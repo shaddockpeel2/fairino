@@ -1,0 +1,156 @@
+{
+  "schema_version": 1,
+  "analyzed_at": "2026-09-10T16:58:30.908416+08:00",
+  "accepted": false,
+  "session": "/home/industio/fairino_ws/evidence/P10/tcp_pivot_20260910",
+  "sample_count": 12,
+  "inlier_sample_indices": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    12
+  ],
+  "outlier_sample_indices": [
+    11
+  ],
+  "tcp_xyz_mm": [
+    -0.8473974109104336,
+    3.027928195738184,
+    184.6144586100288
+  ],
+  "tcp_rpy_deg": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "pivot_xyz_mm": [
+    -102.13419044363096,
+    -477.9446760110041,
+    42.23273564855028
+  ],
+  "nominal_tcp_xyz_mm": [
+    0.0,
+    0.0,
+    163.0
+  ],
+  "delta_from_nominal_mm": [
+    -0.8473974109104336,
+    3.027928195738184,
+    21.614458610028805
+  ],
+  "delta_from_nominal_norm_mm": 21.841960821666454,
+  "tcp_length_mm": 184.64123255493232,
+  "residuals_mm": [
+    {
+      "sample": 1,
+      "value": 1.199208300115739,
+      "inlier": true
+    },
+    {
+      "sample": 2,
+      "value": 1.2537917392613103,
+      "inlier": true
+    },
+    {
+      "sample": 3,
+      "value": 0.9809051353636405,
+      "inlier": true
+    },
+    {
+      "sample": 4,
+      "value": 1.4596890021373479,
+      "inlier": true
+    },
+    {
+      "sample": 5,
+      "value": 0.7598424059203117,
+      "inlier": true
+    },
+    {
+      "sample": 6,
+      "value": 1.100016488148333,
+      "inlier": true
+    },
+    {
+      "sample": 7,
+      "value": 0.4353026566401211,
+      "inlier": true
+    },
+    {
+      "sample": 8,
+      "value": 1.076787418080748,
+      "inlier": true
+    },
+    {
+      "sample": 9,
+      "value": 1.390651757635173,
+      "inlier": true
+    },
+    {
+      "sample": 10,
+      "value": 0.7190736682537404,
+      "inlier": true
+    },
+    {
+      "sample": 11,
+      "value": 3.4100614706000236,
+      "inlier": false
+    },
+    {
+      "sample": 12,
+      "value": 1.9126849653064313,
+      "inlier": true
+    }
+  ],
+  "inlier_residual_rms_mm": 1.181242045498825,
+  "inlier_residual_max_mm": 1.9126849653064313,
+  "orientation_pair_span_deg": 163.16956246143482,
+  "matrix_rank": 6,
+  "condition_number": 5.60925593112428,
+  "singular_values": [
+    4.617609889786873,
+    4.234379842245908,
+    4.197552134788044,
+    2.0929778010615294,
+    2.017430879009616,
+    0.8232125519830492
+  ],
+  "leave_one_out": {
+    "solutions": 11,
+    "max_tcp_delta_mm": 0.7475643712631314,
+    "median_tcp_delta_mm": 0.231404584023151
+  },
+  "limits": {
+    "minimum_samples": 8,
+    "minimum_inliers": 9,
+    "outlier_and_residual_max_mm": 2.0,
+    "residual_rms_mm": 1.5,
+    "leave_one_out_max_tcp_delta_mm": 1.0,
+    "orientation_pair_span_min_deg": 25.0,
+    "condition_number_max": 100.0,
+    "nominal_tcp_delta_max_mm": 10.0,
+    "physical_tcp_length_max_mm": 180.0
+  },
+  "gates": {
+    "minimum_samples": true,
+    "minimum_inliers": true,
+    "full_rank": true,
+    "orientation_span": true,
+    "condition_number": true,
+    "residual_rms": true,
+    "residual_max": true,
+    "leave_one_out_stability": true,
+    "physical_tcp_length": false
+  },
+  "diagnostics": {
+    "nominal_delta_within_review_limit": false
+  },
+  "interpretation": "Pivot calibration observes TCP translation only. Tool RPY remains the mechanically defined flange-aligned orientation."
+}

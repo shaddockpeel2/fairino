@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-08",
+  "requested_fps": 20,
+  "requested_mode_result": "unsupported",
+  "requested_mode_error": "No matched video stream profile found for color 640x480@20 MJPG",
+  "selected_fps": 15,
+  "selected_mode": {
+    "color": "640x480@15 MJPG",
+    "depth_raw": "640x400@15 Y11",
+    "depth_registration": true,
+    "aligned_depth_output": "640x480"
+  },
+  "repeat_30s": {
+    "color_fps": 14.575615781365304,
+    "depth_fps": 14.57268504618035,
+    "color_max_gap_s": 0.17107554100221023,
+    "depth_max_gap_s": 0.20294118899983005,
+    "aligned_pairs": 424,
+    "skew_p50_s": 0.019827604293823242,
+    "skew_p95_s": 0.03410019874572753,
+    "timestamp_regressions": 0,
+    "pair_failures": {},
+    "soft_filter": true,
+    "median_valid_depth_fraction": 0.0
+  },
+  "soft_filter_diagnosis": {
+    "aligned_soft_filter_on_valid_fraction": 0.0,
+    "raw_soft_filter_on_valid_fraction": 0.0,
+    "raw_soft_filter_off_valid_fraction": 0.5059472656249999,
+    "raw_soft_filter_off_center_roi_valid_fraction": 0.7383984375,
+    "raw_soft_filter_off_median_depth_m": 0.3190000057220459,
+    "conclusion": "At 15 FPS the SDK soft filter turns all raw and aligned depth samples into zero; this is not caused by the audit threshold or scene distance."
+  },
+  "final_aligned_30s": {
+    "soft_filter": false,
+    "pass": true,
+    "color_fps": 14.677511719111834,
+    "depth_fps": 14.473481705261653,
+    "color_max_gap_s": 0.19042045600144775,
+    "depth_max_gap_s": 0.2063953839970054,
+    "aligned_pairs": 427,
+    "skew_p50_s": 0.019961118698120117,
+    "skew_p95_s": 0.03485612869262695,
+    "median_valid_depth_fraction": 0.29545247395833335,
+    "timestamp_regressions": 0,
+    "pair_failures": {}
+  },
+  "caveats": [
+    "One earlier 15-second run with the soft filter enabled had a 0.730-second depth receive gap; long-run stability remains open.",
+    "Distance accuracy still needs measured targets at known distances."
+  ]
+}

@@ -1,0 +1,18 @@
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1788855192.353508077] [rosbag2_recorder]: Press SPACE for pausing/resuming
+[INFO] [1788855192.357375328] [rosbag2_storage]: Opened database '/home/industio/fairino_ws/evidence/camera/20260908_bench/rgbd_bag/rgbd_bag_0.db3' for READ_WRITE.
+[INFO] [1788855192.360854075] [rosbag2_recorder]: Listening for topics...
+[INFO] [1788855192.360908617] [rosbag2_recorder]: Event publisher thread: Starting
+[INFO] [1788855192.361158286] [rosbag2_recorder]: Recording...
+[INFO] [1788855201.819397848] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1788855201.822435299] [rosbag2_recorder]: Event publisher thread: Exiting
+[INFO] [1788855201.822952138] [rosbag2_recorder]: Recording stopped
+
+Files:             rgbd_bag_0.db3
+Bag size:          24.5 KiB
+Storage id:        sqlite3
+Duration:          0.000000000s
+Start:             Apr 12 2262 07:47:16.854775807 (9223372036.854775807)
+End:               Apr 12 2262 07:47:16.854775807 (9223372036.854775807)
+Messages:          0
+Topic information: 
+

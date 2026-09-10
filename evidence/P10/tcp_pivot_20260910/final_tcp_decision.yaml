@@ -1,0 +1,16 @@
+schema_version: 1
+decided_at: '2026-09-10T16:45:00+08:00'
+adopted: true
+frame: flange_link -> grasp_frame
+final_pose_mm_deg: [-0.847397, 3.027928, 178.0, 0.0, 0.0, 0.0]
+final_xyz_m: [-0.000847397, 0.003027928, 0.178]
+sources:
+  x_y: 12-pose fixed-point pivot solve, excluding sample 11
+  z: user direct measurement from flange plate to gripper tip
+  rpy: mechanical flange alignment
+raw_pivot_candidate_mm_deg: [-0.847397, 3.027928, 184.614459, 0.0, 0.0, 0.0]
+raw_pivot_z_adopted: false
+decision_reason: vendor confirmed the nominal 160 mm dimension is incorrect; use direct 178 mm measurement for Z
+production_config: src/fairino3mt_v6_moveit2_config/config/ydi_j22_tcp.yaml
+controller_tool_id: null
+remaining_validation: controller write/readback and practical pick-place micro-adjustment

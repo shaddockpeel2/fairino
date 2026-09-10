@@ -1,0 +1,8 @@
+# Keep compact reports; image and bag data stay available locally.
+*.db3
+*.db3-*
+*.mcap
+*.jpg
+*.png
+ros_logs/
+*_ros_logs/

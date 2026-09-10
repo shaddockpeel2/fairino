@@ -1,0 +1,76 @@
+{
+  "pass": false,
+  "checks": {
+    "collected_requested_frames": true,
+    "raw_dimensions_640x400": true,
+    "raw_depth_frame": true,
+    "median_roi_valid_at_least_95pct": false,
+    "temporal_p95_span_at_most_5mm": false,
+    "monotonic_timestamps": true
+  },
+  "frames": 120,
+  "failures": {},
+  "stream": {
+    "width": 640,
+    "height": 400,
+    "frame_id": "camera_depth_optical_frame",
+    "k": [
+      478.3198547363281,
+      0.0,
+      322.17816162109375,
+      0.0,
+      478.3198547363281,
+      198.03799438476562,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "fps": 30.29552967145396,
+    "max_gap_s": 0.04761599500034208,
+    "max_age_s": 0.026462793350219727,
+    "message_layout": {
+      "encoding": "16UC1",
+      "is_bigendian": false,
+      "step_bytes": 1280,
+      "data_bytes": 512000,
+      "expected_min_step_bytes": 1280,
+      "direct_uint16_min_mm": 0,
+      "direct_uint16_max_mm": 9844
+    },
+    "direct_byte_decode_equal_all_frames": true,
+    "full_frame_valid_fraction_median": 0.6169687500000001
+  },
+  "roi": {
+    "pixel": [
+      320,
+      200
+    ],
+    "size": [
+      100,
+      100
+    ],
+    "valid_fraction": 0.6399966666666667,
+    "depth_median_mm": 290.0000214576721,
+    "temporal_p95_span_mm": 93.09999346733089,
+    "frame_median_std_mm": 26.52423456311226,
+    "stable_pixel_fraction": 0.3764,
+    "per_pixel_temporal_std_median_mm": 894.352376461029,
+    "per_pixel_temporal_std_p95_mm": 1657.1308732032774,
+    "valid_depth_percentiles_mm": {
+      "1": 151.00001525878906,
+      "5": 159.00001525878906,
+      "50": 292.0000305175781,
+      "95": 2260.0,
+      "99": 5983.00048828125
+    }
+  },
+  "limitations": [
+    "Raw depth only; no RGB-D alignment is tested.",
+    "The ROI must be placed on one static matte surface.",
+    "No measured ground truth means absolute bias is not tested."
+  ],
+  "visualization_scale_mm": {
+    "low_mm": 154.00001406669617,
+    "high_mm": 4298.000335693359
+  }
+}

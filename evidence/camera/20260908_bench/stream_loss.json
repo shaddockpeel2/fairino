@@ -1,0 +1,7 @@
+{
+  "pass": true,
+  "points_before_stop": 136,
+  "points_after_1s": 0,
+  "stale_diagnostics": 8,
+  "last_status": "no_fresh_valid_point: valid_camera_frame_probe_not_grasp_target"
+}

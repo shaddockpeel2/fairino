@@ -1,0 +1,37 @@
+# DaBai DCW2 production baseline, migrated from the grasp-validated Dofbot project.
+# Verified on this board with serial CH82C5201C9 (firmware RD1017) over USB 2.0.
+# Bench only: camera-to-robot extrinsics must come from a later hand-eye calibration.
+camera_name: camera
+serial_number: CH82C5201C9
+camera:
+  camera_name: camera
+  serial_number: CH82C5201C9
+  device_num: 2
+  color_width: 640
+  color_height: 480
+  color_fps: 10
+  color_format: MJPG
+  enable_color: true
+  color_qos: SENSOR_DATA
+  color_camera_info_qos: SENSOR_DATA
+  depth_width: 640
+  depth_height: 400
+  depth_fps: 10
+  depth_format: Y11
+  enable_depth: true
+  depth_qos: SENSOR_DATA
+  depth_camera_info_qos: SENSOR_DATA
+  enable_ir: false
+  depth_registration: true
+  align_mode: HW
+  enable_frame_sync: false
+  frame_aggregate_mode: full_frame
+  enable_point_cloud: false
+  enable_colored_point_cloud: false
+  publish_tf: true
+  tf_publish_rate: 0.0
+  enable_soft_filter: false
+  enable_ldp: false
+  enable_heartbeat: false
+  time_domain: system
+  log_level: warn

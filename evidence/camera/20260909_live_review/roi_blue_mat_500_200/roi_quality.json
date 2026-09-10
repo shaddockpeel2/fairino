@@ -1,0 +1,50 @@
+{
+  "pass": false,
+  "checks": {
+    "collected_requested_frames": true,
+    "valid_depth_every_frame": true,
+    "median_roi_valid_at_least_95pct": false,
+    "temporal_p95_span_at_most_5mm": false,
+    "timing_contract": true
+  },
+  "requested_frames": 300,
+  "collected_frames": 300,
+  "pair_failures": {},
+  "color_pixel": [
+    500.0,
+    200.0
+  ],
+  "depth_pixel": [
+    499.3338416979903,
+    200.19912726765352
+  ],
+  "roi_radius_px": 20,
+  "median_depth_mm": 290.0000305175781,
+  "expected_distance_mm": null,
+  "bias_mm": null,
+  "roi_valid_fraction": {
+    "median": 0.4155264723378941,
+    "p05": 0.2496133254015467
+  },
+  "temporal_depth_mm": {
+    "p05": 229.00001525878906,
+    "p50": 290.0000305175781,
+    "p95": 411.0,
+    "p95_span": 181.99998474121094,
+    "stddev": 61.67222209021406
+  },
+  "spatial_p95_span_mm": {
+    "median": 747.5000228881836,
+    "p95": 961.0501152038574
+  },
+  "timing_ms": {
+    "skew_p50": 42.174696922302246,
+    "skew_p95": 55.37604093551636,
+    "max_age": 162.41955757141113
+  },
+  "limitations": [
+    "The operator must place the ROI fully inside one static planar target.",
+    "Bias is unavailable without measured lens-to-plane ground truth.",
+    "Camera-frame test only; no hand-eye or robot command."
+  ]
+}

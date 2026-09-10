@@ -1,0 +1,31 @@
+{
+  "pass": true,
+  "messages": {
+    "/tf_static": 1,
+    "/fr3c_camera/diagnostics": 29,
+    "/camera/depth/camera_info": 122,
+    "/camera/color/camera_info": 141,
+    "/camera/color/image_raw": 109,
+    "/camera/depth/image_raw": 109,
+    "/fr3c_camera/probe_point": 81
+  },
+  "depth_frames": 109,
+  "depth_median_m": 0.22500000894069672,
+  "probe_frames": 81,
+  "probe_median_xyz_m": [
+    -0.004210667501280034,
+    -0.001963520450554338,
+    0.2240000069141388
+  ],
+  "probe_z_p05_p95_m": [
+    0.22200001776218414,
+    0.22700001299381256
+  ],
+  "diagnostics": {
+    "insufficient_valid_depth": 1,
+    "no_fresh_valid_point: insufficient_valid_depth": 1,
+    "valid_camera_frame_probe_not_grasp_target": 25,
+    "no_fresh_valid_point: valid_camera_frame_probe_not_grasp_target": 2
+  },
+  "note": "Scene-dependent readback, not absolute accuracy or object detection validation."
+}

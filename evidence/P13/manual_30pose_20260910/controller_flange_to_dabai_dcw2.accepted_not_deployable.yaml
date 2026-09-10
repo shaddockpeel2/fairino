@@ -1,0 +1,31 @@
+calibrated: false
+handeye_accepted: true
+deployable_in_current_ros_tf: false
+status: accepted_handeye_integration_blocked
+parent_frame: controller_flange
+child_frame: camera_link
+xyz:
+- -0.021995874907259755
+- -0.07290788767736256
+- 0.045328450047942836
+rpy:
+- 2.8889523491431395
+- -1.4407987562218758
+- -1.3540474090841446
+camera_serial: CH82C5201C9
+mount_version: final_mount_v1
+image_size:
+- 640
+- 480
+board:
+  type: charuco
+  squares_x: 11
+  squares_y: 8
+  square_length_m: 0.015
+  marker_length_m: 0.011
+  dictionary: DICT_4X4_50
+  legacy_pattern: true
+method: TSAI
+session: /home/industio/fairino_ws/evidence/P13/manual_30pose_20260910
+validation_translation_median_mm: 2.273768638982552
+validation_translation_p95_mm: 6.326555318945608

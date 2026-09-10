@@ -1,0 +1,114 @@
+{
+  "timestamp": "2026-09-09T10:54:06+0800",
+  "contract_pass": false,
+  "color": {
+    "width": 640,
+    "height": 480,
+    "encoding": "rgb8",
+    "frame_id": "camera_color_optical_frame"
+  },
+  "depth": {
+    "width": 640,
+    "height": 480,
+    "encoding": "16UC1",
+    "unit": "millimetres for 16UC1"
+  },
+  "camera_info": {
+    "color_k": [
+      454.5934143066406,
+      0.0,
+      328.5454406738281,
+      0.0,
+      454.5934143066406,
+      243.98500061035156,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "color_d": [
+      0.03332940861582756,
+      -0.054838720709085464,
+      -0.00042468964238651097,
+      3.9932128856889904e-05,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "depth_k": [
+      454.5934143066406,
+      0.0,
+      328.5454406738281,
+      0.0,
+      454.5934143066406,
+      243.98500061035156,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "depth_d": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "distortion_models": [
+      "rational_polynomial",
+      "rational_polynomial"
+    ],
+    "max_k_delta": 0.0
+  },
+  "timing": {
+    "skew_ms": 21.725893020629883,
+    "age_ms": 145.66826820373535
+  },
+  "roi": {
+    "color_pixel": [
+      320,
+      240
+    ],
+    "depth_pixel": [
+      320.0001654201063,
+      240.00016383300024
+    ],
+    "radius_px": 20,
+    "median_mm": 645.0000610351562,
+    "valid_fraction": 0.16002379535990482,
+    "stable_valid_fraction": 0.0,
+    "p05_mm": 327.0000305175781,
+    "p95_mm": 1027.0001220703125,
+    "robust_noise_mm": 309.86339999999996,
+    "temporal_sigma_mm": 92.51322401517155,
+    "temporal_p95_span_mm": 290.149983215332,
+    "quality_ready_300_frames": false,
+    "unique_depth_samples": 71,
+    "expected_distance_mm": null,
+    "bias_mm": null
+  },
+  "preprocess": {
+    "frames": 5,
+    "required_valid_frames": 3,
+    "max_min_max_span_mm": 15.0,
+    "stable_fraction": 0.0009895833333333334,
+    "policy": "no hole filling; latest sample required; stationary target only"
+  },
+  "visualization": {
+    "source": "current unfiltered D2C depth",
+    "adaptive_percentiles": [
+      2,
+      98
+    ],
+    "low_mm": 152.00001001358032,
+    "high_mm": 4180.000305175781
+  },
+  "display_rotation_deg": 180,
+  "limitations": [
+    "Visual edge overlay requires a scene with shared color/depth edges.",
+    "Absolute accuracy requires a measured lens-to-target ground truth.",
+    "This viewer emits no robot command and no base_link transform."
+  ]
+}

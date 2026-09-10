@@ -1,0 +1,61 @@
+# OrbbecSDK
+<!-- 本文档面向开发者 -->
+The Orbbec 3D camera product software development kit, supports UVC, realizes plug-and-play without driver, provides low-level and high-level simple and easy-to-use APIs, and helps developers use flexibly in different scenarios.
+
+## contents description
+
+1.Doc
+> API reference documentation and sample documentation.
+
+2.Driver
+> Windows driver (Dabai, Dabai DCW, Dabai DW, Astra mini Pro, Astra Pro Plus, A1 Pro, Gemini E, Gemini E Lite, Gemini These device that use OpenNI's  protocol, and need to install driver on Windows, while device using standard UVC protocols do not need to install driver)
+
+3.Script
+> Windows: timestamp registration script, used to solve the problem of obtaining UVC timestamps and metadata under Windows;
+> Linux: udev rules installation scripts to resolve device permission issues.
+
+4.Example
+> C/C++ samples, including sample project source code and compiled executables.
+
+5.SDK
+> OrbbecSDK header files and library files, OrbbecSDK running configuration files
+
+## Supported hardware products
+
+| **SDK version** | **products list** | **firmware version** |
+| --- | --- | --- |
+| v1.5.7      | Gemini2        | 1.4.60                     |
+|             | FemtoMega      | 1.1.5  (window10、ubuntu20.04、ubuntu22.04)                     |
+|             | Astra+         | 1.0.22/1.0.21/1.0.20/1.0.19 |
+|             | Femto          | 1.6.7                       |
+|             | Femto W       | 1.1.8          |
+|             | Dabai          | 2436                        |
+|             | Dabai DCW      | 2460                        |
+|             | Dabai DW       | 2606                        |
+|             | Astra Mini Pro | 1007                        |
+|             | Astra Pro Plus | 2513                        |
+|             | A1 Pro         | 3057                        |
+|             | Gemini E       | 3460                        |
+|             | Gemini E Lite  | 3606                  |
+|             | Gemini         | 3.0.18                      |
+| v1.4.3 | Astra+ | 1.0.22/1.0.21/1.0.20/1.0.19 |
+|  | Femto | 1.6.7 |
+|  | *Femto W | 1.1.3（ Window10） |
+|  | Dabai | 2436 |
+|  | Dabai DCW | 2460 |
+|  | Dabai DW | 2606 |
+|  | Astra Mini Pro | 1007 |
+| | Astra Pro Plus | 2513 |
+| | Gemini | 3.0.18 |
+| v1.3.1 | Astra+ | 1.0.21/1.0.20/1.0.19 |
+| | Femto | 1.6.7 |
+| v1.2.8 | Astra+ | 1.0.20 |
+| | Femto | 1.6.7 |
+| v1.1.6 | Astra+ | 1.0.20/1.0.19 |
+| | *Femto | 1.5.1 |
+| v1.0.2 | Astra+ | 1.0.19 |
+
+## Related links
+
+* [3D vision developer community](https://developer.orbbec.com.cn/)
+* [OrbbecSDK homepage](https://developer.orbbec.com.cn/develop_details.html?id=1)

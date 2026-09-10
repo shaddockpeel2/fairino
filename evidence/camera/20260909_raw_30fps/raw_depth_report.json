@@ -1,0 +1,59 @@
+{
+  "pass": false,
+  "checks": {
+    "collected_requested_frames": true,
+    "raw_dimensions_640x400": true,
+    "raw_depth_frame": true,
+    "median_roi_valid_at_least_95pct": false,
+    "temporal_p95_span_at_most_5mm": false,
+    "monotonic_timestamps": true
+  },
+  "frames": 120,
+  "failures": {},
+  "stream": {
+    "width": 640,
+    "height": 400,
+    "frame_id": "camera_depth_optical_frame",
+    "k": [
+      478.3198547363281,
+      0.0,
+      322.17816162109375,
+      0.0,
+      478.3198547363281,
+      198.03799438476562,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "fps": 30.19720697866431,
+    "max_gap_s": 0.043952933000127814,
+    "max_age_s": 0.02561020851135254,
+    "full_frame_valid_fraction_median": 0.6303671875
+  },
+  "roi": {
+    "pixel": [
+      null,
+      null
+    ],
+    "size": [
+      100,
+      100
+    ],
+    "valid_fraction": 0.6297016666666667,
+    "depth_median_mm": 316.0000145435333,
+    "temporal_p95_span_mm": 124.45001304149628,
+    "frame_median_std_mm": 36.83032840490341,
+    "stable_pixel_fraction": 0.2974,
+    "per_pixel_temporal_std_median_mm": 924.107015132904,
+    "per_pixel_temporal_std_p95_mm": 1537.4949991703031
+  },
+  "limitations": [
+    "Raw depth only; no RGB-D alignment is tested.",
+    "The ROI must be placed on one static matte surface.",
+    "No measured ground truth means absolute bias is not tested."
+  ],
+  "visualization_scale_mm": {
+    "low_mm": 154.00001406669617,
+    "high_mm": 4554.000377655029
+  }
+}

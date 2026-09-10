@@ -1,0 +1,7 @@
+# Example schema only. Do not change calibrated to true until these values come
+# from a hand-eye calibration for the final physical camera installation.
+calibrated: false
+parent_frame: flange_link
+child_frame: camera_link
+xyz: [0.0, 0.0, 0.0]
+rpy: [0.0, 0.0, 0.0]

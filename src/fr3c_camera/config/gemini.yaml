@@ -1,0 +1,36 @@
+# Device read back on 2026-09-08: SV1301S_U3 / RD3013 / 2bc5:0614 + 0511.
+# Bench only: this file contains no camera-to-robot transform.
+camera_name: camera
+serial_number: AY23B520016
+camera:
+  camera_name: camera
+  serial_number: AY23B520016
+  device_num: 1
+  color_width: 640
+  color_height: 480
+  color_fps: 15
+  color_format: MJPG
+  depth_width: 640
+  depth_height: 400
+  depth_fps: 15
+  depth_format: Y11
+  enable_color: true
+  enable_depth: true
+  enable_ir: false
+  depth_registration: true
+  align_mode: HW
+  enable_frame_sync: false
+  time_domain: system
+  enable_point_cloud: false
+  enable_colored_point_cloud: false
+  publish_tf: true
+  tf_publish_rate: 0.0
+  color_qos: SENSOR_DATA
+  depth_qos: SENSOR_DATA
+  color_camera_info_qos: SENSOR_DATA
+  depth_camera_info_qos: SENSOR_DATA
+  enable_color_auto_exposure: true
+  enable_color_auto_white_balance: true
+  enable_soft_filter: false
+  enable_ldp: true
+  log_level: warn

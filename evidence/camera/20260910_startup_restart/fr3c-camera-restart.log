@@ -1,0 +1,156 @@
+{
+  "pass": true,
+  "expected_model": "DaBai DCW2",
+  "expected_serial_number": "CH82C5201C9",
+  "expected_connection": "USB2.0",
+  "expected_speed_mbps": "480",
+  "matching_devices": [
+    {
+      "sysfs_name": "6-1.3.1",
+      "product_id": "06a0",
+      "product": "ORBBEC Depth Sensor",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "9",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/009",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    },
+    {
+      "sysfs_name": "6-1.3.3",
+      "product_id": "0561",
+      "product": "Orbbec DaBai DCW2 RGB Camera",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "8",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/008",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    }
+  ],
+  "all_orbbec_devices": [
+    {
+      "sysfs_name": "6-1.3.1",
+      "product_id": "06a0",
+      "product": "ORBBEC Depth Sensor",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "9",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/009",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    },
+    {
+      "sysfs_name": "6-1.3.3",
+      "product_id": "0561",
+      "product": "Orbbec DaBai DCW2 RGB Camera",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "8",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/008",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    }
+  ],
+  "failures": []
+}
+[INFO] [launch]: All log files can be found below /home/industio/.ros/log/2026-09-10-10-34-05-182799-ido-20928
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [component_container-1]: process started with pid [21002]
+[INFO] [rgbd_probe-2]: process started with pid [21004]
+[component_container-1] [INFO] [1789007645.756419691] [camera.camera_container]: Load Library: /home/industio/fairino_ws/install/orbbec_camera/lib/liborbbec_camera.so
+[component_container-1] [INFO] [1789007645.873773258] [camera.camera_container]: Found class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-1] [INFO] [1789007645.873910050] [camera.camera_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-1] [09/10 10:34:05.882290][info][21002][Context.cpp:68] Context created with config: /home/industio/fairino_ws/install/orbbec_camera/share/orbbec_camera/config/OrbbecSDKConfig_v1.0.xml
+[component_container-1] [09/10 10:34:05.882312][info][21002][Context.cpp:73] Work directory=/home/industio/fairino_ws, SDK version=v1.10.35-20260128-fa838f5
+[component_container-1] [09/10 10:34:05.882328][info][21002][LinuxPal.cpp:32] createObPal: create LinuxPal!
+[component_container-1] [09/10 10:34:05.954281][warning][21002][OpenNIDeviceInfo.cpp:190] New openni device matched.
+[component_container-1] [09/10 10:34:05.954440][info][21002][LinuxPal.cpp:166] Create PollingDeviceWatcher!
+[component_container-1] [09/10 10:34:05.954520][info][21002][DeviceManager.cpp:15] Current found device(s): (1)
+[component_container-1] [09/10 10:34:05.954527][info][21002][DeviceManager.cpp:24] 	- Name: DaBai DCW2, PID: 0x06a0, SN/ID: CH82C5201C9, Connection: USB2.0
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+[component_container-1] [INFO] [1789007646.057447173] [camera.camera]: Connecting to device with serial number: CH82C5201C9
+[component_container-1] [INFO] [1789007646.057677298] [camera.camera]: Before lock: Select device serial number: CH82C5201C9
+[component_container-1] [INFO] [1789007646.057711715] [camera.camera]: After lock: Select device serial number: CH82C5201C9
+[component_container-1] [09/10 10:34:06.059806][warning][21032][OpenNIHostProtocol.cpp:739] Get usb core type failed!
+[component_container-1] [INFO] [1789007646.198710122] [camera.camera]: Device serial number CH82C5201C9 matched
+[component_container-1] [INFO] [1789007646.198939956] [camera.camera]: Select device cost 141 ms
+[component_container-1] [INFO] [1789007646.199000331] [camera.camera]: Try to connect device via USB2.0
+[component_container-1] [INFO] [1789007646.199381831] [camera.camera]: OBCameraNode: use_intra_process: OFF
+[component_container-1] [INFO] [1789007646.209060500] [camera.camera]: current time domain: system
+[component_container-1] [INFO] [1789007646.224881378] [camera.camera]: Create align filter
+[component_container-1] [09/10 10:34:06.225087][warning][21032][NeonAlign.cpp:343] NeonAlign create.
+[component_container-1] [INFO] [1789007646.225111795] [camera.camera]: Setting LDP to OFF
+[component_container-1] [INFO] [1789007646.226699920] [camera.camera]: Setting color auto exposure priority to false
+[component_container-1] [INFO] [1789007646.227431712] [camera.camera]: color auto exposure priority is set to 0
+[component_container-1] [INFO] [1789007646.227472254] [camera.camera]: Setting color auto exposure to ON
+[component_container-1] [INFO] [1789007646.228179837] [camera.camera]: Setting IR auto exposure to ON
+[component_container-1] [INFO] [1789007646.229078171] [camera.camera]: default_soft_filter_max_diff: 6
+[component_container-1] [INFO] [1789007646.229132421] [camera.camera]: default_soft_filter_speckle_size: 50
+[component_container-1] [INFO] [1789007646.229262504] [camera.camera]: Setting ThresholdFilter......
+[component_container-1] [INFO] [1789007646.229280587] [camera.camera]: set ThresholdFilter to false
+[component_container-1] [INFO] [1789007646.229326671] [camera.camera]: Skip setting filter: ThresholdFilter
+[component_container-1] [INFO] [1789007646.230242796] [camera.camera]:  stream color is enabled - width: 640, height: 480, fps: 10, Format: OB_FORMAT_MJPG
+[component_container-1] [INFO] [1789007646.230820296] [camera.camera]:  stream depth is enabled - width: 640, height: 400, fps: 10, Format: OB_FORMAT_Y11
+[component_container-1] [09/10 10:34:06.254579][warning][21032][ObException.cpp:5] Current device does not support frame sync!
+[component_container-1] [09/10 10:34:06.254668][warning][21032][Pipeline.cpp:45] Execute failure! A libobsensor_exception has occurred!
+[component_container-1] 	 - where:45#Pipeline
+[component_container-1] 	 - msg:Current device does not support frame sync!
+[component_container-1] 	 - type:N11libobsensor31unsupported_operation_exceptionE
+[component_container-1] [INFO] [1789007646.254709260] [camera.camera]: set align mode to ALIGN_D2C_HW_MODE
+[component_container-1] [INFO] [1789007646.254784510] [camera.camera]: enable depth scale ON
+[component_container-1] [INFO] [1789007646.254805218] [camera.camera]: Enable color stream
+[component_container-1] [INFO] [1789007646.254829135] [camera.camera]: Stream color width: 640 height: 480 fps: 10 format: MJPG
+[component_container-1] [INFO] [1789007646.254847218] [camera.camera]: Enable depth stream
+[component_container-1] [INFO] [1789007646.254860343] [camera.camera]: Stream depth width: 640 height: 400 fps: 10 format: Y11
+[component_container-1] [INFO] [1789007646.925310996] [camera.camera]: Disable frame sync
+[component_container-1] [INFO] [1789007646.925537621] [camera.camera]: Setting LDP to OFF
+[component_container-1] [INFO] [1789007646.944913917] [camera.camera]: Device DaBai DCW2 connected
+[component_container-1] [INFO] [1789007646.945081334] [camera.camera]: Serial number: CH82C5201C9
+[component_container-1] [INFO] [1789007646.945131209] [camera.camera]: Firmware version: RD1017
+[component_container-1] [INFO] [1789007646.945178167] [camera.camera]: Hardware version: 
+[component_container-1] [INFO] [1789007646.945211126] [camera.camera]: Wrapper version: 1.5.15
+[component_container-1] [INFO] [1789007646.945282001] [camera.camera]: SDK version: 1.10.35
+[component_container-1] [INFO] [1789007646.945316126] [camera.camera]: device unique id: 6-1.3.1-9
+[component_container-1] [INFO] [1789007646.945356668] [camera.camera]: Current node pid: 21002
+[component_container-1] [INFO] [1789007646.945387876] [camera.camera]: usb connect type: USB2.0
+[component_container-1] [INFO] [1789007646.945419959] [camera.camera]: Start device cost 988 ms
+[component_container-1] [INFO] [1789007646.945452334] [camera.camera]: Initialize device cost 746 ms
+[component_container-1] [INFO] [1789007647.638184500] [camera.camera]: Publishing static transform from color to depth
+[component_container-1] [INFO] [1789007647.638421334] [camera.camera]: Translation 12.2578, -0.0259598, 1.57039
+[component_container-1] [INFO] [1789007647.638486959] [camera.camera]: Rotation 0.00144328, 0.00102459, 0.000254427, 0.999998
+[component_container-1] [INFO] [1789007647.638550250] [camera.camera]: Publishing static transform from depth to depth
+[component_container-1] [INFO] [1789007647.638607417] [camera.camera]: Translation 0, 0, 0
+[component_container-1] [INFO] [1789007647.638824125] [camera.camera]: Rotation 0, 0, 0, 1
+[component_container-1] [INFO] [1789007654.910918169] [camera.camera]: Init xy tables with size 614400
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...
+[INFO] [rgbd_probe-2]: sending signal 'SIGINT' to process[rgbd_probe-2]
+[INFO] [component_container-1]: sending signal 'SIGINT' to process[component_container-1]
+[component_container-1] Received SIGINT (Ctrl+C), shutting down ROS2...
+[component_container-1] [INFO] [1789007688.696462400] [camera.camera]: Color frame thread exit!
+[component_container-1] [WARN] [1789007688.707493071] [camera.camera]: Do destroy ~OBCameraNode
+[component_container-1] [WARN] [1789007688.707580281] [camera.camera]: Stop tf thread
+[component_container-1] [WARN] [1789007688.707614698] [camera.camera]: Stop color frame thread
+[component_container-1] [WARN] [1789007688.707652032] [camera.camera]: stop streams
+[component_container-1] [09/10 10:34:48.835686][warning][21071][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer37: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[component_container-1] [09/10 10:34:48.939506][warning][21071][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer56: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[component_container-1] [09/10 10:34:49.043167][warning][21071][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer11: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[INFO] [rgbd_probe-2]: process has finished cleanly [pid 21004]
+[ERROR] [component_container-1]: process has died [pid 21002, exit code -2, cmd '/opt/ros/humble/lib/rclcpp_components/component_container --ros-args -r __node:=camera_container -r __ns:=/camera'].

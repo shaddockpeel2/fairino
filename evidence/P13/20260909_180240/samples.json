@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-09-09T18:02:40.191902+08:00",
+  "camera_serial": "CH82C5201C9",
+  "mount_version": "final_mount_v1",
+  "frames": {
+    "base": "base_link",
+    "wrist": "wrist3_link",
+    "camera": "camera_link",
+    "optical": "camera_color_optical_frame"
+  },
+  "topics": {
+    "image": "/camera/color/image_raw",
+    "camera_info": "/camera/color/camera_info"
+  },
+  "board": {
+    "type": "charuco",
+    "squares_x": 11,
+    "squares_y": 8,
+    "square_length_m": 0.015,
+    "marker_length_m": 0.011,
+    "dictionary": "DICT_4X4_50",
+    "legacy_pattern": true
+  },
+  "camera_info": {
+    "width": 640,
+    "height": 480,
+    "distortion_model": "rational_polynomial",
+    "k": [
+      479.73828125,
+      0.0,
+      322.218017578125,
+      0.0,
+      479.7537841796875,
+      243.452392578125,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "d": [
+      -0.015910401940345764,
+      0.003102334216237068,
+      -0.00044000407797284424,
+      -0.00047369441017508507,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "samples": [
+    {
+      "index": 1,
+      "role": "training",
+      "stamp_ns_first": 1788948201257199104,
+      "stamp_ns_last": 1788948203649428992,
+      "quality": {
+        "frames": 12,
+        "corners_min": 66,
+        "markers_min": 43,
+        "reprojection_rms_px_median": 0.29421256482601166,
+        "reprojection_rms_px_max": 0.3534854054450989,
+        "wrist_translation_spread_max_mm": 0.002236480333792532,
+        "wrist_rotation_spread_max_deg": 0.0005070826119466008,
+        "board_translation_spread_max_mm": 0.5187251448703243,
+        "board_rotation_spread_max_deg": 0.20749896286393127,
+        "checks": {
+          "wrist_translation_stable": true,
+          "wrist_rotation_stable": true,
+          "board_translation_stable": true,
+          "board_rotation_stable": true
+        }
+      },
+      "base_from_wrist": [
+        [
+          0.9981813617021529,
+          -0.04333938033592832,
+          0.04190068331820776,
+          -0.06354763077282005
+        ],
+        [
+          0.04558516183275948,
+          0.9974880817117371,
+          -0.05421733914275311,
+          -0.2397600840555594
+        ],
+        [
+          -0.03944568634358028,
+          0.056028786843344794,
+          0.9976496443510353,
+          0.5323399872783733
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_from_board": [
+        [
+          -0.05732315910482493,
+          0.08953245228564706,
+          0.9943329399240275,
+          0.39073964980541415
+        ],
+        [
+          0.9967459746310345,
+          0.06166731631106924,
+          0.05190957672548563,
+          -0.07273649752341951
+        ],
+        [
+          -0.056670252223467756,
+          0.9940729762380168,
+          -0.0927760767990307,
+          -0.0384971808313422
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "index": 2,
+      "role": "training",
+      "stamp_ns_first": 1789005063520314112,
+      "stamp_ns_last": 1789005064717318912,
+      "quality": {
+        "frames": 12,
+        "corners_min": 62,
+        "markers_min": 41,
+        "reprojection_rms_px_median": 0.30945298075675964,
+        "reprojection_rms_px_max": 0.37313127517700195,
+        "wrist_translation_spread_max_mm": 0.0014958180780520174,
+        "wrist_rotation_spread_max_deg": 0.0003119208005322954,
+        "board_translation_spread_max_mm": 0.6187489450629333,
+        "board_rotation_spread_max_deg": 0.41454878362046693,
+        "checks": {
+          "wrist_translation_stable": true,
+          "wrist_rotation_stable": true,
+          "board_translation_stable": true,
+          "board_rotation_stable": true
+        }
+      },
+      "base_from_wrist": [
+        [
+          0.9922166988324779,
+          -0.12254544387587646,
+          0.022105129342421124,
+          -0.042565953867409134
+        ],
+        [
+          0.120687618226224,
+          0.9901006667903511,
+          0.07166008950721998,
+          -0.2600606231124781
+        ],
+        [
+          -0.03066792077826552,
+          -0.06843452203797463,
+          0.9971841328604121,
+          0.5289836107406231
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "camera_from_board": [
+        [
+          -0.039472357803906136,
+          0.22021490938457117,
+          0.9746524132500488,
+          0.3785487347153824
+        ],
+        [
+          0.9990352579367879,
+          -0.010091839530814772,
+          0.04274000671572061,
+          -0.10351514624195067
+        ],
+        [
+          0.019248022458839067,
+          0.9753991739076001,
+          -0.21960411009768144,
+          -0.13444909789046156
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ]
+}

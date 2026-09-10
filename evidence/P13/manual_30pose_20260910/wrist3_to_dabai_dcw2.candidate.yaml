@@ -1,0 +1,29 @@
+calibrated: false
+status: rejected_validation_do_not_load
+parent_frame: wrist3_link
+child_frame: camera_link
+xyz:
+- 0.021194777102367356
+- -0.06647045095506339
+- -0.1378121434586345
+rpy:
+- -0.05640914524871218
+- 1.4356704042095534
+- -1.6288603322624702
+camera_serial: CH82C5201C9
+mount_version: final_mount_v1
+image_size:
+- 640
+- 480
+board:
+  type: charuco
+  squares_x: 11
+  squares_y: 8
+  square_length_m: 0.015
+  marker_length_m: 0.011
+  dictionary: DICT_4X4_50
+  legacy_pattern: true
+method: HORAUD
+session: /home/industio/fairino_ws/evidence/P13/manual_30pose_20260910
+validation_translation_median_mm: 26.555569963892204
+validation_translation_p95_mm: 42.84431126824294

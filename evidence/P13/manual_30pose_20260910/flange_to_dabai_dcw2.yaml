@@ -1,0 +1,83 @@
+calibrated: true
+handeye_accepted: true
+deployable_in_current_ros_tf: true
+status: accepted
+parent_frame: flange_link
+child_frame: camera_link
+xyz:
+- -0.021996403927845576
+- -0.07289998096756403
+- 0.045330103200571334
+rpy:
+- 2.8889206938462344
+- -1.44079515904105
+- -1.3540098205387807
+camera_serial: CH82C5201C9
+mount_version: final_mount_v1
+image_size:
+- 640
+- 480
+board:
+  type: charuco
+  squares_x: 11
+  squares_y: 8
+  square_length_m: 0.015
+  marker_length_m: 0.011
+  dictionary: DICT_4X4_50
+  legacy_pattern: true
+method: TSAI
+session: /home/industio/fairino_ws/evidence/P13/manual_30pose_20260910
+robot_pose_source:
+  type: controller_get_forward_kin_reconstruction
+  frame: controller_flange
+  path: /home/industio/fairino_ws/evidence/P13/manual_30pose_20260910/controller_fk_reconstruction.json
+  provenance:
+    joint_recovery: Numerical inverse kinematics of fairino_description/urdf/fairino3_mt_v6.urdf
+      against each captured base_from_wrist matrix. Solutions 1-37 and 39-40 follow
+      the continuous joint trajectory with numerical-zero FK residual.
+    controller_pose: Read-only XML-RPC GetForwardKin call at 192.168.58.2:20003 for
+      each recovered historical joint vector; no robot motion was commanded.
+    sample_38_branch_selection: Three exact URDF IK branches were evaluated against
+      the fixed-board hand-eye model trained only on samples 1-25. Selected branch
+      residual was 2.782 mm / 0.360 deg; alternatives were 36.606 mm / 8.400 deg and
+      31.470 mm / 11.675 deg.
+    warning: Derived reconstruction, not a replacement for recording controller flange
+      pose synchronously in future captures.
+integration_frame_crosscheck:
+  accepted: true
+  path: /home/industio/fairino_ws/evidence/P13/manual_30pose_20260910/robot_pose_crosscheck_corrected.json
+  sample_count: 3
+  base_frame: base_link
+  ros_frame: flange_link
+  controller_frame: controller_flange
+  ros_frame_from_controller_flange:
+  - - 0.9999999999693489
+    - -6.200350343136435e-06
+    - 4.781222823597345e-06
+    - -1.1978011263217663e-06
+  - - 6.200362920556313e-06
+    - 0.9999999999773184
+    - -2.6304083996382037e-06
+    - 8.162322887787324e-06
+  - - -4.781206514251434e-06
+    - 2.6304380446205374e-06
+    - 0.9999999999851105
+    - 1.739766164521317e-06
+  - - 0.0
+    - 0.0
+    - 0.0
+    - 1.0
+  translation_spread_max_mm: 0.004512515938619811
+  rotation_spread_max_deg: 0.0004831664908332176
+  joint_max_absolute_difference_deg: 0.00021883520750520802
+  limits:
+    translation_spread_max_mm: 0.1
+    rotation_spread_max_deg: 0.01
+    joint_max_absolute_difference_deg: 0.01
+  gates:
+    sample_count: true
+    translation_spread: true
+    rotation_spread: true
+    joint_agreement: true
+validation_translation_median_mm: 2.273768638982552
+validation_translation_p95_mm: 6.326555318945608

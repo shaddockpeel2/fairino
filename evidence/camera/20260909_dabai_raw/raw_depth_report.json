@@ -1,0 +1,76 @@
+{
+  "pass": false,
+  "checks": {
+    "collected_requested_frames": true,
+    "raw_dimensions_640x400": true,
+    "raw_depth_frame": true,
+    "median_roi_valid_at_least_95pct": false,
+    "temporal_p95_span_at_most_5mm": false,
+    "monotonic_timestamps": true
+  },
+  "frames": 120,
+  "failures": {},
+  "stream": {
+    "width": 640,
+    "height": 400,
+    "frame_id": "camera_depth_optical_frame",
+    "k": [
+      306.20953369140625,
+      0.0,
+      319.79052734375,
+      0.0,
+      306.20953369140625,
+      198.16514587402344,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "fps": 15.071573356082366,
+    "max_gap_s": 0.0825072719999298,
+    "max_age_s": 0.027361631393432617,
+    "message_layout": {
+      "encoding": "16UC1",
+      "is_bigendian": false,
+      "step_bytes": 1280,
+      "data_bytes": 512000,
+      "expected_min_step_bytes": 1280,
+      "direct_uint16_min_mm": 0,
+      "direct_uint16_max_mm": 9219
+    },
+    "direct_byte_decode_equal_all_frames": true,
+    "full_frame_valid_fraction_median": 0.0081953125
+  },
+  "roi": {
+    "pixel": [
+      320,
+      200
+    ],
+    "size": [
+      100,
+      100
+    ],
+    "valid_fraction": 0.0022175,
+    "depth_median_mm": 356.00000619888306,
+    "temporal_p95_span_mm": 8028.800633549686,
+    "frame_median_std_mm": 2865.29541015625,
+    "stable_pixel_fraction": 0.0,
+    "per_pixel_temporal_std_median_mm": null,
+    "per_pixel_temporal_std_p95_mm": null,
+    "valid_depth_percentiles_mm": {
+      "1": 117.00000762939453,
+      "5": 120.00000762939453,
+      "50": 2514.000244140625,
+      "95": 7744.00048828125,
+      "99": 8417.0009765625
+    }
+  },
+  "limitations": [
+    "Raw depth only; no RGB-D alignment is tested.",
+    "The ROI must be placed on one static matte surface.",
+    "No measured ground truth means absolute bias is not tested."
+  ],
+  "visualization_scale_mm": {
+    "low_mm": 156.00000321865082,
+    "high_mm": 9219.000816345215
+  }
+}

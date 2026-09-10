@@ -1,0 +1,282 @@
+{
+  "pass": true,
+  "checks": {
+    "streams_at_least_13_fps": true,
+    "no_long_receive_gap": true,
+    "monotonic_timestamps": true,
+    "fresh_timestamps": true,
+    "enough_aligned_pairs": true,
+    "valid_pair_contract": true,
+    "some_valid_depth": true,
+    "camera_info_received": true,
+    "optical_tf_received": true
+  },
+  "duration_s": 60.0,
+  "streams": {
+    "color": {
+      "frames": 856,
+      "fps": 14.254877787061776,
+      "max_gap_s": 0.27626000999998723,
+      "timestamp_regressions": 0
+    },
+    "depth": {
+      "frames": 839,
+      "fps": 13.972097623807432,
+      "max_gap_s": 0.26827465099995607,
+      "timestamp_regressions": 0
+    }
+  },
+  "aligned_pairs": 808,
+  "pair_failures": {},
+  "skew_p50_s": 0.019804835319519043,
+  "skew_p95_s": 0.05253421068191528,
+  "max_age_s": 0.12064886093139648,
+  "median_valid_depth_fraction": 0.31572916666666667,
+  "camera_info": {
+    "di": {
+      "width": 640,
+      "height": 480,
+      "frame_id": "camera_color_optical_frame",
+      "k": [
+        454.5934143066406,
+        0.0,
+        328.5454406738281,
+        0.0,
+        454.5934143066406,
+        243.98500061035156,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "d": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p": [
+        454.5934143066406,
+        0.0,
+        328.5454406738281,
+        0.0,
+        0.0,
+        454.5934143066406,
+        243.98500061035156,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "distortion_model": "rational_polynomial"
+    },
+    "ci": {
+      "width": 640,
+      "height": 480,
+      "frame_id": "camera_color_optical_frame",
+      "k": [
+        454.5934143066406,
+        0.0,
+        328.5454406738281,
+        0.0,
+        454.5934143066406,
+        243.98500061035156,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "d": [
+        0.03332940861582756,
+        -0.054838720709085464,
+        -0.00042468964238651097,
+        3.9932128856889904e-05,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p": [
+        454.5934143066406,
+        0.0,
+        328.5454406738281,
+        0.0,
+        0.0,
+        454.5934143066406,
+        243.98500061035156,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "distortion_model": "rational_polynomial"
+    }
+  },
+  "tf_static": {
+    "camera_color_frame": {
+      "parent": "camera_depth_frame",
+      "translation": [
+        0.0007770984768867493,
+        -0.009836451530456543,
+        2.4818357080221178e-05
+      ],
+      "rotation_xyzw": [
+        0.0007581188692711296,
+        -0.0029616043902933598,
+        -0.0024986183270812035,
+        0.9999921917915344
+      ]
+    },
+    "camera_color_optical_frame": {
+      "parent": "camera_color_frame",
+      "translation": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "rotation_xyzw": [
+        -0.5,
+        0.4999999999999999,
+        -0.5,
+        0.5000000000000001
+      ]
+    },
+    "camera_depth_optical_frame": {
+      "parent": "camera_depth_frame",
+      "translation": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "rotation_xyzw": [
+        -0.5,
+        0.4999999999999999,
+        -0.5,
+        0.5000000000000001
+      ]
+    },
+    "camera_depth_frame": {
+      "parent": "camera_link",
+      "translation": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "rotation_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "last_five_patch_samples": [
+    {
+      "center": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "left": {
+        "rejected": "depth_discontinuity"
+      },
+      "right": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "top": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "bottom": {
+        "rejected": "insufficient_valid_depth"
+      }
+    },
+    {
+      "center": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "left": {
+        "rejected": "depth_discontinuity"
+      },
+      "right": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "top": {
+        "rejected": "depth_discontinuity"
+      },
+      "bottom": {
+        "rejected": "insufficient_valid_depth"
+      }
+    },
+    {
+      "center": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "left": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "right": {
+        "xyz_m": [
+          0.05023774860461772,
+          -0.0014880695382569974,
+          0.15200001001358032
+        ],
+        "valid_fraction": 1.0,
+        "spread_m": 0.003000006079673767
+      },
+      "top": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "bottom": {
+        "rejected": "insufficient_valid_depth"
+      }
+    },
+    {
+      "center": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "left": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "right": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "top": {
+        "rejected": "depth_discontinuity"
+      },
+      "bottom": {
+        "rejected": "insufficient_valid_depth"
+      }
+    },
+    {
+      "center": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "left": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "right": {
+        "rejected": "insufficient_valid_depth"
+      },
+      "top": {
+        "rejected": "depth_discontinuity"
+      },
+      "bottom": {
+        "xyz_m": [
+          -0.0033773190649721927,
+          0.04303586340932676,
+          0.17000000178813934
+        ],
+        "valid_fraction": 0.68,
+        "spread_m": 0.0
+      }
+    }
+  ],
+  "limitations": [
+    "Bench only, no hand-eye or base_link transform.",
+    "No measured distance ground truth; valid fraction depends on scene.",
+    "System timestamps do not prove hardware exposure synchronisation.",
+    "Pixel probe is not an object detector or grasp command."
+  ]
+}

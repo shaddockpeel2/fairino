@@ -1,0 +1,40 @@
+# Active YDI-J22 practical TCP v2, frozen 2026-09-10.
+ydi_j22_tcp:
+  version: 2
+  defined: true
+  calibrated: true
+  status: measured_hybrid_pending_practical_micro_adjustment
+  parent_frame: flange_link
+  child_frame: grasp_frame
+  xyz_m: [-0.000847397, 0.003027928, 0.178]
+  rpy_rad: [0.0, 0.0, 0.0]
+  controller_pose_mm_deg: [-0.847397, 3.027928, 178.0, 0.0, 0.0, 0.0]
+  geometry:
+    tcp_definition: flexible_finger_common_closing_tip
+    previous_nominal_pose_mm_deg: [0.0, 0.0, 163.0, 0.0, 0.0, 0.0]
+    previous_nominal_basis: vendor_160_mm_plus_assumed_spacer_3_mm
+    spacer_presence: unverified_user_observation_suggests_absent
+    user_measured_flange_to_tip_z_mm: 178.0
+    vendor_dimension_note: vendor_confirmed_160_mm_dimension_is_not_reliable_for_this_gripper
+  calibration:
+    method: pivot_xy_plus_direct_measured_z
+    x_y_source: fixed_point_pivot_session
+    z_source: user_direct_flange_face_to_tip_measurement
+    session: evidence/P10/tcp_pivot_20260910
+    sample_count: 12
+    inlier_sample_count: 11
+    excluded_samples: [11]
+    inlier_residual_rms_mm: 1.181242
+    inlier_residual_max_mm: 1.912685
+    orientation_pair_span_deg: 163.169562
+    condition_number: 5.609256
+    leave_one_out_tcp_delta_max_mm: 0.747564
+    candidate_pose_mm_deg: [-0.847397, 3.027928, 184.614459, 0.0, 0.0, 0.0]
+    candidate_length_mm: 184.641
+    candidate_use: x_y_retained_z_replaced_by_direct_measurement
+    final_tcp_length_mm: 178.027769
+    accepted_for: normal_fixed_point_pick_place_with_later_practical_micro_adjustment
+  source: pivot_xy_and_user_measured_z
+  controller_tool_id: null
+  fixed_point_validation: accepted_hybrid_pending_20_cycle_pick_place
+  payload_weight_and_cog: pending

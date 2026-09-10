@@ -1,0 +1,26 @@
+ydi_j22_tcp_candidate:
+  version: 2
+  calibrated: false
+  production_config_updated: false
+  parent_frame: flange_link
+  child_frame: grasp_frame
+  xyz_m:
+  - -0.0008473974109104337
+  - 0.003027928195738184
+  - 0.18461445861002881
+  rpy_rad:
+  - 0.0
+  - -0.0
+  - 0.0
+  controller_pose_mm_deg:
+  - -0.8473974109104336
+  - 3.027928195738184
+  - 184.6144586100288
+  - 0.0
+  - 0.0
+  - 0.0
+  translation_source: fixed_point_pivot_calibration
+  orientation_source: mechanical_flange_alignment
+  source_session: /home/industio/fairino_ws/evidence/P10/tcp_pivot_20260910
+  report: /home/industio/fairino_ws/evidence/P10/tcp_pivot_20260910/tcp_solve_report.json
+  controller_tool_id: null

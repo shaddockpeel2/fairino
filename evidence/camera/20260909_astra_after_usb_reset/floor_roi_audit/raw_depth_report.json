@@ -1,0 +1,76 @@
+{
+  "pass": false,
+  "checks": {
+    "collected_requested_frames": true,
+    "expected_dimensions": true,
+    "expected_frame_id": true,
+    "median_roi_valid_at_least_95pct": false,
+    "temporal_p95_span_at_most_5mm": false,
+    "monotonic_timestamps": true
+  },
+  "frames": 120,
+  "failures": {},
+  "stream": {
+    "width": 640,
+    "height": 480,
+    "frame_id": "camera_color_optical_frame",
+    "k": [
+      454.5934143066406,
+      0.0,
+      328.5454406738281,
+      0.0,
+      454.5934143066406,
+      243.98500061035156,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "fps": 29.570984423871923,
+    "max_gap_s": 0.11796064499958447,
+    "max_age_s": 0.034810781478881836,
+    "message_layout": {
+      "encoding": "16UC1",
+      "is_bigendian": false,
+      "step_bytes": 1280,
+      "data_bytes": 614400,
+      "expected_min_step_bytes": 1280,
+      "direct_uint16_min_mm": 0,
+      "direct_uint16_max_mm": 9893
+    },
+    "direct_byte_decode_equal_all_frames": true,
+    "full_frame_valid_fraction_median": 0.48822265625
+  },
+  "roi": {
+    "pixel": [
+      60,
+      300
+    ],
+    "size": [
+      30,
+      30
+    ],
+    "valid_fraction": 0.7068518518518518,
+    "depth_median_mm": 602.5000214576721,
+    "temporal_p95_span_mm": 614.5000532269477,
+    "frame_median_std_mm": 210.27998626232147,
+    "stable_pixel_fraction": 0.19777777777777777,
+    "per_pixel_temporal_std_median_mm": 1099.2368459701538,
+    "per_pixel_temporal_std_p95_mm": 1704.3475449085238,
+    "valid_depth_percentiles_mm": {
+      "1": 240.00001525878906,
+      "5": 272.0,
+      "50": 594.5000305175781,
+      "95": 3493.000244140625,
+      "99": 6204.00048828125
+    }
+  },
+  "limitations": [
+    "Pixel values are audited; geometric RGB-D alignment is not independently tested.",
+    "The ROI must be placed on one static matte surface.",
+    "No measured ground truth means absolute bias is not tested."
+  ],
+  "visualization_scale_mm": {
+    "low_mm": 152.00001001358032,
+    "high_mm": 3144.940209388735
+  }
+}

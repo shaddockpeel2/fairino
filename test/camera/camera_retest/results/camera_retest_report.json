@@ -1,0 +1,576 @@
+{
+  "verification_level": "L4: real powered camera, no actuation",
+  "sdk_version": "Orbbec SDK 1.5.7 / Python bindings 1.1.4",
+  "device": {
+    "name": "SV1301S_U3",
+    "vid": "0x2bc5",
+    "pid": "0x614",
+    "serial_number": "AY23B520016",
+    "firmware_version": "RD3013",
+    "connection": "USB3.0"
+  },
+  "requested_profiles": {
+    "color": {
+      "width": 640,
+      "height": 480,
+      "fps": 30,
+      "format_code": 5
+    },
+    "depth": {
+      "width": 640,
+      "height": 400,
+      "fps": 30,
+      "format_code": 11
+    }
+  },
+  "raw": {
+    "frames_captured": 120,
+    "frame_sync": {
+      "supported": false,
+      "enabled": false,
+      "error": "ObException error"
+    },
+    "color_output": {
+      "width": 640,
+      "height": 480,
+      "encoding": "bgr8"
+    },
+    "depth_output": {
+      "width": 640,
+      "height": 400,
+      "encoding": "16UC1",
+      "unit": "mm",
+      "value_scale_mm_per_raw_lsb": 1.0
+    },
+    "camera_param": {
+      "depthIntrinsic": {
+        "fx": 478.3198547363281,
+        "fy": 478.3198547363281,
+        "cx": 322.17816162109375,
+        "cy": 198.03799438476562,
+        "width": 640,
+        "height": 400
+      },
+      "rgbIntrinsic": {
+        "fx": 454.5934143066406,
+        "fy": 454.5934143066406,
+        "cx": 328.5454406738281,
+        "cy": 243.98500061035156,
+        "width": 640,
+        "height": 480
+      },
+      "depthDistortion": {
+        "k1": 0.0,
+        "k2": 0.0,
+        "k3": 0.0,
+        "k4": 0.0,
+        "k5": 0.0,
+        "k6": 0.0,
+        "p1": 0.0,
+        "p2": 0.0
+      },
+      "rgbDistortion": {
+        "k1": 0.03332940861582756,
+        "k2": -0.054838720709085464,
+        "k3": 0.0,
+        "k4": 0.0,
+        "k5": 0.0,
+        "k6": 0.0,
+        "p1": -0.00042468964238651097,
+        "p2": 3.9932128856889904e-05
+      },
+      "transform": {
+        "rot": [
+          0.9999863505363464,
+          0.0015310258604586124,
+          -0.004992706701159477,
+          -0.0015014258679002523,
+          0.9999813437461853,
+          0.0059269508346915245,
+          0.005001687910407782,
+          -0.00591937405988574,
+          0.999970018863678
+        ],
+        "trans": [
+          -9.83240032196045,
+          0.03498077392578125,
+          -0.8264209032058716
+        ]
+      },
+      "isMirrored": false
+    },
+    "camera_info": {
+      "color": {
+        "header": {
+          "frame_id": "camera_color_optical_frame",
+          "stamp": "set from each frame systemTimeStamp at publish time"
+        },
+        "height": 480,
+        "width": 640,
+        "distortion_model": "plumb_bob",
+        "d": [
+          0.03332940861582756,
+          -0.054838720709085464,
+          -0.00042468964238651097,
+          3.9932128856889904e-05,
+          0.0
+        ],
+        "k": [
+          454.5934143066406,
+          0.0,
+          328.5454406738281,
+          0.0,
+          454.5934143066406,
+          243.98500061035156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "r": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "p": [
+          454.5934143066406,
+          0.0,
+          328.5454406738281,
+          0.0,
+          0.0,
+          454.5934143066406,
+          243.98500061035156,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "binning_x": 0,
+        "binning_y": 0,
+        "roi": {
+          "x_offset": 0,
+          "y_offset": 0,
+          "height": 0,
+          "width": 0,
+          "do_rectify": false
+        }
+      },
+      "depth": {
+        "header": {
+          "frame_id": "camera_depth_optical_frame",
+          "stamp": "set from each frame systemTimeStamp at publish time"
+        },
+        "height": 400,
+        "width": 640,
+        "distortion_model": "plumb_bob",
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "k": [
+          478.3198547363281,
+          0.0,
+          322.17816162109375,
+          0.0,
+          478.3198547363281,
+          198.03799438476562,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "r": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "p": [
+          478.3198547363281,
+          0.0,
+          322.17816162109375,
+          0.0,
+          0.0,
+          478.3198547363281,
+          198.03799438476562,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "binning_x": 0,
+        "binning_y": 0,
+        "roi": {
+          "x_offset": 0,
+          "y_offset": 0,
+          "height": 0,
+          "width": 0,
+          "do_rectify": false
+        }
+      }
+    },
+    "timestamps": {
+      "color_device": {
+        "zero_count": 120,
+        "non_monotonic_steps": 119,
+        "median_frame_interval_ms": null,
+        "p95_frame_interval_ms": null
+      },
+      "depth_device": {
+        "zero_count": 0,
+        "non_monotonic_steps": 0,
+        "median_frame_interval_ms": 34.0,
+        "p95_frame_interval_ms": 36.099999999999994
+      },
+      "color_system": {
+        "zero_count": 0,
+        "non_monotonic_steps": 0,
+        "median_frame_interval_ms": 32.0,
+        "p95_frame_interval_ms": 47.099999999999994
+      },
+      "depth_system": {
+        "zero_count": 0,
+        "non_monotonic_steps": 0,
+        "median_frame_interval_ms": 34.0,
+        "p95_frame_interval_ms": 36.099999999999994
+      },
+      "color_minus_depth_system_skew_ms": {
+        "median": 19.0,
+        "p05": 10.0,
+        "p95": 30.0,
+        "max_abs": 37.0
+      }
+    },
+    "depth_quality_center_100x100": {
+      "full_frame_valid_pixel_ratio": 0.700216796875,
+      "stable_in_range_bands": {
+        "250_350_mm": {
+          "stable_pixel_count": 0,
+          "frame_area_ratio": 0.0,
+          "temporal_std_median_mm": null,
+          "temporal_std_p95_mm": null
+        },
+        "350_500_mm": {
+          "stable_pixel_count": 0,
+          "frame_area_ratio": 0.0,
+          "temporal_std_median_mm": null,
+          "temporal_std_p95_mm": null
+        },
+        "500_750_mm": {
+          "stable_pixel_count": 118436,
+          "frame_area_ratio": 0.462640625,
+          "temporal_std_median_mm": 1.441834807395935,
+          "temporal_std_p95_mm": 3.253673791885376
+        },
+        "750_1200_mm": {
+          "stable_pixel_count": 25308,
+          "frame_area_ratio": 0.098859375,
+          "temporal_std_median_mm": 2.471714973449707,
+          "temporal_std_p95_mm": 7.340872573852531
+        }
+      },
+      "roi": {
+        "x": 270,
+        "y": 150,
+        "width": 100,
+        "height": 100
+      },
+      "median_distance_mm": 757.0,
+      "frame_median_jitter_std_mm": 1.998888373374939,
+      "frame_median_peak_to_peak_mm": 4.0,
+      "valid_pixel_ratio": 0.97802,
+      "per_pixel_temporal_std_median_mm": 2.242138624191284,
+      "per_pixel_temporal_std_p95_mm": 5.060523748397827,
+      "spatial_plane_fit_rmse_mm_if_center_is_planar": 13.687719027624226
+    }
+  },
+  "aligned_d2c_software": {
+    "frames_captured": 120,
+    "frame_sync": {
+      "supported": false,
+      "enabled": false,
+      "error": "ObException error"
+    },
+    "color_output": {
+      "width": 640,
+      "height": 480,
+      "encoding": "bgr8"
+    },
+    "depth_output": {
+      "width": 640,
+      "height": 480,
+      "encoding": "16UC1",
+      "unit": "mm",
+      "value_scale_mm_per_raw_lsb": 1.0
+    },
+    "camera_param": {
+      "depthIntrinsic": {
+        "fx": 454.5934143066406,
+        "fy": 454.5934143066406,
+        "cx": 328.5454406738281,
+        "cy": 243.98500061035156,
+        "width": 640,
+        "height": 480
+      },
+      "rgbIntrinsic": {
+        "fx": 454.5934143066406,
+        "fy": 454.5934143066406,
+        "cx": 328.5454406738281,
+        "cy": 243.98500061035156,
+        "width": 640,
+        "height": 480
+      },
+      "depthDistortion": {
+        "k1": 0.0,
+        "k2": 0.0,
+        "k3": 0.0,
+        "k4": 0.0,
+        "k5": 0.0,
+        "k6": 0.0,
+        "p1": 0.0,
+        "p2": 0.0
+      },
+      "rgbDistortion": {
+        "k1": 0.03332940861582756,
+        "k2": -0.054838720709085464,
+        "k3": 0.0,
+        "k4": 0.0,
+        "k5": 0.0,
+        "k6": 0.0,
+        "p1": -0.00042468964238651097,
+        "p2": 3.9932128856889904e-05
+      },
+      "transform": {
+        "rot": [
+          0.9999863505363464,
+          0.0015310258604586124,
+          -0.004992706701159477,
+          -0.0015014258679002523,
+          0.9999813437461853,
+          0.0059269508346915245,
+          0.005001687910407782,
+          -0.00591937405988574,
+          0.999970018863678
+        ],
+        "trans": [
+          -9.83240032196045,
+          0.03498077392578125,
+          -0.8264209032058716
+        ]
+      },
+      "isMirrored": false
+    },
+    "camera_info": {
+      "color": {
+        "header": {
+          "frame_id": "camera_color_optical_frame",
+          "stamp": "set from each frame systemTimeStamp at publish time"
+        },
+        "height": 480,
+        "width": 640,
+        "distortion_model": "plumb_bob",
+        "d": [
+          0.03332940861582756,
+          -0.054838720709085464,
+          -0.00042468964238651097,
+          3.9932128856889904e-05,
+          0.0
+        ],
+        "k": [
+          454.5934143066406,
+          0.0,
+          328.5454406738281,
+          0.0,
+          454.5934143066406,
+          243.98500061035156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "r": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "p": [
+          454.5934143066406,
+          0.0,
+          328.5454406738281,
+          0.0,
+          0.0,
+          454.5934143066406,
+          243.98500061035156,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "binning_x": 0,
+        "binning_y": 0,
+        "roi": {
+          "x_offset": 0,
+          "y_offset": 0,
+          "height": 0,
+          "width": 0,
+          "do_rectify": false
+        }
+      },
+      "depth": {
+        "header": {
+          "frame_id": "camera_color_optical_frame",
+          "stamp": "set from each frame systemTimeStamp at publish time"
+        },
+        "height": 480,
+        "width": 640,
+        "distortion_model": "plumb_bob",
+        "d": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "k": [
+          454.5934143066406,
+          0.0,
+          328.5454406738281,
+          0.0,
+          454.5934143066406,
+          243.98500061035156,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "r": [
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "p": [
+          454.5934143066406,
+          0.0,
+          328.5454406738281,
+          0.0,
+          0.0,
+          454.5934143066406,
+          243.98500061035156,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "binning_x": 0,
+        "binning_y": 0,
+        "roi": {
+          "x_offset": 0,
+          "y_offset": 0,
+          "height": 0,
+          "width": 0,
+          "do_rectify": false
+        }
+      }
+    },
+    "timestamps": {
+      "color_device": {
+        "zero_count": 120,
+        "non_monotonic_steps": 119,
+        "median_frame_interval_ms": null,
+        "p95_frame_interval_ms": null
+      },
+      "depth_device": {
+        "zero_count": 0,
+        "non_monotonic_steps": 0,
+        "median_frame_interval_ms": 34.0,
+        "p95_frame_interval_ms": 36.0
+      },
+      "color_system": {
+        "zero_count": 0,
+        "non_monotonic_steps": 0,
+        "median_frame_interval_ms": 32.0,
+        "p95_frame_interval_ms": 48.0
+      },
+      "depth_system": {
+        "zero_count": 0,
+        "non_monotonic_steps": 0,
+        "median_frame_interval_ms": 34.0,
+        "p95_frame_interval_ms": 36.0
+      },
+      "color_minus_depth_system_skew_ms": {
+        "median": 22.0,
+        "p05": 13.0,
+        "p95": 33.0,
+        "max_abs": 36.0
+      }
+    },
+    "depth_quality_center_100x100": {
+      "full_frame_valid_pixel_ratio": 0.53654541015625,
+      "stable_in_range_bands": {
+        "250_350_mm": {
+          "stable_pixel_count": 0,
+          "frame_area_ratio": 0.0,
+          "temporal_std_median_mm": null,
+          "temporal_std_p95_mm": null
+        },
+        "350_500_mm": {
+          "stable_pixel_count": 0,
+          "frame_area_ratio": 0.0,
+          "temporal_std_median_mm": null,
+          "temporal_std_p95_mm": null
+        },
+        "500_750_mm": {
+          "stable_pixel_count": 110981,
+          "frame_area_ratio": 0.36126627604166667,
+          "temporal_std_median_mm": 1.7123746871948242,
+          "temporal_std_p95_mm": 4.015590667724609
+        },
+        "750_1200_mm": {
+          "stable_pixel_count": 22472,
+          "frame_area_ratio": 0.07315104166666667,
+          "temporal_std_median_mm": 2.9001917839050293,
+          "temporal_std_p95_mm": 15.225459480285645
+        }
+      },
+      "roi": {
+        "x": 270,
+        "y": 190,
+        "width": 100,
+        "height": 100
+      },
+      "median_distance_mm": 748.0,
+      "frame_median_jitter_std_mm": 1.986831545829773,
+      "frame_median_peak_to_peak_mm": 7.0,
+      "valid_pixel_ratio": 0.9874616666666667,
+      "per_pixel_temporal_std_median_mm": 2.4966511726379395,
+      "per_pixel_temporal_std_p95_mm": 6.976892375946044,
+      "spatial_plane_fit_rmse_mm_if_center_is_planar": 12.976602994351028
+    }
+  }
+}

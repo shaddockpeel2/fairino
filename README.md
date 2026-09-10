@@ -11,6 +11,9 @@ this board.
   software V3.9.2.
 - `src/fairino_hardware/libfairino/lib/libfairino.so.2.3.2`: SDK built natively
   for AArch64 from FAIRINO C++ SDK tag `v2.3.2-robot3.9.2`.
+- `src/orbbec_vendor`: ARM64 Orbbec ROS 2 wrapper imported from the vendor archive.
+- `src/fr3c_camera`: DaBai DCW2 bench bringup, RGB-D validation, and
+  camera-frame projection interfaces for later hand-eye integration.
 
 ## Build
 
@@ -32,6 +35,19 @@ source /opt/ros/humble/setup.bash
 source /home/industio/fairino_ws/install/setup.bash
 ros2 run fairino_hardware ros2_cmd_server
 ```
+
+The camera bench is deliberately isolated from the robot ROS graph by default:
+
+```bash
+cd /home/industio/fairino_ws
+scripts/camera/run_bench.sh
+```
+
+The default camera is the DaBai DCW2 (`CH82C5201C9`) using a USB2-safe
+640x480 RGB + aligned-depth profile. See
+`docs/hardware/DaBai_DCW2_接入说明.md` for its verified configuration,
+validation results, and remaining calibration work. The older
+`P03_camera_bench.md` is retained as the discarded Gemini Pro test record.
 
 The board interface connected to the controller must have an address in
 `192.168.58.0/24` (currently `192.168.58.10/24`). The controller address is

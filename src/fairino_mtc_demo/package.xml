@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>fairino_mtc_demo</name>
+  <version>0.1.0</version>
+  <description>FAIRINO MTC cyclic pick-and-place demo adapted for FR3-C/FR3MT.</description>
+  <maintainer email="litao@frtech.fr">fa</maintainer>
+  <license>LicenseRef-FAIRINO</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>moveit_task_constructor_core</depend>
+  <depend>rclcpp</depend>
+
+  <exec_depend>fairino3mt_v6_moveit2_config</exec_depend>
+  <exec_depend>moveit_task_constructor_capabilities</exec_depend>
+  <exec_depend>moveit_task_constructor_visualization</exec_depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

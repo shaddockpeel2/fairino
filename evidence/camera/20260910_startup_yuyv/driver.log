@@ -1,0 +1,289 @@
+{
+  "pass": true,
+  "expected_model": "DaBai DCW2",
+  "expected_serial_number": "CH82C5201C9",
+  "expected_connection": "USB2.0",
+  "expected_speed_mbps": "480",
+  "matching_devices": [
+    {
+      "sysfs_name": "6-1.3.1",
+      "product_id": "06a0",
+      "product": "ORBBEC Depth Sensor",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "6",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/006",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    },
+    {
+      "sysfs_name": "6-1.3.3",
+      "product_id": "0561",
+      "product": "Orbbec DaBai DCW2 RGB Camera",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "5",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/005",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    }
+  ],
+  "all_orbbec_devices": [
+    {
+      "sysfs_name": "6-1.3.1",
+      "product_id": "06a0",
+      "product": "ORBBEC Depth Sensor",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "6",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/006",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    },
+    {
+      "sysfs_name": "6-1.3.3",
+      "product_id": "0561",
+      "product": "Orbbec DaBai DCW2 RGB Camera",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "5",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/005",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    }
+  ],
+  "failures": []
+}
+[INFO] [launch]: All log files can be found below /home/industio/.ros/log/2026-09-10-10-30-56-391060-ido-18296
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [component_container-1]: process started with pid [18365]
+[INFO] [rgbd_probe-2]: process started with pid [18367]
+[component_container-1] [INFO] [1789007456.979199598] [camera.camera_container]: Load Library: /home/industio/fairino_ws/install/orbbec_camera/lib/liborbbec_camera.so
+[component_container-1] [INFO] [1789007457.096312762] [camera.camera_container]: Found class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-1] [INFO] [1789007457.096471136] [camera.camera_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-1] [09/10 10:30:57.104656][info][18365][Context.cpp:68] Context created with config: /home/industio/fairino_ws/install/orbbec_camera/share/orbbec_camera/config/OrbbecSDKConfig_v1.0.xml
+[component_container-1] [09/10 10:30:57.104679][info][18365][Context.cpp:73] Work directory=/home/industio/fairino_ws, SDK version=v1.10.35-20260128-fa838f5
+[component_container-1] [09/10 10:30:57.104696][info][18365][LinuxPal.cpp:32] createObPal: create LinuxPal!
+[component_container-1] [09/10 10:30:57.186435][warning][18365][OpenNIDeviceInfo.cpp:190] New openni device matched.
+[component_container-1] [09/10 10:30:57.186578][info][18365][LinuxPal.cpp:166] Create PollingDeviceWatcher!
+[component_container-1] [09/10 10:30:57.186680][info][18365][DeviceManager.cpp:15] Current found device(s): (1)
+[component_container-1] [09/10 10:30:57.186687][info][18365][DeviceManager.cpp:24] 	- Name: DaBai DCW2, PID: 0x06a0, SN/ID: CH82C5201C9, Connection: USB2.0
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+[component_container-1] [INFO] [1789007457.289999875] [camera.camera]: Connecting to device with serial number: CH82C5201C9
+[component_container-1] [INFO] [1789007457.290371457] [camera.camera]: Before lock: Select device serial number: CH82C5201C9
+[component_container-1] [INFO] [1789007457.290458957] [camera.camera]: After lock: Select device serial number: CH82C5201C9
+[component_container-1] [09/10 10:30:57.293826][warning][18394][OpenNIHostProtocol.cpp:739] Get usb core type failed!
+[component_container-1] [INFO] [1789007457.448213130] [camera.camera]: Device serial number CH82C5201C9 matched
+[component_container-1] [INFO] [1789007457.448368297] [camera.camera]: Select device cost 158 ms
+[component_container-1] [INFO] [1789007457.448398046] [camera.camera]: Try to connect device via USB2.0
+[component_container-1] [INFO] [1789007457.448567796] [camera.camera]: OBCameraNode: use_intra_process: OFF
+[component_container-1] [INFO] [1789007457.457816228] [camera.camera]: current time domain: system
+[component_container-1] [INFO] [1789007457.477422005] [camera.camera]: Create align filter
+[component_container-1] [09/10 10:30:57.477861][warning][18394][NeonAlign.cpp:343] NeonAlign create.
+[component_container-1] [INFO] [1789007457.477912004] [camera.camera]: Setting LDP to OFF
+[component_container-1] [INFO] [1789007457.479500416] [camera.camera]: Setting color auto exposure priority to false
+[component_container-1] [INFO] [1789007457.480959328] [camera.camera]: color auto exposure priority is set to 0
+[component_container-1] [INFO] [1789007457.481256827] [camera.camera]: Setting color auto exposure to ON
+[component_container-1] [INFO] [1789007457.482191616] [camera.camera]: Setting IR auto exposure to ON
+[component_container-1] [INFO] [1789007457.483053489] [camera.camera]: default_soft_filter_max_diff: 6
+[component_container-1] [INFO] [1789007457.483148572] [camera.camera]: default_soft_filter_speckle_size: 50
+[component_container-1] [INFO] [1789007457.483307530] [camera.camera]: Setting ThresholdFilter......
+[component_container-1] [INFO] [1789007457.483326780] [camera.camera]: set ThresholdFilter to false
+[component_container-1] [INFO] [1789007457.483377238] [camera.camera]: Skip setting filter: ThresholdFilter
+[component_container-1] [INFO] [1789007457.484415860] [camera.camera]:  stream color is enabled - width: 640, height: 480, fps: 10, Format: OB_FORMAT_YUYV
+[component_container-1] [INFO] [1789007457.485084066] [camera.camera]:  stream depth is enabled - width: 640, height: 400, fps: 10, Format: OB_FORMAT_Y11
+[component_container-1] [09/10 10:30:57.507183][warning][18394][ObException.cpp:5] Current device does not support frame sync!
+[component_container-1] [09/10 10:30:57.507271][warning][18394][Pipeline.cpp:45] Execute failure! A libobsensor_exception has occurred!
+[component_container-1] 	 - where:45#Pipeline
+[component_container-1] 	 - msg:Current device does not support frame sync!
+[component_container-1] 	 - type:N11libobsensor31unsupported_operation_exceptionE
+[component_container-1] [INFO] [1789007457.507338169] [camera.camera]: set align mode to ALIGN_D2C_HW_MODE
+[component_container-1] [INFO] [1789007457.507416919] [camera.camera]: enable depth scale ON
+[component_container-1] [INFO] [1789007457.507434711] [camera.camera]: Enable color stream
+[component_container-1] [INFO] [1789007457.507455711] [camera.camera]: Stream color width: 640 height: 480 fps: 10 format: YUYV
+[component_container-1] [INFO] [1789007457.507474669] [camera.camera]: Enable depth stream
+[component_container-1] [INFO] [1789007457.507488961] [camera.camera]: Stream depth width: 640 height: 400 fps: 10 format: Y11
+[component_container-1] [INFO] [1789007458.189357017] [camera.camera]: Disable frame sync
+[component_container-1] [INFO] [1789007458.189622433] [camera.camera]: Setting LDP to OFF
+[component_container-1] [INFO] [1789007458.211454037] [camera.camera]: Device DaBai DCW2 connected
+[component_container-1] [INFO] [1789007458.211600745] [camera.camera]: Serial number: CH82C5201C9
+[component_container-1] [INFO] [1789007458.211646829] [camera.camera]: Firmware version: RD1017
+[component_container-1] [INFO] [1789007458.211692037] [camera.camera]: Hardware version: 
+[component_container-1] [INFO] [1789007458.211730828] [camera.camera]: Wrapper version: 1.5.15
+[component_container-1] [INFO] [1789007458.211801120] [camera.camera]: SDK version: 1.10.35
+[component_container-1] [INFO] [1789007458.211836703] [camera.camera]: device unique id: 6-1.3.1-6
+[component_container-1] [INFO] [1789007458.211944911] [camera.camera]: Current node pid: 18365
+[component_container-1] [INFO] [1789007458.211979328] [camera.camera]: usb connect type: USB2.0
+[component_container-1] [INFO] [1789007458.212011994] [camera.camera]: Start device cost 1022 ms
+[component_container-1] [INFO] [1789007458.212045536] [camera.camera]: Initialize device cost 763 ms
+[component_container-1] [09/10 10:30:58.829131][warning][18442][VideoSensor.cpp:453] This frame will be dropped because the data size does not match the expectation! size=1116, expected=614400 @OB_SENSOR_COLOR
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] [09/10 10:31:01.857139][warning][18449][VideoSensor.cpp:453] This frame will be dropped because the data size does not match the expectation! size=1135, expected=614400 @OB_SENSOR_COLOR [**66 logs in 3027ms, last: 10:31:01.820799**]
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] [09/10 10:31:07.871107][warning][18486][VideoSensor.cpp:453] This frame will be dropped because the data size does not match the expectation! size=297432, expected=614400 @OB_SENSOR_COLOR [**134 logs in 6013ms, last: 10:31:07.845170**]
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] [09/10 10:31:19.900954][warning][18442][VideoSensor.cpp:453] This frame will be dropped because the data size does not match the expectation! size=571188, expected=614400 @OB_SENSOR_COLOR [**229 logs in 12029ms**]
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [rgbd_probe-2]: sending signal 'SIGINT' to process[rgbd_probe-2]
+[INFO] [component_container-1]: sending signal 'SIGINT' to process[component_container-1]
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] Received SIGINT (Ctrl+C), shutting down ROS2...
+[component_container-1] [WARN] [1789007491.298463927] [camera.camera]: Do destroy ~OBCameraNode
+[component_container-1] [WARN] [1789007491.298531884] [camera.camera]: Stop tf thread
+[component_container-1] [WARN] [1789007491.298543842] [camera.camera]: Stop color frame thread
+[component_container-1] [INFO] [1789007491.298777462] [camera.camera]: Color frame thread exit!
+[component_container-1] [WARN] [1789007491.303101914] [camera.camera]: stop streams
+[component_container-1] [09/10 10:31:31.407821][warning][18443][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer0: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[component_container-1] [09/10 10:31:31.511638][warning][18443][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer19: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[component_container-1] strmh->payload_header_hold_bytes is invalid,size:0
+[component_container-1] [09/10 10:31:31.615397][warning][18443][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer38: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[INFO] [rgbd_probe-2]: process has finished cleanly [pid 18367]
+[component_container-1] [09/10 10:31:31.718909][warning][18443][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer57: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[component_container-1] [09/10 10:31:31.719284][warning][18443][OpenNIUSBLinux.cpp:204] exist(0) read thread(58)
+[component_container-1] [09/10 10:31:31.719909][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720184][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720246][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720299][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720350][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720398][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720448][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720525][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720578][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720628][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720679][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720729][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720780][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720830][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.720880][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721004][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721057][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721109][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721160][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721211][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721262][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721312][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721362][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721412][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721461][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721510][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721569][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721620][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721670][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721720][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721771][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721822][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721872][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721922][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.721972][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722020][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722071][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722121][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722171][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722221][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722309][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722364][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722415][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722465][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722516][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722566][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722616][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722667][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722717][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722768][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722818][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722868][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722918][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.722970][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.723020][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.723071][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.723168][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.723235][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.723288][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.723339][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.723390][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.723441][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.723491][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [09/10 10:31:31.723540][warning][18365][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [WARN] [1789007492.380931404] [camera.camera]: Destroy ~OBCameraNode DONE
+[component_container-1] [09/10 10:31:32.479083][warning][18717][VideoSensor.cpp:453] This frame will be dropped because the data size does not match the expectation! size=1141, expected=614400 @OB_SENSOR_COLOR [**235 logs in 12578ms, last: 10:31:31.703874**]
+[INFO] [component_container-1]: process has finished cleanly [pid 18365]

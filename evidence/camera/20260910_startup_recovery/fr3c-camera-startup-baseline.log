@@ -1,0 +1,594 @@
+{
+  "pass": true,
+  "expected_model": "DaBai DCW2",
+  "expected_serial_number": "CH82C5201C9",
+  "expected_connection": "USB2.0",
+  "expected_speed_mbps": "480",
+  "matching_devices": [
+    {
+      "sysfs_name": "6-1.3.1",
+      "product_id": "06a0",
+      "product": "ORBBEC Depth Sensor",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "6",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/006",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    },
+    {
+      "sysfs_name": "6-1.3.3",
+      "product_id": "0561",
+      "product": "Orbbec DaBai DCW2 RGB Camera",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "5",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/005",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    }
+  ],
+  "all_orbbec_devices": [
+    {
+      "sysfs_name": "6-1.3.1",
+      "product_id": "06a0",
+      "product": "ORBBEC Depth Sensor",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "6",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/006",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    },
+    {
+      "sysfs_name": "6-1.3.3",
+      "product_id": "0561",
+      "product": "Orbbec DaBai DCW2 RGB Camera",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "6",
+      "devnum": "5",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/006/005",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    }
+  ],
+  "failures": []
+}
+[INFO] [launch]: All log files can be found below /home/industio/.ros/log/2026-09-10-10-28-26-394140-ido-15954
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [component_container-1]: process started with pid [16009]
+[INFO] [rgbd_probe-2]: process started with pid [16011]
+[component_container-1] [INFO] [1789007306.949192247] [camera.camera_container]: Load Library: /home/industio/fairino_ws/install/orbbec_camera/lib/liborbbec_camera.so
+[component_container-1] [INFO] [1789007307.080044446] [camera.camera_container]: Found class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-1] [INFO] [1789007307.080195528] [camera.camera_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-1] [09/10 10:28:27.087753][info][16009][Context.cpp:68] Context created with config: /home/industio/fairino_ws/install/orbbec_camera/share/orbbec_camera/config/OrbbecSDKConfig_v1.0.xml
+[component_container-1] [09/10 10:28:27.087775][info][16009][Context.cpp:73] Work directory=/home/industio/fairino_ws, SDK version=v1.10.35-20260128-fa838f5
+[component_container-1] [09/10 10:28:27.087793][info][16009][LinuxPal.cpp:32] createObPal: create LinuxPal!
+[component_container-1] [09/10 10:28:27.159613][warning][16009][OpenNIDeviceInfo.cpp:190] New openni device matched.
+[component_container-1] [09/10 10:28:27.159796][info][16009][LinuxPal.cpp:166] Create PollingDeviceWatcher!
+[component_container-1] [09/10 10:28:27.159882][info][16009][DeviceManager.cpp:15] Current found device(s): (1)
+[component_container-1] [09/10 10:28:27.159890][info][16009][DeviceManager.cpp:24] 	- Name: DaBai DCW2, PID: 0x06a0, SN/ID: CH82C5201C9, Connection: USB2.0
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+[component_container-1] [INFO] [1789007307.263094757] [camera.camera]: Connecting to device with serial number: CH82C5201C9
+[component_container-1] [INFO] [1789007307.263795625] [camera.camera]: Before lock: Select device serial number: CH82C5201C9
+[component_container-1] [INFO] [1789007307.263963915] [camera.camera]: After lock: Select device serial number: CH82C5201C9
+[component_container-1] [09/10 10:28:27.266962][warning][16032][OpenNIHostProtocol.cpp:739] Get usb core type failed!
+[component_container-1] [INFO] [1789007307.431035925] [camera.camera]: Device serial number CH82C5201C9 matched
+[component_container-1] [INFO] [1789007307.431339255] [camera.camera]: Select device cost 168 ms
+[component_container-1] [INFO] [1789007307.431398755] [camera.camera]: Try to connect device via USB2.0
+[component_container-1] [INFO] [1789007307.431665627] [camera.camera]: OBCameraNode: use_intra_process: OFF
+[component_container-1] [INFO] [1789007307.442542936] [camera.camera]: current time domain: system
+[component_container-1] [INFO] [1789007307.457745327] [camera.camera]: Create align filter
+[component_container-1] [INFO] [1789007307.457958825] [camera.camera]: Setting LDP to OFF
+[component_container-1] [09/10 10:28:27.457937][warning][16032][NeonAlign.cpp:343] NeonAlign create.
+[component_container-1] [INFO] [1789007307.459153188] [camera.camera]: Setting color auto exposure priority to false
+[component_container-1] [INFO] [1789007307.459947972] [camera.camera]: color auto exposure priority is set to 0
+[component_container-1] [INFO] [1789007307.460043346] [camera.camera]: Setting color auto exposure to ON
+[component_container-1] [INFO] [1789007307.460571841] [camera.camera]: Setting IR auto exposure to ON
+[component_container-1] [INFO] [1789007307.461108210] [camera.camera]: default_soft_filter_max_diff: 6
+[component_container-1] [INFO] [1789007307.461161585] [camera.camera]: default_soft_filter_speckle_size: 50
+[component_container-1] [INFO] [1789007307.461275625] [camera.camera]: Setting ThresholdFilter......
+[component_container-1] [INFO] [1789007307.461296042] [camera.camera]: set ThresholdFilter to false
+[component_container-1] [INFO] [1789007307.461364583] [camera.camera]: Skip setting filter: ThresholdFilter
+[component_container-1] [INFO] [1789007307.462292074] [camera.camera]:  stream color is enabled - width: 640, height: 480, fps: 10, Format: OB_FORMAT_MJPG
+[component_container-1] [INFO] [1789007307.462952109] [camera.camera]:  stream depth is enabled - width: 640, height: 400, fps: 10, Format: OB_FORMAT_Y11
+[component_container-1] [09/10 10:28:27.492760][warning][16032][ObException.cpp:5] Current device does not support frame sync!
+[component_container-1] [09/10 10:28:27.492837][warning][16032][Pipeline.cpp:45] Execute failure! A libobsensor_exception has occurred!
+[component_container-1] 	 - where:45#Pipeline
+[component_container-1] 	 - msg:Current device does not support frame sync!
+[component_container-1] 	 - type:N11libobsensor31unsupported_operation_exceptionE
+[component_container-1] [INFO] [1789007307.492876812] [camera.camera]: set align mode to ALIGN_D2C_HW_MODE
+[component_container-1] [INFO] [1789007307.492948270] [camera.camera]: enable depth scale ON
+[component_container-1] [INFO] [1789007307.492966644] [camera.camera]: Enable color stream
+[component_container-1] [INFO] [1789007307.492987644] [camera.camera]: Stream color width: 640 height: 480 fps: 10 format: MJPG
+[component_container-1] [INFO] [1789007307.493005144] [camera.camera]: Enable depth stream
+[component_container-1] [INFO] [1789007307.493018561] [camera.camera]: Stream depth width: 640 height: 400 fps: 10 format: Y11
+[component_container-1] [INFO] [1789007308.165064159] [camera.camera]: Disable frame sync
+[component_container-1] [INFO] [1789007308.165315864] [camera.camera]: Setting LDP to OFF
+[component_container-1] [INFO] [1789007308.247480472] [camera.camera]: Device DaBai DCW2 connected
+[component_container-1] [INFO] [1789007308.247652262] [camera.camera]: Serial number: CH82C5201C9
+[component_container-1] [INFO] [1789007308.247701261] [camera.camera]: Firmware version: RD1017
+[component_container-1] [INFO] [1789007308.247746469] [camera.camera]: Hardware version: 
+[component_container-1] [INFO] [1789007308.247780302] [camera.camera]: Wrapper version: 1.5.15
+[component_container-1] [INFO] [1789007308.247849718] [camera.camera]: SDK version: 1.10.35
+[component_container-1] [INFO] [1789007308.247882968] [camera.camera]: device unique id: 6-1.3.1-6
+[component_container-1] [INFO] [1789007308.247924384] [camera.camera]: Current node pid: 16009
+[component_container-1] [INFO] [1789007308.247955884] [camera.camera]: usb connect type: USB2.0
+[component_container-1] [INFO] [1789007308.247989133] [camera.camera]: Start device cost 1085 ms
+[component_container-1] [INFO] [1789007308.248021508] [camera.camera]: Initialize device cost 816 ms
+[component_container-1] [INFO] [1789007308.875144789] [camera.camera]: Publishing static transform from color to depth
+[component_container-1] [INFO] [1789007308.875339620] [camera.camera]: Translation 12.2578, -0.0259598, 1.57039
+[component_container-1] [INFO] [1789007308.875413703] [camera.camera]: Rotation 0.00144328, 0.00102459, 0.000254427, 0.999998
+[component_container-1] [INFO] [1789007308.875481077] [camera.camera]: Publishing static transform from depth to depth
+[component_container-1] [INFO] [1789007308.875542910] [camera.camera]: Translation 0, 0, 0
+[component_container-1] [INFO] [1789007308.875718200] [camera.camera]: Rotation 0, 0, 0, 1
+[component_container-1] [09/10 10:28:28.888645][warning][16061][FormatConverter.cpp:188] Failed to decompress color frame
+[component_container-1] [ERROR] [1789007308.888886528] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007308.889526439] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007308.976461249] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007308.977058576] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007309.073825294] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007309.074391705] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007309.189324247] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007309.189925657] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007309.288559609] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007309.289230727] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007309.377490071] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007309.377976567] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007309.473816462] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007309.474371206] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007309.586755564] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007309.587442141] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007309.670356121] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007309.670953157] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007309.774337395] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007309.775174762] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007309.869822127] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007309.870399038] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007309.990195865] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007309.990661944] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007309.991208230] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007310.084203491] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007310.085051650] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007310.169993365] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007310.170525360] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007310.281025827] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007310.281659612] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007310.377034685] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007310.377668470] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007310.486037208] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007310.486844533] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007310.587727260] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007310.588533419] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007310.669317925] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007310.669923419] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007310.758733763] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007310.759348299] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007310.888953246] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007310.889759989] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007310.966189703] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007310.966696615] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007311.070382694] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007311.070744065] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007311.071108937] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007311.183230478] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007311.183992304] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007311.288522044] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007311.289115580] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007311.386472264] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007311.387062008] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007311.468888342] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007311.469646960] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007311.566572481] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007311.567193142] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007311.666374266] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007311.666882345] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007311.773779770] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007311.774678969] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007311.863285571] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007311.864021731] [camera.camera]: color frame is not decoded
+[component_container-1] [09/10 10:28:31.972830][warning][16061][FormatConverter.cpp:188] Failed to decompress color frame [**31 logs in 3084ms**]
+[component_container-1] [ERROR] [1789007311.973281466] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007311.973792461] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007312.054024980] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007312.054493976] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007312.177161589] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007312.177518294] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007312.178009748] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007312.271769472] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007312.272256843] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007312.355959414] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007312.356876405] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007312.493355594] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007312.494347251] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007312.554414257] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007312.560028787] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007312.673293532] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007312.674056233] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007312.773268322] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007312.773788942] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007312.863003752] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007312.863525538] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007312.962285048] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007312.962789626] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007313.070267807] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007313.070816718] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007313.165537314] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007313.166281348] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007313.273042579] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007313.273352035] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007313.273621241] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007313.377891079] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007313.378641238] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007313.478242371] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007313.479001280] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007313.569555624] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007313.570084411] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007313.666868612] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007313.668631429] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007313.759676226] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007313.760321970] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007313.858079204] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007313.858613824] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007313.958718827] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007313.959247613] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007314.059066206] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007314.059667908] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007314.146150796] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007314.146604917] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007314.278275710] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007314.278900162] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007314.279580614] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007314.370542043] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007314.371524659] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007314.468289616] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007314.468860403] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007314.574532692] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007314.575307935] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007314.655546965] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007314.656175209] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007314.773219849] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007314.777706224] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007314.859466990] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007314.860026401] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007314.962721719] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007314.963275589] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007315.059822135] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007315.060385338] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007315.162877039] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007315.168977481] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007315.255406708] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007315.256070535] [camera.camera]: color frame is not decoded
+[component_container-1] [09/10 10:28:35.342082][warning][16048][VideoSensor.cpp:443] This frame will be dropped because jpg format verification failure! @OB_SENSOR_COLOR
+[component_container-1] [ERROR] [1789007315.462497548] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007315.462949336] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007315.463454206] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007315.567621683] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007315.568141803] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007315.656512137] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007315.657024007] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007315.752534774] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007315.753085727] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007315.950173453] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007315.950721198] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007316.058979972] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007316.059565050] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007316.145854742] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007316.148802881] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007316.247851287] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007316.250640470] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007316.345973119] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007316.348660968] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007316.449865146] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007316.452489830] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007316.555637155] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007316.555981027] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007316.556293399] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007316.661372624] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007316.662119283] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007316.746142747] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007316.746693408] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007316.847331466] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007316.847853253] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007316.964060414] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007316.964789283] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007317.060027769] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007317.060805929] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007317.146564256] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007317.147051626] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007317.258774795] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007317.259861535] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007317.350413026] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007317.351094061] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007317.449103400] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007317.449747977] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007317.545364171] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007317.545887707] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007317.646276648] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007317.646639478] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007317.647099432] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007317.775935151] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007317.776788851] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007317.845147090] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007317.845746751] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007317.945805362] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007317.946339690] [camera.camera]: color frame is not decoded
+[component_container-1] [09/10 10:28:38.054134][warning][16132][FormatConverter.cpp:188] Failed to decompress color frame [**58 logs in 6081ms, last: 10:28:37.945734**]
+[component_container-1] [ERROR] [1789007318.057596158] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007318.058062237] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007318.146689335] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007318.147284329] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007318.258814173] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007318.259564041] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007318.340042006] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007318.340568751] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007318.444251292] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007318.444771329] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007318.554501648] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007318.555259683] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007318.656724037] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007318.657252824] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007318.657795319] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007318.758012809] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007318.758755385] [camera.camera]: color frame is not decoded
+[component_container-1] [09/10 10:28:38.842170][warning][16193][VideoSensor.cpp:443] This frame will be dropped because jpg format verification failure! @OB_SENSOR_COLOR [**1 logs in 3499ms, last: 10:28:35.841594**]
+[component_container-1] [ERROR] [1789007318.853158263] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007318.853701341] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007318.960435979] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007318.961319429] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007319.051320350] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007319.051896095] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007319.160596638] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007319.161399589] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007319.253132580] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007319.253646492] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007319.356703921] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007319.357224541] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007319.438170047] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007319.438749709] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007319.534127374] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007319.534663161] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007319.646929005] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007319.647724081] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007319.738880452] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007319.739327281] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007319.739763611] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007319.853166361] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007319.853931687] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007319.941195511] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007319.941928462] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007320.037144798] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007320.037691085] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007320.145287686] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007320.145804223] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007320.248768575] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007320.249274904] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007320.350046610] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007320.350769353] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007320.444370749] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007320.444897494] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007320.530926001] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007320.531569995] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007320.631147211] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007320.631778080] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007320.732818617] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007320.733397570] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007320.844659721] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007320.844973260] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007320.845219716] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007320.943221738] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007320.943716692] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007321.043113871] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007321.043734824] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007321.137679305] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007321.138489839] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007321.231320956] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007321.234878674] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007321.430484150] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007321.430999229] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007321.546259017] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007321.547045927] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007321.636448325] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007321.637007153] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007321.736238962] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007321.736803623] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007321.842721413] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007321.843501323] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007321.940249112] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007321.940563526] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007321.940830690] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007322.047392477] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007322.048025388] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007322.126108018] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007322.126755220] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007322.226871318] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007322.227455396] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007322.343712558] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007322.344458634] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007322.440290188] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007322.441092847] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007322.538921383] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007322.539496836] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007322.614311120] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007322.614983406] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007322.725883157] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007322.726393277] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007322.838940013] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007322.843400723] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007322.951587665] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007322.952145619] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007322.952729822] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007323.041717189] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007323.042472599] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007323.121300435] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007323.121923430] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007323.223002484] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007323.223554895] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007323.340984386] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007323.341868711] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007323.431591575] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007323.432128820] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007323.539672066] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007323.540262394] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007323.639554172] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007323.640103084] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007323.721198525] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007323.722158100] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007323.818339572] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007323.818847068] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007323.935912854] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007323.936722221] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007324.035332091] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007324.035818586] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007324.036287582] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007324.135857614] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007324.136606315] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007324.235489770] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007324.236241096] [camera.camera]: color frame is not decoded
+[component_container-1] [09/10 10:28:44.322422][warning][16292][VideoSensor.cpp:443] This frame will be dropped because jpg format verification failure! @OB_SENSOR_COLOR [**1 logs in 5480ms, last: 10:28:41.321741**]
+[component_container-1] [ERROR] [1789007324.332815238] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007324.333414316] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007324.435617199] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007324.436374359] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007324.531609095] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007324.532359547] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007324.635316965] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007324.636065083] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007324.735425991] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007324.736176735] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007324.815028700] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007324.815616987] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007324.931995869] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007324.932750987] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007325.015617751] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007325.016184163] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007325.131653684] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007325.132098181] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007325.132560176] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007325.231650135] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007325.232401753] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007325.332026915] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007325.332816158] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007325.425156717] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007325.425952085] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007325.531593110] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007325.532360187] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007325.631589560] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007325.632345845] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007325.732139006] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007325.732885957] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007325.828133074] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007325.828780569] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007325.910983009] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007325.911616504] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007326.026364866] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007326.026983778] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007326.115904872] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007326.116491409] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007326.217747020] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007326.218093517] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007326.218476472] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007326.313129808] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007326.313990801] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007326.411737401] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007326.412428354] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007326.511919189] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007326.514811914] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007326.608254635] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007326.608717215] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007326.721210436] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007326.722073470] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007326.910452109] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007326.910977687] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007327.009536531] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007327.010187234] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007327.109959947] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007327.110524026] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007327.222441175] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007327.222885963] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007327.223399292] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007327.316898352] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007327.317671553] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007327.424003543] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007327.424771203] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007327.522473435] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007327.523261803] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007327.622550687] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007327.623337014] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007327.722403359] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007327.723200185] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007327.822821275] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007327.823612268] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007327.922388699] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007327.923247649] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007328.007943036] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007328.008518198] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007328.101871848] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007328.102616758] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007328.224819075] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007328.225282821] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007328.225769900] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007328.329663292] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007328.330451952] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007328.430602418] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007328.431746908] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007328.530450720] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007328.531466586] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007328.618442000] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007328.619291617] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007328.718385092] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007328.719040462] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007328.818712307] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007328.819537133] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007328.914411686] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007328.914960598] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007329.009944401] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007329.010579937] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007329.104474630] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007329.104980959] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007329.217560698] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007329.218349942] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007329.297896091] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1789007329.298228005] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007329.298502169] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007329.421461361] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007329.422274812] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007329.497884662] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007329.498610322] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007329.604527619] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007329.605102781] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007329.697728734] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007329.698401020] [camera.camera]: color frame is not decoded
+[component_container-1] [ERROR] [1789007329.799041488] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1789007329.799590108] [camera.camera]: color frame is not decoded
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [rgbd_probe-2]: sending signal 'SIGINT' to process[rgbd_probe-2]
+[INFO] [component_container-1]: sending signal 'SIGINT' to process[component_container-1]
+[component_container-1] Received SIGINT (Ctrl+C), shutting down ROS2...
+[component_container-1] [09/10 10:28:50.057767][warning][16251][FormatConverter.cpp:188] Failed to decompress color frame [**118 logs in 12003ms, last: 10:28:49.916750**]
+[component_container-1] [09/10 10:28:50.070973][warning][16049][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer13: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[component_container-1] [09/10 10:28:50.174040][warning][16049][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer32: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[component_container-1] [ERROR] [1789007329.916861474] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [INFO] [1789007329.917212346] [camera.camera]: Color frame thread exit!
+[component_container-1] [WARN] [1789007329.923160920] [camera.camera]: Do destroy ~OBCameraNode
+[component_container-1] [WARN] [1789007329.923206711] [camera.camera]: Stop tf thread
+[component_container-1] [WARN] [1789007329.923224503] [camera.camera]: Stop color frame thread
+[component_container-1] [WARN] [1789007329.923242003] [camera.camera]: stop streams
+[ERROR] [rgbd_probe-2]: process has died [pid 16011, exit code -2, cmd '/home/industio/fairino_ws/install/fr3c_camera/lib/fr3c_camera/rgbd_probe --ros-args --params-file /tmp/launch_params_j0fq6ik1'].
+[ERROR] [component_container-1]: process has died [pid 16009, exit code -2, cmd '/opt/ros/humble/lib/rclcpp_components/component_container --ros-args -r __node:=camera_container -r __ns:=/camera'].

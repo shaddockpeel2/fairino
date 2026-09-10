@@ -1,0 +1,7 @@
+Log file created at: 2026/09/09 10:11:44
+Running on machine: LAPTOP-UOUB831I
+Running duration (h:mm:ss): 0:00:00
+Log line format: [IWEF]yyyymmdd hh:mm:ss.uuuuuu threadid file:line] msg
+[E20260909 10:11:44.202457 14832 OpenNIHostProtocol.cpp:502] Get usb core type failed!
+[E20260909 10:11:51.397234 14832 OpenNIVideoSensor.cpp:634] OpenNI Depth stream stop success.
+[E20260909 10:11:59.484229 14832 OpenNIVideoSensor.cpp:634] OpenNI Depth stream stop success.

@@ -1,0 +1,10 @@
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/camera/20260908_bench/ros_logs/2026-09-08-16-19-07-954676-ido-434188
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [component_container-1]: process started with pid [434247]
+[INFO] [rgbd_probe-2]: process started with pid [434249]
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+[component_container-1] [INFO] [1788855585.375688727] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [component_container-1]: process has finished cleanly [pid 434247]
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [rgbd_probe-2]: sending signal 'SIGINT' to process[rgbd_probe-2]
+[INFO] [rgbd_probe-2]: process has finished cleanly [pid 434249]

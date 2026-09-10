@@ -1,0 +1,30 @@
+# Second-camera A/B diagnostic: raw depth only on the device's USB2 profile.
+camera_name: camera
+serial_number: CH82C5201C9
+camera:
+  camera_name: camera
+  serial_number: CH82C5201C9
+  device_num: 2
+  color_width: 640
+  color_height: 480
+  color_fps: 15
+  color_format: MJPG
+  depth_width: 640
+  depth_height: 400
+  depth_fps: 15
+  depth_format: Y11
+  enable_color: false
+  enable_depth: true
+  enable_ir: false
+  depth_registration: false
+  enable_frame_sync: false
+  time_domain: system
+  enable_point_cloud: false
+  enable_colored_point_cloud: false
+  publish_tf: true
+  tf_publish_rate: 0.0
+  depth_qos: SENSOR_DATA
+  depth_camera_info_qos: SENSOR_DATA
+  enable_soft_filter: false
+  enable_ldp: true
+  log_level: warn

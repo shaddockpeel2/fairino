@@ -1,0 +1,105 @@
+{
+  "timestamp": "2026-09-09T10:50:30+0800",
+  "contract_pass": false,
+  "color": {
+    "width": 640,
+    "height": 480,
+    "encoding": "rgb8",
+    "frame_id": "camera_color_optical_frame"
+  },
+  "depth": {
+    "width": 640,
+    "height": 480,
+    "encoding": "16UC1",
+    "unit": "millimetres for 16UC1"
+  },
+  "camera_info": {
+    "color_k": [
+      454.5934143066406,
+      0.0,
+      328.5454406738281,
+      0.0,
+      454.5934143066406,
+      243.98500061035156,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "color_d": [
+      0.03332940861582756,
+      -0.054838720709085464,
+      -0.00042468964238651097,
+      3.9932128856889904e-05,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "depth_k": [
+      454.5934143066406,
+      0.0,
+      328.5454406738281,
+      0.0,
+      454.5934143066406,
+      243.98500061035156,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "depth_d": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "distortion_models": [
+      "rational_polynomial",
+      "rational_polynomial"
+    ],
+    "max_k_delta": 0.0
+  },
+  "timing": {
+    "skew_ms": 14.574050903320312,
+    "age_ms": 108.8721752166748
+  },
+  "roi": {
+    "color_pixel": [
+      479,
+      319
+    ],
+    "depth_pixel": [
+      478.48735881486976,
+      318.7717680043407
+    ],
+    "radius_px": 20,
+    "median_mm": 560.5,
+    "valid_fraction": 0.32599643069601425,
+    "stable_valid_fraction": 0.0,
+    "p05_mm": 336.0000305175781,
+    "p95_mm": 944.0500396728512,
+    "robust_noise_mm": 202.37485475463865,
+    "temporal_sigma_mm": 63.111569650981096,
+    "temporal_p95_span_mm": 215.10003204345702,
+    "quality_ready_300_frames": true,
+    "unique_depth_samples": 300,
+    "expected_distance_mm": null,
+    "bias_mm": null
+  },
+  "preprocess": {
+    "frames": 5,
+    "required_valid_frames": 3,
+    "max_min_max_span_mm": 15.0,
+    "stable_fraction": 0.0010579427083333333,
+    "policy": "no hole filling; latest sample required; stationary target only"
+  },
+  "display_rotation_deg": 180,
+  "limitations": [
+    "Visual edge overlay requires a scene with shared color/depth edges.",
+    "Absolute accuracy requires a measured lens-to-target ground truth.",
+    "This viewer emits no robot command and no base_link transform."
+  ]
+}

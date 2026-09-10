@@ -1,0 +1,76 @@
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/camera/20260908_bench/ros_logs/2026-09-08-16-24-25-821821-ido-442110
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [component_container-1]: process started with pid [442169]
+[INFO] [rgbd_probe-2]: process started with pid [442171]
+[component_container-1] [INFO] [1788855866.389080594] [camera.camera_container]: Load Library: /home/industio/fairino_ws/install/orbbec_camera/lib/liborbbec_camera.so
+[component_container-1] [INFO] [1788855866.525333000] [camera.camera_container]: Found class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-1] [INFO] [1788855866.525466876] [camera.camera_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-1] [09/08 16:24:26.533388][info][442169][Context.cpp:68] Context created with config: /home/industio/fairino_ws/install/orbbec_camera/share/orbbec_camera/config/OrbbecSDKConfig_v1.0.xml
+[component_container-1] [09/08 16:24:26.533410][info][442169][Context.cpp:73] Work directory=/home/industio/fairino_ws, SDK version=v1.10.35-20260128-fa838f5
+[component_container-1] [09/08 16:24:26.533425][info][442169][LinuxPal.cpp:32] createObPal: create LinuxPal!
+[component_container-1] [09/08 16:24:26.622695][warning][442169][OpenNIDeviceInfo.cpp:190] New openni device matched.
+[component_container-1] [09/08 16:24:26.622894][info][442169][LinuxPal.cpp:166] Create PollingDeviceWatcher!
+[component_container-1] [09/08 16:24:26.622975][info][442169][DeviceManager.cpp:15] Current found device(s): (1)
+[component_container-1] [09/08 16:24:26.622983][info][442169][DeviceManager.cpp:24] 	- Name: SV1301S_U3, PID: 0x0614, SN/ID: , Connection: USB2.0
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+[component_container-1] [INFO] [1788855866.725937984] [camera.camera]: Connecting to device with serial number: AY23B520016
+[component_container-1] [INFO] [1788855866.726225279] [camera.camera]: Before lock: Select device serial number: AY23B520016
+[component_container-1] [INFO] [1788855866.726280113] [camera.camera]: After lock: Select device serial number: AY23B520016
+[component_container-1] [09/08 16:24:26.728697][warning][442209][OpenNIHostProtocol.cpp:739] Get usb core type failed!
+[component_container-1] [09/08 16:24:26.812264][warning][442209][OpenNIHostProtocol.cpp:1112] Host Protocol sub cmd not supported!
+[component_container-1] [09/08 16:24:26.812285][warning][442209][OpenNISensorFirmware.cpp:153] OpenNI2 camera don't support Watchdog function!
+[component_container-1] [INFO] [1788855866.812946602] [camera.camera]: Device serial number AY23B520016 matched
+[component_container-1] [INFO] [1788855866.813088645] [camera.camera]: Select device cost 87 ms
+[component_container-1] [INFO] [1788855866.813112271] [camera.camera]: Try to connect device via USB2.0
+[component_container-1] [INFO] [1788855866.813258106] [camera.camera]: OBCameraNode: use_intra_process: OFF
+[component_container-1] [INFO] [1788855866.816426224] [camera.camera]: current time domain: system
+[component_container-1] [INFO] [1788855866.838751218] [camera.camera]: Create align filter
+[component_container-1] [INFO] [1788855866.838936720] [camera.camera]: Setting LDP to ON
+[component_container-1] [09/08 16:24:26.838918][warning][442209][NeonAlign.cpp:343] NeonAlign create.
+[component_container-1] [INFO] [1788855866.841222536] [camera.camera]: Setting color auto white balance to ON
+[component_container-1] [INFO] [1788855866.842002462] [camera.camera]: Setting color auto exposure priority to false
+[component_container-1] [INFO] [1788855866.843278517] [camera.camera]: color auto exposure priority is set to 0
+[component_container-1] [INFO] [1788855866.843347935] [camera.camera]: Setting color auto exposure to ON
+[component_container-1] [INFO] [1788855866.844275445] [camera.camera]: default_soft_filter_max_diff: 16
+[component_container-1] [INFO] [1788855866.844356237] [camera.camera]: default_soft_filter_speckle_size: 480
+[component_container-1] [INFO] [1788855866.845768503] [camera.camera]:  stream color is enabled - width: 640, height: 480, fps: 10, Format: OB_FORMAT_MJPG
+[component_container-1] [INFO] [1788855866.846924682] [camera.camera]:  stream depth is enabled - width: 640, height: 400, fps: 10, Format: OB_FORMAT_Y11
+[component_container-1] [09/08 16:24:26.897689][warning][442209][ObException.cpp:5] Current device does not support frame sync!
+[component_container-1] [09/08 16:24:26.897794][warning][442209][Pipeline.cpp:45] Execute failure! A libobsensor_exception has occurred!
+[component_container-1] 	 - where:45#Pipeline
+[component_container-1] 	 - msg:Current device does not support frame sync!
+[component_container-1] 	 - type:N11libobsensor31unsupported_operation_exceptionE
+[component_container-1] [INFO] [1788855866.897839447] [camera.camera]: set align mode to ALIGN_D2C_HW_MODE
+[component_container-1] [INFO] [1788855866.897913239] [camera.camera]: enable depth scale ON
+[component_container-1] [INFO] [1788855866.897931031] [camera.camera]: Enable color stream
+[component_container-1] [INFO] [1788855866.897949406] [camera.camera]: Stream color width: 640 height: 480 fps: 10 format: MJPG
+[component_container-1] [INFO] [1788855866.897967782] [camera.camera]: Enable depth stream
+[component_container-1] [INFO] [1788855866.897980615] [camera.camera]: Stream depth width: 640 height: 400 fps: 10 format: Y11
+[component_container-1] [INFO] [1788855867.444604424] [camera.camera]: Disable frame sync
+[component_container-1] [INFO] [1788855867.444881802] [camera.camera]: Setting LDP to ON
+[component_container-1] [INFO] [1788855867.449440893] [camera.camera]: Device SV1301S_U3 connected
+[component_container-1] [INFO] [1788855867.449582937] [camera.camera]: Serial number: AY23B520016
+[component_container-1] [INFO] [1788855867.449648562] [camera.camera]: Firmware version: RD3013
+[component_container-1] [INFO] [1788855867.449709230] [camera.camera]: Hardware version: 
+[component_container-1] [INFO] [1788855867.449757064] [camera.camera]: Wrapper version: 1.5.15
+[component_container-1] [INFO] [1788855867.449870815] [camera.camera]: SDK version: 1.10.35
+[component_container-1] [INFO] [1788855867.449920982] [camera.camera]: device unique id: 6-1.3.2-6
+[component_container-1] [INFO] [1788855867.449976691] [camera.camera]: Current node pid: 442169
+[component_container-1] [INFO] [1788855867.450021900] [camera.camera]: usb connect type: USB2.0
+[component_container-1] [INFO] [1788855867.450067109] [camera.camera]: Start device cost 824 ms
+[component_container-1] [INFO] [1788855867.450112609] [camera.camera]: Initialize device cost 637 ms
+[component_container-1] [INFO] [1788855867.819984361] [camera.camera]: Publishing static transform from color to depth
+[component_container-1] [INFO] [1788855867.820179488] [camera.camera]: Translation 9.83645, -0.0248184, 0.777098
+[component_container-1] [INFO] [1788855867.820229363] [camera.camera]: Rotation 0.000758119, -0.0029616, -0.00249862, 0.999992
+[component_container-1] [INFO] [1788855867.820280114] [camera.camera]: Publishing static transform from depth to depth
+[component_container-1] [INFO] [1788855867.820350698] [camera.camera]: Translation 0, 0, 0
+[component_container-1] [INFO] [1788855867.820395615] [camera.camera]: Rotation 0, 0, 0, 1
+[component_container-1] [09/08 16:24:59.795690][warning][442229][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Invalid argument, number:22 
+[component_container-1] [09/08 16:24:59.795764][warning][442229][OpenNIUSBLinux.cpp:230] Endpoint 0x81, Buffer23: Failed to cancel asynch I/O transfer.
+[component_container-1] [09/08 16:24:59.921498][warning][442230][FormatConverter.cpp:188] Failed to decompress color frame
+[component_container-1] [ERROR] [1788855899.921644175] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1788855899.921999429] [camera.camera]: color frame is not decoded
+[component_container-1] [09/08 16:25:45.959120][warning][442230][FormatConverter.cpp:188] Failed to decompress color frame
+[component_container-1] [ERROR] [1788855945.959360724] [camera.camera]: Failed to convert frame to RGB format
+[component_container-1] [ERROR] [1788855945.959655019] [camera.camera]: Failed to convert frame to video frame
+[component_container-1] [ERROR] [1788855945.959963605] [camera.camera]: color frame is not decoded

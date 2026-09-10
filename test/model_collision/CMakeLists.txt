@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(fr3c_collision_check)
+find_package(ament_cmake REQUIRED)
+find_package(moveit_core REQUIRED)
+find_package(urdf REQUIRED)
+find_package(srdfdom REQUIRED)
+add_executable(check_model check_model.cpp)
+ament_target_dependencies(check_model moveit_core urdf srdfdom)

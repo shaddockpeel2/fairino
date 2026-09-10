@@ -1,4 +1,5 @@
 #include "fairino_hardware/command_server.hpp"
+#include <cmath>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include "fairino_hardware/version_control.h"
@@ -8,6 +9,35 @@ std::atomic<int> mainerrcode;
 std::atomic<int> suberrcode;
 
 #define LOGGER_NAME "fairino_ros2_command_server"
+
+namespace
+{
+int parse_integer(const std::string &value)
+{
+    std::size_t parsed_length = 0;
+    int result = std::stoi(value, &parsed_length);
+    if (parsed_length != value.size()) {
+        throw std::invalid_argument("integer parameter contains trailing characters");
+    }
+    return result;
+}
+
+double parse_double(const std::string &value)
+{
+    std::size_t parsed_length = 0;
+    double result = std::stod(value, &parsed_length);
+    if (parsed_length != value.size() || !std::isfinite(result)) {
+        throw std::invalid_argument("floating-point parameter contains trailing characters");
+    }
+    return result;
+}
+
+bool motion_parameters_in_range(int speed, int tool, int user)
+{
+    return speed >= 0 && speed <= 100 && tool >= 0 && tool <= 14 &&
+           user >= 0 && user <= 14;
+}
+}
 
 #ifdef CHN_VERSION
 char* msgout[] = {
@@ -537,6 +567,7 @@ std::string robot_command_thread::getVariable(std::string para_list){
     }else{
         RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(illegal_get_para)]);
     }
+    return "-1";
 }
 
 /**
@@ -1325,7 +1356,19 @@ std::string robot_command_thread::ImmStopJOG(std::string para){
  */
 std::string robot_command_thread::MoveJ(std::string para){
     //JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, ExaxisPos *epos, float blendT, uint8_t offset_flag, DescPose *offset_pos
-    int speed,tool,user;
+    std::vector<std::string> parameters;
+    _splitString2Vec(para, parameters);
+    if (parameters.size() != 4 && parameters.size() != 8) {
+        RCLCPP_ERROR(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(invalid_paranum)]);
+        return "-1";
+    }
+    int speed = parse_integer(parameters[1]);
+    int tool = parse_integer(parameters[2]);
+    int user = parse_integer(parameters[3]);
+    if (!motion_parameters_in_range(speed, tool, user)) {
+        RCLCPP_ERROR(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(invalid_range)]);
+        return "-1";
+    }
 
     float acc = this->get_parameter("MoveJLC_acc").as_double();
     float ovl = this->get_parameter("MoveJLC_ovl").as_double();
@@ -1343,16 +1386,13 @@ std::string robot_command_thread::MoveJ(std::string para){
     double offset_pos_rz = this->get_parameter("MoveJLC_offset_pos_rz").as_double();
 
 
-    std::regex search_para(",");
-    std::regex_token_iterator iter_data(para.begin(),para.end(),search_para,-1);
-    std::regex_token_iterator<std::string::iterator> end;
     std::smatch num_match;
-    std::string head_str = iter_data->str();
+    std::string head_str = parameters[0];
 
     JointPos tmp_jnt_pos;
     DescPose cartpos;
 
-    if(std::regex_match(head_str,num_match,std::regex("(JNT)([0-9]*)"))){//第一个元素是否满足JNT1这种模式
+    if(std::regex_match(head_str,num_match,std::regex("(JNT)([1-9][0-9]*)"))){//第一个元素是否满足JNT1这种模式
         int index = atol(num_match[2].str().c_str());
         if(index > _cmd_jnt_pos_list.size()){
             RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(out_container_range)]);
@@ -1365,7 +1405,7 @@ std::string robot_command_thread::MoveJ(std::string para){
         }
         RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),"返回正向运动学结果:%f,%f,%f,%f,%f,%f",cartpos.tran.x,\
             cartpos.tran.y,cartpos.tran.z,cartpos.rpy.rx,cartpos.rpy.ry,cartpos.rpy.rz);
-    }else if(std::regex_match(head_str,num_match,std::regex("(CART)([0-9]*)"))){
+    }else if(std::regex_match(head_str,num_match,std::regex("(CART)([1-9][0-9]*)"))){
         int index = atol(num_match[2].str().c_str());
         if(index > _cmd_cart_pos_list.size()){
             RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(out_container_range)]);
@@ -1383,24 +1423,11 @@ std::string robot_command_thread::MoveJ(std::string para){
         return "-1";
     }
 
-    if (iter_data != end){
-        iter_data++;
-
-        speed = std::stoi(iter_data->str());
-        iter_data++;
-
-        // Check if there are more elements in the iterator
-        tool = std::stoi(iter_data->str());
-        iter_data++;
-
-        user = std::stoi(iter_data->str());
-        iter_data++;
-    }
-    if (iter_data != end){
-        eaxis1 = std::stod(iter_data->str());iter_data++;
-        eaxis2 = std::stod(iter_data->str());iter_data++;
-        eaxis3 = std::stod(iter_data->str());iter_data++;
-        eaxis4 = std::stod(iter_data->str());iter_data++;
+    if (parameters.size() == 8){
+        eaxis1 = parse_double(parameters[4]);
+        eaxis2 = parse_double(parameters[5]);
+        eaxis3 = parse_double(parameters[6]);
+        eaxis4 = parse_double(parameters[7]);
     }
     ExaxisPos extpos{eaxis1,eaxis2,eaxis3,eaxis4};
     DescPose offsetpos{offset_pos_x,offset_pos_y,offset_pos_z,offset_pos_rx,offset_pos_ry,offset_pos_rz};
@@ -1418,7 +1445,19 @@ std::string robot_command_thread::MoveJ(std::string para){
  */
 std::string robot_command_thread::MoveL(std::string para){
     //JointPos *joint_pos, DescPose *desc_pos, int tool, int user, float vel, float acc, float ovl, float blendR, ExaxisPos *epos, uint8_t search, uint8_t offset_flag, DescPose *offset_pos
-    int speed,tool,user;
+    std::vector<std::string> parameters;
+    _splitString2Vec(para, parameters);
+    if (parameters.size() != 4 && parameters.size() != 8) {
+        RCLCPP_ERROR(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(invalid_paranum)]);
+        return "-1";
+    }
+    int speed = parse_integer(parameters[1]);
+    int tool = parse_integer(parameters[2]);
+    int user = parse_integer(parameters[3]);
+    if (!motion_parameters_in_range(speed, tool, user)) {
+        RCLCPP_ERROR(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(invalid_range)]);
+        return "-1";
+    }
 
     float acc = this->get_parameter("MoveJLC_acc").as_double();
     float ovl = this->get_parameter("MoveJLC_ovl").as_double();
@@ -1436,16 +1475,13 @@ std::string robot_command_thread::MoveL(std::string para){
     double offset_pos_ry = this->get_parameter("MoveJLC_offset_pos_ry").as_double();
     double offset_pos_rz = this->get_parameter("MoveJLC_offset_pos_rz").as_double();
 
-    std::regex search_para(",");
-    std::regex_token_iterator iter_data(para.begin(),para.end(),search_para,-1);
-    std::regex_token_iterator<std::string::iterator> end;
     std::smatch num_match;
-    std::string head_str = iter_data->str();
+    std::string head_str = parameters[0];
 
     JointPos tmp_jnt_pos;
     DescPose cartpos;
 
-     if(std::regex_match(head_str,num_match,std::regex("(JNT)([0-9]*)"))){//第一个元素是否满足JNT1这种模式
+     if(std::regex_match(head_str,num_match,std::regex("(JNT)([1-9][0-9]*)"))){//第一个元素是否满足JNT1这种模式
         int index = atol(num_match[2].str().c_str());
         if(index > _cmd_jnt_pos_list.size()){
             RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(out_container_range)]);
@@ -1456,7 +1492,7 @@ std::string robot_command_thread::MoveL(std::string para){
             RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(fwd_kin_error)]);
             return "-1";
         }
-    }else if(std::regex_match(head_str,num_match,std::regex("(CART)([0-9]*)"))){
+    }else if(std::regex_match(head_str,num_match,std::regex("(CART)([1-9][0-9]*)"))){
         int index = atol(num_match[2].str().c_str());
         if(index > _cmd_cart_pos_list.size()){
             RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(out_container_range)]);
@@ -1472,24 +1508,11 @@ std::string robot_command_thread::MoveL(std::string para){
         return "-1";
     }
 
-    if (iter_data != end){
-        iter_data++;
-
-        speed = std::stoi(iter_data->str());
-        iter_data++;
-
-        // Check if there are more elements in the iterator
-        tool = std::stoi(iter_data->str());
-        iter_data++;
-
-        user = std::stoi(iter_data->str());
-        iter_data++;
-    }
-    if (iter_data != end){
-        eaxis1 = std::stod(iter_data->str());iter_data++;
-        eaxis2 = std::stod(iter_data->str());iter_data++;
-        eaxis3 = std::stod(iter_data->str());iter_data++;
-        eaxis4 = std::stod(iter_data->str());iter_data++;
+    if (parameters.size() == 8){
+        eaxis1 = parse_double(parameters[4]);
+        eaxis2 = parse_double(parameters[5]);
+        eaxis3 = parse_double(parameters[6]);
+        eaxis4 = parse_double(parameters[7]);
     }
 
     ExaxisPos extpos{eaxis1,eaxis2,eaxis3,eaxis4};
@@ -1509,7 +1532,19 @@ std::string robot_command_thread::MoveL(std::string para){
 std::string robot_command_thread::MoveC(std::string para){
     /*JointPos *joint_pos_p, DescPose *desc_pos_p, int ptool, int puser, float pvel, float pacc, ExaxisPos *epos_p, uint8_t poffset_flag, DescPose *offset_pos_p,
     JointPos *joint_pos_t, DescPose *desc_pos_t, int ttool, int tuser, float tvel, float tacc, ExaxisPos *epos_t, uint8_t toffset_flag, DescPose *offset_pos_t,float ovl, float blendR*/
-    int speed,tool,user;
+    std::vector<std::string> parameters;
+    _splitString2Vec(para, parameters);
+    if (parameters.size() != 5 && parameters.size() != 13) {
+        RCLCPP_ERROR(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(invalid_paranum)]);
+        return "-1";
+    }
+    int speed = parse_integer(parameters[2]);
+    int tool = parse_integer(parameters[3]);
+    int user = parse_integer(parameters[4]);
+    if (!motion_parameters_in_range(speed, tool, user)) {
+        RCLCPP_ERROR(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(invalid_range)]);
+        return "-1";
+    }
 
     float acc = this->get_parameter("MoveJLC_acc").as_double();
     float ovl = this->get_parameter("MoveJLC_ovl").as_double();
@@ -1517,7 +1552,7 @@ std::string robot_command_thread::MoveC(std::string para){
     double eaxis2 = this->get_parameter("MoveJLC_eaxis2").as_double();
     double eaxis3 = this->get_parameter("MoveJLC_eaxis3").as_double();
     double eaxis4 = this->get_parameter("MoveJLC_eaxis4").as_double();
-    float blendR = this->get_parameter("MoveL_blendR").as_double();
+    float blendR = this->get_parameter("MoveC_blendR").as_double();
     uint8_t search = this->get_parameter("MoveL_search").as_int();
     uint8_t offset_flag = this->get_parameter("MoveJLC_offset_flag").as_int();
     double offset_pos_x = this->get_parameter("MoveJLC_offset_pos_x").as_double();
@@ -1527,36 +1562,31 @@ std::string robot_command_thread::MoveC(std::string para){
     double offset_pos_ry = this->get_parameter("MoveJLC_offset_pos_ry").as_double();
     double offset_pos_rz = this->get_parameter("MoveJLC_offset_pos_rz").as_double();
 
-    std::regex search_para(",");
-    std::regex_token_iterator iter_data(para.begin(),para.end(),search_para,-1);
-    std::regex_token_iterator<std::string::iterator> end;
-
     std::smatch num_match,num_match2;
-    std::string head_str = iter_data->str();//第一个点位
-    iter_data++;
-    std::string second_str = iter_data->str();//第二个点位
+    std::string head_str = parameters[0];//第一个点位
+    std::string second_str = parameters[1];//第二个点位
 
     JointPos tmp_jnt_pos,tmp_jnt_pos2;
     DescPose cartpos,cartpos2;
 
-    if(std::regex_match(head_str,num_match,std::regex("(JNT)([0-9]*)")) && \
-        std::regex_match(second_str,num_match2,std::regex("(JNT)([0-9]*)"))){   
+    if(std::regex_match(head_str,num_match,std::regex("(JNT)([1-9][0-9]*)")) && \
+        std::regex_match(second_str,num_match2,std::regex("(JNT)([1-9][0-9]*)"))){   
         int index = atol(num_match[2].str().c_str());
         int index2 = atol(num_match2[2].str().c_str());
         if(index > _cmd_jnt_pos_list.size() || index2 > _cmd_jnt_pos_list.size()){
             RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(out_container_range)]);
             return "-1";
         }
-        JointPos tmp_jnt_pos = _cmd_jnt_pos_list.at(index-1);
-        JointPos tmp_jnt_pos2 = _cmd_jnt_pos_list.at(index2-1);
+        tmp_jnt_pos = _cmd_jnt_pos_list.at(index-1);
+        tmp_jnt_pos2 = _cmd_jnt_pos_list.at(index2-1);
 
         if(_ptr_robot->GetForwardKin(&tmp_jnt_pos,&cartpos) != 0 ||
             _ptr_robot->GetForwardKin(&tmp_jnt_pos2,&cartpos2) != 0){
             RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(fwd_kin_error)]);
             return "-1";
         } 
-    }else if(std::regex_match(head_str,num_match,std::regex("(CART)([0-9]*)")) && \
-              std::regex_match(second_str,num_match2,std::regex("(CART)([0-9]*)"))){
+    }else if(std::regex_match(head_str,num_match,std::regex("(CART)([1-9][0-9]*)")) && \
+              std::regex_match(second_str,num_match2,std::regex("(CART)([1-9][0-9]*)"))){
         int index = atol(num_match[2].str().c_str());
         int index2 = atol(num_match2[2].str().c_str());
         if(index > _cmd_cart_pos_list.size() || index2 > _cmd_cart_pos_list.size()){
@@ -1577,35 +1607,21 @@ std::string robot_command_thread::MoveC(std::string para){
 
     ExaxisPos extpos1{eaxis1,eaxis2,eaxis3,eaxis4},extpos2{eaxis1,eaxis2,eaxis3,eaxis4};
 
-    if (iter_data != end){
-        iter_data++;
-
-        speed = std::stoi(iter_data->str());
-        iter_data++;
-
-        // Check if there are more elements in the iterator
-        tool = std::stoi(iter_data->str());
-        iter_data++;
-
-        user = std::stoi(iter_data->str());
-        iter_data++;
-    }
-
-    if (iter_data != end){
-        eaxis1 = std::stod(iter_data->str());iter_data++;
-        eaxis2 = std::stod(iter_data->str());iter_data++;
-        eaxis3 = std::stod(iter_data->str());iter_data++;
-        eaxis4 = std::stod(iter_data->str());iter_data++;
+    if (parameters.size() == 13){
+        eaxis1 = parse_double(parameters[5]);
+        eaxis2 = parse_double(parameters[6]);
+        eaxis3 = parse_double(parameters[7]);
+        eaxis4 = parse_double(parameters[8]);
 
         extpos1.ePos[0] = eaxis1;
         extpos1.ePos[1] = eaxis2;
         extpos1.ePos[2] = eaxis3;
         extpos1.ePos[3] = eaxis4;
 
-        eaxis1 = std::stod(iter_data->str());iter_data++;
-        eaxis2 = std::stod(iter_data->str());iter_data++;
-        eaxis3 = std::stod(iter_data->str());iter_data++;
-        eaxis4 = std::stod(iter_data->str());iter_data++;
+        eaxis1 = parse_double(parameters[9]);
+        eaxis2 = parse_double(parameters[10]);
+        eaxis3 = parse_double(parameters[11]);
+        eaxis4 = parse_double(parameters[12]);
 
         extpos2.ePos[0] = eaxis1;
         extpos2.ePos[1] = eaxis2;
@@ -1675,18 +1691,26 @@ std::string robot_command_thread::SplinePTP(std::string para){
     /*JointPos *joint_pos, DescPose *desc_pos, int tool, 
     int user, float vel, float acc, float ovl*/
     //默认进来的都是JNT数据
-    int speed,tool,user;
+    std::vector<std::string> parameters;
+    _splitString2Vec(para, parameters);
+    if (parameters.size() != 4) {
+        RCLCPP_ERROR(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(invalid_paranum)]);
+        return "-1";
+    }
+    int speed = parse_integer(parameters[1]);
+    int tool = parse_integer(parameters[2]);
+    int user = parse_integer(parameters[3]);
+    if (!motion_parameters_in_range(speed, tool, user)) {
+        RCLCPP_ERROR(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(invalid_range)]);
+        return "-1";
+    }
 
     float acc = this->get_parameter("Spline_acc").as_double();
     float ovl = this->get_parameter("Spline_ovl").as_double();
 
-    std::regex search_para(",");
-    std::regex_token_iterator iter_data(para.begin(),para.end(),search_para,-1);
-    std::regex_token_iterator<std::string::iterator> end;
-
     std::smatch num_match;
-    std::string head_str = iter_data->str();
-    if(std::regex_match(head_str,num_match,std::regex("(JNT)([0-9]*)"))){ 
+    std::string head_str = parameters[0];
+    if(std::regex_match(head_str,num_match,std::regex("(JNT)([1-9][0-9]*)"))){ 
         int index = atol(num_match[2].str().c_str());
         if(index > _cmd_jnt_pos_list.size()){
             RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(out_container_range)]);
@@ -1699,19 +1723,6 @@ std::string robot_command_thread::SplinePTP(std::string para){
         if(_ptr_robot->GetForwardKin(&tmp_jnt_pos,&cartpos) != 0){
             RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(fwd_kin_error)]);
             return "-1";
-        }
-
-        if (iter_data != end){
-            iter_data++;
-
-            speed = std::stoi(iter_data->str());
-            iter_data++;
-
-            // Check if there are more elements in the iterator
-            tool = std::stoi(iter_data->str());
-            iter_data++;
-
-            user = std::stoi(iter_data->str());
         }
 
         return std::to_string(_ptr_robot->SplinePTP(&tmp_jnt_pos,&cartpos,\
@@ -1757,22 +1768,31 @@ std::string robot_command_thread::NewSplinePoint(std::string para){
       float acc, float ovl float blendR uint8_t lastFlag*/
     //输入参数:pos,speed,lastflag
 
-    int speed,tool,user;
-    uint8_t lastflag;
+    std::vector<std::string> parameters;
+    _splitString2Vec(para, parameters);
+    if (parameters.size() != 5) {
+        RCLCPP_ERROR(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(invalid_paranum)]);
+        return "-1";
+    }
+    int speed = parse_integer(parameters[1]);
+    int tool = parse_integer(parameters[2]);
+    int user = parse_integer(parameters[3]);
+    int lastflag = parse_integer(parameters[4]);
+    if (!motion_parameters_in_range(speed, tool, user) ||
+        (lastflag != 0 && lastflag != 1)) {
+        RCLCPP_ERROR(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(invalid_range)]);
+        return "-1";
+    }
 
     float acc = this->get_parameter("Spline_acc").as_double();
     float ovl = this->get_parameter("Spline_ovl").as_double();
     double blendR = this->get_parameter("NewSpline_blendR").as_double();
 
 
-    std::regex search_para(",");
-    std::regex_token_iterator iter_data(para.begin(),para.end(),search_para,-1);
-    std::regex_token_iterator<std::string::iterator> end;
-
     std::smatch num_match;
-    std::string head_str = iter_data->str();
+    std::string head_str = parameters[0];
 
-    if(std::regex_match(head_str,num_match,std::regex("(CART)([0-9]*)"))){
+    if(std::regex_match(head_str,num_match,std::regex("(CART)([1-9][0-9]*)"))){
         int index = atol(num_match[2].str().c_str());
         if(index > _cmd_cart_pos_list.size()){
             RCLCPP_INFO(rclcpp::get_logger(LOGGER_NAME),msgout[msg_id(out_container_range)]);
@@ -1786,22 +1806,6 @@ std::string robot_command_thread::NewSplinePoint(std::string para){
             return "-1";
         }
 
-        if (iter_data != end){
-            iter_data++;
-
-            speed = std::stoi(iter_data->str());
-            iter_data++;
-
-            // Check if there are more elements in the iterator
-            tool = std::stoi(iter_data->str());
-            iter_data++;
-
-            user = std::stoi(iter_data->str());
-            iter_data++;
-
-            lastflag = std::stoi(iter_data->str());
-        }
-        
         return std::to_string(_ptr_robot->NewSplinePoint(&jntpos,&cartpos,tool,user,speed,\
             acc,ovl,blendR,lastflag));
     }else{

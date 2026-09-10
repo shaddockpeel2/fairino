@@ -1,0 +1,33 @@
+stdin is not a terminal device. Keyboard handling disabled.[INFO] [1788855336.893374858] [rosbag2_recorder]: Press SPACE for pausing/resuming
+[INFO] [1788855336.896668978] [rosbag2_storage]: Opened database '/home/industio/fairino_ws/evidence/camera/20260908_bench/table_rgbd_bag/table_rgbd_bag_0.db3' for READ_WRITE.
+[INFO] [1788855336.898768126] [rosbag2_recorder]: Listening for topics...
+[INFO] [1788855336.898799335] [rosbag2_recorder]: Event publisher thread: Starting
+[INFO] [1788855336.903970933] [rosbag2_recorder]: Subscribed to topic '/tf_static'
+[INFO] [1788855336.909022655] [rosbag2_recorder]: Subscribed to topic '/fr3c_camera/diagnostics'
+[INFO] [1788855336.912885240] [rosbag2_recorder]: Subscribed to topic '/camera/depth/camera_info'
+[INFO] [1788855336.915490727] [rosbag2_recorder]: Subscribed to topic '/fr3c_camera/probe_point'
+[INFO] [1788855336.917594541] [rosbag2_recorder]: Subscribed to topic '/camera/color/image_raw'
+[INFO] [1788855336.919427103] [rosbag2_recorder]: Subscribed to topic '/camera/depth/image_raw'
+[INFO] [1788855336.920847827] [rosbag2_recorder]: Subscribed to topic '/camera/color/camera_info'
+[INFO] [1788855336.921082038] [rosbag2_recorder]: Recording...
+[INFO] [1788855336.923206561] [rosbag2_recorder]: All requested topics are subscribed. Stopping discovery...
+[INFO] [1788855351.349216479] [rosbag2_cpp]: Writing remaining messages from cache to the bag. It may take a while
+[INFO] [1788855351.356894105] [rosbag2_recorder]: Event publisher thread: Exiting
+[INFO] [1788855351.357441278] [rosbag2_recorder]: Recording stopped
+
+Files:             table_rgbd_bag_0.db3
+Bag size:          160.0 MiB
+Storage id:        sqlite3
+Duration:          14.347155510s
+Start:             Sep  8 2026 16:15:36.921599460 (1788855336.921599460)
+End:               Sep  8 2026 16:15:51.268754970 (1788855351.268754970)
+Messages:          592
+Topic information: Topic: /camera/color/camera_info | Type: sensor_msgs/msg/CameraInfo | Count: 141 | Serialization Format: cdr
+                   Topic: /camera/depth/image_raw | Type: sensor_msgs/msg/Image | Count: 109 | Serialization Format: cdr
+                   Topic: /camera/color/image_raw | Type: sensor_msgs/msg/Image | Count: 109 | Serialization Format: cdr
+                   Topic: /fr3c_camera/probe_point | Type: geometry_msgs/msg/PointStamped | Count: 81 | Serialization Format: cdr
+                   Topic: /camera/depth/camera_info | Type: sensor_msgs/msg/CameraInfo | Count: 122 | Serialization Format: cdr
+                   Topic: /fr3c_camera/diagnostics | Type: diagnostic_msgs/msg/DiagnosticArray | Count: 29 | Serialization Format: cdr
+                   Topic: /tf_static | Type: tf2_msgs/msg/TFMessage | Count: 1 | Serialization Format: cdr
+
+Required RGB-D topics recorded successfully.

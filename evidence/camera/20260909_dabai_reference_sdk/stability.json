@@ -1,0 +1,172 @@
+{
+  "pass": false,
+  "requested_duration_seconds": 15.0,
+  "expected_fps": 10.0,
+  "topics": {
+    "color": "/camera/color/image_raw",
+    "depth": "/camera/depth/image_raw",
+    "color_info": "/camera/color/camera_info",
+    "depth_info": "/camera/depth/camera_info"
+  },
+  "streams": {
+    "color": {
+      "frames": 146,
+      "active_seconds": 14.93614419100004,
+      "fps": 9.70799412122518,
+      "max_receipt_gap_seconds": 0.20668425000030766,
+      "max_receipt_gap_at_frame": {
+        "frame": 36,
+        "seconds": 0.20668425000030766
+      },
+      "p95_stamp_interval_seconds": 0.10100674629211426,
+      "max_stamp_interval_seconds": 0.20003819465637207,
+      "max_stamp_interval_at_frame": {
+        "frame": 5,
+        "seconds": 0.20003819465637207
+      },
+      "stamp_regressions": 0,
+      "dimensions": [
+        [
+          640,
+          480
+        ]
+      ],
+      "encodings": [
+        "rgb8"
+      ],
+      "frame_ids": [
+        "camera_color_optical_frame"
+      ]
+    },
+    "depth": {
+      "frames": 149,
+      "active_seconds": 14.84583183299992,
+      "fps": 9.969128147539672,
+      "max_receipt_gap_seconds": 0.20325792299991008,
+      "max_receipt_gap_at_frame": {
+        "frame": 85,
+        "seconds": 0.20325792299991008
+      },
+      "p95_stamp_interval_seconds": 0.10219693183898926,
+      "max_stamp_interval_seconds": 0.1979377269744873,
+      "max_stamp_interval_at_frame": {
+        "frame": 85,
+        "seconds": 0.1979377269744873
+      },
+      "stamp_regressions": 0,
+      "dimensions": [
+        [
+          640,
+          480
+        ]
+      ],
+      "encodings": [
+        "16UC1"
+      ],
+      "frame_ids": [
+        "camera_color_optical_frame"
+      ]
+    }
+  },
+  "camera_info": {
+    "color": {
+      "width": 640,
+      "height": 480,
+      "frame_id": "camera_color_optical_frame",
+      "fx": 479.73828125,
+      "fy": 479.7537841796875,
+      "cx": 322.218017578125,
+      "cy": 243.452392578125,
+      "distortion_model": "rational_polynomial"
+    },
+    "depth": {
+      "width": 640,
+      "height": 480,
+      "frame_id": "camera_color_optical_frame",
+      "fx": 479.73828125,
+      "fy": 479.7537841796875,
+      "cx": 322.218017578125,
+      "cy": 243.452392578125,
+      "distortion_model": "rational_polynomial"
+    }
+  },
+  "rgb_depth_sync": {
+    "method": "offline nearest header timestamp",
+    "pairs": 149,
+    "p50_delta_seconds": 0.03666496276855469,
+    "p95_delta_seconds": 0.04911994934082031,
+    "max_delta_seconds": 0.07889413833618164
+  },
+  "depth_valid_fraction": {
+    "samples": 15,
+    "median": 0.054114583333333334,
+    "minimum": 0.04904296875
+  },
+  "five_point_depth_probe": {
+    "center": {
+      "valid_samples": 0,
+      "median_depth_units": null
+    },
+    "top_left": {
+      "valid_samples": 0,
+      "median_depth_units": null
+    },
+    "top_right": {
+      "valid_samples": 0,
+      "median_depth_units": null
+    },
+    "bottom_left": {
+      "valid_samples": 0,
+      "median_depth_units": null
+    },
+    "bottom_right": {
+      "valid_samples": 0,
+      "median_depth_units": null
+    }
+  },
+  "usb": {
+    "expected_connection": "USB2.0",
+    "initial_signature": [
+      [
+        "6-1.3.1",
+        "06a0",
+        "CH82C5201C9",
+        "480",
+        "9"
+      ],
+      [
+        "6-1.3.3",
+        "0561",
+        "CH82C5201C9",
+        "480",
+        "8"
+      ]
+    ],
+    "topology_changes": [],
+    "final_signature": [
+      [
+        "6-1.3.1",
+        "06a0",
+        "CH82C5201C9",
+        "480",
+        "9"
+      ],
+      [
+        "6-1.3.3",
+        "0561",
+        "CH82C5201C9",
+        "480",
+        "8"
+      ]
+    ]
+  },
+  "failures": [
+    "final USB preflight: unexpected Orbbec device(s) present: 2-1.1.2, AY23B520016"
+  ],
+  "warmup_seconds": 3.0,
+  "snapshots": [
+    "/home/industio/fairino_ws/evidence/camera/20260909_dabai_reference_sdk/snapshot/color.jpg",
+    "/home/industio/fairino_ws/evidence/camera/20260909_dabai_reference_sdk/snapshot/depth.png",
+    "/home/industio/fairino_ws/evidence/camera/20260909_dabai_reference_sdk/snapshot/depth_preview.png"
+  ]
+}

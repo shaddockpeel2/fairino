@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Housing only. User measurements, not manufacturer CAD or optical calibration.
+       In the nominal flange frame: X along camera length, Y radially toward camera,
+       Z outward along the tool. Photo-estimated pose is adjustable. -->
+  <xacro:macro name="gemini_pro_placeholder" params="parent xyz rpy size_x size_y size_z padding">
+    <link name="camera_housing_link">
+      <visual>
+        <geometry><box size="${size_x} ${size_y} ${size_z}"/></geometry>
+        <material name="camera_black"><color rgba="0.08 0.09 0.11 1"/></material>
+      </visual>
+      <collision>
+        <geometry><box size="${size_x + 2*padding} ${size_y + 2*padding} ${size_z + 2*padding}"/></geometry>
+      </collision>
+    </link>
+    <joint name="camera_housing_joint" type="fixed">
+      <parent link="${parent}"/><child link="camera_housing_link"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </joint>
+  </xacro:macro>
+</robot>

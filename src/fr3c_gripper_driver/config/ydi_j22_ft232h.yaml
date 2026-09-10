@@ -1,0 +1,39 @@
+ydi_j22_gripper:
+  ros__parameters:
+    action_name: /ydi_j22_gripper_controller/gripper_cmd
+    joint_name: gripper_command_joint
+    backend: mock
+
+    # Measured opposed-fingertip clear aperture, in metres.
+    closed_position_m: 0.0
+    open_position_m: 0.130
+    startup_position_m: 0.130
+
+    # Both values are inside the physically tested 500..1700 us range.
+    # 2500 us remains an electrical limit, not an accepted mechanical endpoint.
+    operating_close_us: 550
+    operating_open_us: 1650
+    electrical_min_us: 500
+    electrical_max_us: 2500
+    aperture_calibrated: true
+
+    # 2026-09-10 assembled-gripper measurements. Values are expressed at the
+    # effective 10 us waveform resolution of the 100 kHz bit-bang stream.
+    calibration_positions_m: [0.0, 0.024, 0.060, 0.100, 0.110, 0.130]
+    calibration_pulses_us: [550, 820, 1100, 1380, 1480, 1650]
+
+    # Real output requires both this parameter and the confirmation environment
+    # variable documented in README.md. Starting the node emits no PWM.
+    hardware_output_enabled: false
+    assume_reached_without_feedback: true
+    settle_time_s: 0.6
+    command_timeout_s: 8.0
+    slew_us_per_s: 400.0
+
+    ftdi_url: ftdi://ftdi:232h/1
+    pyftdi_site_packages: /home/industio/fairino_ws/test/jiazhua/.venv/lib/python3.10/site-packages
+    sample_rate_hz: 100000
+    frame_us: 20000
+    signal_pin: 7
+    # Two frames limit stale queued motion to about 40 ms.
+    chunk_frames: 2
