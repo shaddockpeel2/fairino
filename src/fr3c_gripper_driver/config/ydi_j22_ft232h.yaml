@@ -7,6 +7,10 @@ ydi_j22_gripper:
     # Measured opposed-fingertip clear aperture, in metres.
     closed_position_m: 0.0
     open_position_m: 0.130
+    # Published immediately as an unverified state estimate for MoveIt. This
+    # does not emit PWM; issue an explicit pre-open command before grasp
+    # planning.
+    # Fully open is conservative for tool/environment clearance.
     startup_position_m: 0.130
 
     # Both values are inside the physically tested 500..1700 us range.

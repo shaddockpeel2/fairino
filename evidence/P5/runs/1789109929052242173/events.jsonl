@@ -1,0 +1,3 @@
+{"time_ns":1789109929052441967,"event":"run_started","detail":"execution"}
+{"time_ns":1789109929075366930,"event":"gripper_pre_open","detail":"result_code=6,reached_goal=0,position=0.06"}
+{"time_ns":1789109929075492057,"event":"state","detail":"failed_holding_state_unchanged: gripper pre_open failed: result_code=6,reached_goal=0,position=0.06"}

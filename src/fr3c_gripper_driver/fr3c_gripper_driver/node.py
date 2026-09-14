@@ -27,8 +27,9 @@ HARDWARE_CONFIRMATION_VALUE = 'I_UNDERSTAND_OPEN_LOOP_PWM'
 class GripperNode(Node):
     """Expose an estimated GripperCommand interface over mock or FT232H PWM."""
 
-    def __init__(self):
-        super().__init__('ydi_j22_gripper')
+    def __init__(self, *, parameter_overrides=None):
+        super().__init__(
+            'ydi_j22_gripper', parameter_overrides=parameter_overrides)
         self._declare_parameters()
         self._calibration = GripperCalibration(
             self.get_parameter('closed_position_m').value,
@@ -77,12 +78,18 @@ class GripperNode(Node):
 
         self._state_lock = threading.Lock()
         self._goal_reserved = False
-        self._estimated_position_m = (
-            float(self.get_parameter('startup_position_m').value)
-            if self._backend_name == 'mock' else None
-        )
-        if self._estimated_position_m is not None:
-            self._calibration.position_to_pulse(self._estimated_position_m)
+        # This gripper has no position feedback, including after a process
+        # restart. MoveIt nevertheless requires a complete joint state before
+        # it can plan. Publish the configured startup aperture for both
+        # backends as an explicitly unverified estimate. The default is fully
+        # open, which is conservative for tool/environment clearance. This
+        # assignment does not open the FTDI device and does not emit PWM.
+        self._estimated_position_m = float(
+            self.get_parameter('startup_position_m').value)
+        self._calibration.position_to_pulse(self._estimated_position_m)
+        self._position_source = (
+            'mock_startup' if self._backend_name == 'mock'
+            else 'startup_parameter_unverified')
         self._last_target_m = None
         self._last_result = 'never_commanded'
 
@@ -115,6 +122,13 @@ class GripperNode(Node):
                 'the first accepted action goal will move the gripper.')
         else:
             self.get_logger().info('YDI-J22 mock GripperCommand server ready.')
+        if self._backend_name == 'ft232h':
+            self.get_logger().warning(
+                'Publishing startup_position_m='
+                f'{self._estimated_position_m:.3f} '
+                'as an UNVERIFIED joint-state '
+                'estimate for MoveIt; send an explicit pre-open command '
+                'before using the grasp opening for planning.')
 
     def _declare_parameters(self):
         defaults = {
@@ -280,6 +294,7 @@ class GripperNode(Node):
     def _set_position(self, position_m):
         with self._state_lock:
             self._estimated_position_m = float(position_m)
+            self._position_source = 'commanded_open_loop_estimate'
 
     def _make_feedback(self, reached):
         feedback = GripperCommand.Feedback()
@@ -309,6 +324,7 @@ class GripperNode(Node):
             last_target = self._last_target_m
             last_result = self._last_result
             busy = self._goal_reserved
+            position_source = self._position_source
         stamp = self.get_clock().now().to_msg()
         if position is not None:
             joint_state = JointState()
@@ -338,6 +354,7 @@ class GripperNode(Node):
             'armed': str(self._hardware_gate_open).lower(),
             'busy': str(busy).lower(),
             'feedback_mode': 'open_loop_estimated',
+            'position_source': position_source,
             'aperture_calibrated': str(
                 bool(self.get_parameter('aperture_calibrated').value)).lower(),
             'last_result': last_result,
@@ -355,6 +372,9 @@ class GripperNode(Node):
             'bytes_written': (
                 '0' if self._backend is None
                 else str(self._backend.bytes_written)),
+            'usb_recovery_count': (
+                '0' if self._backend is None
+                else str(self._backend.recovery_count)),
         }
         status.values = [KeyValue(key=key, value=value)
                          for key, value in values.items()]

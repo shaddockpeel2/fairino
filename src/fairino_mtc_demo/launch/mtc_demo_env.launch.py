@@ -16,7 +16,10 @@ def generate_launch_description():
     # planning_context
     moveit_config = (
         MoveItConfigsBuilder(robotname, package_name=packagename)
-        .robot_description(file_path="config/"+robotname+".urdf.xacro")
+        .robot_description(
+            file_path="config/"+robotname+".urdf.xacro",
+            mappings={"hardware_plugin": "mock_components/GenericSystem"},
+        )
         .trajectory_execution(file_path="config/moveit_controllers.yaml")
         .planning_pipelines(
             pipelines=["ompl", "chomp", "pilz_industrial_motion_planner"]

@@ -1,0 +1,4 @@
+{"time_ns":1789348228657992685,"event":"run_started","detail":"execution"}
+{"time_ns":1789348228658111967,"event":"target_locked","detail":"locked top=[0.0260892555,-0.512086289,0.0347085493] m"}
+{"time_ns":1789348228679134632,"event":"gripper_pre_open","detail":"result_code=6,reached_goal=0,position=0.06"}
+{"time_ns":1789348228679360654,"event":"state","detail":"retryable_failure_before_arm_motion: gripper pre_open failed: result_code=6,reached_goal=0,position=0.06; no arm motion started, fix the condition and call /start again"}

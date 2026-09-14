@@ -1,0 +1,39 @@
+test_date: 2026-09-11
+status: passed_for_first_rgb_grasp
+reason: >-
+  With the physical fingertips touching the table, the RViz model still showed
+  approximately 6 mm clearance. This agrees in sign and magnitude with the
+  6.614459 mm difference between the pivot solution and the prior 178 mm
+  hybrid TCP.
+active_pose_mm_deg: [-0.847397, 3.027928, 184.614459, 0.0, 0.0, 0.0]
+active_xyz_m: [-0.000847397, 0.003027928, 0.184614459]
+prior_active_pose_mm_deg: [-0.847397, 3.027928, 178.0, 0.0, 0.0, 0.0]
+delta_z_mm: 6.614459
+source: fixed_point_pivot_solution
+online_before_restart_xyz_m: [-0.000847397, 0.003027928, 0.178]
+online_before_restart_expected_mismatch_m: 0.006614459
+online_after_restart_xyz_m: [-0.000847397, 0.003027928, 0.184614459]
+validation:
+  method: flange_button_manual_drag_to_table_contact_then_rviz_comparison
+  controller_tool_frame_dependency: none
+  user_observation: physical_fingertip_and_rviz_model_aligned_very_well
+  result: accepted_for_first_rgb_cube_grasp
+  limitation: single_table_contact_comparison_not_full_multi_orientation_tcp_certification
+urdf_mapping:
+  source_of_truth: src/fairino3mt_v6_moveit2_config/config/ydi_j22_tcp.yaml
+  derived_automatically_by_xacro: true
+  retained_spacer_m: 0.003
+  gripper_body_relative_tcp_z_m: 0.181614459
+  finger_proximal_body_z_m: 0.080
+  finger_length_m: 0.101614459
+  finger_center_body_z_m: 0.1308072295
+acceptance:
+  - restart_robot_description_and_move_group
+  - verify_flange_link_to_grasp_frame_matches_active_xyz
+  - compare_physical_fingertip_contact_to_rviz_at_two_or_more_safe_poses
+  - approach_only_at_low_speed_and_stop_above_table_before_final_manual_jog
+rollback:
+  active_xyz_m: [-0.000847397, 0.003027928, 0.178]
+  gripper_body_relative_tcp_z_m: 0.175
+  finger_length_m: 0.095
+  finger_center_body_z_m: 0.1275

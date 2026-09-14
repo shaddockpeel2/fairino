@@ -1,0 +1,3 @@
+{"time_ns":1789114386321360553,"event":"run_started","detail":"execution"}
+{"time_ns":1789114386332871607,"event":"target_reset","detail":"Frozen target cleared; stationary sampling restarted."}
+{"time_ns":1789114401353165974,"event":"state","detail":"failed_holding_state_unchanged: timed out waiting for 8 fresh stable blue-cube samples"}

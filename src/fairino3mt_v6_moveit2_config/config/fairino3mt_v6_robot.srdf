@@ -60,8 +60,13 @@
     <disable_collisions link1="gripper_spacer_link" link2="gripper_link" reason="Adjacent"/>
     <disable_collisions link1="gripper_link" link2="gripper_command_link" reason="Adjacent"/>
     <disable_collisions link1="gripper_link" link2="grasp_frame" reason="Adjacent"/>
-    <!-- The fixed camera housing overlaps the deliberately solid gripper envelope
-         at its root. This allowance is only for these two fixed tool components;
-         camera vs arm/environment remains checked. Revisit for articulated fingers. -->
+    <!-- Finger roots intentionally overlap/touch the housing. Only these
+         mounting pairs are excluded; fingers still collide with the arm,
+         camera, table and world objects. -->
+    <disable_collisions link1="gripper_link" link2="gripper_finger_px_py_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_link" link2="gripper_finger_px_ny_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_link" link2="gripper_finger_nx_py_link" reason="Adjacent"/>
+    <disable_collisions link1="gripper_link" link2="gripper_finger_nx_ny_link" reason="Adjacent"/>
+    <!-- Camera padding slightly overlaps the fixed housing at the mount. -->
     <disable_collisions link1="camera_housing_link" link2="gripper_link" reason="Adjacent"/>
 </robot>

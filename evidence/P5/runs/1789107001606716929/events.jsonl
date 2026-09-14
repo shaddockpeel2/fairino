@@ -1,0 +1,8 @@
+{"time_ns":1789107001607708898,"event":"run_started","detail":"plan_only"}
+{"time_ns":1789107001632523008,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube added"}
+{"time_ns":1789107001754985290,"event":"plan_approach","detail":"return_code=1"}
+{"time_ns":1789107001771821645,"event":"plan_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0334436235"}
+{"time_ns":1789107001775095056,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789107001829966626,"event":"plan_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0737796783"}
+{"time_ns":1789107001872297557,"event":"preview_complete","detail":"approach, full descend and attached full lift planned"}
+{"time_ns":1789107001872404016,"event":"state","detail":"plan_only_complete: three motions planned; no command was sent"}

@@ -1050,7 +1050,7 @@ P07 只运行 fake/mock 或仿真控制器，不连接真机硬件插件。官�
 
 ### 阶段目标
 
-把 YDI-J22 和 FT232H 安全接到整机，对上提供标准 `GripperCommand`，对下实现持续 PWM、标定映射、保护与显式开环状态。2026-09-10 已完成软件实现和 mock 验证，真实硬件 action 待操作者监护下验收。
+把 YDI-J22 和 FT232H 安全接到整机，对上提供标准 `GripperCommand`，对下实现持续 PWM、标定映射、保护与显式开环状态。2026-09-11 已完成软件实现、mock 验证、真实硬件 action、30 mm 标准块首次夹持及超过 30 s 的持续保持；长期可靠性和故障恢复仍待验收。
 
 ### 阶段边界
 
@@ -1058,7 +1058,7 @@ P07 只运行 fake/mock 或仿真控制器，不连接真机硬件插件。官�
 
 2026-09-10 推进结果：已直接实现自有薄驱动而非等待不匹配的第三方协议节点。mock action、越界拒绝、诊断、URDF/SRDF 和 MoveIt controller 已通过离线验证；FT232H 未解锁模式确认不占用设备且拒绝 goal。真实输出仍不默认启用，也不把“命令发送完成”声明为“夹持成功”。
 
-当前实现顺序：纯映射/PWM 单元测试 → mock action → MoveIt 接口 → FT232H 未解锁测试均已完成；下一步在机械臂静止时执行真实 550/1650 µs action，再做中间开度、cancel、断连和持续保持验收，最后进入 MTC。
+当前实现顺序：纯映射/PWM 单元测试 → mock action → MoveIt 接口 → FT232H 未解锁测试 → 真实 action、26 mm 闭合和持续保持均已完成。首次抓取参数冻结为预张开 60 mm、顶面以下 15 mm、闭合 26 mm（有效 840 µs）；下一步进入 MTC 前仍需完成精确姿态、重复 goal、cancel、断连恢复和长期循环验收。
 
 ### 前置条件
 
@@ -1700,7 +1700,7 @@ P07 只运行 fake/mock 或仿真控制器，不连接真机硬件插件。官�
 | P06 SDK 低速运动 | 未开始 | — | 非法参数拒绝已验证，有效运动未现场验收 | 环境交接文档第 10.1 节 | 现场净空、急停、低速轨迹 |
 | P07 模型/MoveIt mock | 开发中 | 2026-09-10（FK 纠正、碰撞回归与真机组合显示） | 保留现有 MoveIt 包/六关节接口，运动学切换为 `fairino3c_v6` 并定义 `flange_link`；3 个现场姿态与 40 组重建姿态 FK 均远低于 1 mm/0.2° 门槛；URDF/SRDF、命名位、自碰撞及障碍碰撞回归通过；正式手眼 TF 已接入 | 本文第 6.1、P07 节，[模型核对报告](../../evidence/P13/manual_30pose_20260910/robot_model_comparison.md)、[RViz/MoveIt 集成交接](../DaBai_DCW2_RViz与MoveIt集成技术交接.md) | 全场景/精细末端碰撞体、mock 与 100 组规划；ServoJ 生命周期/周期和真实轨迹执行仍未验收 |
 | P08 末端机械/布线 | 未开始 | — | — | — | 质量、质心、支架、线缆 |
-| P09 夹爪装机 | 开发中 | 2026-09-10（真实 action 与开度标定） | 自有薄驱动已完成 `GripperCommand`、mock/FT232H backend、诊断、MoveIt controller；真实 action 已驱动夹爪，550～1650 µs对应0～130 mm六点开度映射已写入 | 本文第 6.6 节、P09，[驱动 README](../../src/fr3c_gripper_driver/README.md) | 持续保持时长、cancel/断连、100次循环、夹持确认、动态碰撞几何及带载联动待验收 |
+| P09 夹爪装机 | 开发中 | 2026-09-11（首次方块夹持） | 自有薄驱动已完成 `GripperCommand`、mock/FT232H backend、诊断、MoveIt controller；0～130 mm六点映射、30 mm方块以 `d=15 mm`/闭合26 mm夹持及超过30 s持续保持已通过。一次USB重新枚举被正确传播为action失败 | 本文第 6.6 节、P09，[驱动 README](../../src/fr3c_gripper_driver/README.md)，`evidence/P4/20260911/P4_grip_depth_and_hold_verification.md` | cancel/断连恢复、100次循环、自动夹持确认、动态碰撞几何及带载联动待验收 |
 | P10 固定点抓放 | 开发中 | 2026-09-10（实用 TCP v2 冻结） | `grasp_frame` 已接入 URDF/MTC；最终采用 `[-0.847397,3.027928,178.0] mm`，X/Y 来自固定点求解、Z 来自法兰盘到尖端直测 | `src/fairino3mt_v6_moveit2_config/config/ydi_j22_tcp.yaml`、`docs/calibration/FR3C夹爪TCP固定点标定采集说明.md`、本文 P10 | 控制器专用 tool ID、TCP 读回、负载/质心、固定点 20 次抓放及必要微调 |
 | P11 MoveIt 真机 | 开发中 | 2026-09-10（RViz 多组真机 Plan/Execute） | 操作者已用 RViz 末端交互球和单关节目标完成多组低速 Plan/Execute，实体机械臂运动正常，基础 MoveIt→ros2_control→FR3-C 链路通过 | 本文 P11；现场操作记录（尚未形成独立 P11 证据包） | 归档 20 条审查轨迹；修复/验证 ServoMove 生命周期、第 6 轴有限值、100 Hz/0.008 s 周期、错误返回、取消/断线/deactivate 及跟踪误差 |
 | P12 装机相机 | 开发中 | 2026-09-10（最终支架下完成手眼采集） | DaBai 已固定在最终末端支架，640×480/内参/D2C 固定；40 个多平移/多旋转姿态均能检测标定板并通过单姿态稳定性门禁 | [手眼采集说明](../calibration/FR3C手眼标定数据采集说明.md)、`evidence/P13/manual_30pose_20260910/` | 全抓取区有效深度、夹爪开闭遮挡、10 分钟漂移、支架受力/拆装、10 次冷启动和线缆全范围复测 |

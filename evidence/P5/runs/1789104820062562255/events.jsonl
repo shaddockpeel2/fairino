@@ -1,0 +1,4 @@
+{"time_ns":1789104820066042169,"event":"run_started","detail":"plan_only"}
+{"time_ns":1789104820071048684,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube added"}
+{"time_ns":1789104820207942826,"event":"plan_approach","detail":"return_code=-2"}
+{"time_ns":1789104820208163328,"event":"state","detail":"failed_holding_state_unchanged: approach planning failed with MoveIt code -2"}

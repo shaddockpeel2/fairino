@@ -8,10 +8,11 @@ setup(name='fr3c_camera', version='0.1.0', packages=['fr3c_camera'],
                   ('share/fr3c_camera/rviz', glob('rviz/*.rviz'))],
       install_requires=['setuptools'], zip_safe=True,
       maintainer='FR3-C project', maintainer_email='developer@example.com',
-      description='RGB-D bench integration', license='Apache-2.0',
+      description='RGB-D bench integration', license='Apache-2.0', tests_require=['pytest'],
       entry_points={'console_scripts': ['rgbd_probe = fr3c_camera.probe_node:main',
                                         'rgbd_audit = fr3c_camera.audit:main',
                                         'dabai_camera_preflight = fr3c_camera.preflight:main',
                                         'rgbd_live_view = fr3c_camera.live_view:main',
                                         'rgbd_roi_quality = fr3c_camera.quality:main',
-                                        'rgbd_raw_depth_audit = fr3c_camera.raw_depth_audit:main']})
+                                        'rgbd_raw_depth_audit = fr3c_camera.raw_depth_audit:main',
+                                        'blue_cube_localizer = fr3c_camera.blue_cube_localizer:main']})

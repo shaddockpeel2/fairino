@@ -1,0 +1,16 @@
+# Accepted hand-eye calibration deployed for the first RGB cube grasp.
+# Canonical evidence source:
+# evidence/P13/manual_30pose_20260910/flange_to_dabai_dcw2.yaml
+calibrated: true
+handeye_accepted: true
+deployable_in_current_ros_tf: true
+status: accepted
+parent_frame: flange_link
+child_frame: camera_link
+xyz: [-0.021996403927845576, -0.07289998096756403, 0.045330103200571334]
+rpy: [2.8889206938462344, -1.44079515904105, -1.3540098205387807]
+camera_serial: CH82C5201C9
+mount_version: final_mount_v1
+source: evidence/P13/manual_30pose_20260910/flange_to_dabai_dcw2.yaml
+validation_translation_median_mm: 2.273768638982552
+validation_translation_p95_mm: 6.326555318945608

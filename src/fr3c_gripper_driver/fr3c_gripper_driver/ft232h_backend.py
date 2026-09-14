@@ -34,6 +34,7 @@ class Ft232hPwmBackend:
         self._actual_rate_hz = None
         self._frames_written = 0
         self._bytes_written = 0
+        self._recovery_count = 0
 
     @property
     def current_us(self):
@@ -65,6 +66,11 @@ class Ft232hPwmBackend:
         with self._condition:
             return self._bytes_written
 
+    @property
+    def recovery_count(self):
+        with self._condition:
+            return self._recovery_count
+
     def command(self, pulse_us):
         # The asynchronous bit-bang sample period is the real pulse
         # resolution (10 us at 100 kHz). Keep state/diagnostics consistent
@@ -74,11 +80,23 @@ class Ft232hPwmBackend:
             * 1_000_000 / self.sample_rate_hz))
         with self._condition:
             if self._error:
-                raise RuntimeError(self._error)
+                # USB devices can re-enumerate while the process stays alive.
+                # Once the failed writer thread has exited, let the next
+                # explicit action goal reopen the current FTDI device instead
+                # of permanently poisoning the backend until process restart.
+                if self._thread is not None and self._thread.is_alive():
+                    raise RuntimeError(self._error)
+                self._thread = None
+                self._error = None
+                self._actual_rate_hz = None
+                self._stop = False
+                self._recovery_count += 1
             if self._thread is None:
-                # The first goal is an intentional motion request. Start at its
-                # target because the physical servo position is not observable.
-                self._current_us = pulse_us
+                # On the first goal the physical position is unknown, so start
+                # at the requested target. After USB recovery retain the last
+                # emitted pulse and slew from it toward the new target.
+                if self._current_us is None:
+                    self._current_us = pulse_us
                 self._target_us = pulse_us
                 self._thread = threading.Thread(
                     target=self._run, name='ft232h_pwm', daemon=True)

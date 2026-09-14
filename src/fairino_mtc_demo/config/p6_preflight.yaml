@@ -1,0 +1,46 @@
+# P6 is a read-only gate for the first RGB cube grasp. It consumes controller
+# state already owned by fairino_hardware; it never opens another SDK client.
+control_path: moveit_joint_servoj
+execution_controller: fairino3mt_execution_controller
+joint_state_broadcaster: joint_state_broadcaster
+hardware_component: FR3CHardware
+maximum_state_age_s: 0.5
+expected_joint_state_publishers:
+  - /joint_state_broadcaster
+  - /ydi_j22_gripper
+
+tcp_file: /home/industio/fairino_ws/src/fairino3mt_v6_moveit2_config/config/ydi_j22_tcp.yaml
+handeye_file: /home/industio/fairino_ws/src/fairino3mt_v6_moveit2_config/config/dabai_dcw2_handeye.yaml
+transform_tolerances:
+  translation_mm: 0.2
+  rotation_deg: 0.02
+flange_translation_tolerance_mm: 0.5
+flange_rotation_tolerance_deg: 0.1
+
+# Prototype waiver requested by the operator on 2026-09-11. The controller's
+# live 0 kg / [0,0,0] mm values remain recorded in every report, but do not
+# block the first low-speed proof-of-concept cycle. Set required=true and fill
+# the measured values before accuracy/dynamics work or higher-speed operation.
+payload:
+  required: false
+  waiver_reason: operator requested approximate first grasp before payload calibration
+  expected_mass_kg: null
+  expected_cog_mm: null
+  basis: ''
+  mass_tolerance_kg: 0.02
+  cog_tolerance_mm: 3.0
+
+required_nodes:
+  - /controller_manager
+  - /joint_state_broadcaster
+  - /fairino3mt_execution_controller
+  - /fr3c_trajectory_control_bridge
+  - /move_group
+  - /robot_state_publisher
+  - /dabai_hand_eye_tf
+  - /perception/blue_cube_localizer
+  - /ydi_j22_gripper
+forbidden_nodes:
+  - /ros2_cmd_server
+  - /mtc_node
+  - /fairino_remote_command_server

@@ -1,14 +1,14 @@
-# Active YDI-J22 practical TCP v2, frozen 2026-09-10.
+# Active YDI-J22 TCP v3, accepted for the first RGB cube grasp on 2026-09-11.
 ydi_j22_tcp:
-  version: 2
+  version: 3
   defined: true
   calibrated: true
-  status: measured_hybrid_pending_practical_micro_adjustment
+  status: pivot_solution_accepted_for_first_rgb_grasp
   parent_frame: flange_link
   child_frame: grasp_frame
-  xyz_m: [-0.000847397, 0.003027928, 0.178]
+  xyz_m: [-0.000847397, 0.003027928, 0.184614459]
   rpy_rad: [0.0, 0.0, 0.0]
-  controller_pose_mm_deg: [-0.847397, 3.027928, 178.0, 0.0, 0.0, 0.0]
+  controller_pose_mm_deg: [-0.847397, 3.027928, 184.614459, 0.0, 0.0, 0.0]
   geometry:
     tcp_definition: flexible_finger_common_closing_tip
     previous_nominal_pose_mm_deg: [0.0, 0.0, 163.0, 0.0, 0.0, 0.0]
@@ -17,9 +17,10 @@ ydi_j22_tcp:
     user_measured_flange_to_tip_z_mm: 178.0
     vendor_dimension_note: vendor_confirmed_160_mm_dimension_is_not_reliable_for_this_gripper
   calibration:
-    method: pivot_xy_plus_direct_measured_z
+    method: fixed_point_pivot_3d
     x_y_source: fixed_point_pivot_session
-    z_source: user_direct_flange_face_to_tip_measurement
+    z_source: fixed_point_pivot_session
+    previous_z_decision_source: user_direct_flange_face_to_tip_measurement
     session: evidence/P10/tcp_pivot_20260910
     sample_count: 12
     inlier_sample_count: 11
@@ -31,10 +32,11 @@ ydi_j22_tcp:
     leave_one_out_tcp_delta_max_mm: 0.747564
     candidate_pose_mm_deg: [-0.847397, 3.027928, 184.614459, 0.0, 0.0, 0.0]
     candidate_length_mm: 184.641
-    candidate_use: x_y_retained_z_replaced_by_direct_measurement
-    final_tcp_length_mm: 178.027769
-    accepted_for: normal_fixed_point_pick_place_with_later_practical_micro_adjustment
-  source: pivot_xy_and_user_measured_z
+    candidate_use: promoted_after_table_contact_rviz_alignment_confirmation
+    previous_active_pose_mm_deg: [-0.847397, 3.027928, 178.0, 0.0, 0.0, 0.0]
+    active_tcp_length_mm: 184.641
+    accepted_for: first_rgb_cube_grasp_moveit_rviz
+  source: pivot_solution_promoted_after_table_contact_observation
   controller_tool_id: null
-  fixed_point_validation: accepted_hybrid_pending_20_cycle_pick_place
+  fixed_point_validation: table_contact_rviz_alignment_confirmed_by_user
   payload_weight_and_cog: pending

@@ -1,12 +1,17 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:macro name="fairino3mt_v6_robot_ros2_control" params="name initial_positions_file">
+    <xacro:macro name="fairino3mt_v6_robot_ros2_control" params="name initial_positions_file hardware_plugin">
         <xacro:property name="initial_positions" value="${load_yaml(initial_positions_file)['initial_positions']}"/>
 
         <ros2_control name="${name}" type="system">
             <hardware>
-                <!-- By default, set up controllers for simulation. This won't work on real hardware -->
-                <plugin>fairino_hardware/FairinoHardwareInterface</plugin>
+                <plugin>${hardware_plugin}</plugin>
+                <xacro:if value="${hardware_plugin == 'fairino_hardware/FairinoHardwareInterface'}">
+                  <param name="controller_ip">192.168.58.2</param>
+                  <!-- FAIRINO V3.9.2's official ROS 2 plugin sends ServoJ with cmdT=8 ms. -->
+                  <param name="servo_command_period_sec">0.008</param>
+                  <param name="control_period_tolerance_sec">0.002</param>
+                </xacro:if>
             </hardware>
             <joint name="joint1">
                 <command_interface name="position"/>
@@ -44,6 +49,49 @@
                   <param name="initial_value">${initial_positions['joint6']}</param>
                 </state_interface>
             </joint>
+
+            <!-- Read-only FAIRINO controller state exported by the existing
+                 hardware connection. P6 consumes this through
+                 /dynamic_joint_states; it does not create a second SDK client. -->
+            <xacro:if value="${hardware_plugin == 'fairino_hardware/FairinoHardwareInterface'}">
+              <gpio name="fairino_status">
+                <state_interface name="program_state"/>
+                <state_interface name="robot_state"/>
+                <state_interface name="main_error_code"/>
+                <state_interface name="sub_error_code"/>
+                <state_interface name="robot_mode"/>
+                <state_interface name="tool_id"/>
+                <state_interface name="work_object_id"/>
+                <state_interface name="emergency_stop"/>
+                <state_interface name="motion_done"/>
+                <state_interface name="collision_state"/>
+                <state_interface name="safety_stop_0"/>
+                <state_interface name="safety_stop_1"/>
+                <state_interface name="enabled"/>
+                <state_interface name="payload_kg"/>
+                <state_interface name="payload_cog_x_mm"/>
+                <state_interface name="payload_cog_y_mm"/>
+                <state_interface name="payload_cog_z_mm"/>
+                <state_interface name="tool_x_mm"/>
+                <state_interface name="tool_y_mm"/>
+                <state_interface name="tool_z_mm"/>
+                <state_interface name="tool_rx_deg"/>
+                <state_interface name="tool_ry_deg"/>
+                <state_interface name="tool_rz_deg"/>
+                <state_interface name="wobj_x_mm"/>
+                <state_interface name="wobj_y_mm"/>
+                <state_interface name="wobj_z_mm"/>
+                <state_interface name="wobj_rx_deg"/>
+                <state_interface name="wobj_ry_deg"/>
+                <state_interface name="wobj_rz_deg"/>
+                <state_interface name="flange_x_mm"/>
+                <state_interface name="flange_y_mm"/>
+                <state_interface name="flange_z_mm"/>
+                <state_interface name="flange_rx_deg"/>
+                <state_interface name="flange_ry_deg"/>
+                <state_interface name="flange_rz_deg"/>
+              </gpio>
+            </xacro:if>
 
         </ros2_control>
     </xacro:macro>

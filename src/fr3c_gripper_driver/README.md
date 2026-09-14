@@ -11,6 +11,19 @@ The current hardware has no position, force, current, temperature, or stall
 feedback. The action result therefore reports an **estimated commanded
 position**, never measured effort. Any positive `max_effort` is rejected.
 
+On both mock and FT232H startup, the driver publishes `startup_position_m` to
+`/joint_states` so MoveIt receives a complete robot state. For FT232H this is
+explicitly an unverified assumption, not measured position. The default is the
+fully open 0.130 m aperture, which is conservative for external clearance.
+Startup still emits no PWM; send an explicit pre-open command before relying on
+the grasp opening around a target.
+
+If the FT232H re-enumerates while the node is running, the action active at
+that instant aborts and the caller must restart its task state machine. The
+backend records the USB error and the next explicit gripper goal reopens the
+current FTDI device automatically; restarting the full MoveIt/robot stack is
+not required. Diagnostics expose `usb_recovery_count`.
+
 ## Current mapping
 
 - ROS position: measured opposed-fingertip aperture, `0.000 m` closed to
@@ -79,14 +92,15 @@ the physical gripper:
 It performs five 60↔100 mm cycles and then holds 60 mm for 30 seconds to expose
 any delayed stale PWM output.
 
-The combined MoveIt/camera wrapper starts the FT232H gripper node by default.
-With the confirmation token it is armed; without the token the action server
-remains online but rejects hardware goals. Starting the node still emits no PWM.
-The wrapper refuses to start if another `/ydi_j22_gripper` already exists.
-Every accepted goal and effective pulse is written to the ROS log.
+The combined MoveIt/camera wrapper starts and arms the FT232H gripper node by
+default. It sets the confirmation token internally, so no separate export is
+required. Starting the node still emits no PWM; the first accepted gripper goal
+will move it. Set `FR3C_GRIPPER_BACKEND=mock` before starting the wrapper when
+real gripper output is not wanted. The wrapper refuses to start if another
+`/ydi_j22_gripper` already exists. Every accepted goal and effective pulse is
+written to the ROS log.
 
 ```bash
-export FR3C_ENABLE_FT232H_PWM=I_UNDERSTAND_OPEN_LOOP_PWM
 /home/industio/fairino_ws/scripts/run_moveit_camera_rviz.sh
 ```
 

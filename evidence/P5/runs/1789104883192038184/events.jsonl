@@ -1,0 +1,7 @@
+{"time_ns":1789104883192543940,"event":"run_started","detail":"plan_only"}
+{"time_ns":1789104883202761431,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube added"}
+{"time_ns":1789104883429304543,"event":"plan_approach","detail":"return_code=1"}
+{"time_ns":1789104883475895905,"event":"plan_descend","detail":"fraction=1,moveit_code=1"}
+{"time_ns":1789104883486048353,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789104883551507846,"event":"plan_lift","detail":"fraction=0.21192053,moveit_code=1"}
+{"time_ns":1789104883553470493,"event":"state","detail":"failed_holding_state_unchanged: lift Cartesian path incomplete: fraction=0.211921, code=1"}

@@ -1,0 +1,19 @@
+fr3c_first_grasp_scene:
+  ros__parameters:
+    # All positions are box centres in base_link, in metres. The node refuses
+    # to publish while table.size contains zero. Replace all placeholder zeros
+    # with measured values before use.
+    frame_id: base_link
+    table:
+      id: first_grasp_table
+      size: [0.0, 0.0, 0.0]
+      center: [0.0, 0.0, 0.0]
+    cube:
+      id: target_cube
+      size: [0.030, 0.030, 0.030]
+      center: [0.0, 0.0, 0.0]
+    # Optional nearby boxes, flattened as one XYZ triple per id.
+    # obstacles:
+    #   ids: [fixture]
+    #   sizes: [0.10, 0.10, 0.20]
+    #   centers: [0.40, 0.00, 0.10]

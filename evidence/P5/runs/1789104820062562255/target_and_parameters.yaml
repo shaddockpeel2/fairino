@@ -1,0 +1,14 @@
+frame: base_link
+target_top_xyz_m: [-0.1110818, -0.3447183, 0.0354602]
+grasp_orientation_xyzw: [0, 1, 0, 0]
+approach_clearance_m: 0.015
+grasp_depth_m: 0.015
+lift_distance_m: 0.15
+pre_open_position_m: 0.06
+close_position_m: 0.026
+cube_side_m: 0.03
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: false
+perception_status_json: '{"valid":true,"frozen":true,"reason":"mock_ground_validation"}'

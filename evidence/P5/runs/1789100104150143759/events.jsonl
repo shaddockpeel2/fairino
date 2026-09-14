@@ -1,0 +1,8 @@
+{"time_ns":1789100104154239974,"event":"run_started","detail":"plan_only"}
+{"time_ns":1789100104158869654,"event":"scene_applied","detail":"table and visual target cube added"}
+{"time_ns":1789100104297524665,"event":"plan_approach","detail":"return_code=1"}
+{"time_ns":1789100104307550825,"event":"plan_descend","detail":"fraction=1,moveit_code=1"}
+{"time_ns":1789100104311856167,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789100104366885275,"event":"plan_lift","detail":"fraction=1,moveit_code=1"}
+{"time_ns":1789100104377318898,"event":"preview_complete","detail":"approach, full descend and attached full lift planned"}
+{"time_ns":1789100104377354190,"event":"state","detail":"plan_only_complete: three motions planned; no command was sent"}

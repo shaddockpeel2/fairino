@@ -1,16 +1,19 @@
 # This config file is used by ros2_control
 controller_manager:
   ros__parameters:
-    update_rate: 100  # Hz
+    # 125 Hz = 8 ms, matching the V3.9.2 FAIRINO ROS 2 ServoJ cmdT used below.
+    update_rate: 125  # Hz
 
-    fairino3mt_controller:
+    # Kept inactive while the robot is idle. The trajectory bridge activates
+    # it only for the lifetime of a MoveIt execution goal.
+    fairino3mt_execution_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
-fairino3mt_controller:
+fairino3mt_execution_controller:
   ros__parameters:
     joints:
       - joint1

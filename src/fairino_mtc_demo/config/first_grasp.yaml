@@ -1,0 +1,81 @@
+fr3c_first_grasp:
+  ros__parameters:
+    arm_group: fairino3mt_v6_group
+    base_frame: base_link
+    tip_frame: grasp_frame
+    gripper_joint: gripper_command_joint
+    gripper_action: /ydi_j22_gripper_controller/gripper_cmd
+
+    target_pose_topic: /perception/blue_cube_localizer/top_pose
+    target_valid_topic: /perception/blue_cube_localizer/valid
+    target_status_topic: /perception/blue_cube_localizer/status
+
+    # P3 keeps tracking and updating its latest stable target. /start accepts
+    # only a currently valid/fresh target and copies it once; later camera
+    # updates cannot change the target of an accepted grasp.
+
+    # P3/P4 validated first-grasp geometry, in metres.
+    approach_clearance_m: 0.015
+    grasp_depth_m: 0.015
+    lift_distance_m: 0.050
+    pre_open_position_m: 0.060
+    close_position_m: 0.026
+    cube_side_m: 0.030
+
+    # Exact base-Z-down candidate: RPY ~= [pi, 0, pi]. During P4 the current
+    # measured tool pose was close to this at [-2.997, 0.000, -3.113] rad.
+    # Keep this explicit and verify it once at high clearance before enabling
+    # descend_and_close. Change yaw here if the four-finger axes must rotate.
+    grasp_orientation_xyzw: [0.0, 1.0, 0.0, 0.0]
+
+    # Tight first-run bounds around the P4 test area. Adjust deliberately when
+    # the cube is moved to another part of the measured table.
+    target_x_bounds_m: [-1.0, 1.00]
+    # Expanded after the second physical placement was reacquired at
+    # Y=-0.4726 m. Keep a narrow margin around the two proven test positions.
+    target_y_bounds_m: [-1.00, -0.10]
+    target_top_z_bounds_m: [0.025, 0.50]
+
+    cube_id: target_cube
+    # RViz Grid is the base_link XY plane at Z=0. MoveIt cannot collide with
+    # an RViz display directly, so the task adds a 2 x 2 m collision slab just
+    # below it. The 0.01 mm offset lets the fixed robot base sit on the plane
+    # without allowing a task path to cross below it.
+    ground_plane_id: rviz_ground_plane
+    ground_plane_z_m: 0.0
+    ground_plane_xy_size_m: [2.0, 2.0]
+    ground_plane_thickness_m: 0.020
+    ground_plane_contact_epsilon_m: 0.00001
+    # P4 top Z 0.03546 m gives cube bottom Z 0.00546 m. Keep accepting that
+    # measured offset while refusing a cube below or implausibly far above the plane.
+    maximum_cube_plane_gap_m: 0.010
+    touch_links:
+      - gripper_finger_px_py_link
+      - gripper_finger_px_ny_link
+      - gripper_finger_nx_py_link
+      - gripper_finger_nx_ny_link
+
+    velocity_scale: 0.05
+    acceleration_scale: 0.05
+    planning_time_s: 10.0
+    planning_attempts: 5
+    cartesian_step_m: 0.001
+    # Disable MoveIt's relative-average jump heuristic and apply the explicit
+    # absolute per-sample joint-step limit below. Collision checking stays on.
+    cartesian_jump_threshold: 0.0
+    maximum_cartesian_joint_step_rad: 0.10
+    minimum_cartesian_fraction: 0.999999
+    target_message_timeout_s: 1.0
+    arrival_position_tolerance_m: 0.003
+    arrival_orientation_tolerance_rad: 0.034906585
+    action_timeout_s: 12.0
+    state_timeout_s: 3.0
+    gripper_state_tolerance_m: 0.003
+    log_directory: /home/industio/fairino_ws/evidence/P5/runs
+    # execute=true initially requires a fresh passing P6 gate for the MoveIt
+    # joint ServoJ path. Once accepted, that exact gate remains valid for this
+    # P5 process; stack restart invalidates it and requires a new startup P6.
+    p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+    # Freshness limit for accepting a new gate, not a timeout on an already
+    # accepted running session.
+    p6_gate_max_age_s: 600.0

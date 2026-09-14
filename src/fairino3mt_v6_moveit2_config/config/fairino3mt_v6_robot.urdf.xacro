@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="fairino3mt_v6_robot">
     <xacro:arg name="initial_positions_file" default="initial_positions.yaml" />
+    <xacro:arg name="hardware_plugin" default="fairino_hardware/FairinoHardwareInterface" />
 
     <!-- FR3-C controller FK matches the standard FAIRINO FR3 chain, not the
          fairino3_mt_v6 chain.  fairino3c_v6 is a joint-name-compatible copy
@@ -20,25 +21,53 @@
     <xacro:arg name="gripper_mount_xyz" default="0 0 0"/>
     <xacro:arg name="gripper_mount_rpy" default="0 0 0"/>
     <xacro:arg name="gripper_spacer" default="0.003"/>
-    <!-- Final practical TCP v2, 2026-09-10.  X/Y come from the 12-pose pivot
-         solve; flange-to-tip Z is the user's direct 178 mm measurement.  The
-         body-relative Z subtracts the retained 3 mm collision placeholder. -->
-    <xacro:arg name="gripper_tcp_from_body_xyz" default="-0.000847397 0.003027928 0.175"/>
+    <!-- Active TCP v3 table-contact test, 2026-09-11. All XYZ components come
+         from the 12-pose pivot solution. The 184.614459 mm flange-relative Z
+         matches the observed ~6 mm RViz shortfall of the prior 178 mm TCP.
+         Load the machine-readable calibration as the single source of truth;
+         body-relative Z subtracts the retained 3 mm collision spacer. -->
+    <xacro:property name="gripper_tcp_config"
+      value="${xacro.load_yaml('$(find fairino3mt_v6_moveit2_config)/config/ydi_j22_tcp.yaml')['ydi_j22_tcp']}"/>
+    <xacro:property name="gripper_tcp_flange_xyz" value="${gripper_tcp_config['xyz_m']}"/>
+    <xacro:property name="gripper_spacer_m" value="${float('$(arg gripper_spacer)')}"/>
+    <xacro:property name="gripper_tcp_from_body_xyz"
+      value="${'%s %s %s' % (gripper_tcp_flange_xyz[0], gripper_tcp_flange_xyz[1], gripper_tcp_flange_xyz[2] - gripper_spacer_m)}"/>
     <xacro:arg name="gripper_tcp_rpy" default="0 0 0"/>
-    <xacro:arg name="gripper_envelope_x" default="0.180"/>
-    <xacro:arg name="gripper_envelope_y" default="0.100"/>
-    <xacro:arg name="gripper_envelope_z" default="0.200"/>
+    <!-- First-grasp simplified collision geometry. Housing cross-section is
+         based on the 56 x 80.59 mm drawing. Finger tips end at the calibrated
+         TCP instead of extending 25 mm beyond it as the old solid box did. -->
+    <xacro:arg name="gripper_body_x" default="0.056"/>
+    <xacro:arg name="gripper_body_y" default="0.08059"/>
+    <xacro:arg name="gripper_body_z" default="0.085"/>
+    <xacro:arg name="gripper_finger_x" default="0.012"/>
+    <xacro:arg name="gripper_finger_y" default="0.013"/>
+    <xacro:property name="gripper_finger_proximal_body_z" value="${0.080}"/>
+    <xacro:property name="gripper_finger_z"
+      value="${gripper_tcp_flange_xyz[2] - gripper_spacer_m - gripper_finger_proximal_body_z}"/>
+    <xacro:arg name="gripper_finger_center_x" default="0.0205"/>
+    <xacro:arg name="gripper_finger_center_y" default="0.021"/>
+    <xacro:property name="gripper_finger_center_z"
+      value="${gripper_finger_proximal_body_z + gripper_finger_z / 2.0}"/>
+    <!-- (166 mm max span - 53 mm nominal grasp span) / (2 * 130 mm command). -->
+    <xacro:arg name="gripper_finger_open_multiplier" default="0.434615"/>
     <xacro:include filename="$(find fairino_description)/urdf/ydi_j22_placeholder.xacro"/>
       <xacro:ydi_j22_placeholder parent="flange_link"
         mount_xyz="$(arg gripper_mount_xyz)" mount_rpy="$(arg gripper_mount_rpy)"
-        spacer="$(arg gripper_spacer)" tcp_xyz="$(arg gripper_tcp_from_body_xyz)"
-        tcp_rpy="$(arg gripper_tcp_rpy)" envelope_x="$(arg gripper_envelope_x)"
-        envelope_y="$(arg gripper_envelope_y)" envelope_z="$(arg gripper_envelope_z)"/>
+        spacer="$(arg gripper_spacer)" tcp_xyz="${gripper_tcp_from_body_xyz}"
+        tcp_rpy="$(arg gripper_tcp_rpy)"
+        body_x="$(arg gripper_body_x)" body_y="$(arg gripper_body_y)"
+        body_z="$(arg gripper_body_z)" finger_x="$(arg gripper_finger_x)"
+        finger_y="$(arg gripper_finger_y)" finger_z="${gripper_finger_z}"
+        finger_center_x="$(arg gripper_finger_center_x)"
+        finger_center_y="$(arg gripper_finger_center_y)"
+        finger_center_z="${gripper_finger_center_z}"
+        finger_open_multiplier="$(arg gripper_finger_open_multiplier)"/>
 
     <!-- Camera housing: 100 x 35 x 20 mm measured by user.
          Centre offset estimated from photos, NOT a hand-eye calibration. -->
-    <!-- Nominal flange radius 40 mm + half camera height 17.5 mm. -->
-    <xacro:arg name="camera_mount_xyz" default="0 0.0575 0.015"/>
+    <!-- Nominal flange radius 40 mm + half camera height 17.5 mm. The camera
+         is physically on flange -Y; +Y was the earlier photo-based guess. -->
+    <xacro:arg name="camera_mount_xyz" default="0 -0.0575 0.015"/>
     <xacro:arg name="camera_mount_rpy" default="0 0 0"/>
     <xacro:arg name="camera_size_x" default="0.100"/>
     <xacro:arg name="camera_size_y" default="0.035"/>
@@ -54,6 +83,8 @@
     <xacro:include filename="fairino3mt_v6_robot.ros2_control.xacro" />
 
 
-    <xacro:fairino3mt_v6_robot_ros2_control name="FakeSystem" initial_positions_file="$(arg initial_positions_file)"/>
+    <xacro:fairino3mt_v6_robot_ros2_control name="FR3CHardware"
+      initial_positions_file="$(arg initial_positions_file)"
+      hardware_plugin="$(arg hardware_plugin)"/>
 
 </robot>

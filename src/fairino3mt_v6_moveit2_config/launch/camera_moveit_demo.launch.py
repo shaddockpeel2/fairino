@@ -20,11 +20,12 @@ def _camera_tf(context):
         if preview not in ('1', 'true', 'yes', 'on'):
             return []
 
-        # The URDF already contains a photo-estimated camera housing.  Joining
-        # the camera driver's TF root to that housing makes RGB-D data visible
-        # beside the robot before hand-eye calibration.  Identity here means
-        # "use the housing frame as the camera_link estimate"; it must not be
-        # treated as calibrated geometry for grasp pose computation.
+        # The URDF already contains a photo-estimated camera housing. The
+        # housing axes are image-right, image-down and optical-forward, while
+        # the driver's camera_link follows the ROS body-frame convention. This
+        # rotation is the inverse of the nominal camera_link -> optical-frame
+        # rotation, so the downstream optical frame points along housing +Z.
+        # It is still only a visualization estimate, not hand-eye calibration.
         return [
             LogInfo(msg=(
                 'Publishing visualization-only camera_housing_link -> camera_link TF. '
@@ -37,7 +38,8 @@ def _camera_tf(context):
                 output='screen',
                 arguments=[
                     '--x', '0', '--y', '0', '--z', '0',
-                    '--roll', '0', '--pitch', '0', '--yaw', '0',
+                    '--qx', '0.5', '--qy', '-0.5',
+                    '--qz', '0.5', '--qw', '0.5',
                     '--frame-id', 'camera_housing_link', '--child-frame-id', 'camera_link',
                 ],
             ),
@@ -53,6 +55,10 @@ def _camera_tf(context):
     data = yaml.safe_load(path.read_text(encoding='utf-8'))
     if not isinstance(data, dict) or data.get('calibrated') is not True:
         raise RuntimeError(f'hand-eye file is not marked calibrated: {path}')
+    if data.get('handeye_accepted') is not True or data.get('status') != 'accepted':
+        raise RuntimeError(f'hand-eye file is not accepted: {path}')
+    if str(data.get('camera_serial', '')).strip() != 'CH82C5201C9':
+        raise RuntimeError('hand-eye file is not for the deployed DaBai DCW2 serial')
 
     parent = str(data.get('parent_frame', '')).strip()
     child = str(data.get('child_frame', '')).strip()
@@ -138,8 +144,10 @@ def generate_launch_description():
             description='Must be true together with the hardware confirmation environment token.',
         ),
         DeclareLaunchArgument(
-            'publish_calibrated_tf', default_value='false',
-            description='Publish wrist/tool-to-camera_link only from a validated calibration file.',
+            'publish_calibrated_tf', default_value='true',
+            description=(
+                'Publish wrist/tool-to-camera_link only from a validated '
+                'calibration file.'),
         ),
         DeclareLaunchArgument(
             'publish_mount_preview_tf', default_value='true',
@@ -149,7 +157,8 @@ def generate_launch_description():
             ),
         ),
         DeclareLaunchArgument(
-            'hand_eye_file', default_value='',
+            'hand_eye_file',
+            default_value=str(moveit_share / 'config/dabai_dcw2_handeye.yaml'),
             description='YAML with calibrated, parent_frame, child_frame, xyz and rpy fields.',
         ),
         # Validate calibration before starting the camera or real ros2_control

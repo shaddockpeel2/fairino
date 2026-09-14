@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-11T14:06:06.170097+08:00",
+  "passed": false,
+  "control_path": "moveit_joint_servoj",
+  "confirmations": {
+    "workcell_clear": false,
+    "lift_clearance_150mm": false,
+    "cable_slack": false,
+    "stop_method_ready": false,
+    "no_external_motion_source": false
+  },
+  "checks": [
+    {
+      "name": "control_path",
+      "passed": true,
+      "observed": "moveit_joint_servoj",
+      "expected": "moveit_joint_servoj",
+      "detail": "Tool/work-object IDs do not transform joint ServoJ trajectories."
+    },
+    {
+      "name": "controller_status_complete",
+      "passed": false,
+      "observed": [
+        "program_state",
+        "robot_state",
+        "main_error_code",
+        "sub_error_code",
+        "robot_mode",
+        "tool_id",
+        "work_object_id",
+        "emergency_stop",
+        "motion_done",
+        "collision_state",
+        "safety_stop_0",
+        "safety_stop_1",
+        "enabled",
+        "payload_kg",
+        "payload_cog_x_mm",
+        "payload_cog_y_mm",
+        "payload_cog_z_mm",
+        "tool_x_mm",
+        "tool_y_mm",
+        "tool_z_mm",
+        "tool_rx_deg",
+        "tool_ry_deg",
+        "tool_rz_deg",
+        "wobj_x_mm",
+        "wobj_y_mm",
+        "wobj_z_mm",
+        "wobj_rx_deg",
+        "wobj_ry_deg",
+        "wobj_rz_deg",
+        "flange_x_mm",
+        "flange_y_mm",
+        "flange_z_mm",
+        "flange_rx_deg",
+        "flange_ry_deg",
+        "flange_rz_deg"
+      ],
+      "expected": [],
+      "detail": "Status must come from the existing fairino_hardware SDK connection."
+    },
+    {
+      "name": "execution_controller_idle",
+      "passed": false,
+      "observed": null,
+      "expected": "inactive",
+      "detail": ""
+    },
+    {
+      "name": "joint_state_broadcaster_active",
+      "passed": false,
+      "observed": null,
+      "expected": "active",
+      "detail": ""
+    },
+    {
+      "name": "hardware_component_active",
+      "passed": false,
+      "observed": null,
+      "expected": "active",
+      "detail": ""
+    },
+    {
+      "name": "all_arm_commands_available_unclaimed",
+      "passed": false,
+      "observed": {},
+      "expected": "six available and unclaimed joint position interfaces",
+      "detail": ""
+    },
+    {
+      "name": "trajectory_bridge_idle",
+      "passed": false,
+      "observed": null,
+      "expected": "monitoring_manual_ready",
+      "detail": ""
+    },
+    {
+      "name": "single_arm_joint_state_source",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "arm_joint_state_fresh",
+      "passed": false,
+      "observed": Infinity,
+      "expected": 0.5,
+      "detail": ""
+    },
+    {
+      "name": "ros_fk_matches_controller_flange",
+      "passed": false,
+      "observed": null,
+      "expected": "live base_link->flange_link",
+      "detail": ""
+    },
+    {
+      "name": "tcp_transform_matches",
+      "passed": false,
+      "observed": {
+        "error": "LookupException: \"flange_link\" passed to lookupTransform argument target_frame does not exist. "
+      },
+      "expected": {
+        "translation_m": [
+          -0.000847397,
+          0.003027928,
+          0.184614459
+        ],
+        "quaternion_xyzw": [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "name": "handeye_transform_matches",
+      "passed": false,
+      "observed": {
+        "error": "LookupException: \"flange_link\" passed to lookupTransform argument target_frame does not exist. "
+      },
+      "expected": {
+        "translation_m": [
+          -0.021996403927845576,
+          -0.07289998096756403,
+          0.045330103200571334
+        ],
+        "quaternion_xyzw": [
+          -0.5290522313150038,
+          0.5318489362213198,
+          -0.450771473261966,
+          -0.48378251774335845
+        ]
+      },
+      "detail": ""
+    },
+    {
+      "name": "handeye_transform_unique",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/controller_manager",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/joint_state_broadcaster",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/fairino3mt_execution_controller",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/fr3c_trajectory_control_bridge",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/move_group",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/robot_state_publisher",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/dabai_hand_eye_tf",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/perception/blue_cube_localizer",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/ydi_j22_gripper",
+      "passed": false,
+      "observed": 0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "forbidden_motion_nodes_absent",
+      "passed": true,
+      "observed": [],
+      "expected": [],
+      "detail": ""
+    },
+    {
+      "name": "operator_confirmation:workcell_clear",
+      "passed": false,
+      "observed": false,
+      "expected": true,
+      "detail": "Physical conditions cannot be inferred from RViz or the ROS graph."
+    },
+    {
+      "name": "operator_confirmation:lift_clearance_150mm",
+      "passed": false,
+      "observed": false,
+      "expected": true,
+      "detail": "Physical conditions cannot be inferred from RViz or the ROS graph."
+    },
+    {
+      "name": "operator_confirmation:cable_slack",
+      "passed": false,
+      "observed": false,
+      "expected": true,
+      "detail": "Physical conditions cannot be inferred from RViz or the ROS graph."
+    },
+    {
+      "name": "operator_confirmation:stop_method_ready",
+      "passed": false,
+      "observed": false,
+      "expected": true,
+      "detail": "Physical conditions cannot be inferred from RViz or the ROS graph."
+    },
+    {
+      "name": "operator_confirmation:no_external_motion_source",
+      "passed": false,
+      "observed": false,
+      "expected": true,
+      "detail": "Physical conditions cannot be inferred from RViz or the ROS graph."
+    }
+  ],
+  "snapshot": {
+    "controller_status": null,
+    "control_state": null,
+    "arm_joint_source_count": 0,
+    "arm_joint_source_gids": [],
+    "arm_joint_state_age_s": Infinity,
+    "nodes": [
+      "/_ros2cli_daemon_0_3a894777b2e244cea7f94e80674c0dd0",
+      "/fr3c_p6_preflight"
+    ],
+    "camera_link_static_source_count": 0,
+    "controllers": {},
+    "hardware": {},
+    "base_to_flange": {
+      "error": "LookupException: \"base_link\" passed to lookupTransform argument target_frame does not exist. "
+    },
+    "flange_to_grasp": {
+      "error": "LookupException: \"flange_link\" passed to lookupTransform argument target_frame does not exist. "
+    },
+    "flange_to_camera": {
+      "error": "LookupException: \"flange_link\" passed to lookupTransform argument target_frame does not exist. "
+    }
+  }
+}

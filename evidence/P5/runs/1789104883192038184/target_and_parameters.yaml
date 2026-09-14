@@ -1,0 +1,14 @@
+frame: base_link
+target_top_xyz_m: [-0.111081808645, -0.344718257678, 0.0354601716879]
+grasp_orientation_xyzw: [0, 1, 0, 0]
+approach_clearance_m: 0.015
+grasp_depth_m: 0.015
+lift_distance_m: 0.15
+pre_open_position_m: 0.06
+close_position_m: 0.026
+cube_side_m: 0.03
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: false
+perception_status_json: '{"candidate_area_px":2145.0,"center_base_m":[-0.11112827772197303,-0.3448273892519512,0.03545526358248191],"depth_valid_fraction":0.9876900796524257,"frozen":true,"observed_side_m":[0.023188217792226906,0.023879699418696575],"orientation_source":"fixed_yaw_parameter","position_std_m":[6.851913624717896e-05,4.5371527417122525e-05,3.914300405369522e-05],"reason":"frozen_stable_target","required_samples":8,"sample_stamp":1789097823.613302,"samples":8,"top_z_spread_m":0.0010561468251512052,"valid":true}'

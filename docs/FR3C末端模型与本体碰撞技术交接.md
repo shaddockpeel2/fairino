@@ -104,7 +104,7 @@
 
 | 参数 | 当前默认值 | 说明 |
 | --- | --- | --- |
-| `camera_mount_xyz` | `0 0.0575 0.015` | 相对名义法兰安装坐标的外壳中心 |
+| `camera_mount_xyz` | `0 -0.0575 0.015` | 相对名义法兰安装坐标的外壳中心；实物位于法兰 -Y 侧 |
 | `camera_mount_rpy` | `0 0 0` | 相对安装坐标的旋转 |
 | `camera_size_x` | `0.100` | 长度 |
 | `camera_size_y` | `0.035` | 高度 |
@@ -252,7 +252,7 @@ xacro src/fairino3mt_v6_moveit2_config/config/fairino3mt_v6_robot.urdf.xacro ini
 | 现象 | 先检查什么 |
 | --- | --- |
 | RViz 模型初始姿态与真机不一致 | 检查实际硬件 plugin、joint_states 发布源和更新情况，不能仅凭 FakeSystem 实例名判断 |
-| 相机仍像悬空 | 是否加载最新模型；最终 Y 为 0.0575 m，不是旧值 0.075 m |
+| 相机位置不对或仍像悬空 | 是否加载最新模型；最终 Y 为 -0.0575 m，早期 +Y 是照片估位错误 |
 | 修改后模型没变化 | 是否 source 正确工作区、构建安装，并重启了 MoveIt/RViz |
 | 初始姿态突然碰撞 | 确认 URDF 与 SRDF 同时更新，查看具体碰撞 link 对 |
 | 夹爪无法接近目标物 | 当前实心包络填满开口，需细化抓取几何和接触规则 |

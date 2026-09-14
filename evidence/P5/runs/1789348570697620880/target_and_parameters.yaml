@@ -1,0 +1,16 @@
+frame: base_link
+target_top_xyz_m: [-0.080873992947, -0.524161352794, 0.0348635378176]
+grasp_orientation_xyzw: [0, 1, 0, 0]
+approach_clearance_m: 0.015
+grasp_depth_m: 0.015
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.026
+cube_side_m: 0.03
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 600
+perception_status_json: '{"candidate_area_px":1157.0,"center_base_m":[-0.0808898089485263,-0.5238647993649654,0.034847841640030464],"depth_valid_fraction":0.9555273189326556,"frozen":false,"has_stable_pose":true,"observed_side_m":[0.019335632601106708,0.021860055157980833],"orientation_source":"fixed_yaw_parameter","position_std_m":[6.46662934760805e-05,0.0001340276040724194,3.0087129591986564e-05],"reason":"stable_target_updated","required_samples":8,"sample_stamp":1789348570.239305,"samples":8,"stable":true,"top_z_spread_m":0.002466996489644775,"tracking":true,"valid":true}'
