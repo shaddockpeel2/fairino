@@ -1,0 +1,668 @@
+{
+  "schema_version": 1,
+  "type": "color_top_tcp_contact",
+  "created_at": "2026-09-14T16:51:56.632836+08:00",
+  "base_frame": "base_link",
+  "tcp_frame": "grasp_frame",
+  "status_topic": "/perception/blue_cube_localizer/status",
+  "samples": {
+    "P01": {
+      "color_top": {
+        "median_xyz_m": [
+          -0.09034008929575027,
+          -0.4686153626498264,
+          0.0362441024301908
+        ],
+        "mean_xyz_m": [
+          -0.09034042856591436,
+          -0.4686293271399287,
+          0.03625188036671881
+        ],
+        "std_xyz_mm": [
+          0.040543501265187826,
+          0.06488862705784926,
+          0.01893938467503309
+        ],
+        "range_xyz_mm": [
+          0.13736643813364036,
+          0.18854314699423558,
+          0.05391231262313889
+        ],
+        "max_deviation_mm": 0.13601781237359176,
+        "captured_at": "2026-09-14T16:51:56.631974+08:00",
+        "base_frame": "base_link",
+        "status_topic": "/perception/blue_cube_localizer/status",
+        "sample_count": 8,
+        "sample_stamps_s": [
+          1789375912.04437,
+          1789375912.2443469,
+          1789375912.440338,
+          1789375915.03235,
+          1789375915.23247,
+          1789375915.532376,
+          1789375915.7283719,
+          1789375916.328459
+        ],
+        "colors": [
+          "blue"
+        ],
+        "top_z_spread_mm": [
+          1.1917047586793295,
+          1.1949147084572356,
+          1.1837753997955973,
+          1.2275082615221464,
+          1.1665198939117827,
+          1.1393045564834503,
+          1.1543288020939777,
+          1.1283009386628406
+        ],
+        "depth_valid_fraction": [
+          0.9820554649265906,
+          0.9820700896495518,
+          0.9820846905537459,
+          0.9786008230452675,
+          0.9828150572831423,
+          0.982995951417004,
+          0.9787755102040816,
+          0.9828571428571429
+        ],
+        "observed_short_long_m": [
+          [
+            0.022827326727305863,
+            0.02410784398120674
+          ],
+          [
+            0.02260791927036288,
+            0.023640006980224733
+          ],
+          [
+            0.022449226397505607,
+            0.02374629374944857
+          ],
+          [
+            0.02304782574585979,
+            0.024268448332380357
+          ],
+          [
+            0.022745674702068244,
+            0.023913238570286398
+          ],
+          [
+            0.02249996438051819,
+            0.0238943953742716
+          ],
+          [
+            0.02269336805477059,
+            0.024045690913156472
+          ],
+          [
+            0.02247063720374002,
+            0.023566505537968636
+          ]
+        ],
+        "raw_status": [
+          {
+            "candidate_area_px": 1780.0,
+            "center_base_m": [
+              -0.09034008336755425,
+              -0.46855334381936314,
+              0.036237834883640435
+            ],
+            "color": "blue",
+            "depth_valid_fraction": 0.9820554649265906,
+            "detection_mode": "blue",
+            "frozen": false,
+            "grasp_axis_yaw_base_rad": 0.02263958021171612,
+            "grasp_axis_yaw_period_rad": 1.5707963267948966,
+            "grasp_axis_yaw_std_rad": 0.0024630267435383746,
+            "has_stable_pose": true,
+            "nominal_object_size_m": [
+              0.03,
+              0.03,
+              0.03
+            ],
+            "object_class": "cube_30mm",
+            "observed_short_long_m": [
+              0.022827326727305863,
+              0.02410784398120674
+            ],
+            "orientation_source": "top_surface_square_min_area_edge",
+            "position_std_m": [
+              3.8207266069174284e-05,
+              6.113228050732768e-05,
+              2.0055461361260654e-05
+            ],
+            "reason": "stable_target_updated",
+            "required_samples": 8,
+            "sample_stamp": 1789375912.04437,
+            "samples": 8,
+            "stable": true,
+            "top_axis_ratio": 1.0511573026974084,
+            "top_z_spread_m": 0.0011917047586793295,
+            "tracking": true,
+            "valid": true
+          },
+          {
+            "candidate_area_px": 1782.0,
+            "center_base_m": [
+              -0.09027067806591753,
+              -0.4686452677421091,
+              0.03622994748792807
+            ],
+            "color": "blue",
+            "depth_valid_fraction": 0.9820700896495518,
+            "detection_mode": "blue",
+            "frozen": false,
+            "grasp_axis_yaw_base_rad": 0.02246043463308153,
+            "grasp_axis_yaw_period_rad": 1.5707963267948966,
+            "grasp_axis_yaw_std_rad": 0.002367775811117783,
+            "has_stable_pose": true,
+            "nominal_object_size_m": [
+              0.03,
+              0.03,
+              0.03
+            ],
+            "object_class": "cube_30mm",
+            "observed_short_long_m": [
+              0.02260791927036288,
+              0.023640006980224733
+            ],
+            "orientation_source": "top_surface_square_min_area_edge",
+            "position_std_m": [
+              3.608056837688269e-05,
+              5.873068462096229e-05,
+              2.0705251175953977e-05
+            ],
+            "reason": "stable_target_updated",
+            "required_samples": 8,
+            "sample_stamp": 1789375912.2443469,
+            "samples": 8,
+            "stable": true,
+            "top_axis_ratio": 1.0405051539527361,
+            "top_z_spread_m": 0.0011949147084572356,
+            "tracking": true,
+            "valid": true
+          },
+          {
+            "candidate_area_px": 1785.5,
+            "center_base_m": [
+              -0.09031263530506355,
+              -0.46855806282335777,
+              0.03624086666412368
+            ],
+            "color": "blue",
+            "depth_valid_fraction": 0.9820846905537459,
+            "detection_mode": "blue",
+            "frozen": false,
+            "grasp_axis_yaw_base_rad": 0.022855262276168034,
+            "grasp_axis_yaw_period_rad": 1.5707963267948966,
+            "grasp_axis_yaw_std_rad": 0.002888867635395234,
+            "has_stable_pose": true,
+            "nominal_object_size_m": [
+              0.03,
+              0.03,
+              0.03
+            ],
+            "object_class": "cube_30mm",
+            "observed_short_long_m": [
+              0.022449226397505607,
+              0.02374629374944857
+            ],
+            "orientation_source": "top_surface_square_min_area_edge",
+            "position_std_m": [
+              3.368848133416079e-05,
+              6.696938905538581e-05,
+              2.025641364953583e-05
+            ],
+            "reason": "stable_target_updated",
+            "required_samples": 8,
+            "sample_stamp": 1789375912.440338,
+            "samples": 8,
+            "stable": true,
+            "top_axis_ratio": 1.0478828747233655,
+            "top_z_spread_m": 0.0011837753997955974,
+            "tracking": true,
+            "valid": true
+          },
+          {
+            "candidate_area_px": 1769.0,
+            "center_base_m": [
+              -0.09038990869385205,
+              -0.4687418869663574,
+              0.03624733819625792
+            ],
+            "color": "blue",
+            "depth_valid_fraction": 0.9786008230452675,
+            "detection_mode": "blue",
+            "frozen": false,
+            "grasp_axis_yaw_base_rad": 0.02348949749983752,
+            "grasp_axis_yaw_period_rad": 1.5707963267948966,
+            "grasp_axis_yaw_std_rad": 0.0026236834866924727,
+            "has_stable_pose": true,
+            "nominal_object_size_m": [
+              0.03,
+              0.03,
+              0.03
+            ],
+            "object_class": "cube_30mm",
+            "observed_short_long_m": [
+              0.02304782574585979,
+              0.024268448332380357
+            ],
+            "orientation_source": "top_surface_square_min_area_edge",
+            "position_std_m": [
+              7.079134097108114e-05,
+              0.00013781540751946027,
+              1.8304554172594718e-05
+            ],
+            "reason": "stable_target_updated",
+            "required_samples": 8,
+            "sample_stamp": 1789375915.03235,
+            "samples": 8,
+            "stable": true,
+            "top_axis_ratio": 1.0548967287437965,
+            "top_z_spread_m": 0.0012275082615221464,
+            "tracking": true,
+            "valid": true
+          },
+          {
+            "candidate_area_px": 1772.5,
+            "center_base_m": [
+              -0.09034352301280082,
+              -0.46867859260240063,
+              0.036238587871582045
+            ],
+            "color": "blue",
+            "depth_valid_fraction": 0.9828150572831423,
+            "detection_mode": "blue",
+            "frozen": false,
+            "grasp_axis_yaw_base_rad": 0.02348949749983752,
+            "grasp_axis_yaw_period_rad": 1.5707963267948966,
+            "grasp_axis_yaw_std_rad": 0.0026236834866924727,
+            "has_stable_pose": true,
+            "nominal_object_size_m": [
+              0.03,
+              0.03,
+              0.03
+            ],
+            "object_class": "cube_30mm",
+            "observed_short_long_m": [
+              0.022745674702068244,
+              0.023913238570286398
+            ],
+            "orientation_source": "top_surface_square_min_area_edge",
+            "position_std_m": [
+              6.995942443004422e-05,
+              0.0001359944721706542,
+              1.8860474694079067e-05
+            ],
+            "reason": "stable_target_updated",
+            "required_samples": 8,
+            "sample_stamp": 1789375915.23247,
+            "samples": 8,
+            "stable": true,
+            "top_axis_ratio": 1.043380380138711,
+            "top_z_spread_m": 0.0011665198939117827,
+            "tracking": true,
+            "valid": true
+          },
+          {
+            "candidate_area_px": 1781.5,
+            "center_base_m": [
+              -0.09040804450405117,
+              -0.4686882887066029,
+              0.03628385980055121
+            ],
+            "color": "blue",
+            "depth_valid_fraction": 0.982995951417004,
+            "detection_mode": "blue",
+            "frozen": false,
+            "grasp_axis_yaw_base_rad": 0.024126198557785073,
+            "grasp_axis_yaw_period_rad": 1.5707963267948966,
+            "grasp_axis_yaw_std_rad": 0.0021420721708844434,
+            "has_stable_pose": true,
+            "nominal_object_size_m": [
+              0.03,
+              0.03,
+              0.03
+            ],
+            "object_class": "cube_30mm",
+            "observed_short_long_m": [
+              0.02249996438051819,
+              0.0238943953742716
+            ],
+            "orientation_source": "top_surface_square_min_area_edge",
+            "position_std_m": [
+              7.572693281580484e-05,
+              0.00013487831097061415,
+              2.01307991778968e-05
+            ],
+            "reason": "stable_target_updated",
+            "required_samples": 8,
+            "sample_stamp": 1789375915.532376,
+            "samples": 8,
+            "stable": true,
+            "top_axis_ratio": 1.0512260094813402,
+            "top_z_spread_m": 0.0011393045564834503,
+            "tracking": true,
+            "valid": true
+          },
+          {
+            "candidate_area_px": 1778.0,
+            "center_base_m": [
+              -0.09034009522394629,
+              -0.4685837169016951,
+              0.036280763861555154
+            ],
+            "color": "blue",
+            "depth_valid_fraction": 0.9787755102040816,
+            "detection_mode": "blue",
+            "frozen": false,
+            "grasp_axis_yaw_base_rad": 0.02476431886494269,
+            "grasp_axis_yaw_period_rad": 1.5707963267948966,
+            "grasp_axis_yaw_std_rad": 0.0012085808900332328,
+            "has_stable_pose": true,
+            "nominal_object_size_m": [
+              0.03,
+              0.03,
+              0.03
+            ],
+            "object_class": "cube_30mm",
+            "observed_short_long_m": [
+              0.02269336805477059,
+              0.024045690913156472
+            ],
+            "orientation_source": "top_surface_square_min_area_edge",
+            "position_std_m": [
+              6.0667704850100155e-05,
+              4.71558820746298e-05,
+              2.0037966370829548e-05
+            ],
+            "reason": "stable_target_updated",
+            "required_samples": 8,
+            "sample_stamp": 1789375915.7283719,
+            "samples": 8,
+            "stable": true,
+            "top_axis_ratio": 1.0524562767661885,
+            "top_z_spread_m": 0.0011543288020939776,
+            "tracking": true,
+            "valid": true
+          },
+          {
+            "candidate_area_px": 1779.5,
+            "center_base_m": [
+              -0.0903184603541293,
+              -0.46858545755754377,
+              0.03625584416811195
+            ],
+            "color": "blue",
+            "depth_valid_fraction": 0.9828571428571429,
+            "detection_mode": "blue",
+            "frozen": false,
+            "grasp_axis_yaw_base_rad": 0.02476399246634786,
+            "grasp_axis_yaw_period_rad": 1.5707963267948966,
+            "grasp_axis_yaw_std_rad": 0.0012086398288038312,
+            "has_stable_pose": true,
+            "nominal_object_size_m": [
+              0.03,
+              0.03,
+              0.03
+            ],
+            "object_class": "cube_30mm",
+            "observed_short_long_m": [
+              0.02247063720374002,
+              0.023566505537968636
+            ],
+            "orientation_source": "top_surface_square_min_area_edge",
+            "position_std_m": [
+              5.88875618355279e-05,
+              5.196570350154315e-05,
+              2.0044703121141317e-05
+            ],
+            "reason": "stable_target_updated",
+            "required_samples": 8,
+            "sample_stamp": 1789375916.328459,
+            "samples": 8,
+            "stable": true,
+            "top_axis_ratio": 1.0437408886307593,
+            "top_z_spread_m": 0.0011283009386628406,
+            "tracking": true,
+            "valid": true
+          }
+        ]
+      },
+      "tcp_contact": {
+        "median_xyz_m": [
+          -0.09060760340468477,
+          -0.4690945990991579,
+          0.03120056277116245
+        ],
+        "mean_xyz_m": [
+          -0.09060796385142361,
+          -0.46909443859959365,
+          0.031200583474969342
+        ],
+        "std_xyz_mm": [
+          0.001205612081423953,
+          0.0015165003409601278,
+          0.0015264469447166702
+        ],
+        "range_xyz_mm": [
+          0.0038865235530288755,
+          0.005060370822485005,
+          0.005416046443610517
+        ],
+        "max_deviation_mm": 0.004633236703292757,
+        "captured_at": "2026-09-14T16:53:15.676938+08:00",
+        "base_frame": "base_link",
+        "tcp_frame": "grasp_frame",
+        "sample_count": 12,
+        "quaternion_xyzw": [
+          0.050387878898263704,
+          0.9975327243010917,
+          -0.003838051544769378,
+          -0.048731868104102995
+        ],
+        "rpy_deg": [
+          -179.27647829378742,
+          -5.557030002507923,
+          174.18149388247468
+        ],
+        "tcp_z_axis_spread_deg": 0.00044678310184258826,
+        "raw_transforms": [
+          {
+            "tf_stamp_ns": 1789375994856462074,
+            "xyz_m": [
+              -0.09060756045538368,
+              -0.46909396510390405,
+              0.03119961474143865
+            ],
+            "quaternion_xyzw": [
+              0.05038599259871176,
+              0.9975329137743744,
+              -0.0038376393960673706,
+              -0.048729972404208746
+            ],
+            "age_s_at_capture": 0.0369117
+          },
+          {
+            "tf_stamp_ns": 1789375994928476246,
+            "xyz_m": [
+              -0.09060955415499009,
+              -0.4690912451287914,
+              0.031198030511622885
+            ],
+            "quaternion_xyzw": [
+              0.050389629185687936,
+              0.9975327203862904,
+              -0.0038339460590268498,
+              -0.04873046159100594
+            ],
+            "age_s_at_capture": 0.003406996
+          },
+          {
+            "tf_stamp_ns": 1789375995000446084,
+            "xyz_m": [
+              -0.09060638153686712,
+              -0.4690948278969234,
+              0.031198997177518704
+            ],
+            "quaternion_xyzw": [
+              0.05038789519554113,
+              0.99753291203387,
+              -0.003837478101258972,
+              -0.04872805340676882
+            ],
+            "age_s_at_capture": 0.003591623
+          },
+          {
+            "tf_stamp_ns": 1789375995072524131,
+            "xyz_m": [
+              -0.09060945779478956,
+              -0.46909256018179013,
+              0.03119925048176019
+            ],
+            "quaternion_xyzw": [
+              0.05038782749607121,
+              0.9975328162450257,
+              -0.0038356994507507064,
+              -0.048730224339904676
+            ],
+            "age_s_at_capture": 0.005929649
+          },
+          {
+            "tf_stamp_ns": 1789375995144458677,
+            "xyz_m": [
+              -0.09060764635398587,
+              -0.46909291007428716,
+              0.03119925048176019
+            ],
+            "quaternion_xyzw": [
+              0.05038590146780527,
+              0.9975329135315699,
+              -0.003835793538660646,
+              -0.04873021693387683
+            ],
+            "age_s_at_capture": 0.001726102
+          },
+          {
+            "tf_stamp_ns": 1789375995216485390,
+            "xyz_m": [
+              -0.09060933548670827,
+              -0.4690939310697153,
+              0.03120051184454473
+            ],
+            "quaternion_xyzw": [
+              0.05038981470235,
+              0.9975327208832631,
+              -0.0038377036973486142,
+              -0.048729963798758526
+            ],
+            "age_s_at_capture": 0.001826437
+          },
+          {
+            "tf_stamp_ns": 1789375995288438895,
+            "xyz_m": [
+              -0.09060566763143706,
+              -0.4690959381837712,
+              0.03120173075241918
+            ],
+            "quaternion_xyzw": [
+              0.050386120191494514,
+              0.9975329123448669,
+              -0.0038397344842288255,
+              -0.04872970469751754
+            ],
+            "age_s_at_capture": 0.003433538
+          },
+          {
+            "tf_stamp_ns": 1789375995360509650,
+            "xyz_m": [
+              -0.0906073837081927,
+              -0.46909600466794976,
+              0.031203446558066495
+            ],
+            "quaternion_xyzw": [
+              0.05038807093554436,
+              0.9975328186482593,
+              -0.0038414894986004205,
+              -0.04872946732199954
+            ],
+            "age_s_at_capture": 0.002712822
+          },
+          {
+            "tf_stamp_ns": 1789375995432478905,
+            "xyz_m": [
+              -0.09060914217696575,
+              -0.4690963054996139,
+              0.031202095020151296
+            ],
+            "quaternion_xyzw": [
+              0.050389996963627025,
+              0.9975327213575262,
+              -0.003841395412137719,
+              -0.04872947473902501
+            ],
+            "age_s_at_capture": 0.002011064
+          },
+          {
+            "tf_stamp_ns": 1789375995504518452,
+            "xyz_m": [
+              -0.09060740556408792,
+              -0.4690956047229583,
+              0.031201729680150468
+            ],
+            "quaternion_xyzw": [
+              0.05038987262569691,
+              0.9975327227995828,
+              -0.0038397361064170248,
+              -0.04872970456969464
+            ],
+            "age_s_at_capture": 0.003539706
+          },
+          {
+            "tf_stamp_ns": 1789375995576428206,
+            "xyz_m": [
+              -0.09060741662007746,
+              -0.4690956003640268,
+              0.031201730752419183
+            ],
+            "quaternion_xyzw": [
+              0.05038797980499376,
+              0.997532818412685,
+              -0.0038396436416847125,
+              -0.0487297118555149
+            ],
+            "age_s_at_capture": 0.001521641
+          },
+          {
+            "tf_stamp_ns": 1789375995648433335,
+            "xyz_m": [
+              -0.0906086147335979,
+              -0.4690943703013924,
+              0.031200613697780172
+            ],
+            "quaternion_xyzw": [
+              0.050387878898263704,
+              0.9975327243010917,
+              -0.003838051544769378,
+              -0.048731868104102995
+            ],
+            "age_s_at_capture": 0.001656685
+          }
+        ]
+      },
+      "comparison": {
+        "tcp_minus_color_top_xyz_mm": [
+          -0.2675141089344968,
+          -0.47923644933151044,
+          -5.043539659028349
+        ],
+        "xy_distance_mm": 0.5488454908686881,
+        "z_difference_mm": -5.043539659028349,
+        "distance_3d_mm": 5.073314859639473
+      }
+    },
+  },
+  "updated_at": "2026-09-14T16:54:51.756422+08:00"
+}

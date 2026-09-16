@@ -9,6 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(ament_cmake_python REQUIRED)
 find_package(control_msgs REQUIRED)
+find_package(fairino_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(moveit_core REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
@@ -47,6 +48,7 @@ target_compile_features(first_grasp_node PUBLIC cxx_std_17)
 ament_target_dependencies(
   first_grasp_node
   control_msgs
+  fairino_msgs
   geometry_msgs
   moveit_core
   moveit_ros_planning_interface
@@ -89,6 +91,7 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
   ament_add_pytest_test(test_p6_checks test/test_p6_checks.py)
+  ament_add_pytest_test(test_sort_regions test/test_sort_regions.py)
 endif()
 
 ament_package()

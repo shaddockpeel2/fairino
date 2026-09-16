@@ -33,6 +33,11 @@ ydi_j22_gripper:
     settle_time_s: 0.6
     command_timeout_s: 8.0
     slew_us_per_s: 400.0
+    # A camera/USB transient must not leave the open-loop PWM backend poisoned
+    # until the whole ROS stack is restarted. Retry the same explicit gripper
+    # goal after reopening the FT232H; persistent errors still abort the action.
+    usb_recovery_attempts: 2
+    usb_recovery_backoff_s: 0.20
 
     ftdi_url: ftdi://ftdi:232h/1
     pyftdi_site_packages: /home/industio/fairino_ws/test/jiazhua/.venv/lib/python3.10/site-packages

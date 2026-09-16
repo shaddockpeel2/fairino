@@ -1,0 +1,7 @@
+......................                                                   [100%]
+=============================== warnings summary ===============================
+src/fairino_mtc_demo/test/test_sort_regions.py::test_field_region_colors_are_mapped_to_their_centers
+  Warning: private variables, such as '_ConstructUnits__ConstructUnitsValue', will be normal attributes in 3.11
+
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+22 passed, 1 warning in 0.76s

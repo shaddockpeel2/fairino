@@ -1,0 +1,42 @@
+{
+  "samples": 134,
+  "sampled_duration_s": 39.999170867,
+  "minimum_available_mib": 5365.7734375,
+  "maximum_swap_used_mib": 0.0,
+  "npu_available": false,
+  "components": {
+    "blue_cube": {
+      "peak_process_rss_mib": 192.31640625,
+      "peak_process_cpu_percent": 293.8929689640647,
+      "process_names": [
+        "blue_cube_local",
+        "ros2"
+      ]
+    },
+    "move_group": {
+      "peak_process_rss_mib": 123.96484375,
+      "peak_process_cpu_percent": 114.43741364225804,
+      "process_names": [
+        "move_group"
+      ]
+    },
+    "camera": {
+      "peak_process_rss_mib": 111.57421875,
+      "peak_process_cpu_percent": 68.66244818535482,
+      "process_names": [
+        "component_conta"
+      ]
+    },
+    "rviz": {
+      "peak_process_rss_mib": 321.953125,
+      "peak_process_cpu_percent": 197.77734747943768,
+      "process_names": [
+        "rviz2"
+      ]
+    }
+  },
+  "model_startup_s": null,
+  "completed": null,
+  "generation_results": [],
+  "first_pcm_results": []
+}

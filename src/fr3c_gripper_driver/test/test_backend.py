@@ -1,3 +1,4 @@
+import threading
 import time
 
 from fr3c_gripper_driver.ft232h_backend import Ft232hPwmBackend
@@ -27,6 +28,17 @@ class RecoveringGpio(FakeGpio):
         super().write(payload)
         if len(self.instances) == 1:
             raise OSError('simulated USB re-enumeration')
+
+
+class BlockingCloseRecoveringGpio(RecoveringGpio):
+    close_entered = threading.Event()
+    release_close = threading.Event()
+
+    def close(self):
+        if len(self.instances) == 1:
+            self.close_entered.set()
+            self.release_close.wait(timeout=2.0)
+        super().close()
 
 
 def test_backend_paces_usb_writes_and_closes():
@@ -65,3 +77,30 @@ def test_next_command_reopens_ftdi_after_writer_error():
     assert backend.recovery_count == 1
     assert backend.error is None
     backend.close()
+
+
+def test_recovery_does_not_wait_for_stuck_failed_controller_close():
+    FakeGpio.instances.clear()
+    BlockingCloseRecoveringGpio.close_entered.clear()
+    BlockingCloseRecoveringGpio.release_close.clear()
+    backend = Ft232hPwmBackend(
+        url='fake', sample_rate_hz=100_000, frame_us=20_000,
+        signal_pin=7, chunk_frames=2, slew_us_per_s=400.0,
+    )
+    backend._load_controller = lambda: BlockingCloseRecoveringGpio
+    try:
+        backend.command(840)
+        assert BlockingCloseRecoveringGpio.close_entered.wait(timeout=1.0)
+        assert backend.error is not None
+
+        # The failed writer no longer emits samples, so its blocked cleanup
+        # must not prevent a fresh explicit goal from reopening the device.
+        assert backend.command(1100) == 1100
+        deadline = time.monotonic() + 1.0
+        while len(FakeGpio.instances) < 2 and time.monotonic() < deadline:
+            time.sleep(0.01)
+        assert len(FakeGpio.instances) == 2
+        assert backend.recovery_count == 1
+    finally:
+        BlockingCloseRecoveringGpio.release_close.set()
+        backend.close()

@@ -9,24 +9,55 @@ fr3c_first_grasp:
     target_pose_topic: /perception/blue_cube_localizer/top_pose
     target_valid_topic: /perception/blue_cube_localizer/valid
     target_status_topic: /perception/blue_cube_localizer/status
+    target_size_topic: /perception/blue_cube_localizer/object_size
+    perception_reset_service: /perception/blue_cube_localizer/reset
+    perception_skip_service: /perception/blue_cube_localizer/skip_current_sort_target
+    # Stage-2 color actions use this service to invalidate old samples and bind
+    # the next stable snapshot to an explicit color/filter generation.
+    perception_color_service: /perception/blue_cube_localizer/set_target_color
+
+    # In colors execution mode, /start_continuous keeps selecting targets until
+    # perception confirms that no actionable cube has remained for 10 seconds.
+    batch_empty_timeout_s: 10.0
+    # Match a re-observed source/output cube to the item already handled by the
+    # current batch. This is smaller than one 30 mm cube centre spacing.
+    batch_target_match_distance_m: 0.025
 
     # P3 keeps tracking and updating its latest stable target. /start accepts
     # only a currently valid/fresh target and copies it once; later camera
     # updates cannot change the target of an accepted grasp.
 
     # P3/P4 validated first-grasp geometry, in metres.
-    approach_clearance_m: 0.015
+    approach_clearance_m: 0.010
     grasp_depth_m: 0.015
     lift_distance_m: 0.050
+    # Sorting: attached cube bottom is 5 mm above the A4 region plane when
+    # release is commanded. TCP is higher by the cube geometry offset.
+    release_bottom_gap_m: 0.005
     pre_open_position_m: 0.060
     close_position_m: 0.026
-    cube_side_m: 0.030
+    # P3 publishes either [30, 30, 30] mm or [60, 30, 30] mm together with
+    # the pose. This fallback is used only when use_target_size=false.
+    object_size_m: [0.060, 0.030, 0.030]
+    use_target_size: true
+    # Nominal top-size aspect at or below this value gets square (90-degree)
+    # yaw symmetry; larger values get rectangle (180-degree) symmetry.
+    square_aspect_ratio_max: 1.10
 
     # Exact base-Z-down candidate: RPY ~= [pi, 0, pi]. During P4 the current
     # measured tool pose was close to this at [-2.997, 0.000, -3.113] rad.
-    # Keep this explicit and verify it once at high clearance before enabling
-    # descend_and_close. Change yaw here if the four-finger axes must rotate.
+    # This remains the exact vertical-down nominal orientation. Visual target
+    # yaw is composed on top of it while roll/pitch remain constrained.
     grasp_orientation_xyzw: [0.0, 1.0, 0.0, 0.0]
+    use_target_yaw: true
+    # P3 target X is a selected top edge. Rotating the nominal grasp by
+    # (object_yaw - 90 deg) aligns gripper Y with that edge and its X closing
+    # axis across the perpendicular 30 mm dimension.
+    target_yaw_offset_rad: -1.5707963267948966
+    # Fallback symmetry used only when use_target_size=false. With dynamic
+    # size enabled, cubes use pi/2 and rectangular boxes use pi.
+    target_yaw_symmetry_rad: 3.141592653589793
+    maximum_target_tilt_rad: 0.087266463
 
     # Tight first-run bounds around the P4 test area. Adjust deliberately when
     # the cube is moved to another part of the measured table.
@@ -55,8 +86,10 @@ fr3c_first_grasp:
       - gripper_finger_nx_py_link
       - gripper_finger_nx_ny_link
 
-    velocity_scale: 0.05
-    acceleration_scale: 0.05
+    # First-stage speed increase: keep acceleration conservative to limit
+    # start/stop shock and carried-block oscillation.
+    velocity_scale: 0.075
+    acceleration_scale: 0.065
     planning_time_s: 10.0
     planning_attempts: 5
     cartesian_step_m: 0.001
@@ -66,6 +99,8 @@ fr3c_first_grasp:
     maximum_cartesian_joint_step_rad: 0.10
     minimum_cartesian_fraction: 0.999999
     target_message_timeout_s: 1.0
+    # Includes a fresh RGB-D frame and the configured 8-sample stability window.
+    target_acquisition_timeout_s: 4.0
     arrival_position_tolerance_m: 0.003
     arrival_orientation_tolerance_rad: 0.034906585
     action_timeout_s: 12.0

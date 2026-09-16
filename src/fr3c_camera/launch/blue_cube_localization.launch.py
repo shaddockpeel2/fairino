@@ -7,6 +7,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
@@ -23,6 +24,13 @@ def generate_launch_description():
             description='Required calibrated flange_link-to-grasp_frame TCP YAML.',
         ),
         DeclareLaunchArgument('fixed_yaw_rad', default_value='0.0'),
+        DeclareLaunchArgument(
+            'top_pose_z_compensation_m', default_value='-0.004',
+            description='Signed base-Z correction added to every accepted top pose.'),
+        DeclareLaunchArgument('detection_mode', default_value='blue'),
+        DeclareLaunchArgument(
+            'yolo_model_path',
+            default_value=str(share / 'models/best.rknn')),
         Node(
             package='fr3c_camera',
             executable='blue_cube_localizer',
@@ -35,6 +43,11 @@ def generate_launch_description():
                     'hand_eye_file': LaunchConfiguration('hand_eye_file'),
                     'tcp_file': LaunchConfiguration('tcp_file'),
                     'fixed_yaw_rad': LaunchConfiguration('fixed_yaw_rad'),
+                    'top_pose_z_compensation_m': ParameterValue(
+                        LaunchConfiguration('top_pose_z_compensation_m'),
+                        value_type=float),
+                    'detection_mode': LaunchConfiguration('detection_mode'),
+                    'yolo_model_path': LaunchConfiguration('yolo_model_path'),
                 },
             ],
         ),

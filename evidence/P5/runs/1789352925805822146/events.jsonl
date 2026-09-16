@@ -1,0 +1,10 @@
+{"time_ns":1789352925806130733,"event":"run_started","detail":"execution"}
+{"time_ns":1789352925806212400,"event":"target_locked","detail":"locked top=[-0.186530026,-0.557164276,0.0346120423] m, object_yaw=0.854422228 rad, applied_grasp_yaw=-0.716374099 rad"}
+{"time_ns":1789352926433734724,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,position=0.06"}
+{"time_ns":1789352926434490149,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1789352926435121905,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube added"}
+{"time_ns":1789352926588870882,"event":"plan_approach","detail":"return_code=1"}
+{"time_ns":1789352926600025786,"event":"plan_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0449859691"}
+{"time_ns":1789352926605929180,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789352926681853991,"event":"plan_lift","detail":"fraction=0.745098039,moveit_code=1,maximum_joint_step_rad=0.0602776733"}
+{"time_ns":1789352926684290600,"event":"state","detail":"retryable_failure_before_arm_motion: lift Cartesian path incomplete: fraction=0.745098, code=1; no arm motion started, fix the condition and call /start again"}

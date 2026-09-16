@@ -14,8 +14,10 @@ find_package(ament_cmake REQUIRED)
 find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
+  "action/PickColor.action"
   "srv/RemoteCmdInterface.srv"
   "srv/RemoteScriptContent.srv"
+  "srv/SetTargetColor.srv"
   "msg/RobotNonrtState.msg"
 )
 

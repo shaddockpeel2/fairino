@@ -1,0 +1,26 @@
+# Execute exactly one color-targeted grasp task.
+# Supported values: red, yellow, blue, green.
+string color
+---
+uint16 OK=0
+uint16 INVALID_COLOR=1
+uint16 BUSY=2
+uint16 TARGET_NOT_FOUND=3
+uint16 TARGET_NOT_UNIQUE=4
+uint16 TARGET_STALE=5
+uint16 PRECONDITION_FAILED=6
+uint16 PLANNING_FAILED=7
+uint16 EXECUTION_FAILED=8
+uint16 CANCELED=9
+uint16 HOLDING_OBJECT=10
+uint16 PERCEPTION_UNAVAILABLE=11
+uint16 INTERNAL_ERROR=12
+
+bool success
+uint16 error_code
+string message
+string color
+bool executed
+---
+string phase
+string detail

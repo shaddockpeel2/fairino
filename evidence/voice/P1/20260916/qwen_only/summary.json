@@ -1,0 +1,127 @@
+{
+  "samples": 69,
+  "sampled_duration_s": 23.705039448,
+  "minimum_available_mib": 3305.21484375,
+  "maximum_swap_used_mib": 0.0,
+  "npu_available": false,
+  "components": {
+    "qwen": {
+      "peak_process_rss_mib": 3147.94140625,
+      "peak_process_cpu_percent": 206.85056305480916,
+      "process_names": [
+        "bash",
+        "ld-linux-aarch6",
+        "python"
+      ]
+    }
+  },
+  "model_startup_s": 4.92234865,
+  "completed": true,
+  "generation_results": [
+    {
+      "schema_version": 1,
+      "run_id": "qwen_only",
+      "request_id": "cold-10",
+      "event": "generation_end",
+      "clock": "CLOCK_MONOTONIC",
+      "monotonic_ns": 5671722555056,
+      "wall_time_ns": 1789525510148519265,
+      "pid": 113171,
+      "mode": "qwen",
+      "qwen_first_token_s": 0.15583340499961196,
+      "qwen_total_s": 0.8045151679998526
+    },
+    {
+      "schema_version": 1,
+      "run_id": "qwen_only",
+      "request_id": "cold-30",
+      "event": "generation_end",
+      "clock": "CLOCK_MONOTONIC",
+      "monotonic_ns": 5673590281222,
+      "wall_time_ns": 1789525512016246014,
+      "pid": 113171,
+      "mode": "qwen",
+      "qwen_first_token_s": 0.164241827999831,
+      "qwen_total_s": 1.844080206000399
+    },
+    {
+      "schema_version": 1,
+      "run_id": "qwen_only",
+      "request_id": "cold-60",
+      "event": "generation_end",
+      "clock": "CLOCK_MONOTONIC",
+      "monotonic_ns": 5676470123298,
+      "wall_time_ns": 1789525514896088090,
+      "pid": 113171,
+      "mode": "qwen",
+      "qwen_first_token_s": 0.2170502219996706,
+      "qwen_total_s": 2.855704069999774
+    },
+    {
+      "schema_version": 1,
+      "run_id": "qwen_only",
+      "request_id": "cold-120",
+      "event": "generation_end",
+      "clock": "CLOCK_MONOTONIC",
+      "monotonic_ns": 5679529549027,
+      "wall_time_ns": 1789525517955513527,
+      "pid": 113171,
+      "mode": "qwen",
+      "qwen_first_token_s": 0.37562753000020166,
+      "qwen_total_s": 3.0342372949999117
+    },
+    {
+      "schema_version": 1,
+      "run_id": "qwen_only",
+      "request_id": "warm-10",
+      "event": "generation_end",
+      "clock": "CLOCK_MONOTONIC",
+      "monotonic_ns": 5680345470854,
+      "wall_time_ns": 1789525518771435938,
+      "pid": 113171,
+      "mode": "qwen",
+      "qwen_first_token_s": 0.14500778899946454,
+      "qwen_total_s": 0.7938934690000679
+    },
+    {
+      "schema_version": 1,
+      "run_id": "qwen_only",
+      "request_id": "warm-30",
+      "event": "generation_end",
+      "clock": "CLOCK_MONOTONIC",
+      "monotonic_ns": 5682170680937,
+      "wall_time_ns": 1789525520596646020,
+      "pid": 113171,
+      "mode": "qwen",
+      "qwen_first_token_s": 0.1625239339991822,
+      "qwen_total_s": 1.7876520169993455
+    },
+    {
+      "schema_version": 1,
+      "run_id": "qwen_only",
+      "request_id": "warm-60",
+      "event": "generation_end",
+      "clock": "CLOCK_MONOTONIC",
+      "monotonic_ns": 5685069080991,
+      "wall_time_ns": 1789525523495046367,
+      "pid": 113171,
+      "mode": "qwen",
+      "qwen_first_token_s": 0.2126884239996798,
+      "qwen_total_s": 2.862469339999734
+    },
+    {
+      "schema_version": 1,
+      "run_id": "qwen_only",
+      "request_id": "warm-120",
+      "event": "generation_end",
+      "clock": "CLOCK_MONOTONIC",
+      "monotonic_ns": 5688122670773,
+      "wall_time_ns": 1789525526548636148,
+      "pid": 113171,
+      "mode": "qwen",
+      "qwen_first_token_s": 0.39104135900015535,
+      "qwen_total_s": 3.0203594289996545
+    }
+  ],
+  "first_pcm_results": []
+}

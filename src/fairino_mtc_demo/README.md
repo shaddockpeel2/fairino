@@ -96,7 +96,7 @@ operator-authorized segment still checks that the file remains present,
 unchanged and passing. Restarting the full stack invalidates the old gate and
 runs a new P6 snapshot; an arbitrary ten-minute session timeout is not used.
 
-## P5 one-shot RGB cube task
+## P5 one-shot RGB box task
 
 For the physical first-grasp workflow, the workspace launcher starts the real
 FAIRINO/MoveIt stack, camera, calibrated TF, FT232H gripper, P3 localizer, P5
@@ -114,12 +114,21 @@ Optional environment switches are `FR3C_START_BLUE_CUBE_LOCALIZER`,
 that part of the stack.
 
 `first_grasp_node` is the real-task replacement for the fixed-cylinder cyclic
-demo. It copies the current stable P3 top pose and uses the P4 parameters directly:
-15 mm top clearance, 15 mm grasp depth, 50 mm lift, 60 mm pre-open and 26 mm
+demo. It copies the current stable P3 top pose and matching nominal size. P3
+classifies either a 30 x 30 x 30 mm cube or a 60 x 30 x 30 mm rectangular box,
+estimates a top-edge/long-axis yaw, and publishes both with the same timestamp.
+The task uses the P4 parameters directly:
+10 mm top clearance, 15 mm grasp depth, 50 mm lift, 60 mm pre-open and 26 mm
 close. The old `mtc_node` remains available only as an upstream example.
 
-Before starting, review `config/first_grasp.yaml`, especially the target bounds
-and explicit downward tool orientation. Keep `execute:=false` for the first review:
+Before starting, review `config/first_grasp.yaml`, especially the target bounds,
+dynamic-size input, downward nominal tool orientation, and target-yaw alignment
+offset. Cubes use 90-degree yaw symmetry; rectangular boxes use 180-degree yaw
+symmetry. Each equivalent orientation is fully preview-planned from the same
+start state, then the complete feasible route with the shortest unweighted
+six-axis joint-space path is selected. Joint 6 has no additional travel or
+limit-margin preference; MoveIt's URDF limits, collision checks, and full-path
+requirements still apply. Keep `execute:=false` for the first review:
 
 ```bash
 ros2 launch fairino_mtc_demo first_grasp.launch.py \
@@ -127,12 +136,16 @@ ros2 launch fairino_mtc_demo first_grasp.launch.py \
 ros2 service call /fr3c_first_grasp/start std_srvs/srv/Trigger '{}'
 ```
 
-The plan-only run adds the RViz-ground collision slab and visual cube, plans the routed approach,
+The plan-only run adds the RViz-ground collision slab and correctly sized,
+oriented visual box, plans the routed approach,
 requires complete vertical descend/lift Cartesian paths, previews the attached
 cube lift in RViz, and writes target/trajectory/return evidence under
 `evidence/P5/runs`. It never commands the gripper or arm.
 
-P3 continuously tracks the scene. Eight accepted observations establish a
+P3 continuously tracks the scene. Its `object_size` topic is consumed together
+with `top_pose`; mismatched timestamps are rejected. A top-point axis ratio at
+or below 1.25 is a cube, at or above 1.55 is a rectangular box, and the
+ambiguous band is rejected. Eight accepted observations establish a
 stable target, and later stable observations update that saved pose. A brief
 rejected frame does not erase the rolling window; a long observation gap or a
 20 mm target jump starts a new one. `valid` describes the current observation,
@@ -154,7 +167,7 @@ new target is on the configured table plane, and locks the new snapshot. No P3
 reset or grasp-stack restart is required between successful trials.
 
 After reviewing the preview and completing the P6 field gates, enable execution.
-There is no loop or automatic retry:
+The manual `/start` flow remains one target at a time:
 
 ```bash
 ros2 launch fairino_mtc_demo first_grasp.launch.py \
@@ -163,7 +176,7 @@ ros2 launch fairino_mtc_demo first_grasp.launch.py \
 # Explicitly pre-opens, previews all three paths, and moves to the approach pose.
 ros2 service call /fr3c_first_grasp/start std_srvs/srv/Trigger '{}'
 
-# Call only after inspecting the 15 mm-above-top alignment.
+# Call only after inspecting the 10 mm-above-top alignment.
 ros2 service call /fr3c_first_grasp/descend_and_close std_srvs/srv/Trigger '{}'
 
 # The 26 mm result is open-loop. Call only after physically confirming the cube is held.
@@ -181,7 +194,59 @@ validated, the same state machine can run without the two manual holds:
 ros2 service call /fr3c_first_grasp/start_continuous std_srvs/srv/Trigger '{}'
 ```
 
-This service uses no fixed delay. It pre-authorizes the descend and lift
-transitions, while every operation still waits for the preceding operation to
-report success. Any planning, execution, gripper, or P6 failure stops the
-remaining sequence.
+This service plans to the pose 10 mm above the object, descends vertically to
+the final grasp pose, closes the gripper, and performs the existing vertical
+lift. It uses no fixed delay, and every operation still waits for the
+preceding operation to report success. Any planning, execution, gripper, or
+P6 failure stops the remaining sequence. In executable four-color sorting,
+this service runs a batch in red-yellow-blue-green order: a target whose full
+route cannot be planned before arm motion is skipped, while any failure after
+arm motion starts aborts the batch. After every return home it reacquires the
+scene, and completes only after `actionable_cube_count` remains zero for 10
+seconds. See `docs/four_color_sorting.md` for placement-slot behavior.
+
+## Stage-2 color task actions
+
+In `detection_mode:=colors` with `sort_enabled:=true`, the node also exposes
+two single-request actions using `fairino_msgs/action/PickColor`:
+
+- `/fr3c_first_grasp/pick_hold`: approach, descend, open-loop close, and lift;
+  success leaves the cube held and does not claim sensor-verified grasping.
+- `/fr3c_first_grasp/pick_sort`: performs the same grasp, places only that
+  selected color in its configured A4 region, releases, and returns home.
+
+Each goal first calls the perception `set_target_color` service. The returned
+filter generation invalidates every older pose, and the task accepts only a
+fresh stable pose whose color and generation match the goal. Zero matching
+physical targets, two or more matching targets, stale data, task busy, a held
+object, planning failure, execution failure, and cancellation have distinct
+result codes. A task is never silently retried.
+
+Start with planning only, then send one goal:
+
+```bash
+cd /home/industio/fairino_ws
+FR3C_FIRST_GRASP_EXECUTE=false scripts/run_moveit_camera_rviz.sh detection_mode:=colors
+scripts/grasp/send_color_task.sh hold red
+scripts/grasp/send_color_task.sh sort yellow
+```
+
+Set `FR3C_FIRST_GRASP_EXECUTE=true` only after inspecting the full planned
+route and completing the existing P6/site safety checks. Action cancellation
+stops active MoveIt/gripper goals but deliberately does not open or detach a
+possibly held object.
+
+After a successful `pick_hold`, physically place/remove the cube and make sure
+the gripper no longer holds it. Then explicitly synchronize the software-held
+state before sending another Action:
+
+```bash
+ros2 service call /fr3c_first_grasp/acknowledge_object_released \
+  std_srvs/srv/Trigger '{}'
+```
+
+This acknowledgement sends no arm or gripper command. It removes the previous
+attached/world cube from the MoveIt planning scene, clears the previous Action's
+perception color filter back to all colors, and returns the task to
+`waiting_for_target`. Calling it before the object is physically clear is
+unsafe because the next task begins by opening the gripper.

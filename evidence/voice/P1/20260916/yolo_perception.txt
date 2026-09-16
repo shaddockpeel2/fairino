@@ -1,0 +1,2 @@
+data: '{"detection_mode":"yolo","frozen":false,"has_stable_pose":false,"reason":"yolo_target_count_0","sample_stamp":1789525605.044341,"stable":false,"tracking":true,"valid":false}'
+---

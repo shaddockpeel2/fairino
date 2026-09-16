@@ -60,8 +60,15 @@ class GripperNode(Node):
             self.get_parameter('command_timeout_s').value)
         self._slew_us_per_s = float(
             self.get_parameter('slew_us_per_s').value)
+        self._usb_recovery_attempts = int(
+            self.get_parameter('usb_recovery_attempts').value)
+        self._usb_recovery_backoff_s = float(
+            self.get_parameter('usb_recovery_backoff_s').value)
         if self._settle_time_s < 0.0 or self._command_timeout_s <= 0.0:
             raise ValueError('settle_time_s must be >= 0 and command_timeout_s > 0')
+        if self._usb_recovery_attempts < 0 or self._usb_recovery_backoff_s < 0.0:
+            raise ValueError(
+                'usb_recovery_attempts and usb_recovery_backoff_s must be >= 0')
 
         self._backend = None
         if self._backend_name == 'ft232h':
@@ -150,6 +157,8 @@ class GripperNode(Node):
             'settle_time_s': 0.6,
             'command_timeout_s': 8.0,
             'slew_us_per_s': 400.0,
+            'usb_recovery_attempts': 2,
+            'usb_recovery_backoff_s': 0.20,
             'ftdi_url': 'ftdi://ftdi:232h/1',
             'pyftdi_site_packages': '',
             'sample_rate_hz': 100000,
@@ -255,6 +264,7 @@ class GripperNode(Node):
             expected_motion_s + self._settle_time_s + 1.0,
         )
         reached_at = None
+        recovery_attempts = 0
         while time.monotonic() < deadline:
             if goal_handle.is_cancel_requested:
                 self._backend.freeze()
@@ -262,8 +272,22 @@ class GripperNode(Node):
                 with self._state_lock:
                     self._last_result = 'canceled_pwm_frozen'
                 return self._make_result(False)
-            if self._backend.error:
-                raise RuntimeError(self._backend.error)
+            backend_error = self._backend.error
+            if backend_error:
+                if recovery_attempts >= self._usb_recovery_attempts:
+                    raise RuntimeError(backend_error)
+                recovery_attempts += 1
+                self.get_logger().warning(
+                    'FT232H PWM writer failed; reopening for the same goal '
+                    f'(attempt {recovery_attempts}/'
+                    f'{self._usb_recovery_attempts}): {backend_error}')
+                if self._usb_recovery_backoff_s > 0.0:
+                    time.sleep(self._usb_recovery_backoff_s)
+                target_us = self._backend.command(target_us)
+                reached_at = None
+                deadline = max(
+                    deadline, time.monotonic() + self._command_timeout_s)
+                continue
             current_us = self._backend.current_us
             if current_us is not None:
                 self._set_position(self._calibration.pulse_to_position(current_us))

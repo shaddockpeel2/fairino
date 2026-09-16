@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import random
 from pathlib import Path
 
 import cv2
@@ -24,6 +25,49 @@ METHODS = {
     'ANDREFF': cv2.CALIB_HAND_EYE_ANDREFF,
     'DANIILIDIS': cv2.CALIB_HAND_EYE_DANIILIDIS,
 }
+
+
+def _split_positions(sample_indices, training_samples, minimum_validation_samples,
+                     random_validation_samples=None, random_seed=0):
+    """Return training/validation positions without changing the captured dataset."""
+    sample_indices = list(sample_indices)
+    if random_validation_samples is None:
+        if len(sample_indices) < training_samples + minimum_validation_samples:
+            raise ValueError(
+                f'need {training_samples} training and {minimum_validation_samples} '
+                f'validation samples; got {len(sample_indices)} total')
+        return (
+            list(range(training_samples)),
+            list(range(training_samples, len(sample_indices))),
+            {'type': 'ordered_tail'},
+        )
+
+    if random_validation_samples < minimum_validation_samples:
+        raise ValueError(
+            f'random validation count {random_validation_samples} is smaller than '
+            f'minimum {minimum_validation_samples}')
+    expected_total = training_samples + random_validation_samples
+    if len(sample_indices) != expected_total:
+        raise ValueError(
+            f'random split requires exactly {training_samples} training and '
+            f'{random_validation_samples} validation samples; got '
+            f'{len(sample_indices)} total')
+    selected_indices = sorted(random.Random(random_seed).sample(
+        sample_indices, random_validation_samples))
+    selected_set = set(selected_indices)
+    training_positions = [
+        position for position, index in enumerate(sample_indices)
+        if index not in selected_set
+    ]
+    validation_positions = [
+        position for position, index in enumerate(sample_indices)
+        if index in selected_set
+    ]
+    return training_positions, validation_positions, {
+        'type': 'random_holdout',
+        'seed': random_seed,
+        'requested_validation_samples': random_validation_samples,
+    }
 
 
 def _percentiles(values):
@@ -145,7 +189,7 @@ def _frame_equivalence_report(path, expected_base_frame):
 
 
 def _solve_method(base_training, camera_training, base_validation, camera_validation,
-                  name, method):
+                  validation_sample_indices, name, method):
     rotation, translation = cv2.calibrateHandEye(
         [matrix[:3, :3] for matrix in base_training],
         [matrix[:3, 3].reshape(3, 1) for matrix in base_training],
@@ -175,8 +219,7 @@ def _solve_method(base_training, camera_training, base_validation, camera_valida
                 'rotation_deg': float(rotation_value),
             }
             for index, translation_value, rotation_value in zip(
-                range(len(base_training) + 1,
-                      len(base_training) + len(base_validation) + 1),
+                validation_sample_indices,
                 validation_translation,
                 validation_rotation,
             )
@@ -187,7 +230,8 @@ def _solve_method(base_training, camera_training, base_validation, camera_valida
 def analyze(session_dir, training_samples=25, minimum_validation_samples=10,
             median_limit_mm=3.0, p95_limit_mm=8.0,
             minimum_orientation_span_deg=25.0, robot_poses_path=None,
-            frame_crosscheck_path=None):
+            frame_crosscheck_path=None, random_validation_samples=None,
+            random_seed=0):
     session_dir = Path(session_dir).resolve()
     samples_path = session_dir / 'samples.json'
     document = json.loads(samples_path.read_text())
@@ -195,13 +239,17 @@ def analyze(session_dir, training_samples=25, minimum_validation_samples=10,
     indices = [sample['index'] for sample in samples]
     if indices != list(range(1, len(samples) + 1)):
         raise ValueError(f'sample indices are not continuous: {indices}')
-    if len(samples) < training_samples + minimum_validation_samples:
-        raise ValueError(
-            f'need {training_samples} training and {minimum_validation_samples} validation samples; '
-            f'got {len(samples)} total')
-
-    training = samples[:training_samples]
-    validation = samples[training_samples:]
+    training_positions, validation_positions, split_strategy = _split_positions(
+        indices,
+        training_samples,
+        minimum_validation_samples,
+        random_validation_samples=random_validation_samples,
+        random_seed=random_seed,
+    )
+    training = [samples[position] for position in training_positions]
+    validation = [samples[position] for position in validation_positions]
+    training_indices = [sample['index'] for sample in training]
+    validation_indices = [sample['index'] for sample in validation]
     pose_source = {
         'type': 'captured_ros_tf',
         'frame': document['frames']['wrist'],
@@ -228,10 +276,10 @@ def analyze(session_dir, training_samples=25, minimum_validation_samples=10,
     else:
         base_all = [np.asarray(sample['base_from_wrist'], dtype=float) for sample in samples]
     camera_all = [np.asarray(sample['camera_from_board'], dtype=float) for sample in samples]
-    base_training = base_all[:training_samples]
-    camera_training = camera_all[:training_samples]
-    base_validation = base_all[training_samples:]
-    camera_validation = camera_all[training_samples:]
+    base_training = [base_all[position] for position in training_positions]
+    camera_training = [camera_all[position] for position in training_positions]
+    base_validation = [base_all[position] for position in validation_positions]
+    camera_validation = [camera_all[position] for position in validation_positions]
 
     methods = []
     failures = {}
@@ -239,7 +287,7 @@ def analyze(session_dir, training_samples=25, minimum_validation_samples=10,
         try:
             result = _solve_method(
                 base_training, camera_training, base_validation, camera_validation,
-                name, method)
+                validation_indices, name, method)
             if np.isfinite(np.asarray(result['wrist_from_camera'])).all():
                 methods.append(result)
         except (cv2.error, ValueError) as error:
@@ -302,6 +350,9 @@ def analyze(session_dir, training_samples=25, minimum_validation_samples=10,
         'training_samples': len(training),
         'validation_samples': len(validation),
         'sample_indices': indices,
+        'training_sample_indices': training_indices,
+        'validation_sample_indices': validation_indices,
+        'split_strategy': split_strategy,
         'selected_method': selected['method'],
         'acceptance_limits': {
             'validation_translation_median_mm': median_limit_mm,
@@ -375,6 +426,8 @@ def _write_markdown(path, report):
         f'- 结论：{status}',
         f'- 数据：{report["training_samples"]} 组求解 + '
         f'{report["validation_samples"]} 组独立验证',
+        f'- 求解样本编号：{report["training_sample_indices"]}',
+        f'- 验证样本编号：{report["validation_sample_indices"]}',
         f'- 机器人位姿来源：{report["robot_pose_source"]["type"]} '
         f'（{report["robot_pose_source"]["frame"]}）',
         f'- 选择方法：{report["selected_method"]}',
@@ -447,6 +500,13 @@ def main(args=None):
     parser.add_argument('--training-samples', type=int, default=25)
     parser.add_argument('--minimum-validation-samples', type=int, default=10)
     parser.add_argument(
+        '--random-validation-samples', type=int,
+        help=('randomly select this many held-out samples from the complete session; '
+              'requires exactly training + validation samples'))
+    parser.add_argument(
+        '--random-seed', type=int, default=0,
+        help='deterministic seed used with --random-validation-samples')
+    parser.add_argument(
         '--robot-poses',
         help='optional controller FK reconstruction JSON, indexed like samples.json')
     parser.add_argument(
@@ -460,6 +520,8 @@ def main(args=None):
         minimum_validation_samples=options.minimum_validation_samples,
         robot_poses_path=options.robot_poses,
         frame_crosscheck_path=options.frame_crosscheck,
+        random_validation_samples=options.random_validation_samples,
+        random_seed=options.random_seed,
     )
     print(json.dumps({
         'accepted': report['accepted'],
@@ -468,6 +530,9 @@ def main(args=None):
         'selected_method': report['selected_method'],
         'training_samples': report['training_samples'],
         'validation_samples': report['validation_samples'],
+        'training_sample_indices': report['training_sample_indices'],
+        'validation_sample_indices': report['validation_sample_indices'],
+        'split_strategy': report['split_strategy'],
         'report': report['report_path'],
         'calibration': report['calibration_path'],
     }, indent=2))

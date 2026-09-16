@@ -1,0 +1,2 @@
+data: '{"detection_mode":"colors","frozen":false,"has_stable_pose":false,"reason":"rgbd_stream_stale","stable":false,"tracking":true,"v...'
+---

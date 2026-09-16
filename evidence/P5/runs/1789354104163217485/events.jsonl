@@ -1,0 +1,22 @@
+{"time_ns":1789354104163999451,"event":"run_started","detail":"execution"}
+{"time_ns":1789354104164125744,"event":"target_locked","detail":"locked top=[-0.153589802,-0.532902064,0.0339798955] m, object_yaw=0.95024749 rad, applied_grasp_yaw=-0.620548837 rad"}
+{"time_ns":1789354104906211877,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,position=0.06"}
+{"time_ns":1789354104907780184,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1789354104912369022,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube added"}
+{"time_ns":1789354105084378233,"event":"plan_direct_grasp","detail":"return_code=1"}
+{"time_ns":1789354105117310644,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789354105170376338,"event":"plan_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0427394526"}
+{"time_ns":1789354105202382990,"event":"preview_complete","detail":"direct MoveIt grasp and attached lift planned"}
+{"time_ns":1789354105202699452,"event":"p6_gate","detail":"before direct grasp passed"}
+{"time_ns":1789354105202725118,"event":"target_lock","detail":"before direct grasp uses immutable start snapshot"}
+{"time_ns":1789354127446334607,"event":"execute_direct_grasp","detail":"return_code=1"}
+{"time_ns":1789354127452592961,"event":"arrival_direct_grasp","detail":"position_error_m=0.000498578755,orientation_error_rad=0.000910062205"}
+{"time_ns":1789354128787997370,"event":"gripper_close","detail":"result_code=4,reached_goal=1,position=0.026"}
+{"time_ns":1789354128795532653,"event":"gripper_state_close","detail":"estimated_position_m=0.026571"}
+{"time_ns":1789354128795570278,"event":"state","detail":"attaching_and_lifting: closed at direct grasp pose; attaching cube and planning lift"}
+{"time_ns":1789354128795596237,"event":"target_lock","detail":"before lift uses immutable start snapshot"}
+{"time_ns":1789354128796584705,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789354128837521987,"event":"plan_lift_execute","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0427333956"}
+{"time_ns":1789354130693425949,"event":"execute_lift_execute","detail":"return_code=1"}
+{"time_ns":1789354130699602635,"event":"arrival_lift_execute","detail":"position_error_m=3.11611009e-05,orientation_error_rad=0.000451593909"}
+{"time_ns":1789354130699671469,"event":"state","detail":"complete_holding: direct grasp and lift complete; cube remains attached in the scene; after physically placing it, a fresh stable target may start the next trial"}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "reference_root": "/home/industio/DofbotPro_JetsonNano_0106",
+  "asset_access": "read_only",
+  "source_configs": {
+    "qwen": "dofbot/config/agent/qwen3vl.yaml",
+    "audio": "dofbot/config/agent/audio.yaml",
+    "coordination": "dofbot/config/agent/npu_coordination.yaml",
+    "rag": "dofbot/config/agent/rag.yaml"
+  },
+  "runtime_root": "/home/industio/fairino_ws/evidence/voice",
+  "mutable_config_root": "/home/industio/fairino_ws/config/voice",
+  "minimum_available_memory_mib": 1024,
+  "swap_for_realtime": false,
+  "qwen_instances": 1,
+  "note": "P1 inventory contract; production service integration belongs to stage 3. Reference configs must have mutable output paths rebound before production use."
+}

@@ -12,6 +12,7 @@
 
   <depend>moveit_task_constructor_core</depend>
   <depend>control_msgs</depend>
+  <depend>fairino_msgs</depend>
   <depend>controller_manager_msgs</depend>
   <depend>geometry_msgs</depend>
   <depend>moveit_core</depend>

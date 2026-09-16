@@ -1,0 +1,32 @@
+frame: base_link
+target_top_xyz_m: [-0.050370037623, -0.483637595939, 0.0354289342151]
+target_object_orientation_xyzw: [0, 0, -0.0241093664393, 0.99970932698]
+object_long_axis_yaw_rad: -0.0482234053835
+applied_grasp_yaw_rad: -1.61901973218
+selected_grasp_orientation_xyzw: [0.723949140822, 0.689853347823, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+maximum_joint6_total_travel_rad: 1.57079632679
+minimum_joint6_limit_margin_rad: 0.174532925199
+joint6_soft_fallback: true
+approach_clearance_m: 0.01
+grasp_depth_m: 0.015
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.026
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: green
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.309789013763, -0.280599721595, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 600
+perception_status_json: '{"actionable_cube_count":1,"candidate_area_px":1595.5,"center_base_m":[-0.050413261416900064,-0.4836152784257616,0.03542042718262753],"color":"green","depth_valid_fraction":0.9857549857549858,"detected_targets":[{"center_base_m":[-0.050413261416900064,-0.4836152784257616,0.03542042718262753],"color":"green"}],"detection_mode":"colors","frozen":false,"grasp_axis_yaw_base_rad":-0.04822340538353301,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":0.002315118574470144,"has_stable_pose":true,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.02287709058142687,0.02459325231045653],"orientation_source":"top_surface_square_min_area_edge","physical_cube_count":1,"position_std_m":[7.666320190877009e-05,0.00014501574941809027,1.9848348795309892e-05],"reason":"stable_target_updated","rejected_color_regions":{"not_a_cube_on_sorting_plane":1,"observed_size_out_of_range":2},"required_samples":8,"rgb_color_regions":4,"sample_stamp":1789521681.547478,"samples":8,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":true,"top_axis_ratio":1.065634150140607,"top_z_spread_m":0.0017840106146088872,"tracking":true,"valid":true}'

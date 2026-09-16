@@ -50,7 +50,7 @@
 | MoveIt 2 | 基础真机规划执行已验证，P07/P11 仍开发中 | `fairino3mt_v6_moveit2_config` 已切换到控制器一致的 `fairino3c_v6`；操作者已在有人监护、低速条件下通过 RViz 末端交互球和单关节面板完成多组 Plan/Execute，实体机械臂运动正常；异常退出、取消/断线、ServoJ 生命周期/周期、归档的 20/100 组门禁仍待验收 |
 | RGB-D 相机 | DaBai DCW2 已接入，P03 开发中 | `CH82C5201C9`、固件 `RD1017`、USB2；RGB/硬件 D2C 深度、严格 20 秒快速门禁及相机独立 RViz 的 RGB/深度/彩色点云显示已通过，尺量精度和长期稳定性待验收 |
 | 夹爪 | 台架动作与 ROS/MoveIt 软件链已验证，P04/P09 开发中 | YDI-J22 四指柔性夹爪，独立 5 V 三线 PWM；FT232H AD7 点动已通过，`GripperCommand`、mock、诊断、MoveIt controller 和受控 FT232H backend 已实现；真实 action、机械行程、持续夹持及循环验收待完成（见第 6.6 节） |
-| 手眼标定 | 核心数值门禁与正式 TF 已通过，P13 开发中 | 最终支架与 640×480 相机配置下采集 40 组 ChArUco；25 组求解、15 组独立验证，平移中位数/P95 为 2.274/6.327 mm；`flange_link → camera_link` 已通过重启和 TF 唯一性检查，固定点/9 宫格和拆装复验待完成 |
+| 手眼标定 | 核心数值门禁与正式 TF 已通过，P13 开发中 | 2026-09-14 更新为 20 组 ChArUco 中 15 组求解、随机 5 组独立验证，平移中位数/P95 为 1.452/2.731 mm；`flange_link → camera_link` 已更新，固定点/9 宫格和拆装复验待完成 |
 
 现阶段可以定义为：通信和构建底座完成；MoveIt 已证明 RViz 笛卡尔目标和单关节目标能够规划并驱动实体机械臂，但 P11 的生命周期与故障门禁尚未关闭；DaBai DCW2 已完成可用深度图快速验证、独立 RViz 和 MoveIt 组合可视化，但 P03 长稳与精度门禁尚未关闭；FR3-C ROS 运动学已按控制器 FK 纠正；eye-in-hand 手眼数值门禁及正式 TF 接入完成，但 P13 的固定点、9 宫格和拆装复验尚未关闭；夹爪 ROS/MoveIt 软件链和 mock 动作已接通，真实 FT232H action 及机械/带载验收尚未完成。原约 15% 为早期粗估，本次不按单项成果推算新的整机完成百分比；以第 10 节阶段台账为准。
 
@@ -65,7 +65,7 @@
 - 相机运行时：Orbbec ROS wrapper 1.5.15、Orbbec SDK 1.10.35，默认配置 `src/fr3c_camera/config/dabai_dcw2.yaml`。
 - 相机可视化：独立 profile `src/fr3c_camera/config/dabai_dcw2_rviz.yaml` 仅用于 RViz/点云观察，不替代上述生产基线。
 - 机器人运动学：`src/fairino_description/urdf/fairino3c_v6.urdf`，组合模型显式定义 `wrist3_link → flange_link` 为 +Z 0.1 m；
-- 当前手眼外参：`evidence/P13/manual_30pose_20260910/flange_to_dabai_dcw2.yaml`，绑定相机 SN `CH82C5201C9`、`final_mount_v1` 和 640×480；发布父子帧为 `flange_link → camera_link`。
+- 当前手眼外参：`evidence/P13/recalib_40pose_20260914/flange_to_dabai_dcw2.yaml`，实际包含 20 组采样，绑定相机 SN `CH82C5201C9`、`final_mount_v1` 和 640×480；发布父子帧为 `flange_link → camera_link`。
 
 法奥最新在线手册当前已高于本机控制器版本。最新手册可用于理解功能和硬件结构，但每一个要调用的 API 都要以 V3.9.2 标签内的头文件和源码为准，不能把新版本接口直接用于旧控制器。
 
@@ -334,8 +334,8 @@ T_base_object = T_base_flange × T_flange_camera × T_camera_object
 ```
 
 2026-09-10 当前实机已确认：`wrist3_link → flange_link` 为沿 wrist3 自身 +Z 的 0.1 m 固定变换；
-正式 `flange_link → camera_link` 来自 40 组 ChArUco 数据，文件为
-`evidence/P13/manual_30pose_20260910/flange_to_dabai_dcw2.yaml`。该 TF 已在系统重启后加载并验证唯一，
+2026-09-14 正式 `flange_link → camera_link` 更新为 20 组 ChArUco 数据中 15 组求解、随机 5 组验证的结果，文件为
+`evidence/P13/recalib_40pose_20260914/flange_to_dabai_dcw2.yaml`。发布时必须保证该 TF 唯一，
 不能再同时发布 `camera_housing_link → camera_link` 预览变换。
 
 必须避免以下错误：
@@ -1335,10 +1335,11 @@ P07 只运行 fake/mock 或仿真控制器，不连接真机硬件插件。官�
 - [x] P13-16 已重启组合入口并加载正式 YAML；`tf2_echo flange_link camera_link` 与文件一致；
 - [ ] P13-17 拆装相机支架一次后只做验证；超门槛则证明需要重标定；
 - [ ] P13-18 给 YAML 写入相机 SN、支架版本、分辨率、preset、时间和 SHA256。
+- [x] P13-19 2026-09-14 新采 20 组，以固定随机种子从全体样本抽取 1/12/14/15/18 五组验证，其余 15 组求解；TSAI 平移中位数/P95 为 1.452/2.731 mm，并由用户决定更新部署结果。
 
 ### 验收门槛
 
-- [x] 独立验证平移误差中位数 2.274 mm、P95 6.327 mm，满足 ≤3 mm / ≤8 mm；
+- [x] 当前部署结果的随机 5 组独立验证平移误差中位数 1.452 mm、P95 2.731 mm，满足 ≤3 mm / ≤8 mm；旧 15 组验证结果 2.274/6.327 mm 保留为历史基线；
 - [ ] 验证点覆盖真实抓取区，不只集中在图像中心；
 - [x] 单位、坐标轴、矩阵方向和 TF 链已经离线残差、三姿态 FK 交叉检查及在线 `tf2_echo` 核对；
 - [ ] YAML 与相机 SN、支架版本和相机配置严格绑定；
@@ -1704,7 +1705,7 @@ P07 只运行 fake/mock 或仿真控制器，不连接真机硬件插件。官�
 | P10 固定点抓放 | 开发中 | 2026-09-10（实用 TCP v2 冻结） | `grasp_frame` 已接入 URDF/MTC；最终采用 `[-0.847397,3.027928,178.0] mm`，X/Y 来自固定点求解、Z 来自法兰盘到尖端直测 | `src/fairino3mt_v6_moveit2_config/config/ydi_j22_tcp.yaml`、`docs/calibration/FR3C夹爪TCP固定点标定采集说明.md`、本文 P10 | 控制器专用 tool ID、TCP 读回、负载/质心、固定点 20 次抓放及必要微调 |
 | P11 MoveIt 真机 | 开发中 | 2026-09-10（RViz 多组真机 Plan/Execute） | 操作者已用 RViz 末端交互球和单关节目标完成多组低速 Plan/Execute，实体机械臂运动正常，基础 MoveIt→ros2_control→FR3-C 链路通过 | 本文 P11；现场操作记录（尚未形成独立 P11 证据包） | 归档 20 条审查轨迹；修复/验证 ServoMove 生命周期、第 6 轴有限值、100 Hz/0.008 s 周期、错误返回、取消/断线/deactivate 及跟踪误差 |
 | P12 装机相机 | 开发中 | 2026-09-10（最终支架下完成手眼采集） | DaBai 已固定在最终末端支架，640×480/内参/D2C 固定；40 个多平移/多旋转姿态均能检测标定板并通过单姿态稳定性门禁 | [手眼采集说明](../calibration/FR3C手眼标定数据采集说明.md)、`evidence/P13/manual_30pose_20260910/` | 全抓取区有效深度、夹爪开闭遮挡、10 分钟漂移、支架受力/拆装、10 次冷启动和线缆全范围复测 |
-| P13 手眼标定 | 开发中 | 2026-09-10（核心数值门禁和正式 TF 通过） | 40 组数据按 25 求解+15 独立验证；TSAI 平移中位数/P95 2.274/6.327 mm，旋转中位数/P95 0.418°/0.825°；三姿态确认 `flange_link` 与控制器法兰一致；正式 YAML 已重启加载且 TF 唯一 | [手眼分析报告](../../evidence/P13/manual_30pose_20260910/P13_handeye_analysis_controller_fk.md)、[正式 YAML](../../evidence/P13/manual_30pose_20260910/flange_to_dabai_dcw2.yaml)、[模型核对报告](../../evidence/P13/manual_30pose_20260910/robot_model_comparison.md) | 已知固定点/探针验证、真实抓取区 9 宫格与不同高度误差、支架拆装复验；YAML 仍需补 preset、生成时间和 SHA256；未来采集须直接同步记录控制器 `base→flange` |
+| P13 手眼标定 | 开发中 | 2026-09-14（20 组结果更新部署） | 20 组数据按 15 组求解+随机 5 组独立验证；TSAI 平移中位数/P95 1.452/2.731 mm，旋转中位数/P95 0.446°/0.518°；新外参与旧外参相差 0.976 mm/0.500°；部署 YAML 已更新 | [新手眼分析报告](../../evidence/P13/recalib_40pose_20260914/P13_handeye_analysis.md)、[新正式 YAML](../../evidence/P13/recalib_40pose_20260914/flange_to_dabai_dcw2.yaml)、[历史模型核对报告](../../evidence/P13/manual_30pose_20260910/robot_model_comparison.md) | 用当前部署结果完成重启 TF 唯一性复核、已知固定点/探针验证、真实抓取区 9 宫格与不同高度误差、支架拆装复验；YAML 仍需补 preset、生成时间和 SHA256 |
 | P14 RGB-D 感知 | 未开始 | — | — | — | 可用 DaBai 快照先开发静态算法；需等待 P03-17 的 DaBai rosbag 才能做时序离线验证 |
 | P15 无接触悬停 | 未开始 | — | — | — | 依赖模型/MoveIt/手眼/感知 |
 | P16 视觉抓放 | 未开始 | — | — | — | 依赖所有主链门禁 |

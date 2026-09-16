@@ -1,0 +1,7 @@
+# Select one color for the next perception snapshot. An empty color clears the
+# filter and restores deterministic multi-color sorting selection.
+string color
+---
+bool success
+uint64 generation
+string message

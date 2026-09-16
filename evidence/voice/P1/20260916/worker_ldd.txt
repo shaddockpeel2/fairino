@@ -1,0 +1,10 @@
+	linux-vdso.so.1 (0x0000007f92e0a000)
+	librknnrt.so => /lib/librknnrt.so (0x0000007f92070000)
+	librkllmrt.so => not found
+	libpthread.so.0 => /lib/aarch64-linux-gnu/libpthread.so.0 (0x0000007f92050000)
+	libstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000007f91e20000)
+	libm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000007f91d80000)
+	libgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000007f91d50000)
+	libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000007f91ba0000)
+	libdl.so.2 => /lib/aarch64-linux-gnu/libdl.so.2 (0x0000007f91b80000)
+	/lib/ld-linux-aarch64.so.1 (0x0000007f92dd1000)

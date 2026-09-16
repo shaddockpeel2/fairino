@@ -1,0 +1,12 @@
+/project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: ❓
+cold-10 {'qwen_first_token_s': 0.1855154439999751, 'qwen_total_s': 0.7799476509999295, 'audio_duration_s': 2.061, 'synthesis_s': 2.723223412999687, 'wall_s': 7.939760047999698, 'rtf': 1.3213116996602072}
+/project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: ❓
+cold-30 {'qwen_first_token_s': 0.1751462870006435, 'qwen_total_s': 1.6459431390003374, 'audio_duration_s': 5.313666666666666, 'synthesis_s': 5.336680895999962, 'wall_s': 9.504339439000432, 'rtf': 1.0043311390753331}
+/project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: ❓
+cold-60 {'qwen_first_token_s': 0.23551056900032563, 'qwen_total_s': 2.620921040000212, 'audio_duration_s': 9.837625, 'synthesis_s': 10.898836386000767, 'wall_s': 15.781051578999723, 'rtf': 1.10787272192229}
+/project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: ❓
+cold-120 {'qwen_first_token_s': 0.38179232200036495, 'qwen_total_s': 2.791383920000044, 'audio_duration_s': 19.416916666666665, 'synthesis_s': 18.592049189000136, 'wall_s': 23.68692717199974, 'rtf': 0.9575181017755207}
+warm-10 {'qwen_first_token_s': 0.13941292999970756, 'qwen_total_s': 0.7208441989996572, 'audio_duration_s': 2.0533333333333332, 'synthesis_s': 2.8908438299995396, 'wall_s': 2.891055291000157, 'rtf': 1.4078784886361395}
+warm-30 {'qwen_first_token_s': 0.16130333299952326, 'qwen_total_s': 1.6062056349992417, 'audio_duration_s': 5.313583333333334, 'synthesis_s': 6.7664165969999885, 'wall_s': 6.766660141000102, 'rtf': 1.2734187407116957}
+warm-60 {'qwen_first_token_s': 0.21519283300040115, 'qwen_total_s': 2.5670208689998617, 'audio_duration_s': 9.838916666666666, 'synthesis_s': 11.734862975000397, 'wall_s': 11.735552191000352, 'rtf': 1.1926986854921762}
+warm-120 {'qwen_first_token_s': 0.39411243300037313, 'qwen_total_s': 2.86452784300036, 'audio_duration_s': 19.421, 'synthesis_s': 21.2098160810001, 'wall_s': 21.20998904099997, 'rtf': 1.092107310694614}

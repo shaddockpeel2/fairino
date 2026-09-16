@@ -1,16 +1,24 @@
-# Accepted hand-eye calibration deployed for the first RGB cube grasp.
+# Accepted hand-eye calibration promoted on 2026-09-14.
 # Canonical evidence source:
-# evidence/P13/manual_30pose_20260910/flange_to_dabai_dcw2.yaml
+# evidence/P13/recalib_40pose_20260914/flange_to_dabai_dcw2.yaml
 calibrated: true
 handeye_accepted: true
 deployable_in_current_ros_tf: true
 status: accepted
 parent_frame: flange_link
 child_frame: camera_link
-xyz: [-0.021996403927845576, -0.07289998096756403, 0.045330103200571334]
-rpy: [2.8889206938462344, -1.44079515904105, -1.3540098205387807]
+xyz: [-0.022343004777692268, -0.07201485255317483, 0.04555195303911627]
+rpy: [2.9242034206206333, -1.439956488033078, -1.3816244171579133]
 camera_serial: CH82C5201C9
 mount_version: final_mount_v1
-source: evidence/P13/manual_30pose_20260910/flange_to_dabai_dcw2.yaml
-validation_translation_median_mm: 2.273768638982552
-validation_translation_p95_mm: 6.326555318945608
+source: evidence/P13/recalib_40pose_20260914/flange_to_dabai_dcw2.yaml
+method: TSAI
+training_samples: 15
+validation_samples: 5
+validation_sample_indices: [1, 12, 14, 15, 18]
+random_seed: 20260914
+validation_translation_median_mm: 1.4519125905500603
+validation_translation_p95_mm: 2.7310050960852954
+validation_translation_max_mm: 3.002
+validation_rotation_median_deg: 0.446
+validation_rotation_p95_deg: 0.518

@@ -16,10 +16,24 @@ blue_cube_localizer:
     hand_eye_file: ''
     tcp_file: ''
 
-    cube_side_m: 0.030
-    # A plain-colour cube has no observable yaw. This orientation is explicit,
-    # fixed task configuration rather than a visual estimate.
+    # Five TCP-contact pairs measured the visual top 3.59..5.36 mm high
+    # (median 5.15 mm). Apply a conservative signed correction in base_link.
+    # Negative lowers the published/accepted top pose; set 0.0 to disable.
+    top_pose_z_compensation_m: -0.004
+
+    # Supported object-frame X/Y/Z dimensions. Classification uses top-point
+    # axis ratio, then publishes the matching nominal size with the pose.
+    cube_size_m: [0.030, 0.030, 0.030]
+    rectangular_box_size_m: [0.060, 0.030, 0.030]
+    visual_yaw_enabled: true
+    # Used only when visual_yaw_enabled=false.
     fixed_yaw_rad: 0.0
+    # Clean cubes are close to 1 and 60 x 30 mm tops close to 2. The gap is a
+    # fail-closed ambiguity band, preventing accidental shape switching.
+    cube_max_axis_ratio: 1.25
+    rectangle_min_axis_ratio: 1.55
+    stable_yaw_std_rad: 0.087266463  # 5 degrees across the accepted window
+    max_sample_yaw_jump_rad: 0.34906585  # restart after a 20 degree jump
 
     max_age_s: 0.50
     max_skew_s: 0.065
@@ -37,10 +51,24 @@ blue_cube_localizer:
     saturation_min: 80
     value_min: 35
     morphology_size: 3
+    # Four-color mode uses disjoint hue bands; tune these against the actual
+    # camera image/lighting before hardware execution. Red spans HSV hue 0/179.
+    red_hue_intervals: [0, 10, 170, 179]
+    green_hue_intervals: [40, 85]
+    blue_hue_intervals: [90, 135]
+    yellow_hue_intervals: [18, 34]
+    # In colors mode, only count square tops at cube height above this plane.
+    # Background color patches on the paper/table remain visible in debug,
+    # but cannot compete with a physical cube. Match the P5 ground plane.
+    sorting_plane_z_m: 0.0
+    sorting_max_cube_plane_gap_m: 0.010
+    # A batch planning failure excludes only the same color target within this
+    # small XY radius, allowing the selector to continue with other cubes.
+    sorting_skip_radius_m: 0.025
     min_area_px: 120.0
     max_area_px: 12000.0
     min_aspect_ratio: 0.45
-    max_aspect_ratio: 2.2
+    max_aspect_ratio: 2.8
     min_solidity: 0.72
     min_rectangularity: 0.55
     interior_fraction: 0.23
@@ -51,10 +79,10 @@ blue_cube_localizer:
     top_quantile: 65.0
     top_tolerance_m: 0.006
     min_top_points: 30
-    # This checks that the observed top is compatible with a 30 mm cube. The
-    # interval includes erosion, occlusion and initial RGB-D uncertainty.
+    # This broad check accepts both supported 30 x 30 and 60 x 30 mm tops.
+    # The interval includes mask erosion, occlusion and RGB-D uncertainty.
     min_observed_side_m: 0.014
-    max_observed_side_m: 0.050
+    max_observed_side_m: 0.075
     max_top_z_spread_m: 0.010
 
     # Tighten these to the measured table/workspace before P5 is allowed to
@@ -74,3 +102,12 @@ blue_cube_localizer:
     # jump starts a new rolling window, so old and new object positions cannot mix.
     stable_sample_max_gap_s: 0.75
     max_sample_jump_m: 0.020
+
+    # Select one independent target-detection scene at startup. All modes use
+    # the same registered-depth localization and grasp topics. YOLO's bundled
+    # garbage model recognizes 16 labelled waste classes, not a generic cube.
+    detection_mode: blue
+    yolo_model_path: ''
+    yolo_confidence_threshold: 0.25
+    yolo_iou_threshold: 0.45
+    yolo_core_mode: core0

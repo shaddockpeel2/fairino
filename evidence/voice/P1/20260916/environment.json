@@ -1,0 +1,7 @@
+{
+  "boot_id": "3592e5bc-57b2-4163-b3e2-348ccd22bb69",
+  "platform": "Linux-6.1.118-aarch64-with-glibc2.35",
+  "python": "3.10.12",
+  "git_head": "67593ebeb6255d8992b0e33abe16a3bdafda9f26",
+  "scope": "Stationary physical arm/camera, mock gripper, execute=false, no task services called; RViz GUI only; Qwen max_new_tokens=64 versus source default512"
+}

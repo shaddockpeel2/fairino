@@ -1,0 +1,32 @@
+frame: base_link
+target_top_xyz_m: [0.0507325146484, -0.52202005728, 0.0352961781495]
+target_object_orientation_xyzw: [0, 0, 0.347268988571, 0.937765562162]
+object_long_axis_yaw_rad: 0.70931454709
+applied_grasp_yaw_rad: 0.70931454709
+selected_grasp_orientation_xyzw: [-0.347268988571, 0.937765562162, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+maximum_joint6_total_travel_rad: 1.57079632679
+minimum_joint6_limit_margin_rad: 0.174532925199
+joint6_soft_fallback: true
+approach_clearance_m: 0.01
+grasp_depth_m: 0.015
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.026
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: red
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.34206370388, -0.226749644041, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 600
+perception_status_json: '{"candidate_area_px":3210.0,"center_base_m":[0.050592176711637904,-0.5219916354576416,0.03527856233871532],"color":"red","depth_valid_fraction":1.0,"detection_mode":"colors","frozen":false,"grasp_axis_yaw_base_rad":0.7093145470902107,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":0.006439086467881707,"has_stable_pose":true,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.024413659457515093,0.025251800403266855],"orientation_source":"top_surface_square_min_area_edge","physical_cube_count":1,"position_std_m":[0.00011741520890632437,4.7004760926295266e-05,1.1942825890992802e-05],"reason":"stable_target_updated","rejected_color_regions":{},"required_samples":8,"rgb_color_regions":1,"sample_stamp":1789372019.556878,"samples":8,"stable":true,"top_axis_ratio":1.0341338107758329,"top_z_spread_m":0.0009254915338919312,"tracking":true,"valid":true}'

@@ -1,0 +1,4 @@
+{"time_ns":1789372830506493266,"event":"run_started","detail":"execution"}
+{"time_ns":1789372830506609058,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1789372830531233866,"event":"gripper_pre_open","detail":"result_code=6,reached_goal=0,position=0.06"}
+{"time_ns":1789372830531612745,"event":"state","detail":"retryable_failure_before_arm_motion: gripper pre_open failed: result_code=6,reached_goal=0,position=0.06; no arm motion started, fix the condition and call /start again"}

@@ -1,0 +1,36 @@
+calibrated: true
+handeye_accepted: true
+deployable_in_current_ros_tf: true
+status: accepted
+parent_frame: flange_link
+child_frame: camera_link
+xyz:
+- -0.022343004777692268
+- -0.07201485255317483
+- 0.04555195303911627
+rpy:
+- 2.9242034206206333
+- -1.439956488033078
+- -1.3816244171579133
+camera_serial: CH82C5201C9
+mount_version: final_mount_v1
+image_size:
+- 640
+- 480
+board:
+  type: charuco
+  squares_x: 11
+  squares_y: 8
+  square_length_m: 0.015
+  marker_length_m: 0.011
+  dictionary: DICT_4X4_50
+  legacy_pattern: true
+method: TSAI
+session: /home/industio/fairino_ws/evidence/P13/recalib_40pose_20260914
+robot_pose_source:
+  type: captured_ros_tf
+  frame: flange_link
+  path: /home/industio/fairino_ws/evidence/P13/recalib_40pose_20260914/samples.json
+integration_frame_crosscheck: null
+validation_translation_median_mm: 1.4519125905500603
+validation_translation_p95_mm: 2.7310050960852954

@@ -1,0 +1,32 @@
+frame: base_link
+target_top_xyz_m: [-0.0586333715783, -0.505329629953, 0.0359506699984]
+target_object_orientation_xyzw: [0, 0, -0.0793580632185, 0.996846175597]
+object_long_axis_yaw_rad: -0.158883191478
+applied_grasp_yaw_rad: -0.158883191478
+selected_grasp_orientation_xyzw: [0.0793580632185, 0.996846175597, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+maximum_joint6_total_travel_rad: 1.57079632679
+minimum_joint6_limit_margin_rad: 0.174532925199
+joint6_soft_fallback: false
+approach_clearance_m: 0.01
+grasp_depth_m: 0.015
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.026
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: blue
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.342040637258, -0.374449797348, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 600
+perception_status_json: '{"candidate_area_px":1173.0,"center_base_m":[-0.058616657897614735,-0.5053746497498235,0.035907441617022196],"color":"blue","depth_valid_fraction":0.7775061124694377,"detection_mode":"colors","frozen":false,"grasp_axis_yaw_base_rad":-0.15888319147775026,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":0.019214615985232903,"has_stable_pose":true,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.017549962882020285,0.02167876851243377],"orientation_source":"top_surface_square_min_area_edge","physical_cube_count":1,"position_std_m":[5.7421098905472535e-05,4.5212782793222644e-05,3.269042299738872e-05],"reason":"stable_target_updated","rejected_color_regions":{"not_a_cube_on_sorting_plane":1},"required_samples":8,"rgb_color_regions":2,"sample_stamp":1789373847.0476632,"samples":8,"stable":true,"top_axis_ratio":1.2029624576268265,"top_z_spread_m":0.0018204991272932902,"tracking":true,"valid":true}'

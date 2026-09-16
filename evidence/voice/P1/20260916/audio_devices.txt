@@ -1,0 +1,4 @@
+ 0 [rockchipdp0    ]: rockchip_dp0 - rockchip,dp0
+                      rockchip,dp0
+ 1 [rockchipes8388 ]: rockchip-es8388 - rockchip-es8388
+                      rockchip-es8388

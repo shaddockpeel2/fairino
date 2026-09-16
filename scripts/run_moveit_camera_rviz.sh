@@ -12,6 +12,33 @@ workspace="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 source /opt/ros/humble/setup.bash
 source "$workspace/install/setup.bash"
 
+# Select exactly one perception scene before starting the hardware stack.
+detection_mode="${FR3C_DETECTION_MODE:-blue}"
+launch_args=()
+for argument in "$@"; do
+  case "$argument" in
+    detection_mode:=*) detection_mode="${argument#detection_mode:=}" ;;
+    *) launch_args+=("$argument") ;;
+  esac
+done
+case "$detection_mode" in
+  blue) ;;
+  colors) ;;
+  yolo)
+    yolo_site_packages="$workspace/.venv-yolo/lib/python3.10/site-packages"
+    if [[ ! -f "$yolo_site_packages/rknnlite/api/rknn_lite.py" ||
+          ! -f "$yolo_site_packages/ruamel/yaml/__init__.py" ]]; then
+      echo "ERROR: run scripts/setup_yolo_runtime.sh before starting YOLO mode." >&2
+      exit 2
+    fi
+    export PYTHONPATH="$yolo_site_packages${PYTHONPATH:+:$PYTHONPATH}"
+    ;;
+  *)
+    echo "ERROR: detection_mode must be blue, colors or yolo, got '$detection_mode'." >&2
+    exit 2
+    ;;
+esac
+
 existing_nodes="$(ros2 node list 2>/dev/null || true)"
 for node in \
   /controller_manager \
@@ -43,10 +70,12 @@ else
 fi
 
 exec ros2 launch fairino_mtc_demo full_first_grasp.launch.py \
+  detection_mode:="$detection_mode" \
+  sort_enabled:="${FR3C_SORT_ENABLED:-$([[ "$detection_mode" == colors ]] && echo true || echo false)}" \
   gripper_backend:="$gripper_backend" \
   gripper_hardware_output_enabled:="$gripper_hardware_output_enabled" \
   start_blue_cube_localizer:="${FR3C_START_BLUE_CUBE_LOCALIZER:-true}" \
   start_first_grasp:="${FR3C_START_FIRST_GRASP:-true}" \
   first_grasp_execute:="${FR3C_FIRST_GRASP_EXECUTE:-true}" \
   run_p6_preflight:="${FR3C_RUN_P6_PREFLIGHT:-true}" \
-  "$@"
+  "${launch_args[@]}"

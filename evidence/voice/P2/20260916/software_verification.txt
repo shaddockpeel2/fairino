@@ -1,0 +1,48 @@
+FR3C offline voice-grasp plan, stage P2 software verification
+Date: 2026-09-16
+
+No robot or gripper command was issued during this verification.
+
+Build command:
+  source /opt/ros/humble/setup.bash
+  colcon build --packages-up-to fairino_mtc_demo fr3c_camera \
+    --symlink-install --cmake-args -DBUILD_TESTING=OFF
+
+Build result:
+  8 packages finished successfully:
+  orbbec_camera_msgs, fairino_msgs, fairino_description,
+  fr3c_gripper_driver, orbbec_camera, fr3c_camera,
+  fairino3mt_v6_moveit2_config, fairino_mtc_demo
+
+Interface checks:
+  ros2 interface show fairino_msgs/action/PickColor
+  ros2 interface show fairino_msgs/srv/SetTargetColor
+Result: both interfaces resolved successfully.
+
+Targeted regression:
+  python3 -m pytest -q \
+    src/fr3c_camera/test/test_cube_perception.py \
+    src/fr3c_camera/test/test_tracking_window.py \
+    src/fairino_mtc_demo/test/test_sort_regions.py \
+    test/test_voice_p1_baseline.py
+Result: 24 passed, 1 warning.
+
+Full Python regression:
+  python3 -m pytest -q
+Result: 79 passed, 1 warning.
+
+The warning is the existing Python 3.11 compatibility warning emitted while
+loading MoveIt launch utilities; there were no test failures.
+
+Field-follow-up build:
+  Added /fr3c_first_grasp/acknowledge_object_released after a successful
+  pick_hold exposed the intended HOLDING_OBJECT guard. An incremental
+  fairino_mtc_demo build completed successfully. The service itself sends no
+  robot or gripper command and must be called only after physical release.
+
+Color-filter follow-up:
+  Live status showed detection_mode=colors and sort_enabled=true, but the
+  completed red action left target_filter_color=red. The release acknowledgement
+  now also clears the perception filter to the all-colors state. The updated
+  fairino_mtc_demo target compiled successfully; an already running process
+  must be restarted to load this change.

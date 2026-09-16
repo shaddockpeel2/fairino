@@ -1,0 +1,9 @@
+{
+  "samples": 68,
+  "duration_s": 20.003564619,
+  "minimum_available_mib": 5421.65625,
+  "maximum_swap_used_mib": 0.0,
+  "cpu_ticks_per_second": 100,
+  "npu_available": false,
+  "note": "RSS is per process, not additive physical memory; CPU = delta ticks / HZ / elapsed seconds; sampled peaks may miss short transients."
+}

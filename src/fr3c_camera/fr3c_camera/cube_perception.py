@@ -6,7 +6,7 @@ functions deliberately contain no ROS imports so the geometry can be tested
 offline with synthetic data.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 import cv2
 import numpy as np
@@ -27,10 +27,25 @@ class BlueCandidate:
 class TopSurface:
     center: np.ndarray
     size_xy: np.ndarray
+    long_axis_yaw_rad: float
+    square_edge_yaw_rad: float
+    axis_ratio: float
     point_count: int
     top_point_count: int
     depth_valid_fraction: float
     z_spread: float
+
+
+def compensate_top_surface_z(surface, z_compensation_m):
+    """Apply a signed base-Z correction without altering raw surface quality."""
+    compensation = float(z_compensation_m)
+    center = np.asarray(surface.center, dtype=np.float64)
+    if center.shape != (3,) or not np.isfinite(center).all() or \
+            not np.isfinite(compensation):
+        raise ValueError('invalid_top_surface_z_compensation')
+    corrected = center.copy()
+    corrected[2] += compensation
+    return replace(surface, center=corrected)
 
 
 def blue_mask(
@@ -60,6 +75,51 @@ def blue_mask(
         mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
         mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
     return mask
+
+
+def color_mask(bgr, hue_intervals, saturation_min=80, value_min=35,
+               morphology_size=3):
+    """Segment one named color, including hue intervals crossing red's seam."""
+    if not hue_intervals or len(hue_intervals) % 2:
+        raise ValueError('invalid_color_hue_intervals')
+    mask = np.zeros(np.asarray(bgr).shape[:2], dtype=np.uint8)
+    for lower, upper in zip(hue_intervals[::2], hue_intervals[1::2]):
+        if not 0 <= lower <= upper <= 179:
+            raise ValueError('invalid_color_hue_intervals')
+        # Reuse the existing validated HSV/morphology path for each interval.
+        if lower == upper:
+            raise ValueError('invalid_color_hue_intervals')
+        mask = cv2.bitwise_or(mask, blue_mask(
+            bgr, lower, upper, saturation_min, value_min, morphology_size))
+    return mask
+
+
+def find_color_candidates(bgr, color_intervals, saturation_min=80,
+                          value_min=35, morphology_size=3, **candidate_filter):
+    """Return (color, candidate) pairs; callers require exactly one overall."""
+    found = []
+    for color, intervals in color_intervals.items():
+        mask = color_mask(bgr, intervals, saturation_min, value_min,
+                          morphology_size)
+        found.extend((color, item) for item in
+                     find_blue_candidates(mask, **candidate_filter))
+    return found
+
+
+def is_tabletop_cube(surface, cube_height_m, cube_max_axis_ratio,
+                     plane_z_m, maximum_plane_gap_m):
+    """Require a square top at the expected height above the work plane."""
+    if not np.isfinite((cube_height_m, cube_max_axis_ratio, plane_z_m,
+                        maximum_plane_gap_m)).all() or cube_height_m <= 0 or \
+            cube_max_axis_ratio < 1 or maximum_plane_gap_m < 0:
+        raise ValueError('invalid_tabletop_cube_filter')
+    center = np.asarray(surface.center, dtype=np.float64)
+    if center.shape != (3,) or not np.isfinite(center).all() or \
+            not np.isfinite(surface.axis_ratio):
+        return False
+    gap = float(center[2] - cube_height_m - plane_z_m)
+    return surface.axis_ratio <= cube_max_axis_ratio and \
+        0.0 <= gap <= maximum_plane_gap_m
 
 
 def find_blue_candidates(
@@ -251,15 +311,40 @@ def extract_top_surface(
     robust_origin = np.median(xy, axis=0)
     centered = xy - robust_origin
     covariance = centered.T @ centered / max(1, centered.shape[0] - 1)
-    _, axes = np.linalg.eigh(covariance)
+    eigenvalues, axes = np.linalg.eigh(covariance)
     coordinates = centered @ axes
     low, high = np.percentile(coordinates, [2.5, 97.5], axis=0)
     size_xy = np.sort(high - low)
     center_xy = robust_origin + ((low + high) * 0.5) @ axes.T
+    # eigh() returns the minor and major axes in ascending eigenvalue order.
+    # A rectangle has an unoriented long axis: yaw and yaw + pi describe the
+    # same physical axis.  Keep the published representative in [-pi/2, pi/2)
+    # and let downstream code handle that pi symmetry explicitly.
+    long_axis = axes[:, 1]
+    long_axis_yaw = float(np.arctan2(long_axis[1], long_axis[0]))
+    long_axis_yaw = float((long_axis_yaw + np.pi * 0.5) % np.pi - np.pi * 0.5)
+    minor_variance = max(float(eigenvalues[0]), 1e-12)
+    axis_ratio = float(np.sqrt(max(float(eigenvalues[1]), 0.0) / minor_variance))
+    # PCA intentionally has no preferred direction for a square. Recover a
+    # grasp-equivalent edge from the minimum-area top-surface rectangle and
+    # canonicalize it modulo 90 degrees. Either adjacent edge is therefore
+    # equivalent and angle wrapping cannot create a false discontinuity.
+    rectangle = cv2.minAreaRect(xy.astype(np.float32))
+    corners = cv2.boxPoints(rectangle).astype(np.float64)
+    edges = np.roll(corners, -1, axis=0) - corners
+    edge = edges[int(np.argmax(np.linalg.norm(edges, axis=1)))]
+    square_edge_yaw = float(np.arctan2(edge[1], edge[0]))
+    square_period = np.pi * 0.5
+    square_edge_yaw = float(
+        (square_edge_yaw + square_period * 0.5) % square_period -
+        square_period * 0.5)
     z_low, z_high = np.percentile(top[:, 2], [10.0, 90.0])
     return TopSurface(
         center=np.array([center_xy[0], center_xy[1], np.median(top[:, 2])]),
         size_xy=size_xy,
+        long_axis_yaw_rad=long_axis_yaw,
+        square_edge_yaw_rad=square_edge_yaw,
+        axis_ratio=axis_ratio,
         point_count=int(points.shape[0]),
         top_point_count=int(top.shape[0]),
         depth_valid_fraction=float(depth_valid_fraction),

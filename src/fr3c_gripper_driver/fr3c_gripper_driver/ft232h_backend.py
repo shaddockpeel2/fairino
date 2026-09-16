@@ -27,6 +27,7 @@ class Ft232hPwmBackend:
             raise ValueError('chunk_frames must be >= 2')
         self._condition = threading.Condition()
         self._thread = None
+        self._retired_threads = []
         self._stop = False
         self._current_us = None
         self._target_us = None
@@ -81,11 +82,13 @@ class Ft232hPwmBackend:
         with self._condition:
             if self._error:
                 # USB devices can re-enumerate while the process stays alive.
-                # Once the failed writer thread has exited, let the next
-                # explicit action goal reopen the current FTDI device instead
-                # of permanently poisoning the backend until process restart.
+                # An errored writer has already stopped issuing PWM writes, but
+                # pyftdi's close() can remain blocked while a device disappears.
+                # Do not let that cleanup thread permanently poison subsequent
+                # explicit goals: retire it and let a fresh controller reopen
+                # the re-enumerated device.
                 if self._thread is not None and self._thread.is_alive():
-                    raise RuntimeError(self._error)
+                    self._retired_threads.append(self._thread)
                 self._thread = None
                 self._error = None
                 self._actual_rate_hz = None
@@ -116,8 +119,11 @@ class Ft232hPwmBackend:
             self._stop = True
             self._condition.notify_all()
             thread = self._thread
+            retired_threads = list(self._retired_threads)
         if thread is not None:
             thread.join(timeout=2.0)
+        for retired_thread in retired_threads:
+            retired_thread.join(timeout=0.2)
 
     def _load_controller(self):
         try:

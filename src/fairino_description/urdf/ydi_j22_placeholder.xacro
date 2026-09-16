@@ -11,7 +11,8 @@
        the drawing's 166 mm maximum span. -->
   <xacro:macro name="ydi_j22_placeholder"
                params="parent mount_xyz mount_rpy spacer tcp_xyz tcp_rpy
-                       body_x body_y body_z finger_x finger_y finger_z
+                       body_x body_y body_z body_positive_y_collision_extension
+                       finger_x finger_y finger_z
                        finger_center_x finger_center_y finger_center_z
                        finger_open_multiplier">
     <link name="gripper_mount_link"/>
@@ -43,8 +44,10 @@
         <material name="gripper_gray"><color rgba="0.35 0.38 0.42 1"/></material>
       </visual>
       <collision>
-        <origin xyz="0 0 ${body_z/2}"/>
-        <geometry><box size="${body_x} ${body_y} ${body_z}"/></geometry>
+        <!-- The camera is on flange -Y. Extend only the opposite (+Y) face;
+             shifting by half the extension keeps the camera-side face fixed. -->
+        <origin xyz="0 ${body_positive_y_collision_extension/2} ${body_z/2}"/>
+        <geometry><box size="${body_x} ${body_y + body_positive_y_collision_extension} ${body_z}"/></geometry>
       </collision>
     </link>
     <joint name="gripper_joint" type="fixed">

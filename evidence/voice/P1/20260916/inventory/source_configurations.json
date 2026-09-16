@@ -1,0 +1,176 @@
+{
+  "qwen3vl": {
+    "schema_version": 1,
+    "model": {
+      "id": "qwen3-vl-2b-instruct-w8a8-rk3588",
+      "enabled": true,
+      "vision_path": "rknn-llm-main/examples/multimodal_model_demo/data/rknn/qwen3-vl_vision_rk3588.rknn",
+      "language_path": "rknn-llm-main/examples/multimodal_model_demo/data/rkllm/qwen3-vl-2b-instruct_w8a8_rk3588.rkllm",
+      "image_width": 448,
+      "image_height": 448
+    },
+    "worker": {
+      "source_path": "rknn-llm-main/examples/multimodal_model_demo/web/worker/qwen3_vl_worker.cpp",
+      "binary_path": "rknn-llm-main/examples/multimodal_model_demo/web/install/bin/qwen3_vl_worker",
+      "rkllm_runtime_path": "rknn-llm-main/examples/multimodal_model_demo/web/install/lib/librkllmrt.so",
+      "rknn_runtime_path": "rknn-llm-main/examples/multimodal_model_demo/web/install/lib/librknnrt.so",
+      "transport": "unix",
+      "socket_name": "qwen3vl-worker.sock",
+      "max_new_tokens": 512,
+      "max_context_len": 4096,
+      "npu_core_num": 1,
+      "startup_timeout_s": 120,
+      "request_timeout_s": 180,
+      "max_prompt_bytes": 65536,
+      "max_image_bytes": 10485760,
+      "tools_enabled": false
+    },
+    "asr_assets": {
+      "enabled": false,
+      "service_source_path": "rknn-llm-main/examples/multimodal_model_demo/web/asr_service.py",
+      "runtime_path": "rknn-llm-main/ASR/rknn-runtime/librknnrt.so",
+      "model_dir": "rknn-llm-main/ASR/sherpa-onnx-rk3588-streaming-zipformer-small-bilingual-zh-en-2023-02-16"
+    },
+    "excluded_legacy_features": {
+      "web_http_server": true,
+      "deepseek_model": true,
+      "legacy_yolo_service": true,
+      "music_tools": true,
+      "wake_word": true,
+      "remote_api": true
+    }
+  },
+  "audio": {
+    "schema_version": 1,
+    "audio": {
+      "enabled": true,
+      "capture_device": "plughw:CARD=Device,DEV=0",
+      "playback_device": "plughw:CARD=Device,DEV=0",
+      "card_name_hint": "USB Audio Device",
+      "sample_rate_hz": 16000,
+      "maximum_record_seconds": 30,
+      "minimum_record_seconds": 0.35,
+      "asr_timeout_s": 60,
+      "playback_timeout_s": 60,
+      "maximum_tts_characters": 120,
+      "runtime_directory": "dofbot/Log/p17/runtime"
+    },
+    "asr": {
+      "binary_path": "rknn-llm-main/ASR/.venv/bin/sherpa-onnx",
+      "runtime_path": "rknn-llm-main/ASR/rknn-runtime/librknnrt.so",
+      "model_directory": "rknn-llm-main/ASR/sherpa-onnx-rk3588-streaming-zipformer-small-bilingual-zh-en-2023-02-16",
+      "provider": "rknn",
+      "num_threads": -1,
+      "decoding_method": "modified_beam_search",
+      "hotwords_file": "dofbot/config/agent/asr_hotwords.txt",
+      "hotwords_score": 2.0,
+      "streaming_worker": "dofbot/tools/p17_streaming_asr_worker.py",
+      "streaming_c_api_library": "rknn-llm-main/ASR/.venv/lib/python3.9/site-packages/sherpa_onnx/lib/libsherpa-onnx-c-api.so"
+    },
+    "wake_word": {
+      "enabled": true,
+      "phrases": [
+        "小博同学",
+        "小波同学"
+      ],
+      "listen_seconds": 3,
+      "query_seconds": 30,
+      "cpu_kws": {
+        "enabled": true,
+        "model_directory": "dofbot/models/kws/sherpa-onnx-kws-zipformer-wenetspeech-3.3M-2024-01-01",
+        "keywords_file": "dofbot/config/agent/kws_keywords.txt",
+        "num_threads": 2,
+        "score": 1.8,
+        "threshold": 0.2,
+        "num_trailing_blanks": 1,
+        "pre_roll_seconds": 2.0,
+        "chunk_ms": 100
+      }
+    },
+    "endpointing": {
+      "enabled": true,
+      "frame_ms": 20,
+      "speech_threshold_dbfs": -45.0,
+      "minimum_speech_ms": 180,
+      "trailing_silence_ms": 3000,
+      "initial_silence_ms": 7000,
+      "maximum_utterance_ms": 30000
+    },
+    "tts": {
+      "enabled": true,
+      "backend": "kokoro",
+      "model_directory": "dofbot/kokoro_tts/kokoro-multi-lang-v1_1",
+      "model_filename": "model.onnx",
+      "speaker_id": 3,
+      "speed": 1.15,
+      "num_threads": 4,
+      "warmup_text": "语音准备就绪",
+      "resume_listening_delay_s": 0.4,
+      "pre_recorded_text": "我在",
+      "pre_recorded_wav": "dofbot/resources/audio/wake_ack_wozai.wav",
+      "defer_during_model_inference": false,
+      "first_segment_min_characters": 10,
+      "first_segment_max_characters": 20,
+      "segment_target_characters": 28,
+      "segment_max_characters": 44,
+      "stream_prebuffer_seconds": 0.55,
+      "stream_prebuffer_min_seconds": 0.35,
+      "stream_prebuffer_max_seconds": 1.2,
+      "stream_prebuffer_step_seconds": 0.15,
+      "player_latency_ms": 80,
+      "stream_block_ms": 40,
+      "silence_threshold_dbfs": -50.0,
+      "leading_silence_ms": 15,
+      "unpunctuated_pause_ms": 35,
+      "clause_pause_ms": 65,
+      "sentence_pause_ms": 120,
+      "max_concealment_ms": 120
+    }
+  },
+  "rag": {
+    "schema_version": 1,
+    "enabled": true,
+    "paths": {
+      "sources_dir": "dofbot/knowledge/sources",
+      "index_dir": "dofbot/knowledge/builds/current",
+      "tokenizer_dir": "dofbot/RAG/weights/bge-small-zh-v1.5",
+      "onnx_model_path": "dofbot/RAG/test/bge-small-zh-v1.5_seq128_fp32.onnx",
+      "rknn_model_path": "dofbot/RAG/test/bge-small-zh-v1.5_seq128_int32_fp16_rk3588.rknn"
+    },
+    "chunking": {
+      "sequence_length": 128,
+      "passage_tokens": 96,
+      "overlap_tokens": 16
+    },
+    "retrieval": {
+      "top_n": 1000,
+      "top_k": 5,
+      "minimum_score": 0.45,
+      "minimum_margin": 0.0,
+      "high_confidence_score": 0.62,
+      "minimum_lexical_coverage": 0.45,
+      "minimum_scoped_lexical_coverage": 0.2,
+      "minimum_source_identity_coverage": 0.4,
+      "lexical_weight": 0.2,
+      "maximum_context_chars": 2600
+    },
+    "runtime": {
+      "npu_core": "0",
+      "query_instruction": "为这个句子生成表示以用于检索相关文章："
+    }
+  },
+  "npu_coordination": {
+    "schema_version": 1,
+    "coordination": {
+      "service_ready_timeout_s": 3.0,
+      "pause_confirm_timeout_s": 3.0,
+      "resume_confirm_timeout_s": 5.0,
+      "status_stale_timeout_s": 2.5,
+      "fault_reset_timeout_s": 8.0,
+      "startup_timeout_s": 20.0,
+      "minimum_available_memory_mb": 1024,
+      "allow_asr_perception_concurrency": true,
+      "log_directory": "dofbot/Log/p14/runtime"
+    }
+  }
+}

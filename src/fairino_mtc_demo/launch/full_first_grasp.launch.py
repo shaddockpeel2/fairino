@@ -53,6 +53,10 @@ def generate_launch_description():
             'perception_config': LaunchConfiguration('perception_config'),
             'hand_eye_file': LaunchConfiguration('hand_eye_file'),
             'tcp_file': LaunchConfiguration('tcp_file'),
+            'detection_mode': LaunchConfiguration('detection_mode'),
+            'top_pose_z_compensation_m': LaunchConfiguration(
+                'top_pose_z_compensation_m'),
+            'yolo_model_path': LaunchConfiguration('yolo_model_path'),
         }.items(),
         condition=IfCondition(LaunchConfiguration('start_blue_cube_localizer')),
     )
@@ -62,6 +66,8 @@ def generate_launch_description():
         launch_arguments={
             'task_config': LaunchConfiguration('task_config'),
             'execute': LaunchConfiguration('first_grasp_execute'),
+            'sort_enabled': LaunchConfiguration('sort_enabled'),
+            'grid_file': LaunchConfiguration('grid_file'),
         }.items(),
         condition=IfCondition(LaunchConfiguration('start_first_grasp')),
     )
@@ -109,6 +115,17 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'perception_config',
             default_value=str(camera_share / 'config/blue_cube_localizer.yaml')),
+        DeclareLaunchArgument('detection_mode', default_value='blue'),
+        DeclareLaunchArgument(
+            'top_pose_z_compensation_m', default_value='-0.004',
+            description='Signed base-Z correction added to perception top poses.'),
+        DeclareLaunchArgument('sort_enabled', default_value='false'),
+        DeclareLaunchArgument(
+            'grid_file',
+            default_value='/home/industio/fairino_ws/evidence/a4_paper_grid.json'),
+        DeclareLaunchArgument(
+            'yolo_model_path',
+            default_value=str(camera_share / 'models/best.rknn')),
         DeclareLaunchArgument(
             'task_config',
             default_value=str(task_share / 'config/first_grasp.yaml')),
@@ -140,5 +157,6 @@ def generate_launch_description():
         preflight,
         LogInfo(msg=(
             'Full grasp stack requested. Wait for P3 valid=true/stable=true and the P6 '
-            'passed=true log, then call /fr3c_first_grasp/start.')),
+            'passed=true log, then call /fr3c_first_grasp/start for one target or '
+            '/fr3c_first_grasp/start_continuous for a colors-mode batch.')),
     ])

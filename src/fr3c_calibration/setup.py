@@ -23,6 +23,8 @@ setup(
             'handeye_pose_crosscheck = fr3c_calibration.pose_crosscheck:main',
             'tcp_pivot_capture = fr3c_calibration.tcp_pivot:capture_main',
             'tcp_pivot_analyze = fr3c_calibration.tcp_pivot:analyze_main',
+            'paper_grid = fr3c_calibration.paper_grid:main',
+            'surface_contact_capture = fr3c_calibration.surface_contact:main',
         ],
     },
 )

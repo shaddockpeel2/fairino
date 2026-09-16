@@ -1,0 +1,5 @@
+P6_EXECUTION_GATE_V1
+passed=false
+generated_at=2026-09-16T10:21:43.783666+08:00
+control_path=unverified
+report_path=full_stack_startup

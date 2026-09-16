@@ -39,6 +39,8 @@
     <xacro:arg name="gripper_body_x" default="0.056"/>
     <xacro:arg name="gripper_body_y" default="0.08059"/>
     <xacro:arg name="gripper_body_z" default="0.085"/>
+    <!-- One-sided collision margin on the +Y face, away from the -Y camera. -->
+    <xacro:arg name="gripper_away_from_camera_collision_extension" default="0.005"/>
     <xacro:arg name="gripper_finger_x" default="0.012"/>
     <xacro:arg name="gripper_finger_y" default="0.013"/>
     <xacro:property name="gripper_finger_proximal_body_z" value="${0.080}"/>
@@ -56,22 +58,26 @@
         spacer="$(arg gripper_spacer)" tcp_xyz="${gripper_tcp_from_body_xyz}"
         tcp_rpy="$(arg gripper_tcp_rpy)"
         body_x="$(arg gripper_body_x)" body_y="$(arg gripper_body_y)"
-        body_z="$(arg gripper_body_z)" finger_x="$(arg gripper_finger_x)"
+        body_z="$(arg gripper_body_z)"
+        body_positive_y_collision_extension="$(arg gripper_away_from_camera_collision_extension)"
+        finger_x="$(arg gripper_finger_x)"
         finger_y="$(arg gripper_finger_y)" finger_z="${gripper_finger_z}"
         finger_center_x="$(arg gripper_finger_center_x)"
         finger_center_y="$(arg gripper_finger_center_y)"
         finger_center_z="${gripper_finger_center_z}"
         finger_open_multiplier="$(arg gripper_finger_open_multiplier)"/>
 
-    <!-- Camera housing: 100 x 35 x 20 mm measured by user.
-         Centre offset estimated from photos, NOT a hand-eye calibration. -->
-    <!-- Nominal flange radius 40 mm + half camera height 17.5 mm. The camera
-         is physically on flange -Y; +Y was the earlier photo-based guess. -->
-    <xacro:arg name="camera_mount_xyz" default="0 -0.0575 0.015"/>
+    <!-- Camera housing: 90 x 45 x 60 mm measured by user (X length,
+         Y radial height, Z depth along the shooting/tool direction).
+         Centre offset is approximate geometry, NOT a hand-eye calibration. -->
+    <!-- Keep the housing tangent to the nominal 40 mm flange radius on -Y:
+         centre Y = -(40 + 45/2) mm. Keep its rear face at flange Z +5 mm,
+         so the added depth projects forward along +Z. -->
+    <xacro:arg name="camera_mount_xyz" default="0 -0.0625 0.035"/>
     <xacro:arg name="camera_mount_rpy" default="0 0 0"/>
-    <xacro:arg name="camera_size_x" default="0.100"/>
-    <xacro:arg name="camera_size_y" default="0.035"/>
-    <xacro:arg name="camera_size_z" default="0.020"/>
+    <xacro:arg name="camera_size_x" default="0.090"/>
+    <xacro:arg name="camera_size_y" default="0.045"/>
+    <xacro:arg name="camera_size_z" default="0.060"/>
     <xacro:arg name="camera_collision_padding" default="0.003"/>
     <xacro:include filename="$(find fairino_description)/urdf/gemini_pro_placeholder.xacro"/>
     <xacro:gemini_pro_placeholder parent="gripper_mount_link"

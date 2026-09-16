@@ -1,0 +1,24 @@
+frame: base_link
+target_top_xyz_m: [0.147448596793, -0.414125970148, 0.0370024070241]
+target_object_orientation_xyzw: [0, 0, 0.0968235638329, 0.995301561079]
+object_long_axis_yaw_rad: 0.193950978526
+applied_grasp_yaw_rad: -1.37684534827
+selected_grasp_orientation_xyzw: [0.6353198846, 0.77224908173, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+approach_clearance_m: 0.01
+grasp_depth_m: 0.015
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.026
+object_size_m: [0.03, 0.03, 0.03]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 600
+perception_status_json: '{"candidate_area_px":1226.5,"center_base_m":[0.14741929495015002,-0.41425223830812113,0.03710575537058203],"depth_valid_fraction":0.8897338403041825,"frozen":false,"grasp_axis_yaw_base_rad":0.19903446940887104,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":0.0314707798386063,"has_stable_pose":true,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.020510566323339356,0.022030948006725913],"orientation_source":"top_surface_square_min_area_edge","position_std_m":[0.00010466354024571626,0.0001608480031705148,4.6367632342094856e-05],"reason":"stable_target_updated","required_samples":8,"sample_stamp":1789358138.4255428,"samples":8,"stable":true,"top_axis_ratio":1.0719228514464432,"top_z_spread_m":0.0018197625597232564,"tracking":true,"valid":true}'

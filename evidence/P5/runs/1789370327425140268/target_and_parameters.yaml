@@ -1,0 +1,32 @@
+frame: base_link
+target_top_xyz_m: [-0.0965033944137, -0.399060282665, 0.0367937032332]
+target_object_orientation_xyzw: [0, 0, 0.0344058224981, 0.999407944424]
+object_long_axis_yaw_rad: 0.068825228319
+applied_grasp_yaw_rad: 0.068825228319
+selected_grasp_orientation_xyzw: [-0.0344058224981, 0.999407944424, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+maximum_joint6_total_travel_rad: 1.57079632679
+minimum_joint6_limit_margin_rad: 0.174532925199
+joint6_soft_fallback: true
+approach_clearance_m: 0.01
+grasp_depth_m: 0.015
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.026
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: yellow
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.2374912583, -0.374433469667, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 600
+perception_status_json: '{"candidate_area_px":2249.5,"center_base_m":[-0.09645952861814908,-0.3991222587553219,0.0368132607906774],"color":"yellow","depth_valid_fraction":0.9972583961617546,"detection_mode":"colors","frozen":false,"grasp_axis_yaw_base_rad":0.06882522831903161,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":0.02768634491980226,"has_stable_pose":true,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.02169849826510374,0.022982363099865892],"orientation_source":"top_surface_square_min_area_edge","position_std_m":[4.5659414577176555e-05,7.024838265208344e-05,1.4068135452932435e-05],"reason":"stable_target_updated","required_samples":8,"sample_stamp":1789370327.045325,"samples":8,"stable":true,"top_axis_ratio":1.0557368219831178,"top_z_spread_m":0.0009935800700459838,"tracking":true,"valid":true}'

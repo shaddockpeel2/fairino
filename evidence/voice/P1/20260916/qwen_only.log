@@ -1,0 +1,8 @@
+cold-10 {'qwen_first_token_s': 0.15583340499961196, 'qwen_total_s': 0.8045151679998526}
+cold-30 {'qwen_first_token_s': 0.164241827999831, 'qwen_total_s': 1.844080206000399}
+cold-60 {'qwen_first_token_s': 0.2170502219996706, 'qwen_total_s': 2.855704069999774}
+cold-120 {'qwen_first_token_s': 0.37562753000020166, 'qwen_total_s': 3.0342372949999117}
+warm-10 {'qwen_first_token_s': 0.14500778899946454, 'qwen_total_s': 0.7938934690000679}
+warm-30 {'qwen_first_token_s': 0.1625239339991822, 'qwen_total_s': 1.7876520169993455}
+warm-60 {'qwen_first_token_s': 0.2126884239996798, 'qwen_total_s': 2.862469339999734}
+warm-120 {'qwen_first_token_s': 0.39104135900015535, 'qwen_total_s': 3.0203594289996545}

@@ -1,0 +1,30 @@
+{"time_ns":1789358034342170278,"event":"run_started","detail":"execution"}
+{"time_ns":1789358034342293654,"event":"target_locked","detail":"locked top=[0.251642467,-0.486035948,0.0353084136] m, object_yaw=0.614279261 rad, applied_grasp_yaw=-0.956517066 rad"}
+{"time_ns":1789358035697018036,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,position=0.06"}
+{"time_ns":1789358035701429254,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1789358035705768887,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube added"}
+{"time_ns":1789358035827607626,"event":"plan_approach","detail":"return_code=1"}
+{"time_ns":1789358035839408596,"event":"plan_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0248515191"}
+{"time_ns":1789358035842686675,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789358035872878607,"event":"plan_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0408204147"}
+{"time_ns":1789358035886764434,"event":"preview_complete","detail":"approach, full descend and attached full lift planned"}
+{"time_ns":1789358035887299940,"event":"p6_gate","detail":"before approach passed"}
+{"time_ns":1789358035887322399,"event":"target_lock","detail":"before approach uses immutable start snapshot"}
+{"time_ns":1789358049342465550,"event":"execute_approach","detail":"return_code=1"}
+{"time_ns":1789358049349624883,"event":"arrival_approach","detail":"position_error_m=0.000361024577,orientation_error_rad=0.00115509328"}
+{"time_ns":1789358049349702759,"event":"state","detail":"waiting_for_descend_command: inspect high-clearance alignment, then call descend_and_close"}
+{"time_ns":1789358049349757593,"event":"state","detail":"descending_and_closing: planning from actual state, then descending and closing"}
+{"time_ns":1789358049349773343,"event":"target_lock","detail":"before descend uses immutable start snapshot"}
+{"time_ns":1789358049364550222,"event":"plan_descend_execute","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0248244065"}
+{"time_ns":1789358050326713279,"event":"execute_descend_execute","detail":"return_code=1"}
+{"time_ns":1789358050333444732,"event":"arrival_descend_execute","detail":"position_error_m=0.000255559412,orientation_error_rad=0.000100323798"}
+{"time_ns":1789358051673992362,"event":"gripper_close","detail":"result_code=4,reached_goal=1,position=0.026"}
+{"time_ns":1789358051676929187,"event":"gripper_state_close","detail":"estimated_position_m=0.026571"}
+{"time_ns":1789358051677000647,"event":"state","detail":"waiting_for_manual_grip_confirmation: 26 mm was commanded open-loop; physically confirm grip before lift"}
+{"time_ns":1789358051677076481,"event":"state","detail":"attaching_and_lifting: manual grip confirmed; attaching cube and planning lift"}
+{"time_ns":1789358051677117315,"event":"target_lock","detail":"before lift uses immutable start snapshot"}
+{"time_ns":1789358051678270870,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789358051712384305,"event":"plan_lift_execute","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0408191352"}
+{"time_ns":1789358053472363064,"event":"execute_lift_execute","detail":"return_code=1"}
+{"time_ns":1789358053476916908,"event":"arrival_lift_execute","detail":"position_error_m=0.000319275615,orientation_error_rad=0.000307732422"}
+{"time_ns":1789358053476992451,"event":"state","detail":"complete_holding: lift complete; cube remains attached in the scene; after physically placing it, a fresh stable target may start the next trial"}
