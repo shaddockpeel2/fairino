@@ -1,34 +1,37 @@
-"""Continuous open-loop FT232H PWM backend.
+"""ROS-facing finite-command FT232H backend for the YDI-J22 gripper."""
 
-This backend deliberately opens the USB device only after the first command.
-No PWM is emitted merely by starting the ROS node.
-"""
-
-import importlib
-from pathlib import Path
-import sys
 import threading
 import time
 
-from .mapping import advance_pulse, build_pwm_frames
+from .ft232h_servo import GripperController, angle_to_pulse_us
 
 
 class Ft232hPwmBackend:
+    """Wrap the proven standalone controller behind the existing backend API."""
+
     def __init__(self, *, url, sample_rate_hz, frame_us, signal_pin,
-                 chunk_frames, slew_us_per_s, pyftdi_site_packages=''):
-        self.url = url
+                 command_duration_s=0.8, post_write_delay_s=0.05,
+                 electrical_min_us=500, electrical_max_us=2500,
+                 pyftdi_site_packages='', controller_factory=None,
+                 sleep=time.sleep):
+        self.url = str(url)
         self.sample_rate_hz = int(sample_rate_hz)
         self.frame_us = int(frame_us)
-        self.signal_mask = 1 << int(signal_pin)
-        self.chunk_frames = int(chunk_frames)
-        self.slew_us_per_s = float(slew_us_per_s)
+        if self.frame_us <= 0 or 1_000_000 % self.frame_us:
+            raise ValueError('frame_us must divide one second exactly')
+        self.pwm_hz = 1_000_000 // self.frame_us
+        self.signal_pin = int(signal_pin)
+        self.command_duration_s = float(command_duration_s)
+        self.post_write_delay_s = float(post_write_delay_s)
+        self.electrical_min_us = int(electrical_min_us)
+        self.electrical_max_us = int(electrical_max_us)
         self.pyftdi_site_packages = str(pyftdi_site_packages)
-        if self.chunk_frames < 2:
-            raise ValueError('chunk_frames must be >= 2')
+        self._controller_factory = controller_factory
+        self._sleep = sleep
+        if self.command_duration_s <= 0.0:
+            raise ValueError('command_duration_s must be positive')
         self._condition = threading.Condition()
-        self._thread = None
-        self._retired_threads = []
-        self._stop = False
+        self._active = False
         self._current_us = None
         self._target_us = None
         self._error = None
@@ -73,122 +76,64 @@ class Ft232hPwmBackend:
             return self._recovery_count
 
     def command(self, pulse_us):
-        # The asynchronous bit-bang sample period is the real pulse
-        # resolution (10 us at 100 kHz). Keep state/diagnostics consistent
-        # with the waveform that is physically emitted.
-        pulse_us = int(round(
-            round(int(pulse_us) * self.sample_rate_hz / 1_000_000)
-            * 1_000_000 / self.sample_rate_hz))
+        return self._run_command(
+            round(float(pulse_us)),
+            lambda controller: controller.move_pulse(
+                pulse_us, self.command_duration_s),
+        )
+
+    def command_angle(self, angle_deg):
+        """Execute the exact angle mapping used by the standalone test."""
+        requested_pulse_us = angle_to_pulse_us(
+            angle_deg, self.electrical_min_us, self.electrical_max_us)
+        return self._run_command(
+            round(requested_pulse_us),
+            lambda controller: controller.move_angle(
+                angle_deg, self.command_duration_s),
+        )
+
+    def _run_command(self, requested_pulse_us, move):
         with self._condition:
-            if self._error:
-                # USB devices can re-enumerate while the process stays alive.
-                # An errored writer has already stopped issuing PWM writes, but
-                # pyftdi's close() can remain blocked while a device disappears.
-                # Do not let that cleanup thread permanently poison subsequent
-                # explicit goals: retire it and let a fresh controller reopen
-                # the re-enumerated device.
-                if self._thread is not None and self._thread.is_alive():
-                    self._retired_threads.append(self._thread)
-                self._thread = None
+            if self._active:
+                raise RuntimeError('FT232H command is already active')
+            if self._error is not None:
                 self._error = None
-                self._actual_rate_hz = None
-                self._stop = False
                 self._recovery_count += 1
-            if self._thread is None:
-                # On the first goal the physical position is unknown, so start
-                # at the requested target. After USB recovery retain the last
-                # emitted pulse and slew from it toward the new target.
-                if self._current_us is None:
-                    self._current_us = pulse_us
-                self._target_us = pulse_us
-                self._thread = threading.Thread(
-                    target=self._run, name='ft232h_pwm', daemon=True)
-                self._thread.start()
-            else:
-                self._target_us = pulse_us
-            self._condition.notify_all()
-        return pulse_us
-
-    def freeze(self):
-        with self._condition:
-            if self._current_us is not None:
-                self._target_us = self._current_us
-
-    def close(self):
-        with self._condition:
-            self._stop = True
-            self._condition.notify_all()
-            thread = self._thread
-            retired_threads = list(self._retired_threads)
-        if thread is not None:
-            thread.join(timeout=2.0)
-        for retired_thread in retired_threads:
-            retired_thread.join(timeout=0.2)
-
-    def _load_controller(self):
+            self._active = True
+            self._target_us = int(requested_pulse_us)
         try:
-            module = importlib.import_module('pyftdi.gpio')
-        except ImportError:
-            path = Path(self.pyftdi_site_packages).expanduser()
-            if not path.is_dir():
-                raise RuntimeError(
-                    'pyftdi is unavailable; configure pyftdi_site_packages')
-            sys.path.insert(0, str(path))
-            module = importlib.import_module('pyftdi.gpio')
-        return module.GpioAsyncController
-
-    def _run(self):
-        gpio = None
-        try:
-            controller = self._load_controller()
-            gpio = controller()
-            gpio.configure(
-                self.url,
-                direction=self.signal_mask,
-                initial=0,
-                frequency=self.sample_rate_hz,
-            )
+            with GripperController(
+                url=self.url,
+                signal_pin=self.signal_pin,
+                sample_rate_hz=self.sample_rate_hz,
+                pwm_hz=self.pwm_hz,
+                electrical_min_us=self.electrical_min_us,
+                electrical_max_us=self.electrical_max_us,
+                post_write_delay_s=self.post_write_delay_s,
+                pyftdi_site_packages=self.pyftdi_site_packages,
+                controller_factory=self._controller_factory,
+                sleep=self._sleep,
+            ) as controller:
+                result = move(controller)
             with self._condition:
-                self._actual_rate_hz = float(gpio.frequency)
-            while True:
-                with self._condition:
-                    if self._stop:
-                        break
-                    current = self._current_us
-                    target = self._target_us
-                pulses = []
-                for _ in range(self.chunk_frames):
-                    current = advance_pulse(
-                        current, target, self.slew_us_per_s, self.frame_us)
-                    pulses.append(current)
-                payload = build_pwm_frames(
-                    pulses,
-                    sample_rate_hz=self.sample_rate_hz,
-                    frame_us=self.frame_us,
-                    signal_mask=self.signal_mask,
-                )
-                started = time.monotonic()
-                gpio.write(payload)
-
-                # A USB bulk write may return before the FT232H has clocked all
-                # samples onto the pin. Pace the producer by the represented
-                # waveform duration so old goals cannot accumulate in host/USB
-                # buffers and emerge seconds later as unexpected motion. If
-                # write() itself blocks, only wait for the remaining duration.
-                waveform_seconds = len(payload) / self._actual_rate_hz
-                remaining = waveform_seconds - (time.monotonic() - started)
-                if remaining > 0.0:
-                    time.sleep(remaining)
-                with self._condition:
-                    self._current_us = current
-                    self._frames_written += len(pulses)
-                    self._bytes_written += len(payload)
-        except Exception as error:  # hardware/USB errors must reach diagnostics
+                self._current_us = result.effective_pulse_us
+                self._target_us = result.effective_pulse_us
+                self._actual_rate_hz = result.actual_sample_rate_hz
+                self._frames_written += result.frames
+                self._bytes_written += result.bytes_written
+            return result.effective_pulse_us
+        except Exception as error:
             with self._condition:
                 self._error = f'{type(error).__name__}: {error}'
+            raise
         finally:
-            if gpio is not None:
-                try:
-                    gpio.close()
-                except Exception:
-                    pass
+            with self._condition:
+                self._active = False
+
+    def freeze(self):
+        # command() returns only after the bounded PWM burst and AD7-low write.
+        return None
+
+    def close(self):
+        # Each command owns and closes its own FT232H session.
+        return None

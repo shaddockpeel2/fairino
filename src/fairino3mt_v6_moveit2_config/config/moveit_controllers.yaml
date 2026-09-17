@@ -2,6 +2,12 @@
 
 moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
 
+# Allow low-speed real-hardware trajectories enough time to settle before
+# MoveIt cancels them. The previous defaults were trajectory*1.1 + 0.5 s.
+trajectory_execution:
+  allowed_execution_duration_scaling: 1.5
+  allowed_goal_duration_margin: 2.0
+
 moveit_simple_controller_manager:
   controller_names:
     - fairino3mt_controller

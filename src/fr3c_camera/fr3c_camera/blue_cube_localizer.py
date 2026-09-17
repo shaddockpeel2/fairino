@@ -16,7 +16,7 @@ from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
 from sensor_msgs.msg import CameraInfo, Image, JointState
 from std_msgs.msg import Bool, String
-from std_srvs.srv import Trigger
+from std_srvs.srv import SetBool, Trigger
 from fairino_msgs.srv import SetTargetColor
 from tf2_ros import Buffer, TransformException, TransformListener
 from visualization_msgs.msg import Marker
@@ -35,6 +35,7 @@ from fr3c_camera.cube_perception import (
     transform_points,
 )
 from fr3c_camera.rgbd import image_array, stamp_seconds, validate_pair
+from fr3c_camera.inference_gate import InferenceGate
 from fr3c_camera.yolo_cube_candidate import candidate_from_detection
 
 
@@ -126,6 +127,9 @@ class BlueCubeLocalizer(Node):
         self._read_parameters()
         self._target_color = None
         self._filter_generation = 0
+        self._inference_gate = InferenceGate()
+        self._frames_processed = 0
+        self._processing_error_count = 0
         self._yolo_detector = None
         if self._detection_mode == 'yolo':
             from fr3c_camera.rknn_detector import RKNNDetector
@@ -151,6 +155,9 @@ class BlueCubeLocalizer(Node):
         self._debug_pub = self.create_publisher(Image, '~/debug_image', 1)
         self._marker_pub = self.create_publisher(Marker, '~/marker', 1)
         self.create_service(Trigger, '~/reset', self._reset_service)
+        self.create_service(
+            SetBool, '~/set_inference_enabled',
+            self._set_inference_enabled_service)
         self.create_service(
             SetTargetColor, '~/set_target_color', self._set_target_color_service)
         self.create_service(
@@ -555,6 +562,39 @@ class BlueCubeLocalizer(Node):
         return surface
 
     def _rgbd_callback(self, color, depth, color_info, depth_info):
+        self._last_frame_time = self.get_clock().now().nanoseconds * 1e-9
+        if not self._inference_gate.enter():
+            gate = self._inference_gate.snapshot()
+            with self._lock:
+                self._last_status = {
+                    'valid': False, 'stable': False, 'tracking': False,
+                    'frozen': False, 'has_stable_pose': False,
+                    'detection_mode': self._detection_mode,
+                    'target_filter_color': self._target_color or '',
+                    'filter_generation': self._filter_generation,
+                    'reason': 'perception_paused',
+                    'inference_enabled': gate.enabled,
+                    'active_inferences': gate.active_inferences,
+                    'pause_generation': gate.pause_generation,
+                }
+            return
+        success = False
+        try:
+            self._process_rgbd_callback(color, depth, color_info, depth_info)
+            with self._lock:
+                reason = str(self._last_status.get('reason', ''))
+            success = not reason.startswith('internal_error:')
+            if success:
+                self._frames_processed += 1
+            else:
+                self._processing_error_count += 1
+        except BaseException:
+            self._processing_error_count += 1
+            raise
+        finally:
+            self._inference_gate.leave(success=success)
+
+    def _process_rgbd_callback(self, color, depth, color_info, depth_info):
         frame_stamp = stamp_seconds(color)
         self._last_frame_time = self.get_clock().now().nanoseconds * 1e-9
         if self._last_processed_stamp is not None and \
@@ -893,22 +933,52 @@ class BlueCubeLocalizer(Node):
 
     def _heartbeat(self):
         now = self.get_clock().now().nanoseconds * 1e-9
+        gate = self._inference_gate.snapshot()
         with self._lock:
             status = dict(self._last_status)
             pose = self._stable_pose
             object_size = self._stable_object_size
             color_name = self._stable_color
+        status.update({
+            'inference_enabled': gate.enabled,
+            'active_inferences': gate.active_inferences,
+            'pause_generation': gate.pause_generation,
+            'frames_inferred': self._frames_processed,
+            'frames_skipped_paused': gate.frames_skipped_paused,
+            'last_inference_start_ns': gate.last_inference_start_ns,
+            'last_inference_end_ns': gate.last_inference_end_ns,
+            'last_success_ns': gate.last_success_ns,
+            'error_count': self._processing_error_count,
+            'npu_inference': self._detection_mode == 'yolo',
+        })
+        if not gate.enabled:
+            status.update({
+                'valid': False, 'stable': False, 'tracking': False,
+                'has_stable_pose': False, 'reason': 'perception_paused',
+            })
+            pose = None
+            object_size = None
         stream_stale = (
             self._last_frame_time is None or
             now - self._last_frame_time > self._max_age_s)
-        if stream_stale:
+        if stream_stale and gate.enabled:
             status = {
                 'valid': False, 'stable': False, 'tracking': True,
                 'frozen': False, 'has_stable_pose': pose is not None,
                 'detection_mode': self._detection_mode,
                 'target_filter_color': status.get('target_filter_color', ''),
                 'filter_generation': status.get('filter_generation', 0),
-                'reason': 'rgbd_stream_stale'}
+                'reason': 'rgbd_stream_stale',
+                'inference_enabled': gate.enabled,
+                'active_inferences': gate.active_inferences,
+                'pause_generation': gate.pause_generation,
+                'frames_inferred': self._frames_processed,
+                'frames_skipped_paused': gate.frames_skipped_paused,
+                'last_inference_start_ns': gate.last_inference_start_ns,
+                'last_inference_end_ns': gate.last_inference_end_ns,
+                'last_success_ns': gate.last_success_ns,
+                'error_count': self._processing_error_count,
+                'npu_inference': self._detection_mode == 'yolo'}
         text = json.dumps(status, sort_keys=True, separators=(',', ':'))
         self._valid_pub.publish(Bool(data=bool(status.get('valid', False))))
         self._status_pub.publish(String(data=text))
@@ -951,6 +1021,50 @@ class BlueCubeLocalizer(Node):
         self._marker_pub.publish(delete)
         response.success = True
         response.message = 'Saved stable target cleared; continuous tracking restarted.'
+        return response
+
+    def _set_inference_enabled_service(self, request, response):
+        try:
+            snapshot = self._inference_gate.set_enabled(
+                bool(request.data), timeout_s=3.0)
+        except (RuntimeError, TimeoutError, ValueError) as error:
+            response.success = False
+            response.message = f'Perception gate transition failed: {error}'
+            return response
+        if not request.data:
+            with self._lock:
+                self._samples.clear()
+                self._stable_pose = None
+                self._stable_surface = None
+                self._stable_object_size = None
+                self._stable_color = None
+                self._last_processed_stamp = None
+                self._last_status = {
+                    'valid': False, 'stable': False, 'tracking': False,
+                    'frozen': False, 'has_stable_pose': False,
+                    'detection_mode': self._detection_mode,
+                    'target_filter_color': self._target_color or '',
+                    'filter_generation': self._filter_generation,
+                    'reason': 'perception_paused',
+                }
+        else:
+            with self._lock:
+                self._samples.clear()
+                self._last_processed_stamp = None
+                self._last_status = {
+                    'valid': False, 'stable': False, 'tracking': True,
+                    'frozen': False, 'has_stable_pose': False,
+                    'detection_mode': self._detection_mode,
+                    'target_filter_color': self._target_color or '',
+                    'filter_generation': self._filter_generation,
+                    'reason': 'perception_resumed_waiting_for_fresh_rgbd',
+                }
+        response.success = True
+        response.message = (
+            f'inference_enabled={str(snapshot.enabled).lower()};'
+            f'active={snapshot.active_inferences};'
+            f'generation={snapshot.pause_generation};'
+            f'npu_inference={str(self._detection_mode == "yolo").lower()}')
         return response
 
     def _set_target_color_service(self, request, response):
@@ -1033,6 +1147,10 @@ class BlueCubeLocalizer(Node):
         return response
 
     def destroy_node(self):
+        try:
+            self._inference_gate.close()
+        except TimeoutError as error:
+            self.get_logger().error(f'Perception gate close timed out: {error}')
         if self._yolo_detector is not None:
             self._yolo_detector.close()
         return super().destroy_node()

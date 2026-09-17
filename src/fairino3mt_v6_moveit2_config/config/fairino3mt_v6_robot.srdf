@@ -39,10 +39,10 @@
         <joint name="joint6" value="0"/>
     </group_state>
     <group_state name="closed" group="ydi_j22_gripper">
-        <joint name="gripper_command_joint" value="0.0"/>
+        <joint name="gripper_command_joint" value="0.026"/>
     </group_state>
     <group_state name="open" group="ydi_j22_gripper">
-        <joint name="gripper_command_joint" value="0.130"/>
+        <joint name="gripper_command_joint" value="0.060"/>
     </group_state>
     <end_effector name="ydi_j22" parent_link="flange_link"
                   group="ydi_j22_gripper" parent_group="fairino3mt_v6_group"/>

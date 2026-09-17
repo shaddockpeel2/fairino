@@ -1,5 +1,4 @@
-import threading
-import time
+import pytest
 
 from fr3c_gripper_driver.ft232h_backend import Ft232hPwmBackend
 
@@ -8,99 +7,79 @@ class FakeGpio:
     instances = []
 
     def __init__(self):
-        self.frequency = 100_000.0
-        self.write_count = 0
+        self.frequency = 10_000.0
+        self.is_connected = True
+        self.configured = False
+        self.writes = []
         self.closed = False
         self.instances.append(self)
 
     def configure(self, *_args, **_kwargs):
-        pass
+        self.configured = True
 
-    def write(self, _payload):
-        self.write_count += 1
+    def write(self, payload):
+        self.writes.append(payload)
 
     def close(self):
+        self.is_connected = False
         self.closed = True
 
 
-class RecoveringGpio(FakeGpio):
+class FailingGpio(FakeGpio):
+    fail_next = True
+
     def write(self, payload):
+        if isinstance(payload, bytes) and type(self).fail_next:
+            type(self).fail_next = False
+            raise OSError('simulated USB failure')
         super().write(payload)
-        if len(self.instances) == 1:
-            raise OSError('simulated USB re-enumeration')
 
 
-class BlockingCloseRecoveringGpio(RecoveringGpio):
-    close_entered = threading.Event()
-    release_close = threading.Event()
-
-    def close(self):
-        if len(self.instances) == 1:
-            self.close_entered.set()
-            self.release_close.wait(timeout=2.0)
-        super().close()
-
-
-def test_backend_paces_usb_writes_and_closes():
-    backend = Ft232hPwmBackend(
-        url='fake', sample_rate_hz=100_000, frame_us=20_000,
-        signal_pin=7, chunk_frames=2, slew_us_per_s=400.0,
+def make_backend(controller_factory=FakeGpio):
+    return Ft232hPwmBackend(
+        url='fake', sample_rate_hz=10_000, frame_us=20_000,
+        signal_pin=7, command_duration_s=0.8, post_write_delay_s=0.05,
+        electrical_min_us=500, electrical_max_us=2500,
+        controller_factory=controller_factory, sleep=lambda _seconds: None,
     )
-    backend._load_controller = lambda: FakeGpio
-    assert backend.command(1103) == 1100
-    time.sleep(0.13)
-    backend.close()
+
+
+@pytest.mark.parametrize(
+    ('angle_deg', 'effective_us', 'high_samples'),
+    [(31, 800, 8), (70, 1300, 13)],
+)
+def test_backend_emits_one_finite_burst_and_pulls_ad7_low(
+        angle_deg, effective_us, high_samples):
+    FakeGpio.instances.clear()
+    backend = make_backend()
+
+    assert backend.command_angle(angle_deg) == effective_us
 
     gpio = FakeGpio.instances[-1]
-    assert 2 <= gpio.write_count <= 5
+    assert gpio.configured
     assert gpio.closed
+    assert len(gpio.writes) == 2
+    payload, final_low = gpio.writes
+    assert final_low == 0
+    assert len(payload) == 8_000  # 10 kHz * 0.8 seconds
+    frame = payload[:200]
+    assert frame[:high_samples] == bytes([0x80]) * high_samples
+    assert frame[high_samples:] == bytes(200 - high_samples)
+    assert payload == frame * 40
+    assert backend.current_us == effective_us
+    assert backend.frames_written == 40
+    assert backend.bytes_written == 8_000
 
 
-def test_next_command_reopens_ftdi_after_writer_error():
+def test_next_command_reopens_after_usb_error():
     FakeGpio.instances.clear()
-    backend = Ft232hPwmBackend(
-        url='fake', sample_rate_hz=100_000, frame_us=20_000,
-        signal_pin=7, chunk_frames=2, slew_us_per_s=400.0,
-    )
-    backend._load_controller = lambda: RecoveringGpio
-    backend.command(840)
-    deadline = time.monotonic() + 1.0
-    while backend.error is None and time.monotonic() < deadline:
-        time.sleep(0.01)
-    assert 'simulated USB re-enumeration' in backend.error
+    FailingGpio.fail_next = True
+    backend = make_backend(FailingGpio)
+    with pytest.raises(OSError, match='simulated USB failure'):
+        backend.command_angle(31)
+    assert 'simulated USB failure' in backend.error
 
-    assert backend.command(1100) == 1100
-    deadline = time.monotonic() + 1.0
-    while len(FakeGpio.instances) < 2 and time.monotonic() < deadline:
-        time.sleep(0.01)
-    assert len(FakeGpio.instances) == 2
+    assert backend.command_angle(70) == 1300
     assert backend.recovery_count == 1
     assert backend.error is None
-    backend.close()
-
-
-def test_recovery_does_not_wait_for_stuck_failed_controller_close():
-    FakeGpio.instances.clear()
-    BlockingCloseRecoveringGpio.close_entered.clear()
-    BlockingCloseRecoveringGpio.release_close.clear()
-    backend = Ft232hPwmBackend(
-        url='fake', sample_rate_hz=100_000, frame_us=20_000,
-        signal_pin=7, chunk_frames=2, slew_us_per_s=400.0,
-    )
-    backend._load_controller = lambda: BlockingCloseRecoveringGpio
-    try:
-        backend.command(840)
-        assert BlockingCloseRecoveringGpio.close_entered.wait(timeout=1.0)
-        assert backend.error is not None
-
-        # The failed writer no longer emits samples, so its blocked cleanup
-        # must not prevent a fresh explicit goal from reopening the device.
-        assert backend.command(1100) == 1100
-        deadline = time.monotonic() + 1.0
-        while len(FakeGpio.instances) < 2 and time.monotonic() < deadline:
-            time.sleep(0.01)
-        assert len(FakeGpio.instances) == 2
-        assert backend.recovery_count == 1
-    finally:
-        BlockingCloseRecoveringGpio.release_close.set()
-        backend.close()
+    assert len(FakeGpio.instances) == 2

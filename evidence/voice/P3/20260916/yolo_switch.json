@@ -1,0 +1,52 @@
+{
+  "ok": true,
+  "requests": 3,
+  "responses": [
+    {
+      "request_id": "yolo-text-01",
+      "text": "YOLO恢复验证正常。",
+      "first_token_s": 0.18868041099995025,
+      "total_s": 0.6973198349987797
+    },
+    {
+      "request_id": "yolo-text-02",
+      "text": "YOLO恢复验证正常。",
+      "first_token_s": 0.14501537999967695,
+      "total_s": 0.6665477810020093
+    },
+    {
+      "request_id": "yolo-text-03",
+      "text": "YOLO恢复验证正常。",
+      "first_token_s": 0.14003365700045833,
+      "total_s": 0.7026953120002872
+    }
+  ],
+  "worker_pid": 557769,
+  "initial_perception": {
+    "available": true,
+    "enabled": true,
+    "active_inferences": 0,
+    "pause_generation": 0,
+    "frames_inferred": 201,
+    "error_count": 0,
+    "last_success_ns": 18739727987927,
+    "observed_monotonic": 18739.730126451,
+    "detection_mode": "yolo",
+    "npu_inference": true
+  },
+  "final_perception": {
+    "available": true,
+    "enabled": true,
+    "active_inferences": 0,
+    "pause_generation": 4,
+    "frames_inferred": 210,
+    "error_count": 0,
+    "last_success_ns": 18750581890553,
+    "observed_monotonic": 18750.585023088,
+    "detection_mode": "yolo",
+    "npu_inference": true
+  },
+  "fresh_frames_after_switches": 9,
+  "pause_generations": 4,
+  "coordination_fault": ""
+}

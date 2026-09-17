@@ -9,17 +9,10 @@ fi
 
 command_script='/home/industio/fairino_ws/scripts/gripper/command_gripper.sh'
 
-echo '阶段 1/3：命令并保持 60 mm。'
-"$command_script" 0.060
+echo '阶段 1/2：只发送一次抓取位 26 mm（台架 31°）。'
+"$command_script" close
 
-echo '阶段 2/3：执行 5 次 60↔100 mm 目标切换。'
-for cycle in 1 2 3 4 5; do
-  echo "cycle $cycle: 100 mm"
-  "$command_script" 0.100
-  echo "cycle $cycle: 60 mm"
-  "$command_script" 0.060
-done
+echo '阶段 2/2：只发送一次张开释放位 60 mm（台架 70°）。'
+"$command_script" open
 
-echo '阶段 3/3：末态保持 60 mm，观察 30 秒是否存在延迟旧动作。'
-sleep 30
-echo '验证序列完成；预期最终开度仍为 60 mm。'
+echo '验证序列完成；末态为 60 mm。脚本不做循环、扫角或额外保持动作。'

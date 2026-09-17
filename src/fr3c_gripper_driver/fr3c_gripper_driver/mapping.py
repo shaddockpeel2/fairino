@@ -94,32 +94,3 @@ class GripperCalibration:
             raise ValueError('pulse is outside the operating range')
         positions, pulses = self._points()
         return self._interpolate(pulse_us, pulses, positions)
-
-
-def build_pwm_frames(pulses_us, sample_rate_hz=100_000, frame_us=20_000,
-                     signal_mask=0x80):
-    """Build one 20 ms frame per requested pulse value."""
-    if sample_rate_hz <= 0 or frame_us <= 0:
-        raise ValueError('sample rate and frame duration must be positive')
-    if signal_mask <= 0 or signal_mask > 0x80 or signal_mask & (signal_mask - 1):
-        raise ValueError('signal mask must select one FT232H low GPIO pin')
-    samples_per_frame = round(sample_rate_hz * frame_us / 1_000_000)
-    payload = bytearray()
-    for pulse_us in pulses_us:
-        if not 0 < int(pulse_us) < frame_us:
-            raise ValueError('pulse must be inside the PWM frame')
-        high_samples = round(sample_rate_hz * int(pulse_us) / 1_000_000)
-        payload.extend(bytes([signal_mask]) * high_samples)
-        payload.extend(bytes(samples_per_frame - high_samples))
-    return bytes(payload)
-
-
-def advance_pulse(current_us, target_us, slew_us_per_s, frame_us=20_000):
-    """Advance one PWM frame toward target with a bounded pulse slew rate."""
-    if slew_us_per_s <= 0:
-        return int(target_us)
-    maximum_step = max(1, round(slew_us_per_s * frame_us / 1_000_000))
-    difference = int(target_us) - int(current_us)
-    if abs(difference) <= maximum_step:
-        return int(target_us)
-    return int(current_us) + (maximum_step if difference > 0 else -maximum_step)

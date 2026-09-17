@@ -1,0 +1,14 @@
+{
+  "ok": true,
+  "injected_timeout_s": 0.05,
+  "timeout_error": "Qwen request exceeded its total timeout",
+  "worker_pid_before": 563181,
+  "worker_pid_after": 563511,
+  "recovery_result": {
+    "request_id": "after-timeout",
+    "text": "超时后恢复正常。",
+    "first_token_s": 0.2033858240029076,
+    "total_s": 0.6758505020006851
+  },
+  "healthy_after": true
+}

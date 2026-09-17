@@ -7,8 +7,9 @@
        finger links replace the former solid envelope so the grasp opening is
        real collision-free space and contact permission can be limited to the
        fingers. The finger motion is a planning approximation: all four
-       fingers move symmetrically in X from a nominal 29 mm closed opening to
-       the drawing's 166 mm maximum span. -->
+       fingers move symmetrically in X and the command value equals the clear
+       fingertip aperture. The active range is restricted to the 26 mm grasp
+       and 60 mm release states. -->
   <xacro:macro name="ydi_j22_placeholder"
                params="parent mount_xyz mount_rpy spacer tcp_xyz tcp_rpy
                        body_x body_y body_z body_positive_y_collision_extension
@@ -61,7 +62,7 @@
       <parent link="gripper_link"/><child link="gripper_command_link"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <axis xyz="1 0 0"/>
-      <limit lower="0.0" upper="0.130" effort="1.0" velocity="0.130"/>
+      <limit lower="0.026" upper="0.060" effort="1.0" velocity="0.060"/>
     </joint>
 
     <!-- Four independently named contact links. Mimic joints make the two X

@@ -39,6 +39,9 @@ joint_limits:
     has_acceleration_limits: false
     max_acceleration: 0
   gripper_command_joint:
+    has_position_limits: true
+    min_position: 0.026
+    max_position: 0.060
     has_velocity_limits: true
-    max_velocity: 0.130
+    max_velocity: 0.060
     has_acceleration_limits: false

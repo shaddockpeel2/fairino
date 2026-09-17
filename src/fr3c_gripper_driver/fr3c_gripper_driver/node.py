@@ -42,6 +42,25 @@ class GripperNode(Node):
             tuple(self.get_parameter('calibration_pulses_us').value),
         )
         self._calibration.validate()
+        self._allowed_positions_m = tuple(
+            float(value) for value in
+            self.get_parameter('allowed_positions_m').value)
+        if (len(self._allowed_positions_m) != 2
+                or not math.isclose(
+                    self._allowed_positions_m[0],
+                    self._calibration.closed_position_m)
+                or not math.isclose(
+                    self._allowed_positions_m[1],
+                    self._calibration.open_position_m)):
+            raise ValueError(
+                'allowed_positions_m must contain exactly [close, open]')
+        self._closed_angle_deg = float(
+            self.get_parameter('closed_angle_deg').value)
+        self._open_angle_deg = float(
+            self.get_parameter('open_angle_deg').value)
+        if not (0.0 <= self._closed_angle_deg < self._open_angle_deg <= 180.0):
+            raise ValueError(
+                'angles must satisfy 0 <= closed_angle < open_angle <= 180')
 
         self._backend_name = str(self.get_parameter('backend').value).lower()
         if self._backend_name not in ('mock', 'ft232h'):
@@ -60,15 +79,8 @@ class GripperNode(Node):
             self.get_parameter('command_timeout_s').value)
         self._slew_us_per_s = float(
             self.get_parameter('slew_us_per_s').value)
-        self._usb_recovery_attempts = int(
-            self.get_parameter('usb_recovery_attempts').value)
-        self._usb_recovery_backoff_s = float(
-            self.get_parameter('usb_recovery_backoff_s').value)
         if self._settle_time_s < 0.0 or self._command_timeout_s <= 0.0:
             raise ValueError('settle_time_s must be >= 0 and command_timeout_s > 0')
-        if self._usb_recovery_attempts < 0 or self._usb_recovery_backoff_s < 0.0:
-            raise ValueError(
-                'usb_recovery_attempts and usb_recovery_backoff_s must be >= 0')
 
         self._backend = None
         if self._backend_name == 'ft232h':
@@ -77,8 +89,14 @@ class GripperNode(Node):
                 sample_rate_hz=self.get_parameter('sample_rate_hz').value,
                 frame_us=self.get_parameter('frame_us').value,
                 signal_pin=self.get_parameter('signal_pin').value,
-                chunk_frames=self.get_parameter('chunk_frames').value,
-                slew_us_per_s=self._slew_us_per_s,
+                command_duration_s=self.get_parameter(
+                    'command_duration_s').value,
+                post_write_delay_s=self.get_parameter(
+                    'post_write_delay_s').value,
+                electrical_min_us=self.get_parameter(
+                    'electrical_min_us').value,
+                electrical_max_us=self.get_parameter(
+                    'electrical_max_us').value,
                 pyftdi_site_packages=self.get_parameter(
                     'pyftdi_site_packages').value,
             )
@@ -89,8 +107,8 @@ class GripperNode(Node):
         # restart. MoveIt nevertheless requires a complete joint state before
         # it can plan. Publish the configured startup aperture for both
         # backends as an explicitly unverified estimate. The default is fully
-        # open, which is conservative for tool/environment clearance. This
-        # assignment does not open the FTDI device and does not emit PWM.
+        # release position. This assignment does not open the FTDI device and
+        # does not emit PWM.
         self._estimated_position_m = float(
             self.get_parameter('startup_position_m').value)
         self._calibration.position_to_pulse(self._estimated_position_m)
@@ -125,8 +143,9 @@ class GripperNode(Node):
                 f'{HARDWARE_CONFIRMATION_VALUE} to arm it.')
         elif self._backend_name == 'ft232h':
             self.get_logger().warning(
-                'FT232H open-loop PWM is ARMED. Starting this node emits no PWM; '
-                'the first accepted action goal will move the gripper.')
+                'FT232H finite-burst PWM is ARMED. Starting this node emits no '
+                'PWM; each accepted action opens FTDI, sends one bounded burst, '
+                'pulls AD7 low and closes FTDI.')
         else:
             self.get_logger().info('YDI-J22 mock GripperCommand server ready.')
         if self._backend_name == 'ft232h':
@@ -142,29 +161,31 @@ class GripperNode(Node):
             'action_name': '/ydi_j22_gripper_controller/gripper_cmd',
             'joint_name': 'gripper_command_joint',
             'backend': 'mock',
-            'closed_position_m': 0.0,
-            'open_position_m': 0.130,
-            'startup_position_m': 0.130,
-            'operating_close_us': 550,
-            'operating_open_us': 1650,
+            'closed_position_m': 0.026,
+            'open_position_m': 0.060,
+            'startup_position_m': 0.060,
+            'allowed_positions_m': [0.026, 0.060],
+            'closed_angle_deg': 31.0,
+            'open_angle_deg': 70.0,
+            'operating_close_us': 800,
+            'operating_open_us': 1300,
             'electrical_min_us': 500,
             'electrical_max_us': 2500,
-            'calibration_positions_m': [0.0, 0.024, 0.060, 0.100, 0.110, 0.130],
-            'calibration_pulses_us': [550, 820, 1100, 1380, 1480, 1650],
+            'calibration_positions_m': [0.026, 0.060],
+            'calibration_pulses_us': [800, 1300],
             'aperture_calibrated': True,
             'hardware_output_enabled': False,
             'assume_reached_without_feedback': True,
             'settle_time_s': 0.6,
             'command_timeout_s': 8.0,
             'slew_us_per_s': 400.0,
-            'usb_recovery_attempts': 2,
-            'usb_recovery_backoff_s': 0.20,
             'ftdi_url': 'ftdi://ftdi:232h/1',
             'pyftdi_site_packages': '',
-            'sample_rate_hz': 100000,
+            'sample_rate_hz': 10000,
             'frame_us': 20000,
             'signal_pin': 7,
-            'chunk_frames': 2,
+            'command_duration_s': 0.8,
+            'post_write_delay_s': 0.05,
         }
         for name, value in defaults.items():
             self.declare_parameter(name, value)
@@ -176,6 +197,14 @@ class GripperNode(Node):
             self._calibration.position_to_pulse(position)
         except (TypeError, ValueError) as error:
             self.get_logger().error(f'Rejecting invalid gripper position: {error}')
+            return GoalResponse.REJECT
+        if not any(
+                math.isclose(
+                    position, allowed, rel_tol=0.0, abs_tol=1e-6)
+                for allowed in self._allowed_positions_m):
+            self.get_logger().error(
+                'Rejecting unsupported gripper position: only 0.026 m '
+                '(31 deg) and 0.060 m (70 deg) are enabled')
             return GoalResponse.REJECT
         if not math.isfinite(effort) or effort < 0.0:
             self.get_logger().error('Rejecting invalid max_effort')
@@ -210,7 +239,16 @@ class GripperNode(Node):
                 self._last_result = 'executing'
             if self._backend_name == 'mock':
                 return self._execute_mock(goal_handle, start_m, target_m)
-            return self._execute_ft232h(goal_handle, target_m, target_us)
+            target_angle_deg = (
+                self._closed_angle_deg
+                if math.isclose(
+                    target_m,
+                    self._calibration.closed_position_m,
+                    rel_tol=0.0,
+                    abs_tol=1e-6)
+                else self._open_angle_deg)
+            return self._execute_ft232h(
+                goal_handle, target_m, target_angle_deg)
         except Exception as error:
             self.get_logger().error(
                 f'Gripper command failed: {type(error).__name__}: {error}')
@@ -249,11 +287,12 @@ class GripperNode(Node):
             self._last_result = 'estimated_reached_mock'
         return self._make_result(True)
 
-    def _execute_ft232h(self, goal_handle, target_m, target_us):
+    def _execute_ft232h(self, goal_handle, target_m, target_angle_deg):
         prior_us = self._backend.current_us
-        target_us = self._backend.command(target_us)
+        target_us = self._backend.command_angle(target_angle_deg)
         self.get_logger().warning(
-            f'PWM active: effective_target={target_us} us, '
+            f'PWM active: angle={target_angle_deg:.1f} deg, '
+            f'effective_target={target_us} us, '
             f'aperture={target_m * 1000.0:.1f} mm')
         expected_motion_s = (
             abs(target_us - prior_us) / self._slew_us_per_s
@@ -264,7 +303,6 @@ class GripperNode(Node):
             expected_motion_s + self._settle_time_s + 1.0,
         )
         reached_at = None
-        recovery_attempts = 0
         while time.monotonic() < deadline:
             if goal_handle.is_cancel_requested:
                 self._backend.freeze()
@@ -272,25 +310,15 @@ class GripperNode(Node):
                 with self._state_lock:
                     self._last_result = 'canceled_pwm_frozen'
                 return self._make_result(False)
-            backend_error = self._backend.error
-            if backend_error:
-                if recovery_attempts >= self._usb_recovery_attempts:
-                    raise RuntimeError(backend_error)
-                recovery_attempts += 1
-                self.get_logger().warning(
-                    'FT232H PWM writer failed; reopening for the same goal '
-                    f'(attempt {recovery_attempts}/'
-                    f'{self._usb_recovery_attempts}): {backend_error}')
-                if self._usb_recovery_backoff_s > 0.0:
-                    time.sleep(self._usb_recovery_backoff_s)
-                target_us = self._backend.command(target_us)
-                reached_at = None
-                deadline = max(
-                    deadline, time.monotonic() + self._command_timeout_s)
-                continue
+            if self._backend.error:
+                raise RuntimeError(self._backend.error)
             current_us = self._backend.current_us
             if current_us is not None:
-                self._set_position(self._calibration.pulse_to_position(current_us))
+                # There is no position feedback. The actual FTDI clock may
+                # quantize the pulse a few microseconds away from the nominal
+                # 800/1300 us calibration, so publish the commanded two-state
+                # aperture rather than treating clock quantization as motion.
+                self._set_position(target_m)
             goal_handle.publish_feedback(self._make_feedback(False))
             if (current_us == target_us
                     and self._backend.actual_rate_hz is not None):

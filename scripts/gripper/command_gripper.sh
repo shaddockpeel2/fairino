@@ -7,8 +7,8 @@ if [[ $# -ne 1 ]]; then
 fi
 
 case "$1" in
-  open) position='0.130' ;;
-  close) position='0.0' ;;
+  open) position='0.060' ;;
+  close) position='0.026' ;;
   *) position="$1" ;;
 esac
 

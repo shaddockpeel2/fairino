@@ -1,0 +1,28 @@
+{"time_ns":1789610543526749727,"event":"run_started","detail":"execution"}
+{"time_ns":1789610543526840728,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1789610545885403177,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,requested_position_m=0.06,reported_position_m=0.06,stalled=0"}
+{"time_ns":1789610545886820109,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1789610545889884100,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube added"}
+{"time_ns":1789610546022052505,"event":"plan_candidate_0_approach","detail":"return_code=1"}
+{"time_ns":1789610546029013787,"event":"plan_candidate_0_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0373068343"}
+{"time_ns":1789610546032883662,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789610546114176693,"event":"plan_candidate_0_lift","detail":"fraction=0.862745098,moveit_code=1,maximum_joint_step_rad=0.063989346"}
+{"time_ns":1789610546123305665,"event":"grasp_candidate_rejected","detail":"index=0,yaw_rad=-1.656651,reason=candidate_0_lift Cartesian path incomplete: fraction=0.862745, code=1"}
+{"time_ns":1789610546186122291,"event":"plan_candidate_1_approach","detail":"return_code=1"}
+{"time_ns":1789610546192000604,"event":"plan_candidate_1_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0427695303"}
+{"time_ns":1789610546194994594,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789610546269736430,"event":"plan_candidate_1_lift","detail":"fraction=0.68627451,moveit_code=1,maximum_joint_step_rad=0.061934828"}
+{"time_ns":1789610546273937350,"event":"grasp_candidate_rejected","detail":"index=1,yaw_rad=-0.085854,reason=candidate_1_lift Cartesian path incomplete: fraction=0.686275, code=1"}
+{"time_ns":1789610546335641256,"event":"plan_candidate_2_approach","detail":"return_code=1"}
+{"time_ns":1789610546341604736,"event":"plan_candidate_2_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0370501492"}
+{"time_ns":1789610546344222180,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789610546402785678,"event":"plan_candidate_2_lift","detail":"fraction=0.803921569,moveit_code=1,maximum_joint_step_rad=0.0643840602"}
+{"time_ns":1789610546406370299,"event":"grasp_candidate_rejected","detail":"index=2,yaw_rad=1.484942,reason=candidate_2_lift Cartesian path incomplete: fraction=0.803922, code=1"}
+{"time_ns":1789610546499159202,"event":"plan_candidate_3_approach","detail":"return_code=1"}
+{"time_ns":1789610546506622448,"event":"plan_candidate_3_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0349235593"}
+{"time_ns":1789610546509387478,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789610546579507515,"event":"plan_candidate_3_lift","detail":"fraction=0.980392157,moveit_code=1,maximum_joint_step_rad=0.0677455703"}
+{"time_ns":1789610546586867218,"event":"grasp_candidate_rejected","detail":"index=3,yaw_rad=3.055738,reason=candidate_3_lift Cartesian path incomplete: fraction=0.980392, code=1"}
+{"time_ns":1789610546587244639,"event":"state","detail":"retryable_failure_before_arm_motion: no equivalent grasp has a complete collision-free trajectory; no arm motion started, fix the condition and call /start again"}
+{"time_ns":1789610992590900535,"event":"state","detail":"waiting_for_target: pick_sort accepted; requesting a fresh unique red target"}
+{"time_ns":1789610992689296677,"event":"target_filter_set","detail":"color=red,generation=2"}

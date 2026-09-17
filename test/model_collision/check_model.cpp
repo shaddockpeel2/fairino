@@ -113,7 +113,8 @@ int main(int argc, char ** argv)
   const Eigen::Isometry3d flange_to_grasp =
     state.getGlobalLinkTransform("flange_link").inverse() *
     state.getGlobalLinkTransform("grasp_frame");
-  const Eigen::Vector3d expected_tcp(-0.000847397, 0.003027928, 0.178);
+  const Eigen::Vector3d expected_tcp(
+    -0.000847397, 0.003027928, 0.184614459);
   const double tcp_error = (flange_to_grasp.translation() - expected_tcp).norm();
   std::cout << "flange_to_grasp_xyz=" << flange_to_grasp.translation().transpose()
             << " error=" << tcp_error << '\n';
@@ -132,18 +133,20 @@ int main(int argc, char ** argv)
         .translation().x();
       return positive_x - negative_x + 0.012;
     };
+  state.setVariablePosition("gripper_command_joint", 0.026);
+  state.update();
   const double closed_span = fingerSpanX();
-  state.setVariablePosition("gripper_command_joint", 0.130);
+  state.setVariablePosition("gripper_command_joint", 0.060);
   state.update();
   const double open_span = fingerSpanX();
   std::cout << "finger_span closed=" << closed_span
             << " open=" << open_span << '\n';
-  if (std::abs(closed_span - 0.053) > 1e-6 ||
-    std::abs(open_span - 0.166) > 1e-6)
+  if (std::abs(closed_span - 0.050) > 1e-6 ||
+    std::abs(open_span - 0.084) > 1e-6)
   {
     return 19;
   }
-  state.setVariablePosition("gripper_command_joint", 0.0);
+  state.setVariablePosition("gripper_command_joint", 0.026);
   state.update();
 
   collision_detection::CollisionRequest request;
@@ -221,6 +224,8 @@ int main(int argc, char ** argv)
 
   // A 30 mm cube at the grasp depth may touch only the four finger links.
   // Its centre is 15 mm behind the calibrated fingertip TCP.
+  state.setVariablePosition("gripper_command_joint", 0.026);
+  state.update();
   const Eigen::Isometry3d gripper_pose = state.getGlobalLinkTransform("gripper_link");
   const Eigen::Isometry3d grasp_cube_pose =
     gripper_pose * Eigen::Translation3d(0.0, 0.0, 0.160);

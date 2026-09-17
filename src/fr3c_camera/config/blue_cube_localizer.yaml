@@ -1,4 +1,4 @@
-blue_cube_localizer:
+/perception/blue_cube_localizer:
   ros__parameters:
     # These are the D2C streams produced by dabai_dcw2*.yaml. Raw, unregistered
     # depth must not be substituted.
@@ -35,8 +35,8 @@ blue_cube_localizer:
     stable_yaw_std_rad: 0.087266463  # 5 degrees across the accepted window
     max_sample_yaw_jump_rad: 0.34906585  # restart after a 20 degree jump
 
-    max_age_s: 0.50
-    max_skew_s: 0.065
+    max_age_s: 0.80
+    max_skew_s: 0.10
     tf_timeout_s: 0.12
     sample_period_s: 0.18
     hand_eye_translation_tolerance_m: 0.0005
@@ -95,12 +95,12 @@ blue_cube_localizer:
     joint_state_max_age_s: 0.25
     stationary_window_s: 0.40
     stationary_joint_span_rad: 0.001
-    stable_samples: 8
+    stable_samples: 3
     stable_xy_std_m: 0.003
     stable_z_std_m: 0.003
     # A few rejected frames do not discard progress. A longer gap or a target
     # jump starts a new rolling window, so old and new object positions cannot mix.
-    stable_sample_max_gap_s: 0.75
+    stable_sample_max_gap_s: 1.20
     max_sample_jump_m: 0.020
 
     # Select one independent target-detection scene at startup. All modes use

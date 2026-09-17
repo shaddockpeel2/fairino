@@ -4,27 +4,29 @@ ydi_j22_gripper:
     joint_name: gripper_command_joint
     backend: mock
 
-    # Measured opposed-fingertip clear aperture, in metres.
-    closed_position_m: 0.0
-    open_position_m: 0.130
+    # The project intentionally exposes only its two required working states.
+    # 26 mm is the grasp position tested with 31 degrees; 60 mm is the
+    # pre-open/release position tested with 70 degrees.
+    closed_position_m: 0.026
+    open_position_m: 0.060
     # Published immediately as an unverified state estimate for MoveIt. This
     # does not emit PWM; issue an explicit pre-open command before grasp
     # planning.
-    # Fully open is conservative for tool/environment clearance.
-    startup_position_m: 0.130
+    startup_position_m: 0.060
+    allowed_positions_m: [0.026, 0.060]
+    closed_angle_deg: 31.0
+    open_angle_deg: 70.0
 
-    # Both values are inside the physically tested 500..1700 us range.
-    # 2500 us remains an electrical limit, not an accepted mechanical endpoint.
-    operating_close_us: 550
-    operating_open_us: 1650
+    # At 10 kHz, 31 degrees (844.4 us nominal) is represented by 8 samples =
+    # 800 us; 70 degrees (1277.8 us nominal) is 13 samples = 1300 us.
+    operating_close_us: 800
+    operating_open_us: 1300
     electrical_min_us: 500
     electrical_max_us: 2500
     aperture_calibrated: true
 
-    # 2026-09-10 assembled-gripper measurements. Values are expressed at the
-    # effective 10 us waveform resolution of the 100 kHz bit-bang stream.
-    calibration_positions_m: [0.0, 0.024, 0.060, 0.100, 0.110, 0.130]
-    calibration_pulses_us: [550, 820, 1100, 1380, 1480, 1650]
+    calibration_positions_m: [0.026, 0.060]
+    calibration_pulses_us: [800, 1300]
 
     # Real output requires both this parameter and the confirmation environment
     # variable documented in README.md. Starting the node emits no PWM.
@@ -33,16 +35,13 @@ ydi_j22_gripper:
     settle_time_s: 0.6
     command_timeout_s: 8.0
     slew_us_per_s: 400.0
-    # A camera/USB transient must not leave the open-loop PWM backend poisoned
-    # until the whole ROS stack is restarted. Retry the same explicit gripper
-    # goal after reopening the FT232H; persistent errors still abort the action.
-    usb_recovery_attempts: 2
-    usb_recovery_backoff_s: 0.20
 
     ftdi_url: ftdi://ftdi:232h/1
     pyftdi_site_packages: /home/industio/fairino_ws/test/jiazhua/.venv/lib/python3.10/site-packages
-    sample_rate_hz: 100000
+    # Match /home/industio/YDI-J22.../gripper_ft232h.py exactly: one finite
+    # 0.8 s burst at 10 kHz/50 Hz, then 50 ms and AD7 low before close.
+    sample_rate_hz: 10000
     frame_us: 20000
     signal_pin: 7
-    # Two frames limit stale queued motion to about 40 ms.
-    chunk_frames: 2
+    command_duration_s: 0.8
+    post_write_delay_s: 0.05
