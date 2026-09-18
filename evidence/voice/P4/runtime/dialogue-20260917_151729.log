@@ -1,0 +1,9 @@
+2026-09-17 15:17:30,108 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-17 15:18:54,781 INFO fr3c_dialogue_gui intent request_id=bbcf869322244e1597535c2fe74ba52a route=action task=pick_sort color=blue raw='{"schema_version":"1.0","route":"action","task":"pick_sort","color":"blue","reply":"准备将蓝色方块放入对应分类区。"}'
+2026-09-17 15:18:56,861 INFO fr3c_dialogue_gui action_dispatched request_id=bbcf869322244e1597535c2fe74ba52a task=pick_sort color=blue
+2026-09-17 15:18:56,863 INFO fr3c_dialogue_gui action_event kind=result request_id=bbcf869322244e1597535c2fe74ba52a phase=failed success=False error_code=None executed=None detail=抓取 Action 服务不可用。
+2026-09-17 15:18:58,496 INFO fr3c_dialogue_gui speech playback first_write=0.441s playback_end=3.608s
+2026-09-17 15:19:22,765 INFO fr3c_dialogue_gui intent request_id=9a3ad3cd43544ab19d74a233c1867407 route=action task=pick_sort color=blue raw='{"schema_version":"1.0","route":"action","task":"pick_sort","color":"blue","reply":"准备将蓝色方块放入对应分类区。"}'
+2026-09-17 15:19:24,790 INFO fr3c_dialogue_gui action_dispatched request_id=9a3ad3cd43544ab19d74a233c1867407 task=pick_sort color=blue
+2026-09-17 15:19:24,791 INFO fr3c_dialogue_gui action_event kind=result request_id=9a3ad3cd43544ab19d74a233c1867407 phase=failed success=False error_code=None executed=None detail=抓取 Action 服务不可用。
+2026-09-17 15:19:26,418 INFO fr3c_dialogue_gui speech playback first_write=0.401s playback_end=3.568s

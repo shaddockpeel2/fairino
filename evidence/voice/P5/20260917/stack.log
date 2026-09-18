@@ -1,0 +1,375 @@
+{
+  "pass": true,
+  "expected_model": "DaBai DCW2",
+  "expected_serial_number": "CH82C5201C9",
+  "expected_connection": "USB2.0",
+  "expected_speed_mbps": "480",
+  "matching_devices": [
+    {
+      "sysfs_name": "5-1.3.1",
+      "product_id": "06a0",
+      "product": "ORBBEC Depth Sensor",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "5",
+      "devnum": "23",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/005/023",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    },
+    {
+      "sysfs_name": "5-1.3.3",
+      "product_id": "0561",
+      "product": "Orbbec DaBai DCW2 RGB Camera",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "5",
+      "devnum": "25",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/005/025",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    }
+  ],
+  "all_orbbec_devices": [
+    {
+      "sysfs_name": "5-1.3.1",
+      "product_id": "06a0",
+      "product": "ORBBEC Depth Sensor",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "5",
+      "devnum": "23",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/005/023",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    },
+    {
+      "sysfs_name": "5-1.3.3",
+      "product_id": "0561",
+      "product": "Orbbec DaBai DCW2 RGB Camera",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "5",
+      "devnum": "25",
+      "authorized": "1",
+      "device_node": "/dev/bus/usb/005/025",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    }
+  ],
+  "failures": []
+}
+WARNING: this starts the current ros2_control configuration, which uses the real FAIRINO hardware plugin.
+[INFO] [launch]: All log files can be found below /home/industio/.ros/log/2026-09-17-12-02-11-586443-ido-366424
+[INFO] [launch]: Default logging verbosity is set to INFO
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+[INFO] [launch.user]: Invalidated previous P6 gate: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+[INFO] [launch.user]: Full grasp stack requested. Wait for P3 valid=true/stable=true and the P6 passed=true log, then call /fr3c_first_grasp/start for one target or /fr3c_first_grasp/start_continuous for a colors-mode batch.
+[INFO] [static_transform_publisher-1]: process started with pid [366759]
+[INFO] [robot_state_publisher-2]: process started with pid [366761]
+[INFO] [move_group-3]: process started with pid [366763]
+[INFO] [ros2_control_node-4]: process started with pid [366765]
+[INFO] [spawner-5]: process started with pid [366767]
+[INFO] [spawner-6]: process started with pid [366769]
+[INFO] [component_container-7]: process started with pid [366771]
+[INFO] [gripper_node-8]: process started with pid [366773]
+[INFO] [rviz2-9]: process started with pid [366777]
+[INFO] [blue_cube_localizer-10]: process started with pid [366785]
+[static_transform_publisher-1] [INFO] [1789617735.589344333] [dabai_hand_eye_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+[static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+[static_transform_publisher-1] from 'flange_link' to 'camera_link'
+[component_container-7] [INFO] [1789617735.606554896] [camera.camera_container]: Load Library: /home/industio/fairino_ws/install/orbbec_camera/lib/liborbbec_camera.so
+[robot_state_publisher-2] [WARN] [1789617735.718610368] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[robot_state_publisher-2] [INFO] [1789617735.721724819] [robot_state_publisher]: got segment base_link
+[ros2_control_node-4] [WARN] [1789617735.723418254] [controller_manager]: [Deprecated] Passing the robot description parameter directly to the control_manager node is deprecated. Use '~/robot_description' topic from 'robot_state_publisher' instead.
+[robot_state_publisher-2] [INFO] [1789617735.724619934] [robot_state_publisher]: got segment camera_housing_link
+[robot_state_publisher-2] [INFO] [1789617735.724635976] [robot_state_publisher]: got segment flange_link
+[robot_state_publisher-2] [INFO] [1789617735.724643559] [robot_state_publisher]: got segment forearm_link
+[robot_state_publisher-2] [INFO] [1789617735.724650268] [robot_state_publisher]: got segment grasp_frame
+[robot_state_publisher-2] [INFO] [1789617735.724656393] [robot_state_publisher]: got segment gripper_command_link
+[robot_state_publisher-2] [INFO] [1789617735.724663393] [robot_state_publisher]: got segment gripper_finger_nx_ny_link
+[robot_state_publisher-2] [INFO] [1789617735.724669810] [robot_state_publisher]: got segment gripper_finger_nx_py_link
+[robot_state_publisher-2] [INFO] [1789617735.724676518] [robot_state_publisher]: got segment gripper_finger_px_ny_link
+[robot_state_publisher-2] [INFO] [1789617735.724682935] [robot_state_publisher]: got segment gripper_finger_px_py_link
+[robot_state_publisher-2] [INFO] [1789617735.724689060] [robot_state_publisher]: got segment gripper_link
+[robot_state_publisher-2] [INFO] [1789617735.724695185] [robot_state_publisher]: got segment gripper_mount_link
+[robot_state_publisher-2] [INFO] [1789617735.724701602] [robot_state_publisher]: got segment gripper_spacer_link
+[robot_state_publisher-2] [INFO] [1789617735.724707727] [robot_state_publisher]: got segment shoulder_link
+[robot_state_publisher-2] [INFO] [1789617735.724714143] [robot_state_publisher]: got segment upperarm_link
+[robot_state_publisher-2] [INFO] [1789617735.724719977] [robot_state_publisher]: got segment wrist1_link
+[robot_state_publisher-2] [INFO] [1789617735.724726102] [robot_state_publisher]: got segment wrist2_link
+[robot_state_publisher-2] [INFO] [1789617735.724731935] [robot_state_publisher]: got segment wrist3_link
+[ros2_control_node-4] [INFO] [1789617735.724614101] [resource_manager]: Loading hardware 'FR3CHardware' 
+[ros2_control_node-4] [INFO] [1789617735.738111706] [resource_manager]: Initialize hardware 'FR3CHardware' 
+[ros2_control_node-4] [INFO] [1789617735.738305667] [resource_manager]: Successful initialization of hardware 'FR3CHardware'
+[ros2_control_node-4] [INFO] [1789617735.738567586] [resource_manager]: 'configure' hardware 'FR3CHardware' 
+[ros2_control_node-4] [INFO] [1789617735.738613962] [resource_manager]: Successful 'configure' of hardware 'FR3CHardware'
+[ros2_control_node-4] [INFO] [1789617735.738661796] [resource_manager]: 'activate' hardware 'FR3CHardware' 
+[ros2_control_node-4] [INFO] [1789617735.738683671] [FairinoHardwareInterface]: Connecting to FAIRINO controller at 192.168.58.2
+[move_group-3] [INFO] [1789617735.830786884] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.0107197 seconds
+[move_group-3] [INFO] [1789617735.834705760] [moveit_robot_model.robot_model]: Loading robot model 'fairino3mt_v6_robot'...
+[move_group-3] [INFO] [1789617735.835535561] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[component_container-7] [INFO] [1789617736.168154397] [camera.camera_container]: Found class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-7] [INFO] [1789617736.170291462] [camera.camera_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-7] [09/17 12:02:16.272127][info][366771][Context.cpp:68] Context created with config: /home/industio/fairino_ws/install/orbbec_camera/share/orbbec_camera/config/OrbbecSDKConfig_v1.0.xml
+[component_container-7] [09/17 12:02:16.272194][info][366771][Context.cpp:73] Work directory=/home/industio/fairino_ws, SDK version=v1.10.35-20260128-fa838f5
+[component_container-7] [09/17 12:02:16.272264][info][366771][LinuxPal.cpp:32] createObPal: create LinuxPal!
+[component_container-7] [09/17 12:02:16.352780][warning][366771][OpenNIDeviceInfo.cpp:190] New openni device matched.
+[component_container-7] [09/17 12:02:16.353019][info][366771][LinuxPal.cpp:166] Create PollingDeviceWatcher!
+[component_container-7] [09/17 12:02:16.353234][info][366771][DeviceManager.cpp:15] Current found device(s): (1)
+[component_container-7] [09/17 12:02:16.353254][info][366771][DeviceManager.cpp:24] 	- Name: DaBai DCW2, PID: 0x06a0, SN/ID: CH82C5201C9, Connection: USB2.0
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+[rviz2-9] [INFO] [1789617736.389584605] [rviz2]: Stereo is NOT SUPPORTED
+[rviz2-9] [INFO] [1789617736.392113382] [rviz2]: OpenGl version: 3.1 (GLSL 1.4)
+[component_container-7] [INFO] [1789617736.466761322] [camera.camera]: Connecting to device with serial number: CH82C5201C9
+[component_container-7] [INFO] [1789617736.466948282] [camera.camera]: Before lock: Select device serial number: CH82C5201C9
+[component_container-7] [INFO] [1789617736.466998741] [camera.camera]: After lock: Select device serial number: CH82C5201C9
+[component_container-7] [09/17 12:02:16.469454][warning][366947][OpenNIHostProtocol.cpp:739] Get usb core type failed!
+[spawner-6] [INFO] [1789617736.482690870] [spawner_fairino3mt_execution_controller]: waiting for service /controller_manager/list_controllers to become available...
+[spawner-5] [INFO] [1789617736.485972739] [spawner_joint_state_broadcaster]: waiting for service /controller_manager/list_controllers to become available...
+[move_group-3] [WARN] [1789617736.497749201] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[rviz2-9] [INFO] [1789617736.498763921] [rviz2]: Stereo is NOT SUPPORTED
+[component_container-7] [INFO] [1789617736.657383901] [camera.camera]: Device serial number CH82C5201C9 matched
+[component_container-7] [INFO] [1789617736.657565903] [camera.camera]: Select device cost 190 ms
+[component_container-7] [INFO] [1789617736.657645529] [camera.camera]: Try to connect device via USB2.0
+[component_container-7] [INFO] [1789617736.657958782] [camera.camera]: OBCameraNode: use_intra_process: OFF
+[rviz2-9] Warning: class_loader.impl: SEVERE WARNING!!! A namespace collision has occurred with plugin factory for class rviz_default_plugins::displays::InteractiveMarkerDisplay. New factory will OVERWRITE existing one. This situation occurs when libraries containing plugins are directly linked against an executable (the one running right now generating this message). Please separate plugins out into their own library or just don't link against the library and use either class_loader::ClassLoader/MultiLibraryClassLoader to open.
+[rviz2-9]          at line 253 in /opt/ros/humble/include/class_loader/class_loader/class_loader_core.hpp
+[component_container-7] [INFO] [1789617736.801177428] [camera.camera]: current time domain: system
+[component_container-7] [INFO] [1789617736.820303387] [camera.camera]: Create align filter
+[component_container-7] [09/17 12:02:16.820526][warning][366947][NeonAlign.cpp:343] NeonAlign create.
+[component_container-7] [INFO] [1789617736.820557139] [camera.camera]: Setting LDP to OFF
+[component_container-7] [INFO] [1789617736.821917779] [camera.camera]: Setting color auto exposure priority to false
+[component_container-7] [INFO] [1789617736.822754288] [camera.camera]: color auto exposure priority is set to 0
+[component_container-7] [INFO] [1789617736.822823122] [camera.camera]: Setting color auto exposure to ON
+[component_container-7] [INFO] [1789617736.823367962] [camera.camera]: Setting IR auto exposure to ON
+[component_container-7] [INFO] [1789617736.824191054] [camera.camera]: default_soft_filter_max_diff: 6
+[component_container-7] [INFO] [1789617736.824279722] [camera.camera]: default_soft_filter_speckle_size: 50
+[component_container-7] [INFO] [1789617736.824480390] [camera.camera]: Setting ThresholdFilter......
+[component_container-7] [INFO] [1789617736.824522683] [camera.camera]: set ThresholdFilter to false
+[component_container-7] [INFO] [1789617736.824600850] [camera.camera]: Skip setting filter: ThresholdFilter
+[component_container-7] [INFO] [1789617736.826152825] [camera.camera]:  stream color is enabled - width: 640, height: 480, fps: 10, Format: OB_FORMAT_MJPG
+[component_container-7] [INFO] [1789617736.827284213] [camera.camera]:  stream depth is enabled - width: 640, height: 400, fps: 10, Format: OB_FORMAT_Y11
+[gripper_node-8] [INFO] [1789617736.830038743] [ydi_j22_gripper]: YDI-J22 mock GripperCommand server ready.
+[component_container-7] [09/17 12:02:16.899490][warning][366947][ObException.cpp:5] Current device does not support frame sync!
+[component_container-7] [09/17 12:02:16.899560][warning][366947][Pipeline.cpp:45] Execute failure! A libobsensor_exception has occurred!
+[component_container-7] 	 - where:45#Pipeline
+[component_container-7] 	 - msg:Current device does not support frame sync!
+[component_container-7] 	 - type:N11libobsensor31unsupported_operation_exceptionE
+[component_container-7] [INFO] [1789617736.899592377] [camera.camera]: set align mode to ALIGN_D2C_HW_MODE
+[component_container-7] [INFO] [1789617736.899644585] [camera.camera]: enable depth scale ON
+[component_container-7] [INFO] [1789617736.899661502] [camera.camera]: Enable color stream
+[component_container-7] [INFO] [1789617736.899679586] [camera.camera]: Stream color width: 640 height: 480 fps: 10 format: MJPG
+[component_container-7] [INFO] [1789617736.899694753] [camera.camera]: Enable depth stream
+[component_container-7] [INFO] [1789617736.899708169] [camera.camera]: Stream depth width: 640 height: 400 fps: 10 format: Y11
+[move_group-3] [INFO] [1789617737.128136120] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Publishing maintained planning scene on 'monitored_planning_scene'
+[move_group-3] [INFO] [1789617737.129028921] [moveit.ros_planning_interface.moveit_cpp]: Listening to 'joint_states' for joint states
+[move_group-3] [INFO] [1789617737.130988359] [moveit_ros.current_state_monitor]: Listening to joint states on topic 'joint_states'
+[move_group-3] [INFO] [1789617737.134030767] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/attached_collision_object' for attached collision objects
+[move_group-3] [INFO] [1789617737.134079476] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[move_group-3] [INFO] [1789617737.135599659] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/planning_scene'
+[move_group-3] [INFO] [1789617737.135646035] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting world geometry update monitor for collision objects, attached objects, octomap updates.
+[move_group-3] [INFO] [1789617737.137351137] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'collision_object'
+[move_group-3] [INFO] [1789617737.139097364] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to 'planning_scene_world' for planning scene world geometry
+[move_group-3] [WARN] [1789617737.139495202] [moveit.ros.occupancy_map_monitor.middleware_handle]: Resolution not specified for Octomap. Assuming resolution = 0.1 instead
+[move_group-3] [ERROR] [1789617737.139515619] [moveit.ros.occupancy_map_monitor.middleware_handle]: No 3D sensor plugin(s) defined for octomap updates
+[blue_cube_localizer-10] [INFO] [1789617737.211322110] [perception.blue_cube_localizer]: Box localizer started with colors detection; valid pose publication requires 3 stable samples.
+[blue_cube_localizer-10] [INFO] [1789617737.436401691] [perception.blue_cube_localizer]: Localization status: {"active_inferences":0,"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":0,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":null,"last_inference_start_ns":null,"last_success_ns":null,"npu_inference":false,"pause_generation":0,"reason":"rgbd_stream_stale","stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[component_container-7] [INFO] [1789617737.625365835] [camera.camera]: Disable frame sync
+[component_container-7] [INFO] [1789617737.625514879] [camera.camera]: Setting LDP to OFF
+[component_container-7] [INFO] [1789617737.644058373] [camera.camera]: Device DaBai DCW2 connected
+[component_container-7] [INFO] [1789617737.644165416] [camera.camera]: Serial number: CH82C5201C9
+[component_container-7] [INFO] [1789617737.644182624] [camera.camera]: Firmware version: RD1017
+[component_container-7] [INFO] [1789617737.644198666] [camera.camera]: Hardware version: 
+[component_container-7] [INFO] [1789617737.644207999] [camera.camera]: Wrapper version: 1.5.15
+[component_container-7] [INFO] [1789617737.644237458] [camera.camera]: SDK version: 1.10.35
+[component_container-7] [INFO] [1789617737.644246208] [camera.camera]: device unique id: 5-1.3.1-23
+[component_container-7] [INFO] [1789617737.644259917] [camera.camera]: Current node pid: 366771
+[component_container-7] [INFO] [1789617737.644268375] [camera.camera]: usb connect type: USB2.0
+[component_container-7] [INFO] [1789617737.644279167] [camera.camera]: Start device cost 1277 ms
+[component_container-7] [INFO] [1789617737.644287917] [camera.camera]: Initialize device cost 986 ms
+[move_group-3] [INFO] [1789617737.969230295] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'chomp'
+[move_group-3] [INFO] [1789617737.987753664] [moveit.ros_planning.planning_pipeline]: Using planning interface 'CHOMP'
+[move_group-3] [INFO] [1789617737.995405039] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.path_tolerance' was not set. Using default value: 0.100000
+[move_group-3] [INFO] [1789617737.995461623] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.resample_dt' was not set. Using default value: 0.100000
+[move_group-3] [INFO] [1789617737.995468623] [moveit_ros.add_time_optimal_parameterization]: Param 'chomp.min_angle_change' was not set. Using default value: 0.001000
+[move_group-3] [INFO] [1789617737.995499831] [moveit_ros.fix_workspace_bounds]: Param 'chomp.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-3] [INFO] [1789617737.995524040] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_bounds_error' was set to 0.100000
+[move_group-3] [INFO] [1789617737.995533373] [moveit_ros.fix_start_state_bounds]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-3] [INFO] [1789617737.995548832] [moveit_ros.fix_start_state_collision]: Param 'chomp.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-3] [INFO] [1789617737.995558457] [moveit_ros.fix_start_state_collision]: Param 'chomp.jiggle_fraction' was set to 0.050000
+[move_group-3] [INFO] [1789617737.995565457] [moveit_ros.fix_start_state_collision]: Param 'chomp.max_sampling_attempts' was not set. Using default value: 100
+[move_group-3] [INFO] [1789617737.995580624] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-3] [INFO] [1789617737.995587041] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-3] [INFO] [1789617737.995591416] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-3] [INFO] [1789617737.995595499] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-3] [INFO] [1789617737.995599583] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-3] [INFO] [1789617737.995603958] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-3] [INFO] [1789617738.001995319] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'pilz_industrial_motion_planner'
+[move_group-3] [INFO] [1789617738.006605453] [moveit.pilz_industrial_motion_planner.joint_limits_aggregator]: Reading limits from namespace robot_description_planning
+[move_group-3] [INFO] [1789617738.016592812] [moveit.pilz_industrial_motion_planner]: Available plugins: pilz_industrial_motion_planner/PlanningContextLoaderCIRC pilz_industrial_motion_planner/PlanningContextLoaderLIN pilz_industrial_motion_planner/PlanningContextLoaderPTP 
+[move_group-3] [INFO] [1789617738.016702188] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderCIRC
+[move_group-3] [INFO] [1789617738.025201447] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [CIRC]
+[move_group-3] [INFO] [1789617738.025269698] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderLIN
+[move_group-3] [INFO] [1789617738.026838007] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [LIN]
+[move_group-3] [INFO] [1789617738.026872715] [moveit.pilz_industrial_motion_planner]: About to load: pilz_industrial_motion_planner/PlanningContextLoaderPTP
+[move_group-3] [INFO] [1789617738.028257272] [moveit.pilz_industrial_motion_planner]: Registered Algorithm [PTP]
+[move_group-3] [INFO] [1789617738.028289939] [moveit.ros_planning.planning_pipeline]: Using planning interface 'Pilz Industrial Motion Planner'
+[move_group-3] [INFO] [1789617738.031562767] [moveit.ros_planning_interface.moveit_cpp]: Loading planning pipeline 'ompl'
+[move_group-3] [INFO] [1789617738.053423130] [moveit.ros_planning.planning_pipeline]: Using planning interface 'OMPL'
+[move_group-3] [INFO] [1789617738.055059398] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.path_tolerance' was not set. Using default value: 0.100000
+[move_group-3] [INFO] [1789617738.055102273] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.resample_dt' was not set. Using default value: 0.100000
+[move_group-3] [INFO] [1789617738.055162649] [moveit_ros.add_time_optimal_parameterization]: Param 'ompl.min_angle_change' was not set. Using default value: 0.001000
+[move_group-3] [INFO] [1789617738.055204649] [moveit_ros.fix_workspace_bounds]: Param 'ompl.default_workspace_bounds' was not set. Using default value: 10.000000
+[move_group-3] [INFO] [1789617738.055234108] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_bounds_error' was set to 0.100000
+[move_group-3] [INFO] [1789617738.055242275] [moveit_ros.fix_start_state_bounds]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-3] [INFO] [1789617738.055260358] [moveit_ros.fix_start_state_collision]: Param 'ompl.start_state_max_dt' was not set. Using default value: 0.500000
+[move_group-3] [INFO] [1789617738.055269983] [moveit_ros.fix_start_state_collision]: Param 'ompl.jiggle_fraction' was set to 0.050000
+[move_group-3] [INFO] [1789617738.055275234] [moveit_ros.fix_start_state_collision]: Param 'ompl.max_sampling_attempts' was not set. Using default value: 100
+[move_group-3] [INFO] [1789617738.055291567] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Add Time Optimal Parameterization'
+[move_group-3] [INFO] [1789617738.055297692] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Resolve constraint frames to robot links'
+[move_group-3] [INFO] [1789617738.055301775] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Workspace Bounds'
+[move_group-3] [INFO] [1789617738.055305859] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Bounds'
+[move_group-3] [INFO] [1789617738.055309651] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State In Collision'
+[move_group-3] [INFO] [1789617738.055313442] [moveit.ros_planning.planning_pipeline]: Using planning request adapter 'Fix Start State Path Constraints'
+[move_group-3] [INFO] [1789617738.131384147] [moveit.plugins.moveit_simple_controller_manager]: Added FollowJointTrajectory controller for fairino3mt_controller
+[move_group-3] [INFO] [1789617738.131445689] [moveit.plugins.moveit_simple_controller_manager]: Max effort set to 0.0
+[move_group-3] [INFO] [1789617738.135669944] [moveit.plugins.moveit_simple_controller_manager]: Added GripperCommand controller for ydi_j22_gripper_controller
+[move_group-3] [INFO] [1789617738.135886655] [moveit.plugins.moveit_simple_controller_manager]: Returned 2 controllers in list
+[move_group-3] [INFO] [1789617738.135918738] [moveit.plugins.moveit_simple_controller_manager]: Returned 2 controllers in list
+[move_group-3] [INFO] [1789617738.136560120] [moveit_ros.trajectory_execution_manager]: Trajectory execution is managing controllers
+[move_group-3] [INFO] [1789617738.136589287] [move_group.move_group]: MoveGroup debug mode is ON
+[move_group-3] [INFO] [1789617738.178804998] [move_group.move_group]: 
+[move_group-3] 
+[move_group-3] ********************************************************
+[move_group-3] * MoveGroup using: 
+[move_group-3] *     - ApplyPlanningSceneService
+[move_group-3] *     - ClearOctomapService
+[move_group-3] *     - CartesianPathService
+[move_group-3] *     - ExecuteTrajectoryAction
+[move_group-3] *     - GetPlanningSceneService
+[move_group-3] *     - KinematicsService
+[move_group-3] *     - MoveAction
+[move_group-3] *     - MotionPlanService
+[move_group-3] *     - QueryPlannersService
+[move_group-3] *     - StateValidationService
+[move_group-3] ********************************************************
+[move_group-3] 
+[move_group-3] [INFO] [1789617738.179782383] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context using planning plugin ompl_interface/OMPLPlanner
+[move_group-3] [INFO] [1789617738.179826134] [moveit_move_group_capabilities_base.move_group_context]: MoveGroup context initialization complete
+[move_group-3] [96mLoading 'move_group/ApplyPlanningSceneService'...
+[move_group-3] [0m[96mLoading 'move_group/ClearOctomapService'...
+[move_group-3] [0m[96mLoading 'move_group/MoveGroupCartesianPathService'...
+[move_group-3] [0m[96mLoading 'move_group/MoveGroupExecuteTrajectoryAction'...
+[move_group-3] [0m[96mLoading 'move_group/MoveGroupGetPlanningSceneService'...
+[move_group-3] [0m[96mLoading 'move_group/MoveGroupKinematicsService'...
+[move_group-3] [0m[96mLoading 'move_group/MoveGroupMoveAction'...
+[move_group-3] [0m[96mLoading 'move_group/MoveGroupPlanService'...
+[move_group-3] [0m[96mLoading 'move_group/MoveGroupQueryPlannersService'...
+[move_group-3] [0m[96mLoading 'move_group/MoveGroupStateValidationService'...
+[move_group-3] [0m[92m
+[move_group-3] You can start planning now!
+[move_group-3] 
+[component_container-7] [INFO] [1789617738.288453902] [camera.camera]: Publishing static transform from color to depth
+[component_container-7] [INFO] [1789617738.288641738] [camera.camera]: Translation 12.2578, -0.0259598, 1.57039
+[component_container-7] [INFO] [1789617738.288688405] [camera.camera]: Rotation 0.00144328, 0.00102459, 0.000254427, 0.999998
+[component_container-7] [INFO] [1789617738.288735947] [camera.camera]: Publishing static transform from depth to depth
+[component_container-7] [INFO] [1789617738.288795448] [camera.camera]: Translation 0, 0, 0
+[component_container-7] [INFO] [1789617738.288952366] [camera.camera]: Rotation 0, 0, 0, 1
+[blue_cube_localizer-10] [INFO] [1789617738.688705143] [perception.blue_cube_localizer]: Localization status: {"actionable_cube_count":0,"active_inferences":0,"detected_targets":[],"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":2,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11296494138367,"last_inference_start_ns":11296494071574,"last_success_ns":11296494138367,"npu_inference":false,"pause_generation":0,"physical_color_counts":{},"physical_cube_count":0,"reason":"color_target_count_0","rejected_color_regions":{},"requested_color_physical_count":0,"rgb_color_regions":0,"sample_stamp":1789617738.371754,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[ros2_control_node-4] [INFO] [1789617738.940817269] [FairinoHardwareInterface]: Hardware active in monitoring mode with cmdT=0.008000 s; ServoJ is inhibited until a trajectory controller claims all six arm position interfaces
+[ros2_control_node-4] [INFO] [1789617738.940982354] [resource_manager]: Successful 'activate' of hardware 'FR3CHardware'
+[ros2_control_node-4] [INFO] [1789617738.998213228] [controller_manager]: update rate is 125 Hz
+[ros2_control_node-4] [INFO] [1789617738.998310646] [controller_manager]: Spawning controller_manager RT thread with scheduler priority: 50
+[ros2_control_node-4] [WARN] [1789617738.998534648] [controller_manager]: Could not enable FIFO RT scheduling policy: with error number <1>(Operation not permitted). See [https://control.ros.org/master/doc/ros2_control/controller_manager/doc/userdoc.html] for details on how to enable realtime scheduling.
+[ros2_control_node-4] [INFO] [1789617739.010492529] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[ros2_control_node-4] [INFO] [1789617739.047108470] [controller_manager]: Loading controller 'fairino3mt_execution_controller'
+[spawner-5] [INFO] [1789617739.050118794] [spawner_joint_state_broadcaster]: [94mLoaded [1mjoint_state_broadcaster[0m
+[ros2_control_node-4] [WARN] [1789617739.106703912] [fairino3mt_execution_controller]: [Deprecated]: "allow_nonzero_velocity_at_trajectory_end" is set to true. The default behavior will change to false.
+[ros2_control_node-4] [INFO] [1789617739.111125335] [controller_manager]: Configuring controller 'joint_state_broadcaster'
+[ros2_control_node-4] [INFO] [1789617739.111280503] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published
+[spawner-6] [INFO] [1789617739.114212660] [spawner_fairino3mt_execution_controller]: [94mLoaded [1mfairino3mt_execution_controller[0m
+[ros2_control_node-4] [INFO] [1789617739.127433471] [controller_manager]: Configuring controller 'fairino3mt_execution_controller'
+[ros2_control_node-4] [INFO] [1789617739.128105187] [fairino3mt_execution_controller]: No specific joint names are used for command interfaces. Using 'joints' parameter.
+[ros2_control_node-4] [INFO] [1789617739.128207854] [fairino3mt_execution_controller]: Command interfaces are [position] and state interfaces are [position].
+[ros2_control_node-4] [INFO] [1789617739.128286605] [fairino3mt_execution_controller]: Using 'splines' interpolation method.
+[ros2_control_node-4] [INFO] [1789617739.132917447] [fairino3mt_execution_controller]: Controller state will be published at 50.00 Hz.
+[ros2_control_node-4] [INFO] [1789617739.137551206] [fairino3mt_execution_controller]: Action status changes will be monitored at 20.00 Hz.
+[spawner-5] [INFO] [1789617739.176863927] [spawner_joint_state_broadcaster]: [92mConfigured and activated [1mjoint_state_broadcaster[0m
+[INFO] [spawner-6]: process has finished cleanly [pid 366769]
+[INFO] [spawner-5]: process has finished cleanly [pid 366767]
+[INFO] [trajectory_control_bridge.py-11]: process started with pid [367159]
+[rviz2-9] [ERROR] [1789617739.937541808] [moveit_ros_visualization.motion_planning_frame]: Action server: /recognize_objects not available
+[rviz2-9] [INFO] [1789617739.995634859] [moveit_ros_visualization.motion_planning_frame]: MoveGroup namespace changed: / -> . Reloading params.
+[component_container-7] [WARN] [1789617740.055759389] [camera.camera]: New subscription discovered on topic '/camera/depth_registered/points', requesting incompatible QoS. No messages will be sent to it. Last incompatible policy: RELIABILITY_QOS_POLICY
+[component_container-7] [INFO] [1789617740.176893086] [camera.camera]: Init xy tables with size 614400
+[rviz2-9] [INFO] [1789617740.404190815] [moveit_rdf_loader.rdf_loader]: Loaded robot model in 0.26207 seconds
+[rviz2-9] [INFO] [1789617740.404285025] [moveit_robot_model.robot_model]: Loading robot model 'fairino3mt_v6_robot'...
+[rviz2-9] [INFO] [1789617740.404304275] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[trajectory_control_bridge.py-11] [INFO] [1789617740.421882342] [fr3c_trajectory_control_bridge]: Trajectory bridge ready: flange drag remains available until MoveIt submits an execution goal
+[rviz2-9] [WARN] [1789617740.645397697] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[rviz2-9] [INFO] [1789617741.243804183] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Starting planning scene monitor
+[rviz2-9] [INFO] [1789617741.246599838] [moveit_ros.planning_scene_monitor.planning_scene_monitor]: Listening to '/monitored_planning_scene'
+[rviz2-9] [INFO] [1789617741.608069198] [interactive_marker_display_367292525696]: Connected on namespace: /rviz_moveit_motion_planning_display/robot_interaction_interactive_marker_topic
+[rviz2-9] [WARN] [1789617741.622706649] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[rviz2-9] [WARN] [1789617741.622861818] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[rviz2-9] [INFO] [1789617741.631534912] [moveit_ros_visualization.motion_planning_frame]: group fairino3mt_v6_group
+[rviz2-9] [INFO] [1789617741.631571079] [moveit_ros_visualization.motion_planning_frame]: Constructing new MoveGroup connection for group 'fairino3mt_v6_group' in namespace ''
+[rviz2-9] [INFO] [1789617741.686336177] [interactive_marker_display_367292525696]: Sending request for interactive markers
+[rviz2-9] [INFO] [1789617741.700560040] [move_group_interface]: Ready to take commands for planning group fairino3mt_v6_group.
+[rviz2-9] [INFO] [1789617741.704317623] [moveit_ros_visualization.motion_planning_frame]: group fairino3mt_v6_group
+[rviz2-9] [INFO] [1789617741.788242122] [interactive_marker_display_367292525696]: Service response received for initialization
+[blue_cube_localizer-10] [INFO] [1789617792.061748610] [perception.blue_cube_localizer]: Localization status: {"active_inferences":0,"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":292,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11349837815054,"last_inference_start_ns":11348633469419,"last_success_ns":11349837815054,"npu_inference":false,"pause_generation":0,"reason":"rgbd_stream_stale","stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617804.285163507] [perception.blue_cube_localizer]: Localization status: {"actionable_cube_count":0,"active_inferences":0,"detected_targets":[],"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":301,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11362082721061,"last_inference_start_ns":11361906901602,"last_success_ns":11362082721061,"npu_inference":false,"pause_generation":0,"physical_color_counts":{},"physical_cube_count":0,"reason":"color_target_count_0","rejected_color_regions":{},"requested_color_physical_count":0,"rgb_color_regions":0,"sample_stamp":1789617803.928401,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617806.051114767] [perception.blue_cube_localizer]: Localization status: {"active_inferences":0,"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":304,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11363848991116,"last_inference_start_ns":11362942413562,"last_success_ns":11363848991116,"npu_inference":false,"pause_generation":0,"reason":"rgbd_stream_stale","stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617807.573095574] [perception.blue_cube_localizer]: Localization status: {"actionable_cube_count":0,"active_inferences":0,"detected_targets":[],"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":305,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11365374815840,"last_inference_start_ns":11364978258015,"last_success_ns":11365374815840,"npu_inference":false,"pause_generation":0,"physical_color_counts":{},"physical_cube_count":0,"reason":"color_target_count_0","rejected_color_regions":{},"requested_color_physical_count":0,"rgb_color_regions":0,"sample_stamp":1789617807.1164439,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617809.287775357] [perception.blue_cube_localizer]: Localization status: {"active_inferences":0,"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":307,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11367086902095,"last_inference_start_ns":11366237178870,"last_success_ns":11367086902095,"npu_inference":false,"pause_generation":0,"reason":"rgbd_stream_stale","stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617811.668052150] [perception.blue_cube_localizer]: Localization status: {"actionable_cube_count":0,"active_inferences":0,"detected_targets":[],"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":308,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11369473889919,"last_inference_start_ns":11369120466273,"last_success_ns":11369473889919,"npu_inference":false,"pause_generation":0,"physical_color_counts":{},"physical_cube_count":0,"reason":"color_target_count_0","rejected_color_regions":{},"requested_color_physical_count":0,"rgb_color_regions":0,"sample_stamp":1789617811.205328,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617812.194020095] [perception.blue_cube_localizer]: Localization status: {"active_inferences":0,"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":308,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11369473889919,"last_inference_start_ns":11369120466273,"last_success_ns":11369473889919,"npu_inference":false,"pause_generation":0,"reason":"rgbd_stream_stale","stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617814.304986741] [perception.blue_cube_localizer]: Localization status: {"actionable_cube_count":0,"active_inferences":0,"detected_targets":[],"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":309,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11372106434296,"last_inference_start_ns":11371319993511,"last_success_ns":11372106434296,"npu_inference":false,"pause_generation":0,"physical_color_counts":{},"physical_cube_count":0,"reason":"color_target_count_0","rejected_color_regions":{},"requested_color_physical_count":0,"rgb_color_regions":0,"sample_stamp":1789617813.396551,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617814.439523542] [perception.blue_cube_localizer]: Localization status: {"active_inferences":0,"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":309,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11372106434296,"last_inference_start_ns":11371319993511,"last_success_ns":11372106434296,"npu_inference":false,"pause_generation":0,"reason":"rgbd_stream_stale","stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617815.077595667] [perception.blue_cube_localizer]: Localization status: {"actionable_cube_count":0,"active_inferences":0,"detected_targets":[],"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":310,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11372870546880,"last_inference_start_ns":11372418690202,"last_success_ns":11372870546880,"npu_inference":false,"pause_generation":0,"physical_color_counts":{},"physical_cube_count":0,"reason":"color_target_count_0","rejected_color_regions":{},"requested_color_physical_count":0,"rgb_color_regions":0,"sample_stamp":1789617814.4923708,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617817.193468493] [perception.blue_cube_localizer]: Localization status: {"active_inferences":0,"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":315,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11374059697390,"last_inference_start_ns":11374059670264,"last_success_ns":11374059697390,"npu_inference":false,"pause_generation":0,"reason":"rgbd_stream_stale","stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617819.053429902] [perception.blue_cube_localizer]: Localization status: {"actionable_cube_count":0,"active_inferences":0,"detected_targets":[],"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":317,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11376841885315,"last_inference_start_ns":11376092514309,"last_success_ns":11376841885315,"npu_inference":false,"pause_generation":0,"physical_color_counts":{},"physical_cube_count":0,"reason":"color_target_count_0","rejected_color_regions":{},"requested_color_physical_count":0,"rgb_color_regions":0,"sample_stamp":1789617818.0764558,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617821.569389465] [perception.blue_cube_localizer]: Localization status: {"active_inferences":0,"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":321,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11379366728850,"last_inference_start_ns":11378557490566,"last_success_ns":11379366728850,"npu_inference":false,"pause_generation":0,"reason":"rgbd_stream_stale","stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617821.790516918] [perception.blue_cube_localizer]: Localization status: {"actionable_cube_count":0,"active_inferences":0,"detected_targets":[],"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":322,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11379595004839,"last_inference_start_ns":11379412349806,"last_success_ns":11379595004839,"npu_inference":false,"pause_generation":0,"physical_color_counts":{},"physical_cube_count":0,"reason":"color_target_count_0","rejected_color_regions":{},"requested_color_physical_count":0,"rgb_color_regions":0,"sample_stamp":1789617821.0684311,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617822.714218700] [perception.blue_cube_localizer]: Localization status: {"active_inferences":0,"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":324,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11380514232989,"last_inference_start_ns":11379619620024,"last_success_ns":11380514232989,"npu_inference":false,"pause_generation":0,"reason":"rgbd_stream_stale","stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[blue_cube_localizer-10] [INFO] [1789617823.871970659] [perception.blue_cube_localizer]: Localization status: {"actionable_cube_count":0,"active_inferences":0,"detected_targets":[],"detection_mode":"colors","error_count":0,"filter_generation":0,"frames_inferred":326,"frames_skipped_paused":0,"frozen":false,"has_stable_pose":false,"inference_enabled":true,"last_inference_end_ns":11381674808312,"last_inference_start_ns":11381470174497,"last_success_ns":11381674808312,"npu_inference":false,"pause_generation":0,"physical_color_counts":{},"physical_cube_count":0,"reason":"color_target_count_0","rejected_color_regions":{},"requested_color_physical_count":0,"rgb_color_regions":0,"sample_stamp":1789617823.260669,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":false,"target_filter_color":"","tracking":true,"valid":false}
+[ERROR] [move_group-3]: process has died [pid 366763, exit code -9, cmd '/opt/ros/humble/lib/moveit_ros_move_group/move_group --ros-args --params-file /tmp/launch_params_8jxu0lrt --params-file /tmp/launch_params_h1x77_hf'].
+[move_group-3] [0m

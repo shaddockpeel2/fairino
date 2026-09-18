@@ -1,0 +1,6 @@
+{"time_ns":1789712631928591010,"event":"run_started","detail":"execution"}
+{"time_ns":1789712631928629802,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1789712631937622862,"event":"gripper_pre_open_started","detail":"requested_position_m=0.060000"}
+{"time_ns":1789712634256117023,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,requested_position_m=0.06,reported_position_m=0.06,stalled=0"}
+{"time_ns":1789712634257682124,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1789712634257792375,"event":"state","detail":"retryable_failure_before_arm_motion: stack source bottom must be within 10 mm of its support top; gap=3.11353 mm, expected=32.5219 mm; no arm motion started, fix the condition and call /start again"}

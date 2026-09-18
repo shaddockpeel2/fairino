@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-17",
+  "phase": "P5",
+  "status": "interface contract for phase 6; this file is not a pipeline implementation",
+  "selected_backend": {
+    "candidate": "matcha-icefall-zh-baker",
+    "family": "matcha",
+    "acoustic_model": "model-steps-3.onnx",
+    "vocoder": "vocos-22khz-univ.onnx",
+    "tokens": "tokens.txt",
+    "lexicon": "lexicon.txt",
+    "sample_rate": 22050,
+    "num_speakers": 1,
+    "speaker_id": 0,
+    "speed": 1.0,
+    "threads": 3,
+    "threads_note": "thread sweep in evidence/voice/P5/20260917/threads/ measured 2/3/4/6 threads on the A76 cluster at 0.294/0.255/0.356/0.706 RTF P95 and 1.339 on 4 A55 little cores; 3 threads on the big cluster is the measured optimum and the full-stack run at 3 threads met both objectives",
+    "cpu_affinity": "A76 big cores 4-7",
+    "rule_fsts": [
+      "phone.fst",
+      "date.fst",
+      "number.fst"
+    ],
+    "license": "model code Apache-2.0; training dataset Baker (DataBaker) NON-COMMERCIAL - valid only under the 2026-09-17 decision that this project is non-commercial",
+    "assets_root": "assets/voice/tts/matcha-icefall-zh-baker",
+    "cold_load_s": 3.36,
+    "load_s": 3.38
+  },
+  "backend_interface": {
+    "module": "fr3c_voice.tts_backends",
+    "engine_module": "fr3c_voice.tts_engine",
+    "shape": {
+      "load": "load the engine; timing is reported separately and must never be charged to first-segment latency",
+      "synthesize": "synthesize one text segment, return TtsResult",
+      "result_fields": [
+        "text",
+        "pcm",
+        "sample_rate",
+        "synthesis_s",
+        "first_callback_s",
+        "first_audible_s",
+        "callback_count",
+        "peak_dbfs",
+        "rms_dbfs"
+      ],
+      "first_audible_s": "seconds from generation start to the first sample above -45 dBFS sustained 20 ms; NOT the same as the first callback",
+      "cache": "TtsBackend caches by exact text, which is how pre-generated status PCM is served"
+    },
+    "guarantees": [
+      "no pipeline, no queues, no threads, no audio device access in this layer",
+      "raises TtsError on empty text, NaN/Inf samples, empty PCM or silent audio",
+      "engine construction lives in one place so the benchmark and the runtime cannot drift"
+    ]
+  },
+  "first_segment_splitter": {
+    "class": "fr3c_voice.tts_backends.FirstSegmentSplitter",
+    "policy_class": "fr3c_voice.tts_backends.SegmentPolicy",
+    "pure_logic": true,
+    "tests": "src/fr3c_voice/test/test_tts_backends.py (12 cases)",
+    "rules": {
+      "strict_first_segment": "the first segment is released at the first sentence-final punctuation, or at first_max_characters; it is never soft-cut early into a half phrase",
+      "later_segments": "cut at sentence punctuation, else at clause punctuation once the target length is reached, else at the target length; the hard cap is never exceeded",
+      "lookahead": "the soft cut keeps one character of lookahead so a clause mark arriving on the boundary is not orphaned into the next segment"
+    }
+  },
+  "segmentation_parameters": {
+    "first_min_characters": 4,
+    "first_max_characters": 24,
+    "segment_target_characters": 28,
+    "segment_max_characters": 44,
+    "note": "first_max_characters is the latency/prosody knob. The measured curve shows the selected Matcha backend remains within the 0.8 s objective through 24 characters, so the runtime now uses 24 to avoid cutting ordinary Chinese sentences too early."
+  },
+  "measured_first_segment_curve": {
+    "source": "evidence/voice/P5/20260917/latency_curve.json",
+    "backend": "matcha-icefall-zh-baker, 4 threads, A76, idle bench, 5 runs per length",
+    "objective_s": 0.8,
+    "columns": [
+      "characters",
+      "audio_s_p50",
+      "first_valid_pcm_p50_s",
+      "first_valid_pcm_max_s",
+      "rtf_p50",
+      "rtf_max"
+    ],
+    "rows": [
+      [
+        2,
+        0.45,
+        0.212,
+        0.228,
+        0.297,
+        0.335
+      ],
+      [
+        4,
+        0.87,
+        0.251,
+        0.256,
+        0.199,
+        0.215
+      ],
+      [
+        6,
+        1.18,
+        0.274,
+        0.277,
+        0.166,
+        0.176
+      ],
+      [
+        7,
+        1.35,
+        0.295,
+        0.3,
+        0.16,
+        0.163
+      ],
+      [
+        8,
+        1.55,
+        0.253,
+        0.261,
+        0.239,
+        0.243
+      ],
+      [
+        10,
+        2.09,
+        0.304,
+        0.407,
+        0.168,
+        0.229
+      ],
+      [
+        16,
+        3.16,
+        0.244,
+        0.255,
+        0.17,
+        0.174
+      ],
+      [
+        24,
+        4.79,
+        0.219,
+        0.245,
+        0.134,
+        0.143
+      ],
+      [
+        30,
+        6.03,
+        0.651,
+        0.68,
+        0.095,
+        0.1
+      ],
+      [
+        60,
+        12.39,
+        1.205,
+        1.211,
+        0.091,
+        0.091
+      ],
+      [
+        120,
+        24.66,
+        2.457,
+        2.576,
+        0.097,
+        0.102
+      ]
+    ],
+    "interpretation": [
+      "up to about 24 characters (about 4.8 s of audio) the first callback arrives early and the delivered chunk grows with the segment",
+      "beyond that the first callback effectively carries the whole segment and latency grows linearly with audio duration",
+      "so the safe first-segment budget is <= 16 characters, and 24 characters is the measured upper bound",
+      "late segments may be long: at 120 characters RTF is still about 0.10, so throughput is not the constraint"
+    ]
+  },
+  "acoustic_reference": {
+    "source": "evidence/voice/P5/20260917/calibration.json and acoustic_report.json",
+    "playback_path_offset_p50_s": 0.0,
+    "playback_path_offset_spread_ms": 10.0,
+    "calibration_snr_db": 31.9,
+    "method": "gated 250 ms pilot bursts; the offset is the delay between handing PCM to ALSA and the microphone picking the sound up",
+    "consequence": "acoustic_first_sound ~= software first_valid_pcm; do not add a large fixed acoustic allowance",
+    "environments_note": "at the default low speaker level the room floor is about -40 dBFS and per-utterance acoustic detection is unreliable; per-utterance acoustic checks must be run at a raised, explicitly recorded level"
+  },
+  "pre_generated_pcm": {
+    "principle": "fixed status phrases may be pre-generated, but playback must be triggered by the real state machine and must never be counted as a dynamic-answer first-sound measurement",
+    "candidates": [
+      "我在",
+      "好的",
+      "收到",
+      "正在执行",
+      "已完成",
+      "没有找到目标",
+      "任务已停止",
+      "正在恢复"
+    ],
+    "implementation": "synthesize once at startup through TtsBackend.synthesize(); the result is cached by exact text, so a hit costs a dictionary lookup and no synthesis",
+    "not_a_substitute_for": "dynamic Qwen answers, which must go through real synthesis"
+  },
+  "phase6_handover": {
+    "must_handle": [
+      "whole-machine available memory measured at 1167 MiB for a single configured stack and as low as 745 MiB when other workload shares the board; the 1024 MiB guard used by P3 has little margin",
+      "the 2-character case shows RTF up to 0.726 at 3 threads and 0.866 at 4 threads; either cover very short playbacks with pre-generated PCM or accept and document it",
+      "pre-generated PCM must be state-triggered, never scheduled unconditionally"
+    ],
+    "must_not_do": [
+      "grow the playback buffer to hide a synthesis gap",
+      "treat the sherpa-onnx callback as a streaming guarantee",
+      "charge cold model load to first-segment latency"
+    ]
+  },
+  "thread_sweep": {
+    "source": "evidence/voice/P5/20260917/threads/",
+    "backend": "matcha-icefall-zh-baker",
+    "rows": [
+      {
+        "config": "2 threads / A76",
+        "rtf_p95": 0.294,
+        "first_valid_pcm_p95_worst_s": 0.298
+      },
+      {
+        "config": "3 threads / A76",
+        "rtf_p95": 0.255,
+        "first_valid_pcm_p95_worst_s": 0.259
+      },
+      {
+        "config": "4 threads / A76",
+        "rtf_p95": 0.356,
+        "first_valid_pcm_p95_worst_s": 0.301
+      },
+      {
+        "config": "6 threads / A76",
+        "rtf_p95": 0.706,
+        "first_valid_pcm_p95_worst_s": 0.624
+      },
+      {
+        "config": "4 threads / A55 little",
+        "rtf_p95": 1.339,
+        "first_valid_pcm_p95_worst_s": 0.851
+      }
+    ],
+    "conclusions": [
+      "3 threads on the A76 cluster is the measured optimum; 6 threads is worse than 4",
+      "pinning to the A76 cluster is mandatory: the little cluster cannot keep up (RTF P95 1.339 > 1)",
+      "load time is insensitive to thread count (3.48-3.74 s)"
+    ]
+  }
+}

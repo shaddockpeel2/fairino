@@ -72,6 +72,7 @@ fi
 exec ros2 launch fairino_mtc_demo full_first_grasp.launch.py \
   detection_mode:="$detection_mode" \
   sort_enabled:="${FR3C_SORT_ENABLED:-$([[ "$detection_mode" == colors ]] && echo true || echo false)}" \
+  stack_enabled:="${FR3C_STACK_ENABLED:-$([[ "$detection_mode" == colors ]] && echo true || echo false)}" \
   gripper_backend:="$gripper_backend" \
   gripper_hardware_output_enabled:="$gripper_hardware_output_enabled" \
   start_blue_cube_localizer:="${FR3C_START_BLUE_CUBE_LOCALIZER:-true}" \

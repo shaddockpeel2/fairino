@@ -1,0 +1,8 @@
+{"text": "抓起红色方块", "intent": {"schema_version": "1.0", "route": "action", "task": "pick_hold", "color": "red", "reply": "准备抓取红色方块并在抬升后保持夹持。"}, "elapsed_s": 9.008566267999413}
+{"text": "抓起黄色方块", "intent": {"schema_version": "1.0", "route": "action", "task": "pick_hold", "color": "yellow", "reply": "准备抓取黄色方块并在抬升后保持夹持。"}, "elapsed_s": 9.104677366998658}
+{"text": "抓起蓝色方块", "intent": {"schema_version": "1.0", "route": "action", "task": "pick_hold", "color": "blue", "reply": "准备抓取蓝色方块并在抬升后保持夹持。"}, "elapsed_s": 8.853537393002625}
+{"text": "抓起绿色方块", "intent": {"schema_version": "1.0", "route": "action", "task": "pick_hold", "color": "green", "reply": "准备抓取绿色方块并在抬升后保持夹持。"}, "elapsed_s": 8.88100943599784}
+{"text": "不要装红色方块", "intent": {"schema_version": "1.0", "route": "chat", "task": null, "color": null, "reply": "好的，不会发起抓取。"}, "elapsed_s": 8.08224611499827}
+{"text": "怎么装红色方块", "intent": {"schema_version": "1.0", "route": "clarify", "task": null, "color": null, "reply": "请说明要将红色方块放入哪个分类区。"}, "elapsed_s": 8.639479067001957}
+{"text": "请把蓝色方块放到分类区域", "intent": {"schema_version": "1.0", "route": "action", "task": "pick_sort", "color": "blue", "reply": "准备将蓝色方块放入对应分类区。"}, "elapsed_s": 8.52482107099786}
+{"text": "你好请介绍一下自己", "intent": {"schema_version": "1.0", "route": "chat", "task": null, "color": null, "reply": "我是一个离线助手，可以协助您完成抓取、分类等操作。"}, "elapsed_s": 9.149590567001724}

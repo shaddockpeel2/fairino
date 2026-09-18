@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "rounds": 10,
+  "cases": {
+    "length_20": {
+      "rounds": 10,
+      "first_valid_pcm_write_p50_s": 0.012385614500090014,
+      "first_valid_pcm_write_p95_s": 0.24373019409995278,
+      "segment_count_p50": 2.0,
+      "gap_max_s": 0.0021,
+      "gap_p95_s": 0.0020099999999999996,
+      "gap_over_150ms": 0,
+      "xruns_total": 0,
+      "failures": [],
+      "pcm_queue_blocked": 0
+    },
+    "length_60": {
+      "rounds": 10,
+      "first_valid_pcm_write_p50_s": 0.010852598000383296,
+      "first_valid_pcm_write_p95_s": 0.015500196399989362,
+      "segment_count_p50": 3.0,
+      "gap_max_s": 0.0042,
+      "gap_p95_s": 0.003915,
+      "gap_over_150ms": 0,
+      "xruns_total": 0,
+      "failures": [],
+      "pcm_queue_blocked": 0
+    },
+    "length_120": {
+      "rounds": 10,
+      "first_valid_pcm_write_p50_s": 0.010334446000342723,
+      "first_valid_pcm_write_p95_s": 0.015312419350448178,
+      "segment_count_p50": 5.0,
+      "gap_max_s": 0.0052,
+      "gap_p95_s": 0.0030999999999999947,
+      "gap_over_150ms": 0,
+      "xruns_total": 0,
+      "failures": [],
+      "pcm_queue_blocked": 0
+    },
+    "slow_token": {
+      "rounds": 3,
+      "audio_before_text_end_all_rounds": true,
+      "head_start_s": [
+        2.3703,
+        2.4338,
+        2.438
+      ],
+      "failures": []
+    },
+    "stop": {
+      "rounds": 5,
+      "stop_latency_p50_ms": null,
+      "stop_latency_p95_ms": null,
+      "stop_latency_max_ms": null,
+      "all_cancelled": false,
+      "target_ms": 250
+    },
+    "device_recovery": {
+      "reopens_before": 0,
+      "reopens_after": 0,
+      "xruns_after": 0,
+      "played_after_recovery": true
+    },
+    "qwen": {
+      "rounds": 3,
+      "first_token_p50_s": 0.203373799999099,
+      "first_valid_pcm_write_p50_s": 0.3085811549990467,
+      "audio_before_text_end_rounds": 3,
+      "gap_max_s": 0.6111,
+      "gap_over_150ms": 20,
+      "xruns_total": 0,
+      "failures": []
+    }
+  },
+  "wall_s": 654.42
+}

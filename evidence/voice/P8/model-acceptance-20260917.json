@@ -1,0 +1,42 @@
+{
+  "date": "2026-09-17",
+  "runtime": "RK3588 isolated Unix socket, no ROS guards for model-only acceptance",
+  "configuration": {
+    "max_new_tokens": 2048,
+    "max_context_len": 4096,
+    "request_timeout_s": 600
+  },
+  "cases": [
+    {
+      "name": "simple_text",
+      "output_characters": 27,
+      "output_utf8_bytes": 77,
+      "token_callbacks": 17,
+      "first_token_s": 11.122250239997811,
+      "total_s": 12.892668636999588,
+      "ending": "AI助手，名叫通义千问，很高兴为你服务！"
+    },
+    {
+      "name": "long_text_complete_ending",
+      "output_characters": 1236,
+      "output_utf8_bytes": 3654,
+      "token_callbacks": 717,
+      "first_token_s": 0.23733655300020473,
+      "total_s": 71.20603332799874,
+      "ending": "展，成为智能制造不可或缺的重要组成部分。"
+    },
+    {
+      "name": "static_camera_image",
+      "source": "test/camera/camera_retest/results/raw_color.png",
+      "output_characters": 123,
+      "first_token_s": 12.19112879900058,
+      "total_s": 18.753063201998884,
+      "completed": true
+    }
+  ],
+  "limits": [
+    "No live /camera/color/image_raw topic was present during acceptance.",
+    "The P6 TTS service was not online, so audible streaming remains a field check.",
+    "RKLLM RUN_FINISH exposes no natural-vs-limit finish reason."
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-17",
+  "phase": "P5",
+  "purpose": "Fixed text corpus for the P5 TTS backend comparison. Every category states what it is evidence for; nothing here asserts an expected result.",
+  "categories": {
+    "first_segment": {
+      "purpose": "Locate the first-segment character count where first-valid-PCM latency crosses the P95 <= 0.8 s objective. This curve is the deliverable the P6 segmenter consumes. The characters field is the real len() of the string, verified when the corpus was written.",
+      "texts": [
+        {"id": "fs-02", "characters": 2, "text": "好的"},
+        {"id": "fs-04", "characters": 4, "text": "好的收到"},
+        {"id": "fs-06", "characters": 6, "text": "好的我知道了"},
+        {"id": "fs-07", "characters": 7, "text": "好的我这就去办"},
+        {"id": "fs-08", "characters": 8, "text": "好的，我这就去办"},
+        {"id": "fs-10", "characters": 10, "text": "好的，我马上帮你去拿"},
+        {"id": "fs-16", "characters": 16, "text": "好的，我马上帮你把红色方块拿起来"},
+        {"id": "fs-24", "characters": 24, "text": "好的，我现在就把桌面上的红色方块拿起来放到分类区"}
+      ]
+    },
+    "length_ladder": {
+      "purpose": "RTF versus text length for the sustained-throughput objective. Exactly the P1 ladder so the two phases stay comparable.",
+      "source": "config/voice/p1_texts.json",
+      "texts": [
+        {"id": "len-10", "characters": 10, "text": "相机已经准备就绪请观"},
+        {"id": "len-30", "characters": 30, "text": "相机已经准备就绪请观察桌面上的彩色方块并等待识别结果确认目标"},
+        {"id": "len-60", "characters": 60, "text": "相机已经准备就绪请观察桌面上的彩色方块并等待识别结果确认目标位置保持稳定随后报告当前状态相机已经准备就绪请观察桌面上的彩"},
+        {"id": "len-120", "characters": 120, "text": "相机已经准备就绪请观察桌面上的彩色方块并等待识别结果确认目标位置保持稳定随后报告当前状态相机已经准备就绪请观察桌面上的彩色方块并等待识别结果确认目标位置保持稳定随后报告当前状态相机已经准备就绪请观察桌面上的彩色方块并等待识别结果确认目标位置"}
+      ]
+    },
+    "numbers": {
+      "purpose": "Chinese number normalisation. Requires the rule FSTs (phone/date/number) to be wired correctly; a candidate that cannot read numbers correctly is unusable for a robot that reports coordinates, counts and status codes.",
+      "texts": [
+        {"id": "num-0", "text": "零"},
+        {"id": "num-1", "text": "一"},
+        {"id": "num-2", "text": "二"},
+        {"id": "num-3", "text": "三"},
+        {"id": "num-4", "text": "四"},
+        {"id": "num-5", "text": "五"},
+        {"id": "num-6", "text": "六"},
+        {"id": "num-7", "text": "七"},
+        {"id": "num-8", "text": "八"},
+        {"id": "num-9", "text": "九"},
+        {"id": "num-10", "text": "十"},
+        {"id": "num-21", "text": "二十一"},
+        {"id": "num-105", "text": "一百零五"},
+        {"id": "num-2024", "text": "二零二四"},
+        {"id": "num-10000", "text": "一万"},
+        {"id": "num-date", "text": "2024年12月31号"},
+        {"id": "num-police", "text": "拨打110"},
+        {"id": "num-phone", "text": "一八九二零二四零五一一"},
+        {"id": "num-money", "text": "123456块钱"},
+        {"id": "num-decimal", "text": "三点一四"},
+        {"id": "num-percent", "text": "百分之八十五"},
+        {"id": "num-negative", "text": "负十二度"},
+        {"id": "num-coord", "text": "坐标X等于三百二十五，Y等于负一百二十"},
+        {"id": "num-mixed", "text": "误差不超过0.5毫米，速度降到百分之三十"},
+        {"id": "num-code", "text": "错误码1234"}
+      ]
+    },
+    "colours": {
+      "purpose": "Colour pronunciation, because colour is the task parameter of this project. Both bare colour words and the derived forms the operator actually hears.",
+      "texts": [
+        {"id": "col-red", "text": "红色"},
+        {"id": "col-yellow", "text": "黄色"},
+        {"id": "col-blue", "text": "蓝色"},
+        {"id": "col-green", "text": "绿色"},
+        {"id": "col-purple", "text": "紫色"},
+        {"id": "col-black", "text": "黑色"},
+        {"id": "col-white", "text": "白色"},
+        {"id": "col-grey", "text": "灰色"},
+        {"id": "col-orange", "text": "橙色"},
+        {"id": "col-pink", "text": "粉色"},
+        {"id": "col-light-blue", "text": "浅蓝色"},
+        {"id": "col-dark-green", "text": "深绿色"},
+        {"id": "col-block", "text": "红色方块"},
+        {"id": "col-all", "text": "红色、黄色、蓝色、绿色"},
+        {"id": "col-sentence", "text": "已经找到红色方块，正在接近目标"},
+        {"id": "col-none", "text": "桌面上没有红色的方块"}
+      ]
+    },
+    "robustness": {
+      "purpose": "Input hygiene. The reference Kokoro emitted `Unknown token` for an emoji; a backend must survive real model output rather than only cleaned fixtures.",
+      "texts": [
+        {"id": "rob-emoji", "text": "好的 ✅ 马上执行"},
+        {"id": "rob-emoji2", "text": "抓取完成 🎉"},
+        {"id": "rob-markdown", "text": "**加粗** 与 `代码` 与 ~~删除~~"},
+        {"id": "rob-json", "text": "{\"intent\": \"pick_hold\", \"color\": \"red\"}"},
+        {"id": "rob-symbols", "text": "温度 25℃ 角度 90° 长度 3.5mm"},
+        {"id": "rob-latin", "text": "使用 RGB-D 相机识别 YOLO 目标"},
+        {"id": "rob-long-punct", "text": "第一步，移动到位；第二步，下降抓取；第三步，抬升返回。"},
+        {"id": "rob-quote", "text": "他说：“好的”。"},
+        {"id": "rob-space", "text": "红 色 方 块"},
+        {"id": "rob-newline", "text": "第一行\n第二行"}
+      ]
+    }
+  },
+  "measurement_texts": {
+    "note": "Used by p5_bench.py for the repeat runs. first_segment plus length_ladder, to keep total runtime bounded.",
+    "categories": ["first_segment", "length_ladder"]
+  },
+  "correctness_texts": {
+    "note": "Used by p5_pronunciation.py. Audio is rendered for human review; ASR is only a cross-check, never the judge.",
+    "categories": ["numbers", "colours", "robustness"]
+  }
+}

@@ -169,8 +169,10 @@ def load_config(
         max_prompt_bytes=_positive_int(worker.get('max_prompt_bytes'), 'worker.max_prompt_bytes'),
         max_image_bytes=_positive_int(worker.get('max_image_bytes'), 'worker.max_image_bytes'),
     )
-    if qwen.max_new_tokens > 1024 or qwen.max_context_len > 8192:
-        raise ConfigError('model output/context limits exceed the stage-3 safety bound')
+    if qwen.max_context_len > 8192:
+        raise ConfigError('model context limit exceeds the verified runtime bound')
+    if qwen.max_new_tokens >= qwen.max_context_len:
+        raise ConfigError('model output limit must be smaller than the context limit')
 
     service_config = ServiceConfig(
         runtime_dir=runtime_dir,

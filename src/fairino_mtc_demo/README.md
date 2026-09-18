@@ -208,12 +208,19 @@ seconds. See `docs/four_color_sorting.md` for placement-slot behavior.
 ## Stage-2 color task actions
 
 In `detection_mode:=colors` with `sort_enabled:=true`, the node also exposes
-two single-request actions using `fairino_msgs/action/PickColor`:
+four single-request actions using `fairino_msgs/action/PickColor`:
 
 - `/fr3c_first_grasp/pick_hold`: approach, descend, open-loop close, and lift;
   success leaves the cube held and does not claim sensor-verified grasping.
 - `/fr3c_first_grasp/pick_sort`: performs the same grasp, places only that
   selected color in its configured A4 region, releases, and returns home.
+- `/fr3c_first_grasp/pick_place`: performs the same grasp but places into a
+  zone named by the goal instead of the color-mapped region. `zone` is `A` for
+  the first free slot of region A, or `A3` for one explicit 1-based slot.
+- `/fr3c_first_grasp/pick_stack`: grasps the cube of `color` and stacks it on
+  the cube of `support_color`. Requires `stack_enabled:=true`. The placement
+  target is the lower cube's measured top face, not a calibrated zone, and the
+  upper cube is rotated so both top faces share one yaw. Two-cube stacks only.
 
 Each goal first calls the perception `set_target_color` service. The returned
 filter generation invalidates every older pose, and the task accepts only a
@@ -222,6 +229,44 @@ physical targets, two or more matching targets, stale data, task busy, a held
 object, planning failure, execution failure, and cancellation have distinct
 result codes. A task is never silently retried.
 
+`pick_hold` and `pick_sort` must leave `zone` empty; a non-empty `zone` is
+rejected with `INVALID_ZONE` so each action keeps exactly one meaning. Only
+`pick_place` accepts a zone, and it never falls back to the color-mapped region:
+an unknown region or an out-of-range slot returns `INVALID_ZONE`, and an
+occupied slot returns `ZONE_UNAVAILABLE`. Both are decided before any
+perception wait or arm motion, so they cannot move the robot. A zone is a
+calibrated A4 region name, so `pick_place(red, zone:=D)` is a valid request and
+is not checked against the color.
+
+Only `pick_stack` accepts `support_color`, and it must differ from `color`.
+Every other action rejects a non-empty `support_color` with
+`INVALID_SUPPORT_COLOR`. `pick_stack` first stabilizes the requested source
+colour, then locks both source and support from that status's same-frame
+`detected_targets` list. It never re-observes either coordinate after motion
+starts. Before any motion it also refuses a pair that is not two cubes lying side by side
+(`STACK_GEOMETRY_REJECTED`), including a lower cube that already carries a cube,
+so it cannot silently build a three-high tower. The lower cube stays a planning
+obstacle for the whole task and is cleared afterwards.
+
+`pick_stack` is the one action that promises the task slot back whatever
+happens: a failure after motion started triggers a return-home trajectory, the
+final state is startable, and the next goal can be sent immediately. If the
+failure happened after closing the gripper, the next goal returns
+`HOLDING_OBJECT` until the operator removes the cube, exactly like `pick_hold`.
+
+The placement rotation is bounded by `maximum_stack_placement_rotation_rad`
+(default 45 degrees). A square top face gives four equivalent grasps whose yaws
+differ by 90 degrees, so the nearest aligned placement is at most half of that
+symmetry step away. A candidate above the allowance is dropped before
+planning; if all four are dropped the pair is reported unstackable while the arm
+is still at home.
+
+Slot occupancy is read from the live MoveIt planning scene: a slot counts as
+occupied when a known obstacle lies within `zone_slot_clearance_m` of it. No
+call counter is kept, so clearing the table and restarting the stack restores
+the correct occupancy automatically. The active target cube and the ground slab
+are never treated as slot obstacles.
+
 Start with planning only, then send one goal:
 
 ```bash
@@ -229,6 +274,17 @@ cd /home/industio/fairino_ws
 FR3C_FIRST_GRASP_EXECUTE=false scripts/run_moveit_camera_rviz.sh detection_mode:=colors
 scripts/grasp/send_color_task.sh hold red
 scripts/grasp/send_color_task.sh sort yellow
+scripts/grasp/send_color_task.sh place blue A
+scripts/grasp/send_color_task.sh place red D3
+scripts/grasp/send_color_task.sh stack red blue
+```
+
+The calibrated zones and their slot coordinates are launch parameters, so they
+can be inspected without guessing:
+
+```bash
+ros2 param get /fr3c_first_grasp place_zone_names
+ros2 param get /fr3c_first_grasp place_zone_a_slots_m
 ```
 
 Set `FR3C_FIRST_GRASP_EXECUTE=true` only after inspecting the full planned

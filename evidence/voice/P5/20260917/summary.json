@@ -1,0 +1,1430 @@
+{
+  "schema_version": 1,
+  "run": "20260917",
+  "objectives": {
+    "rtf_p95_max": 0.8,
+    "first_segment_p95_max_s": 0.8
+  },
+  "candidates_measured": 5,
+  "comparison": [
+    {
+      "candidate": "matcha-icefall-zh-baker",
+      "order": "B",
+      "role": "speed_upper_bound_probe",
+      "family": "matcha",
+      "license": "Model code Apache-2.0; training dataset Baker (DataBaker) is NON-COMMERCIAL. Recorded per user decision 2026-09-17 that this project is non-commercial.",
+      "sample_rate": 22050,
+      "num_speakers": 1,
+      "load_s": 3.377703086999645,
+      "cold_load_s_p50": 3.358638200500536,
+      "rtf_p50": 0.1621563839663518,
+      "rtf_p95": 0.29479127543528433,
+      "first_valid_pcm_p50": 0.2641211691042553,
+      "first_valid_pcm_p95": 2.431725604754656,
+      "incremental_delivery": true,
+      "max_callback_count": 2,
+      "peak_rss_mib": 491.609375,
+      "health": "ok",
+      "problems": [],
+      "rtf_target_met_whole_corpus": true,
+      "first_segment_target_met_whole_corpus": false,
+      "operating_point": {
+        "max_first_segment_characters": 24,
+        "runs": 45,
+        "first_valid_pcm_p95_worst_s": 0.39976198464084284,
+        "rtf_p95_worst": 0.33332186912450723,
+        "first_segment_target_met": true,
+        "rtf_target_met": true
+      },
+      "by_characters": {
+        "2": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.2116272511042734,
+          "first_valid_pcm_p95": 0.22739937230382562,
+          "rtf_p50": 0.29665457311916593,
+          "rtf_p95": 0.33332186912450723,
+          "audio_duration_p50": 0.447437641723356
+        },
+        "4": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.251065266840776,
+          "first_valid_pcm_p95": 0.25527894109325455,
+          "rtf_p50": 0.19877137405546755,
+          "rtf_p95": 0.2140280774394064,
+          "audio_duration_p50": 0.8680725623582767
+        },
+        "6": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.2744384171050296,
+          "first_valid_pcm_p95": 0.2771177436945235,
+          "rtf_p50": 0.1659399343309708,
+          "rtf_p95": 0.17430475934475825,
+          "audio_duration_p50": 1.1803628117913831
+        },
+        "7": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.2954579191049742,
+          "first_valid_pcm_p95": 0.29966491010438395,
+          "rtf_p50": 0.15993818057409578,
+          "rtf_p95": 0.1626653011329423,
+          "audio_duration_p50": 1.3549659863945578
+        },
+        "8": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.25267165710412876,
+          "first_valid_pcm_p95": 0.2603551825044814,
+          "rtf_p50": 0.23864709190077243,
+          "rtf_p95": 0.2428022481899348,
+          "audio_duration_p50": 1.5490702947845805
+        },
+        "10": {
+          "runs": 10,
+          "first_valid_pcm_p50": 0.3039749588411882,
+          "first_valid_pcm_p95": 0.39976198464084284,
+          "rtf_p50": 0.1682327306766565,
+          "rtf_p95": 0.21877592928362416,
+          "audio_duration_p50": 2.09437641723356
+        },
+        "16": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.2436345481041098,
+          "first_valid_pcm_p95": 0.25341055929364115,
+          "rtf_p50": 0.1696911130273858,
+          "rtf_p95": 0.17332472043490976,
+          "audio_duration_p50": 3.164761904761905
+        },
+        "24": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.21880129584143784,
+          "first_valid_pcm_p95": 0.2418737355043231,
+          "rtf_p50": 0.13356195410282748,
+          "rtf_p95": 0.14251275509122452,
+          "audio_duration_p50": 4.787800453514739
+        },
+        "30": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.650859152103676,
+          "first_valid_pcm_p95": 0.6793290157045885,
+          "rtf_p50": 0.09526269930709236,
+          "rtf_p95": 0.09960048512051485,
+          "audio_duration_p50": 6.031428571428571
+        },
+        "60": {
+          "runs": 5,
+          "first_valid_pcm_p50": 1.2047168281036829,
+          "first_valid_pcm_p95": 1.210168965904104,
+          "rtf_p50": 0.091009230943829,
+          "rtf_p95": 0.09144499777629084,
+          "audio_duration_p50": 12.3859410430839
+        },
+        "120": {
+          "runs": 5,
+          "first_valid_pcm_p50": 2.456630988104207,
+          "first_valid_pcm_p95": 2.554501705103776,
+          "rtf_p50": 0.09692122980910327,
+          "rtf_p95": 0.10088829548147421,
+          "audio_duration_p50": 24.66312925170068
+        }
+      },
+      "max_characters_meeting_first_segment_target": 30
+    },
+    {
+      "candidate": "vits-zh-aishell3",
+      "order": "C",
+      "role": "small_open_license",
+      "family": "vits",
+      "license": "AISHELL-3 dataset Apache-2.0",
+      "sample_rate": 8000,
+      "num_speakers": 174,
+      "load_s": 1.6900446750005358,
+      "cold_load_s_p50": 1.7073647444999551,
+      "rtf_p50": 0.2993476782185802,
+      "rtf_p95": 0.47397230089767634,
+      "first_valid_pcm_p50": 0.749497766000295,
+      "first_valid_pcm_p95": 7.0821029954501045,
+      "incremental_delivery": false,
+      "max_callback_count": 1,
+      "peak_rss_mib": 762.8671875,
+      "health": "ok",
+      "problems": [],
+      "rtf_target_met_whole_corpus": true,
+      "first_segment_target_met_whole_corpus": false,
+      "operating_point": {
+        "max_first_segment_characters": 24,
+        "runs": 45,
+        "first_valid_pcm_p95_worst_s": 1.5361946970004647,
+        "rtf_p95_worst": 0.5228658450450988,
+        "first_segment_target_met": false,
+        "rtf_target_met": true
+      },
+      "by_characters": {
+        "2": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.42978908699988094,
+          "first_valid_pcm_p95": 0.4753535200002516,
+          "rtf_p50": 0.48610238100606323,
+          "rtf_p95": 0.5228658450450988,
+          "audio_duration_p50": 0.663375
+        },
+        "4": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.5352760779997697,
+          "first_valid_pcm_p95": 0.5398785827997417,
+          "rtf_p50": 0.39086237140293256,
+          "rtf_p95": 0.410597343835126,
+          "audio_duration_p50": 1.112
+        },
+        "6": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.5429199649996371,
+          "first_valid_pcm_p95": 0.5785515020001039,
+          "rtf_p50": 0.3394083336078993,
+          "rtf_p95": 0.36747894703474626,
+          "audio_duration_p50": 1.311
+        },
+        "7": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.596323688999837,
+          "first_valid_pcm_p95": 0.6577021225997959,
+          "rtf_p50": 0.33580695551169376,
+          "rtf_p95": 0.34153962226142626,
+          "audio_duration_p50": 1.526875
+        },
+        "8": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.6412710409995998,
+          "first_valid_pcm_p95": 0.7466160242000477,
+          "rtf_p50": 0.3401452307694085,
+          "rtf_p95": 0.3419318499109334,
+          "audio_duration_p50": 1.6485
+        },
+        "10": {
+          "runs": 10,
+          "first_valid_pcm_p50": 0.7294033980002314,
+          "first_valid_pcm_p95": 0.8774755609502662,
+          "rtf_p50": 0.2985277779622882,
+          "rtf_p95": 0.3026845674675154,
+          "audio_duration_p50": 2.2169375000000002
+        },
+        "16": {
+          "runs": 5,
+          "first_valid_pcm_p50": 1.047367731000195,
+          "first_valid_pcm_p95": 1.1192434198001866,
+          "rtf_p50": 0.278021328781628,
+          "rtf_p95": 0.29864242812790964,
+          "audio_duration_p50": 3.379875
+        },
+        "24": {
+          "runs": 5,
+          "first_valid_pcm_p50": 1.4975001900002827,
+          "first_valid_pcm_p95": 1.5361946970004647,
+          "rtf_p50": 0.2639359391434545,
+          "rtf_p95": 0.2687822168974275,
+          "audio_duration_p50": 5.253
+        },
+        "30": {
+          "runs": 5,
+          "first_valid_pcm_p50": 1.9941070559999208,
+          "first_valid_pcm_p95": 2.215142654800409,
+          "rtf_p50": 0.26048532698462956,
+          "rtf_p95": 0.2702031544267925,
+          "audio_duration_p50": 7.3505
+        },
+        "60": {
+          "runs": 5,
+          "first_valid_pcm_p50": 3.831802190000053,
+          "first_valid_pcm_p95": 4.134241672000142,
+          "rtf_p50": 0.24737612648506774,
+          "rtf_p95": 0.2556647463950702,
+          "audio_duration_p50": 15.29825
+        },
+        "120": {
+          "runs": 5,
+          "first_valid_pcm_p50": 7.567922401999895,
+          "first_valid_pcm_p95": 7.765185025399856,
+          "rtf_p50": 0.2453516103751299,
+          "rtf_p95": 0.2535410754804572,
+          "audio_duration_p50": 29.97225
+        }
+      },
+      "max_characters_meeting_first_segment_target": 8
+    },
+    {
+      "candidate": "vits-melo-tts-zh_en",
+      "order": "D",
+      "role": "naturalness_license_candidate",
+      "family": "vits",
+      "license": "MIT (see LICENSE in repo)",
+      "sample_rate": 44100,
+      "num_speakers": 1,
+      "load_s": 6.637711215000309,
+      "cold_load_s_p50": 6.565264360000128,
+      "rtf_p50": 0.7353830754711921,
+      "rtf_p95": 0.770338598074602,
+      "first_valid_pcm_p50": 0.7453022475000216,
+      "first_valid_pcm_p95": 16.35128974029932,
+      "incremental_delivery": true,
+      "max_callback_count": 2,
+      "peak_rss_mib": 798.83203125,
+      "health": "ok",
+      "problems": [],
+      "rtf_target_met_whole_corpus": true,
+      "first_segment_target_met_whole_corpus": false,
+      "operating_point": {
+        "max_first_segment_characters": 24,
+        "runs": 45,
+        "first_valid_pcm_p95_worst_s": 1.4991969417997368,
+        "rtf_p95_worst": 0.770370680570968,
+        "first_segment_target_met": false,
+        "rtf_target_met": true
+      },
+      "by_characters": {
+        "2": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.5604064629998539,
+          "first_valid_pcm_p95": 0.5649802591995103,
+          "rtf_p50": 0.7344716142905604,
+          "rtf_p95": 0.7433553107883846,
+          "audio_duration_p50": 0.5456689342403628
+        },
+        "4": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.6815106440002273,
+          "first_valid_pcm_p95": 0.6836846944000717,
+          "rtf_p50": 0.735411520295847,
+          "rtf_p95": 0.7381971035317748,
+          "audio_duration_p50": 0.7778684807256235
+        },
+        "6": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.8200664800000231,
+          "first_valid_pcm_p95": 0.8316146472001201,
+          "rtf_p50": 0.7464562624403497,
+          "rtf_p95": 0.7545125152287067,
+          "audio_duration_p50": 0.9520181405895691
+        },
+        "7": {
+          "runs": 5,
+          "first_valid_pcm_p50": 1.0598260959997061,
+          "first_valid_pcm_p95": 1.069747703199726,
+          "rtf_p50": 0.756976795427653,
+          "rtf_p95": 0.770370680570968,
+          "audio_duration_p50": 1.242267573696145
+        },
+        "8": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.5052659729995866,
+          "first_valid_pcm_p95": 0.5080851727999834,
+          "rtf_p50": 0.7293219201380421,
+          "rtf_p95": 0.7430913554356541,
+          "audio_duration_p50": 1.5441269841269842
+        },
+        "10": {
+          "runs": 10,
+          "first_valid_pcm_p50": 0.9768101475003641,
+          "first_valid_pcm_p95": 1.4991969417997368,
+          "rtf_p50": 0.7468144221139382,
+          "rtf_p95": 0.7633718731260728,
+          "audio_duration_p50": 1.8401814058956916
+        },
+        "16": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.4925497339996582,
+          "first_valid_pcm_p95": 0.5090031565994213,
+          "rtf_p50": 0.7273517087652489,
+          "rtf_p95": 0.73491431794915,
+          "audio_duration_p50": 2.8560544217687074
+        },
+        "24": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.5010939119998511,
+          "first_valid_pcm_p95": 0.5166853466001703,
+          "rtf_p50": 0.7306501143051969,
+          "rtf_p95": 0.7324379866738226,
+          "audio_duration_p50": 4.167981859410431
+        },
+        "30": {
+          "runs": 5,
+          "first_valid_pcm_p50": 3.9755800530002308,
+          "first_valid_pcm_p95": 4.001840502399464,
+          "rtf_p50": 0.7235276326970015,
+          "rtf_p95": 0.7265619364932635,
+          "audio_duration_p50": 5.363809523809524
+        },
+        "60": {
+          "runs": 5,
+          "first_valid_pcm_p50": 7.812129882999543,
+          "first_valid_pcm_p95": 7.819952101599811,
+          "rtf_p50": 0.7205792223775572,
+          "rtf_p95": 0.7215232702299564,
+          "audio_duration_p50": 10.692789115646258
+        },
+        "120": {
+          "runs": 5,
+          "first_valid_pcm_p50": 16.44768660700025,
+          "first_valid_pcm_p95": 16.62185718040015,
+          "rtf_p50": 0.7702715345141171,
+          "rtf_p95": 0.7785130452383147,
+          "audio_duration_p50": 21.223038548752836
+        }
+      },
+      "max_characters_meeting_first_segment_target": 24
+    },
+    {
+      "candidate": "vits-zh-hf-fanchen-C",
+      "order": "E",
+      "role": "voice_choice_candidate",
+      "family": "vits",
+      "license": "PENDING REVIEW - upstream HF model card license must be recorded before this candidate can be selected",
+      "sample_rate": 16000,
+      "num_speakers": 187,
+      "load_s": 1.7932227210003475,
+      "cold_load_s_p50": 1.7402201469994907,
+      "rtf_p50": 0.5781870163143257,
+      "rtf_p95": 0.845761412837411,
+      "first_valid_pcm_p50": 0.999283321499679,
+      "first_valid_pcm_p95": 16.194359797999333,
+      "incremental_delivery": true,
+      "max_callback_count": 2,
+      "peak_rss_mib": 1031.62890625,
+      "health": "ok",
+      "problems": [],
+      "rtf_target_met_whole_corpus": false,
+      "first_segment_target_met_whole_corpus": false,
+      "operating_point": {
+        "max_first_segment_characters": 24,
+        "runs": 45,
+        "first_valid_pcm_p95_worst_s": 3.0198466630001217,
+        "rtf_p95_worst": 0.8856290943490958,
+        "first_segment_target_met": false,
+        "rtf_target_met": false
+      },
+      "by_characters": {
+        "2": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.6818390449999424,
+          "first_valid_pcm_p95": 0.818275590599951,
+          "rtf_p50": 0.726918097126352,
+          "rtf_p95": 0.8487481894114522,
+          "audio_duration_p50": 0.8735
+        },
+        "4": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.9147052889992483,
+          "first_valid_pcm_p95": 0.9644914791996853,
+          "rtf_p50": 0.5875588807832202,
+          "rtf_p95": 0.6747498301903573,
+          "audio_duration_p50": 1.264375
+        },
+        "6": {
+          "runs": 5,
+          "first_valid_pcm_p50": 1.1569816819998233,
+          "first_valid_pcm_p95": 1.1974629988005108,
+          "rtf_p50": 0.6252273218513048,
+          "rtf_p95": 0.6539401229471647,
+          "audio_duration_p50": 1.5475625
+        },
+        "7": {
+          "runs": 5,
+          "first_valid_pcm_p50": 1.3314722179994716,
+          "first_valid_pcm_p95": 1.418424381799443,
+          "rtf_p50": 0.579083960696211,
+          "rtf_p95": 0.6165063413850099,
+          "audio_duration_p50": 2.0926875
+        },
+        "8": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.6847379579993139,
+          "first_valid_pcm_p95": 0.7413425273997418,
+          "rtf_p50": 0.6659830514437433,
+          "rtf_p95": 0.7095969015203494,
+          "audio_duration_p50": 2.46075
+        },
+        "10": {
+          "runs": 10,
+          "first_valid_pcm_p50": 1.3107761025004039,
+          "first_valid_pcm_p95": 3.0198466630001217,
+          "rtf_p50": 0.6524959897161645,
+          "rtf_p95": 0.8856290943490958,
+          "audio_duration_p50": 3.125375
+        },
+        "16": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.7439025229999606,
+          "first_valid_pcm_p95": 0.8459163005999071,
+          "rtf_p50": 0.5579599037697992,
+          "rtf_p95": 0.6175643481622483,
+          "audio_duration_p50": 4.6014375
+        },
+        "24": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.7012341100001868,
+          "first_valid_pcm_p95": 0.7468467648001242,
+          "rtf_p50": 0.5035521654157354,
+          "rtf_p95": 0.5104136735937596,
+          "audio_duration_p50": 7.052
+        },
+        "30": {
+          "runs": 5,
+          "first_valid_pcm_p50": 4.873212645000749,
+          "first_valid_pcm_p95": 5.616573386000411,
+          "rtf_p50": 0.5580026128039481,
+          "rtf_p95": 0.5840077320710958,
+          "audio_duration_p50": 8.4975
+        },
+        "60": {
+          "runs": 5,
+          "first_valid_pcm_p50": 8.606263782999013,
+          "first_valid_pcm_p95": 9.08845517139994,
+          "rtf_p50": 0.4678305305308957,
+          "rtf_p95": 0.5016594253802427,
+          "audio_duration_p50": 18.040625
+        },
+        "120": {
+          "runs": 5,
+          "first_valid_pcm_p50": 16.221204271001042,
+          "first_valid_pcm_p95": 16.52160297779963,
+          "rtf_p50": 0.44787767222837865,
+          "rtf_p95": 0.45068734599593774,
+          "audio_duration_p50": 36.3248125
+        }
+      },
+      "max_characters_meeting_first_segment_target": 24
+    },
+    {
+      "candidate": "kokoro-multi-lang-v1_1",
+      "order": "A",
+      "role": "baseline",
+      "family": "kokoro",
+      "license": "Apache-2.0 (sherpa-onnx model card ships Apache-2.0 LICENSE; upstream Kokoro weights provenance not fully documented - see P1 license notes)",
+      "sample_rate": 24000,
+      "num_speakers": 103,
+      "load_s": 3.217591075999735,
+      "cold_load_s_p50": 3.19892414899914,
+      "rtf_p50": 0.9617705172048212,
+      "rtf_p95": 1.1537307813467488,
+      "first_valid_pcm_p50": 1.4292506534997664,
+      "first_valid_pcm_p95": 17.0318873293005,
+      "incremental_delivery": true,
+      "max_callback_count": 2,
+      "peak_rss_mib": 1370.70703125,
+      "health": "ok",
+      "problems": [],
+      "rtf_target_met_whole_corpus": false,
+      "first_segment_target_met_whole_corpus": false,
+      "operating_point": {
+        "max_first_segment_characters": 24,
+        "runs": 45,
+        "first_valid_pcm_p95_worst_s": 2.2747377980997223,
+        "rtf_p95_worst": 1.1706753531989285,
+        "first_segment_target_met": false,
+        "rtf_target_met": false
+      },
+      "by_characters": {
+        "2": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.7660124969996105,
+          "first_valid_pcm_p95": 0.7883021525998629,
+          "rtf_p50": 0.927549095813816,
+          "rtf_p95": 0.9563747277524495,
+          "audio_duration_p50": 0.7723333333333333
+        },
+        "4": {
+          "runs": 5,
+          "first_valid_pcm_p50": 1.2605574359991443,
+          "first_valid_pcm_p95": 1.2866139517992998,
+          "rtf_p50": 1.1467511065140437,
+          "rtf_p95": 1.1706753531989285,
+          "audio_duration_p50": 1.04725
+        },
+        "6": {
+          "runs": 5,
+          "first_valid_pcm_p50": 1.5797588309999993,
+          "first_valid_pcm_p95": 1.6053321657999913,
+          "rtf_p50": 1.0749234171856947,
+          "rtf_p95": 1.0926183168927381,
+          "audio_duration_p50": 1.40525
+        },
+        "7": {
+          "runs": 5,
+          "first_valid_pcm_p50": 1.7886482039996918,
+          "first_valid_pcm_p95": 1.8288564691996436,
+          "rtf_p50": 1.015761909844711,
+          "rtf_p95": 1.0402976067112593,
+          "audio_duration_p50": 1.6925
+        },
+        "8": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.8287685839991901,
+          "first_valid_pcm_p95": 0.8448125572009304,
+          "rtf_p50": 1.1535735763241532,
+          "rtf_p95": 1.1585219460186569,
+          "audio_duration_p50": 1.9233333333333333
+        },
+        "10": {
+          "runs": 10,
+          "first_valid_pcm_p50": 1.5415914170004545,
+          "first_valid_pcm_p95": 2.2747377980997223,
+          "rtf_p50": 1.000031871475416,
+          "rtf_p95": 1.0921770963697566,
+          "audio_duration_p50": 2.3410416666666665
+        },
+        "16": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.8157678759987903,
+          "first_valid_pcm_p95": 0.8331035097995483,
+          "rtf_p50": 0.9720790213766707,
+          "rtf_p95": 0.9804461208720814,
+          "audio_duration_p50": 3.646875
+        },
+        "24": {
+          "runs": 5,
+          "first_valid_pcm_p50": 0.8291566849991796,
+          "first_valid_pcm_p95": 0.8460935233999044,
+          "rtf_p50": 0.9406711712906972,
+          "rtf_p95": 0.9539026113356799,
+          "audio_duration_p50": 4.993375
+        },
+        "30": {
+          "runs": 5,
+          "first_valid_pcm_p50": 5.051952677999289,
+          "first_valid_pcm_p95": 5.150914088799546,
+          "rtf_p50": 0.8565094362940527,
+          "rtf_p95": 0.8735304206435011,
+          "audio_duration_p50": 5.8177916666666665
+        },
+        "60": {
+          "runs": 5,
+          "first_valid_pcm_p50": 9.567030837999773,
+          "first_valid_pcm_p95": 9.65868611719954,
+          "rtf_p50": 0.8829599455358866,
+          "rtf_p95": 0.8914567001556362,
+          "audio_duration_p50": 10.760833333333334
+        },
+        "120": {
+          "runs": 5,
+          "first_valid_pcm_p50": 17.19982597900009,
+          "first_valid_pcm_p95": 17.299561537200063,
+          "rtf_p50": 0.8194394589374169,
+          "rtf_p95": 0.8245160100083151,
+          "audio_duration_p50": 20.910708333333332
+        }
+      },
+      "max_characters_meeting_first_segment_target": 2
+    }
+  ],
+  "acoustic_calibration": null,
+  "acoustic_report": {
+    "schema_version": 1,
+    "objective_s": 0.8,
+    "offset_s": 0.0,
+    "offset_spread_ms": 9.999999999999954,
+    "method": "acoustic_first_sound = software_first_valid_pcm + calibrated playback path offset",
+    "candidates": [
+      {
+        "candidate": "kokoro-multi-lang-v1_1",
+        "role": "baseline",
+        "threads": 4,
+        "sample_rate": 24000,
+        "num_speakers": 103,
+        "load_s": 3.217591075999735,
+        "cold_load_s_p50": 3.19892414899914,
+        "peak_rss_mib": 1370.70703125,
+        "incremental_delivery": true,
+        "whole_corpus": {
+          "software_first_valid_pcm_p50_s": 1.4292506534997664,
+          "software_first_valid_pcm_p95_s": 17.0318873293005,
+          "acoustic_first_sound_p50_s": 1.4292506534997664,
+          "acoustic_first_sound_p95_s": 17.0318873293005,
+          "rtf_p50": 0.9617705172048212,
+          "rtf_p95": 1.1537307813467488,
+          "note": "first-segment figures here include the 120-character item and are not the operating point"
+        },
+        "operating_point": {
+          "max_first_segment_characters": 24,
+          "runs": 45,
+          "software_first_valid_pcm_p95_worst_s": 2.2747377980997223,
+          "acoustic_first_sound_p95_worst_s": 2.2747377980997223,
+          "rtf_p95_worst": 1.1706753531989285,
+          "first_segment_objective_met": false,
+          "rtf_objective_met": false
+        },
+        "health": "ok",
+        "by_characters": {
+          "2": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.7660124969996105,
+            "first_valid_pcm_p95": 0.7883021525998629,
+            "rtf_p50": 0.927549095813816,
+            "rtf_p95": 0.9563747277524495,
+            "audio_duration_p50": 0.7723333333333333
+          },
+          "4": {
+            "runs": 5,
+            "first_valid_pcm_p50": 1.2605574359991443,
+            "first_valid_pcm_p95": 1.2866139517992998,
+            "rtf_p50": 1.1467511065140437,
+            "rtf_p95": 1.1706753531989285,
+            "audio_duration_p50": 1.04725
+          },
+          "6": {
+            "runs": 5,
+            "first_valid_pcm_p50": 1.5797588309999993,
+            "first_valid_pcm_p95": 1.6053321657999913,
+            "rtf_p50": 1.0749234171856947,
+            "rtf_p95": 1.0926183168927381,
+            "audio_duration_p50": 1.40525
+          },
+          "7": {
+            "runs": 5,
+            "first_valid_pcm_p50": 1.7886482039996918,
+            "first_valid_pcm_p95": 1.8288564691996436,
+            "rtf_p50": 1.015761909844711,
+            "rtf_p95": 1.0402976067112593,
+            "audio_duration_p50": 1.6925
+          },
+          "8": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.8287685839991901,
+            "first_valid_pcm_p95": 0.8448125572009304,
+            "rtf_p50": 1.1535735763241532,
+            "rtf_p95": 1.1585219460186569,
+            "audio_duration_p50": 1.9233333333333333
+          },
+          "10": {
+            "runs": 10,
+            "first_valid_pcm_p50": 1.5415914170004545,
+            "first_valid_pcm_p95": 2.2747377980997223,
+            "rtf_p50": 1.000031871475416,
+            "rtf_p95": 1.0921770963697566,
+            "audio_duration_p50": 2.3410416666666665
+          },
+          "16": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.8157678759987903,
+            "first_valid_pcm_p95": 0.8331035097995483,
+            "rtf_p50": 0.9720790213766707,
+            "rtf_p95": 0.9804461208720814,
+            "audio_duration_p50": 3.646875
+          },
+          "24": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.8291566849991796,
+            "first_valid_pcm_p95": 0.8460935233999044,
+            "rtf_p50": 0.9406711712906972,
+            "rtf_p95": 0.9539026113356799,
+            "audio_duration_p50": 4.993375
+          },
+          "30": {
+            "runs": 5,
+            "first_valid_pcm_p50": 5.051952677999289,
+            "first_valid_pcm_p95": 5.150914088799546,
+            "rtf_p50": 0.8565094362940527,
+            "rtf_p95": 0.8735304206435011,
+            "audio_duration_p50": 5.8177916666666665
+          },
+          "60": {
+            "runs": 5,
+            "first_valid_pcm_p50": 9.567030837999773,
+            "first_valid_pcm_p95": 9.65868611719954,
+            "rtf_p50": 0.8829599455358866,
+            "rtf_p95": 0.8914567001556362,
+            "audio_duration_p50": 10.760833333333334
+          },
+          "120": {
+            "runs": 5,
+            "first_valid_pcm_p50": 17.19982597900009,
+            "first_valid_pcm_p95": 17.299561537200063,
+            "rtf_p50": 0.8194394589374169,
+            "rtf_p95": 0.8245160100083151,
+            "audio_duration_p50": 20.910708333333332
+          }
+        }
+      },
+      {
+        "candidate": "matcha-icefall-zh-baker",
+        "role": "speed_upper_bound_probe",
+        "threads": 4,
+        "sample_rate": 22050,
+        "num_speakers": 1,
+        "load_s": 3.377703086999645,
+        "cold_load_s_p50": 3.358638200500536,
+        "peak_rss_mib": 491.609375,
+        "incremental_delivery": true,
+        "whole_corpus": {
+          "software_first_valid_pcm_p50_s": 0.2641211691042553,
+          "software_first_valid_pcm_p95_s": 2.431725604754656,
+          "acoustic_first_sound_p50_s": 0.2641211691042553,
+          "acoustic_first_sound_p95_s": 2.431725604754656,
+          "rtf_p50": 0.1621563839663518,
+          "rtf_p95": 0.29479127543528433,
+          "note": "first-segment figures here include the 120-character item and are not the operating point"
+        },
+        "operating_point": {
+          "max_first_segment_characters": 24,
+          "runs": 45,
+          "software_first_valid_pcm_p95_worst_s": 0.39976198464084284,
+          "acoustic_first_sound_p95_worst_s": 0.39976198464084284,
+          "rtf_p95_worst": 0.33332186912450723,
+          "first_segment_objective_met": true,
+          "rtf_objective_met": true
+        },
+        "health": "ok",
+        "by_characters": {
+          "2": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.2116272511042734,
+            "first_valid_pcm_p95": 0.22739937230382562,
+            "rtf_p50": 0.29665457311916593,
+            "rtf_p95": 0.33332186912450723,
+            "audio_duration_p50": 0.447437641723356
+          },
+          "4": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.251065266840776,
+            "first_valid_pcm_p95": 0.25527894109325455,
+            "rtf_p50": 0.19877137405546755,
+            "rtf_p95": 0.2140280774394064,
+            "audio_duration_p50": 0.8680725623582767
+          },
+          "6": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.2744384171050296,
+            "first_valid_pcm_p95": 0.2771177436945235,
+            "rtf_p50": 0.1659399343309708,
+            "rtf_p95": 0.17430475934475825,
+            "audio_duration_p50": 1.1803628117913831
+          },
+          "7": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.2954579191049742,
+            "first_valid_pcm_p95": 0.29966491010438395,
+            "rtf_p50": 0.15993818057409578,
+            "rtf_p95": 0.1626653011329423,
+            "audio_duration_p50": 1.3549659863945578
+          },
+          "8": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.25267165710412876,
+            "first_valid_pcm_p95": 0.2603551825044814,
+            "rtf_p50": 0.23864709190077243,
+            "rtf_p95": 0.2428022481899348,
+            "audio_duration_p50": 1.5490702947845805
+          },
+          "10": {
+            "runs": 10,
+            "first_valid_pcm_p50": 0.3039749588411882,
+            "first_valid_pcm_p95": 0.39976198464084284,
+            "rtf_p50": 0.1682327306766565,
+            "rtf_p95": 0.21877592928362416,
+            "audio_duration_p50": 2.09437641723356
+          },
+          "16": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.2436345481041098,
+            "first_valid_pcm_p95": 0.25341055929364115,
+            "rtf_p50": 0.1696911130273858,
+            "rtf_p95": 0.17332472043490976,
+            "audio_duration_p50": 3.164761904761905
+          },
+          "24": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.21880129584143784,
+            "first_valid_pcm_p95": 0.2418737355043231,
+            "rtf_p50": 0.13356195410282748,
+            "rtf_p95": 0.14251275509122452,
+            "audio_duration_p50": 4.787800453514739
+          },
+          "30": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.650859152103676,
+            "first_valid_pcm_p95": 0.6793290157045885,
+            "rtf_p50": 0.09526269930709236,
+            "rtf_p95": 0.09960048512051485,
+            "audio_duration_p50": 6.031428571428571
+          },
+          "60": {
+            "runs": 5,
+            "first_valid_pcm_p50": 1.2047168281036829,
+            "first_valid_pcm_p95": 1.210168965904104,
+            "rtf_p50": 0.091009230943829,
+            "rtf_p95": 0.09144499777629084,
+            "audio_duration_p50": 12.3859410430839
+          },
+          "120": {
+            "runs": 5,
+            "first_valid_pcm_p50": 2.456630988104207,
+            "first_valid_pcm_p95": 2.554501705103776,
+            "rtf_p50": 0.09692122980910327,
+            "rtf_p95": 0.10088829548147421,
+            "audio_duration_p50": 24.66312925170068
+          }
+        }
+      },
+      {
+        "candidate": "vits-melo-tts-zh_en",
+        "role": "naturalness_license_candidate",
+        "threads": 4,
+        "sample_rate": 44100,
+        "num_speakers": 1,
+        "load_s": 6.637711215000309,
+        "cold_load_s_p50": 6.565264360000128,
+        "peak_rss_mib": 798.83203125,
+        "incremental_delivery": true,
+        "whole_corpus": {
+          "software_first_valid_pcm_p50_s": 0.7453022475000216,
+          "software_first_valid_pcm_p95_s": 16.35128974029932,
+          "acoustic_first_sound_p50_s": 0.7453022475000216,
+          "acoustic_first_sound_p95_s": 16.35128974029932,
+          "rtf_p50": 0.7353830754711921,
+          "rtf_p95": 0.770338598074602,
+          "note": "first-segment figures here include the 120-character item and are not the operating point"
+        },
+        "operating_point": {
+          "max_first_segment_characters": 24,
+          "runs": 45,
+          "software_first_valid_pcm_p95_worst_s": 1.4991969417997368,
+          "acoustic_first_sound_p95_worst_s": 1.4991969417997368,
+          "rtf_p95_worst": 0.770370680570968,
+          "first_segment_objective_met": false,
+          "rtf_objective_met": true
+        },
+        "health": "ok",
+        "by_characters": {
+          "2": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.5604064629998539,
+            "first_valid_pcm_p95": 0.5649802591995103,
+            "rtf_p50": 0.7344716142905604,
+            "rtf_p95": 0.7433553107883846,
+            "audio_duration_p50": 0.5456689342403628
+          },
+          "4": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.6815106440002273,
+            "first_valid_pcm_p95": 0.6836846944000717,
+            "rtf_p50": 0.735411520295847,
+            "rtf_p95": 0.7381971035317748,
+            "audio_duration_p50": 0.7778684807256235
+          },
+          "6": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.8200664800000231,
+            "first_valid_pcm_p95": 0.8316146472001201,
+            "rtf_p50": 0.7464562624403497,
+            "rtf_p95": 0.7545125152287067,
+            "audio_duration_p50": 0.9520181405895691
+          },
+          "7": {
+            "runs": 5,
+            "first_valid_pcm_p50": 1.0598260959997061,
+            "first_valid_pcm_p95": 1.069747703199726,
+            "rtf_p50": 0.756976795427653,
+            "rtf_p95": 0.770370680570968,
+            "audio_duration_p50": 1.242267573696145
+          },
+          "8": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.5052659729995866,
+            "first_valid_pcm_p95": 0.5080851727999834,
+            "rtf_p50": 0.7293219201380421,
+            "rtf_p95": 0.7430913554356541,
+            "audio_duration_p50": 1.5441269841269842
+          },
+          "10": {
+            "runs": 10,
+            "first_valid_pcm_p50": 0.9768101475003641,
+            "first_valid_pcm_p95": 1.4991969417997368,
+            "rtf_p50": 0.7468144221139382,
+            "rtf_p95": 0.7633718731260728,
+            "audio_duration_p50": 1.8401814058956916
+          },
+          "16": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.4925497339996582,
+            "first_valid_pcm_p95": 0.5090031565994213,
+            "rtf_p50": 0.7273517087652489,
+            "rtf_p95": 0.73491431794915,
+            "audio_duration_p50": 2.8560544217687074
+          },
+          "24": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.5010939119998511,
+            "first_valid_pcm_p95": 0.5166853466001703,
+            "rtf_p50": 0.7306501143051969,
+            "rtf_p95": 0.7324379866738226,
+            "audio_duration_p50": 4.167981859410431
+          },
+          "30": {
+            "runs": 5,
+            "first_valid_pcm_p50": 3.9755800530002308,
+            "first_valid_pcm_p95": 4.001840502399464,
+            "rtf_p50": 0.7235276326970015,
+            "rtf_p95": 0.7265619364932635,
+            "audio_duration_p50": 5.363809523809524
+          },
+          "60": {
+            "runs": 5,
+            "first_valid_pcm_p50": 7.812129882999543,
+            "first_valid_pcm_p95": 7.819952101599811,
+            "rtf_p50": 0.7205792223775572,
+            "rtf_p95": 0.7215232702299564,
+            "audio_duration_p50": 10.692789115646258
+          },
+          "120": {
+            "runs": 5,
+            "first_valid_pcm_p50": 16.44768660700025,
+            "first_valid_pcm_p95": 16.62185718040015,
+            "rtf_p50": 0.7702715345141171,
+            "rtf_p95": 0.7785130452383147,
+            "audio_duration_p50": 21.223038548752836
+          }
+        }
+      },
+      {
+        "candidate": "vits-zh-aishell3",
+        "role": "small_open_license",
+        "threads": 4,
+        "sample_rate": 8000,
+        "num_speakers": 174,
+        "load_s": 1.6900446750005358,
+        "cold_load_s_p50": 1.7073647444999551,
+        "peak_rss_mib": 762.8671875,
+        "incremental_delivery": false,
+        "whole_corpus": {
+          "software_first_valid_pcm_p50_s": 0.749497766000295,
+          "software_first_valid_pcm_p95_s": 7.0821029954501045,
+          "acoustic_first_sound_p50_s": 0.749497766000295,
+          "acoustic_first_sound_p95_s": 7.0821029954501045,
+          "rtf_p50": 0.2993476782185802,
+          "rtf_p95": 0.47397230089767634,
+          "note": "first-segment figures here include the 120-character item and are not the operating point"
+        },
+        "operating_point": {
+          "max_first_segment_characters": 24,
+          "runs": 45,
+          "software_first_valid_pcm_p95_worst_s": 1.5361946970004647,
+          "acoustic_first_sound_p95_worst_s": 1.5361946970004647,
+          "rtf_p95_worst": 0.5228658450450988,
+          "first_segment_objective_met": false,
+          "rtf_objective_met": true
+        },
+        "health": "ok",
+        "by_characters": {
+          "2": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.42978908699988094,
+            "first_valid_pcm_p95": 0.4753535200002516,
+            "rtf_p50": 0.48610238100606323,
+            "rtf_p95": 0.5228658450450988,
+            "audio_duration_p50": 0.663375
+          },
+          "4": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.5352760779997697,
+            "first_valid_pcm_p95": 0.5398785827997417,
+            "rtf_p50": 0.39086237140293256,
+            "rtf_p95": 0.410597343835126,
+            "audio_duration_p50": 1.112
+          },
+          "6": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.5429199649996371,
+            "first_valid_pcm_p95": 0.5785515020001039,
+            "rtf_p50": 0.3394083336078993,
+            "rtf_p95": 0.36747894703474626,
+            "audio_duration_p50": 1.311
+          },
+          "7": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.596323688999837,
+            "first_valid_pcm_p95": 0.6577021225997959,
+            "rtf_p50": 0.33580695551169376,
+            "rtf_p95": 0.34153962226142626,
+            "audio_duration_p50": 1.526875
+          },
+          "8": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.6412710409995998,
+            "first_valid_pcm_p95": 0.7466160242000477,
+            "rtf_p50": 0.3401452307694085,
+            "rtf_p95": 0.3419318499109334,
+            "audio_duration_p50": 1.6485
+          },
+          "10": {
+            "runs": 10,
+            "first_valid_pcm_p50": 0.7294033980002314,
+            "first_valid_pcm_p95": 0.8774755609502662,
+            "rtf_p50": 0.2985277779622882,
+            "rtf_p95": 0.3026845674675154,
+            "audio_duration_p50": 2.2169375000000002
+          },
+          "16": {
+            "runs": 5,
+            "first_valid_pcm_p50": 1.047367731000195,
+            "first_valid_pcm_p95": 1.1192434198001866,
+            "rtf_p50": 0.278021328781628,
+            "rtf_p95": 0.29864242812790964,
+            "audio_duration_p50": 3.379875
+          },
+          "24": {
+            "runs": 5,
+            "first_valid_pcm_p50": 1.4975001900002827,
+            "first_valid_pcm_p95": 1.5361946970004647,
+            "rtf_p50": 0.2639359391434545,
+            "rtf_p95": 0.2687822168974275,
+            "audio_duration_p50": 5.253
+          },
+          "30": {
+            "runs": 5,
+            "first_valid_pcm_p50": 1.9941070559999208,
+            "first_valid_pcm_p95": 2.215142654800409,
+            "rtf_p50": 0.26048532698462956,
+            "rtf_p95": 0.2702031544267925,
+            "audio_duration_p50": 7.3505
+          },
+          "60": {
+            "runs": 5,
+            "first_valid_pcm_p50": 3.831802190000053,
+            "first_valid_pcm_p95": 4.134241672000142,
+            "rtf_p50": 0.24737612648506774,
+            "rtf_p95": 0.2556647463950702,
+            "audio_duration_p50": 15.29825
+          },
+          "120": {
+            "runs": 5,
+            "first_valid_pcm_p50": 7.567922401999895,
+            "first_valid_pcm_p95": 7.765185025399856,
+            "rtf_p50": 0.2453516103751299,
+            "rtf_p95": 0.2535410754804572,
+            "audio_duration_p50": 29.97225
+          }
+        }
+      },
+      {
+        "candidate": "vits-zh-hf-fanchen-C",
+        "role": "voice_choice_candidate",
+        "threads": 4,
+        "sample_rate": 16000,
+        "num_speakers": 187,
+        "load_s": 1.7932227210003475,
+        "cold_load_s_p50": 1.7402201469994907,
+        "peak_rss_mib": 1031.62890625,
+        "incremental_delivery": true,
+        "whole_corpus": {
+          "software_first_valid_pcm_p50_s": 0.999283321499679,
+          "software_first_valid_pcm_p95_s": 16.194359797999333,
+          "acoustic_first_sound_p50_s": 0.999283321499679,
+          "acoustic_first_sound_p95_s": 16.194359797999333,
+          "rtf_p50": 0.5781870163143257,
+          "rtf_p95": 0.845761412837411,
+          "note": "first-segment figures here include the 120-character item and are not the operating point"
+        },
+        "operating_point": {
+          "max_first_segment_characters": 24,
+          "runs": 45,
+          "software_first_valid_pcm_p95_worst_s": 3.0198466630001217,
+          "acoustic_first_sound_p95_worst_s": 3.0198466630001217,
+          "rtf_p95_worst": 0.8856290943490958,
+          "first_segment_objective_met": false,
+          "rtf_objective_met": false
+        },
+        "health": "ok",
+        "by_characters": {
+          "2": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.6818390449999424,
+            "first_valid_pcm_p95": 0.818275590599951,
+            "rtf_p50": 0.726918097126352,
+            "rtf_p95": 0.8487481894114522,
+            "audio_duration_p50": 0.8735
+          },
+          "4": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.9147052889992483,
+            "first_valid_pcm_p95": 0.9644914791996853,
+            "rtf_p50": 0.5875588807832202,
+            "rtf_p95": 0.6747498301903573,
+            "audio_duration_p50": 1.264375
+          },
+          "6": {
+            "runs": 5,
+            "first_valid_pcm_p50": 1.1569816819998233,
+            "first_valid_pcm_p95": 1.1974629988005108,
+            "rtf_p50": 0.6252273218513048,
+            "rtf_p95": 0.6539401229471647,
+            "audio_duration_p50": 1.5475625
+          },
+          "7": {
+            "runs": 5,
+            "first_valid_pcm_p50": 1.3314722179994716,
+            "first_valid_pcm_p95": 1.418424381799443,
+            "rtf_p50": 0.579083960696211,
+            "rtf_p95": 0.6165063413850099,
+            "audio_duration_p50": 2.0926875
+          },
+          "8": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.6847379579993139,
+            "first_valid_pcm_p95": 0.7413425273997418,
+            "rtf_p50": 0.6659830514437433,
+            "rtf_p95": 0.7095969015203494,
+            "audio_duration_p50": 2.46075
+          },
+          "10": {
+            "runs": 10,
+            "first_valid_pcm_p50": 1.3107761025004039,
+            "first_valid_pcm_p95": 3.0198466630001217,
+            "rtf_p50": 0.6524959897161645,
+            "rtf_p95": 0.8856290943490958,
+            "audio_duration_p50": 3.125375
+          },
+          "16": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.7439025229999606,
+            "first_valid_pcm_p95": 0.8459163005999071,
+            "rtf_p50": 0.5579599037697992,
+            "rtf_p95": 0.6175643481622483,
+            "audio_duration_p50": 4.6014375
+          },
+          "24": {
+            "runs": 5,
+            "first_valid_pcm_p50": 0.7012341100001868,
+            "first_valid_pcm_p95": 0.7468467648001242,
+            "rtf_p50": 0.5035521654157354,
+            "rtf_p95": 0.5104136735937596,
+            "audio_duration_p50": 7.052
+          },
+          "30": {
+            "runs": 5,
+            "first_valid_pcm_p50": 4.873212645000749,
+            "first_valid_pcm_p95": 5.616573386000411,
+            "rtf_p50": 0.5580026128039481,
+            "rtf_p95": 0.5840077320710958,
+            "audio_duration_p50": 8.4975
+          },
+          "60": {
+            "runs": 5,
+            "first_valid_pcm_p50": 8.606263782999013,
+            "first_valid_pcm_p95": 9.08845517139994,
+            "rtf_p50": 0.4678305305308957,
+            "rtf_p95": 0.5016594253802427,
+            "audio_duration_p50": 18.040625
+          },
+          "120": {
+            "runs": 5,
+            "first_valid_pcm_p50": 16.221204271001042,
+            "first_valid_pcm_p95": 16.52160297779963,
+            "rtf_p50": 0.44787767222837865,
+            "rtf_p95": 0.45068734599593774,
+            "audio_duration_p50": 36.3248125
+          }
+        }
+      }
+    ]
+  },
+  "stability": {
+    "kokoro-multi-lang-v1_1": {
+      "verdict": "stable",
+      "quiet_rate": 0.0,
+      "items_unstable": []
+    },
+    "matcha-icefall-zh-baker": {
+      "verdict": "stable",
+      "quiet_rate": 0.0,
+      "items_unstable": []
+    },
+    "vits-zh-aishell3": {
+      "verdict": "stable",
+      "quiet_rate": 0.0,
+      "items_unstable": []
+    },
+    "vits-melo-tts-zh_en": {
+      "verdict": "unstable",
+      "quiet_rate": 0.4928571428571429,
+      "items_unstable": [
+        "一",
+        "二",
+        "四",
+        "五",
+        "六",
+        "七",
+        "八",
+        "九",
+        "十"
+      ]
+    },
+    "vits-zh-hf-fanchen-C": {
+      "verdict": "unstable",
+      "quiet_rate": 0.25,
+      "items_unstable": [
+        "一",
+        "二",
+        "四",
+        "五",
+        "十"
+      ]
+    }
+  },
+  "load": {
+    "tts": {
+      "memory": {
+        "minimum_available_mib": 4357.6171875,
+        "maximum_swap_used_mib": 0.0,
+        "samples": 173,
+        "npu_available": false
+      },
+      "per_candidate": {
+        "matcha-icefall-zh-baker": {
+          "samples": 36,
+          "rtf_p50": 0.1759435848748122,
+          "rtf_p95": 0.33016591693210584,
+          "rtf_max": 0.37119260401706733,
+          "first_valid_pcm_p50": 0.28479113260384104,
+          "first_valid_pcm_p95": 3.2131777806038553,
+          "health": "ok",
+          "qwen": null
+        },
+        "vits-melo-tts-zh_en": {
+          "samples": 36,
+          "rtf_p50": 0.878025076492442,
+          "rtf_p95": 1.2197911275436177,
+          "rtf_max": 1.3832417069005578,
+          "first_valid_pcm_p50": 0.9037092055011817,
+          "first_valid_pcm_p95": 19.16133923499943,
+          "health": "ok",
+          "qwen": null
+        }
+      }
+    },
+    "qwen": {
+      "memory": {
+        "minimum_available_mib": 1724.7421875,
+        "maximum_swap_used_mib": 0.0,
+        "samples": 154,
+        "npu_available": false
+      },
+      "per_candidate": {
+        "matcha-icefall-zh-baker": {
+          "samples": 36,
+          "rtf_p50": 0.32089387169684036,
+          "rtf_p95": 0.6446745667025098,
+          "rtf_max": 0.6948803834727796,
+          "first_valid_pcm_p50": 0.41989756197269223,
+          "first_valid_pcm_p95": 2.6251027343541136,
+          "health": "ok",
+          "qwen": {
+            "requests_done": 8,
+            "errors": [],
+            "first_token_s_p50": 1.5125339109999913,
+            "total_s_p50": 1.5125465990004159
+          }
+        },
+        "vits-melo-tts-zh_en": {
+          "samples": 36,
+          "rtf_p50": 0.7693835616501963,
+          "rtf_p95": 1.7692816136636211,
+          "rtf_max": 2.0350608057726958,
+          "first_valid_pcm_p50": 1.3342959170001996,
+          "first_valid_pcm_p95": 16.700833489000942,
+          "health": "ok",
+          "qwen": {
+            "requests_done": 8,
+            "errors": [],
+            "first_token_s_p50": 1.519458873500298,
+            "total_s_p50": 1.5194722910000564
+          }
+        }
+      }
+    },
+    "full": {
+      "memory": {
+        "minimum_available_mib": 745.3515625,
+        "maximum_swap_used_mib": 0.0,
+        "samples": 172,
+        "npu_available": false
+      },
+      "per_candidate": {
+        "matcha-icefall-zh-baker": {
+          "samples": 36,
+          "rtf_p50": 0.36438144329285316,
+          "rtf_p95": 0.7134032877984193,
+          "rtf_max": 0.866430847489746,
+          "first_valid_pcm_p50": 0.5405376746042929,
+          "first_valid_pcm_p95": 2.9534444408536,
+          "health": "ok",
+          "qwen": {
+            "requests_done": 8,
+            "errors": [],
+            "first_token_s_p50": 1.6201146334997247,
+            "total_s_p50": 1.6201281960002234
+          }
+        },
+        "vits-melo-tts-zh_en": {
+          "samples": 36,
+          "rtf_p50": 0.8827525951093759,
+          "rtf_p95": 2.127169739260818,
+          "rtf_max": 2.263063111030371,
+          "first_valid_pcm_p50": 1.3775206319993596,
+          "first_valid_pcm_p95": 19.012291056250014,
+          "health": "ok",
+          "qwen": {
+            "requests_done": 8,
+            "errors": [],
+            "first_token_s_p50": 1.6242160880001393,
+            "total_s_p50": 1.624230088499644
+          }
+        }
+      }
+    }
+  },
+  "pronunciation": {
+    "kokoro-multi-lang-v1_1": {
+      "sample_rate": 24000,
+      "num_speakers": 103,
+      "items_with_warnings": [],
+      "items_silent": [],
+      "clipped_items": [],
+      "items": 51
+    },
+    "matcha-icefall-zh-baker": {
+      "sample_rate": 22050,
+      "num_speakers": 1,
+      "items_with_warnings": [],
+      "items_silent": [],
+      "clipped_items": [],
+      "items": 51
+    },
+    "vits-zh-aishell3": {
+      "sample_rate": 8000,
+      "num_speakers": 174,
+      "items_with_warnings": [],
+      "items_silent": [],
+      "clipped_items": [],
+      "items": 51
+    },
+    "vits-melo-tts-zh_en": {
+      "sample_rate": 44100,
+      "num_speakers": 1,
+      "items_with_warnings": [],
+      "items_silent": [
+        "num-4",
+        "num-6",
+        "num-9"
+      ],
+      "clipped_items": [],
+      "items": 51
+    },
+    "vits-zh-hf-fanchen-C": {
+      "sample_rate": 16000,
+      "num_speakers": 187,
+      "items_with_warnings": [],
+      "items_silent": [
+        "num-2",
+        "rob-json"
+      ],
+      "clipped_items": [],
+      "items": 51
+    }
+  }
+}

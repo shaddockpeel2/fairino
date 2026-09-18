@@ -28,9 +28,9 @@
     visual_yaw_enabled: true
     # Used only when visual_yaw_enabled=false.
     fixed_yaw_rad: 0.0
-    # Clean cubes are close to 1 and 60 x 30 mm tops close to 2. The gap is a
-    # fail-closed ambiguity band, preventing accidental shape switching.
-    cube_max_axis_ratio: 1.25
+    # Perspective and partial depth edges can stretch a real 30 mm cube top.
+    # Keep a fail-closed ambiguity band before the 60 x 30 mm box threshold.
+    cube_max_axis_ratio: 1.40
     rectangle_min_axis_ratio: 1.55
     stable_yaw_std_rad: 0.087266463  # 5 degrees across the accepted window
     max_sample_yaw_jump_rad: 0.34906585  # restart after a 20 degree jump
@@ -62,6 +62,14 @@
     # but cannot compete with a physical cube. Match the P5 ground plane.
     sorting_plane_z_m: 0.0
     sorting_max_cube_plane_gap_m: 0.010
+    # Allow millimetre-scale depth/calibration error below the nominal plane.
+    sorting_max_cube_plane_penetration_m: 0.002
+    # P2 stacking. A cube placed on top of another cube publishes its top one
+    # cube height above the plane; that tier must stay detectable so the lower
+    # cube is still reported (and reported as tier 1) after the upper cube has
+    # been stacked on it. Empty list disables stack-tier detection.
+    stacking_cube_height_offsets_m: [0.030]
+    stacking_tier_tolerance_m: 0.012
     # A batch planning failure excludes only the same color target within this
     # small XY radius, allowing the selector to continue with other cubes.
     sorting_skip_radius_m: 0.025

@@ -1,0 +1,101 @@
+[
+  {
+    "characters": 2,
+    "audio_s_p50": 0.447,
+    "first_callback_p50_s": 0.132,
+    "first_valid_pcm_p50_s": 0.212,
+    "first_valid_pcm_max_s": 0.228,
+    "rtf_p50": 0.297,
+    "rtf_max": 0.335
+  },
+  {
+    "characters": 4,
+    "audio_s_p50": 0.868,
+    "first_callback_p50_s": 0.172,
+    "first_valid_pcm_p50_s": 0.251,
+    "first_valid_pcm_max_s": 0.256,
+    "rtf_p50": 0.199,
+    "rtf_max": 0.215
+  },
+  {
+    "characters": 6,
+    "audio_s_p50": 1.18,
+    "first_callback_p50_s": 0.195,
+    "first_valid_pcm_p50_s": 0.274,
+    "first_valid_pcm_max_s": 0.277,
+    "rtf_p50": 0.166,
+    "rtf_max": 0.176
+  },
+  {
+    "characters": 7,
+    "audio_s_p50": 1.355,
+    "first_callback_p50_s": 0.216,
+    "first_valid_pcm_p50_s": 0.295,
+    "first_valid_pcm_max_s": 0.3,
+    "rtf_p50": 0.16,
+    "rtf_max": 0.163
+  },
+  {
+    "characters": 8,
+    "audio_s_p50": 1.549,
+    "first_callback_p50_s": 0.173,
+    "first_valid_pcm_p50_s": 0.253,
+    "first_valid_pcm_max_s": 0.261,
+    "rtf_p50": 0.239,
+    "rtf_max": 0.243
+  },
+  {
+    "characters": 10,
+    "audio_s_p50": 2.094,
+    "first_callback_p50_s": 0.234,
+    "first_valid_pcm_p50_s": 0.304,
+    "first_valid_pcm_max_s": 0.407,
+    "rtf_p50": 0.168,
+    "rtf_max": 0.229
+  },
+  {
+    "characters": 16,
+    "audio_s_p50": 3.165,
+    "first_callback_p50_s": 0.164,
+    "first_valid_pcm_p50_s": 0.244,
+    "first_valid_pcm_max_s": 0.255,
+    "rtf_p50": 0.17,
+    "rtf_max": 0.174
+  },
+  {
+    "characters": 24,
+    "audio_s_p50": 4.788,
+    "first_callback_p50_s": 0.149,
+    "first_valid_pcm_p50_s": 0.219,
+    "first_valid_pcm_max_s": 0.245,
+    "rtf_p50": 0.134,
+    "rtf_max": 0.143
+  },
+  {
+    "characters": 30,
+    "audio_s_p50": 6.031,
+    "first_callback_p50_s": 0.573,
+    "first_valid_pcm_p50_s": 0.651,
+    "first_valid_pcm_max_s": 0.68,
+    "rtf_p50": 0.095,
+    "rtf_max": 0.1
+  },
+  {
+    "characters": 60,
+    "audio_s_p50": 12.386,
+    "first_callback_p50_s": 1.125,
+    "first_valid_pcm_p50_s": 1.205,
+    "first_valid_pcm_max_s": 1.211,
+    "rtf_p50": 0.091,
+    "rtf_max": 0.091
+  },
+  {
+    "characters": 120,
+    "audio_s_p50": 24.663,
+    "first_callback_p50_s": 2.377,
+    "first_valid_pcm_p50_s": 2.457,
+    "first_valid_pcm_max_s": 2.576,
+    "rtf_p50": 0.097,
+    "rtf_max": 0.102
+  }
+]

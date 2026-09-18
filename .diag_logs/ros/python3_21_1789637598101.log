@@ -1,0 +1,2 @@
+[INFO] [1789637598.232374964] [ydi_j22_gripper]: YDI-J22 mock GripperCommand server ready.
+[ERROR] [1789637598.233069430] [ydi_j22_gripper]: Rejecting unsupported gripper position: only 0.026 m (31 deg) and 0.060 m (70 deg) are enabled

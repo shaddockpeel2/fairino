@@ -1,0 +1,957 @@
+2026-09-18 10:53:11,652 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-18 10:53:12,303 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:12,605 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:13,127 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:13,229 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:13,229 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:13,642 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:13,643 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:13,849 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:14,052 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:14,153 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:14,368 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:14,780 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:14,781 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:14,884 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:15,190 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:15,191 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:15,402 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:15,606 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:15,607 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:15,813 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:16,016 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:16,119 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:16,329 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:16,533 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:16,635 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:16,737 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:17,043 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:17,155 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:17,256 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:17,562 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:17,664 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:17,766 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:17,969 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:18,173 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:18,275 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:18,480 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:18,748 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:18,953 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:19,156 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:19,156 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:19,359 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:19,564 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:19,666 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:19,768 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:19,971 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:20,174 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:20,481 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:20,482 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:20,685 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:20,787 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:20,993 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:21,198 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:21,299 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:21,502 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:21,604 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:21,705 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:22,011 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:22,113 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:22,317 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:22,520 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:22,622 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:22,723 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:23,181 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:23,182 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:23,384 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:23,589 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:23,690 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:23,792 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:24,095 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:24,197 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:24,400 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:24,606 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:24,606 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:24,807 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:25,113 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:25,116 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:25,218 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:25,640 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:25,741 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:25,742 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:26,047 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:26,150 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:26,299 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:26,502 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:26,606 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:26,812 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:27,017 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:27,119 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:27,221 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:27,526 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:27,627 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:27,729 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:28,036 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:28,139 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:28,443 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:28,646 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:28,647 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:28,851 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:29,055 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:29,161 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:29,264 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:29,468 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:29,693 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:29,894 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:30,096 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:30,198 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:30,200 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:30,508 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:30,609 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:30,914 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:31,120 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:31,121 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:31,326 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:31,648 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:31,648 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:31,954 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:31,954 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:32,159 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:32,261 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:32,464 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:32,667 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:32,769 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:33,178 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:33,178 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:33,381 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:33,585 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:33,687 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:33,798 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:34,032 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:34,135 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:34,444 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:34,648 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:34,648 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:34,954 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:35,156 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:35,156 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:35,258 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:35,461 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:35,666 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:35,768 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:35,972 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:36,177 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:36,381 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:36,482 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:36,687 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:36,789 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:36,997 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:37,199 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:37,401 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:37,502 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:37,605 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:37,910 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:38,113 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:38,114 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:38,216 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:38,621 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:38,621 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:38,825 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:39,030 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:39,131 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:39,232 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:39,561 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:39,663 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:39,869 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:40,072 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:40,172 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:40,478 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:40,682 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:40,683 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:40,885 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:41,091 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:41,193 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:41,396 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:41,498 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:41,700 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:41,803 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:42,006 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:42,107 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:42,425 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:42,527 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:42,628 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:42,730 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:43,035 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:43,138 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:43,240 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:43,550 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:43,652 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:43,857 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:44,170 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:44,170 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:44,372 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:44,676 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:44,677 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:44,880 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:45,097 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:45,200 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:45,403 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:45,609 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:45,609 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:45,873 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:46,075 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:46,177 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:46,381 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:46,583 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:46,691 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:46,893 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:46,995 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:47,201 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:47,450 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:47,658 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:47,658 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:47,861 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:48,179 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:48,180 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:48,283 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:48,486 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:48,690 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:48,996 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:49,203 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:49,203 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:49,408 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:49,511 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:49,614 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:49,716 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:50,019 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:50,121 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:50,427 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:50,529 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:50,632 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:50,959 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:50,959 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:51,163 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:51,372 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:51,475 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:51,687 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:51,788 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:52,093 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:52,195 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:52,296 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:52,602 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:52,705 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:52,808 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:53,011 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:53,113 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:53,361 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:53,567 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:53,669 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:53,774 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:54,078 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:54,179 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:54,280 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:54,486 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:54,689 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:54,792 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:54,998 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:55,202 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:55,405 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:55,610 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:55,610 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:55,913 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:56,015 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:56,117 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:56,379 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:56,583 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:56,685 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:56,798 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:57,000 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:57,202 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:57,202 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:57,510 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:57,610 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:57,914 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:58,032 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:58,134 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:58,446 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:58,649 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:58,650 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:58,752 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:59,073 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:59,175 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:59,287 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:59,490 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:53:59,618 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:53:59,720 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:00,025 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:00,135 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:00,440 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:00,645 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:00,645 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:00,848 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:00,952 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:01,160 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:01,364 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:01,568 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:01,670 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:01,772 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:02,187 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:02,188 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:02,391 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:02,595 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:02,697 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:02,798 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:03,206 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:03,207 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:03,409 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:03,612 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:03,613 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:03,818 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:04,020 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:04,121 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:04,439 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:04,541 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:04,644 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:04,953 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:04,953 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:05,158 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:05,259 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:05,697 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:05,698 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:05,698 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:06,021 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:06,123 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:06,225 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:06,530 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:06,631 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:06,935 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:07,137 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:07,137 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:07,339 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:07,543 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:07,645 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:07,747 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:08,156 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:08,157 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:08,359 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:08,664 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:08,664 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:08,766 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:08,969 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:09,186 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:09,389 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:09,491 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:09,696 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:09,799 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:10,104 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:10,206 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:10,409 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:10,612 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:10,612 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:10,714 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:11,018 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:11,122 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:11,225 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:11,630 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:11,731 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:11,731 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:12,167 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:12,167 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:12,371 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:12,574 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:12,679 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:12,883 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:13,085 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:13,187 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:13,398 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:13,500 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:13,703 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:13,907 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:14,114 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:14,114 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:14,318 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:14,521 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:14,623 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:14,825 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:15,026 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:15,140 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:15,352 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:15,557 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:15,660 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:15,965 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:15,966 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:16,217 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:16,319 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:16,635 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:16,635 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:16,838 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:17,148 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:17,149 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:17,353 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:17,558 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:17,661 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:17,865 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:18,067 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:18,195 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:18,296 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:18,500 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:18,705 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:18,908 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:19,113 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:19,114 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:19,419 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:19,622 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:19,623 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:19,926 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:20,030 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:20,132 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:20,240 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:20,460 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:20,662 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:20,765 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=rgbd_stream_stale
+2026-09-18 10:54:20,968 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=rgbd_stream_stale
+2026-09-18 10:54:21,172 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:21,374 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=collecting_stable_samples
+2026-09-18 10:54:21,580 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=collecting_stable_samples
+2026-09-18 10:54:21,682 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:21,887 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:22,090 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:22,192 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:22,296 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:22,498 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:22,700 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:22,801 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:23,004 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:23,106 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:23,317 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:23,622 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:23,762 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:23,864 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:23,965 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:24,168 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:24,274 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:24,681 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:24,681 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:25,007 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:25,108 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:25,209 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:25,414 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:25,618 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:25,618 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:25,820 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:26,023 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:26,125 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:26,434 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:26,538 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:26,640 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:26,843 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:27,045 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:27,147 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:27,460 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:27,460 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:27,664 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:27,868 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:28,071 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:28,172 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:28,376 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:28,480 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:28,681 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:28,884 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:29,087 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:29,189 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:29,291 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:29,615 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:29,719 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:29,944 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:30,046 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:30,148 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:30,250 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:30,663 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:30,663 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:30,865 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:30,968 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:31,172 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:31,479 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:31,682 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:31,682 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:31,886 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:32,190 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:32,190 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:32,308 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:32,512 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:32,619 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:32,721 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:33,025 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:33,127 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:33,230 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:33,636 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:33,636 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:33,939 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:34,041 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:34,144 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:34,246 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:34,451 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:34,657 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:34,961 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:35,165 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:35,165 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:35,369 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:35,579 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:35,681 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:35,783 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:36,088 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:36,190 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:36,292 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:36,496 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:36,701 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:36,903 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:37,107 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:37,107 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:37,411 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:37,514 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:37,617 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:37,719 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:38,125 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:38,126 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:38,228 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:38,637 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:38,637 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:38,843 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:39,053 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:39,155 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:39,258 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:39,563 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:39,664 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:39,967 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:39,967 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:40,170 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:40,384 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:40,588 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:40,691 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:40,795 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:41,000 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:41,203 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:41,203 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:41,511 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:41,613 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:41,714 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:42,020 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:42,124 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:42,227 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:42,633 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:42,633 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:42,736 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:43,042 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:43,145 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:43,457 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:43,457 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:43,662 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:43,866 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:44,068 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:44,174 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:44,380 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:44,483 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:44,687 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:44,789 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:44,994 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:45,198 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:45,401 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:45,608 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:45,608 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:45,712 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:46,117 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:46,219 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:46,424 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:46,628 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:46,628 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:46,832 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:47,037 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:47,139 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:47,241 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:47,649 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:47,649 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:47,752 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:47,960 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:48,166 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:48,471 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:48,681 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:48,681 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:48,783 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:48,988 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:49,190 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:49,291 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:49,494 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:49,700 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:49,906 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:50,008 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:50,110 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:50,313 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:50,530 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:50,632 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:50,777 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:51,085 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:51,187 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:51,289 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:51,494 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:51,697 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:51,955 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:51,955 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:52,159 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:52,260 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:52,463 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:52,668 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:52,770 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:52,977 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:53,185 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:53,286 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:53,539 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:53,643 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:53,849 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:53,951 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:54,156 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:54,257 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:54,461 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:54,667 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:54,769 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:54,972 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:55,176 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:55,279 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:55,481 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:55,684 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:55,886 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:56,089 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:56,212 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:56,213 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:56,529 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:56,632 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:56,735 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:57,046 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:57,155 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:57,257 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:57,508 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:57,609 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:57,914 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:58,117 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:58,239 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:58,443 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:58,645 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:58,645 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:58,847 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:59,051 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:59,153 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:59,356 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:59,563 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:59,664 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:54:59,766 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:54:59,969 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:00,173 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:00,275 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:00,477 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:00,680 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:00,884 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:01,191 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:01,191 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:01,292 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:01,497 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:01,701 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:01,905 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:02,008 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:02,109 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:02,212 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:02,520 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:02,621 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:02,933 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:03,140 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:03,141 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:03,350 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:03,553 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:03,654 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:03,957 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:04,059 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:04,161 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:04,263 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:04,466 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:04,669 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:04,872 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:05,176 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:05,177 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:05,279 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:05,482 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:05,688 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:05,892 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:05,994 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:06,197 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:06,297 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:06,500 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:06,703 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:06,704 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:07,008 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:07,112 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:07,222 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:07,533 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:07,639 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:07,843 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:08,053 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:08,156 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:08,258 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:08,460 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:08,662 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:08,764 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:09,098 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:09,199 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:09,301 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:09,504 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:09,605 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:09,911 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:10,113 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:10,113 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:10,343 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:10,547 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:10,648 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:10,757 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:11,061 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:11,166 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:11,473 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:11,575 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:11,677 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:11,782 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:11,985 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:12,189 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:12,392 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:12,595 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:12,697 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:12,799 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:13,003 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:13,106 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:13,308 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:13,511 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:13,612 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:13,917 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:14,019 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:14,120 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:14,223 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:14,628 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:14,629 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:14,731 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:15,138 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:15,139 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:15,343 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:15,546 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:15,648 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:15,751 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:16,059 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:16,161 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:16,263 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:16,467 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:16,674 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:16,879 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:17,083 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:17,185 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:17,287 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:17,490 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:17,695 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:17,796 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:18,001 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:18,208 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:18,209 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:18,614 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:18,615 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:18,716 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:19,021 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:19,123 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:19,443 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:19,648 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:19,649 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:19,954 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:19,954 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:20,156 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:20,259 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:20,479 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:20,682 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:20,784 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:20,987 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:21,190 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:21,309 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:21,512 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:21,614 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:21,818 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:22,023 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:22,124 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:22,327 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:22,532 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:22,634 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:22,846 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:23,071 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:23,174 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:23,276 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:23,582 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:23,684 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:23,800 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:24,105 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:24,105 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:24,206 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:24,510 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:24,611 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:24,814 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:25,017 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:25,119 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:25,220 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:25,531 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:25,642 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:25,744 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:25,949 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=rgbd_stream_stale
+2026-09-18 10:55:26,159 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:26,362 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:26,564 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:26,666 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:26,869 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:27,176 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:27,176 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:27,382 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:27,484 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:27,687 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:27,789 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:28,094 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:28,200 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:28,201 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:28,608 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:28,608 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:28,913 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:29,016 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:29,118 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:29,322 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:29,627 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:29,627 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:29,934 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:30,040 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:30,142 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:30,458 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:30,661 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:30,661 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:30,964 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:31,167 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:31,168 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:31,372 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:31,575 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:31,677 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:31,883 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:32,188 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:32,189 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:32,398 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:32,505 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:32,710 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:32,811 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:33,014 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:33,116 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:33,422 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:33,648 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:33,648 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:33,857 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:33,966 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:34,169 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:34,372 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:34,475 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:34,678 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:34,780 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:35,194 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:35,194 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:35,398 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:35,703 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:35,703 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:35,907 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:36,008 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:36,110 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:36,211 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:36,532 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:36,635 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:36,738 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:37,044 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:37,146 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:37,348 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:37,552 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:37,653 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:37,754 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:38,061 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:38,162 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:38,368 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:38,573 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:38,677 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:38,778 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:38,982 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:39,186 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:39,288 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:39,695 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:39,695 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:39,809 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:40,012 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:40,113 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:40,214 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:40,521 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:40,623 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:40,724 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:41,029 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:41,131 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:41,233 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:41,555 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:41,657 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:41,759 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:42,169 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:42,169 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:42,373 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:42,477 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:42,685 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:42,991 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:43,194 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:43,195 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:43,398 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:43,601 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:43,702 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:43,804 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:44,110 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:44,213 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:44,214 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:44,620 INFO fr3c_dialogue_gui speech service availability changed to False
+2026-09-18 10:55:44,620 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:44,621 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:44,825 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:45,034 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:45,137 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:45,442 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:45,545 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:45,647 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:45,749 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:46,055 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:46,158 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:46,462 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:46,462 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:46,668 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:46,769 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:46,972 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:47,354 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:47,354 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:47,557 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:47,659 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:47,761 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:47,984 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:48,193 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:48,296 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:48,601 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:48,705 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:48,908 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:49,011 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:49,112 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:49,417 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:49,628 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:49,732 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:49,733 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:50,137 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:50,137 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:50,441 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:50,656 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:50,656 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:50,759 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:50,962 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:51,188 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target
+2026-09-18 10:55:51,290 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:51,593 INFO fr3c_dialogue_gui action_event kind=perception_state request_id= phase=ready success=None error_code=None executed=None detail=stable_target_updated
+2026-09-18 10:55:51,695 INFO fr3c_dialogue_gui action_event kind=robot_state request_id= phase=waiting_for_target success=None error_code=None executed=None detail=waiting for a current stable P3 target

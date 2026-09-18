@@ -98,8 +98,9 @@ ros2 topic echo /fr3c_first_grasp/state --once
 竖直，自动使用对应的 30×30×30 mm 或 60×30×30 mm 碰撞体。每个等价角都从同一起点
 完成接近、下降、提升预规划，再根据真实关节轨迹选择。单轮第六轴累计转角 90°、
 距 URDF 限位至少 10° 为默认软偏好；若没有候选满足，仍会选择超出软偏好最少的完整可行路径，
-并在日志中标记。URDF 硬限位、碰撞和路径完整性检查不会放宽。轴比位于
-`1.25`～`1.55` 的模糊样本也会被拒绝。
+并在日志中标记。URDF 硬限位、碰撞和路径完整性检查不会放宽。考虑相机透视和深度边缘造成的
+正方体顶面拉伸，立方体轴比上限为 `1.40`；轴比位于 `1.40`～`1.55` 的模糊样本仍会被拒绝。
+桌面高度允许向上 `10 mm`、向下 `2 mm` 的 RGB-D/手眼标定误差，超出后仍按非桌面立方体拒绝。
 
 首次验证动态 yaw 或新检测模式时，建议先以仅规划模式启动。下面以蓝色模式为例；验证
 `colors` 或 `yolo` 时，将最后的模式参数替换成对应值：
@@ -152,6 +153,16 @@ ros2 action send_goal --feedback \
   fairino_msgs/action/PickColor \
   "{color: blue}"
 ```
+
+把一个颜色方块码到另一个颜色方块上（两块都必须在初始画面中）：
+
+```bash
+scripts/grasp/send_color_task.sh stack red blue
+```
+
+`color=red` 是被抓起的上方方块，`support_color=blue` 是留在桌面的下方方块。
+节点在初始位姿的同一条 RGB-D 状态中锁定两者，开始运动后不再重新定位蓝块；
+放置时红块底面在蓝块顶面上方 5 mm 张爪，随后返回任务起始关节位。
 
 颜色可替换为 `red`、`yellow`、`blue`、`green`。每个 Goal 只执行一次；不存在或不唯一时返回错误，
 不会自动改抓其他颜色。`pick_hold` 成功后必须先真实放稳／移除物体并确认夹爪不再持物，再同步
@@ -206,3 +217,34 @@ ros2 service call /fr3c_first_grasp/cancel std_srvs/srv/Trigger '{}'
 
 停止整套系统时，在终端 1 按 `Ctrl+C`，并等待所有节点退出后再重新启动，禁止叠加启动第二套
 控制栈。
+
+当前 `fairino_msgs`、`fr3c_camera`、`fairino_mtc_demo` 和 `fr3c_voice` 已完成联合编译。真机前仍应先用 `FR3C_FIRST_GRASP_EXECUTE=false` 完成仅规划验证，再使用两个终端：
+终端 1：机器人栈（真实运动，夹爪会使能）
+cd /home/industio/fairino_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+scripts/run_moveit_camera_rviz.sh detection_mode:=colors
+终端 2：UI。为减少内存，先禁用 TTS：
+cd /home/industio/fairino_ws
+scripts/voice/start_dialogue_full.sh --no-speech
+然后输入：
+把黄色方块放置到D区域
+仅规划、不让机械臂运动时，终端 1 改成：
+FR3C_FIRST_GRASP_EXECUTE=false \
+scripts/run_moveit_camera_rviz.sh detection_mode:=colors
+停止语音/UI 后台服务：
+cd /home/industio/fairino_ws
+scripts/voice/stop_voice_demo.sh
+注意：真实运动命令会启用 FAIRINO 硬件和 FT232H 开环夹爪，启动前必须确认工作区无人、急停可用。
+刚才核对时还发现一个细节：我把停止与进程匹配写在同一条 shell 命令里，pgrep -f 误匹配了外层检查命令，导致停止脚本提前中断；Qwen 确实还没停。现在改为单独执行官方停止脚本，再分开检查。
+
+原因是 start_dialogue_full.sh 使用 nohup setsid 将 Qwen 和 TTS 作为独立后台服务启动。Ctrl+C 只终止前台 GUI，这是脚本的既定行为，方便下次打开 GUI 时复用模型。
+正确停止命令：
+cd /home/industio/fairino_ws
+scripts/voice/stop_voice_demo.sh
+我已执行并确认：
+- Qwen 服务已停止
+- Qwen worker 已停止
+- TTS 已停止
+- 两个服务 socket 均已删除
+如果希望以后 Ctrl+C 自动清理全部后台服务，可以再修改启动脚本增加退出清理逻辑。

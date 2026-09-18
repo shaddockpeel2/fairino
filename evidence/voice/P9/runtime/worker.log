@@ -1,0 +1,55 @@
+arecord: pcm_read:2221: read error: Interrupted system call
+arecord: pcm_read:2221: read error: Interrupted system call
+arecord: pcm_read:2221: Traceback (most recent call last):
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/kws_worker.py", line 96, in <module>
+    raise SystemExit(main())
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/kws_worker.py", line 86, in main
+    return run(parse_args())
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/kws_worker.py", line 53, in run
+    raw = sys.stdin.buffer.read(args.chunk_samples * 2)
+KeyboardInterrupt
+读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+ALSA lib confmisc.c:165:(snd_config_get_card) Cannot get card index for Device
+arecord: main:831: 音乐打开错误： 没有那个设备
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: Traceback (most recent call last):
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/kws_worker.py", line 96, in <module>
+    raise SystemExit(main())
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/kws_worker.py", line 86, in main
+    return run(parse_args())
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/kws_worker.py", line 53, in run
+    raw = sys.stdin.buffer.read(args.chunk_samples * 2)
+KeyboardInterrupt
+读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用

@@ -65,7 +65,7 @@ def test_config_rejects_escape_tools_and_unbounded_context(tmp_path):
                       'vision_path: ../vision.rknn'), 'escapes'),
         (base.replace('tools_enabled: false', 'tools_enabled: true'), 'forbidden'),
         (base.replace('max_context_len: 256', 'max_context_len: 9000'),
-         'safety bound'),
+         'runtime bound'),
     ):
         path = tmp_path / 'bad.yaml'
         path.write_text(changed, encoding='utf-8')

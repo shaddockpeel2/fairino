@@ -24,17 +24,20 @@ is no sweep or intermediate-position command in the production interface.
 The FT232H backend is encapsulated in `ft232h_servo.py`. Every accepted goal:
 
 1. opens FT232H asynchronous bit-bang on AD7;
-2. writes one complete 0.8 s, 50 Hz waveform (40 frames / 8000 bytes);
+2. writes one complete 0.8 s, 50 Hz waveform (40 frames / 8000 bytes) for
+   every pre-open, grasp, and release command;
 3. waits for the bounded waveform to drain;
 4. writes AD7 low and closes the controller.
 
-There is no background writer, queued refill loop, or continuous PWM stream.
+There is no background writer, queued refill loop, or unbounded PWM stream.
 This mirrors the better-performing standalone `gripper_ft232h.py` behavior and
 prevents old waveform chunks from accumulating and executing later.
 
 The gripper has no position, force, current, temperature, or stall feedback.
 Action position is therefore an open-loop estimate, effort is unknown, and a
-positive `max_effort` is rejected. Startup publishes the configured 60 mm
+positive `max_effort` is rejected. A successful result remains a commanded
+estimate, not proof that the fingers physically held the requested aperture.
+Startup publishes the configured 60 mm
 release estimate for MoveIt but emits no PWM.
 
 ## Build and mock test

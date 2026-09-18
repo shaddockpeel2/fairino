@@ -1,5 +1,5 @@
 P6_EXECUTION_GATE_V1
 passed=true
-generated_at=2026-09-17T10:00:03.156526+08:00
+generated_at=2026-09-18T16:54:14.448338+08:00
 control_path=moveit_joint_servoj
-report_path=/home/industio/fairino_ws/evidence/P6/runs/1789610403156526080/report.json
+report_path=/home/industio/fairino_ws/evidence/P6/runs/1789721654448337920/report.json

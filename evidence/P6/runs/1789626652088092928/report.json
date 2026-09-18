@@ -1,0 +1,544 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-09-17T14:30:52.088093+08:00",
+  "passed": true,
+  "control_path": "moveit_joint_servoj",
+  "confirmations": {
+    "workcell_clear": true,
+    "lift_clearance_50mm": true,
+    "cable_slack": true,
+    "stop_method_ready": true,
+    "no_external_motion_source": true
+  },
+  "checks": [
+    {
+      "name": "control_path",
+      "passed": true,
+      "observed": "moveit_joint_servoj",
+      "expected": "moveit_joint_servoj",
+      "detail": "Tool/work-object IDs do not transform joint ServoJ trajectories."
+    },
+    {
+      "name": "controller_status_complete",
+      "passed": true,
+      "observed": [],
+      "expected": [],
+      "detail": "Status must come from the existing fairino_hardware SDK connection."
+    },
+    {
+      "name": "controller_program_stopped",
+      "passed": true,
+      "observed": 1.0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "controller_robot_stopped",
+      "passed": true,
+      "observed": 1.0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "controller_error_clear",
+      "passed": true,
+      "observed": [
+        0.0,
+        0.0
+      ],
+      "expected": [
+        0,
+        0
+      ],
+      "detail": ""
+    },
+    {
+      "name": "controller_emergency_stop_clear",
+      "passed": true,
+      "observed": 0.0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "controller_safety_stops_clear",
+      "passed": true,
+      "observed": [
+        0.0,
+        0.0
+      ],
+      "expected": [
+        0,
+        0
+      ],
+      "detail": ""
+    },
+    {
+      "name": "controller_collision_clear",
+      "passed": true,
+      "observed": 0.0,
+      "expected": 0,
+      "detail": ""
+    },
+    {
+      "name": "controller_motion_done",
+      "passed": true,
+      "observed": 1.0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "controller_enabled",
+      "passed": true,
+      "observed": 1.0,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "payload_prototype_waiver_recorded",
+      "passed": true,
+      "observed": {
+        "controller": {
+          "mass_kg": 0.0,
+          "cog_mm": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "reason": "operator requested approximate first grasp before payload calibration"
+      },
+      "expected": "non-empty operator-directed prototype waiver",
+      "detail": ""
+    },
+    {
+      "name": "controller_tool_recorded_not_required_by_joint_path",
+      "passed": true,
+      "observed": {
+        "tool_id": 0.0,
+        "tool_coord_mm_deg": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "expected": "record only for moveit_joint_servoj",
+      "detail": ""
+    },
+    {
+      "name": "controller_work_object_recorded_not_required_by_joint_path",
+      "passed": true,
+      "observed": {
+        "work_object_id": 0.0
+      },
+      "expected": "record only for moveit_joint_servoj",
+      "detail": ""
+    },
+    {
+      "name": "execution_controller_idle",
+      "passed": true,
+      "observed": "inactive",
+      "expected": "inactive",
+      "detail": ""
+    },
+    {
+      "name": "joint_state_broadcaster_active",
+      "passed": true,
+      "observed": "active",
+      "expected": "active",
+      "detail": ""
+    },
+    {
+      "name": "hardware_component_active",
+      "passed": true,
+      "observed": "active",
+      "expected": "active",
+      "detail": ""
+    },
+    {
+      "name": "all_arm_commands_available_unclaimed",
+      "passed": true,
+      "observed": {
+        "joint1/position": {
+          "available": true,
+          "claimed": false
+        },
+        "joint2/position": {
+          "available": true,
+          "claimed": false
+        },
+        "joint3/position": {
+          "available": true,
+          "claimed": false
+        },
+        "joint4/position": {
+          "available": true,
+          "claimed": false
+        },
+        "joint5/position": {
+          "available": true,
+          "claimed": false
+        },
+        "joint6/position": {
+          "available": true,
+          "claimed": false
+        }
+      },
+      "expected": "six available and unclaimed joint position interfaces",
+      "detail": ""
+    },
+    {
+      "name": "trajectory_bridge_idle",
+      "passed": true,
+      "observed": "monitoring_manual_ready",
+      "expected": "monitoring_manual_ready",
+      "detail": ""
+    },
+    {
+      "name": "single_arm_joint_state_source",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "joint_state_publishers_expected",
+      "passed": true,
+      "observed": [
+        "/joint_state_broadcaster",
+        "/ydi_j22_gripper"
+      ],
+      "expected": [
+        "/joint_state_broadcaster",
+        "/ydi_j22_gripper"
+      ],
+      "detail": ""
+    },
+    {
+      "name": "arm_joint_state_fresh",
+      "passed": true,
+      "observed": 0.012856803,
+      "expected": 0.5,
+      "detail": ""
+    },
+    {
+      "name": "ros_fk_matches_controller_flange",
+      "passed": true,
+      "observed": {
+        "translation_mm": 0.010628061681296866,
+        "rotation_deg": 0.00037043545288951215
+      },
+      "expected": {
+        "translation_mm_max": 0.5,
+        "rotation_deg_max": 0.1
+      },
+      "detail": ""
+    },
+    {
+      "name": "tcp_transform_matches",
+      "passed": true,
+      "observed": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "expected": {
+        "translation_mm_max": 0.2,
+        "rotation_deg_max": 0.02
+      },
+      "detail": ""
+    },
+    {
+      "name": "handeye_transform_matches",
+      "passed": true,
+      "observed": {
+        "translation_mm": 0.0,
+        "rotation_deg": 0.0
+      },
+      "expected": {
+        "translation_mm_max": 0.2,
+        "rotation_deg_max": 0.02
+      },
+      "detail": ""
+    },
+    {
+      "name": "handeye_transform_unique",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/controller_manager",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/joint_state_broadcaster",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/fairino3mt_execution_controller",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/fr3c_trajectory_control_bridge",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/move_group",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/robot_state_publisher",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/dabai_hand_eye_tf",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/perception/blue_cube_localizer",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "required_node:/ydi_j22_gripper",
+      "passed": true,
+      "observed": 1,
+      "expected": 1,
+      "detail": ""
+    },
+    {
+      "name": "forbidden_motion_nodes_absent",
+      "passed": true,
+      "observed": [],
+      "expected": [],
+      "detail": ""
+    },
+    {
+      "name": "operator_confirmation:workcell_clear",
+      "passed": true,
+      "observed": true,
+      "expected": true,
+      "detail": "Physical conditions cannot be inferred from RViz or the ROS graph."
+    },
+    {
+      "name": "operator_confirmation:lift_clearance_50mm",
+      "passed": true,
+      "observed": true,
+      "expected": true,
+      "detail": "Physical conditions cannot be inferred from RViz or the ROS graph."
+    },
+    {
+      "name": "operator_confirmation:cable_slack",
+      "passed": true,
+      "observed": true,
+      "expected": true,
+      "detail": "Physical conditions cannot be inferred from RViz or the ROS graph."
+    },
+    {
+      "name": "operator_confirmation:stop_method_ready",
+      "passed": true,
+      "observed": true,
+      "expected": true,
+      "detail": "Physical conditions cannot be inferred from RViz or the ROS graph."
+    },
+    {
+      "name": "operator_confirmation:no_external_motion_source",
+      "passed": true,
+      "observed": true,
+      "expected": true,
+      "detail": "Physical conditions cannot be inferred from RViz or the ROS graph."
+    }
+  ],
+  "snapshot": {
+    "controller_status": {
+      "robot_state": 1.0,
+      "main_error_code": 0.0,
+      "program_state": 1.0,
+      "sub_error_code": 0.0,
+      "robot_mode": 1.0,
+      "tool_id": 0.0,
+      "wobj_x_mm": 0.0,
+      "wobj_z_mm": 0.0,
+      "tool_z_mm": 0.0,
+      "flange_rx_deg": 178.34112548828125,
+      "tool_ry_deg": 0.0,
+      "wobj_ry_deg": 0.0,
+      "work_object_id": 0.0,
+      "wobj_rz_deg": 0.0,
+      "motion_done": 1.0,
+      "flange_x_mm": -58.00339889526367,
+      "wobj_rx_deg": 0.0,
+      "flange_z_mm": 399.0220642089844,
+      "flange_ry_deg": -0.2764934003353119,
+      "tool_rx_deg": 0.0,
+      "flange_y_mm": -345.7037353515625,
+      "wobj_y_mm": 0.0,
+      "tool_y_mm": 0.0,
+      "tool_x_mm": 0.0,
+      "payload_cog_z_mm": 0.0,
+      "emergency_stop": 0.0,
+      "payload_cog_y_mm": 0.0,
+      "enabled": 1.0,
+      "payload_cog_x_mm": 0.0,
+      "flange_rz_deg": 175.2391357421875,
+      "payload_kg": 0.0,
+      "safety_stop_1": 0.0,
+      "safety_stop_0": 0.0,
+      "tool_rz_deg": 0.0,
+      "collision_state": 0.0
+    },
+    "control_state": "monitoring_manual_ready",
+    "arm_joint_source_count": 1,
+    "joint_state_publishers": [
+      "/joint_state_broadcaster",
+      "/ydi_j22_gripper"
+    ],
+    "arm_joint_state_age_s": 0.012856803,
+    "nodes": [
+      "/_ros2cli_daemon_0_93eeff873ee84a77aef317ce33e5d6c2",
+      "/camera/camera",
+      "/camera/camera_container",
+      "/controller_manager",
+      "/dabai_hand_eye_tf",
+      "/fairino3mt_execution_controller",
+      "/fr3c_dialogue_action_bridge",
+      "/fr3c_first_grasp",
+      "/fr3c_p6_startup_preflight",
+      "/fr3c_qwen_resource_bridge",
+      "/fr3c_trajectory_control_bridge",
+      "/interactive_marker_display_367998990512",
+      "/joint_state_broadcaster",
+      "/launch_ros_786317",
+      "/move_group",
+      "/move_group_private_367659901328",
+      "/moveit_simple_controller_manager",
+      "/perception/blue_cube_localizer",
+      "/perception/transform_listener_impl_7f9a056d10",
+      "/planning_scene_interface_367302634720",
+      "/robot_state_publisher",
+      "/rviz",
+      "/rviz_private_546534759280",
+      "/transform_listener_impl_559a8e1cf0",
+      "/transform_listener_impl_55ae1e3b10",
+      "/transform_listener_impl_7f400e46d0",
+      "/ydi_j22_gripper"
+    ],
+    "camera_link_static_source_count": 1,
+    "controllers": {
+      "joint_state_broadcaster": "active",
+      "fairino3mt_execution_controller": "inactive"
+    },
+    "hardware": {
+      "FR3CHardware": {
+        "state": "active",
+        "type": "system",
+        "class_type": "fairino_hardware/FairinoHardwareInterface",
+        "arm_command_interfaces": {
+          "joint1/position": {
+            "available": true,
+            "claimed": false
+          },
+          "joint2/position": {
+            "available": true,
+            "claimed": false
+          },
+          "joint3/position": {
+            "available": true,
+            "claimed": false
+          },
+          "joint4/position": {
+            "available": true,
+            "claimed": false
+          },
+          "joint5/position": {
+            "available": true,
+            "claimed": false
+          },
+          "joint6/position": {
+            "available": true,
+            "claimed": false
+          }
+        }
+      }
+    },
+    "base_to_flange": {
+      "translation_m": [
+        -0.058002643924734455,
+        -0.3457141163777059,
+        0.39902421363002555
+      ],
+      "quaternion_xyzw": [
+        0.04156296000774446,
+        0.999028073618661,
+        0.01456572748162894,
+        -0.001807777672422791
+      ],
+      "parent_frame": "base_link",
+      "child_frame": "flange_link"
+    },
+    "flange_to_grasp": {
+      "translation_m": [
+        -0.000847397,
+        0.003027928,
+        0.184614459
+      ],
+      "quaternion_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "parent_frame": "flange_link",
+      "child_frame": "grasp_frame"
+    },
+    "flange_to_camera": {
+      "translation_m": [
+        -0.022343004777692268,
+        -0.07201485255317483,
+        0.04555195303911627
+      ],
+      "quaternion_xyzw": [
+        -0.5304542667965861,
+        0.5313345018947883,
+        -0.45322928624404357,
+        -0.48050508012322635
+      ],
+      "parent_frame": "flange_link",
+      "child_frame": "camera_link"
+    },
+    "arm_joint_positions_rad": {
+      "joint1": -1.4421849540619724,
+      "joint2": -1.6097153634911512,
+      "joint3": -1.1823878639283991,
+      "joint4": -1.9496098197280018,
+      "joint5": 1.57216319422438,
+      "joint6": 0.21175389709513928
+    }
+  }
+}

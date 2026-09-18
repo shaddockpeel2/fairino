@@ -1,0 +1,114 @@
+FR3C pick_place (color + explicit zone) software verification
+Date: 2026-09-17
+Scope: follow-up extension of the verified stage-2 colour action interfaces.
+       pick_hold and pick_sort semantics were NOT changed.
+
+No robot or gripper command was issued during this verification.
+
+Build commands:
+  source /opt/ros/humble/setup.bash
+  MAKEFLAGS=-j1 CMAKE_BUILD_PARALLEL_LEVEL=1 \
+    colcon build --packages-select fairino_msgs \
+    --executor sequential --parallel-workers 1 --cmake-args -DBUILD_TESTING=OFF
+  MAKEFLAGS=-j1 CMAKE_BUILD_PARALLEL_LEVEL=1 \
+    colcon build --packages-select fairino_mtc_demo \
+    --executor sequential --parallel-workers 1 --cmake-args -DBUILD_TESTING=ON
+Result: both packages finished successfully.
+
+Interface check:
+  ros2 interface show fairino_msgs/action/PickColor
+Result: Goal now has `string color` + `string zone`; Result has
+  `success, error_code, message, color, zone, executed`; error codes now
+  include INVALID_ZONE=13 and ZONE_UNAVAILABLE=14. Existing clients that send
+  only `{color: red}` still parse, with zone defaulting to "".
+
+Launch-to-node zone parameter contract:
+  ros2 launch fairino_mtc_demo mtc_demo_env.launch.py use_rviz:=false
+  ros2 launch fairino_mtc_demo first_grasp.launch.py \
+    execute:=false sort_enabled:=true \
+    grid_file:=/home/industio/fairino_ws/evidence/a4_paper_grid.json
+Result: node started (no configuration rejection) and move_group reported
+  "You can start planning now!".
+
+  ros2 action list
+Result: /fr3c_first_grasp/pick_hold, /fr3c_first_grasp/pick_sort and the new
+  /fr3c_first_grasp/pick_place are all advertised.
+
+Real calibration expansion:
+  evidence/a4_paper_grid.json -> zones a, b, c, d, 4 slots each
+    a: center [0.3420, -0.3744, 0.0]
+    b: center [0.2375, -0.3744, 0.0]
+    c: center [0.2375, -0.2267, 0.0]
+    d: center [0.3421, -0.2267, 0.0]
+
+Negative end-to-end test of the new zone validation:
+  Added a region E (not colour-mapped, center Z = 0.05 m) to a copy of the
+  real grid, then launched with that file. The node refused to start:
+    FATAL: P5 configuration/startup rejected:
+           invalid e placement zone center or grid plane Z
+    process died with exit code 2
+  No colour-mapped region was altered, so this error can only come from the
+  newly added zone validation. This proves the launch file emits the zone
+  centres and that the node validates them. The temporary grid copy was
+  deleted after the check.
+
+Targeted pytest:
+  source /opt/ros/humble/setup.bash && source install/setup.bash
+  ROS_LOG_DIR=/tmp/fr3c_ros_logs python3 -m pytest -q \
+    src/fairino_mtc_demo/test/test_place_zone.py \
+    src/fairino_mtc_demo/test/test_sort_regions.py
+Result: 7 passed.
+
+  test_place_zone.py compiles the production ZoneRequest/parseZone code from
+  first_grasp_node.cpp into a standalone binary and asserts:
+    accepted: A, a, " C ", A3, d1, B12, zone4, "A 1"
+    rejected: "", "   ", 3, A0, A123, A-1, A1B, !
+  It also asserts the three action servers stay mutually exclusive about
+  `zone`, that slot occupancy reads planning_scene_.getObjects(), and that a
+  zone task never reaches the colour-mapped fallback.
+
+  test_sort_regions.py additionally asserts every calibrated region becomes a
+  zone parameter (including a region that no colour maps to), that zone slots
+  are independent of the colour aliases, and that a region name which cannot
+  become a ROS parameter fails loudly.
+
+colcon test (fairino_mtc_demo):
+  MAKEFLAGS=-j1 colcon test --packages-select fairino_mtc_demo \
+    --executor sequential --parallel-workers 1
+Result: test_place_zone, test_sort_regions, test_p6_checks, test_idle_cancel
+  all pass; cppcheck, lint_cmake, pep257, xmllint clean; uncrustify clean for
+  first_grasp_node.cpp.
+  Remaining failures are pre-existing lint debt in files this change did not
+  touch: flake8 E501 in test/test_idle_cancel.py (untracked from an earlier
+  session), E302/E303/E265/E501 in launch/mtc_demo_env.launch.py and
+  launch/mtc_demo_app.launch.py, and uncrustify in src/mtc_node.cpp.
+
+Full workspace Python regression:
+  source /opt/ros/humble/setup.bash && source install/setup.bash
+  ROS_LOG_DIR=/tmp/fr3c_ros_logs \
+  PYTHONPATH=$PYTHONPATH:/home/industio/fairino_ws/test/jiazhua/.venv/lib/python3.10/site-packages \
+  python3 -m pytest -q
+Result: 195 passed, 4 skipped, 1 warning.
+  The warning is the existing Python 3.11 compatibility warning from the
+  MoveIt launch utilities. Nine rclpy tests fail without ROS_LOG_DIR because
+  the sandbox denies writes to ~/.ros/log; they are unrelated to this change
+  and pass once ROS_LOG_DIR points at a writable directory.
+
+NOT VERIFIED - runtime action round trip:
+  In this environment DDS completes discovery but does not deliver data.
+  `ros2 topic echo /fr3c_first_grasp/state` received nothing while the node
+  published every 500 ms, and a goal to the unchanged pick_hold action also
+  stopped at "Sending goal:" with no goal response. The same failure therefore
+  affects pre-existing paths, so it is an environment limitation rather than a
+  regression. Runtime goal handling of pick_place (INVALID_ZONE,
+  ZONE_UNAVAILABLE, slot selection, actual placement) still has to be
+  exercised on the real setup. See the field checklist in
+  docs/voice/P2_颜色抓取任务Action接口.md.
+
+Known limits carried forward:
+  - Zone slot occupancy only knows obstacles present in the MoveIt scene.
+    Cubes the software never observed are invisible to it.
+  - pick_place does not check that a colour matches a zone by design; a red
+    cube may be placed in zone D.
+  - The gripper remains open-loop; a successful pick_place still means the
+    motion chain completed, not that the cube was sensor-verified as held.

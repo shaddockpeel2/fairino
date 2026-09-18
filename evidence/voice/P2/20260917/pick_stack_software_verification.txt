@@ -1,0 +1,254 @@
+FR3C pick_stack (two-cube stacking) software verification
+Date: 2026-09-17
+Scope: follow-up extension of the verified stage-2 colour action interfaces.
+       pick_hold, pick_sort and pick_place semantics were NOT changed.
+
+No robot or gripper command was issued during this verification.
+No camera, MoveIt or DDS runtime was available, so no action goal was sent.
+
+What was added
+--------------
+A fourth single-shot Action, /fr3c_first_grasp/pick_stack, that grasps the cube
+of `color`, rotates it to match the top-face yaw of the cube of `support_color`,
+places it on that cube's measured top face, releases it and returns home.
+
+The goal carries the new field `support_color`; the result carries it back plus
+two new error codes:
+  INVALID_SUPPORT_COLOR=15    goal or configuration rejected before any motion
+  STACK_GEOMETRY_REJECTED=16  the requested pair cannot form a two-cube stack
+
+Build commands:
+  source /opt/ros/humble/setup.bash
+  colcon build --packages-select fairino_msgs
+  colcon build --packages-select fairino_mtc_demo
+Result: both packages finished successfully, no warnings from first_grasp_node.
+
+Interface check:
+  ros2 interface show fairino_msgs/action/PickColor
+  ROS_LOG_DIR=/home/industio/fairino_ws/.diag_logs/ros ros2 interface show \
+    fairino_msgs/action/PickColor
+Result: Goal is `string color`, `string zone`, `string support_color`; Result is
+  `success, error_code, message, color, zone, support_color, executed`; the
+  error code list ends with INVALID_SUPPORT_COLOR=15 and STACK_GEOMETRY_REJECTED=16.
+  Existing clients that send only {color: red} still parse, with zone and
+  support_color defaulting to "".
+
+Perception layer change
+-----------------------
+`is_tabletop_cube` rejected every cube that was not exactly one cube height above
+the plane, so the upper cube of a finished stack was invisible and the lower cube
+of a new stack could be mistaken for a free table position. Added
+`tabletop_cube_tier`, which returns 0 for a cube resting on the work plane and 1
+for a cube whose bottom rests on another cube:
+  src/fr3c_camera/config/blue_cube_localizer.yaml
+    stacking_cube_height_offsets_m: [0.030]
+    stacking_tier_tolerance_m: 0.012
+`is_tabletop_cube` is now a thin wrapper over it, so the pre-stack colour filter
+behaviour is unchanged. The perception status `detected_targets` entries gained
+`top_z_base_m`, `grasp_axis_yaw_base_rad`, `grasp_axis_yaw_period_rad`,
+`observed_short_long_m`, `object_class`, `nominal_object_size_m` and
+`stack_tier`, because pick_stack needs the lower cube's pose and yaw, which the
+single-colour filter never selects.
+
+Precision fix found while testing: a cube resting exactly on the plane measured a
+gap of about -1.2e-9 m after the frame conversion and was rejected by the
+`gap >= 0.0` bound. The lower bound now carries a 1e-6 m tolerance while the
+upper bound, which separates one tier from the next, stays strict.
+
+Rotation arithmetic
+-------------------
+Square top faces make four grasp yaws physically equivalent. The placement
+rotation is
+  theta = wrap(destination_yaw - target_yaw_offset - source_grasp_yaw, 90 deg)
+where wrap takes the nearest whole 90 degree multiple.
+
+CORRECTION (2026-09-18). An earlier revision of this file claimed the best of the
+four equivalent grasps could need almost 90 degrees and that a 45 degree
+allowance would refuse stackable pairs. That was wrong, and the claim has been
+withdrawn. The measurement behind it modelled the source candidates without
+wrapping them into [-pi, pi), which is not what the code does:
+`graspCandidates()` wraps every candidate with
+  candidate_yaw = atan2(sin(raw_yaw), cos(raw_yaw))
+
+With wrapped candidates the four reduced rotations are an arithmetic progression
+with spacing exactly one symmetry step, so the nearest one is never further than
+half a step from the requested placement rotation. The bound is therefore:
+
+  best of the four equivalent grasps : <= half a symmetry step = <= 45 degrees
+  chosen equivalent                  : <= the same 45 degrees
+
+Re-measured over a full grid of source and destination yaws, wrapped candidates:
+  worst best-of-four = 0.7831853072 rad (44.8732 degrees)
+  worst any-of-four  = 0.7831853072 rad (44.8732 degrees)
+i.e. 45 degrees is a tight upper bound, and 45 degrees is enough.
+
+`maximum_stack_placement_rotation_rad` is configured to 0.7853981633974483
+(45 degrees), the exact worst case the reduction can leave, so no reachable pair
+is refused for want of a larger limit. Candidates above it are dropped before any
+trajectory planning and recorded as `grasp_candidate_rejected`; if all four are
+dropped the task fails while the arm is still at home.
+
+Startup guard fix (2026-09-18)
+------------------------------
+The guard that refuses a too-small allowance compared it against
+`target_yaw_symmetry_rad`, the configured fallback. That fallback is documented
+as applying only when `use_target_size=false`; with measured sizes the locked
+step comes from the detected top shape, and a square top uses half a turn of
+symmetry steps. The guard was therefore twice as strict as run time and aborted
+the node on the shipped 45 degree configuration:
+
+  [FATAL] [fr3c_first_grasp]: P5 configuration/startup rejected:
+  maximum_stack_placement_rotation_rad must allow at least half one
+  yaw-symmetry step, otherwise rotating a cube onto the same yaw would always
+  be refused
+
+Because this validation runs in the constructor, before any
+`rclcpp_action::create_server` call, the process exited with no action server
+advertised at all. The client then blocked forever on
+"Waiting for an action server to become available...", which is what the operator
+observed; the arm correctly never moved because no goal was ever delivered.
+
+The guard now compares against the smallest step that can occur at run time:
+  const double symmetry = std::min(target_yaw_symmetry_rad_, kPi * 0.5);
+and its message reports the threshold it computed. Verified against the shipped
+configuration:
+
+  old threshold 0.5 * 3.141592653589793 = 1.5707963267948966  -> abort
+  new threshold 0.5 * min(pi, pi/2)     = 0.7853981633974483  -> pass
+  limit 0.70 refused, 0.7853981633974483 accepted
+  0.90 and 1.5707963267948966 accepted
+
+All other startup numeric guards were re-checked against the shipped
+configuration and pass, so this was the only blocker.
+
+Automated verification
+----------------------
+Targeted perception and action tests:
+  ROS_LOG_DIR=/home/industio/fairino_ws/.diag_logs/ros python3 -m pytest -q \
+    src/fr3c_camera/test \
+    src/fairino_mtc_demo/test
+Result: 27 passed (perception) and 22 passed (action interfaces).
+
+New coverage:
+  src/fairino_mtc_demo/test/test_stack_task.py  (8 tests)
+    - Compiles the production `closestEquivalentAngle` and checks 25 exact
+      rotation cases, including exact half-step and exact whole-step inputs,
+      multi-turn wrapped differences, and a grid sweep proving that the best of
+      the four equivalent grasps and every candidate stay within the configured
+      allowance for every destination yaw.
+    - Compiles the production placement-height and attached-cube offset and
+      sweeps destination yaw, source yaw and lower-cube height: the released
+      cube's bottom must rest exactly on the lower cube's top, the placed top
+      face must match the lower cube's yaw, and the approach must hold the
+      grasped cube clear of the tower.
+    - Asserts that support_color is rejected for the other three tasks and that
+      a same-colour pair is refused before the start lock is taken, i.e. before
+      any perception request or motion.
+    - Asserts the source cube is compared against the support cube's top, that a
+      support cube already carrying a cube is refused, that the virtual support
+      obstacle is added to the scene and cleared afterwards, and that the
+      placement height comes from the measured lower cube rather than the plane.
+    - Asserts the failure path returns home and lands in a startable state.
+  src/fr3c_camera/test/test_cube_perception.py
+    - `tabletop_cube_tier` returns 0 for a cube on the plane, 1 for the upper
+      cube of a two-cube stack, and None for a three-high tower; disabled tier
+      detection hides the stacked cube again; invalid configuration raises and a
+      non-square top never matches.
+
+Full workspace regression:
+  ROS_LOG_DIR=/home/industio/fairino_ws/.diag_logs/ros \
+    python3 -m pytest -q --ignore=test/jiazhua
+Result: 216 passed, 4 skipped, 1 warning (the pre-existing Python 3.11
+compatibility warning from the MoveIt launch utilities).
+`test/jiazhua` is excluded because it imports pyftdi, which is not installed in
+this environment; it is unrelated to this change.
+
+Pre-existing flakiness, unrelated to this change: repeated full-suite runs
+sometimes fail 4 tests in src/fr3c_voice/test/test_voice_input.py
+(thirty-round release, manual finish/cancel, worker-crash recovery, native
+endpoint). Those same 9 tests pass when the file is run alone, and the failures
+alternate between runs of the identical tree, so they are timing sensitive in
+this sandbox rather than caused by pick_stack. No file that suite imports was
+touched by this change.
+
+Two environment findings, both unrelated to this change:
+  - ROS_LOG_DIR must point at a writable directory. Without it rclpy fails with
+    "Failed opening file /home/industio/.ros/log/... for writing: Read-only file
+    system", which surfaces as 10 unrelated rclpy context failures.
+  - No DDS runtime is available, so no action goal could be sent and no runtime
+    parameter round trip was measured.
+
+Not verified here (requires the real cell)
+------------------------------------------
+- Action goal round trip, /fr3c_first_grasp/state contents, and the actual
+  planned trajectories.
+- Whether the wrist can realize the up-to-90-degree placement rotation with a
+  30 mm cube attached. The allowance bounds the request; only the planner on the
+  real robot can confirm reachability and collision-freedom.
+- Whether the gripper's open fingers clear the lower cube during the descent.
+  The support cube is a planning obstacle for the whole task, so MoveIt rejects
+  a colliding path, but this was not exercised.
+- Grasp stability of a cube held with its yaw rotated relative to the fingers.
+- Camera detection of the stacked cube in real lighting.
+
+Run the field checklist in docs/voice/P2_颜色抓取任务Action接口.md ("pick_stack
+现场验收清单") before treating the feature as accepted.
+
+Cleanup guard fix (2026-09-18, second failure)
+----------------------------------------------
+First live attempt after the startup-guard fix reached the node and aborted with
+
+  phase: retryable_failure_before_arm_motion
+  error_code: 6 (PRECONDITION_FAILED)
+  message: failed to remove the previous trial's world cube
+  executed: false
+
+No arm motion occurred, which is the intended fail-closed behavior; the bug was
+in the precondition, not in the motion chain.
+
+Cause. `clearPreviousCubeScene()` sent a world REMOVE unconditionally, but MoveIt
+treats removing an object that is not present as a FAILURE, not as a no-op:
+
+  PlanningScene::processCollisionObjectRemove()      (moveit_core/planning_scene)
+    if (!world_->removeObject(object.id)) {
+      RCLCPP_WARN_STREAM(LOGGER, "Tried to remove world object '" << object.id
+                         << "', but it does not exist in this scene.");
+      return false;
+    }
+
+which propagates PlanningSceneMonitor::newPlanningSceneMessage ->
+ApplyPlanningScene.success=false -> PlanningSceneInterface::applyCollisionObject()
+-> false. move_group's log confirms it received the request and refused it:
+
+  [WARN] [moveit_planning_scene.planning_scene]: Tried to remove world object
+  'target_cube', but it does not exist in this scene.
+
+The live scene really was empty (verified with /get_planning_scene: no
+target_cube, no stack_support_cube, no rviz_ground_plane). An empty scene is the
+normal state before the first task of a freshly started stack, so the cleanup
+meant to protect against leftovers refused the first legitimate task.
+
+Fix. `clearPreviousCubeScene()` now checks existence first and returns success
+when the cube is already absent, recording `previous_cube_absent`:
+
+  if (planning_scene_.getObjects({cube_id_}).count(cube_id_) == 0) {
+    recordEvent("previous_cube_absent", "world_id=" + cube_id_);
+    return true;
+  }
+
+The same hazard was audited in the other cleanup paths and is already handled
+there: `clearStackSupportObject()` returns early when the support obstacle is
+absent, and `archivePreviousSortedCubeScene()` only removes the active cube
+inside `if (previous.count(cube_id_) != 0)`. A regression test
+(`test_clearing_an_absent_cube_is_a_no_op_not_a_failure`) now pins all three.
+
+Verification: fairino_mtc_demo rebuilt cleanly; test_stack_task.py 12 passed;
+full workspace regression 247 passed, 4 skipped.
+
+Note on the node-scoped service. `PlanningSceneInterface` calls
+`rclcpp::spin_until_future_complete()` on the same node that the
+MultiThreadedExecutor is spinning, which is safe here only because the action
+runs on its own worker thread. The function also has no explicit timeout, so a
+lost response blocks rather than fails. Neither was the cause of this abort (the
+call returned a definite false), but both are worth knowing if a future task
+appears to hang in a planning-scene precondition.

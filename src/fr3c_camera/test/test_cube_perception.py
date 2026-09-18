@@ -15,6 +15,7 @@ from fr3c_camera.cube_perception import (
     quaternion_angular_distance,
     registered_points_from_mask,
     rpy_to_quaternion,
+    tabletop_cube_tier,
     transform_points,
 )
 
@@ -148,6 +149,99 @@ def test_flat_colored_background_does_not_count_as_second_cube():
         if is_tabletop_cube(surface, 0.03, 1.25, 0.0, 0.01):
             physical.append(color)
     assert physical == ['blue']
+
+
+def test_mild_perspective_stretch_is_still_a_cube_but_old_limit_rejects_it():
+    # Live RGB-D data measured the visible blue 30 mm cube at 1.301. Accept that
+    # perspective/depth-edge stretch while keeping the 1.40..1.55 ambiguity
+    # band before a 60 x 30 mm rectangular top is classified.
+    surface = SimpleNamespace(
+        center=np.array([0.25, -0.35, 0.0295]), axis_ratio=1.301)
+    assert tabletop_cube_tier(surface, 0.030, 1.40, 0.0, 0.010) == 0
+    assert tabletop_cube_tier(surface, 0.030, 1.25, 0.0, 0.010) is None
+
+    surface.center[2] = 0.0279
+    assert tabletop_cube_tier(surface, 0.030, 1.40, 0.0, 0.010) is None
+
+
+def test_stacked_cube_tier_distinguishes_a_cube_on_the_table_from_one_on_top():
+    """
+    The upper cube of a stack must stay detectable, and it must be reported as
+    a different tier. Without that, the lower cube of a new stack could be
+    mistaken for a free table position and a third cube would be piled on.
+    """
+    info = camera_info(width=100, height=80)
+    info.k = [200.0, 0.0, 50.0, 0.0, 200.0, 40.0, 0.0, 0.0, 1.0]
+
+    def top_surface_at(top_z_m):
+        # The depth values have to stay inside the sensor's valid range, so the
+        # cube region gets a fixed 30 mm depth step and the base-frame height is
+        # then set by the translation.
+        depth = np.full((80, 100), 0.50, dtype=np.float32)
+        depth[34:47, 44:57] = np.float32(0.47)
+        mask = np.zeros_like(depth, dtype=np.uint8)
+        mask[34:47, 44:57] = 255
+        points, fraction = registered_points_from_mask(depth, info, info, mask)
+        surface = extract_top_surface(
+            transform_points(points, [0.1, -0.2, top_z_m - 0.47], [0, 0, 0, 1]),
+            fraction, top_quantile=60.0, top_tolerance_m=0.002,
+            min_top_points=20)
+        assert surface.center[2] == pytest.approx(top_z_m, abs=0.002)
+        return surface
+
+    # Bottom of a cube: top face one cube height above the plane.
+    on_table = top_surface_at(0.030)
+    assert tabletop_cube_tier(
+        on_table, 0.030, 1.25, 0.0, 0.010,
+        stacked_offsets_m=[0.030], stack_tolerance_m=0.012) == 0
+
+    # Upper cube of a two-cube stack: top face two cube heights above the plane.
+    stacked = top_surface_at(0.060)
+    assert tabletop_cube_tier(
+        stacked, 0.030, 1.25, 0.0, 0.010,
+        stacked_offsets_m=[0.030], stack_tolerance_m=0.012) == 1
+
+    # A three-high tower is outside what pick_stack builds and must be refused
+    # rather than reported as another stackable tier.
+    too_high = top_surface_at(0.090)
+    assert tabletop_cube_tier(
+        too_high, 0.030, 1.25, 0.0, 0.010,
+        stacked_offsets_m=[0.030], stack_tolerance_m=0.012) is None
+
+    # With stack-tier detection disabled the stacked cube is simply invisible,
+    # which preserves the pre-stack behavior of the colour filter.
+    assert tabletop_cube_tier(
+        stacked, 0.030, 1.25, 0.0, 0.010,
+        stacked_offsets_m=(), stack_tolerance_m=0.012) is None
+    assert tabletop_cube_tier(
+        on_table, 0.030, 1.25, 0.0, 0.010,
+        stacked_offsets_m=(), stack_tolerance_m=0.012) == 0
+
+
+def test_stacked_cube_tier_rejects_invalid_configuration_and_shapes():
+    """A bad tier configuration or a non-cube footprint must never match."""
+    info = camera_info(width=100, height=80)
+    info.k = [200.0, 0.0, 50.0, 0.0, 200.0, 40.0, 0.0, 0.0, 1.0]
+    width, height = 13, 26
+    depth = np.full((80, 100), 0.47, dtype=np.float32)
+    depth[34:34 + height, 44:44 + width] = 0.50
+    mask = np.zeros_like(depth, dtype=np.uint8)
+    mask[34:34 + height, 44:44 + width] = 255
+    points, fraction = registered_points_from_mask(depth, info, info, mask)
+    surface = extract_top_surface(
+        transform_points(points, [0.1, -0.2, 0.0], [0, 0, 0, 1]),
+        fraction, top_quantile=60.0, top_tolerance_m=0.002, min_top_points=20)
+
+    with pytest.raises(ValueError):
+        tabletop_cube_tier(surface, 0.030, 1.25, 0.0, 0.010,
+                           stacked_offsets_m=[0.0], stack_tolerance_m=0.012)
+    with pytest.raises(ValueError):
+        tabletop_cube_tier(surface, 0.030, 1.25, 0.0, 0.010,
+                           stacked_offsets_m=[0.030], stack_tolerance_m=0.0)
+    # A 60 x 30 mm top is not a cube and must not be accepted at any tier.
+    assert tabletop_cube_tier(surface, 0.030, 1.25, 0.0, 0.010,
+                              stacked_offsets_m=[0.030],
+                              stack_tolerance_m=0.012) is None
 
 
 def test_registered_depth_back_projection_and_top_fit():

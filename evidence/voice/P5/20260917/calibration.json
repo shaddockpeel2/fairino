@@ -1,0 +1,49 @@
+{
+  "device": "plughw:CARD=Device,DEV=0",
+  "mixer_percent": 90,
+  "pilot_total_sound_ms": 750,
+  "repeats": 3,
+  "offset_s_p50": 0.0,
+  "offset_s_min": -0.009999999999999953,
+  "offset_s_max": 0.0,
+  "offset_spread_ms": 9.999999999999954,
+  "snr_db_p50": 31.857176838822763,
+  "records": [
+    {
+      "index": 0,
+      "pre_roll_s": 0.3,
+      "played_onset_s": 0.5,
+      "captured_onset_s": 0.8,
+      "offset_s": 0.0,
+      "threshold_dbfs": -28.0,
+      "floor_p95_dbfs": -34.68025837314977,
+      "pilot_peak_dbfs": -10.96936473006626,
+      "captured_peak_dbfs": -4.370024143422782,
+      "snr_db": 30.310234229726987
+    },
+    {
+      "index": 1,
+      "pre_roll_s": 0.3,
+      "played_onset_s": 0.5,
+      "captured_onset_s": 0.79,
+      "offset_s": -0.009999999999999953,
+      "threshold_dbfs": -28.0,
+      "floor_p95_dbfs": -36.13335931692746,
+      "pilot_peak_dbfs": -10.96936473006626,
+      "captured_peak_dbfs": -4.2761824781046975,
+      "snr_db": 31.857176838822763
+    },
+    {
+      "index": 2,
+      "pre_roll_s": 0.3,
+      "played_onset_s": 0.5,
+      "captured_onset_s": 0.8,
+      "offset_s": 0.0,
+      "threshold_dbfs": -28.0,
+      "floor_p95_dbfs": -38.90185737307047,
+      "pilot_peak_dbfs": -10.96936473006626,
+      "captured_peak_dbfs": -4.280598818874974,
+      "snr_db": 34.62125855419549
+    }
+  ]
+}

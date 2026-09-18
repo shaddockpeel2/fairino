@@ -4,6 +4,71 @@ import importlib.util
 import json
 from pathlib import Path
 
+import pytest
+
+
+def _launch_module(name):
+    launch_path = Path(__file__).parents[1] / 'launch' / 'first_grasp.launch.py'
+    spec = importlib.util.spec_from_file_location(name, launch_path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _grid_document(regions):
+    return {
+        'schema_version': 1,
+        'type': 'a4_tcp_grid',
+        'base_frame': 'base_link',
+        'grid': {
+            'projection': {'mode': 'base_z'},
+            'regions': regions,
+        },
+    }
+
+
+def test_every_calibrated_region_is_addressable_as_a_zone(tmp_path):
+    """pick_place zones must cover the grid, not just the four colour regions."""
+    launch_module = _launch_module('first_grasp_launch_zones')
+    wide = {'center_m': [0.15, -0.15, 0.0], 'width_m': 0.12, 'height_m': 0.12}
+    document = _grid_document({
+        'A': wide, 'B': wide, 'C': wide, 'D': wide,
+        'E': {'center_m': [0.3, -0.3, 0.0], 'width_m': 0.05, 'height_m': 0.05},
+    })
+    path = tmp_path / 'a4_grid.json'
+    path.write_text(json.dumps(document), encoding='utf-8')
+
+    result = launch_module._load_sort_regions(path)
+
+    assert sorted(result['place_zone_names']) == ['a', 'b', 'c', 'd', 'e']
+    for zone, label in (('a', 'A'), ('b', 'B'), ('c', 'C'), ('d', 'D'), ('e', 'E')):
+        assert result[f'place_zone_{zone}_center_m'] == document['grid']['regions'][label][
+            'center_m']
+        assert len(result[f'place_zone_{zone}_slots_m']) % 3 == 0
+    # A zone is an independent handle: its slots are its own, not a colour alias.
+    assert result['place_zone_a_slots_m'] == result['place_blue_slots_m']
+    assert result['place_zone_e_slots_m'] == document['grid']['regions']['E']['center_m']
+    # The verified colour mapping is untouched by the zone parameters.
+    assert result['place_blue_center_m'] == document['grid']['regions']['A']['center_m']
+    assert result['place_red_center_m'] == document['grid']['regions']['C']['center_m']
+
+
+def test_zone_names_reject_non_identifier_regions(tmp_path):
+    """A region name that cannot become a ROS parameter must fail loudly."""
+    launch_module = _launch_module('first_grasp_launch_bad_zone')
+    document = _grid_document({
+        'A': {'center_m': [0.1, -0.1, 0.0], 'width_m': 0.12, 'height_m': 0.12},
+        'B': {'center_m': [0.2, -0.1, 0.0], 'width_m': 0.12, 'height_m': 0.12},
+        'C': {'center_m': [0.2, -0.2, 0.0], 'width_m': 0.12, 'height_m': 0.12},
+        'D': {'center_m': [0.1, -0.2, 0.0], 'width_m': 0.12, 'height_m': 0.12},
+        'A-1': {'center_m': [0.3, -0.3, 0.0], 'width_m': 0.12, 'height_m': 0.12},
+    })
+    path = tmp_path / 'bad_grid.json'
+    path.write_text(json.dumps(document), encoding='utf-8')
+
+    with pytest.raises(RuntimeError, match='Invalid region name'):
+        launch_module._load_sort_regions(path)
+
 
 def test_field_region_colors_are_mapped_to_their_centers(tmp_path):
     launch_path = Path(__file__).parents[1] / 'launch' / 'first_grasp.launch.py'

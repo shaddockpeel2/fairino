@@ -1,0 +1,15 @@
+[WARN] [1789710467.919921058] [controller_manager]: [Deprecated] Passing the robot description parameter directly to the control_manager node is deprecated. Use '~/robot_description' topic from 'robot_state_publisher' instead.
+[INFO] [1789710467.920309854] [resource_manager]: Loading hardware 'FR3CHardware' 
+[INFO] [1789710467.924113228] [resource_manager]: Initialize hardware 'FR3CHardware' 
+[INFO] [1789710467.924201021] [resource_manager]: Successful initialization of hardware 'FR3CHardware'
+[INFO] [1789710467.924276564] [resource_manager]: 'configure' hardware 'FR3CHardware' 
+[INFO] [1789710467.924287647] [resource_manager]: Successful 'configure' of hardware 'FR3CHardware'
+[INFO] [1789710467.924294355] [resource_manager]: 'activate' hardware 'FR3CHardware' 
+[INFO] [1789710467.924299897] [resource_manager]: Successful 'activate' of hardware 'FR3CHardware'
+[INFO] [1789710467.933065159] [controller_manager]: update rate is 125 Hz
+[INFO] [1789710467.933115326] [controller_manager]: Spawning controller_manager RT thread with scheduler priority: 50
+[WARN] [1789710467.933527748] [controller_manager]: Could not enable FIFO RT scheduling policy: with error number <1>(Operation not permitted). See [https://control.ros.org/master/doc/ros2_control/controller_manager/doc/userdoc.html] for details on how to enable realtime scheduling.
+[ERROR] [1789710468.652598033] [controller_manager]: The 'type' param was not defined for 'fairino3mt_controller'.
+[INFO] [1789710468.657512086] [controller_manager]: Loading controller 'joint_state_broadcaster'
+[INFO] [1789710468.714379539] [controller_manager]: Configuring controller 'joint_state_broadcaster'
+[INFO] [1789710468.714522749] [joint_state_broadcaster]: 'joints' or 'interfaces' parameter is empty. All available state interfaces will be published

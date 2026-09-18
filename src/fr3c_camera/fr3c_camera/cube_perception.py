@@ -107,19 +107,57 @@ def find_color_candidates(bgr, color_intervals, saturation_min=80,
 
 
 def is_tabletop_cube(surface, cube_height_m, cube_max_axis_ratio,
-                     plane_z_m, maximum_plane_gap_m):
+                     plane_z_m, maximum_plane_gap_m,
+                     maximum_plane_penetration_m=0.002):
     """Require a square top at the expected height above the work plane."""
+    return tabletop_cube_tier(
+        surface, cube_height_m, cube_max_axis_ratio, plane_z_m,
+        maximum_plane_gap_m,
+        maximum_plane_penetration_m=maximum_plane_penetration_m) is not None
+
+
+def tabletop_cube_tier(surface, cube_height_m, cube_max_axis_ratio,
+                       plane_z_m, maximum_plane_gap_m,
+                       stacked_offsets_m=(), stack_tolerance_m=0.012,
+                       maximum_plane_penetration_m=0.002):
+    """Return the cube tier whose expected top height matches the surface.
+
+    Tier 0 means a cube resting directly on the work plane. Tier ``k`` means a
+    cube whose bottom rests on ``stacked_offsets_m[k - 1]``, which is how the
+    two-cube stack reports its upper cube. The returned tier is what the P2
+    stack task uses to decide whether a detected top can still be used as the
+    lower cube of a new stack.
+    """
+    offsets = tuple(stacked_offsets_m)
     if not np.isfinite((cube_height_m, cube_max_axis_ratio, plane_z_m,
-                        maximum_plane_gap_m)).all() or cube_height_m <= 0 or \
-            cube_max_axis_ratio < 1 or maximum_plane_gap_m < 0:
+                        maximum_plane_gap_m, stack_tolerance_m,
+                        maximum_plane_penetration_m)).all() or \
+            cube_height_m <= 0 or cube_max_axis_ratio < 1 or \
+            maximum_plane_gap_m < 0 or maximum_plane_penetration_m < 0 or \
+            stack_tolerance_m <= 0 or \
+            any(not np.isfinite(offset) or offset <= 0 for offset in offsets):
         raise ValueError('invalid_tabletop_cube_filter')
     center = np.asarray(surface.center, dtype=np.float64)
     if center.shape != (3,) or not np.isfinite(center).all() or \
             not np.isfinite(surface.axis_ratio):
-        return False
-    gap = float(center[2] - cube_height_m - plane_z_m)
-    return surface.axis_ratio <= cube_max_axis_ratio and \
-        0.0 <= gap <= maximum_plane_gap_m
+        return None
+    if surface.axis_ratio > cube_max_axis_ratio:
+        return None
+    # RGB-D depth and hand-eye calibration can place a real cube bottom a small
+    # distance below the configured plane. Keep that allowance explicit and
+    # much tighter than the positive gap limit.
+    lower_tolerance = maximum_plane_penetration_m
+    gaps = [float(center[2] - cube_height_m - plane_z_m)]
+    for offset in offsets:
+        gaps.append(float(center[2] - cube_height_m - offset - plane_z_m))
+    for tier, gap in enumerate(gaps):
+        if tier == 0:
+            if -lower_tolerance <= gap <= maximum_plane_gap_m:
+                return 0
+        elif -lower_tolerance <= gap <= maximum_plane_gap_m and \
+                gaps[tier - 1] > maximum_plane_gap_m:
+            return tier
+    return None
 
 
 def find_blue_candidates(

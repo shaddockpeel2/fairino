@@ -1,0 +1,94 @@
+/project/sherpa-onnx/csrc/offline-tts-matcha-model-config.cc:Validate:103 From sherpa-onnx v1.12.15, you don't need to provide dict_dir for this model. Ignore it
+/project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: shei2
+/project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: shei2
+/project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: shei2
+/project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: shei2
+matcha-icefall-zh-baker: load 3.38s, sample_rate 22050, speakers 1
+  fs-02      chars=  2 first_valid=0.22614775710409954 rtf=0.327
+  fs-04      chars=  4 first_valid=0.23862540610427455 rtf=0.182
+  fs-06      chars=  6 first_valid=0.27281410610468804 rtf=0.164
+  fs-07      chars=  7 first_valid=0.2877388671035259 rtf=0.154
+  fs-08      chars=  8 first_valid=0.24777451510401075 rtf=0.241
+  fs-10      chars= 10 first_valid=0.22697710284148112 rtf=0.198
+  fs-16      chars= 16 first_valid=0.2436345481041098 rtf=0.166
+  fs-24      chars= 24 first_valid=0.2104856531035875 rtf=0.132
+  len-10     chars= 10 first_valid=0.40712454084052063 rtf=0.154
+  len-30     chars= 30 first_valid=0.643036393841719 rtf=0.095
+  len-60     chars= 60 first_valid=1.2047168281036829 rtf=0.091
+  len-120    chars=120 first_valid=2.4701294571045036 rtf=0.097
+{"candidate": "matcha-icefall-zh-baker", "threads": 4, "affinity": "big", "load_s": 3.377703086999645}
+{
+  "samples": 60,
+  "health": "ok",
+  "problems": [],
+  "rtf_p50": 0.1621563839663518,
+  "rtf_p95": 0.29479127543528433,
+  "rtf_mean": 0.16722347233907714,
+  "first_valid_pcm_p50": 0.2641211691042553,
+  "first_valid_pcm_p95": 2.431725604754656,
+  "first_valid_pcm_observed": [
+    0.22771227610375713,
+    0.20862479810459258,
+    0.21083915810451795,
+    0.2116272511042734,
+    0.22614775710409954,
+    0.25612807684057537,
+    0.24350971510413724,
+    0.251065266840776,
+    0.2518823981039713,
+    0.23862540610427455,
+    0.26738320810401994,
+    0.2772671628418879,
+    0.2744384171050296,
+    0.27652006710506605,
+    0.27281410610468804,
+    0.29781432210385894,
+    0.2954579191049742,
+    0.2805585311038339,
+    0.3001275571045152,
+    0.2877388671035259,
+    0.25267165710412876,
+    0.25833939210444434,
+    0.2608591301044907,
+    0.24085376610439194,
+    0.24777451510401075,
+    0.2521434421045523,
+    0.25695641984122397,
+    0.24246349310435103,
+    0.22155511910425044,
+    0.22697710284148112,
+    0.2551174388410049,
+    0.24303283310420734,
+    0.24658304110418608,
+    0.22946942384179916,
+    0.2436345481041098,
+    0.21880129584143784,
+    0.23072726910451816,
+    0.2446603521042743,
+    0.20488629684143003,
+    0.2104856531035875,
+    0.3509934978411524,
+    0.37608062984065094,
+    0.38499261084154335,
+    0.39076330484123667,
+    0.40712454084052063,
+    0.6767329181042623,
+    0.67997804010467,
+    0.650859152103676,
+    0.6504712291047507,
+    0.643036393841719,
+    1.2106074051038558,
+    1.2028953531038677,
+    1.2084152091050964,
+    1.198211419103627,
+    1.2047168281036829,
+    2.456630988104207,
+    2.4304147951046797,
+    2.5755947671035937,
+    2.4112546791042586,
+    2.4701294571045036
+  ],
+  "incremental_delivery_any": true,
+  "max_callback_count": 2,
+  "peak_rss_kib": 503408
+}

@@ -20,6 +20,7 @@ setup(
         'console_scripts': [
             'qwen_service = fr3c_voice.service:main',
             'qwen_client = fr3c_voice.client:main',
+            'dialogue_gui = fr3c_voice.dialogue_gui:main',
         ],
     },
 )

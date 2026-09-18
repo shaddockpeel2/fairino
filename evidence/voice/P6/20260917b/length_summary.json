@@ -1,0 +1,32 @@
+{
+  "20": {
+    "rounds": 10,
+    "first_write_p50": 0.43833088950032106,
+    "first_write_p95": 0.4529978268507875,
+    "gap_max": 0.0004,
+    "gap_over_150ms": 0,
+    "xruns": 0,
+    "segment_count_p50": 2.0,
+    "failures": []
+  },
+  "60": {
+    "rounds": 10,
+    "first_write_p50": 0.4352533350011072,
+    "first_write_p95": 0.45163297264962243,
+    "gap_max": 0.0005,
+    "gap_over_150ms": 0,
+    "xruns": 0,
+    "segment_count_p50": 3.0,
+    "failures": []
+  },
+  "120": {
+    "rounds": 10,
+    "first_write_p50": 0.43403561400009494,
+    "first_write_p95": 0.4525372218004122,
+    "gap_max": 0.0005,
+    "gap_over_150ms": 0,
+    "xruns": 0,
+    "segment_count_p50": 5.0,
+    "failures": []
+  }
+}

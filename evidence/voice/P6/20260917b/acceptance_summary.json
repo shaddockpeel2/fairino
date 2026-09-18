@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "rounds": 3,
+  "cases": {
+    "length_20": {
+      "rounds": 3,
+      "first_valid_pcm_write_p50_s": 0.4339144759996998,
+      "first_valid_pcm_write_p95_s": 0.45181889510040496,
+      "segment_count_p50": 2.0,
+      "gap_max_s": 0.0006,
+      "gap_p95_s": 0.0006,
+      "gap_over_150ms": 0,
+      "xruns_total": 0,
+      "failures": [],
+      "pcm_queue_blocked": 0
+    },
+    "length_60": {
+      "rounds": 3,
+      "first_valid_pcm_write_p50_s": 0.43450856500021473,
+      "first_valid_pcm_write_p95_s": 0.4408591845998671,
+      "segment_count_p50": 3.0,
+      "gap_max_s": 0.0004,
+      "gap_p95_s": 0.0004,
+      "gap_over_150ms": 0,
+      "xruns_total": 0,
+      "failures": [],
+      "pcm_queue_blocked": 0
+    },
+    "length_120": {
+      "rounds": 3,
+      "first_valid_pcm_write_p50_s": 0.43997504099934304,
+      "first_valid_pcm_write_p95_s": 0.443025322801077,
+      "segment_count_p50": 5.0,
+      "gap_max_s": 0.0006,
+      "gap_p95_s": 0.0004899999999999999,
+      "gap_over_150ms": 0,
+      "xruns_total": 0,
+      "failures": [],
+      "pcm_queue_blocked": 0
+    },
+    "slow_token": {
+      "rounds": 3,
+      "audio_before_text_end_all_rounds": true,
+      "head_start_s": [
+        2.296,
+        2.2557,
+        2.2295
+      ],
+      "failures": []
+    },
+    "stop": {
+      "rounds": 5,
+      "stop_latency_p50_ms": 0.7201329990493832,
+      "stop_latency_p95_ms": 0.8900595992599847,
+      "stop_latency_max_ms": 0.8965929991973098,
+      "all_cancelled": true,
+      "target_ms": 250
+    },
+    "device_recovery": {
+      "reopens_before": 0,
+      "reopens_after": 0,
+      "xruns_after": 0,
+      "played_after_recovery": true
+    },
+    "qwen": {
+      "rounds": 3,
+      "first_token_p50_s": 0.22731866799949785,
+      "first_valid_pcm_write_p50_s": 0.8172388010007126,
+      "audio_before_text_end_rounds": 3,
+      "gap_max_s": 0.001,
+      "gap_over_150ms": 0,
+      "xruns_total": 0,
+      "failures": []
+    }
+  },
+  "wall_s": 356.11
+}

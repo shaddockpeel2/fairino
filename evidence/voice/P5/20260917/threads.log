@@ -1,0 +1,61 @@
+== threads=4 affinity=big
+matcha-icefall-zh-baker: load 3.48s, sample_rate 22050, speakers 1
+  fs-02      chars=  2 first_valid=0.24656216310397208 rtf=0.371
+  fs-04      chars=  4 first_valid=0.25427041410550366 rtf=0.202
+  fs-06      chars=  6 first_valid=0.28172238010340145 rtf=0.171
+  fs-08      chars=  8 first_valid=0.23479369384141816 rtf=0.229
+  fs-10      chars= 10 first_valid=0.24118435410347952 rtf=0.201
+  fs-16      chars= 16 first_valid=0.22057613010330893 rtf=0.149
+  fs-24      chars= 24 first_valid=0.2306072391042289 rtf=0.136
+  len-30     chars= 30 first_valid=0.6551712041040627 rtf=0.096
+  len-60     chars= 60 first_valid=1.2041043591056404 rtf=0.091
+  len-120    chars=120 first_valid=2.455120963104873 rtf=0.097
+== threads=2 affinity=big
+matcha-icefall-zh-baker: load 3.71s, sample_rate 22050, speakers 1
+  fs-02      chars=  2 first_valid=0.21339842610397677 rtf=0.299
+  fs-04      chars=  4 first_valid=0.26595529110492855 rtf=0.215
+  fs-06      chars=  6 first_valid=0.2886216568414215 rtf=0.186
+  fs-08      chars=  8 first_valid=0.24309216710427786 rtf=0.238
+  fs-10      chars= 10 first_valid=0.24299883210407638 rtf=0.216
+  fs-16      chars= 16 first_valid=0.24093497610412665 rtf=0.192
+  fs-24      chars= 24 first_valid=0.24074743310340632 rtf=0.174
+  len-30     chars= 30 first_valid=1.0011470601042856 rtf=0.153
+  len-60     chars= 60 first_valid=1.9679681461042673 rtf=0.153
+  len-120    chars=120 first_valid=4.102082878104211 rtf=0.164
+== threads=3 affinity=big
+matcha-icefall-zh-baker: load 3.58s, sample_rate 22050, speakers 1
+  fs-02      chars=  2 first_valid=0.1857438668422378 rtf=0.256
+  fs-04      chars=  4 first_valid=0.22614702310276694 rtf=0.169
+  fs-06      chars=  6 first_valid=0.2530532741042588 rtf=0.147
+  fs-08      chars=  8 first_valid=0.20717430884098345 rtf=0.201
+  fs-10      chars= 10 first_valid=0.22240256510523973 rtf=0.179
+  fs-16      chars= 16 first_valid=0.21227415584245815 rtf=0.153
+  fs-24      chars= 24 first_valid=0.21973816110441471 rtf=0.136
+  len-30     chars= 30 first_valid=0.7464125301052444 rtf=0.111
+  len-60     chars= 60 first_valid=1.4537682011054311 rtf=0.111
+  len-120    chars=120 first_valid=2.929821795104017 rtf=0.116
+== threads=6 affinity=big
+matcha-icefall-zh-baker: load 3.58s, sample_rate 22050, speakers 1
+  fs-02      chars=  2 first_valid=0.39083986110419566 rtf=0.696
+  fs-04      chars=  4 first_valid=0.6183102581057209 rtf=0.622
+  fs-06      chars=  6 first_valid=0.4873651978424436 rtf=0.354
+  fs-08      chars=  8 first_valid=0.46734777810381267 rtf=0.542
+  fs-10      chars= 10 first_valid=0.5476626878418005 rtf=0.515
+  fs-16      chars= 16 first_valid=0.4939999851052743 rtf=0.418
+  fs-24      chars= 24 first_valid=0.42478352210348014 rtf=0.333
+  len-30     chars= 30 first_valid=1.6350547151036334 rtf=0.258
+  len-60     chars= 60 first_valid=2.9150635851041624 rtf=0.229
+  len-120    chars=120 first_valid=5.324088508103541 rtf=0.213
+== threads=4 affinity=little
+matcha-icefall-zh-baker: load 12.91s, sample_rate 22050, speakers 1
+  fs-02      chars=  2 first_valid=0.6692821861055744 rtf=1.314
+  fs-04      chars=  4 first_valid=0.7670067501043558 rtf=0.793
+  fs-06      chars=  6 first_valid=0.8012409151037172 rtf=0.612
+  fs-08      chars=  8 first_valid=0.7078734318412148 rtf=0.913
+  fs-10      chars= 10 first_valid=0.7496599781047006 rtf=0.790
+  fs-16      chars= 16 first_valid=0.6932431541048754 rtf=0.657
+  fs-24      chars= 24 first_valid=0.6571027528417448 rtf=0.559
+  len-30     chars= 30 first_valid=2.6671427451059753 rtf=0.430
+  len-60     chars= 60 first_valid=5.0477931411045756 rtf=0.402
+  len-120    chars=120 first_valid=9.944734871104101 rtf=0.401
+== thread sweep complete

@@ -16,6 +16,13 @@ fr3c_first_grasp:
     # the next stable snapshot to an explicit color/filter generation.
     perception_color_service: /perception/blue_cube_localizer/set_target_color
 
+    # Placement geometry is not set here. first_grasp.launch.py reads the
+    # projected A4 grid and injects, for every calibrated region:
+    #   place_<color>_center_m / place_<color>_slots_m  (pick_sort colours)
+    #   place_zone_<region>_center_m / place_zone_<region>_slots_m (pick_place)
+    #   place_zone_names                                (list of zones)
+    # pick_place therefore never depends on the detected colour.
+
     # In colors execution mode, /start_continuous keeps selecting targets until
     # perception confirms that no actionable cube has remained for 10 seconds.
     batch_empty_timeout_s: 10.0
@@ -34,8 +41,16 @@ fr3c_first_grasp:
     # Sorting: attached cube bottom is 5 mm above the A4 region plane when
     # release is commanded. TCP is higher by the cube geometry offset.
     release_bottom_gap_m: 0.005
+    # pick_place only. A calibrated zone slot counts as occupied when a known
+    # MoveIt obstacle lies within this horizontal distance of it. The value also
+    # sets the spacing that keeps two 30 mm cubes from overlapping a slot.
+    zone_slot_clearance_m: 0.025
     pre_open_position_m: 0.060
     close_position_m: 0.026
+    # The hardware has no aperture feedback. Send one bounded, bench-validated
+    # 0.8 s open burst before arm motion. Repeating the same open command made
+    # the fingers visibly hunt and added about 2.3 s before the arm could move.
+    pre_open_command_repetitions: 1
     # P3 publishes either [30, 30, 30] mm or [60, 30, 30] mm together with
     # the pose. This fallback is used only when use_target_size=false.
     object_size_m: [0.060, 0.030, 0.030]
@@ -68,6 +83,26 @@ fr3c_first_grasp:
     target_top_z_bounds_m: [0.025, 0.50]
 
     cube_id: target_cube
+    # pick_stack only. The lower cube stays in the planning scene for the whole
+    # task under this virtual obstacle ID, which is cleared when the task ends.
+    stack_support_id: stack_support_cube
+    # pick_stack only. A square top face gives four equivalent grasps of the
+    # upper cube, one whole yaw-symmetry step (90 degrees) apart. Aligning the
+    # upper cube with the lower one requires rotating the wrist by the difference
+    # between the two measured yaws reduced by whole 90 degree symmetry steps.
+    # The nearest equivalent is therefore never more than 45 degrees away. A
+    # candidate above this allowance is refused; if every candidate is refused
+    # the pair is reported unstackable while the arm is still at home.
+    maximum_stack_placement_rotation_rad: 0.7853981633974483
+    # pick_stack only. The approach and retreat have to clear the lower cube
+    # while the wrist rotates, so they stand higher than a table placement.
+    stack_approach_clearance_m: 0.030
+    # pick_stack only. Before motion both requested cubes must sit side by side
+    # on the tabletop. Their independently estimated bottom heights may differ
+    # by at most this tolerance.
+    stack_height_tolerance_m: 0.012
+    # pick_stack only. Horizontal radius that counts as "sitting on top of".
+    stack_footprint_tolerance_m: 0.020
     # RViz Grid is the base_link XY plane at Z=0. MoveIt cannot collide with
     # an RViz display directly, so the task adds a 2 x 2 m collision slab just
     # below it. The 0.01 mm offset lets the fixed robot base sit on the plane
@@ -97,6 +132,9 @@ fr3c_first_grasp:
     # absolute per-sample joint-step limit below. Collision checking stays on.
     cartesian_jump_threshold: 0.0
     maximum_cartesian_joint_step_rad: 0.10
+    # Execute prevalidated placement descent/retreat only when every arm joint
+    # is still within this distance of that trajectory's checked start state.
+    validated_segment_start_tolerance_rad: 0.010
     minimum_cartesian_fraction: 0.999999
     target_message_timeout_s: 1.0
     # Includes a fresh RGB-D frame and the configured perception stability window.

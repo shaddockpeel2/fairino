@@ -289,11 +289,17 @@ class GripperNode(Node):
 
     def _execute_ft232h(self, goal_handle, target_m, target_angle_deg):
         prior_us = self._backend.current_us
+        effective_duration_s = self._backend.command_duration_s
+        self.get_logger().warning(
+            f'PWM burst starting: angle={target_angle_deg:.1f} deg, '
+            f'aperture={target_m * 1000.0:.1f} mm, '
+            f'burst_duration_s={effective_duration_s:.3f}')
         target_us = self._backend.command_angle(target_angle_deg)
         self.get_logger().warning(
-            f'PWM active: angle={target_angle_deg:.1f} deg, '
+            f'PWM burst completed: angle={target_angle_deg:.1f} deg, '
             f'effective_target={target_us} us, '
-            f'aperture={target_m * 1000.0:.1f} mm')
+            f'aperture={target_m * 1000.0:.1f} mm, '
+            f'burst_duration_s={effective_duration_s:.3f}')
         expected_motion_s = (
             abs(target_us - prior_us) / self._slew_us_per_s
             if prior_us is not None and self._slew_us_per_s > 0 else 0.0

@@ -28,10 +28,10 @@ from fr3c_camera.cube_perception import (
     find_color_candidates,
     extract_top_surface,
     find_blue_candidates,
-    is_tabletop_cube,
     quaternion_angular_distance,
     registered_points_from_mask,
     rpy_to_quaternion,
+    tabletop_cube_tier,
     transform_points,
 )
 from fr3c_camera.rgbd import image_array, stamp_seconds, validate_pair
@@ -48,7 +48,7 @@ def select_sort_target(
     available = []
     skipped_count = 0
     for match in physical_matches:
-        color_name, _, surface = match
+        color_name, _, surface = match[0], match[1], match[2]
         if target_color is not None and color_name != target_color:
             continue
         center = np.asarray(surface.center, dtype=np.float64)
@@ -221,7 +221,7 @@ class BlueCubeLocalizer(Node):
             'rectangular_box_size_m': [0.060, 0.030, 0.030],
             'visual_yaw_enabled': True,
             'fixed_yaw_rad': 0.0,
-            'cube_max_axis_ratio': 1.25,
+            'cube_max_axis_ratio': 1.40,
             'rectangle_min_axis_ratio': 1.55,
             'stable_yaw_std_rad': 0.087266463,
             'max_sample_yaw_jump_rad': 0.34906585,
@@ -274,6 +274,13 @@ class BlueCubeLocalizer(Node):
             'yellow_hue_intervals': [18, 34],
             'sorting_plane_z_m': 0.0,
             'sorting_max_cube_plane_gap_m': 0.010,
+            'sorting_max_cube_plane_penetration_m': 0.002,
+            # P2 stacking: a cube whose bottom rests on top of another cube
+            # publishes its top one cube height higher. Recognising that tier is
+            # what lets the localizer keep reporting the lower cube after the
+            # upper one has been stacked on it. An empty list disables the tier.
+            'stacking_cube_height_offsets_m': [0.030],
+            'stacking_tier_tolerance_m': 0.012,
             'sorting_skip_radius_m': 0.025,
             'yolo_model_path': '',
             'yolo_confidence_threshold': 0.25,
@@ -361,6 +368,12 @@ class BlueCubeLocalizer(Node):
         self._sorting_plane_z = float(value('sorting_plane_z_m'))
         self._sorting_max_cube_plane_gap = float(
             value('sorting_max_cube_plane_gap_m'))
+        self._sorting_max_cube_plane_penetration = float(
+            value('sorting_max_cube_plane_penetration_m'))
+        self._stacking_cube_height_offsets = tuple(
+            float(offset) for offset in value('stacking_cube_height_offsets_m'))
+        self._stacking_tier_tolerance = float(
+            value('stacking_tier_tolerance_m'))
         self._sorting_skip_radius = float(value('sorting_skip_radius_m'))
         self._yolo_model_path = str(value('yolo_model_path'))
         self._yolo_confidence = float(value('yolo_confidence_threshold'))
@@ -371,9 +384,16 @@ class BlueCubeLocalizer(Node):
         if self._detection_mode == 'yolo' and not self._yolo_model_path:
             raise ValueError('yolo_model_path_required_in_yolo_mode')
         if not math.isfinite(self._sorting_plane_z) or not math.isfinite(
-                self._sorting_max_cube_plane_gap) or \
-                self._sorting_max_cube_plane_gap < 0:
+                self._sorting_max_cube_plane_gap) or not math.isfinite(
+                self._sorting_max_cube_plane_penetration) or \
+                self._sorting_max_cube_plane_gap < 0 or \
+                self._sorting_max_cube_plane_penetration < 0:
             raise ValueError('invalid_sorting_plane_parameters')
+        if not math.isfinite(self._stacking_tier_tolerance) or \
+                self._stacking_tier_tolerance <= 0 or \
+                any(not math.isfinite(offset) or offset <= 0
+                    for offset in self._stacking_cube_height_offsets):
+            raise ValueError('invalid_stacking_tier_parameters')
         if not all(math.isfinite(v) and 0.0 < v <= 1.0 for v in (
                 self._yolo_confidence, self._yolo_iou)):
             raise ValueError('yolo_thresholds_must_be_in_(0,1]')
@@ -682,24 +702,59 @@ class BlueCubeLocalizer(Node):
             if matches is not None:
                 physical_matches = []
                 rejected_reasons = {}
+                rejected_target_details = []
                 for name, item in matches:
+                    item_surface = None
                     try:
                         item_surface = self._candidate_surface(
                             item, depth_m, color_info, depth_info,
                             translation, quaternion)
-                        if not is_tabletop_cube(
-                                item_surface, self._cube_size[2],
-                                self._cube_max_axis_ratio, self._sorting_plane_z,
-                                self._sorting_max_cube_plane_gap):
-                            raise ValueError('not_a_cube_on_sorting_plane')
-                        physical_matches.append((name, item, item_surface))
+                        tier = tabletop_cube_tier(
+                            item_surface, self._cube_size[2],
+                            self._cube_max_axis_ratio, self._sorting_plane_z,
+                            self._sorting_max_cube_plane_gap,
+                            stacked_offsets_m=self._stacking_cube_height_offsets,
+                            stack_tolerance_m=self._stacking_tier_tolerance,
+                            maximum_plane_penetration_m=
+                            self._sorting_max_cube_plane_penetration)
+                        if tier is None:
+                            bottom_gap = (
+                                float(item_surface.center[2]) -
+                                float(self._cube_size[2]) -
+                                self._sorting_plane_z)
+                            raise ValueError(
+                                'not_a_cube_on_sorting_plane:'
+                                f'color={name},'
+                                f'top_z_m={float(item_surface.center[2]):.9f},'
+                                f'bottom_gap_m={bottom_gap:.9f},'
+                                f'axis_ratio={float(item_surface.axis_ratio):.6f},'
+                                f'max_axis_ratio={self._cube_max_axis_ratio:.6f},'
+                                f'max_plane_gap_m='
+                                f'{self._sorting_max_cube_plane_gap:.6f},'
+                                f'max_plane_penetration_m='
+                                f'{self._sorting_max_cube_plane_penetration:.6f}')
+                        physical_matches.append((name, item, item_surface, tier))
                     except ValueError as error:
                         key = str(error).split(':', 1)[0]
                         rejected_reasons[key] = rejected_reasons.get(key, 0) + 1
+                        detail = {'color': name, 'reason': str(error)}
+                        if item_surface is not None:
+                            detail.update({
+                                'top_z_base_m': float(item_surface.center[2]),
+                                'bottom_gap_m': (
+                                    float(item_surface.center[2]) -
+                                    float(self._cube_size[2]) -
+                                    self._sorting_plane_z),
+                                'axis_ratio': float(item_surface.axis_ratio),
+                                'observed_short_long_m': [
+                                    float(value) for value in item_surface.size_xy],
+                            })
+                        rejected_target_details.append(detail)
                 diagnostics['physical_cube_count'] = len(physical_matches)
                 diagnostics['rejected_color_regions'] = rejected_reasons
+                diagnostics['rejected_target_details'] = rejected_target_details
                 color_counts = {
-                    name: sum(1 for color_name, _, _ in physical_matches
+                    name: sum(1 for color_name, _, _, _ in physical_matches
                               if color_name == name)
                     for name in SORT_COLOR_PRIORITY
                 }
@@ -716,12 +771,11 @@ class BlueCubeLocalizer(Node):
                 diagnostics['actionable_cube_count'] = actionable_count
                 diagnostics['sort_color_order'] = ['red', 'yellow', 'blue', 'green']
                 diagnostics['detected_targets'] = [
-                    {
-                        'color': name,
-                        'center_base_m': [float(value) for value in item_surface.center],
-                    }
-                    for name, _, item_surface in physical_matches
+                    self._detected_target_entry(name, item_surface, tier)
+                    for name, _, item_surface, tier in physical_matches
                 ]
+                diagnostics['stacked_cube_count'] = sum(
+                    1 for _, _, _, tier in physical_matches if tier > 0)
                 if target_color is not None and color_counts.get(target_color, 0) == 0:
                     raise ValueError(f'requested_color_not_found:{target_color}')
                 if target_color is not None and actionable_count != 1:
@@ -730,7 +784,7 @@ class BlueCubeLocalizer(Node):
                 if selected is None:
                     raise ValueError(
                         f'actionable_cube_count_0_of_{len(physical_matches)}_physical_cubes')
-                color_name, candidate, surface = selected
+                color_name, candidate, surface, _ = selected
                 cv2.drawContours(annotated, [candidate.contour], -1,
                                  (0, 255, 0), 2)
                 cv2.putText(annotated, color_name,
@@ -810,6 +864,28 @@ class BlueCubeLocalizer(Node):
                 surface.long_axis_yaw_rad, math.pi)
         raise ValueError(
             f'object_shape_ambiguous:axis_ratio={surface.axis_ratio:.3f}')
+
+    def _detected_target_entry(self, color_name, surface, tier):
+        """Describe one physically valid cube for downstream stack planning.
+
+        The P2 stack task needs the orientation of both the upper and the lower
+        cube in the same frame, not only the one selected by the colour filter.
+        Every entry here comes from the single RGB-D frame that also produced
+        the selected target, so a consumer may treat them as one snapshot.
+        """
+        object_class, object_size, visual_yaw, yaw_period = \
+            self._surface_grasp_geometry(surface)
+        return {
+            'color': color_name,
+            'center_base_m': [float(value) for value in surface.center],
+            'top_z_base_m': float(surface.center[2]),
+            'grasp_axis_yaw_base_rad': float(visual_yaw),
+            'grasp_axis_yaw_period_rad': float(yaw_period),
+            'observed_short_long_m': [float(value) for value in surface.size_xy],
+            'object_class': object_class,
+            'nominal_object_size_m': [float(value) for value in object_size],
+            'stack_tier': int(tier),
+        }
 
     def _make_size_message(self, pose, object_size):
         message = Vector3Stamped()

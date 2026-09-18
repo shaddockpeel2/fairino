@@ -1,0 +1,19 @@
+[WARN] [1789710467.876258374] [kdl_parser]: The root link base_link has an inertia specified in the URDF, but KDL does not support a root link with an inertia.  As a workaround, you can add an extra dummy link to your URDF.
+[INFO] [1789710467.876479168] [robot_state_publisher]: got segment base_link
+[INFO] [1789710467.876599336] [robot_state_publisher]: got segment camera_housing_link
+[INFO] [1789710467.876611003] [robot_state_publisher]: got segment flange_link
+[INFO] [1789710467.876618295] [robot_state_publisher]: got segment forearm_link
+[INFO] [1789710467.876626170] [robot_state_publisher]: got segment grasp_frame
+[INFO] [1789710467.876633462] [robot_state_publisher]: got segment gripper_command_link
+[INFO] [1789710467.876641045] [robot_state_publisher]: got segment gripper_finger_nx_ny_link
+[INFO] [1789710467.876648337] [robot_state_publisher]: got segment gripper_finger_nx_py_link
+[INFO] [1789710467.876655629] [robot_state_publisher]: got segment gripper_finger_px_ny_link
+[INFO] [1789710467.876662920] [robot_state_publisher]: got segment gripper_finger_px_py_link
+[INFO] [1789710467.876669337] [robot_state_publisher]: got segment gripper_link
+[INFO] [1789710467.876676337] [robot_state_publisher]: got segment gripper_mount_link
+[INFO] [1789710467.876683337] [robot_state_publisher]: got segment gripper_spacer_link
+[INFO] [1789710467.876690337] [robot_state_publisher]: got segment shoulder_link
+[INFO] [1789710467.876697046] [robot_state_publisher]: got segment upperarm_link
+[INFO] [1789710467.876704629] [robot_state_publisher]: got segment wrist1_link
+[INFO] [1789710467.876711046] [robot_state_publisher]: got segment wrist2_link
+[INFO] [1789710467.876718046] [robot_state_publisher]: got segment wrist3_link

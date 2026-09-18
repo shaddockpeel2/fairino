@@ -1,0 +1,2 @@
+[WARN] [1789711212.866683110] [ydi_j22_gripper]: FT232H backend is DISARMED: action goals will be rejected. Set hardware_output_enabled:=true and FR3C_ENABLE_FT232H_PWM=I_UNDERSTAND_OPEN_LOOP_PWM to arm it.
+[WARN] [1789711212.867088823] [ydi_j22_gripper]: Publishing startup_position_m=0.060 as an UNVERIFIED joint-state estimate for MoveIt; send an explicit pre-open command before using the grasp opening for planning.

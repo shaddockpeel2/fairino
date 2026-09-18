@@ -1,0 +1,13 @@
+{"time_ns":1789712446198172215,"event":"run_started","detail":"execution"}
+{"time_ns":1789712446198246299,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1789712446203782778,"event":"gripper_pre_open_started","detail":"requested_position_m=0.060000"}
+{"time_ns":1789712448516675445,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,requested_position_m=0.06,reported_position_m=0.06,stalled=0"}
+{"time_ns":1789712448524264114,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1789712448524480825,"event":"state","detail":"retryable_failure_before_arm_motion: stack source bottom must be within 10 mm of its support top; gap=1.53181 mm, expected=31.1381 mm; no arm motion started, fix the condition and call /start again"}
+{"time_ns":1789712477386444291,"event":"previous_cube_absent","detail":"world_id=target_cube"}
+{"time_ns":1789712477386490667,"event":"state","detail":"waiting_for_target: pick_stack accepted; locating one fresh red cube and one fresh blue cube below it"}
+{"time_ns":1789712477420980056,"event":"target_filter_set","detail":"color=red,generation=4"}
+{"time_ns":1789712478142031686,"event":"stack_destination_locked","detail":"color=blue,top_xyz_m=[-0.0249184866,-0.48277005,0.0317146543],yaw_rad=0.59437865,tier=0,plane_gap_m=0.00171465427"}
+{"time_ns":1789712478142077770,"event":"stack_pair_snapshot_locked","detail":"source=red,support=blue,filter_generation=4,same_rgbd_status=true"}
+{"time_ns":1789712478142920988,"event":"stack_pair_validated","detail":"lower=blue,upper=red,same_snapshot=true,xy_separation_m=0.164095127,tabletop_bottom_difference_m=0.000303124069,source_bottom_m=0.00201777834,destination_bottom_m=0.00171465427"}
+{"time_ns":1789712478143115240,"event":"latency","detail":"\"stage\":\"target_acquired\",\"elapsed_ms\":770.7"}

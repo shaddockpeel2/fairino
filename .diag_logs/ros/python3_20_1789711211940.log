@@ -1,0 +1,2 @@
+[INFO] [1789711212.055611117] [ydi_j22_gripper]: YDI-J22 mock GripperCommand server ready.
+[ERROR] [1789711212.056150998] [ydi_j22_gripper]: Rejecting invalid gripper position: position must be in 0.026..0.06 m

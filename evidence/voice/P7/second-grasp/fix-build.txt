@@ -1,0 +1,8 @@
+Starting >>> fr3c_voice
+Starting >>> fairino_mtc_demo
+Finished <<< fr3c_voice [2.69s]
+[Processing: fairino_mtc_demo]
+[Processing: fairino_mtc_demo]
+Finished <<< fairino_mtc_demo [1min 13s]
+
+Summary: 2 packages finished [1min 14s]

@@ -1,0 +1,17 @@
+{"time_ns":1789712564084083292,"event":"run_started","detail":"execution"}
+{"time_ns":1789712564084128209,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1789712564088409340,"event":"gripper_pre_open_started","detail":"requested_position_m=0.060000"}
+{"time_ns":1789712566412777369,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,requested_position_m=0.06,reported_position_m=0.06,stalled=0"}
+{"time_ns":1789712566418422058,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1789712566418794229,"event":"state","detail":"retryable_failure_before_arm_motion: stack source bottom must be within 10 mm of its support top; gap=2.23982 mm, expected=31.6916 mm; no arm motion started, fix the condition and call /start again"}
+{"time_ns":1789712583138643985,"event":"previous_cube_absent","detail":"world_id=target_cube"}
+{"time_ns":1789712583138690944,"event":"state","detail":"waiting_for_target: pick_stack accepted; locating one fresh red cube and one fresh blue cube below it"}
+{"time_ns":1789712583308260855,"event":"target_filter_set","detail":"color=red,generation=6"}
+{"time_ns":1789712584131529966,"event":"state","detail":"retryable_failure_before_arm_motion: the blue cube that should stay on the table is not resting on the table plane: bottom_gap_m=0.031945"}
+{"time_ns":1789712616269387630,"event":"previous_cube_absent","detail":"world_id=target_cube"}
+{"time_ns":1789712616269484465,"event":"state","detail":"waiting_for_target: pick_stack accepted; locating one fresh red cube and one fresh blue cube below it"}
+{"time_ns":1789712616452523402,"event":"target_filter_set","detail":"color=red,generation=7"}
+{"time_ns":1789712617231640638,"event":"stack_destination_locked","detail":"color=blue,top_xyz_m=[-0.000202912342,-0.534622911,0.0324845607],yaw_rad=0.154224029,tier=0,plane_gap_m=0.00248456069"}
+{"time_ns":1789712617231719681,"event":"stack_pair_snapshot_locked","detail":"source=red,support=blue,filter_generation=7,same_rgbd_status=true"}
+{"time_ns":1789712617234447087,"event":"stack_pair_validated","detail":"lower=blue,upper=red,same_snapshot=true,xy_separation_m=0.133220056,tabletop_bottom_difference_m=-0.000780264176,source_bottom_m=0.00170429651,destination_bottom_m=0.00248456069"}
+{"time_ns":1789712617235410473,"event":"latency","detail":"\"stage\":\"target_acquired\",\"elapsed_ms\":983.6"}

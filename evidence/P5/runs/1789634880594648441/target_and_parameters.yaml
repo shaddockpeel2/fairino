@@ -1,0 +1,30 @@
+frame: base_link
+target_top_xyz_m: [-0.037946217571, -0.533706370988, 0.0305553153575]
+target_object_orientation_xyzw: [0, 0, 0.00342706277224, 0.999994127603]
+object_long_axis_yaw_rad: 0.00685413896122
+applied_grasp_yaw_rad: 0.00685413896122
+selected_grasp_orientation_xyzw: [-0.00342706277224, 0.999994127603, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+equivalent_grasp_selection: minimum_joint_space_path_length
+approach_clearance_m: 0.01
+grasp_depth_m: 0.015
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.026
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: blue
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.342040637258, -0.374449797348, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 600
+perception_status_json: '{"actionable_cube_count":1,"active_inferences":0,"candidate_area_px":1162.0,"center_base_m":[-0.0379773042557982,-0.5337063709879712,0.03055531535751638],"color":"blue","depth_valid_fraction":0.8886138613861386,"detected_targets":[{"center_base_m":[-0.0379773042557982,-0.5337063709879712,0.03055531535751638],"color":"blue"},{"center_base_m":[0.0203438504810052,-0.49288127257468967,0.0310796986351658],"color":"yellow"}],"detection_mode":"colors","error_count":0,"filter_generation":2,"frames_inferred":1744,"frames_skipped_paused":0,"frozen":false,"grasp_axis_yaw_base_rad":0.006854138961224485,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":0.0032238585301642775,"has_stable_pose":true,"inference_enabled":true,"last_inference_end_ns":28438360572342,"last_inference_start_ns":28438158073179,"last_success_ns":28438360572342,"nominal_object_size_m":[0.03,0.03,0.03],"npu_inference":false,"object_class":"cube_30mm","observed_short_long_m":[0.01912728535508582,0.022463025462071552],"orientation_source":"top_surface_square_min_area_edge","pause_generation":0,"physical_color_counts":{"blue":1,"green":0,"red":0,"yellow":1},"physical_cube_count":2,"position_std_m":[2.634247769859267e-05,4.734111509533029e-05,1.610146826685272e-05],"raw_center_base_m":[-0.0379773042557982,-0.5337063709879712,0.03455531535751638],"reason":"stable_target_updated","rejected_color_regions":{"no_valid_candidate_depth":1,"target_outside_workspace":1},"requested_color_physical_count":1,"required_samples":3,"rgb_color_regions":4,"sample_stamp":1789634880.198675,"samples":3,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":true,"target_filter_color":"blue","top_axis_ratio":1.1566093019000385,"top_pose_z_compensation_m":-0.004,"top_z_spread_m":0.0019685065414146996,"tracking":true,"valid":true}'

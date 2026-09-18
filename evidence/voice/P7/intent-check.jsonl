@@ -1,0 +1,8 @@
+{"text": "抓起红色方块", "error": "model service request failed: [Errno 2] No such file or directory", "elapsed_s": 0.0006623820008826442}
+{"text": "抓起黄色方块", "error": "model service request failed: [Errno 2] No such file or directory", "elapsed_s": 7.816799916327e-05}
+{"text": "抓起蓝色方块", "error": "model service request failed: [Errno 2] No such file or directory", "elapsed_s": 5.13339982717298e-05}
+{"text": "抓起绿色方块", "error": "model service request failed: [Errno 2] No such file or directory", "elapsed_s": 4.5501001295633614e-05}
+{"text": "不要装红色方块", "error": "model service request failed: [Errno 2] No such file or directory", "elapsed_s": 4.345900015323423e-05}
+{"text": "怎么装红色方块", "error": "model service request failed: [Errno 2] No such file or directory", "elapsed_s": 4.229199839755893e-05}
+{"text": "请把蓝色方块放到分类区域", "error": "model service request failed: [Errno 2] No such file or directory", "elapsed_s": 4.462500146473758e-05}
+{"text": "你好请介绍一下自己", "error": "model service request failed: [Errno 2] No such file or directory", "elapsed_s": 4.199999966658652e-05}

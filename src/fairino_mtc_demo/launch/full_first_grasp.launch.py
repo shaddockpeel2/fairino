@@ -67,6 +67,7 @@ def generate_launch_description():
             'task_config': LaunchConfiguration('task_config'),
             'execute': LaunchConfiguration('first_grasp_execute'),
             'sort_enabled': LaunchConfiguration('sort_enabled'),
+            'stack_enabled': LaunchConfiguration('stack_enabled'),
             'grid_file': LaunchConfiguration('grid_file'),
         }.items(),
         condition=IfCondition(LaunchConfiguration('start_first_grasp')),
@@ -120,6 +121,10 @@ def generate_launch_description():
             'top_pose_z_compensation_m', default_value='-0.004',
             description='Signed base-Z correction added to perception top poses.'),
         DeclareLaunchArgument('sort_enabled', default_value='false'),
+        DeclareLaunchArgument(
+            'stack_enabled',
+            default_value='false',
+            description='Enable pick_stack two-cube stacking. Requires sort_enabled.'),
         DeclareLaunchArgument(
             'grid_file',
             default_value='/home/industio/fairino_ws/evidence/a4_paper_grid.json'),

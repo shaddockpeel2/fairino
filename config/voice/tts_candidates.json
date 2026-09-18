@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-17",
+  "phase": "P5",
+  "runtime": {
+    "python": "3.10.12",
+    "sherpa_onnx": "1.13.6",
+    "provider": "cpu",
+    "note": "All candidates run on the same pinned runtime so the comparison is apples-to-apples. provider=cpu for every candidate; no candidate may silently fall back to another runtime."
+  },
+  "reference_root": "/home/industio/DofbotPro_JetsonNano_0106",
+  "asset_root": "assets/voice/tts",
+  "github_release_base": "https://github.com/k2-fsa/sherpa-onnx/releases/download",
+  "huggingface_base": "https://huggingface.co",
+  "speaker_ids": {
+    "kokoro-multi-lang-v1_1": 3,
+    "vits-zh-aishell3": 21,
+    "vits-zh-hf-fanchen-C": 0,
+    "_note": "Placeholder defaults pending a tokens/speaker-range check after download; recorded per candidate in evidence."
+  },
+  "candidates": {
+    "kokoro-multi-lang-v1_1": {
+      "order": "A",
+      "role": "baseline",
+      "family": "kokoro",
+      "label": "Kokoro multi-lang v1.1 (current baseline)",
+      "sample_rate_hz_expected": 24000,
+      "license": "Apache-2.0 (sherpa-onnx model card ships Apache-2.0 LICENSE; upstream Kokoro weights provenance not fully documented - see P1 license notes)",
+      "source_kind": "reference_project",
+      "reference_dir": "dofbot/kokoro_tts/kokoro-multi-lang-v1_1",
+      "assets": [
+        {"name": "model.onnx", "bytes": 325631784},
+        {"name": "voices.bin", "bytes": 53790720},
+        {"name": "tokens.txt", "bytes": 1111},
+        {"name": "lexicon-us-en.txt", "bytes": 5956885},
+        {"name": "lexicon-zh.txt", "bytes": 2119465},
+        {"name": "date-zh.fst", "bytes": 59154},
+        {"name": "number-zh.fst", "bytes": 64482},
+        {"name": "phone-zh.fst", "bytes": 88630},
+        {"name": "LICENSE", "bytes": null},
+        {"name": "README.md", "bytes": null}
+      ],
+      "espeak_data_dir": "espeak-ng-data",
+      "rule_fsts": ["date-zh.fst", "number-zh.fst", "phone-zh.fst"],
+      "vocoder": null
+    },
+    "matcha-icefall-zh-baker": {
+      "order": "B",
+      "role": "speed_upper_bound_probe",
+      "family": "matcha",
+      "label": "Matcha-TTS icefall zh-baker",
+      "sample_rate_hz_expected": 22050,
+      "license": "Model code Apache-2.0; training dataset Baker (DataBaker) is NON-COMMERCIAL. Recorded per user decision 2026-09-17 that this project is non-commercial.",
+      "source_kind": "github_release",
+      "source_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/matcha-icefall-zh-baker.tar.bz2",
+      "archive": {"type": "tar.bz2", "strip_root": true},
+      "vocoder": {
+        "name": "vocos-22khz-univ.onnx",
+        "url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/vocoder-models/vocos-22khz-univ.onnx",
+        "bytes": 53884024
+      },
+      "assets": [
+        {"name": "model-steps-3.onnx", "bytes": null},
+        {"name": "tokens.txt", "bytes": null},
+        {"name": "lexicon.txt", "bytes": null},
+        {"name": "date.fst", "bytes": null},
+        {"name": "number.fst", "bytes": null},
+        {"name": "phone.fst", "bytes": null},
+        {"name": "README.md", "bytes": null}
+      ],
+      "dict_dir": "dict",
+      "rule_fsts": ["phone.fst", "date.fst", "number.fst"]
+    },
+    "vits-zh-aishell3": {
+      "order": "C",
+      "role": "small_open_license",
+      "family": "vits",
+      "label": "VITS zh-aishell3 (multi-speaker)",
+      "sample_rate_hz_expected": null,
+      "sample_rate_note": "Official docs disagree with the model scale on both sample rate and RTF; pending on-board measurement, no expected value is asserted here.",
+      "license": "AISHELL-3 dataset Apache-2.0",
+      "source_kind": "github_release",
+      "source_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-zh-aishell3.tar.bz2",
+      "archive": {"type": "tar.bz2", "strip_root": true},
+      "assets": [
+        {"name": "vits-aishell3.onnx", "bytes": null},
+        {"name": "tokens.txt", "bytes": null},
+        {"name": "lexicon.txt", "bytes": null},
+        {"name": "date.fst", "bytes": null},
+        {"name": "number.fst", "bytes": null},
+        {"name": "phone.fst", "bytes": null},
+        {"name": "new_heteronym.fst", "bytes": null}
+      ],
+      "extra_assets_optional": ["vits-aishell3.int8.onnx"],
+      "rule_fsts": ["phone.fst", "date.fst", "number.fst"]
+    },
+    "vits-melo-tts-zh_en": {
+      "order": "D",
+      "role": "naturalness_license_candidate",
+      "family": "vits",
+      "label": "MeloTTS zh_en (MIT)",
+      "sample_rate_hz_expected": 44100,
+      "license": "MIT (see LICENSE in repo)",
+      "source_kind": "huggingface",
+      "repo": "csukuangfj/vits-melo-tts-zh_en",
+      "assets": [
+        {"name": "model.onnx", "bytes": null},
+        {"name": "tokens.txt", "bytes": null},
+        {"name": "lexicon.txt", "bytes": null},
+        {"name": "date.fst", "bytes": null},
+        {"name": "number.fst", "bytes": null},
+        {"name": "phone.fst", "bytes": null},
+        {"name": "new_heteronym.fst", "bytes": null},
+        {"name": "LICENSE", "bytes": null},
+        {"name": "README.md", "bytes": null}
+      ],
+      "extra_assets_optional": ["model.int8.onnx"],
+      "dict_dir": "dict",
+      "rule_fsts": ["phone.fst", "date.fst", "number.fst"]
+    },
+    "vits-zh-hf-fanchen-C": {
+      "order": "E",
+      "role": "voice_choice_candidate",
+      "family": "vits",
+      "label": "VITS zh-hf fanchen-C (187 speakers)",
+      "sample_rate_hz_expected": 16000,
+      "license": "PENDING REVIEW - upstream HF model card license must be recorded before this candidate can be selected",
+      "source_kind": "huggingface",
+      "repo": "csukuangfj/vits-zh-hf-fanchen-C",
+      "assets": [
+        {"name": "vits-zh-hf-fanchen-C.onnx", "bytes": null},
+        {"name": "tokens.txt", "bytes": null},
+        {"name": "lexicon.txt", "bytes": null},
+        {"name": "date.fst", "bytes": null},
+        {"name": "number.fst", "bytes": null},
+        {"name": "phone.fst", "bytes": null},
+        {"name": "new_heteronym.fst", "bytes": null},
+        {"name": "G_C.json", "bytes": null}
+      ],
+      "dict_dir": "dict",
+      "rule_fsts": ["phone.fst", "date.fst", "number.fst"]
+    }
+  },
+  "int8_control_group": {
+    "note": "Supporting experiment ONLY, never a selection candidate. The upstream P17 record shows an INT8 Kokoro producing NaN, so any quantized variant must clear the hard numerical gate before it may even be discussed as an optimisation. Results go to Known Limitations.",
+    "candidates": {
+      "kokoro-int8-multi-lang-v1_1": {
+        "family": "kokoro",
+        "reference_dir": "dofbot/kokoro_tts/kokoro-int8-multi-lang-v1_1",
+        "source_kind": "reference_project",
+        "assets": [{"name": "model.int8.onnx", "bytes": 109837518}]
+      },
+      "vits-melo-tts-zh_en-int8": {
+        "family": "vits",
+        "source_kind": "huggingface",
+        "repo": "csukuangfj/vits-melo-tts-zh_en",
+        "base_candidate": "vits-melo-tts-zh_en",
+        "assets": [{"name": "model.int8.onnx", "bytes": null}]
+      },
+      "vits-zh-aishell3-int8": {
+        "family": "vits",
+        "source_kind": "github_release",
+        "source_url": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-zh-aishell3.tar.bz2",
+        "archive": {"type": "tar.bz2", "strip_root": true},
+        "base_candidate": "vits-zh-aishell3",
+        "assets": [{"name": "vits-aishell3.int8.onnx", "bytes": null}]
+      }
+    }
+  },
+  "excluded": {
+    "reason": "Not evaluated in P5 to avoid pulling new runtime risk into a model-selection phase.",
+    "items": [
+      "Anything requiring a GPU or a non-ONNX runtime",
+      "Anything requiring network access at run time",
+      "Third-party TTS frameworks the reference project never validated"
+    ]
+  }
+}

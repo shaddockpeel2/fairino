@@ -1,6 +1,18 @@
 # Execute exactly one color-targeted grasp task.
-# Supported values: red, yellow, blue, green.
+# pick_hold: grasp and keep holding. pick_sort: grasp and place into the
+# configured color region. pick_place: grasp and place into an explicit zone.
+# pick_stack: grasp the cube of `color` and stack it on top of the cube of
+# `support_color`. Supported color values: red, yellow, blue, green.
 string color
+# Placement zone for pick_place, resolved against the calibrated A4 grid.
+# Use a bare region name such as "A" for the first free slot, or an explicit
+# 1-based slot such as "A3". Must stay empty for pick_hold and pick_sort,
+# which keep their verified fixed behavior.
+string zone
+# pick_stack only: the colour of the cube that stays on the table and becomes
+# the lower cube of the stack. Must differ from `color`. Every other task must
+# leave this empty, exactly like `zone`.
+string support_color
 ---
 uint16 OK=0
 uint16 INVALID_COLOR=1
@@ -15,11 +27,19 @@ uint16 CANCELED=9
 uint16 HOLDING_OBJECT=10
 uint16 PERCEPTION_UNAVAILABLE=11
 uint16 INTERNAL_ERROR=12
+uint16 INVALID_ZONE=13
+uint16 ZONE_UNAVAILABLE=14
+uint16 INVALID_SUPPORT_COLOR=15
+uint16 STACK_GEOMETRY_REJECTED=16
 
 bool success
 uint16 error_code
 string message
 string color
+# Zone actually used; empty for pick_hold and pick_sort.
+string zone
+# pick_stack only: the lower cube colour that was actually used.
+string support_color
 bool executed
 ---
 string phase

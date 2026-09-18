@@ -22,6 +22,7 @@
 
 #include <algorithm>
 #include <atomic>
+#include <cctype>
 #include <chrono>
 #include <cmath>
 #include <condition_variable>
@@ -51,6 +52,13 @@ using PickColor = fairino_msgs::action::PickColor;
 using GoalHandlePickColor = rclcpp_action::ServerGoalHandle<PickColor>;
 
 constexpr double kPi = 3.14159265358979323846;
+// pick_stack builds exactly one two-cube tower, so a cube reported above a
+// single stacked tier means the support cube is already carrying something.
+constexpr int kMaximumStackTier = 1;
+// Both cubes of a new two-high stack start on the same tabletop. This tolerance
+// absorbs the independent depth/top-surface estimates when their bottom heights
+// are compared before any arm motion.
+constexpr double kStackTabletopToleranceDefault = 0.012;
 
 bool isFinite(double value)
 {
@@ -156,11 +164,67 @@ double quaternionYaw(const geometry_msgs::msg::Quaternion & input)
     1.0 - 2.0 * (q.y * q.y + q.z * q.z));
 }
 
+// A cube's top face is square, so a grasp yaw, that yaw plus one symmetry step,
+// and every further multiple describe the same physical grip. pick_stack picks
+// the equivalent whose placement rotation is smallest, which keeps the wrist
+// close to the source orientation and gives the planner the best chance of a
+// collision-free route onto the lower cube.
+//
+// The result is the requested rotation minus the nearest whole number of
+// symmetry steps, so it never exceeds half a symmetry step. For a square top
+// that worst case is 45 degrees, and it is reached when the two measured yaws
+// differ by half a step. Callers that need a tighter bound must reject the
+// candidate rather than assume the reduction removed more than it can.
+//
+// The step count is taken from the raw difference, not from a folded angle:
+// folding reports the angle inside one turn, which loses how many turns the
+// difference already covered. Both measured yaws are wrapped into [-pi, pi), so
+// a quarter-turn symmetry can appear up to four times in the difference.
+double closestEquivalentAngle(double target_yaw, double reference_yaw, double symmetry)
+{
+  const double raw = target_yaw - reference_yaw;
+  const double steps = std::round(raw / symmetry);
+  return raw - steps * symmetry;
+}
+
 double positionDistance(
   const geometry_msgs::msg::Point & a,
   const geometry_msgs::msg::Point & b)
 {
   return std::hypot(std::hypot(a.x - b.x, a.y - b.y), a.z - b.z);
+}
+
+// MoveIt may normalize a CollisionObject when it crosses the planning-scene
+// service boundary: a pose originally stored in primitive_poses can come back
+// in the object's outer pose with an identity primitive pose. Always compose
+// both layers before comparing a retained obstacle with a newly perceived
+// target, otherwise the same physical cube can exist twice in the scene.
+geometry_msgs::msg::Point collisionPrimitivePosition(
+  const moveit_msgs::msg::CollisionObject & object,
+  const geometry_msgs::msg::Pose & primitive_pose)
+{
+  auto orientation = object.pose.orientation;
+  const double norm = std::sqrt(
+    orientation.x * orientation.x + orientation.y * orientation.y +
+    orientation.z * orientation.z + orientation.w * orientation.w);
+  if (norm < 1e-9) {
+    orientation.x = 0.0;
+    orientation.y = 0.0;
+    orientation.z = 0.0;
+    orientation.w = 1.0;
+  } else {
+    orientation = normalizedQuaternion(orientation);
+  }
+  geometry_msgs::msg::Vector3 local;
+  local.x = primitive_pose.position.x;
+  local.y = primitive_pose.position.y;
+  local.z = primitive_pose.position.z;
+  const auto rotated = rotate(orientation, local);
+  geometry_msgs::msg::Point world;
+  world.x = object.pose.position.x + rotated.x;
+  world.y = object.pose.position.y + rotated.y;
+  world.z = object.pose.position.z + rotated.z;
+  return world;
 }
 
 std::string jsonEscape(const std::string & input)
@@ -195,6 +259,67 @@ moveit_msgs::msg::CollisionObject makeBox(
   return object;
 }
 
+// A placement zone names a calibrated A4 grid region and, optionally, one
+// 1-based slot inside it: "A", "A3", "c". Whitespace is ignored.
+struct ZoneRequest
+{
+  std::string region;
+  bool explicit_slot{false};
+  std::size_t slot_index{0};
+};
+
+bool parseZone(const std::string & raw, ZoneRequest & request, std::string & reason)
+{
+  // Build into a local and publish only on success, so a rejected zone can
+  // never leave a half-filled request for a caller to act on.
+  ZoneRequest parsed;
+  std::string text;
+  for (const char character : raw) {
+    const auto value = static_cast<unsigned char>(character);
+    if (std::isspace(value) == 0) {
+      text.push_back(static_cast<char>(std::tolower(value)));
+    }
+  }
+  if (text.empty()) {
+    reason = "zone is empty";
+    return false;
+  }
+  std::size_t split = 0;
+  while (split < text.size() &&
+    std::isalpha(static_cast<unsigned char>(text[split])) != 0)
+  {
+    ++split;
+  }
+  if (split == 0) {
+    reason = "zone must start with a region name, for example A or A3";
+    return false;
+  }
+  for (std::size_t index = split; index < text.size(); ++index) {
+    if (std::isdigit(static_cast<unsigned char>(text[index])) == 0) {
+      reason = "zone must be a region name with an optional slot number, "
+        "for example A or A3";
+      return false;
+    }
+  }
+  parsed.region = text.substr(0, split);
+  parsed.explicit_slot = split < text.size();
+  if (parsed.explicit_slot) {
+    const std::string digits = text.substr(split);
+    if (digits.size() > 2) {
+      reason = "zone slot number is out of range; slots are numbered from 1";
+      return false;
+    }
+    const int slot = std::stoi(digits);
+    if (slot < 1) {
+      reason = "zone slot number is out of range; slots are numbered from 1";
+      return false;
+    }
+    parsed.slot_index = static_cast<std::size_t>(slot - 1);
+  }
+  request = parsed;
+  return true;
+}
+
 std::string stateName(int state)
 {
   switch (state) {
@@ -215,6 +340,7 @@ std::string stateName(int state)
     case 14: return "batch_scanning";
     case 15: return "batch_complete";
     case 16: return "batch_complete_with_skips";
+    case 17: return "complete_stacked_home";
     default: return "unknown";
   }
 }
@@ -299,8 +425,10 @@ public:
       perception_skip_service_);
     perception_color_client_ = node_->create_client<fairino_msgs::srv::SetTargetColor>(
       perception_color_service_);
-    pick_hold_server_ = createPickServer("~/pick_hold", false);
-    pick_sort_server_ = createPickServer("~/pick_sort", true);
+    pick_hold_server_ = createPickServer("~/pick_hold", PickTaskMode::HOLD);
+    pick_sort_server_ = createPickServer("~/pick_sort", PickTaskMode::SORT);
+    pick_place_server_ = createPickServer("~/pick_place", PickTaskMode::PLACE);
+    pick_stack_server_ = createPickServer("~/pick_stack", PickTaskMode::STACK);
     state_timer_ = node_->create_wall_timer(500ms, [this]() {publishState();});
 
     RCLCPP_INFO(
@@ -342,6 +470,7 @@ private:
     BATCH_SCANNING = 14,
     BATCH_COMPLETE = 15,
     BATCH_COMPLETE_WITH_SKIPS = 16,
+    STACK_COMPLETE = 17,
   };
 
   struct PlannedMotion
@@ -350,6 +479,14 @@ private:
     moveit_msgs::msg::RobotTrajectory trajectory;
     moveit_msgs::msg::RobotState start_state;
     moveit::core::RobotStatePtr end_state;
+  };
+
+  struct PendingGripperCommand
+  {
+    double position{0.0};
+    std::string name;
+    GoalHandleGripper::SharedPtr goal_handle;
+    std::shared_future<GoalHandleGripper::WrappedResult> result_future;
   };
 
   struct JointPathMetrics
@@ -365,6 +502,31 @@ private:
     geometry_msgs::msg::Quaternion orientation;
   };
 
+  // One physically valid cube reported by the same perception frame as the
+  // selected target. pick_stack needs the lower cube's pose and yaw, which the
+  // single-colour filter never selects, so those values travel in the status.
+  struct DetectedCube
+  {
+    std::string color;
+    geometry_msgs::msg::Point center;
+    double top_z{0.0};
+    double grasp_axis_yaw_rad{0.0};
+    double grasp_axis_yaw_period_rad{kPi * 0.5};
+    std::vector<double> object_size_m;
+    int stack_tier{0};
+  };
+
+  // The immutable lower-cube snapshot of one pick_stack task.
+  struct StackDestination
+  {
+    bool valid{false};
+    std::string color;
+    geometry_msgs::msg::Pose top_pose;
+    std::vector<double> object_size_m;
+    double grasp_axis_yaw_rad{0.0};
+    double grasp_axis_yaw_period_rad{kPi * 0.5};
+  };
+
   struct IgnoredTarget
   {
     std::string color;
@@ -378,8 +540,51 @@ private:
     return color == "red" || color == "yellow" || color == "blue" || color == "green";
   }
 
+  // Action goals are free-form text, so colour values are trimmed and lowered
+  // before any comparison. An empty result means "not specified".
+  static std::string normalizedColor(const std::string & raw)
+  {
+    const auto first = raw.find_first_not_of(" \t\r\n");
+    if (first == std::string::npos) {
+      return {};
+    }
+    const auto last = raw.find_last_not_of(" \t\r\n");
+    std::string text = raw.substr(first, last - first + 1);
+    std::transform(
+      text.begin(), text.end(), text.begin(),
+      [](unsigned char character) {return static_cast<char>(std::tolower(character));});
+    return text;
+  }
+
+  // The four action names share one message type, so the task mode has to be
+  // carried explicitly instead of being inferred from the goal fields.
+  enum class PickTaskMode
+  {
+    HOLD,
+    SORT,
+    PLACE,
+    STACK,
+  };
+
+  static bool modeIsSorting(PickTaskMode mode)
+  {
+    return mode == PickTaskMode::SORT || mode == PickTaskMode::PLACE ||
+           mode == PickTaskMode::STACK;
+  }
+
+  static const char * modeName(PickTaskMode mode)
+  {
+    switch (mode) {
+      case PickTaskMode::HOLD: return "pick_hold";
+      case PickTaskMode::SORT: return "pick_sort";
+      case PickTaskMode::PLACE: return "pick_place";
+      case PickTaskMode::STACK: return "pick_stack";
+    }
+    return "unknown";
+  }
+
   rclcpp_action::Server<PickColor>::SharedPtr createPickServer(
-    const std::string & name, bool sort_task)
+    const std::string & name, PickTaskMode mode)
   {
     return rclcpp_action::create_server<PickColor>(
       node_, name,
@@ -396,13 +601,15 @@ private:
         condition_.notify_all();
         return rclcpp_action::CancelResponse::ACCEPT;
       },
-      [this, sort_task](const std::shared_ptr<GoalHandlePickColor> goal_handle) {
+      [this, mode](const std::shared_ptr<GoalHandlePickColor> goal_handle) {
         if (action_goal_claimed_.exchange(true)) {
           auto result = std::make_shared<PickColor::Result>();
           result->success = false;
           result->error_code = PickColor::Result::BUSY;
           result->message = "another grasp task is active";
           result->color = goal_handle->get_goal()->color;
+          result->zone = goal_handle->get_goal()->zone;
+          result->support_color = goal_handle->get_goal()->support_color;
           result->executed = false;
           goal_handle->abort(result);
           return;
@@ -410,8 +617,11 @@ private:
         if (action_thread_.joinable()) {
           action_thread_.join();
         }
+        markActionStart();
         action_thread_ = std::thread(
-          [this, goal_handle, sort_task]() {executePickAction(goal_handle, sort_task);});
+          [this, goal_handle, mode]() {
+            executePickAction(goal_handle, mode);
+          });
       });
   }
 
@@ -424,6 +634,8 @@ private:
     result->error_code = error_code;
     result->message = message;
     result->color = goal_handle->get_goal()->color;
+    result->zone = goal_handle->get_goal()->zone;
+    result->support_color = goal_handle->get_goal()->support_color;
     result->executed = execute_ && success;
     if (goal_handle->is_canceling() || error_code == PickColor::Result::CANCELED) {
       goal_handle->canceled(result);
@@ -539,9 +751,9 @@ private:
   }
 
   void executePickAction(
-    const std::shared_ptr<GoalHandlePickColor> goal_handle, bool sort_task)
+    const std::shared_ptr<GoalHandlePickColor> goal_handle, PickTaskMode mode)
   {
-    const std::string color = goal_handle->get_goal()->color;
+    const std::string color = normalizedColor(goal_handle->get_goal()->color);
     {
       std::lock_guard<std::mutex> lock(action_mutex_);
       active_action_goal_ = goal_handle;
@@ -559,13 +771,76 @@ private:
         "color must be one of: red, yellow, blue, green", false);
       return;
     }
+    const std::string raw_zone = goal_handle->get_goal()->zone;
+    const std::string raw_support_color = goal_handle->get_goal()->support_color;
+    ZoneRequest zone_request;
+    std::string zone_reason;
+    if (mode == PickTaskMode::PLACE) {
+      if (!parseZone(raw_zone, zone_request, zone_reason)) {
+        finishPickAction(
+          goal_handle, PickColor::Result::INVALID_ZONE,
+          "invalid pick_place zone: " + zone_reason, false);
+        return;
+      }
+      if (zone_centers_.count(zone_request.region) == 0) {
+        finishPickAction(
+          goal_handle, PickColor::Result::INVALID_ZONE,
+          "unknown placement zone '" + zone_request.region +
+          "'; calibrated zones are " + calibratedZoneList(), false);
+        return;
+      }
+    } else if (!raw_zone.empty()) {
+      finishPickAction(
+        goal_handle, PickColor::Result::INVALID_ZONE,
+        std::string(modeName(mode)) + " does not accept a zone; " +
+        "use /fr3c_first_grasp/pick_place for an explicit placement zone", false);
+      return;
+    }
+
+    std::string support_color;
+    if (mode == PickTaskMode::STACK) {
+      support_color = normalizedColor(raw_support_color);
+      if (support_color.empty()) {
+        finishPickAction(
+          goal_handle, PickColor::Result::INVALID_SUPPORT_COLOR,
+          "pick_stack requires support_color: the colour of the cube that stays "
+          "on the table and becomes the lower cube of the stack", false);
+        return;
+      }
+      if (!supportedColor(support_color)) {
+        finishPickAction(
+          goal_handle, PickColor::Result::INVALID_SUPPORT_COLOR,
+          "support_color must be one of: red, yellow, blue, green", false);
+        return;
+      }
+      if (support_color == color) {
+        finishPickAction(
+          goal_handle, PickColor::Result::INVALID_SUPPORT_COLOR,
+          "pick_stack needs two different colours; color and support_color are both " +
+          color, false);
+        return;
+      }
+    } else if (!raw_support_color.empty()) {
+      finishPickAction(
+        goal_handle, PickColor::Result::INVALID_SUPPORT_COLOR,
+        std::string(modeName(mode)) + " does not accept a support_color; " +
+        "use /fr3c_first_grasp/pick_stack to stack one cube on another", false);
+      return;
+    }
 
     std::unique_lock<std::mutex> start_lock(start_mutex_);
     std::string reason;
-    if (sort_task && !sort_enabled_) {
+    if (modeIsSorting(mode) && !sort_enabled_) {
       finishPickAction(
         goal_handle, PickColor::Result::PRECONDITION_FAILED,
-        "pick_sort requires sort_enabled=true and configured placement regions", false);
+        std::string(modeName(mode)) +
+        " requires sort_enabled=true and configured placement regions", false);
+      return;
+    }
+    if (mode == PickTaskMode::STACK && !stack_enabled_) {
+      finishPickAction(
+        goal_handle, PickColor::Result::PRECONDITION_FAILED,
+        "pick_stack requires stack_enabled=true", false);
       return;
     }
     if (!p6Gate(reason)) {
@@ -586,10 +861,33 @@ private:
         false);
       return;
     }
+    // A stack that failed after closing the gripper returns home with the cube
+    // still attached. The next task's pre-open step would drop it, so the task
+    // is refused with the same code the hold flow uses until the operator has
+    // physically released the cube and cleared it (acknowledge_object_released
+    // for a hold, or a fresh release of the planning scene).
+    if (cubeIsStillAttached()) {
+      finishPickAction(
+        goal_handle, PickColor::Result::HOLDING_OBJECT,
+        "the previous task left the cube attached to the gripper; remove it and "
+        "clear the scene before starting another task", false);
+      return;
+    }
     if (prior_state == SORT_COMPLETE && !archivePreviousSortedCubeScene(reason)) {
       finishPickAction(
         goal_handle, PickColor::Result::PRECONDITION_FAILED,
         "cannot prepare the previous sorted scene: " + reason, false);
+      return;
+    }
+    if (prior_state == STACK_COMPLETE && !archivePreviousSortedCubeScene(reason)) {
+      finishPickAction(
+        goal_handle, PickColor::Result::PRECONDITION_FAILED,
+        "cannot prepare the previous stacked scene: " + reason, false);
+      return;
+    }
+    if (prior_state == STACK_COMPLETE && !clearStackSupportObject(reason)) {
+      finishPickAction(
+        goal_handle, PickColor::Result::PRECONDITION_FAILED, reason, false);
       return;
     }
 
@@ -606,7 +904,8 @@ private:
     batch_mode_ = false;
     continuous_requested_ = false;
     automatic_task_ = true;
-    task_sort_enabled_ = sort_task;
+    task_sort_enabled_ = modeIsSorting(mode);
+    task_stack_enabled_ = mode == PickTaskMode::STACK;
     canceled_.store(false);
     if (goal_handle->is_canceling()) {
       canceled_.store(true);
@@ -615,15 +914,55 @@ private:
         "task canceled before target acquisition", false);
       return;
     }
+    // The lower cube of a finished or abandoned stack is a virtual planning
+    // obstacle, so a non-stack task must not inherit it.
+    if (mode != PickTaskMode::STACK && !clearStackSupportObject(reason)) {
+      setState(RETRYABLE_FAILED, reason);
+      finishPickAction(
+        goal_handle, PickColor::Result::PRECONDITION_FAILED, reason, false);
+      return;
+    }
+    // A stack that failed before closing the gripper left the source cube where
+    // the perception node still sees it, so the stale planning-scene copy must
+    // not become an obstacle for this task.
+    if (mode == PickTaskMode::STACK && !clearPreviousCubeScene(reason)) {
+      setState(RETRYABLE_FAILED, reason);
+      finishPickAction(
+        goal_handle, PickColor::Result::PRECONDITION_FAILED, reason, false);
+      return;
+    }
     worker_running_.store(true);
     {
       std::lock_guard<std::mutex> lock(mutex_);
       locked_color_ = color;
+      locked_zone_ = zone_request;
+      locked_place_center_.clear();
+      locked_stack_support_color_ = support_color;
+      locked_stack_destination_.valid = false;
+      locked_stack_destination_.color.clear();
     }
-    setState(
-      WAITING_TARGET,
-      std::string(sort_task ? "pick_sort" : "pick_hold") +
-      " accepted; requesting a fresh unique " + color + " target");
+    // Resolve the zone before any target acquisition or arm motion so an
+    // unusable slot is reported as such instead of a planning failure.
+    if (mode == PickTaskMode::PLACE && !assignZoneSlot(zone_reason)) {
+      setState(RETRYABLE_FAILED, zone_reason);
+      finishPickAction(
+        goal_handle, PickColor::Result::ZONE_UNAVAILABLE, zone_reason, false);
+      return;
+    }
+    const std::string task_name = modeName(mode);
+    if (mode == PickTaskMode::STACK) {
+      setState(
+        WAITING_TARGET,
+        task_name + " accepted; locating one fresh " + color + " cube and one fresh " +
+        support_color + " cube below it");
+    } else {
+      setState(
+        WAITING_TARGET,
+        mode == PickTaskMode::PLACE ?
+        task_name + " accepted; requesting a fresh unique " + color +
+        " target for zone " + zone_request.region :
+        task_name + " accepted; requesting a fresh unique " + color + " target");
+    }
     start_lock.unlock();
 
     uint64_t filter_generation = 0;
@@ -642,6 +981,36 @@ private:
       finishPickAction(goal_handle, acquisition_error, reason, false);
       return;
     }
+    // A completed sort/stack retains its placed source cube as a MoveIt
+    // obstacle.  If perception now selects that same physical cube for the
+    // next task (for example, moving the red cube off a blue support), remove
+    // only the archived copy at the newly locked source pose.  Other placed
+    // cubes remain obstacles.
+    if (mode != PickTaskMode::STACK && !clearArchivedObstacleAtTarget(reason)) {
+      setState(RETRYABLE_FAILED, reason);
+      finishPickAction(
+        goal_handle, PickColor::Result::PRECONDITION_FAILED, reason, false);
+      return;
+    }
+    if (mode == PickTaskMode::STACK) {
+      uint16_t pair_error = PickColor::Result::INTERNAL_ERROR;
+      if (!lockStackDestinationFromSourceSnapshot(
+          support_color, color, filter_generation, pair_error, reason))
+      {
+        setState(RETRYABLE_FAILED, reason);
+        finishPickAction(goal_handle, pair_error, reason, false);
+        return;
+      }
+      if (!validateStackPair(reason)) {
+        setState(RETRYABLE_FAILED, reason);
+        finishPickAction(
+          goal_handle, PickColor::Result::STACK_GEOMETRY_REJECTED, reason, false);
+        return;
+      }
+      publishState();
+    }
+
+    recordLatency("target_acquired");
 
     const bool completed = runCycle();
     State final_state;
@@ -653,15 +1022,29 @@ private:
     }
     if (completed &&
       (final_state == PLAN_ONLY_COMPLETE ||
-      (!sort_task && final_state == COMPLETE) ||
-      (sort_task && final_state == SORT_COMPLETE)))
+      (mode == PickTaskMode::HOLD && final_state == COMPLETE) ||
+      (mode != PickTaskMode::HOLD && final_state == SORT_COMPLETE) ||
+      (mode == PickTaskMode::STACK && final_state == STACK_COMPLETE)))
     {
-      const std::string completion = execute_ ?
-        (sort_task ?
-        "pick_sort motion completed once; the selected cube was released in its color region" :
-        "pick_hold motion completed once; the gripper close was open-loop and the cube remains held") :
-        (sort_task ? "pick_sort full route planned; no command was sent" :
-        "pick_hold route planned; no command was sent");
+      std::string completion;
+      if (mode == PickTaskMode::PLACE) {
+        completion = execute_ ?
+          "pick_place motion completed once; the selected cube was released in zone " + raw_zone :
+          "pick_place full route to zone " + raw_zone + " planned; no command was sent";
+      } else if (mode == PickTaskMode::STACK) {
+        completion = execute_ ?
+          "pick_stack motion completed once; the " + color + " cube was released on top of " +
+          "the " + support_color + " cube and the arm returned to its start joints" :
+          "pick_stack full route planned; no command was sent";
+      } else if (mode == PickTaskMode::SORT) {
+        completion = execute_ ?
+          "pick_sort motion completed once; the cube was released in its color region" :
+          "pick_sort full route planned; no command was sent";
+      } else {
+        completion = execute_ ?
+          "pick_hold motion completed once; the gripper close was open-loop and the cube held" :
+          "pick_hold route planned; no command was sent";
+      }
       finishPickAction(goal_handle, PickColor::Result::OK, completion, true);
       return;
     }
@@ -669,6 +1052,10 @@ private:
       finishPickAction(goal_handle, PickColor::Result::CANCELED, final_detail, false);
       return;
     }
+    // pick_stack promises "one attempt, then the task slot is free again". That
+    // includes the failure path: the arm was already sent home by runCycle()'s
+    // recovery step, and the state below is a startable one, so the caller can
+    // immediately issue the next stack without any manual state reset.
     finishPickAction(
       goal_handle,
       arm_motion_started_.load() ? PickColor::Result::EXECUTION_FAILED :
@@ -709,11 +1096,20 @@ private:
     perception_color_service_ = declare_string(
       "perception_color_service", "/perception/blue_cube_localizer/set_target_color");
     cube_id_ = declare_string("cube_id", "target_cube");
+    stack_support_id_ = declare_string("stack_support_id", "stack_support_cube");
     ground_plane_id_ = declare_string("ground_plane_id", "rviz_ground_plane");
     log_directory_ = declare_string("log_directory", "evidence/P5/runs");
     p6_gate_file_ = declare_string(
       "p6_gate_file", "/home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt");
     sort_enabled_ = node_->declare_parameter<bool>("sort_enabled", false);
+    stack_enabled_ = node_->declare_parameter<bool>("stack_enabled", false);
+    maximum_stack_placement_rotation_rad_ = declare_double(
+      "maximum_stack_placement_rotation_rad", kPi * 0.25);
+    stack_approach_clearance_m_ = declare_double("stack_approach_clearance_m", 0.030);
+    stack_height_tolerance_m_ = declare_double(
+      "stack_height_tolerance_m", kStackTabletopToleranceDefault);
+    stack_footprint_tolerance_m_ = declare_double(
+      "stack_footprint_tolerance_m", 0.020);
     sort_grid_file_ = declare_string("sort_grid_file", "");
     for (const auto & color : {"red", "green", "blue", "yellow"}) {
       place_centers_[color] = declare_vector(
@@ -721,6 +1117,17 @@ private:
       place_slots_[color] = declare_vector(
         std::string("place_") + color + "_slots_m", std::vector<double>{});
     }
+    // pick_place resolves its target from the calibrated grid by region name, so
+    // the placement target never depends on the detected colour.
+    for (const auto & zone : node_->declare_parameter<std::vector<std::string>>(
+        "place_zone_names", std::vector<std::string>{}))
+    {
+      zone_centers_[zone] = declare_vector(
+        std::string("place_zone_") + zone + "_center_m", std::vector<double>{});
+      zone_slots_[zone] = declare_vector(
+        std::string("place_zone_") + zone + "_slots_m", std::vector<double>{});
+    }
+    zone_slot_clearance_m_ = declare_double("zone_slot_clearance_m", 0.025);
     release_bottom_gap_m_ = declare_double("release_bottom_gap_m", 0.005);
     batch_empty_timeout_s_ = declare_double("batch_empty_timeout_s", 10.0);
     batch_target_match_distance_m_ = declare_double(
@@ -732,6 +1139,8 @@ private:
     lift_distance_m_ = declare_double("lift_distance_m", 0.050);
     pre_open_position_m_ = declare_double("pre_open_position_m", 0.060);
     close_position_m_ = declare_double("close_position_m", 0.026);
+    pre_open_command_repetitions_ = node_->declare_parameter<int>(
+      "pre_open_command_repetitions", 1);
     object_size_m_ = declare_vector("object_size_m", {0.060, 0.030, 0.030});
     use_target_size_ = node_->declare_parameter<bool>("use_target_size", true);
     square_aspect_ratio_max_ = declare_double("square_aspect_ratio_max", 1.10);
@@ -758,6 +1167,8 @@ private:
     cartesian_jump_threshold_ = declare_double("cartesian_jump_threshold", 0.0);
     maximum_cartesian_joint_step_rad_ = declare_double(
       "maximum_cartesian_joint_step_rad", 0.10);
+    validated_segment_start_tolerance_rad_ = declare_double(
+      "validated_segment_start_tolerance_rad", 0.010);
     minimum_cartesian_fraction_ = declare_double("minimum_cartesian_fraction", 0.999999);
     target_message_timeout_s_ = declare_double("target_message_timeout_s", 1.0);
     target_acquisition_timeout_s_ = declare_double("target_acquisition_timeout_s", 4.0);
@@ -781,7 +1192,8 @@ private:
     const auto positive = [](double value) {return isFinite(value) && value > 0.0;};
     if (arm_group_.empty() || base_frame_.empty() || tip_frame_.empty() ||
       gripper_action_.empty() ||
-      cube_id_.empty() || ground_plane_id_.empty() ||
+      cube_id_.empty() || stack_support_id_.empty() || ground_plane_id_.empty() ||
+      cube_id_ == stack_support_id_ ||
       (use_target_size_ && target_size_topic_.empty()))
     {
       throw std::runtime_error("frame, group, action and scene object names must not be empty");
@@ -795,10 +1207,12 @@ private:
       !positive(state_timeout_s_) || !positive(gripper_state_tolerance_m_) ||
       !positive(ground_plane_thickness_m_) || !positive(maximum_cube_plane_gap_m_) ||
       !positive(maximum_cartesian_joint_step_rad_) ||
+      !positive(validated_segment_start_tolerance_rad_) ||
       !positive(p6_gate_max_age_s_) ||
       !positive(batch_empty_timeout_s_) ||
       !positive(batch_target_match_distance_m_) ||
-      planning_attempts_ < 1)
+      planning_attempts_ < 1 || pre_open_command_repetitions_ < 1 ||
+      pre_open_command_repetitions_ > 3)
     {
       throw std::runtime_error("distance, timeout and planning parameters must be positive");
     }
@@ -856,6 +1270,57 @@ private:
     if (touch_links_.empty()) {
       throw std::runtime_error("touch_links must name only the intended gripper contact links");
     }
+    if (!positive(maximum_stack_placement_rotation_rad_) ||
+      maximum_stack_placement_rotation_rad_ > kPi * 0.5 ||
+      !positive(stack_approach_clearance_m_) ||
+      !positive(stack_height_tolerance_m_) ||
+      !positive(stack_footprint_tolerance_m_))
+    {
+      throw std::runtime_error(
+              "stack rotation limit, approach clearance and tolerances must be positive "
+              "and the rotation limit must not exceed half a turn of yaw symmetry");
+    }
+    if (stack_enabled_ && !sort_enabled_) {
+      throw std::runtime_error(
+              "stack_enabled requires sort_enabled so the four-color "
+              "perception mode and cube geometry are configured");
+    }
+    if (stack_enabled_ && !use_target_yaw_) {
+      throw std::runtime_error(
+              "stack_enabled requires use_target_yaw: without a measured top-face yaw "
+              "the upper cube cannot be aligned with the lower cube");
+    }
+    if (stack_enabled_ && !use_target_size_) {
+      throw std::runtime_error(
+              "stack_enabled requires use_target_size: the stack geometry needs the "
+              "measured cube height");
+    }
+    if (stack_enabled_) {
+      // The allowance has to cover the smallest symmetry step that can occur at
+      // run time, not the configured fallback. With use_target_size enabled the
+      // locked step is derived from the measured top shape: a square top uses
+      // half a turn of symmetry steps (kPi * 0.5) and a 60 x 30 mm top uses a
+      // full turn. `target_yaw_symmetry_rad` only applies when no measured size
+      // is available, so it bounds the smallest possible step from below.
+      //
+      // Half the smallest step is exactly the worst case the reduction can
+      // leave: graspCandidates() wraps its candidates, so the candidates are one
+      // whole step apart in the reduced space and the nearest of them is never
+      // further than half a step from the requested placement rotation. A limit
+      // below that half step would refuse even two cubes that already share a
+      // yaw, which is the failure this guard exists to prevent.
+      const double symmetry = std::min(target_yaw_symmetry_rad_, kPi * 0.5);
+      if (!(symmetry > 0.0) ||
+        maximum_stack_placement_rotation_rad_ < 0.5 * symmetry - 1e-9)
+      {
+        throw std::runtime_error(
+                "maximum_stack_placement_rotation_rad must allow at least half the "
+                "smallest run-time yaw-symmetry step (" +
+                std::to_string(0.5 * symmetry) +
+                " rad for this configuration), otherwise rotating a cube onto the "
+                "same yaw would always be refused");
+      }
+    }
     if (sort_enabled_) {
       if (sort_grid_file_.empty()) {
         throw std::runtime_error("sorting requires a projected A4 grid file");
@@ -881,6 +1346,32 @@ private:
           }
         }
       }
+      for (const auto & entry : zone_centers_) {
+        const auto & zone = entry.first;
+        const auto center = entry.second;
+        const auto slots = zone_slots_.find(zone);
+        if (!finiteVector(center, 3) ||
+          std::abs(center[2] - ground_plane_z_m_) > 0.001)
+        {
+          throw std::runtime_error(
+                  "invalid " + zone + " placement zone center or grid plane Z");
+        }
+        if (slots == zone_slots_.end() || slots->second.empty() ||
+          slots->second.size() % 3 != 0 ||
+          !finiteVector(slots->second, slots->second.size()))
+        {
+          throw std::runtime_error("invalid " + zone + " placement zone slots");
+        }
+        for (std::size_t index = 2; index < slots->second.size(); index += 3) {
+          if (std::abs(slots->second[index] - ground_plane_z_m_) > 0.001) {
+            throw std::runtime_error(
+                    "invalid " + zone + " placement zone slot plane Z");
+          }
+        }
+      }
+    }
+    if (!isFinite(zone_slot_clearance_m_) || zone_slot_clearance_m_ <= 0.0) {
+      throw std::runtime_error("zone_slot_clearance_m must be a positive length");
     }
     if (execute_ && p6_gate_file_.empty()) {
       throw std::runtime_error("execution mode requires p6_gate_file");
@@ -1157,14 +1648,10 @@ private:
         return false;
       }
     }
-    const double cube_plane_gap = point.z - object_size[2] - ground_plane_z_m_;
-    if (cube_plane_gap < 0.0 || cube_plane_gap > maximum_cube_plane_gap_m_) {
-      std::ostringstream message;
-      message << "current target is not on the configured table plane: gap_m="
-              << cube_plane_gap;
-      reason = message.str();
-      return false;
-    }
+    // Do not require the source cube bottom to coincide with the RViz/A4
+    // ground plane. In the real cell source cubes can sit on a raised fixture
+    // while sort destinations remain on the calibrated Z=0 paper plane. The
+    // broad target Z bounds and MoveIt collision checks still apply.
     if (sort_enabled_ || automatic_task_) {
       if (std::abs(object_size[0] - object_size[1]) > 0.003 ||
         std::abs(object_size[1] - object_size[2]) > 0.003)
@@ -1175,6 +1662,389 @@ private:
     }
     result = *selected_pose;
     return true;
+  }
+
+  std::string calibratedZoneList() const
+  {
+    std::string list;
+    for (const auto & entry : zone_centers_) {
+      if (!list.empty()) {
+        list += ", ";
+      }
+      list += entry.first;
+    }
+    return list.empty() ? std::string("(none)") : list;
+  }
+
+  // ---------------------------------------------------------------------
+  // pick_stack target acquisition
+  //
+  // The source-colour filter stabilizes the cube that will be grasped, while
+  // `detected_targets` in that very same RGB-D status still describes every
+  // physically valid coloured cube in view. pick_stack accepts only a status
+  // that contains exactly one source and one support cube, then freezes both
+  // poses before planning. No perception result is consulted after motion.
+  // ---------------------------------------------------------------------
+
+  // Parse the cubes the perception node reports for the frame that also
+  // produced the selected target. Entries are only trusted while the status
+  // belongs to the expected filter generation.
+  bool detectedCubesFromStatus(
+    const std::string & status, const std::string & requested_color,
+    uint64_t filter_generation, std::vector<DetectedCube> & cubes,
+    std::string & reason) const
+  {
+    cubes.clear();
+    const auto data = nlohmann::json::parse(status, nullptr, false);
+    if (data.is_discarded() || !data.is_object() ||
+      data.value("detection_mode", "") != "colors")
+    {
+      reason = "no four-color perception status is available";
+      return false;
+    }
+    if (!requested_color.empty()) {
+      if (data.value("target_filter_color", std::string{}) != requested_color ||
+        data.value("filter_generation", uint64_t{0}) != filter_generation)
+      {
+        reason = "perception status belongs to a different colour filter generation";
+        return false;
+      }
+    }
+    if (!data.contains("detected_targets") || !data["detected_targets"].is_array()) {
+      reason = "perception status carries no per-cube target list";
+      return false;
+    }
+    for (const auto & entry : data["detected_targets"]) {
+      if (!entry.is_object() || !entry.contains("color") ||
+        !entry["color"].is_string() || !entry.contains("center_base_m") ||
+        !entry["center_base_m"].is_array() || entry["center_base_m"].size() != 3)
+      {
+        reason = "perception reported a malformed per-cube target entry";
+        return false;
+      }
+      DetectedCube cube;
+      cube.color = normalizedColor(entry["color"].get<std::string>());
+      if (!supportedColor(cube.color)) {
+        reason = "perception reported an unsupported colour " + cube.color;
+        return false;
+      }
+      std::vector<double> center;
+      for (const auto & value : entry["center_base_m"]) {
+        if (!value.is_number()) {
+          reason = "perception reported a non-numeric cube centre";
+          return false;
+        }
+        center.push_back(value.get<double>());
+      }
+      if (!finiteVector(center, 3)) {
+        reason = "perception reported a non-finite cube centre";
+        return false;
+      }
+      cube.center.x = center[0];
+      cube.center.y = center[1];
+      cube.center.z = center[2];
+      cube.top_z = entry.value("top_z_base_m", center[2]);
+      cube.grasp_axis_yaw_rad = entry.value("grasp_axis_yaw_base_rad", 0.0);
+      cube.grasp_axis_yaw_period_rad = entry.value(
+        "grasp_axis_yaw_period_rad", kPi * 0.5);
+      cube.stack_tier = entry.value("stack_tier", 0);
+      if (!isFinite(cube.top_z) || !isFinite(cube.grasp_axis_yaw_rad) ||
+        !(cube.grasp_axis_yaw_period_rad > 0.0) ||
+        !isFinite(cube.grasp_axis_yaw_period_rad) ||
+        cube.grasp_axis_yaw_period_rad > 2.0 * kPi ||
+        cube.stack_tier < 0 || cube.stack_tier > kMaximumStackTier)
+      {
+        reason = "perception reported an unusable cube orientation or stack tier";
+        return false;
+      }
+      cube.object_size_m = object_size_m_;
+      if (entry.contains("nominal_object_size_m") &&
+        entry["nominal_object_size_m"].is_array() &&
+        entry["nominal_object_size_m"].size() == 3)
+      {
+        std::vector<double> size;
+        for (const auto & value : entry["nominal_object_size_m"]) {
+          if (!value.is_number()) {
+            reason = "perception reported a non-numeric cube size";
+            return false;
+          }
+          size.push_back(value.get<double>());
+        }
+        if (finiteVector(size, 3) &&
+          std::all_of(size.begin(), size.end(), [](double value) {return value > 0.0;}))
+        {
+          cube.object_size_m = size;
+        }
+      }
+      cubes.push_back(cube);
+    }
+    return true;
+  }
+
+  // The lower cube must be alone on the table plane and must be a cube. This
+  // is the check that stops "stack A on B" from silently becoming a three-high
+  // tower when B itself already carries a cube.
+  bool lockStackDestinationSnapshot(
+    const std::vector<DetectedCube> & cubes, const DetectedCube & cube,
+    std::string & reason)
+  {
+    const double bottom = cube.top_z - cube.object_size_m[2];
+    const double plane_gap = bottom - ground_plane_z_m_;
+    if (plane_gap < -maximum_cube_plane_gap_m_ ||
+      plane_gap > maximum_cube_plane_gap_m_)
+    {
+      std::ostringstream message;
+      message << "the " << cube.color << " cube that should stay on the table is "
+              << "not resting on the table plane: bottom_gap_m=" << plane_gap;
+      reason = message.str();
+      return false;
+    }
+    if (cube.stack_tier != 0) {
+      reason = "the " + cube.color + " support cube is already stacked on another cube";
+      return false;
+    }
+    if (std::abs(cube.object_size_m[0] - cube.object_size_m[1]) > 0.003 ||
+      std::abs(cube.object_size_m[1] - cube.object_size_m[2]) > 0.003)
+    {
+      reason = "pick_stack currently accepts only equal-size cubes";
+      return false;
+    }
+    for (const auto & other : cubes) {
+      if (other.color == cube.color &&
+        positionDistance(other.center, cube.center) < 1e-9)
+      {
+        continue;
+      }
+      const double xy = std::hypot(
+        other.center.x - cube.center.x, other.center.y - cube.center.y);
+      if (xy <= stack_footprint_tolerance_m_ &&
+        other.center.z >= cube.top_z + 0.5 * cube.object_size_m[2])
+      {
+        reason = "another detected cube already sits on the " + cube.color +
+          " support cube; pick_stack builds only a two-cube stack";
+        return false;
+      }
+    }
+    StackDestination destination;
+    destination.valid = true;
+    destination.color = cube.color;
+    destination.top_pose.position = cube.center;
+    destination.top_pose.orientation.z = std::sin(cube.grasp_axis_yaw_rad * 0.5);
+    destination.top_pose.orientation.w = std::cos(cube.grasp_axis_yaw_rad * 0.5);
+    destination.object_size_m = cube.object_size_m;
+    destination.grasp_axis_yaw_rad = cube.grasp_axis_yaw_rad;
+    destination.grasp_axis_yaw_period_rad = cube.grasp_axis_yaw_period_rad;
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      locked_stack_destination_ = destination;
+    }
+    std::ostringstream detail;
+    detail << std::setprecision(9) << "color=" << cube.color
+           << ",top_xyz_m=[" << cube.center.x << "," << cube.center.y << ","
+           << cube.center.z << "],yaw_rad=" << cube.grasp_axis_yaw_rad
+           << ",tier=" << cube.stack_tier
+           << ",plane_gap_m=" << plane_gap;
+    recordEvent("stack_destination_locked", detail.str());
+    return true;
+  }
+
+  // Lock the support from the exact status that was already used to lock the
+  // source pose. This is deliberately not another perception request: the
+  // camera is still at the initial pose and both coordinates share one frame.
+  bool lockStackDestinationFromSourceSnapshot(
+    const std::string & support_color, const std::string & source_color,
+    uint64_t filter_generation, uint16_t & error_code, std::string & reason)
+  {
+    std::string status;
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      status = locked_target_status_;
+    }
+    std::vector<DetectedCube> cubes;
+    if (!detectedCubesFromStatus(
+        status, source_color, filter_generation, cubes, reason))
+    {
+      error_code = PickColor::Result::PERCEPTION_UNAVAILABLE;
+      reason = "the source snapshot cannot provide the complete stack pair: " + reason;
+      return false;
+    }
+    int source_matches = 0;
+    int support_matches = 0;
+    DetectedCube support;
+    for (const auto & cube : cubes) {
+      if (cube.color == source_color) {
+        ++source_matches;
+      }
+      if (cube.color == support_color) {
+        ++support_matches;
+        support = cube;
+      }
+    }
+    if (source_matches != 1) {
+      error_code = source_matches == 0 ? PickColor::Result::TARGET_NOT_FOUND :
+        PickColor::Result::TARGET_NOT_UNIQUE;
+      reason = "the initial snapshot must contain exactly one " + source_color +
+        " source cube; count=" + std::to_string(source_matches);
+      return false;
+    }
+    if (support_matches != 1) {
+      error_code = support_matches == 0 ? PickColor::Result::TARGET_NOT_FOUND :
+        PickColor::Result::TARGET_NOT_UNIQUE;
+      reason = "the initial snapshot must contain exactly one " + support_color +
+        " support cube; count=" + std::to_string(support_matches);
+      return false;
+    }
+    if (!lockStackDestinationSnapshot(cubes, support, reason)) {
+      error_code = PickColor::Result::STACK_GEOMETRY_REJECTED;
+      return false;
+    }
+    recordEvent(
+      "stack_pair_snapshot_locked",
+      "source=" + source_color + ",support=" + support_color +
+      ",filter_generation=" + std::to_string(filter_generation) +
+      ",same_rgbd_status=true");
+    return true;
+  }
+
+  // Decide whether the pair ordered by the caller can physically be stacked in
+  // the direction the caller asked for, objecting before any arm motion.
+  bool validateStackPair(std::string & reason)
+  {
+    StackDestination destination;
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      destination = locked_stack_destination_;
+    }
+    if (!destination.valid) {
+      reason = "the stack support cube was never snapshotted";
+      return false;
+    }
+    std::string status;
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      status = locked_target_status_;
+    }
+    const auto data = nlohmann::json::parse(status, nullptr, false);
+    const uint64_t generation = data.is_object() ?
+      data.value("filter_generation", uint64_t{0}) : uint64_t{0};
+    std::vector<DetectedCube> cubes;
+    if (!detectedCubesFromStatus(status, locked_color_, generation, cubes, reason)) {
+      reason = "cannot validate the frozen stack pair: " + reason;
+      return false;
+    }
+    const auto source = std::find_if(
+      cubes.begin(), cubes.end(), [this](const DetectedCube & cube) {
+        return cube.color == locked_color_;
+      });
+    if (source == cubes.end()) {
+      reason = "the frozen snapshot has no " + locked_color_ + " source cube";
+      return false;
+    }
+    if (source->stack_tier != 0) {
+      reason = "the " + locked_color_ +
+        " source cube is already stacked; both cubes must start on the tabletop";
+      return false;
+    }
+    const double source_bottom = source->top_z - source->object_size_m[2];
+    const double destination_bottom = destination.top_pose.position.z -
+      destination.object_size_m[2];
+    const double source_plane_gap = source_bottom - ground_plane_z_m_;
+    if (std::abs(source_plane_gap) > maximum_cube_plane_gap_m_) {
+      std::ostringstream message;
+      message << "the " << locked_color_
+              << " source cube is not resting on the tabletop: bottom_gap_m="
+              << source_plane_gap;
+      reason = message.str();
+      return false;
+    }
+    const double tabletop_difference = source_bottom - destination_bottom;
+    if (std::abs(tabletop_difference) > stack_height_tolerance_m_) {
+      std::ostringstream message;
+      message << "the two cubes do not start on the same tabletop: bottom_difference_m="
+              << tabletop_difference;
+      reason = message.str();
+      return false;
+    }
+    const double xy_separation = std::hypot(
+      source->center.x - destination.top_pose.position.x,
+      source->center.y - destination.top_pose.position.y);
+    if (xy_separation <= stack_footprint_tolerance_m_) {
+      reason = "the source and support cube footprints overlap in the initial snapshot";
+      return false;
+    }
+    std::ostringstream detail;
+    detail << std::setprecision(9) << "lower=" << destination.color
+           << ",upper=" << locked_color_
+           << ",same_snapshot=true"
+           << ",xy_separation_m=" << xy_separation
+           << ",tabletop_bottom_difference_m=" << tabletop_difference
+           << ",source_bottom_m=" << source_bottom
+           << ",destination_bottom_m=" << destination_bottom;
+    recordEvent("stack_pair_validated", detail.str());
+    RCLCPP_INFO(node_->get_logger(), "pick_stack pair: %s", detail.str().c_str());
+    return true;
+  }
+
+  // A slot is unusable when a known MoveIt obstacle already sits on it. This
+  // reads the live planning scene instead of keeping a counter, so the answer
+  // stays correct after an operator clears the table and restarts the stack.
+  bool slotOccupied(const std::vector<double> & center)
+  {
+    for (const auto & entry : planning_scene_.getObjects()) {
+      if (entry.first == cube_id_ || entry.first == ground_plane_id_) {
+        continue;
+      }
+      for (const auto & pose : entry.second.primitive_poses) {
+        if (std::hypot(
+            pose.position.x - center[0], pose.position.y - center[1]) <
+          zone_slot_clearance_m_)
+        {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  bool assignZoneSlot(std::string & reason)
+  {
+    const auto slots_entry = zone_slots_.find(locked_zone_.region);
+    if (slots_entry == zone_slots_.end() || slots_entry->second.empty()) {
+      reason = "placement zone has no configured slots: " + locked_zone_.region;
+      return false;
+    }
+    const auto & slots = slots_entry->second;
+    const std::size_t count = slots.size() / 3;
+    const auto slot_center = [&slots](std::size_t index) {
+        return std::vector<double>{
+        slots[index * 3], slots[index * 3 + 1], slots[index * 3 + 2]};
+      };
+    if (locked_zone_.explicit_slot) {
+      if (locked_zone_.slot_index >= count) {
+        std::ostringstream message;
+        message << "placement zone " << locked_zone_.region << " has " << count
+                << " slot(s); requested slot " << (locked_zone_.slot_index + 1);
+        reason = message.str();
+        return false;
+      }
+      if (slotOccupied(slot_center(locked_zone_.slot_index))) {
+        std::ostringstream message;
+        message << "requested placement slot " << locked_zone_.region
+                << (locked_zone_.slot_index + 1) << " is already occupied";
+        reason = message.str();
+        return false;
+      }
+      locked_place_center_ = slot_center(locked_zone_.slot_index);
+      return true;
+    }
+    for (std::size_t index = 0; index < count; ++index) {
+      if (!slotOccupied(slot_center(index))) {
+        locked_place_center_ = slot_center(index);
+        return true;
+      }
+    }
+    reason = "every slot in placement zone " + locked_zone_.region + " is already occupied";
+    return false;
   }
 
   bool callPerceptionService(
@@ -1223,6 +2093,9 @@ private:
     if (!task_sort_enabled_) {
       locked_place_center_.clear();
       return true;
+    }
+    if (!locked_zone_.region.empty()) {
+      return assignZoneSlot(reason);
     }
     if (!batch_mode_) {
       locked_place_center_ = place_centers_.at(color);
@@ -1309,7 +2182,6 @@ private:
       "detected color has no configured placement region",
       "target is outside configured first-grasp bounds",
       "target orientation is not a horizontal top-surface yaw",
-      "current target is not on the configured table plane",
       "four-color sorting currently accepts only equal-size cubes"
     })
     {
@@ -1418,6 +2290,7 @@ private:
     }
     if (state != WAITING_TARGET && state != RETRYABLE_FAILED &&
       state != PLAN_ONLY_COMPLETE && state != COMPLETE && state != SORT_COMPLETE &&
+      state != STACK_COMPLETE &&
       state != BATCH_COMPLETE && state != BATCH_COMPLETE_WITH_SKIPS)
     {
       reason = "Task is not idle; current state=" + stateName(state);
@@ -1427,6 +2300,14 @@ private:
       worker_.join();
     }
     return true;
+  }
+
+  // True while the planning scene still carries the grasped cube as an object
+  // attached to the gripper, which means software cannot assume the gripper is
+  // empty even though the arm may have returned home.
+  bool cubeIsStillAttached()
+  {
+    return planning_scene_.getAttachedObjects({cube_id_}).count(cube_id_) != 0;
   }
 
   bool clearPreviousCubeScene(std::string & reason)
@@ -1440,6 +2321,20 @@ private:
     if (planning_scene_.getAttachedObjects({cube_id_}).count(cube_id_) != 0) {
       reason = "the previous trial's cube is still attached in the planning scene";
       return false;
+    }
+
+    // MoveIt reports a REMOVE for an object that is not in the scene as a
+    // FAILURE, not as a no-op:
+    //   PlanningScene::processCollisionObjectRemove() logs
+    //   "Tried to remove world object '<id>', but it does not exist in this
+    //   scene." and returns false, which becomes ApplyPlanningScene.success =
+    //   false. Treating that as an error would refuse the very first task on a
+    //   freshly started stack, when the scene is legitimately empty and there is
+    //   nothing to clean up. Removing a cube that is not there is already the
+    //   desired state, so it is not requested in the first place.
+    if (planning_scene_.getObjects({cube_id_}).count(cube_id_) == 0) {
+      recordEvent("previous_cube_absent", "world_id=" + cube_id_);
+      return true;
     }
 
     moveit_msgs::msg::CollisionObject remove;
@@ -1498,6 +2393,72 @@ private:
       }
     }
     recordEvent("sorted_cube_archived", "obstacle_id=" + placed_id);
+    // The lower cube of a finished stack is a virtual obstacle for planning, not
+    // a real scene object the operator created, so it must not outlive the task.
+    return clearStackSupportObject(reason);
+  }
+
+  bool clearArchivedObstacleAtTarget(std::string & reason)
+  {
+    const auto target_object = cubeObject();
+    const auto target = collisionPrimitivePosition(
+      target_object, target_object.primitive_poses.front());
+    const double match_tolerance_m = std::min(
+      locked_object_size_m_[2] * 0.45,
+      std::max(maximum_cube_plane_gap_m_, stack_height_tolerance_m_));
+    const std::string prefix = cube_id_ + "_sorted_";
+    std::vector<std::string> matches;
+    for (const auto & entry : planning_scene_.getObjects()) {
+      if (entry.first.rfind(prefix, 0) != 0) {
+        continue;
+      }
+      if (std::any_of(
+          entry.second.primitive_poses.begin(), entry.second.primitive_poses.end(),
+          [&entry, &target, match_tolerance_m](const geometry_msgs::msg::Pose & pose) {
+            const auto archived = collisionPrimitivePosition(entry.second, pose);
+            return positionDistance(archived, target) <= match_tolerance_m;
+          }))
+      {
+        matches.push_back(entry.first);
+      }
+    }
+    for (const auto & id : matches) {
+      moveit_msgs::msg::CollisionObject remove;
+      remove.header.frame_id = base_frame_;
+      remove.id = id;
+      remove.operation = moveit_msgs::msg::CollisionObject::REMOVE;
+      if (!planning_scene_.applyCollisionObject(remove) ||
+        planning_scene_.getObjects({id}).count(id) != 0)
+      {
+        reason = "failed to reclaim the selected cube from archived obstacle " + id;
+        return false;
+      }
+      recordEvent(
+        "archived_target_reclaimed",
+        "obstacle_id=" + id + ",distance_tolerance_m=" +
+        std::to_string(match_tolerance_m));
+    }
+    return true;
+  }
+
+  // Remove the virtual lower-cube obstacle of pick_stack from the planning
+  // scene. Safe to call when no stack obstacle is present.
+  bool clearStackSupportObject(std::string & reason)
+  {
+    if (planning_scene_.getObjects({stack_support_id_}).count(stack_support_id_) == 0) {
+      return true;
+    }
+    moveit_msgs::msg::CollisionObject remove;
+    remove.header.frame_id = base_frame_;
+    remove.id = stack_support_id_;
+    remove.operation = moveit_msgs::msg::CollisionObject::REMOVE;
+    if (!planning_scene_.applyCollisionObject(remove) ||
+      planning_scene_.getObjects({stack_support_id_}).count(stack_support_id_) != 0)
+    {
+      reason = "failed to clear the previous stack support cube from the scene";
+      return false;
+    }
+    recordEvent("stack_support_cleared", "obstacle_id=" + stack_support_id_);
     return true;
   }
 
@@ -1564,8 +2525,128 @@ private:
     return pose;
   }
 
+  // -----------------------------------------------------------------------
+  // pick_stack geometry
+  //
+  // The upper cube must come down with the same top-face yaw as the lower cube,
+  // otherwise the two cubes touch only along an edge and the tower is not
+  // stable. The lower cube's yaw is known before any motion, so the required
+  // placement rotation is fixed during planning and the source grasp yaw is
+  // chosen from the equivalent grasps that need the smallest rotation.
+  // -----------------------------------------------------------------------
+
+  // Yaw of the lower cube's top face in the base frame.
+  double stackDestinationYaw() const
+  {
+    return locked_stack_destination_.grasp_axis_yaw_rad;
+  }
+
+  // TCP rotation that lands the upper cube with its top face aligned to the
+  // lower cube. The applied grasp yaw of a candidate already carries the edge
+  // offset, so the placement yaw is (destination - offset) mapped onto the
+  // candidate's equivalent grasp set.
+  geometry_msgs::msg::Quaternion stackPlacementOrientation(
+    const GraspCandidate & candidate) const
+  {
+    if (!use_target_yaw_ || !locked_stack_destination_.valid) {
+      return candidate.orientation;
+    }
+    const double symmetry = locked_yaw_symmetry_rad_;
+    const double desired_applied =
+      stackDestinationYaw() - target_yaw_offset_rad_;
+    const double placement_yaw = closestEquivalentAngle(
+      desired_applied, candidate.yaw_rad, symmetry);
+    if (std::abs(placement_yaw) < 1e-9) {
+      return candidate.orientation;
+    }
+    return normalizedQuaternion(
+      multiply(yawQuaternion(placement_yaw), candidate.orientation));
+  }
+
+  // Rotation the wrist has to add to the source grasp to align the upper cube
+  // with the lower one. A square cube allows four equally valid choices; the
+  // planner still has to confirm that the chosen one is reachable.
+  double stackPlacementYawOffset(const GraspCandidate & candidate) const
+  {
+    if (!use_target_yaw_ || !locked_stack_destination_.valid) {
+      return 0.0;
+    }
+    return closestEquivalentAngle(
+      stackDestinationYaw() - target_yaw_offset_rad_, candidate.yaw_rad,
+      locked_yaw_symmetry_rad_);
+  }
+
+  // TCP height that leaves the attached cube's bottom release_bottom_gap_m_
+  // above the lower cube's top face. The attached cube centre sits
+  // (grasp_depth - height/2) above the TCP, so the TCP has to be that much
+  // lower than the intended resting centre.
+  geometry_msgs::msg::Pose stackPlacePose() const
+  {
+    auto pose = graspPose();
+    pose.position.x = locked_stack_destination_.top_pose.position.x;
+    pose.position.y = locked_stack_destination_.top_pose.position.y;
+    const double destination_top_z = locked_stack_destination_.top_pose.position.z;
+    pose.position.z = destination_top_z + release_bottom_gap_m_ +
+      locked_object_size_m_[2] - grasp_depth_m_;
+    pose.orientation = stackPlacementOrientation(
+      {locked_applied_yaw_rad_, locked_grasp_orientation_});
+    return pose;
+  }
+
+  // Approach and retreat for a stack stay higher than a table placement: the
+  // grasped cube has to clear the lower cube while the wrist rotates.
+  geometry_msgs::msg::Pose stackPlaceApproachPose() const
+  {
+    auto pose = stackPlacePose();
+    pose.position.z += stack_approach_clearance_m_;
+    return pose;
+  }
+
+  // The upper cube after the 5 mm free drop: its bottom rests on the lower
+  // cube's top. The release pose itself remains release_bottom_gap_m_ higher.
+  moveit_msgs::msg::CollisionObject stackedCubeObject() const
+  {
+    auto pose = cubeObject().primitive_poses.front();
+    pose.position.x = locked_stack_destination_.top_pose.position.x;
+    pose.position.y = locked_stack_destination_.top_pose.position.y;
+    pose.position.z = locked_stack_destination_.top_pose.position.z +
+      locked_object_size_m_[2] * 0.5;
+    pose.orientation = stackPlacementOrientation(
+      {locked_applied_yaw_rad_, locked_grasp_orientation_});
+    return makeBox(cube_id_, base_frame_, locked_object_size_m_, pose);
+  }
+
+  // The lower cube stays in the scene for the whole stack task, so the planner
+  // must route the grasped upper cube around it.
+  moveit_msgs::msg::CollisionObject stackSupportObject() const
+  {
+    geometry_msgs::msg::Pose pose;
+    pose.position.x = locked_stack_destination_.top_pose.position.x;
+    pose.position.y = locked_stack_destination_.top_pose.position.y;
+    pose.position.z = locked_stack_destination_.top_pose.position.z -
+      locked_stack_destination_.object_size_m[2] * 0.5;
+    pose.orientation = locked_stack_destination_.top_pose.orientation;
+    return makeBox(
+      stack_support_id_, base_frame_, locked_stack_destination_.object_size_m, pose);
+  }
+
+  // During execution the placement target follows whichever equivalent grasp
+  // the planner selected, which is only known after previewAll().
+  geometry_msgs::msg::Pose activePlacePose() const
+  {
+    return task_stack_enabled_ ? stackPlacePose() : placePose();
+  }
+
+  geometry_msgs::msg::Pose activePlaceApproachPose() const
+  {
+    return task_stack_enabled_ ? stackPlaceApproachPose() : placeApproachPose();
+  }
+
   moveit_msgs::msg::CollisionObject placedCubeObject() const
   {
+    if (task_stack_enabled_) {
+      return stackedCubeObject();
+    }
     auto pose = cubeObject().primitive_poses.front();
     const auto & center = locked_place_center_;
     pose.position.x = center[0];
@@ -1598,24 +2679,17 @@ private:
     plane_pose.position.z = ground_plane_z_m_ - ground_plane_contact_epsilon_m_ -
       ground_plane_thickness_m_ * 0.5;
     plane_pose.orientation.w = 1.0;
-    const double cube_bottom = locked_target_.pose.position.z - locked_object_size_m_[2];
-    const double cube_plane_gap = cube_bottom - ground_plane_z_m_;
-    if (cube_plane_gap < 0.0 || cube_plane_gap > maximum_cube_plane_gap_m_) {
-      std::ostringstream stream;
-      stream << "visual box bottom must be on/above the RViz plane and within "
-             << maximum_cube_plane_gap_m_ * 1000.0 << " mm; gap="
-             << cube_plane_gap * 1000.0 << " mm";
-      reason = stream.str();
-      return false;
-    }
+    // validateStackPair() has already required both pick_stack cubes to start
+    // side by side on the same tabletop. Do not compare the source bottom with
+    // the support top here: that relationship becomes true only after placing.
     for (const auto & pose : {approachPose(), graspPose(), liftPose()}) {
       if (pose.position.z < ground_plane_z_m_) {
         reason = "a task TCP target is below the configured RViz ground plane";
         return false;
       }
     }
-    if (task_sort_enabled_ && (placePose().position.z < ground_plane_z_m_ ||
-      placeApproachPose().position.z < ground_plane_z_m_))
+    if (task_sort_enabled_ && (activePlacePose().position.z < ground_plane_z_m_ ||
+      activePlaceApproachPose().position.z < ground_plane_z_m_))
     {
       reason = "place TCP target is below the ground plane";
       return false;
@@ -1624,12 +2698,21 @@ private:
       ground_plane_id_, base_frame_,
       {ground_plane_xy_size_[0], ground_plane_xy_size_[1], ground_plane_thickness_m_},
       plane_pose);
-    if (!planning_scene_.applyCollisionObjects({plane, cubeObject()})) {
+    std::vector<moveit_msgs::msg::CollisionObject> objects{plane, cubeObject()};
+    if (task_stack_enabled_) {
+      // The lower cube is a permanent obstacle for the whole stack task. It has
+      // to be in the scene before the approach is planned, not added later.
+      objects.push_back(stackSupportObject());
+    }
+    if (!planning_scene_.applyCollisionObjects(objects)) {
       reason = "MoveIt rejected RViz-ground/cube collision objects";
       return false;
     }
     recordEvent(
-      "scene_applied",
+      "scene_applied", task_stack_enabled_ ?
+      "RViz XY plane converted to a collision slab below Z=" +
+      std::to_string(ground_plane_z_m_) +
+      "; visual target cube and stack support cube added" :
       "RViz XY plane converted to a collision slab below Z=" +
       std::to_string(ground_plane_z_m_) + "; visual target cube added");
     return true;
@@ -1694,6 +2777,23 @@ private:
     }
     if (!planning_scene_.applyCollisionObject(cubeObject())) {
       reason = "failed to restore cube after preview attachment";
+      return false;
+    }
+    if (task_stack_enabled_ && !applyStackSupportObject(reason)) {
+      return false;
+    }
+    return true;
+  }
+
+  // Keep the lower cube present in the scene for the whole stack task, whatever
+  // a rejected planning candidate did to the world objects in between.
+  bool applyStackSupportObject(std::string & reason)
+  {
+    if (!task_stack_enabled_ || !locked_stack_destination_.valid) {
+      return true;
+    }
+    if (!planning_scene_.applyCollisionObject(stackSupportObject())) {
+      reason = "MoveIt rejected the stack support cube";
       return false;
     }
     return true;
@@ -1824,6 +2924,37 @@ private:
     return motion;
   }
 
+  PlannedMotion planJointState(
+    const std::string & name, const moveit::core::RobotStatePtr & start,
+    const moveit::core::RobotStatePtr & target)
+  {
+    if (!target) {
+      throw std::runtime_error(name + " has no validated target joint state");
+    }
+    std::vector<double> target_joints;
+    target->copyJointGroupPositions(arm_group_, target_joints);
+    move_group_->setStartState(*start);
+    move_group_->clearPoseTargets();
+    if (!move_group_->setJointValueTarget(target_joints)) {
+      throw std::runtime_error(name + " rejected the validated target joint state");
+    }
+    moveit::planning_interface::MoveGroupInterface::Plan plan;
+    const auto code = move_group_->plan(plan);
+    recordReturn("plan_" + name, code.val);
+    if (code != moveit::core::MoveItErrorCode::SUCCESS) {
+      throw std::runtime_error(
+              name + " planning failed with MoveIt code " +
+              std::to_string(code.val));
+    }
+    PlannedMotion motion;
+    motion.name = name;
+    motion.trajectory = plan.trajectory_;
+    moveit::core::robotStateToRobotStateMsg(*start, motion.start_state);
+    motion.end_state = endState(*start, motion.trajectory);
+    saveTrajectory(motion);
+    return motion;
+  }
+
   PlannedMotion planCartesian(
     const std::string & name, const moveit::core::RobotStatePtr & start,
     const geometry_msgs::msg::Pose & target)
@@ -1930,6 +3061,38 @@ private:
     return result;
   }
 
+  void verifyValidatedSegmentStart(
+    const std::string & name, const moveit::core::RobotStatePtr & expected)
+  {
+    if (!expected) {
+      throw std::runtime_error(name + " has no validated start state");
+    }
+    const auto actual = currentStartState(false);
+    std::vector<double> actual_joints;
+    std::vector<double> expected_joints;
+    actual->copyJointGroupPositions(arm_group_, actual_joints);
+    expected->copyJointGroupPositions(arm_group_, expected_joints);
+    if (actual_joints.size() != expected_joints.size() || actual_joints.empty()) {
+      throw std::runtime_error(name + " validated start state has inconsistent dimensions");
+    }
+    double maximum_difference = 0.0;
+    for (std::size_t index = 0; index < actual_joints.size(); ++index) {
+      maximum_difference = std::max(
+        maximum_difference, std::abs(actual_joints[index] - expected_joints[index]));
+    }
+    std::ostringstream detail;
+    detail << std::setprecision(9)
+           << "segment=" << name
+           << ",maximum_arm_joint_difference_rad=" << maximum_difference
+           << ",limit_rad=" << validated_segment_start_tolerance_rad_;
+    recordEvent("validated_segment_start", detail.str());
+    if (maximum_difference > validated_segment_start_tolerance_rad_) {
+      throw std::runtime_error(
+              name + " actual start differs from its validated trajectory: " +
+              detail.str());
+    }
+  }
+
   JointPathMetrics combinedJointPathMetrics(const std::vector<PlannedMotion> & motions) const
   {
     JointPathMetrics total;
@@ -1967,6 +3130,24 @@ private:
       const auto & candidate = candidates[index];
       locked_grasp_orientation_ = candidate.orientation;
       locked_applied_yaw_rad_ = candidate.yaw_rad;
+      // A square top face makes the four equivalent grasps interchangeable in
+      // grasp quality but not in wrist travel. Half a symmetry step (45 degrees
+      // for a square top) is the worst case the reduction can leave, so a
+      // candidate is dropped only when it exceeds the configured allowance.
+      // The four candidates are one whole step apart, so at least one always
+      // survives any allowance of half a step or more.
+      const double placement_yaw_offset = stackPlacementYawOffset(candidate);
+      if (task_stack_enabled_ &&
+        std::abs(placement_yaw_offset) >
+        maximum_stack_placement_rotation_rad_ + 1e-9)
+      {
+        recordEvent(
+          "grasp_candidate_rejected",
+          "index=" + std::to_string(index) + ",yaw_rad=" +
+          std::to_string(candidate.yaw_rad) + ",reason=placement_rotation_" +
+          std::to_string(placement_yaw_offset) + "_rad_exceeds_limit");
+        continue;
+      }
       const std::string prefix = "candidate_" + std::to_string(index) + "_";
       bool attachment_attempted = false;
       try {
@@ -1983,13 +3164,17 @@ private:
           planCartesian(
             prefix + "lift", motions.back().end_state, liftPose()));
         if (task_sort_enabled_) {
+          // For pick_stack the placement orientation depends on the candidate,
+          // so the rotation the wrist has to add is recorded with the path.
+          const double placement_yaw_offset = stackPlacementYawOffset(candidate);
           motions.push_back(
             planPose(
               prefix + "place_approach", motions.back().end_state,
-              placeApproachPose()));
+              activePlaceApproachPose()));
           motions.push_back(
             planCartesian(
-              prefix + "place_descend", motions.back().end_state, placePose()));
+              prefix + "place_descend", motions.back().end_state,
+              activePlacePose()));
           if (!releaseCubeScene(reason)) {
             throw std::runtime_error(reason);
           }
@@ -2000,10 +3185,17 @@ private:
           motions.push_back(
             planCartesian(
               prefix + "place_retreat", open_state,
-              placeApproachPose()));
+              activePlaceApproachPose()));
           motions.push_back(
             planHome(
               prefix + "return_home", motions.back().end_state));
+          if (task_stack_enabled_) {
+            recordEvent(
+              "stack_candidate_rotation",
+              "index=" + std::to_string(index) + ",source_yaw_rad=" +
+              std::to_string(candidate.yaw_rad) + ",placement_yaw_offset_rad=" +
+              std::to_string(placement_yaw_offset));
+          }
         }
         if (!restoreWorldCube(reason)) {
           throw std::runtime_error(reason);
@@ -2042,6 +3234,14 @@ private:
       }
     }
     if (best_motions.empty()) {
+      if (task_stack_enabled_) {
+        std::ostringstream message;
+        message << "no equivalent " << locked_color_ << " grasp can place the cube on the "
+                << locked_stack_support_color_ << " cube within "
+                << maximum_stack_placement_rotation_rad_ << " rad of wrist rotation and "
+                << "with a complete collision-free trajectory";
+        throw std::runtime_error(message.str());
+      }
       throw std::runtime_error("no equivalent grasp has a complete collision-free trajectory");
     }
     locked_grasp_orientation_ = best_candidate.orientation;
@@ -2062,11 +3262,26 @@ private:
       "grasp_candidate_selected", "yaw_rad=" +
       std::to_string(best_candidate.yaw_rad) + ",joint_space_path_length_rad=" +
       std::to_string(best_score));
+    if (task_stack_enabled_) {
+      recordEvent(
+        "stack_candidate_selected",
+        "source_yaw_rad=" + std::to_string(best_candidate.yaw_rad) +
+        ",destination_yaw_rad=" + std::to_string(stackDestinationYaw()) +
+        ",placement_yaw_offset_rad=" +
+        std::to_string(stackPlacementYawOffset(best_candidate)) +
+        ",placement_orientation_xyzw=[" +
+        std::to_string(locked_grasp_orientation_.x) + "," +
+        std::to_string(locked_grasp_orientation_.y) + "," +
+        std::to_string(locked_grasp_orientation_.z) + "," +
+        std::to_string(locked_grasp_orientation_.w) + "]");
+    }
     publishPreview(best_motions);
     recordEvent(
-      "preview_complete", task_sort_enabled_ ?
+      "preview_complete", task_stack_enabled_ ?
+      "grasp, aligned stack placement, release, retreat and return-home paths planned" :
+      (task_sort_enabled_ ?
       "grasp, place, release, retreat and return-home paths planned" :
-      "approach, full descend and attached full lift planned");
+      "approach, full descend and attached full lift planned"));
     return best_motions;
   }
 
@@ -2126,12 +3341,13 @@ private:
     return true;
   }
 
-  bool commandGripper(double position, const std::string & name)
+  std::optional<PendingGripperCommand> beginGripperCommand(
+    double position, const std::string & name)
   {
     if (!gripper_client_->wait_for_action_server(std::chrono::duration<double>(action_timeout_s_)))
     {
       fail("gripper action server unavailable for " + name);
-      return false;
+      return std::nullopt;
     }
     GripperCommand::Goal goal;
     goal.command.position = position;
@@ -2141,38 +3357,56 @@ private:
       std::future_status::ready)
     {
       fail("gripper goal acknowledgement timed out for " + name);
-      return false;
+      return std::nullopt;
     }
     const auto goal_handle = goal_future.get();
     if (!goal_handle) {
       fail("gripper rejected " + name);
-      return false;
+      return std::nullopt;
     }
-    auto result_future = gripper_client_->async_get_result(goal_handle);
-    if (result_future.wait_for(std::chrono::duration<double>(action_timeout_s_)) !=
+    PendingGripperCommand pending;
+    pending.position = position;
+    pending.name = name;
+    pending.goal_handle = goal_handle;
+    pending.result_future = gripper_client_->async_get_result(goal_handle);
+    recordEvent(
+      "gripper_" + name + "_started",
+      "requested_position_m=" + std::to_string(position));
+    return pending;
+  }
+
+  bool finishGripperCommand(PendingGripperCommand & pending)
+  {
+    if (pending.result_future.wait_for(std::chrono::duration<double>(action_timeout_s_)) !=
       std::future_status::ready)
     {
-      gripper_client_->async_cancel_goal(goal_handle);
-      fail("gripper result timed out for " + name);
+      gripper_client_->async_cancel_goal(pending.goal_handle);
+      fail("gripper result timed out for " + pending.name);
       return false;
     }
-    const auto wrapped = result_future.get();
+    const auto wrapped = pending.result_future.get();
     const bool success = wrapped.code == rclcpp_action::ResultCode::SUCCEEDED &&
       wrapped.result && wrapped.result->reached_goal;
     std::ostringstream detail;
     detail << "result_code=" << static_cast<int>(wrapped.code)
            << ",reached_goal=" << (wrapped.result && wrapped.result->reached_goal)
-           << ",requested_position_m=" << position;
+           << ",requested_position_m=" << pending.position;
     if (wrapped.result) {
       detail << ",reported_position_m=" << wrapped.result->position
              << ",stalled=" << wrapped.result->stalled;
     }
-    recordEvent("gripper_" + name, detail.str());
+    recordEvent("gripper_" + pending.name, detail.str());
     if (!success) {
-      fail("gripper " + name + " failed: " + detail.str());
+      fail("gripper " + pending.name + " failed: " + detail.str());
       return false;
     }
     return true;
+  }
+
+  bool commandGripper(double position, const std::string & name)
+  {
+    auto pending = beginGripperCommand(position, name);
+    return pending && finishGripperCommand(*pending);
   }
 
   void start(
@@ -2330,6 +3564,15 @@ private:
 
   void cancel(const std::shared_ptr<std_srvs::srv::Trigger::Response> & response)
   {
+    // A cancel with no running task is idempotent. In particular, preserve
+    // SORT_COMPLETE (needed to archive the placed cube on the next start) and
+    // COMPLETE (the held-object lock). Do not turn either into CANCELED.
+    // Do not wait on start_mutex_: active cancellation must remain immediate.
+    if (!worker_running_.load() && !action_goal_claimed_.load()) {
+      response->success = true;
+      response->message = "No active task to cancel; task and holding state unchanged.";
+      return;
+    }
     canceled_.store(true);
     move_group_->stop();
     if (gripper_client_) {
@@ -2392,14 +3635,71 @@ private:
 
   bool runCycle()
   {
+    if (task_stack_enabled_) {
+      // pick_stack promises that one request always ends with the arm back at
+      // its start joints and the task slot free, whatever happened in between.
+      const bool completed = runCycleBody();
+      if (execute_ && !completed && arm_motion_started_.load() &&
+        !canceled_.load())
+      {
+        recoverToHomeAfterFailedStack();
+      }
+      return completed;
+    }
+    return runCycleBody();
+  }
+
+  // A failed stack must not leave the arm parked over the tower. Returning home
+  // with the cube still attached is safe and lets the operator inspect the
+  // scene; nothing is released automatically.
+  void recoverToHomeAfterFailedStack()
+  {
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      state_detail_ += "; returning to the start joints before reporting the failure";
+    }
+    publishState();
+    recordEvent("stack_recovery_start", "arm motion had started; returning home");
+    try {
+      auto home = planHome("stack_failure_return_home", currentStartState(false));
+      if (executeMotion(home, locked_home_pose_)) {
+        recordEvent("stack_recovery_done", "arm returned to the task start joints");
+        std::lock_guard<std::mutex> lock(mutex_);
+        state_detail_ += "; arm returned to the start joints";
+        state_ = RETRYABLE_FAILED;
+        return;
+      }
+      recordEvent("stack_recovery_failed", "return-home motion did not complete");
+    } catch (const std::exception & error) {
+      recordEvent("stack_recovery_failed", error.what());
+    }
+    {
+      std::lock_guard<std::mutex> lock(mutex_);
+      state_detail_ += "; automatic return home also failed, inspect the cell before the next task";
+      state_ = FAILED;
+    }
+  }
+
+  bool runCycleBody()
+  {
     try {
       initializeRunLog();
       recordEvent("target_snapshot", "stable target copied; equivalent yaws will be planned");
-      if (execute_ && !commandGripper(pre_open_position_m_, "pre_open")) {
-        return false;
-      }
-      if (execute_ && !waitForGripperState(pre_open_position_m_, "pre_open")) {
-        return false;
+      // The gripper is open-loop: one successful Action result proves that a
+      // finite PWM burst was transmitted, not that the fingers moved. Send the
+      // configured bounded opening command before any arm motion. Production
+      // uses one command; extra repetitions remain an explicit diagnostic
+      // option because they add latency and can make the servo hunt.
+      for (int repetition = 1; execute_ && repetition <= pre_open_command_repetitions_;
+        ++repetition)
+      {
+        const std::string name = repetition == 1 ?
+          "pre_open" : "pre_open_confirm_" + std::to_string(repetition);
+        if (!commandGripper(pre_open_position_m_, name) ||
+          !waitForGripperState(pre_open_position_m_, name))
+        {
+          return false;
+        }
       }
       std::vector<PlannedMotion> preview;
       try {
@@ -2409,6 +3709,7 @@ private:
         fail(error.what());
         return false;
       }
+      recordLatency("planning_done");
       std::ostringstream target_detail;
       target_detail << std::setprecision(9) << "locked top=["
                     << locked_target_.pose.position.x << ","
@@ -2421,9 +3722,11 @@ private:
       recordTarget();
       if (!execute_) {
         setState(
-          PLAN_ONLY_COMPLETE, task_sort_enabled_ ?
+          PLAN_ONLY_COMPLETE, task_stack_enabled_ ?
+          "full stack route planned; no command was sent" :
+          (task_sort_enabled_ ?
           "full color-sort route planned; no command was sent" :
-          "three motions planned; no command was sent");
+          "three motions planned; no command was sent"));
         return true;
       }
       std::string p6_reason;
@@ -2433,6 +3736,7 @@ private:
       }
       recordEvent("p6_gate", "before approach passed");
       recordEvent("target_lock", "before approach uses immutable start snapshot");
+      recordLatency("approach_command");
       if (!executeMotion(preview.front(), approachPose())) {
         return false;
       }
@@ -2479,36 +3783,73 @@ private:
           fail("before placement: " + p6_reason);
           return false;
         }
-        setState(PLACING, "moving the grasped cube to its color region");
-        auto place_approach = planPose(
-          "place_approach_execute", currentStartState(false), placeApproachPose());
-        if (!executeMotion(place_approach, placeApproachPose())) {
+        if (task_stack_enabled_) {
+          recordEvent(
+            "stack_destination_snapshot_reused",
+            "placing from the immutable initial same-frame support pose; no re-observation");
+          setState(
+            PLACING, "moving the grasped " + locked_color_ + " cube above the " +
+            locked_stack_support_color_ + " cube with the top faces aligned");
+        } else {
+          setState(PLACING, "moving the grasped cube to its color region");
+        }
+        // previewAll() proved that motion 3's exact IK branch can continue with
+        // a complete collision-free Cartesian descent. A pose-only replan may
+        // reach the same TCP pose through another IK branch that cannot descend.
+        constexpr std::size_t kPlaceApproachIndex = 3;
+        constexpr std::size_t kPlaceDescendIndex = 4;
+        constexpr std::size_t kPlaceRetreatIndex = 5;
+        if (preview.size() <= kPlaceRetreatIndex) {
+          fail("validated placement trajectory is incomplete");
           return false;
         }
-        auto place_descend = planCartesian(
-          "place_descend_execute", currentStartState(false), placePose());
-        if (!executeMotion(place_descend, placePose())) {
+        auto place_approach = planJointState(
+          "place_approach_execute", currentStartState(false),
+          preview[kPlaceApproachIndex].end_state);
+        if (!executeMotion(place_approach, activePlaceApproachPose())) {
           return false;
         }
+        // The Cartesian segment was already checked from this exact joint
+        // branch before any arm motion. Recomputing it from a sub-millimetre
+        // hardware arrival error is singularity-sensitive for rotated cubes.
+        verifyValidatedSegmentStart(
+          "place_descend_execute", preview[kPlaceApproachIndex].end_state);
+        auto place_descend = preview[kPlaceDescendIndex];
+        place_descend.name = "place_descend_execute";
+        if (!executeMotion(place_descend, activePlacePose())) {
+          return false;
+        }
+        auto retreat = preview[kPlaceRetreatIndex];
+        retreat.name = "place_retreat_execute";
         if (!commandGripper(pre_open_position_m_, "release")) {
           return false;
         }
         if (!waitForGripperState(pre_open_position_m_, "release")) {
           return false;
         }
+        // Plan with the cube attached so its retreat swept volume is checked,
+        // then detach it only after the fixed 0.8 s release command completes.
         if (!releaseCubeScene(reason)) {
           fail(reason);
           return false;
         }
-        setState(RETURNING_HOME, "retreating from the placed cube and returning to start joints");
-        auto retreat = planCartesian(
-          "place_retreat_execute", currentStartState(false), placeApproachPose());
-        if (!executeMotion(retreat, placeApproachPose())) {
+        verifyValidatedSegmentStart(
+          "place_retreat_execute", preview[kPlaceDescendIndex].end_state);
+        setState(
+          RETURNING_HOME,
+          "release command completed; retreating from the placed cube");
+        if (!executeMotion(retreat, activePlaceApproachPose())) {
           return false;
         }
         auto home = planHome("return_home_execute", currentStartState(false));
         if (!executeMotion(home, locked_home_pose_)) {
           return false;
+        }
+        if (task_stack_enabled_) {
+          setState(
+            STACK_COMPLETE, "the " + locked_color_ + " cube was released on top of the " +
+            locked_stack_support_color_ + " cube and the arm returned to start joints");
+          return true;
         }
         setState(
           SORT_COMPLETE, "cube placed in " + locked_color_ +
@@ -2646,6 +3987,46 @@ private:
     RCLCPP_ERROR(node_->get_logger(), "P5 task stopped: %s", reason.c_str());
   }
 
+  // Latency accounting for "how long until the arm moves". The path from user
+  // input to the first motion has several stages that are easy to blame on the
+  // wrong component, so each one records its own elapsed time into the event
+  // log. `action_started_at_` is set when the Action is accepted, which is the
+  // point the GUI's dispatch returns.
+  void markActionStart()
+  {
+    action_started_at_ = node_->now();
+    acquisition_ms_ = -1.0;
+    planning_ms_ = -1.0;
+    approach_ms_ = -1.0;
+  }
+
+  double sinceActionStartMs() const
+  {
+    if (action_started_at_.nanoseconds() == 0) {
+      return -1.0;
+    }
+    return (node_->now() - action_started_at_).seconds() * 1000.0;
+  }
+
+  void recordLatency(const std::string & stage)
+  {
+    const double elapsed = sinceActionStartMs();
+    std::ostringstream detail;
+    detail << std::fixed << std::setprecision(1) << "\"stage\":\"" << jsonEscape(stage)
+           << "\",\"elapsed_ms\":" << elapsed;
+    if (stage == "target_acquired") {
+      acquisition_ms_ = elapsed;
+    } else if (stage == "planning_done") {
+      planning_ms_ = elapsed;
+    } else if (stage == "approach_command") {
+      approach_ms_ = elapsed;
+    }
+    recordEvent("latency", detail.str());
+    RCLCPP_INFO(
+      node_->get_logger(), "[latency] %s at %.1f ms after action accept",
+      stage.c_str(), elapsed);
+  }
+
   void setState(State state, const std::string & detail)
   {
     {
@@ -2675,6 +4056,9 @@ private:
     int batch_succeeded;
     int batch_skipped;
     std::string locked_color;
+    std::string locked_zone;
+    std::string stack_support_color;
+    double stack_rotation_rad = 0.0;
     {
       std::lock_guard<std::mutex> lock(mutex_);
       state = state_;
@@ -2682,10 +4066,20 @@ private:
       batch_succeeded = batch_succeeded_;
       batch_skipped = batch_skipped_;
       locked_color = locked_color_;
+      locked_zone = locked_zone_.region;
+      if (locked_zone_.explicit_slot) {
+        locked_zone += std::to_string(locked_zone_.slot_index + 1);
+      }
+      stack_support_color = locked_stack_support_color_;
+      if (task_stack_enabled_) {
+        stack_rotation_rad = stackPlacementYawOffset(
+          {locked_applied_yaw_rad_, locked_grasp_orientation_});
+      }
     }
     const bool retryable =
       state == WAITING_TARGET || state == RETRYABLE_FAILED ||
       state == PLAN_ONLY_COMPLETE || state == COMPLETE || state == SORT_COMPLETE ||
+      state == STACK_COMPLETE ||
       state == BATCH_COMPLETE || state == BATCH_COMPLETE_WITH_SKIPS;
     std_msgs::msg::String message;
     message.data = "{\"state\":\"" + stateName(state) + "\",\"detail\":\"" +
@@ -2693,8 +4087,14 @@ private:
       ",\"batch_mode\":" + (batch_mode_ ? "true" : "false") +
       ",\"batch_succeeded\":" + std::to_string(batch_succeeded) +
       ",\"batch_skipped\":" + std::to_string(batch_skipped) +
-      ",\"task_mode\":\"" + (task_sort_enabled_ ? "pick_sort" : "pick_hold") + "\"" +
+      ",\"task_mode\":\"" +
+      (task_stack_enabled_ ? "pick_stack" :
+      (locked_zone.empty() ? (task_sort_enabled_ ? "pick_sort" : "pick_hold") : "pick_place")) +
+      "\"" +
       ",\"target_color\":\"" + jsonEscape(locked_color) + "\"" +
+      ",\"target_zone\":\"" + jsonEscape(locked_zone) + "\"" +
+      ",\"support_color\":\"" + jsonEscape(stack_support_color) + "\"" +
+      ",\"stack_placement_yaw_rad\":" + std::to_string(stack_rotation_rad) +
       ",\"action_active\":" + (action_goal_claimed_.load() ? "true" : "false") +
       ",\"retryable\":" + (retryable ? "true" : "false") + "}";
     state_publisher_->publish(message);
@@ -2759,6 +4159,20 @@ private:
            << "sort_enabled: " << (task_sort_enabled_ ? "true" : "false") << "\n"
            << "sort_color: " << locked_color_ << "\n"
            << "sort_grid_file: " << sort_grid_file_ << "\n"
+           << "stack_enabled: " << (task_stack_enabled_ ? "true" : "false") << "\n"
+           << "stack_upper_color: " << (task_stack_enabled_ ? locked_color_ : "") << "\n"
+           << "stack_lower_color: " << locked_stack_support_color_ << "\n"
+           << "stack_support_top_xyz_m: [";
+    if (task_stack_enabled_) {
+      const auto & top = locked_stack_destination_.top_pose.position;
+      stream << top.x << ", " << top.y << ", " << top.z;
+    }
+    stream << "]\n"
+           << "stack_support_yaw_rad: " << stackDestinationYaw() << "\n"
+           << "stack_placement_yaw_offset_rad: " << stackPlacementYawOffset(
+      {locked_applied_yaw_rad_, locked_grasp_orientation_}) << "\n"
+           << "stack_approach_clearance_m: " << stack_approach_clearance_m_ << "\n"
+           << "stack_height_tolerance_m: " << stack_height_tolerance_m_ << "\n"
            << "release_bottom_gap_m: " << release_bottom_gap_m_ << "\n"
            << "place_region_center_m: [";
     if (task_sort_enabled_) {
@@ -2813,6 +4227,8 @@ private:
   rclcpp::Client<fairino_msgs::srv::SetTargetColor>::SharedPtr perception_color_client_;
   rclcpp_action::Server<PickColor>::SharedPtr pick_hold_server_;
   rclcpp_action::Server<PickColor>::SharedPtr pick_sort_server_;
+  rclcpp_action::Server<PickColor>::SharedPtr pick_place_server_;
+  rclcpp_action::Server<PickColor>::SharedPtr pick_stack_server_;
   rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr pose_subscription_;
   rclcpp::Subscription<geometry_msgs::msg::Vector3Stamped>::SharedPtr size_subscription_;
   rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr valid_subscription_;
@@ -2839,6 +4255,7 @@ private:
   std::string perception_skip_service_;
   std::string perception_color_service_;
   std::string cube_id_;
+  std::string stack_support_id_;
   std::string ground_plane_id_;
   std::string log_directory_;
   std::string p6_gate_file_;
@@ -2846,7 +4263,23 @@ private:
   std::unordered_map<std::string, std::vector<double>> place_centers_;
   std::unordered_map<std::string, std::vector<double>> place_slots_;
   std::unordered_map<std::string, std::size_t> place_slot_use_count_;
+  std::unordered_map<std::string, std::vector<double>> zone_centers_;
+  std::unordered_map<std::string, std::vector<double>> zone_slots_;
+  double zone_slot_clearance_m_{0.025};
   bool sort_enabled_{false};
+  bool stack_enabled_{false};
+  // pick_stack only. The wrist must never need more than half a symmetry step of
+  // extra rotation to align the two cubes; a larger requirement means the pair
+  // cannot be stacked with the requested orientation.
+  double maximum_stack_placement_rotation_rad_{kPi * 0.25};
+  // pick_stack only. Extra height above the lower cube for the approach and
+  // retreat poses, so the grasped cube clears the tower while the wrist turns.
+  double stack_approach_clearance_m_{0.030};
+  // pick_stack only. Allowed difference between the two initially tabletop
+  // cube-bottom estimates before the pair is rejected as inconsistent.
+  double stack_height_tolerance_m_{kStackTabletopToleranceDefault};
+  // pick_stack only. Horizontal radius that counts as "sitting on top of".
+  double stack_footprint_tolerance_m_{0.020};
   double release_bottom_gap_m_{0.005};
   double batch_empty_timeout_s_{10.0};
   double batch_target_match_distance_m_{0.025};
@@ -2856,6 +4289,7 @@ private:
   double lift_distance_m_{0.050};
   double pre_open_position_m_{0.060};
   double close_position_m_{0.026};
+  int pre_open_command_repetitions_{1};
   std::vector<double> object_size_m_{0.060, 0.030, 0.030};
   bool use_target_size_{true};
   double square_aspect_ratio_max_{1.10};
@@ -2876,9 +4310,14 @@ private:
   double cartesian_step_m_{0.001};
   double cartesian_jump_threshold_{0.0};
   double maximum_cartesian_joint_step_rad_{0.10};
+  double validated_segment_start_tolerance_rad_{0.010};
   double minimum_cartesian_fraction_{0.999999};
   double target_message_timeout_s_{1.0};
   double target_acquisition_timeout_s_{4.0};
+  rclcpp::Time action_started_at_{0, 0, RCL_ROS_TIME};
+  double acquisition_ms_{-1.0};
+  double planning_ms_{-1.0};
+  double approach_ms_{-1.0};
   double arrival_position_tolerance_m_{0.003};
   double arrival_orientation_tolerance_rad_{2.0 * kPi / 180.0};
   double action_timeout_s_{12.0};
@@ -2910,7 +4349,10 @@ private:
   double locked_yaw_symmetry_rad_{kPi};
   std::string locked_target_status_;
   std::string locked_color_;
+  std::string locked_stack_support_color_;
+  StackDestination locked_stack_destination_;
   std::vector<double> locked_place_center_;
+  ZoneRequest locked_zone_;
   moveit::core::RobotStatePtr locked_home_state_;
   geometry_msgs::msg::Pose locked_home_pose_;
   rclcpp::Time target_pose_received_{0, 0, RCL_ROS_TIME};
@@ -2927,6 +4369,7 @@ private:
   bool continuous_requested_{false};
   bool automatic_task_{false};
   std::atomic<bool> task_sort_enabled_{false};
+  std::atomic<bool> task_stack_enabled_{false};
   bool cycle_failure_skippable_{false};
   bool batch_empty_confirmed_{false};
   int batch_succeeded_{0};

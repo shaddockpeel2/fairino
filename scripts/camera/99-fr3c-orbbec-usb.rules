@@ -1,0 +1,33 @@
+# FR3C: keep the Orbbec DaBai DCW2 depth camera and its host hubs out of USB autosuspend.
+#
+# Failure this prevents (observed on the FR3C board, bus 6):
+#   hub 6-1.3:1.0: hub_ext_port_status failed (err = -110)
+#   usb 6-1.3.3: Failed to suspend device, error -110
+#   usb 6-1.3-port3: cannot reset (err = -110) ... Cannot enable. Maybe the USB cable is bad?
+#   -> depth sensor 2bc5:06a0 and RGB 2bc5:0561 both stop answering control transfers
+#      and the driver logs "Device with serial number CH82C5201C9 not found".
+#
+# The camera hangs off two cascaded bus-powered hubs (05e3:0610 -> 1a40:0101) on a
+# USB 2.0 EHCI bus shared with audio/serial/wireless. usbcore.autosuspend=2 lets the
+# kernel suspend those hubs; a cheap hub that fails to resume wedges the whole subtree.
+# Pinning power/control=on keeps the link alive.
+
+ACTION!="remove", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="on", \
+  ATTR{idVendor}=="2bc5", ATTR{idProduct}=="06a0"
+
+ACTION!="remove", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="on", \
+  ATTR{idVendor}=="2bc5", ATTR{idProduct}=="0561"
+
+# uvcvideo enables autosuspend while probing the RGB function, after the
+# usb-device add rule above has run.  Re-apply the parent-device policy after
+# either UVC interface is bound to the driver.
+ACTION=="bind", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_interface", \
+  ATTRS{idVendor}=="2bc5", ATTRS{idProduct}=="0561", \
+  RUN+="/bin/sh -c 'echo on > /sys$env{DEVPATH}/../power/control'"
+
+# Hubs on the camera's path on this board (Genesys USB2.1 hub -> Terminus USB 2.0 hub).
+ACTION!="remove", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="on", \
+  ATTR{idVendor}=="05e3", ATTR{idProduct}=="0610"
+
+ACTION!="remove", SUBSYSTEM=="usb", TEST=="power/control", ATTR{power/control}="on", \
+  ATTR{idVendor}=="1a40", ATTR{idProduct}=="0101"

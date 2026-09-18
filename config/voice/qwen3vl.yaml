@@ -15,11 +15,12 @@ worker:
   rknn_runtime_path: rknn-llm-main/examples/multimodal_model_demo/web/install/lib/librknnrt.so
   transport: unix
   socket_name: qwen3vl-worker.sock
-  max_new_tokens: 256
+  # Half of the verified 4096 context. This is a ceiling, not a target length.
+  max_new_tokens: 2048
   max_context_len: 4096
   npu_core_num: 1
   startup_timeout_s: 120
-  request_timeout_s: 90
+  request_timeout_s: 600
   cancel_grace_s: 0.25
   terminate_grace_s: 3
   max_prompt_bytes: 65536
@@ -39,4 +40,14 @@ coordination:
   pause_confirm_timeout_s: 3.0
   resume_confirm_timeout_s: 8.0
   status_stale_timeout_s: 2.5
-  minimum_available_memory_mib: 1024
+  minimum_available_memory_mib: 512
+
+dialogue:
+  max_history_turns: 4
+  # Includes the system prompt, retained turns and current question.
+  max_history_prompt_bytes: 6000
+  camera_topic: /camera/color/image_raw
+  camera_max_age_s: 1.0
+  capture_max_edge: 1280
+  capture_jpeg_quality: 88
+  max_saved_captures: 20

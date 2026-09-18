@@ -1,0 +1,3 @@
+2026-09-17 13:43:32,648 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-17 13:45:18,049 WARNING fr3c_dialogue_gui intent_rejected request_id=0f7ef2f8919f4cf1aef8e56676c8dad1 code=explicit_action_not_routed detail=抓取黄色方块到工作区
+2026-09-17 13:54:47,957 INFO fr3c_dialogue_gui speech service availability changed to False

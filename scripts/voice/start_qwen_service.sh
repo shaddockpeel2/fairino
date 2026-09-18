@@ -8,4 +8,4 @@ if [[ -f "${workspace}/install/setup.bash" ]]; then
 fi
 set -u
 export PYTHONPATH="${workspace}/src/fr3c_voice:${PYTHONPATH:-}"
-exec python3 -m fr3c_voice.service --workspace "${workspace}" "$@"
+exec /usr/bin/python3 -m fr3c_voice.service --workspace "${workspace}" "$@"

@@ -1,0 +1,713 @@
+{
+  "schema_version": 1,
+  "description": "FR3C P4 中文文字意图评测集；评测程序只分类，绝不调用 Action。",
+  "cases": [
+    {
+      "id": "hold-001",
+      "category": "hold_synonym",
+      "text": "抓起红色方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "red"
+    },
+    {
+      "id": "hold-002",
+      "category": "hold_synonym",
+      "text": "请把红色的小方块拿起来",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "red"
+    },
+    {
+      "id": "hold-003",
+      "category": "hold_synonym",
+      "text": "帮我夹起红色方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "red"
+    },
+    {
+      "id": "hold-004",
+      "category": "hold_synonym",
+      "text": "把红方块拾起来并保持夹持",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "red"
+    },
+    {
+      "id": "hold-005",
+      "category": "hold_synonym",
+      "text": "拿起黄色方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "yellow"
+    },
+    {
+      "id": "hold-006",
+      "category": "hold_synonym",
+      "text": "请抓一下黄色的小方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "yellow"
+    },
+    {
+      "id": "hold-007",
+      "category": "hold_synonym",
+      "text": "把黄方块捡起来",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "yellow"
+    },
+    {
+      "id": "hold-008",
+      "category": "hold_synonym",
+      "text": "帮我夹起黄色方块并保持",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "yellow"
+    },
+    {
+      "id": "hold-009",
+      "category": "hold_synonym",
+      "text": "抓起蓝色方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "blue"
+    },
+    {
+      "id": "hold-010",
+      "category": "hold_synonym",
+      "text": "请拿一下蓝色的小方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "blue"
+    },
+    {
+      "id": "hold-011",
+      "category": "hold_synonym",
+      "text": "把蓝方块拾起来",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "blue"
+    },
+    {
+      "id": "hold-012",
+      "category": "hold_synonym",
+      "text": "帮我夹起蓝色方块并保持夹持",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "blue"
+    },
+    {
+      "id": "hold-013",
+      "category": "hold_synonym",
+      "text": "抓取绿色方块并保持",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "green"
+    },
+    {
+      "id": "hold-014",
+      "category": "hold_synonym",
+      "text": "请把绿色的小方块拿起来",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "green"
+    },
+    {
+      "id": "hold-015",
+      "category": "hold_synonym",
+      "text": "把绿方块捡起来",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "green"
+    },
+    {
+      "id": "hold-016",
+      "category": "hold_synonym",
+      "text": "帮我夹起绿色方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "green"
+    },
+    {
+      "id": "sort-001",
+      "category": "sort_synonym",
+      "text": "把红色方块放到分类区",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "red"
+    },
+    {
+      "id": "sort-002",
+      "category": "sort_synonym",
+      "text": "请将红方块放进分类区域",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "red"
+    },
+    {
+      "id": "sort-003",
+      "category": "sort_synonym",
+      "text": "抓取红色方块并放到对应区",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "red"
+    },
+    {
+      "id": "sort-004",
+      "category": "sort_synonym",
+      "text": "分类红色方块",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "red"
+    },
+    {
+      "id": "sort-005",
+      "category": "sort_synonym",
+      "text": "把黄色方块放到分类区",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "yellow"
+    },
+    {
+      "id": "sort-006",
+      "category": "sort_synonym",
+      "text": "请将黄方块放进分类区域",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "yellow"
+    },
+    {
+      "id": "sort-007",
+      "category": "sort_synonym",
+      "text": "抓取黄色方块并放到对应区",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "yellow"
+    },
+    {
+      "id": "sort-008",
+      "category": "sort_synonym",
+      "text": "分类黄色方块",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "yellow"
+    },
+    {
+      "id": "sort-009",
+      "category": "sort_synonym",
+      "text": "把蓝色方块放到分类区",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "blue"
+    },
+    {
+      "id": "sort-010",
+      "category": "sort_synonym",
+      "text": "请将蓝方块放进分类区域",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "blue"
+    },
+    {
+      "id": "sort-011",
+      "category": "sort_synonym",
+      "text": "抓取蓝色方块并放到对应区",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "blue"
+    },
+    {
+      "id": "sort-012",
+      "category": "sort_synonym",
+      "text": "分类蓝色方块",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "blue"
+    },
+    {
+      "id": "sort-013",
+      "category": "sort_synonym",
+      "text": "把绿色方块放到分类区",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "green"
+    },
+    {
+      "id": "sort-014",
+      "category": "sort_synonym",
+      "text": "请将绿方块放进分类区域",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "green"
+    },
+    {
+      "id": "sort-015",
+      "category": "sort_synonym",
+      "text": "抓取绿色方块并放到对应区",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "green"
+    },
+    {
+      "id": "sort-016",
+      "category": "sort_synonym",
+      "text": "分类绿色方块",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "green"
+    },
+    {
+      "id": "neg-001",
+      "category": "negation",
+      "text": "不要抓红色方块",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "neg-002",
+      "category": "negation",
+      "text": "别拿黄色方块",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "neg-003",
+      "category": "negation",
+      "text": "先不抓蓝色方块",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "neg-004",
+      "category": "negation",
+      "text": "我不想让你夹起绿色方块",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "neg-005",
+      "category": "negation",
+      "text": "不用把红方块放到分类区",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "neg-006",
+      "category": "negation",
+      "text": "不许拿黄色方块",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "neg-007",
+      "category": "negation",
+      "text": "别动蓝色方块",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "neg-008",
+      "category": "negation",
+      "text": "无需分类绿色方块",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "neg-009",
+      "category": "negation",
+      "text": "取消抓红色方块的想法",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "neg-010",
+      "category": "negation",
+      "text": "现在不需要拿黄色方块",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "ask-001",
+      "category": "consultation",
+      "text": "怎么抓红色方块？",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "ask-002",
+      "category": "consultation",
+      "text": "你能不能拿起黄色方块？",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "ask-003",
+      "category": "consultation",
+      "text": "可以夹起蓝色方块吗？",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "ask-004",
+      "category": "consultation",
+      "text": "抓绿色方块有哪些步骤？",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "ask-005",
+      "category": "consultation",
+      "text": "为什么要把红色方块放到分类区？",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "ask-006",
+      "category": "consultation",
+      "text": "请介绍拿取黄色方块的方法",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "ask-007",
+      "category": "consultation",
+      "text": "是否可以分类蓝色方块",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "ask-008",
+      "category": "consultation",
+      "text": "夹绿色方块会不会掉？",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "ask-009",
+      "category": "consultation",
+      "text": "如何将红色方块放进分类区",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "ask-010",
+      "category": "consultation",
+      "text": "拿黄色方块是什么意思？",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "missing-001",
+      "category": "missing_parameter",
+      "text": "抓一个方块",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "missing-002",
+      "category": "missing_parameter",
+      "text": "把那个拿起来",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "missing-003",
+      "category": "missing_parameter",
+      "text": "帮我分类一下",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "missing-004",
+      "category": "missing_parameter",
+      "text": "把红色方块处理一下",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "missing-005",
+      "category": "missing_parameter",
+      "text": "拿起来",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "missing-006",
+      "category": "missing_parameter",
+      "text": "放到分类区",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "missing-007",
+      "category": "missing_parameter",
+      "text": "请操作绿色方块",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "missing-008",
+      "category": "missing_parameter",
+      "text": "抓取目标",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "confuse-001",
+      "category": "color_confusion",
+      "text": "抓红色和蓝色方块",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "confuse-002",
+      "category": "color_confusion",
+      "text": "拿起黄色或者绿色方块",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "confuse-003",
+      "category": "color_confusion",
+      "text": "把红色和黄色方块放到分类区",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "confuse-004",
+      "category": "color_confusion",
+      "text": "抓一个红蓝色方块",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "confuse-005",
+      "category": "color_confusion",
+      "text": "如果有红色方块就抓起来",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "confuse-006",
+      "category": "color_confusion",
+      "text": "抓起蓝色方块然后拿黄色方块",
+      "route": "clarify",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "confuse-007",
+      "category": "color_confusion",
+      "text": "他说‘抓绿色方块’",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "confuse-008",
+      "category": "color_confusion",
+      "text": "把“抓红色方块”翻译成英文",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "misc-001",
+      "category": "non_action",
+      "text": "你好，介绍一下你自己",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "misc-002",
+      "category": "non_action",
+      "text": "你看到了什么？",
+      "route": "vision",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "misc-003",
+      "category": "non_action",
+      "text": "看看桌面上有哪些东西",
+      "route": "vision",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "misc-004",
+      "category": "non_action",
+      "text": "今天天气怎么样",
+      "route": "chat",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "release-001",
+      "category": "release_ack",
+      "text": "物体已取下",
+      "route": "release_ack",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "release-002",
+      "category": "release_ack",
+      "text": "方块已经拿走",
+      "route": "release_ack",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "release-003",
+      "category": "release_ack",
+      "text": "上一个任务已完成",
+      "route": "release_ack",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "release-004",
+      "category": "release_ack",
+      "text": "解除持物状态",
+      "route": "release_ack",
+      "task": null,
+      "color": null
+    },
+    {
+      "id": "multi-017",
+      "category": "multi",
+      "text": "换个颜色，抓绿色方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "green"
+    },
+    {
+      "id": "multi-018",
+      "category": "multi",
+      "text": "换成绿色，放到分类区",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "green"
+    },
+    {
+      "id": "multi-019",
+      "category": "multi",
+      "text": "这次抓蓝色方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "blue"
+    },
+    {
+      "id": "multi-020",
+      "category": "multi",
+      "text": "现在抓蓝色的",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "blue"
+    },
+    {
+      "id": "multi-021",
+      "category": "multi",
+      "text": "再抓一个红色的",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "red"
+    },
+    {
+      "id": "multi-022",
+      "category": "multi",
+      "text": "继续抓黄色方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "yellow"
+    },
+    {
+      "id": "multi-023",
+      "category": "multi",
+      "text": "下一个抓绿色方块放到分类区",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "green"
+    },
+    {
+      "id": "multi-024",
+      "category": "multi",
+      "text": "换成蓝色方块分类",
+      "route": "action",
+      "task": "pick_sort",
+      "color": "blue"
+    },
+    {
+      "id": "multi-025",
+      "category": "multi",
+      "text": "改抓黄色方块",
+      "route": "action",
+      "task": "pick_hold",
+      "color": "yellow"
+    },
+    {
+      "id": "stack-001",
+      "category": "stack",
+      "text": "把红色方块放到蓝色方块上面",
+      "route": "action",
+      "task": "pick_stack",
+      "color": "red",
+      "support_color": "blue"
+    },
+    {
+      "id": "stack-002",
+      "category": "stack",
+      "text": "将黄方块码到绿方块顶面",
+      "route": "action",
+      "task": "pick_stack",
+      "color": "yellow",
+      "support_color": "green"
+    },
+    {
+      "id": "stack-003",
+      "category": "stack",
+      "text": "把蓝色方块叠到红色方块上方",
+      "route": "action",
+      "task": "pick_stack",
+      "color": "blue",
+      "support_color": "red"
+    }
+  ]
+}
