@@ -1182,3 +1182,40 @@ model input height=448, width=448, channel=3
 ===the core num is 1===
 [imgenc] rknn_set_core_mask returned: 0
 qwen3_vl_worker ready
+I rkllm: rkllm-runtime version: 1.3.0, rknpu driver version: 0.9.8, platform: RK3588
+I rkllm: loading rkllm model from /home/industio/DofbotPro_JetsonNano_0106/rknn-llm-main/examples/multimodal_model_demo/data/rkllm/qwen3-vl-2b-instruct_w8a8_rk3588.rkllm
+I rkllm: rkllm-toolkit version: 1.3.0, max_context_limit: 4096, npu_core_num: 3, target_platform: RK3588, model_dtype: W8A8
+I rkllm: Enabled cpus: [4, 5, 6, 7]
+I rkllm: Enabled cpus num: 4
+I rkllm: Using mrope
+[imgenc] init rknn from path: /home/industio/DofbotPro_JetsonNano_0106/rknn-llm-main/examples/multimodal_model_demo/data/rknn/qwen3-vl_vision_rk3588.rknn
+[imgenc] rknn_init returned: 0
+[imgenc] query in/out num...
+[imgenc] query in/out num returned: 0
+model input num: 1, output num: 5
+input tensors:
+[imgenc] query input attr 0...
+[imgenc] query input attr 0 returned: 0
+  index=0, name=pixel, n_dims=4, dims=[1, 448, 448, 3], n_elems=602112, size=1204224, fmt=NHWC, type=FP16, qnt_type=AFFINE, zp=0, scale=1.000000
+output tensors:
+[imgenc] query output attr 0...
+[imgenc] query output attr 0 returned: 0
+  index=0, name=input.207, n_dims=2, dims=[784, 1024, 0, 0], n_elems=802816, size=1605632, fmt=UNDEFINED, type=FP16, qnt_type=AFFINE, zp=0, scale=1.000000
+[imgenc] query output attr 1...
+[imgenc] query output attr 1 returned: 0
+  index=1, name=4649, n_dims=2, dims=[196, 2048, 0, 0], n_elems=401408, size=802816, fmt=UNDEFINED, type=FP16, qnt_type=AFFINE, zp=0, scale=1.000000
+[imgenc] query output attr 2...
+[imgenc] query output attr 2 returned: 0
+  index=2, name=1498, n_dims=2, dims=[196, 2048, 0, 0], n_elems=401408, size=802816, fmt=UNDEFINED, type=FP16, qnt_type=AFFINE, zp=0, scale=1.000000
+[imgenc] query output attr 3...
+[imgenc] query output attr 3 returned: 0
+  index=3, name=2549, n_dims=2, dims=[196, 2048, 0, 0], n_elems=401408, size=802816, fmt=UNDEFINED, type=FP16, qnt_type=AFFINE, zp=0, scale=1.000000
+[imgenc] query output attr 4...
+[imgenc] query output attr 4 returned: 0
+  index=4, name=3600, n_dims=2, dims=[196, 2048, 0, 0], n_elems=401408, size=802816, fmt=UNDEFINED, type=FP16, qnt_type=AFFINE, zp=0, scale=1.000000
+image token=196, embed size=2048, output num=5, output elems=2408448, canonical output=1
+model input height=448, width=448, channel=3
+[imgenc] set npu core...
+===the core num is 1===
+[imgenc] rknn_set_core_mask returned: 0
+qwen3_vl_worker ready

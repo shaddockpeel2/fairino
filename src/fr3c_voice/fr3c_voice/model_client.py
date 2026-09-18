@@ -49,7 +49,9 @@ class ModelServiceClient:
 
     def generate(self, prompt: str, request_id: str = '',
                  image_path: Path | str | None = None,
-                 on_token: Callable[[str], None] | None = None) -> str:
+                 on_token: Callable[[str], None] | None = None,
+                 knowledge_question: str = '',
+                 on_knowledge: Callable[[dict], None] | None = None) -> str:
         """Run one generation, optionally forwarding tokens as they arrive.
 
         `on_token` is what lets speech start before the answer is finished; it
@@ -57,10 +59,13 @@ class ModelServiceClient:
         """
         identifier = request_id or uuid.uuid4().hex
         payload = {
-            'op': 'chat_image' if image_path is not None else 'chat_text',
+            'op': ('chat_image' if image_path is not None else
+                   'chat_auto' if knowledge_question else 'chat_text'),
             'request_id': identifier,
             'prompt': prompt, 'reset_before': True,
         }
+        if knowledge_question:
+            payload['question'] = knowledge_question
         if image_path is not None:
             payload['image_path'] = str(Path(image_path).resolve())
 
@@ -74,6 +79,9 @@ class ModelServiceClient:
         results = [item for item in records if item.get('event') == 'result']
         if len(results) != 1 or not isinstance(results[0].get('text'), str):
             raise ModelServiceError('model service returned no unique result')
+        metadata = results[0].get('knowledge')
+        if on_knowledge is not None and isinstance(metadata, dict):
+            on_knowledge(metadata)
         return results[0]['text']
 
     def cancel_model(self, request_id: str = '') -> bool:
@@ -96,15 +104,19 @@ class CancellableGeneration:
 
     def generate(self, prompt: str, request_id: str = '',
                  image_path: Path | str | None = None,
-                 on_token: Callable[[str], None] | None = None) -> str:
+                 on_token: Callable[[str], None] | None = None,
+                 knowledge_question: str = '',
+                 on_knowledge: Callable[[dict], None] | None = None) -> str:
         identifier = request_id or uuid.uuid4().hex
         with self._lock:
             if self._request_id:
                 raise ModelServiceError('another dialogue request is active')
             self._request_id = identifier
         try:
-            return self.client.generate(prompt, identifier, image_path=image_path,
-                                        on_token=on_token)
+            return self.client.generate(
+                prompt, identifier, image_path=image_path, on_token=on_token,
+                knowledge_question=knowledge_question,
+                on_knowledge=on_knowledge)
         finally:
             with self._lock:
                 self._request_id = ''

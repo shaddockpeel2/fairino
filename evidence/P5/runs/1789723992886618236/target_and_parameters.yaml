@@ -1,0 +1,38 @@
+frame: base_link
+target_top_xyz_m: [0.0119148226993, -0.548545154771, 0.0321261958625]
+target_object_orientation_xyzw: [0, 0, -0.0205986162312, 0.999787825996]
+object_long_axis_yaw_rad: -0.0412001463703
+applied_grasp_yaw_rad: 1.52959618042
+selected_grasp_orientation_xyzw: [-0.692391330289, 0.72152217273, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+equivalent_grasp_selection: minimum_joint_space_path_length
+approach_clearance_m: 0.01
+grasp_depth_m: 0.015
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.026
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: red
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+stack_enabled: false
+stack_upper_color: 
+stack_lower_color: 
+stack_support_top_xyz_m: []
+stack_support_yaw_rad: 0
+stack_placement_yaw_offset_rad: 0
+stack_approach_clearance_m: 0.03
+stack_height_tolerance_m: 0.012
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.237514324922, -0.22673331636, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 600
+perception_status_json: '{"actionable_cube_count":1,"active_inferences":0,"candidate_area_px":1292.0,"center_base_m":[0.011914822699349549,-0.5486709850560947,0.03216805147371926],"color":"red","depth_valid_fraction":0.9853479853479854,"detected_targets":[{"center_base_m":[0.011914822699349549,-0.5486709850560947,0.03216805147371926],"color":"red","grasp_axis_yaw_base_rad":-0.041200265175141304,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.020019521850156555,0.022212027029231966],"stack_tier":0,"top_z_base_m":0.03216805147371926},{"center_base_m":[-0.0862067709612407,-0.5448959461619417,0.03154061608148556],"color":"green","grasp_axis_yaw_base_rad":-0.04120755079549132,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.020971616670130627,0.021497773836745983],"stack_tier":0,"top_z_base_m":0.03154061608148556},{"center_base_m":[0.0429376244125246,-0.4523611100199357,0.031591224395659506],"color":"blue","grasp_axis_yaw_base_rad":-0.002172300119752113,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.02268483726689907,0.024028469931521294],"stack_tier":0,"top_z_base_m":0.031591224395659506},{"center_base_m":[-0.07336107726070346,-0.4624880301134434,0.030794511585477056],"color":"yellow","grasp_axis_yaw_base_rad":0.26379312494518636,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.02327764252049716,0.024737842992887202],"stack_tier":0,"top_z_base_m":0.030794511585477056}],"detection_mode":"colors","error_count":0,"filter_generation":1,"frames_inferred":968,"frames_skipped_paused":0,"frozen":false,"grasp_axis_yaw_base_rad":-0.041200146370327775,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":5.2274095975606715e-06,"has_stable_pose":true,"inference_enabled":true,"last_inference_end_ns":2767986723028,"last_inference_start_ns":2767782862077,"last_success_ns":2767986723028,"nominal_object_size_m":[0.03,0.03,0.03],"npu_inference":false,"object_class":"cube_30mm","observed_short_long_m":[0.020019521850156555,0.022212027029231966],"orientation_source":"top_surface_square_min_area_edge","pause_generation":0,"physical_color_counts":{"blue":1,"green":1,"red":1,"yellow":1},"physical_cube_count":4,"position_std_m":[0.0003541415484955893,7.013367987276335e-05,4.4868470213803385e-05],"raw_center_base_m":[0.011914822699349549,-0.5486709850560947,0.036168051473719265],"reason":"stable_target_updated","rejected_color_regions":{"insufficient_valid_depth_fraction":1,"observed_size_out_of_range":2},"rejected_target_details":[{"color":"yellow","reason":"observed_size_out_of_range:0.0672,0.0954"},{"color":"yellow","reason":"insufficient_valid_depth_fraction:0.066"},{"color":"yellow","reason":"observed_size_out_of_range:0.0127,0.0156"}],"requested_color_physical_count":1,"required_samples":3,"rgb_color_regions":7,"sample_stamp":1789723992.328316,"samples":3,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":true,"stacked_cube_count":0,"target_filter_color":"red","top_axis_ratio":1.1096113283926443,"top_pose_z_compensation_m":-0.004,"top_z_spread_m":0.0016166260101336191,"tracking":true,"valid":true}'

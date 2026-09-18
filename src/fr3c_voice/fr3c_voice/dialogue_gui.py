@@ -154,7 +154,7 @@ class DialogueGui:
             title_row, text='FR3C 离线智能助手', style='Title.TLabel').pack(
                 side='left')
         self.ttk.Label(
-            title_row, text='唤醒语音 · 千问聊天 · 当前画面 · 阶段 9', style='Sub.TLabel').pack(
+            title_row, text='唤醒语音 · 千问聊天 · 本地知识 · 当前画面 · 阶段 10', style='Sub.TLabel').pack(
                 side='right', pady=(8, 0))
 
         status_card = self.ttk.Frame(outer, style='Card.TFrame', padding=8)
@@ -162,7 +162,8 @@ class DialogueGui:
         status_top = self.ttk.Frame(status_card, style='Card.TFrame')
         status_top.pack(fill='x')
         for key, title in (
-                ('model', '模型'), ('vision', '视觉'), ('task', '任务')):
+                ('model', '模型'), ('knowledge', '知识'),
+                ('vision', '视觉'), ('task', '任务')):
             value = self.tk.StringVar(value=f'{title}：检查中')
             self._status_values[key] = value
             self.ttk.Label(
@@ -291,6 +292,28 @@ class DialogueGui:
             self._stream_text = ''
         elif answer:
             self._append('assistant', answer)
+
+    def _append_knowledge_metadata(self, metadata: dict) -> None:
+        mode = metadata.get('mode')
+        if mode == 'knowledge':
+            lines = [
+                f"资料来源 · {metadata.get('version', '未知版本')} · "
+                f"检索 {float(metadata.get('elapsed_ms', 0.0)):.0f} ms"
+            ]
+            for number, source in enumerate(metadata.get('sources', []), 1):
+                location = source.get('title') or source.get('source') or '未知资料'
+                if source.get('section'):
+                    location += ' / ' + str(source['section'])
+                if source.get('page') is not None:
+                    location += f" / 第{source['page']}页"
+                if source.get('ordinal') is not None:
+                    location += f" · 片段{source['ordinal']}"
+                lines.append(f'[{number}] {location}')
+            self._append('system', '\n'.join(lines))
+        elif mode == 'no_match':
+            self._append('system', '本地知识库未找到可靠出处；回答未引用项目资料。')
+        elif mode == 'unavailable' and metadata.get('routed'):
+            self._append('system', '知识库暂不可用，本轮已保留普通对话能力。')
 
     def _show_snapshot(self, snapshot: SavedSnapshot) -> None:
         """Show the exact JPEG sent to Qwen and retain Tk's image reference."""
@@ -668,7 +691,8 @@ class DialogueGui:
 
     def _generate_answer(self, request_id: str, prompt: str,
                          model_request_id: str, image_path: Path | None,
-                         speak_enabled: bool, speech_epoch: int) -> str:
+                         speak_enabled: bool, speech_epoch: int,
+                         knowledge_question: str = '') -> str:
         speech_started = self._begin_generation_speech(
             request_id, speak_enabled, speech_epoch)
 
@@ -677,12 +701,20 @@ class DialogueGui:
             if speech_started and self.speech is not None:
                 self.speech.feed(token)
 
-        answer = self.generator.generate(
-            prompt, request_id=model_request_id, image_path=image_path,
-            on_token=on_token).strip()
+        knowledge_metadata: dict = {}
+        arguments = {
+            'request_id': model_request_id,
+            'image_path': image_path,
+            'on_token': on_token,
+        }
+        if knowledge_question:
+            arguments['knowledge_question'] = knowledge_question
+            arguments['on_knowledge'] = knowledge_metadata.update
+        answer = self.generator.generate(prompt, **arguments).strip()
         if not answer:
             raise ModelServiceError('模型返回空回答')
-        self.ui_events.put(('answer_result', request_id, answer))
+        self.ui_events.put((
+            'answer_result', request_id, answer, dict(knowledge_metadata)))
         if speech_started and self.speech is not None:
             metrics = self.speech.finish(timeout_s=900.0)
             self.trace.write('speech_result', request_id, metrics=metrics)
@@ -694,7 +726,7 @@ class DialogueGui:
         try:
             answer = self._generate_answer(
                 request_id, prompt, f'{request_id}-chat', None,
-                speak_enabled, speech_epoch)
+                speak_enabled, speech_epoch, knowledge_question=user_text)
             self.conversation.record(user_text, answer)
             self.trace.write(
                 'chat_generation_end', request_id,
@@ -925,7 +957,9 @@ class DialogueGui:
                 self.model_client.socket_path, timeout_s=1.5)
             health = health_client.health()
             ready = bool(health.get('healthy')) and health.get('state') == 'ready'
-            self.ui_events.put(('model_health', ready, health.get('state', 'unknown')))
+            self.ui_events.put((
+                'model_health', ready, health.get('state', 'unknown'),
+                health.get('knowledge', {})))
         except Exception as error:
             self.ui_events.put(('model_health', False, str(error)))
         finally:
@@ -1002,6 +1036,8 @@ class DialogueGui:
                 self._append_stream_token(event[1], event[2])
             elif kind == 'answer_result':
                 self._finish_stream(event[1], event[2])
+                if len(event) > 3 and event[3]:
+                    self._append_knowledge_metadata(event[3])
                 self._set_busy(False)
                 self._resume_after_request(event[1])
             elif kind == 'generation_error':
@@ -1015,6 +1051,14 @@ class DialogueGui:
                 ready, detail = event[1], event[2]
                 self._status_values['model'].set(
                     '模型：就绪' if ready else f'模型：未就绪 · {detail}')
+                knowledge = event[3] if len(event) > 3 else {}
+                if knowledge.get('available'):
+                    self._status_values['knowledge'].set(
+                        f"知识：就绪 · {knowledge.get('chunks', 0)}片段")
+                else:
+                    reason = str(knowledge.get('last_error') or '不可用')
+                    self._status_values['knowledge'].set(
+                        f'知识：已降级 · {reason[:28]}')
             elif kind == 'speech_done':
                 if event[1] == self._speech_epoch:
                     self._on_speech_result(event[2])

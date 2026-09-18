@@ -17,7 +17,8 @@ def test_gui_is_single_page_and_exposes_required_controls():
     for label in (
             '发送', '开始说话', '截图问答', '自动播报',
             '停止播报', '停止抓取', '模型', '视觉', '任务',
-            '唤醒：未唤醒', '正在接收问题', '秒后退出', '我在'):
+            '知识', '资料来源', '唤醒：未唤醒', '正在接收问题',
+            '秒后退出', '我在'):
         assert label in source
     assert "'tk', 'useinputmethods', True" in source
     # Stage 6 made the speech controls functional; they must not regress to
@@ -41,7 +42,8 @@ def test_full_start_script_preserves_ros_python_and_detaches_services():
     ).read_text(encoding='utf-8')
     assert 'set -euo pipefail' in script
     assert 'nohup setsid bash -c' in script
-    assert '/usr/bin/python3 -m fr3c_voice.service' in script
+    assert 'KNOWLEDGE_PYTHON' in script
+    assert '.venv-rk3588/bin/python' in script
     assert "PYTHONUNBUFFERED=1 PYTHONPATH='${ROOT}/src/fr3c_voice'" in script
     assert 'socket_healthy' in script
 

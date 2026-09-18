@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import argparse
-from dataclasses import asdict
 from datetime import datetime
 import fcntl
 import json
@@ -19,6 +18,13 @@ from typing import Any, Callable
 from .config import load_config
 from .controller import ControllerState, QwenController
 from .coordinator import NpuCoordinator, NpuOwner
+from .knowledge import (
+    KnowledgeRuntime,
+    build_knowledge_prompt,
+    load_knowledge_settings,
+    result_payload,
+    unavailable_metadata,
+)
 from .trace import TraceWriter
 
 
@@ -27,10 +33,14 @@ MAX_SERVICE_REQUEST_BYTES = 1024 * 1024
 
 class QwenServiceCore:
     def __init__(self, controller: QwenController,
-                 coordinator: NpuCoordinator, auto_recover: bool) -> None:
+                 coordinator: NpuCoordinator, auto_recover: bool,
+                 knowledge: KnowledgeRuntime | None = None,
+                 knowledge_error: str = '') -> None:
         self.controller = controller
         self.coordinator = coordinator
         self.auto_recover = auto_recover
+        self.knowledge = knowledge
+        self.knowledge_error = knowledge_error
 
     def ensure_ready(self, request_id: str) -> None:
         state = self.controller.state
@@ -47,16 +57,58 @@ class QwenServiceCore:
             NpuOwner.QWEN_LOAD, request_id, self.controller.recover)
 
     def chat(self, request: dict[str, Any],
-             on_token: Callable[[str], None]) -> Any:
+             on_token: Callable[[str], None]) -> tuple[Any, dict[str, Any] | None]:
         request_id = str(request.get('request_id') or uuid.uuid4().hex)
         self.ensure_ready(f'{request_id}-load')
         operation = str(request.get('op'))
         prompt = str(request.get('prompt') or '')
+        question = str(request.get('question') or '').strip()
+        use_knowledge = bool(
+            operation == 'chat_auto'
+            and question
+            and self.knowledge is not None
+            and self.knowledge.available
+            and self.knowledge.wants_retrieval(question))
+        knowledge_metadata: dict[str, Any] | None = None
 
         def invoke():
+            nonlocal prompt, knowledge_metadata
+            if operation == 'chat_auto' and use_knowledge:
+                try:
+                    retrieval = self.knowledge.retrieve(question)
+                    prompt = build_knowledge_prompt(question, retrieval)
+                    knowledge_metadata = retrieval.metadata()
+                    self.controller.trace.write(
+                        'knowledge_retrieval_end', request_id,
+                        mode=knowledge_metadata['mode'],
+                        version=knowledge_metadata['version'],
+                        elapsed_ms=knowledge_metadata['elapsed_ms'],
+                        source_count=len(knowledge_metadata['sources']))
+                except Exception as error:  # knowledge failure must not break chat
+                    self.knowledge.disable(error)
+                    self.knowledge_error = f'{type(error).__name__}: {error}'
+                    knowledge_metadata = unavailable_metadata(self.knowledge_error)
+                    self.controller.trace.write(
+                        'knowledge_disabled', request_id, error=self.knowledge_error)
+            elif operation == 'chat_auto':
+                if self.knowledge is None:
+                    knowledge_metadata = unavailable_metadata(
+                        self.knowledge_error or 'knowledge runtime unavailable',
+                        routed=False)
+                elif not self.knowledge.available:
+                    knowledge_metadata = unavailable_metadata(
+                        self.knowledge.last_error or self.knowledge_error,
+                        routed=False)
+                else:
+                    knowledge_metadata = {
+                        'routed': False, 'mode': 'skipped',
+                        'version': self.knowledge.store.version,
+                        'elapsed_ms': 0.0, 'reason': 'ordinary_chat',
+                        'sources': [], 'error': '',
+                    }
             if bool(request.get('reset_before', True)):
                 self.controller.reset_context()
-            if operation == 'chat_text':
+            if operation in ('chat_text', 'chat_auto'):
                 return self.controller.chat_text(
                     prompt, request_id=request_id, on_token=on_token)
             if operation == 'chat_image':
@@ -68,10 +120,11 @@ class QwenServiceCore:
                     on_token=on_token)
             raise ValueError(f'unsupported chat operation: {operation}')
 
-        owner = (
-            NpuOwner.QWEN_VISION if operation == 'chat_image'
-            else NpuOwner.QWEN_TEXT)
-        return self.coordinator.run(owner, request_id, invoke)
+        owner = (NpuOwner.QWEN_VISION if operation == 'chat_image'
+                 else NpuOwner.RAG_QWEN_TEXT if use_knowledge
+                 else NpuOwner.QWEN_TEXT)
+        chat = self.coordinator.run(owner, request_id, invoke)
+        return chat, knowledge_metadata
 
     def recover(self, request_id: str) -> None:
         if self.coordinator.fault:
@@ -80,6 +133,15 @@ class QwenServiceCore:
             NpuOwner.QWEN_LOAD, request_id, self.controller.recover)
 
     def health(self) -> dict[str, Any]:
+        if self.knowledge is not None:
+            knowledge = self.knowledge.health()
+        else:
+            knowledge = {
+                'available': False, 'version': '', 'chunks': 0,
+                'embedder_loaded': False,
+                'last_error': self.knowledge_error or 'not configured',
+                'index_dir': '',
+            }
         return {
             'state': self.controller.state.value,
             'healthy': self.controller.health(),
@@ -88,6 +150,7 @@ class QwenServiceCore:
             'npu_owner': self.coordinator.owner,
             'coordination_fault': self.coordinator.fault,
             'last_error': self.controller.last_error,
+            'knowledge': knowledge,
         }
 
 
@@ -130,19 +193,19 @@ class QwenRequestHandler(socketserver.StreamRequestHandler):
                 threading.Thread(
                     target=self.server.shutdown, daemon=True).start()  # type: ignore[attr-defined]
                 return
-            if operation not in ('chat_text', 'chat_image'):
+            if operation not in ('chat_text', 'chat_image', 'chat_auto'):
                 raise ValueError(f'unsupported operation: {operation}')
             request_id = str(request.get('request_id') or uuid.uuid4().hex)
             request['request_id'] = request_id
             self._write({'event': 'accepted', 'request_id': request_id})
-            result = core.chat(
+            result, knowledge = core.chat(
                 request,
                 lambda token: self._write({
                     'event': 'token', 'request_id': request_id,
                     'text': token,
                 }),
             )
-            self._write({'event': 'result', **asdict(result)})
+            self._write({'event': 'result', **result_payload(result, knowledge)})
         except (BrokenPipeError, ConnectionResetError):
             core = getattr(self.server, 'core', None)  # type: ignore[attr-defined]
             if core is not None:
@@ -177,6 +240,13 @@ def main() -> int:
                         help='run without perception and robot status guards')
     args = parser.parse_args()
     qwen_config, service_config = load_config(args.config, args.workspace)
+    knowledge_runtime = None
+    knowledge_error = ''
+    try:
+        knowledge_settings = load_knowledge_settings(args.config)
+        knowledge_runtime = KnowledgeRuntime.load(knowledge_settings)
+    except Exception as error:
+        knowledge_error = f'{type(error).__name__}: {error}'
     stamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     trace = TraceWriter(service_config.trace_directory / stamp / 'trace.jsonl')
     ros_runtime = None
@@ -199,7 +269,8 @@ def main() -> int:
     controller = QwenController(
         qwen_config, service_config.runtime_dir, trace=trace)
     core = QwenServiceCore(
-        controller, coordinator, service_config.auto_recover)
+        controller, coordinator, service_config.auto_recover,
+        knowledge_runtime, knowledge_error)
     socket_path = service_config.runtime_dir / service_config.service_socket_name
     service_config.runtime_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
     service_lock = (service_config.runtime_dir / 'qwen-service.lock').open(
@@ -231,6 +302,8 @@ def main() -> int:
         server.server_close()
         socket_path.unlink(missing_ok=True)
         controller.close()
+        if knowledge_runtime is not None:
+            knowledge_runtime.close()
         if ros_runtime is not None:
             ros_runtime.close()
         fcntl.flock(service_lock.fileno(), fcntl.LOCK_UN)

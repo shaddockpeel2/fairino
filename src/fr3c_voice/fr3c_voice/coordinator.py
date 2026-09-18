@@ -27,6 +27,7 @@ class NpuOwner(str, Enum):
     QWEN_LOAD = 'qwen_load'
     QWEN_TEXT = 'qwen_text'
     QWEN_VISION = 'qwen_vision'
+    RAG_QWEN_TEXT = 'rag_qwen_text'
 
 
 @dataclass(frozen=True)

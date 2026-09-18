@@ -73,13 +73,18 @@ PY
 
 LOG_BASE="${ROOT}/evidence/voice/P6/runtime"
 mkdir -p "${LOG_BASE}"
+KNOWLEDGE_PYTHON="${FR3C_KNOWLEDGE_PYTHON:-/home/DofbotPro_JetsonNano_0106/.venv-rk3588/bin/python}"
+if [ ! -x "${KNOWLEDGE_PYTHON}" ]; then
+  echo "   !! 知识库隔离环境缺失，将保留普通聊天并禁用知识检索" >&2
+  KNOWLEDGE_PYTHON=/usr/bin/python3
+fi
 
 echo "== 1/3 Qwen 模型服务"
 start_if_needed "qwen-service" "fr3c_voice.service" \
   "${ROOT}/evidence/voice/P3/runtime/fr3c-qwen-service.sock" \
   "cd '${ROOT}' && source /opt/ros/humble/setup.bash && source '${ROOT}/install/setup.bash' && \
    PYTHONUNBUFFERED=1 PYTHONPATH='${ROOT}/src/fr3c_voice':\"\${PYTHONPATH:-}\" \
-   /usr/bin/python3 -m fr3c_voice.service --workspace '${ROOT}'"
+   '${KNOWLEDGE_PYTHON}' -m fr3c_voice.service --workspace '${ROOT}'"
 
 if [ "${WITH_SPEECH}" = "1" ]; then
   echo "== 2/3 流式语音管线（独占扬声器）"

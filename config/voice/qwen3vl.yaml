@@ -51,3 +51,18 @@ dialogue:
   capture_max_edge: 1280
   capture_jpeg_quality: 88
   max_saved_captures: 20
+
+# Stage 10 reuses the previous project's verified immutable knowledge bundle.
+# Override only the root with FR3C_KNOWLEDGE_ROOT when the assets are relocated.
+knowledge:
+  enabled: true
+  root: /home/industio/DofbotPro_JetsonNano_0106/dofbot
+  index_dir: knowledge/builds/current
+  tokenizer_dir: RAG/weights/bge-small-zh-v1.5
+  rknn_model_path: RAG/test/bge-small-zh-v1.5_seq128_int32_fp16_rk3588.rknn
+  # Keep online retrieval small: exact search over 595 vectors, no vector DB.
+  top_k: 4
+  minimum_score: 0.45
+  maximum_context_chars: 2200
+  npu_core: "0"
+  query_instruction: "为这个句子生成表示以用于检索相关文章："
