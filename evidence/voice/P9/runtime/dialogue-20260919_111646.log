@@ -1,0 +1,21 @@
+2026-09-19 11:16:46,830 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-19 11:17:02,210 INFO fr3c_dialogue_gui speech playback first_write=0.202s playback_end=0.749s
+2026-09-19 11:17:20,317 INFO fr3c_dialogue_gui intent request_id=8225ea8915d745ffb2628352a420b2c0 route=clarify task=None color=None zone=None support_color=None raw='{"schema_version":"1.0","route":"clarify","task":null,"color":null,"zone":null,"support_color":null,"reply":"请说明要将哪个颜色的方块放入‘放置区’。"}'
+2026-09-19 11:17:25,356 INFO fr3c_dialogue_gui speech playback first_write=0.639s playback_end=4.945s
+2026-09-19 11:17:43,925 INFO fr3c_dialogue_gui intent request_id=716cabe39b1643f6b945d150925653d6 route=clarify task=None color=None zone=None support_color=None raw='{"schema_version":"1.0","route":"clarify","task":null,"color":null,"zone":null,"support_color":null,"reply":"请说明要抓取红、黄、蓝、绿中的哪一种方块。"}'
+2026-09-19 11:17:49,283 INFO fr3c_dialogue_gui speech playback first_write=0.640s playback_end=5.207s
+2026-09-19 11:18:05,554 INFO fr3c_dialogue_gui intent request_id=714899275bd74853bc82320ef6a4cecf route=clarify task=None color=None zone=None support_color=None raw='{"schema_version":"1.0","route":"clarify","task":null,"color":null,"zone":null,"support_color":null,"reply":"请说明要处理的颜色方块类型。"}'
+2026-09-19 11:18:09,098 INFO fr3c_dialogue_gui speech playback first_write=0.386s playback_end=3.413s
+2026-09-19 11:18:30,131 WARNING fr3c_dialogue_gui intent_rejected request_id=6e49180178a44d91a740d5e146b406c7 code=explicit_action_not_routed detail=啊绿色方块儿放到放治区
+2026-09-19 11:18:57,886 INFO fr3c_dialogue_gui local_action_route request_id=80419bdded8545239f0f21e3a8f27cb2 task=pick_sort color=green zone=None support_color=None
+2026-09-19 11:18:57,889 INFO fr3c_dialogue_gui action_dispatched request_id=80419bdded8545239f0f21e3a8f27cb2 task=pick_sort color=green zone=None support_color=None
+2026-09-19 11:18:57,992 INFO fr3c_dialogue_gui action_event kind=accepted request_id=80419bdded8545239f0f21e3a8f27cb2 phase=accepted success=None error_code=None executed=None detail=抓取请求已接受，等待实际执行结果。
+2026-09-19 11:18:57,995 INFO fr3c_dialogue_gui action_event kind=feedback request_id=80419bdded8545239f0f21e3a8f27cb2 phase=waiting_for_target success=None error_code=None executed=None detail=pick_sort accepted; requesting a fresh unique green target
+2026-09-19 11:19:01,502 INFO fr3c_dialogue_gui speech playback first_write=0.430s playback_end=3.557s
+2026-09-19 11:19:06,647 INFO fr3c_dialogue_gui action_event kind=feedback request_id=80419bdded8545239f0f21e3a8f27cb2 phase=waiting_for_descend_command success=None error_code=None executed=None detail=inspect high-clearance alignment, then call descend_and_close
+2026-09-19 11:19:06,648 INFO fr3c_dialogue_gui action_event kind=feedback request_id=80419bdded8545239f0f21e3a8f27cb2 phase=descending_and_closing success=None error_code=None executed=None detail=planning from actual state, then descending and closing
+2026-09-19 11:19:09,803 INFO fr3c_dialogue_gui action_event kind=feedback request_id=80419bdded8545239f0f21e3a8f27cb2 phase=waiting_for_manual_grip_confirmation success=None error_code=None executed=None detail=26 mm close was commanded open-loop; continuing without a grip sensor claim
+2026-09-19 11:19:09,803 INFO fr3c_dialogue_gui action_event kind=feedback request_id=80419bdded8545239f0f21e3a8f27cb2 phase=attaching_and_lifting success=None error_code=None executed=None detail=close command completed; attaching cube in the scene and planning lift
+2026-09-19 11:19:10,949 INFO fr3c_dialogue_gui action_event kind=feedback request_id=80419bdded8545239f0f21e3a8f27cb2 phase=placing success=None error_code=None executed=None detail=moving the grasped cube to its color region
+2026-09-19 11:19:28,523 INFO fr3c_dialogue_gui action_event kind=feedback request_id=80419bdded8545239f0f21e3a8f27cb2 phase=failed_holding_state_unchanged success=None error_code=None executed=None detail=place_descend_execute execution failed with MoveIt code -6
+2026-09-19 11:19:28,524 INFO fr3c_dialogue_gui action_event kind=result request_id=80419bdded8545239f0f21e3a8f27cb2 phase=failed success=False error_code=8 executed=False detail=place_descend_execute execution failed with MoveIt code -6

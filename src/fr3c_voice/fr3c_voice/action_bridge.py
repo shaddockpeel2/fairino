@@ -10,6 +10,8 @@ import threading
 import time
 
 import rclpy
+from action_msgs.msg import GoalStatus
+from control_msgs.action import GripperCommand
 from rclpy.action import ActionClient
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
@@ -47,6 +49,9 @@ class ColorActionBridge(Node):
     STATE_TOPIC = '/fr3c_first_grasp/state'
     PERCEPTION_STATUS_TOPIC = '/perception/blue_cube_localizer/status'
     DEFAULT_COLOR_TOPIC = '/camera/color/image_raw'
+    GRIPPER_ACTION = '/ydi_j22_gripper_controller/gripper_cmd'
+    GRIPPER_CLOSED_POSITION_M = 0.026
+    GRIPPER_OPEN_POSITION_M = 0.060
 
     def __init__(self, color_topic: str = DEFAULT_COLOR_TOPIC) -> None:
         super().__init__('fr3c_dialogue_action_bridge')
@@ -55,6 +60,8 @@ class ColorActionBridge(Node):
         self._lock = threading.Lock()
         self._active_goal = None
         self._cancel_pending = False
+        self._active_gripper_goal = None
+        self._gripper_request_id = ''
         self._latest_state: dict = {}
         self._state_observed = 0.0
         self._latest_perception: dict = {}
@@ -70,6 +77,8 @@ class ColorActionBridge(Node):
         self._cancel_client = self.create_client(Trigger, self.CANCEL_SERVICE)
         self._release_ack_client = self.create_client(
             Trigger, self.RELEASE_ACK_SERVICE)
+        self._gripper_client = ActionClient(
+            self, GripperCommand, self.GRIPPER_ACTION)
         self.create_subscription(String, self.STATE_TOPIC, self._on_state, 10)
         self.create_subscription(
             String, self.PERCEPTION_STATUS_TOPIC, self._on_perception, 10)
@@ -144,6 +153,13 @@ class ColorActionBridge(Node):
         return all(
             client.server_is_ready() for client in self._action_clients.values())
 
+    def gripper_server_ready(self) -> bool:
+        return self._gripper_client.server_is_ready()
+
+    def gripper_command_active(self) -> bool:
+        with self._lock:
+            return bool(self._gripper_request_id)
+
     def send(self, request_id: str, task: str, color: str, zone: str = '',
              support_color: str = '', server_timeout_s: float = 2.0) -> None:
         if task not in self._action_clients:
@@ -164,6 +180,8 @@ class ColorActionBridge(Node):
                 raise ValueError('stack source and support colors must differ')
         elif normalized_support:
             raise ValueError(f'{task} does not accept a support color')
+        if self.gripper_command_active():
+            raise RuntimeError('manual gripper command is still active')
         self.guard.begin(
             request_id, task, color, normalized_zone, normalized_support)
         client = self._action_clients[task]
@@ -194,6 +212,126 @@ class ColorActionBridge(Node):
             return
         future.add_done_callback(
             lambda completed: self._on_goal_response(request_id, completed))
+
+    def command_gripper(self, request_id: str, command: str) -> bool:
+        """Send one of the two calibrated manual gripper commands.
+
+        The YDI-J22 driver is intentionally two-state.  A close command may
+        either hold an object or reach the fully closed pose; the open-loop
+        hardware cannot distinguish those outcomes.
+        """
+        positions = {
+            'open': self.GRIPPER_OPEN_POSITION_M,
+            'close': self.GRIPPER_CLOSED_POSITION_M,
+        }
+        if command not in positions:
+            raise ValueError(f'unsupported gripper command: {command}')
+        if not request_id:
+            raise ValueError('request_id must not be empty')
+        robot_state, _observed = self.state_snapshot()
+        if self.guard.snapshot().active or robot_state.get('action_active'):
+            self._emit(ActionUiEvent(
+                kind='gripper_result', request_id=request_id,
+                phase=command, success=False,
+                detail='抓取任务正在运行，已拒绝手动夹爪命令。'))
+            return False
+        with self._lock:
+            if self._gripper_request_id:
+                self._emit(ActionUiEvent(
+                    kind='gripper_result', request_id=request_id,
+                    phase=command, success=False,
+                    detail='上一条夹爪命令尚未结束。'))
+                return False
+            self._gripper_request_id = request_id
+        if not self._gripper_client.server_is_ready():
+            with self._lock:
+                self._gripper_request_id = ''
+            self._emit(ActionUiEvent(
+                kind='gripper_result', request_id=request_id,
+                phase=command, success=False,
+                detail='夹爪 Action 服务不可用。'))
+            return False
+        goal = GripperCommand.Goal()
+        goal.command.position = positions[command]
+        # This open-loop gripper has no force/current feedback; its driver
+        # rejects non-zero effort goals.
+        goal.command.max_effort = 0.0
+        try:
+            future = self._gripper_client.send_goal_async(goal)
+        except Exception as error:
+            with self._lock:
+                self._gripper_request_id = ''
+            self._emit(ActionUiEvent(
+                kind='gripper_result', request_id=request_id,
+                phase=command, success=False,
+                detail=f'夹爪命令提交失败：{error}'))
+            return False
+        future.add_done_callback(
+            lambda completed: self._on_gripper_goal_response(
+                request_id, command, completed))
+        self._emit(ActionUiEvent(
+            kind='gripper_submitted', request_id=request_id,
+            phase=command, detail='夹爪命令已提交。'))
+        return True
+
+    def _on_gripper_goal_response(self, request_id: str, command: str,
+                                  future) -> None:
+        try:
+            goal_handle = future.result()
+        except Exception as error:
+            self._finish_gripper_request(request_id)
+            self._emit(ActionUiEvent(
+                kind='gripper_result', request_id=request_id,
+                phase=command, success=False,
+                detail=f'夹爪命令提交失败：{error}'))
+            return
+        if goal_handle is None or not goal_handle.accepted:
+            self._finish_gripper_request(request_id)
+            self._emit(ActionUiEvent(
+                kind='gripper_result', request_id=request_id,
+                phase=command, success=False,
+                detail='夹爪驱动拒绝了命令；请检查硬件输出门禁和驱动状态。'))
+            return
+        with self._lock:
+            if self._gripper_request_id == request_id:
+                self._active_gripper_goal = goal_handle
+        self._emit(ActionUiEvent(
+            kind='gripper_accepted', request_id=request_id,
+            phase=command, detail='夹爪正在动作。'))
+        result_future = goal_handle.get_result_async()
+        result_future.add_done_callback(
+            lambda completed: self._on_gripper_result(
+                request_id, command, completed))
+
+    def _on_gripper_result(self, request_id: str, command: str, future) -> None:
+        try:
+            wrapped = future.result()
+            result = wrapped.result
+            succeeded = wrapped.status == GoalStatus.STATUS_SUCCEEDED
+            reached = bool(result and result.reached_goal)
+            success = succeeded and reached
+            if success:
+                detail = (
+                    '夹爪已打开。' if command == 'open'
+                    else '夹爪已执行闭合；有物体时为夹持，无物体时为完全闭合。')
+            elif wrapped.status == GoalStatus.STATUS_CANCELED:
+                detail = '夹爪命令已取消。'
+            else:
+                detail = '夹爪动作未成功完成。'
+        except Exception as error:
+            success = False
+            detail = f'读取夹爪结果失败：{error}'
+        finally:
+            self._finish_gripper_request(request_id)
+        self._emit(ActionUiEvent(
+            kind='gripper_result', request_id=request_id,
+            phase=command, success=success, detail=detail))
+
+    def _finish_gripper_request(self, request_id: str) -> None:
+        with self._lock:
+            if self._gripper_request_id == request_id:
+                self._gripper_request_id = ''
+                self._active_gripper_goal = None
 
     def _on_goal_response(self, request_id: str, future) -> None:
         try:

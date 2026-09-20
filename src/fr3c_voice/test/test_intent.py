@@ -149,21 +149,46 @@ def test_model_zone_must_match_the_users_named_region():
 
 
 def test_designated_zone_means_the_preconfigured_color_sort_region():
-    responses = iter([
-        encoded(
-            'action', 'pick_place', 'red', '指定放置区',
-            reply='准备放置。'),
-        encoded(
-            'action', 'pick_sort', 'red',
-            reply='准备将红色方块放入预设颜色区域。'),
-    ])
+    raw = encoded(
+        'action', 'pick_sort', 'red',
+        reply='准备将红色方块放入预设颜色区域。')
 
     intent, _ = classify_text(
-        '把红色方块放到指定放置区', lambda _prompt: next(responses))
+        '把红色方块放到指定放置区', lambda _prompt: raw)
 
     assert intent.route == 'action'
     assert intent.task == 'pick_sort'
     assert intent.color == 'red'
+    assert intent.zone is None
+
+
+def test_invalid_model_response_fails_after_one_generation():
+    calls = []
+
+    def generate(prompt):
+        calls.append(prompt)
+        return encoded(
+            'action', 'pick_sort', 'red',
+            reply='准备放入分类区。')
+
+    with pytest.raises(IntentProtocolError) as caught:
+        classify_text('把红色方块放到D区', generate)
+
+    assert caught.value.code == 'named_zone_requires_pick_place'
+    assert len(calls) == 1
+
+
+@pytest.mark.parametrize('text', [
+    '把绿色方块放到放置区',
+    '把绿色方块放到放置区域',
+])
+def test_bare_placement_zone_means_the_preconfigured_color_sort_region(text):
+    intent = safe_local_action_route(text)
+
+    assert intent is not None
+    assert intent.route == 'action'
+    assert intent.task == 'pick_sort'
+    assert intent.color == 'green'
     assert intent.zone is None
 
 

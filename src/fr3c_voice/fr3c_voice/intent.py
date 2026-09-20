@@ -40,7 +40,7 @@ PLACEMENT_CUE = re.compile(
 # region ("D区域") is deliberately *not* a sort cue; it selects pick_place.
 SORT_CUE = re.compile(
     r'分类|对应(?:分类)?(?:区|区域)|'
-    r'(?:指定|预设)(?:放置)?(?:区|区域)')
+    r'(?:(?:指定|预设)(?:放置)?|放置)(?:区|区域)')
 STACK_CUE = re.compile(r'上面|上方|顶面|顶部|之上|码垛|堆叠')
 ZONE_TOKEN = re.compile(r'^[a-z]+(?:[1-9][0-9]?)?$', re.IGNORECASE)
 ZONE_MENTIONS = (
@@ -247,7 +247,7 @@ zone只能是区域名加可选的1起算槽位号（如"D"、"A3"）或null。
    只要明确说“放到/放进分类区、放到对应区”或“分类某色方块”，即使前面还有“抓取”，task也必须是pick_sort。
 3. 用户明确要求把指定颜色方块放到指定的字母区域（如D区域、A3槽位）：route=action, task=pick_place，zone填用户指定的值。
    指定区域与颜色没有绑定；“红色放到D区”就是pick_place, color=red, zone="D"。
-   “指定放置区”“预设放置区”表示按颜色放到项目标定的默认区，必须task=pick_sort、zone=null；不得把这些中文词本身填入zone。
+   “放置区”“指定放置区”“预设放置区”表示按颜色放到项目标定的默认区，必须task=pick_sort、zone=null；不得把这些中文词本身填入zone。
 4. 用户明确要求把一种颜色方块放到另一种颜色方块的上面/顶面：route=action,
    task=pick_stack。color是被抓起的上方方块，support_color是留在桌面的下方方块，
    两者必须明确且不同，zone必须为null。
@@ -485,58 +485,17 @@ def validate_route_semantics(user_text: str,
 
 
 def classify_text(user_text: str,
-                  generate: Callable[[str], str],
-                  maximum_attempts: int = 2) -> tuple[DialogueIntent, str]:
-    """Return a validated route and raw model output (empty for shortcuts)."""
+                  generate: Callable[[str], str]) -> tuple[DialogueIntent, str]:
+    """Return one validated model route (or an empty-output shortcut).
+
+    Model classification is deliberately single-shot.  A malformed or
+    semantically unsafe first response fails closed immediately instead of
+    paying for a second generation and delaying the operator-visible result.
+    """
     shortcut = direct_shortcut(user_text)
     if shortcut is not None:
         return shortcut, ''
-    if maximum_attempts < 1 or maximum_attempts > 2:
-        raise ValueError('maximum_attempts must be 1 or 2')
-    base_prompt = build_intent_prompt(user_text)
-    last_error: IntentProtocolError | None = None
-    for attempt in range(maximum_attempts):
-        prompt = base_prompt
-        if attempt:
-            correction = {
-                'explicit_action_not_routed': (
-                    '原句已经包含明确动作和唯一颜色，必须route=action，并按是否放入分类区选择task。'),
-                'hold_conflicts_with_sort_cue': (
-                    '原句包含放入分类区/对应区，必须task=pick_sort。'),
-                'sort_without_sort_cue': (
-                    '原句没有分类放置含义，不得task=pick_sort。'),
-                'named_zone_requires_pick_place': (
-                    '原句指定了字母区域，必须task=pick_place并在zone填入该区域。'),
-                'zone_not_unique': (
-                    '只有唯一明确的区域才能pick_place。'),
-                'model_zone_mismatch': (
-                    'zone必须与用户原句指定的区域完全一致。'),
-                'invalid_zone': (
-                    'zone不能是“指定放置区”等描述；这句话表示颜色默认区，必须task=pick_sort且zone=null。'),
-                'action_missing_zone': (
-                    'pick_place必须有原句明确给出的字母区域或槽位；没有时必须route=clarify。'),
-                'stack_task_required': (
-                    '原句要求把一种颜色放到另一种颜色上，必须task=pick_stack。'),
-                'stack_without_stack_cue': (
-                    '只有明确说放到另一方块上面/顶面才能pick_stack。'),
-                'model_stack_role_mismatch': (
-                    'pick_stack的color是原句第一个、被抓起的方块，support_color是第二个、留在桌面的方块。'),
-                'vision_route_required': (
-                    '原句明确要求看画面，必须route=vision。'),
-                'quoted_text_not_action': (
-                    '原句只是在引用或翻译文字，必须route=chat且不得action。'),
-            }.get(last_error.code if last_error else '', '')
-            prompt += (
-                '\n\n上一次输出未通过程序校验。请重新独立判断，并严格遵守全部字段约束。'
-                f'校验错误码：{last_error.code if last_error else "unknown"}。'
-                f'{correction}'
-                '仍然只输出一个JSON对象。')
-        raw = generate(prompt)
-        try:
-            intent = parse_dialogue_intent(raw)
-            validate_route_semantics(user_text, intent)
-            return intent, raw
-        except IntentProtocolError as error:
-            last_error = error
-    assert last_error is not None
-    raise last_error
+    raw = generate(build_intent_prompt(user_text))
+    intent = parse_dialogue_intent(raw)
+    validate_route_semantics(user_text, intent)
+    return intent, raw

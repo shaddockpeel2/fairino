@@ -14,26 +14,23 @@ WORKSPACE = Path(__file__).resolve().parents[3]
 
 
 def test_wake_query_parser_keeps_same_utterance_question():
-    phrases = ('9527', '九五二七')
-    assert extract_wake_query('九五二七，介绍一下机械臂', phrases) == (
+    phrases = ('法奥同学',)
+    assert extract_wake_query('法奥同学，介绍一下机械臂', phrases) == (
         True, '介绍一下机械臂')
-    assert extract_wake_query('你好，9 5 2 7！你看到了什么', phrases) == (
+    assert extract_wake_query('你好，法奥同学！你看到了什么', phrases) == (
         True, '你看到了什么')
-    assert extract_wake_query('九武贰妻，抓起红色方块', phrases) == (
+    assert extract_wake_query('发澳童雪，抓起红色方块', phrases) == (
         True, '抓起红色方块')
-    assert extract_wake_query('就吴尔器，抓起蓝色方块', phrases) == (
+    assert extract_wake_query('法奥同学法奥同学，抓起蓝色方块', phrases) == (
         True, '抓起蓝色方块')
-    assert extract_wake_query('九五二期九武贰妻，抓起红色方块', phrases) == (
-        True, '抓起红色方块')
-    assert extract_wake_query('我刚才提到九五二七', phrases) == (False, '')
+    assert extract_wake_query('我刚才提到法奥同学', phrases) == (False, '')
 
 
 def test_cpu_kws_is_authority_but_wake_fragments_are_not_questions():
-    phrases = ('9527', '九五二七')
-    assert wake_query_from_asr('武贰妻', phrases) == ''
-    assert wake_query_from_asr('九武贰妻', phrases) == ''
-    assert wake_query_from_asr('就吴尔器', phrases) == ''
-    assert wake_query_from_asr('9527', phrases) == ''
+    phrases = ('法奥同学',)
+    assert wake_query_from_asr('澳童雪', phrases) == ''
+    assert wake_query_from_asr('发澳童雪', phrases) == ''
+    assert wake_query_from_asr('法奥同学', phrases) == ''
     assert wake_query_from_asr('介绍一下机械臂', phrases) == '介绍一下机械臂'
 
 
@@ -41,7 +38,8 @@ def test_stage9_assets_and_timing_configuration_are_valid():
     wake = WakeInput(WORKSPACE, lambda _event: None)
     wake.validate()
     assert wake.enabled_by_default is True
-    assert wake.phrases == ('9527', '九五二七')
+    assert wake.phrases == ('法奥同学',)
+    assert wake.asr['hotwords_score'] == 3.0
     assert wake.config['pre_roll_s'] == 2.0
     assert wake.config['followup_initial_silence_s'] == 7.0
     assert wake.asr['trailing_silence_s'] == 0.65
@@ -55,7 +53,7 @@ def _event_gui():
     scheduled = []
     gui = SimpleNamespace(
         wake=SimpleNamespace(
-            phrases=('9527', '九五二七'),
+            phrases=('法奥同学',),
             config={'retry_delay_s': 2.0, 'resume_delay_s': 0.5}),
         _wake_request='wake-1',
         _wake_mode='wake',
@@ -83,10 +81,10 @@ def test_wake_final_submits_same_utterance_once():
     gui, _displayed, values, submissions, scheduled = _event_gui()
     DialogueGui._handle_wake_event(
         gui, 'wake_final', 'wake-1',
-        {'mode': 'wake', 'text': '九武贰妻，请介绍机械臂'})
+        {'mode': 'wake', 'text': '发澳童雪，请介绍机械臂'})
     DialogueGui._handle_wake_event(
         gui, 'wake_final', 'wake-1',
-        {'mode': 'wake', 'text': '九武贰妻，请介绍机械臂'})
+        {'mode': 'wake', 'text': '发澳童雪，请介绍机械臂'})
     assert values == ['请介绍机械臂']
     assert submissions == [(
         '请介绍机械臂', {'request_id': 'wake-1', 'source': 'wake'})]
@@ -97,7 +95,7 @@ def test_wake_only_says_ack_then_opens_one_followup_window():
     gui, displayed, values, submissions, scheduled = _event_gui()
     DialogueGui._handle_wake_event(
         gui, 'wake_final', 'wake-1',
-        {'mode': 'wake', 'text': '九武贰妻'})
+        {'mode': 'wake', 'text': '发澳童雪'})
     assert values == ['']
     assert submissions == []
     assert ('assistant', '我在') in displayed

@@ -1,0 +1,17 @@
+2026-09-19 10:51:52,620 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-19 11:12:41,229 INFO fr3c_dialogue_gui speech playback first_write=0.186s playback_end=0.712s
+2026-09-19 11:13:00,933 WARNING fr3c_dialogue_gui intent_rejected request_id=479b0bb6e53d409ead2cb4c52fa7cb8c code=explicit_action_not_routed detail=把绿色方块放到放置居
+2026-09-19 11:13:10,106 INFO fr3c_dialogue_gui speech playback first_write=0.150s playback_end=0.675s
+2026-09-19 11:13:27,571 WARNING fr3c_dialogue_gui intent_rejected request_id=a770e56fd8584038a4b5b26e0fc5d9de code=action_missing_parameters detail=task='pick_sort', color=None
+2026-09-19 11:13:42,921 INFO fr3c_dialogue_gui speech playback first_write=0.149s playback_end=0.678s
+2026-09-19 11:13:56,699 INFO fr3c_dialogue_gui action_event kind=cancel_requested request_id= phase= success=None error_code=None executed=None detail=已直接请求停止抓取。
+2026-09-19 11:13:56,705 INFO fr3c_dialogue_gui action_event kind=cancel_result request_id= phase= success=True error_code=None executed=None detail=No active task to cancel; task and holding state unchanged.
+2026-09-19 11:14:01,722 INFO fr3c_dialogue_gui intent request_id=7027369235f64678bb5f641ea0982557 route=clarify task=None color=None zone=None support_color=None raw='{"schema_version":"1.0","route":"clarify","task":null,"color":null,"zone":null,"support_color":null,"reply":"请说明要放入分类区的颜色方块。"}'
+2026-09-19 11:14:05,541 INFO fr3c_dialogue_gui speech playback first_write=0.448s playback_end=3.715s
+2026-09-19 11:14:25,145 INFO fr3c_dialogue_gui speech playback first_write=0.174s playback_end=0.721s
+2026-09-19 11:14:31,514 INFO fr3c_dialogue_gui local_action_route request_id=cc152048d609434c94e20133d007ff09 task=pick_sort color=green zone=None support_color=None
+2026-09-19 11:14:31,516 INFO fr3c_dialogue_gui action_dispatched request_id=cc152048d609434c94e20133d007ff09 task=pick_sort color=green zone=None support_color=None
+2026-09-19 11:14:31,621 INFO fr3c_dialogue_gui action_event kind=accepted request_id=cc152048d609434c94e20133d007ff09 phase=accepted success=None error_code=None executed=None detail=抓取请求已接受，等待实际执行结果。
+2026-09-19 11:14:31,628 INFO fr3c_dialogue_gui action_event kind=result request_id=cc152048d609434c94e20133d007ff09 phase=failed success=False error_code=6 executed=False detail=P6 execution gate refused the task: P6 gate has not yet been accepted in this grasp session and is stale: age_s=2142.27, initial_limit_s=600
+2026-09-19 11:14:35,093 INFO fr3c_dialogue_gui speech playback first_write=0.418s playback_end=3.545s
+2026-09-19 11:15:15,257 INFO fr3c_dialogue_gui speech service availability changed to False

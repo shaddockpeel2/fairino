@@ -491,6 +491,7 @@ private:
 
   struct JointPathMetrics
   {
+    double duration_s{0.0};
     double path_length_rad{0.0};
     std::vector<std::string> joint_names;
     std::vector<double> joint_travel_rad;
@@ -1141,6 +1142,8 @@ private:
     close_position_m_ = declare_double("close_position_m", 0.026);
     pre_open_command_repetitions_ = node_->declare_parameter<int>(
       "pre_open_command_repetitions", 1);
+    release_command_repetitions_ = node_->declare_parameter<int>(
+      "release_command_repetitions", 2);
     object_size_m_ = declare_vector("object_size_m", {0.060, 0.030, 0.030});
     use_target_size_ = node_->declare_parameter<bool>("use_target_size", true);
     square_aspect_ratio_max_ = declare_double("square_aspect_ratio_max", 1.10);
@@ -1179,7 +1182,7 @@ private:
     state_timeout_s_ = declare_double("state_timeout_s", 3.0);
     gripper_state_tolerance_m_ = declare_double("gripper_state_tolerance_m", 0.003);
     maximum_cube_plane_gap_m_ = declare_double("maximum_cube_plane_gap_m", 0.010);
-    p6_gate_max_age_s_ = declare_double("p6_gate_max_age_s", 600.0);
+    p6_gate_max_age_s_ = declare_double("p6_gate_max_age_s", 3600.0);
 
     touch_links_ = node_->declare_parameter<std::vector<std::string>>(
       "touch_links",
@@ -1212,7 +1215,8 @@ private:
       !positive(batch_empty_timeout_s_) ||
       !positive(batch_target_match_distance_m_) ||
       planning_attempts_ < 1 || pre_open_command_repetitions_ < 1 ||
-      pre_open_command_repetitions_ > 3)
+      pre_open_command_repetitions_ > 3 || release_command_repetitions_ < 1 ||
+      release_command_repetitions_ > 3)
     {
       throw std::runtime_error("distance, timeout and planning parameters must be positive");
     }
@@ -3039,6 +3043,12 @@ private:
       previous.push_back(state.position[index]);
     }
     JointPathMetrics result;
+    const auto & final_time = trajectory.points.back().time_from_start;
+    result.duration_s =
+      static_cast<double>(final_time.sec) + static_cast<double>(final_time.nanosec) * 1e-9;
+    if (!isFinite(result.duration_s) || result.duration_s < 0.0) {
+      throw std::runtime_error(motion.name + " has an invalid planned duration");
+    }
     result.joint_names = names;
     result.joint_travel_rad.assign(names.size(), 0.0);
     for (const auto & point : trajectory.points) {
@@ -3104,6 +3114,7 @@ private:
       } else if (part.joint_names != total.joint_names) {
         throw std::runtime_error("planned motions use inconsistent joint ordering");
       }
+      total.duration_s += part.duration_s;
       total.path_length_rad += part.path_length_rad;
       for (std::size_t index = 0; index < part.joint_travel_rad.size(); ++index) {
         total.joint_travel_rad[index] += part.joint_travel_rad[index];
@@ -3122,7 +3133,8 @@ private:
     const auto candidates = graspCandidates();
     std::vector<PlannedMotion> best_motions;
     GraspCandidate best_candidate;
-    double best_score = std::numeric_limits<double>::infinity();
+    double best_duration_s = std::numeric_limits<double>::infinity();
+    double best_path_length_rad = std::numeric_limits<double>::infinity();
     for (std::size_t index = 0; index < candidates.size(); ++index) {
       if (canceled_.load()) {
         throw std::runtime_error("candidate planning canceled");
@@ -3202,20 +3214,28 @@ private:
         }
         attachment_attempted = false;
         const auto metrics = combinedJointPathMetrics(motions);
-        // Compare equivalent grasp orientations using the standard joint-space
-        // path length. All six arm joints have equal weight; joint6 is no
-        // longer constrained or preferred separately.
-        const double score = metrics.path_length_rad;
+        // All candidates execute the same fixed gripper commands and waits, so
+        // their summed arm-trajectory duration directly orders total task time.
+        // Joint-space length is used only to make an equal-duration result
+        // deterministic and prefer the simpler motion in that tie.
+        constexpr double kDurationTieToleranceS = 1e-9;
         std::ostringstream detail;
         detail << std::setprecision(9) << "index=" << index << ",yaw_rad=" << candidate.yaw_rad
-               << ",joint_space_path_length_rad=" << score;
+               << ",planned_duration_s=" << metrics.duration_s
+               << ",joint_space_path_length_rad=" << metrics.path_length_rad;
         for (std::size_t joint = 0; joint < metrics.joint_names.size(); ++joint) {
           detail << "," << metrics.joint_names[joint] << "_travel_rad="
                  << metrics.joint_travel_rad[joint];
         }
         recordEvent("grasp_candidate_valid", detail.str());
-        if (score < best_score) {
-          best_score = score;
+        const bool shorter_duration =
+          metrics.duration_s < best_duration_s - kDurationTieToleranceS;
+        const bool equal_duration_shorter_path =
+          std::abs(metrics.duration_s - best_duration_s) <= kDurationTieToleranceS &&
+          metrics.path_length_rad < best_path_length_rad;
+        if (shorter_duration || equal_duration_shorter_path) {
+          best_duration_s = metrics.duration_s;
+          best_path_length_rad = metrics.path_length_rad;
           best_candidate = candidate;
           best_motions = std::move(motions);
         }
@@ -3260,8 +3280,9 @@ private:
     }
     recordEvent(
       "grasp_candidate_selected", "yaw_rad=" +
-      std::to_string(best_candidate.yaw_rad) + ",joint_space_path_length_rad=" +
-      std::to_string(best_score));
+      std::to_string(best_candidate.yaw_rad) + ",planned_duration_s=" +
+      std::to_string(best_duration_s) + ",joint_space_path_length_rad=" +
+      std::to_string(best_path_length_rad));
     if (task_stack_enabled_) {
       recordEvent(
         "stack_candidate_selected",
@@ -3308,6 +3329,7 @@ private:
       const auto metrics = jointPathMetrics(motion);
       std::ostringstream detail;
       detail << std::setprecision(9) << "segment=" << motion.name
+             << ",planned_duration_s=" << metrics.duration_s
              << ",joint_space_path_length_rad=" << metrics.path_length_rad;
       for (std::size_t joint = 0; joint < metrics.joint_names.size(); ++joint) {
         detail << "," << metrics.joint_names[joint] << "_travel_rad="
@@ -3821,14 +3843,24 @@ private:
         }
         auto retreat = preview[kPlaceRetreatIndex];
         retreat.name = "place_retreat_execute";
-        if (!commandGripper(pre_open_position_m_, "release")) {
-          return false;
-        }
-        if (!waitForGripperState(pre_open_position_m_, "release")) {
-          return false;
+        // This gripper has no aperture feedback: a successful action only
+        // proves that the bounded PWM burst was sent.  Repeat the independent
+        // open command while the arm is stationary at the placement pose so
+        // one intermittent/stiction event cannot carry the cube into retreat.
+        // Never close between attempts because that could re-grip or displace
+        // an already placed cube.
+        for (int repetition = 1; repetition <= release_command_repetitions_; ++repetition) {
+          const auto name = repetition == 1 ?
+            std::string("release") : "release_confirm_" + std::to_string(repetition);
+          if (!commandGripper(pre_open_position_m_, name)) {
+            return false;
+          }
+          if (!waitForGripperState(pre_open_position_m_, name)) {
+            return false;
+          }
         }
         // Plan with the cube attached so its retreat swept volume is checked,
-        // then detach it only after the fixed 0.8 s release command completes.
+        // then detach it only after every fixed 0.8 s release command completes.
         if (!releaseCubeScene(reason)) {
           fail(reason);
           return false;
@@ -3837,7 +3869,7 @@ private:
           "place_retreat_execute", preview[kPlaceDescendIndex].end_state);
         setState(
           RETURNING_HOME,
-          "release command completed; retreating from the placed cube");
+          "release command sequence completed; retreating from the placed cube");
         if (!executeMotion(retreat, activePlaceApproachPose())) {
           return false;
         }
@@ -4154,6 +4186,7 @@ private:
            << "lift_distance_m: " << lift_distance_m_ << "\n"
            << "pre_open_position_m: " << pre_open_position_m_ << "\n"
            << "close_position_m: " << close_position_m_ << "\n"
+           << "release_command_repetitions: " << release_command_repetitions_ << "\n"
            << "object_size_m: [" << locked_object_size_m_[0] << ", "
            << locked_object_size_m_[1] << ", " << locked_object_size_m_[2] << "]\n"
            << "sort_enabled: " << (task_sort_enabled_ ? "true" : "false") << "\n"
@@ -4290,6 +4323,7 @@ private:
   double pre_open_position_m_{0.060};
   double close_position_m_{0.026};
   int pre_open_command_repetitions_{1};
+  int release_command_repetitions_{2};
   std::vector<double> object_size_m_{0.060, 0.030, 0.030};
   bool use_target_size_{true};
   double square_aspect_ratio_max_{1.10};
@@ -4327,7 +4361,7 @@ private:
   double ground_plane_thickness_m_{0.020};
   double ground_plane_contact_epsilon_m_{0.00001};
   double maximum_cube_plane_gap_m_{0.010};
-  double p6_gate_max_age_s_{600.0};
+  double p6_gate_max_age_s_{3600.0};
 
   mutable std::mutex mutex_;
   std::mutex start_mutex_;

@@ -1,0 +1,48 @@
+2026-09-19 16:12:39,901 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-19 16:13:30,796 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=957ec9d49ddd4968bd4fc15d818210db phase=open success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:13:30,797 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=957ec9d49ddd4968bd4fc15d818210db phase=open success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:13:33,136 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=957ec9d49ddd4968bd4fc15d818210db phase=open success=True error_code=None executed=None detail=夹爪已打开。
+2026-09-19 16:13:33,590 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=23798cb6b6a7456d9cbb567bd87c1ae4 phase=close success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:13:33,692 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=23798cb6b6a7456d9cbb567bd87c1ae4 phase=close success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:13:35,969 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=23798cb6b6a7456d9cbb567bd87c1ae4 phase=close success=True error_code=None executed=None detail=夹爪已执行闭合；有物体时为夹持，无物体时为完全闭合。
+2026-09-19 16:13:36,486 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=e17f84411bae42cc8da9f591c106e70b phase=open success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:13:36,486 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=e17f84411bae42cc8da9f591c106e70b phase=open success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:13:38,858 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=e17f84411bae42cc8da9f591c106e70b phase=open success=True error_code=None executed=None detail=夹爪已打开。
+2026-09-19 16:13:39,281 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=36a8631c39e444d29eb9d3c441e6e059 phase=close success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:13:39,383 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=36a8631c39e444d29eb9d3c441e6e059 phase=close success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:13:41,608 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=36a8631c39e444d29eb9d3c441e6e059 phase=close success=True error_code=None executed=None detail=夹爪已执行闭合；有物体时为夹持，无物体时为完全闭合。
+2026-09-19 16:14:50,419 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=2b5066e5bc374248be6cd1041f8d1211 phase=open success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:14:50,522 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=2b5066e5bc374248be6cd1041f8d1211 phase=open success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:14:52,775 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=2b5066e5bc374248be6cd1041f8d1211 phase=open success=True error_code=None executed=None detail=夹爪已打开。
+2026-09-19 16:14:53,328 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=fae320a7cae14eef949a371f0b1b5d3a phase=close success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:14:53,329 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=fae320a7cae14eef949a371f0b1b5d3a phase=close success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:14:55,628 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=fae320a7cae14eef949a371f0b1b5d3a phase=close success=True error_code=None executed=None detail=夹爪已执行闭合；有物体时为夹持，无物体时为完全闭合。
+2026-09-19 16:14:57,053 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=4e44bbd3a09d4cf187d2fd9a050c8b14 phase=open success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:14:57,054 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=4e44bbd3a09d4cf187d2fd9a050c8b14 phase=open success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:14:59,411 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=4e44bbd3a09d4cf187d2fd9a050c8b14 phase=open success=True error_code=None executed=None detail=夹爪已打开。
+2026-09-19 16:14:59,837 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=f46327e550774e80b3a463d7685cc8a9 phase=close success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:14:59,938 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=f46327e550774e80b3a463d7685cc8a9 phase=close success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:15:02,243 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=f46327e550774e80b3a463d7685cc8a9 phase=close success=True error_code=None executed=None detail=夹爪已执行闭合；有物体时为夹持，无物体时为完全闭合。
+2026-09-19 16:15:02,764 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=5220e9fb5c7341d9befa7e896f920b81 phase=open success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:15:02,764 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=5220e9fb5c7341d9befa7e896f920b81 phase=open success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:15:05,055 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=5220e9fb5c7341d9befa7e896f920b81 phase=open success=True error_code=None executed=None detail=夹爪已打开。
+2026-09-19 16:15:05,616 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=0ab9e886b4484cb2ba7dc4d983c25841 phase=close success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:15:05,619 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=0ab9e886b4484cb2ba7dc4d983c25841 phase=close success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:15:07,938 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=0ab9e886b4484cb2ba7dc4d983c25841 phase=close success=True error_code=None executed=None detail=夹爪已执行闭合；有物体时为夹持，无物体时为完全闭合。
+2026-09-19 16:15:08,507 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=ff3ce53c50044d2b80f197a380d7dd6e phase=open success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:15:08,512 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=ff3ce53c50044d2b80f197a380d7dd6e phase=open success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:15:10,835 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=ff3ce53c50044d2b80f197a380d7dd6e phase=open success=True error_code=None executed=None detail=夹爪已打开。
+2026-09-19 16:15:11,243 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=d5bee41edf3d41a4833da2125ec09819 phase=close success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:15:11,244 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=d5bee41edf3d41a4833da2125ec09819 phase=close success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:15:13,524 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=d5bee41edf3d41a4833da2125ec09819 phase=close success=True error_code=None executed=None detail=夹爪已执行闭合；有物体时为夹持，无物体时为完全闭合。
+2026-09-19 16:15:14,443 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=0865041e093741d9b069192086a63875 phase=open success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-19 16:15:14,443 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=0865041e093741d9b069192086a63875 phase=open success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-19 16:15:16,801 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=0865041e093741d9b069192086a63875 phase=open success=True error_code=None executed=None detail=夹爪已打开。
+2026-09-19 16:16:05,702 INFO fr3c_dialogue_gui local_route request_id=cb1d6676691640c784d8539350ade393 route=chat
+2026-09-19 16:16:10,028 INFO fr3c_dialogue_gui speech playback first_write=1.719s playback_end=4.246s
+2026-09-19 16:17:34,566 INFO fr3c_dialogue_gui speech playback first_write=0.147s playback_end=0.674s
+2026-09-19 16:17:47,552 INFO fr3c_dialogue_gui local_action_route request_id=c31ed33ab5d64933ae2cd3af63ba803a task=pick_sort color=green zone=None support_color=None
+2026-09-19 16:17:47,563 INFO fr3c_dialogue_gui action_dispatched request_id=c31ed33ab5d64933ae2cd3af63ba803a task=pick_sort color=green zone=None support_color=None
+2026-09-19 16:17:47,563 INFO fr3c_dialogue_gui action_event kind=accepted request_id=c31ed33ab5d64933ae2cd3af63ba803a phase=accepted success=None error_code=None executed=None detail=抓取请求已接受，等待实际执行结果。
+2026-09-19 16:17:47,618 INFO fr3c_dialogue_gui action_event kind=result request_id=c31ed33ab5d64933ae2cd3af63ba803a phase=failed success=False error_code=6 executed=False detail=P6 execution gate refused the task: P6 gate has not yet been accepted in this grasp session and is stale: age_s=2467.04, initial_limit_s=600
+2026-09-19 16:17:51,145 INFO fr3c_dialogue_gui speech playback first_write=0.429s playback_end=3.555s

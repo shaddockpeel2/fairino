@@ -1,0 +1,24 @@
+{"time_ns":1789808278842722854,"event":"run_started","detail":"execution"}
+{"time_ns":1789808278842780604,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1789808278846117887,"event":"gripper_pre_open_started","detail":"requested_position_m=0.060000"}
+{"time_ns":1789808281039007243,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,requested_position_m=0.06,reported_position_m=0.06,stalled=0"}
+{"time_ns":1789808281041047180,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1789808281041847813,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube and stack support cube added"}
+{"time_ns":1789808291166121143,"event":"plan_candidate_0_approach","detail":"return_code=99999"}
+{"time_ns":1789808291170888481,"event":"grasp_candidate_rejected","detail":"index=0,yaw_rad=-1.591907,reason=candidate_0_approach planning failed with MoveIt code 99999"}
+{"time_ns":1789808301357701461,"event":"plan_candidate_1_approach","detail":"return_code=99999"}
+{"time_ns":1789808301357873546,"event":"grasp_candidate_rejected","detail":"index=1,yaw_rad=-0.021110,reason=candidate_1_approach planning failed with MoveIt code 99999"}
+{"time_ns":1789808311394073719,"event":"plan_candidate_2_approach","detail":"return_code=99999"}
+{"time_ns":1789808311394209637,"event":"grasp_candidate_rejected","detail":"index=2,yaw_rad=1.549686,reason=candidate_2_approach planning failed with MoveIt code 99999"}
+{"time_ns":1789808311529219119,"event":"plan_candidate_3_approach","detail":"return_code=1"}
+{"time_ns":1789808311545239655,"event":"plan_candidate_3_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0449427279"}
+{"time_ns":1789808311548952026,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789808311608535458,"event":"plan_candidate_3_lift","detail":"fraction=0.588235294,moveit_code=1,maximum_joint_step_rad=0.0545727831"}
+{"time_ns":1789808311613717843,"event":"grasp_candidate_rejected","detail":"index=3,yaw_rad=3.120482,reason=candidate_3_lift Cartesian path incomplete: fraction=0.588235, code=1"}
+{"time_ns":1789808311614118014,"event":"state","detail":"retryable_failure_before_arm_motion: no equivalent blue grasp can place the cube on the yellow cube within 0.785398 rad of wrist rotation and with a complete collision-free trajectory; no arm motion started, fix the condition and call /start again"}
+{"time_ns":1789808374051055546,"event":"state","detail":"waiting_for_target: pick_stack accepted; locating one fresh blue cube and one fresh yellow cube below it"}
+{"time_ns":1789808374381566080,"event":"target_filter_set","detail":"color=blue,generation=3"}
+{"time_ns":1789808375048030581,"event":"stack_destination_locked","detail":"color=yellow,top_xyz_m=[-0.0184297408,-0.324209073,0.0317597851],yaw_rad=0.557695405,tier=0,plane_gap_m=0.00175978513"}
+{"time_ns":1789808375048089498,"event":"stack_pair_snapshot_locked","detail":"source=blue,support=yellow,filter_generation=3,same_rgbd_status=true"}
+{"time_ns":1789808375049079425,"event":"stack_pair_validated","detail":"lower=yellow,upper=blue,same_snapshot=true,xy_separation_m=0.154127275,tabletop_bottom_difference_m=0.000934826311,source_bottom_m=0.00269461144,destination_bottom_m=0.00175978513"}
+{"time_ns":1789808375049299927,"event":"latency","detail":"\"stage\":\"target_acquired\",\"elapsed_ms\":1021.2"}

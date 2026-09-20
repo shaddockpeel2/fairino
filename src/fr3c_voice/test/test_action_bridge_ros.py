@@ -15,6 +15,7 @@ MultiThreadedExecutor = pytest.importorskip(
     'rclpy.executors').MultiThreadedExecutor
 Node = pytest.importorskip('rclpy.node').Node
 PickColor = pytest.importorskip('fairino_msgs.action').PickColor
+GripperCommand = pytest.importorskip('control_msgs.action').GripperCommand
 Trigger = pytest.importorskip('std_srvs.srv').Trigger
 Image = pytest.importorskip('sensor_msgs.msg').Image
 String = pytest.importorskip('std_msgs.msg').String
@@ -76,6 +77,59 @@ def test_periodic_status_updates_refresh_snapshots_without_flooding_ui_queue():
             node.events.get_nowait()
     finally:
         node.destroy_node()
+        rclpy.shutdown()
+
+
+def test_bridge_manual_gripper_exposes_only_calibrated_open_and_close():
+    os.environ.setdefault('ROS_DOMAIN_ID', '231')
+    rclpy.init()
+    server_node = Node('manual_gripper_mock_server')
+    positions = []
+
+    def execute(goal_handle):
+        positions.append(goal_handle.request.command.position)
+        goal_handle.succeed()
+        result = GripperCommand.Result()
+        result.position = goal_handle.request.command.position
+        result.reached_goal = True
+        return result
+
+    action_server = ActionServer(
+        server_node, GripperCommand, ColorActionBridge.GRIPPER_ACTION, execute)
+    bridge = ColorActionBridge()
+    executor = MultiThreadedExecutor(num_threads=2)
+    executor.add_node(server_node)
+    executor.add_node(bridge)
+    spin_thread = threading.Thread(target=executor.spin, daemon=True)
+    spin_thread.start()
+    try:
+        deadline = time.monotonic() + 2.0
+        while not bridge.gripper_server_ready() and time.monotonic() < deadline:
+            time.sleep(0.02)
+        assert bridge.command_gripper('open-request', 'open')
+        events = []
+        deadline = time.monotonic() + 3.0
+        while time.monotonic() < deadline:
+            try:
+                event = bridge.events.get(timeout=0.2)
+            except queue.Empty:
+                continue
+            events.append(event)
+            if event.kind == 'gripper_result':
+                break
+        results = [event for event in events if event.kind == 'gripper_result']
+        assert len(results) == 1
+        assert results[0].success is True
+        assert positions == [ColorActionBridge.GRIPPER_OPEN_POSITION_M]
+        assert not bridge.gripper_command_active()
+        with pytest.raises(ValueError, match='unsupported gripper command'):
+            bridge.command_gripper('bad-request', 'half-open')
+    finally:
+        executor.shutdown(timeout_sec=2.0)
+        spin_thread.join(timeout=2.0)
+        action_server.destroy()
+        bridge.destroy_node()
+        server_node.destroy_node()
         rclpy.shutdown()
 
 

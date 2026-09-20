@@ -10,16 +10,21 @@ WORKSPACE = Path(__file__).resolve().parents[3]
 SOURCE = WORKSPACE / 'src/fr3c_voice/fr3c_voice/dialogue_gui.py'
 
 
-def test_gui_is_single_page_and_exposes_required_controls():
+def test_gui_exposes_dialogue_and_two_state_gripper_pages():
     source = SOURCE.read_text(encoding='utf-8')
-    assert 'ttk.Notebook' not in source
+    assert 'ttk.Notebook' in source
     assert '点动' not in source
     for label in (
             '发送', '开始说话', '截图问答', '自动播报',
             '停止播报', '停止抓取', '模型', '视觉', '任务',
             '知识', '资料来源', '唤醒：未唤醒', '正在接收问题',
-            '秒后退出', '我在'):
+            '秒后退出', '我在', '夹爪控制', '打开夹爪', '闭合夹爪',
+            '夹持；无物体时完全闭合', '夹爪 Action 服务不可用'):
         assert label in source
+    assert "command=lambda: self.command_gripper('open')" in source
+    assert "command=lambda: self.command_gripper('close')" in source
+    assert '60 mm · 70°' in source
+    assert '26 mm · 31°' in source
     assert "'tk', 'useinputmethods', True" in source
     # Stage 6 made the speech controls functional; they must not regress to
     # placeholders that silently do nothing.

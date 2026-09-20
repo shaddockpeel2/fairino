@@ -16,6 +16,7 @@ import time
 import uuid
 
 from .trace import TraceWriter
+from .asr_text import normalize_robot_asr_text
 
 
 CAPTURE_LOCK_PATH = '/tmp/fr3c-button-asr.lock'
@@ -103,6 +104,7 @@ class VoiceInput:
             command = [sys.executable, str(Path(__file__).with_name('asr_worker.py')),
                        '--c-api-library', str(library), '--model-dir', str(root / cfg['model_directory']),
                        '--hotwords-file', str(self.workspace / 'config/voice/asr_hotwords.txt'),
+                       '--hotwords-score', str(cfg.get('hotwords_score', 2.0)),
                        '--sample-rate', str(cfg['sample_rate']),
                        '--num-threads', str(cfg['num_threads']), '--chunk-samples', '800',
                        '--speech-endpoint-seconds', str(cfg['trailing_silence_s']),
@@ -163,12 +165,15 @@ class VoiceInput:
                             if kind == 'partial':
                                 self._event('asr_partial', rid, text=event.get('text', ''))
                             elif kind == 'final':
-                                text = event.get('text', '').strip()
+                                raw_text = event.get('text', '').strip()
+                                text = normalize_robot_asr_text(raw_text)
                                 if not closed:
                                     self.trace.write('input_end', rid, reason='sherpa_endpoint')
                                 data = dict(text=text, reason=reason or event.get('reason'),
                                             audio_s=total, voiced_s=voiced,
                                             speech_end_monotonic_ns=int(last_voice * 1e9) if last_voice else None)
+                                if text != raw_text:
+                                    data['raw_text'] = raw_text
                                 terminal = ('asr_final' if text and total >= cfg['minimum_record_s']
                                             and voiced >= cfg['minimum_speech_s'] else 'asr_empty', data)
                                 return

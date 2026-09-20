@@ -1,4 +1,4 @@
-"""Single-page stage-4 dialogue GUI for safe text-to-Action operation."""
+"""Dialogue and manual gripper GUI for safe local robot operation."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ import math
 import os
 from pathlib import Path
 import queue
+import signal
 import threading
 import time
 import uuid
@@ -92,6 +93,8 @@ class DialogueGui:
         self.log_path = log_path
         self.ui_events: queue.Queue[tuple] = queue.Queue()
         self._dialogue_busy = False
+        self._gripper_busy = False
+        self._gripper_request = ''
         self._closing = False
         self._health_running = False
         self._last_health_started = 0.0
@@ -143,6 +146,15 @@ class DialogueGui:
             'Primary.TButton', font=('Noto Sans CJK SC', 10, 'bold'),
             padding=(16, 9))
         style.configure('Tool.TButton', padding=(11, 8))
+        style.configure(
+            'Gripper.TButton', font=('Noto Sans CJK SC', 13, 'bold'),
+            padding=(24, 18))
+        style.configure(
+            'Section.TLabel', background='#ffffff', foreground='#152238',
+            font=('Noto Sans CJK SC', 13, 'bold'))
+        style.configure(
+            'Hint.TLabel', background='#ffffff', foreground='#65748b',
+            font=('Noto Sans CJK SC', 10))
 
     def _build_page(self) -> None:
         outer = self.ttk.Frame(self.root, style='App.TFrame', padding=18)
@@ -154,11 +166,20 @@ class DialogueGui:
             title_row, text='FR3C 离线智能助手', style='Title.TLabel').pack(
                 side='left')
         self.ttk.Label(
-            title_row, text='唤醒语音 · 千问聊天 · 本地知识 · 当前画面 · 阶段 10', style='Sub.TLabel').pack(
+            title_row, text='智能对话 · 视觉任务 · 夹爪控制', style='Sub.TLabel').pack(
                 side='right', pady=(8, 0))
 
-        status_card = self.ttk.Frame(outer, style='Card.TFrame', padding=8)
-        status_card.pack(fill='x', pady=(12, 10))
+        self.pages = self.ttk.Notebook(outer)
+        self.pages.pack(fill='both', expand=True, pady=(12, 0))
+        dialogue_page = self.ttk.Frame(
+            self.pages, style='App.TFrame', padding=(4, 10, 4, 4))
+        gripper_page = self.ttk.Frame(
+            self.pages, style='App.TFrame', padding=(18, 20))
+        self.pages.add(dialogue_page, text='  智能对话  ')
+        self.pages.add(gripper_page, text='  夹爪控制  ')
+
+        status_card = self.ttk.Frame(dialogue_page, style='Card.TFrame', padding=8)
+        status_card.pack(fill='x', pady=(0, 10))
         status_top = self.ttk.Frame(status_card, style='Card.TFrame')
         status_top.pack(fill='x')
         for key, title in (
@@ -178,7 +199,7 @@ class DialogueGui:
             status_card, textvariable=wake_value,
             style='Wake.TLabel').pack(fill='x', padx=4, pady=(4, 0))
 
-        chat_card = self.ttk.Frame(outer, style='Card.TFrame', padding=12)
+        chat_card = self.ttk.Frame(dialogue_page, style='Card.TFrame', padding=12)
         chat_card.pack(fill='both', expand=True)
         self.history = self.tk.Text(
             chat_card, wrap='word', relief='flat', borderwidth=0,
@@ -208,12 +229,12 @@ class DialogueGui:
                 '未检测到 XIM 输入法环境；请通过 start_dialogue_gui.sh 启动以使用中文输入。')
 
         self.preview_card = self.ttk.Frame(
-            outer, style='Card.TFrame', padding=8)
+            dialogue_page, style='Card.TFrame', padding=8)
         self.preview_label = self.ttk.Label(
             self.preview_card, text='', style='Status.TLabel', compound='left')
         self.preview_label.pack(anchor='w')
 
-        input_row = self.ttk.Frame(outer, style='App.TFrame')
+        input_row = self.ttk.Frame(dialogue_page, style='App.TFrame')
         self.input_row = input_row
         input_row.pack(fill='x', pady=(10, 8))
         self.input_var = self.tk.StringVar()
@@ -226,7 +247,7 @@ class DialogueGui:
             input_row, text='发送', style='Primary.TButton', command=self.send_text)
         self.send_button.pack(side='left', padx=(10, 0))
 
-        tools = self.ttk.Frame(outer, style='App.TFrame')
+        tools = self.ttk.Frame(dialogue_page, style='App.TFrame')
         tools.pack(fill='x')
         self.voice_button = self.ttk.Button(
             tools, text='🎙 开始说话', style='Tool.TButton', command=self.toggle_voice)
@@ -254,7 +275,68 @@ class DialogueGui:
         self.ttk.Button(
             tools, text='停止抓取', style='Tool.TButton',
             command=self.stop_action).pack(side='right', padx=7)
+        self._build_gripper_page(gripper_page)
         self.input_box.focus_set()
+
+    def _build_gripper_page(self, page) -> None:
+        intro = self.ttk.Frame(page, style='Card.TFrame', padding=22)
+        intro.pack(fill='x')
+        self.ttk.Label(
+            intro, text='夹爪手动控制', style='Section.TLabel').pack(anchor='w')
+        self.ttk.Label(
+            intro,
+            text='YDI-J22 当前只支持两个标定动作。闭合时，有物体会形成夹持；'
+                 '没有物体会到达完全闭合位置。',
+            style='Hint.TLabel', wraplength=720, justify='left').pack(
+                anchor='w', pady=(8, 0))
+        self.ttk.Label(
+            intro,
+            text='⚠ 动作会直接驱动真实夹爪。操作前请让手指、线缆和障碍物远离夹爪。',
+            style='Wake.TLabel', wraplength=720, justify='left').pack(
+                fill='x', pady=(16, 0))
+
+        state_card = self.ttk.Frame(page, style='Card.TFrame', padding=22)
+        state_card.pack(fill='x', pady=(14, 0))
+        self.gripper_service_var = self.tk.StringVar(value='夹爪服务：检查中')
+        self.gripper_result_var = self.tk.StringVar(value='尚未发送手动命令')
+        self.ttk.Label(
+            state_card, textvariable=self.gripper_service_var,
+            style='Section.TLabel').pack(anchor='w')
+        self.ttk.Label(
+            state_card, textvariable=self.gripper_result_var,
+            style='Hint.TLabel', wraplength=720, justify='left').pack(
+                anchor='w', pady=(8, 0))
+
+        actions = self.ttk.Frame(page, style='Card.TFrame', padding=22)
+        actions.pack(fill='both', expand=True, pady=(14, 0))
+        actions.columnconfigure(0, weight=1)
+        actions.columnconfigure(1, weight=1)
+        self.open_gripper_button = self.ttk.Button(
+            actions, text='打开夹爪\n60 mm · 70°', style='Gripper.TButton',
+            command=lambda: self.command_gripper('open'))
+        self.open_gripper_button.grid(
+            row=0, column=0, sticky='nsew', padx=(0, 8), pady=(0, 12))
+        self.close_gripper_button = self.ttk.Button(
+            actions, text='闭合夹爪\n26 mm · 31°', style='Gripper.TButton',
+            command=lambda: self.command_gripper('close'))
+        self.close_gripper_button.grid(
+            row=0, column=1, sticky='nsew', padx=(8, 0), pady=(0, 12))
+        self.ttk.Label(
+            actions,
+            text='打开：释放或预张开夹爪。', style='Hint.TLabel').grid(
+                row=1, column=0, sticky='nw', padx=(4, 8))
+        self.ttk.Label(
+            actions,
+            text='闭合：有物体时夹持；无物体时完全闭合。',
+            style='Hint.TLabel', wraplength=330, justify='left').grid(
+                row=1, column=1, sticky='nw', padx=(12, 4))
+        self.ttk.Label(
+            actions,
+            text='说明：夹爪为开环控制，没有位置、夹持力或物体检测反馈。'
+                 '“动作完成”仅表示驱动命令执行完毕。手动打开不会自动解除抓取任务的持物状态。',
+            style='Hint.TLabel', wraplength=720, justify='left').grid(
+                row=2, column=0, columnspan=2, sticky='sw', pady=(28, 0))
+        self._set_gripper_buttons('disabled')
 
     def _append(self, role: str, message: str) -> None:
         labels = {'user': '你', 'assistant': '助手', 'system': '系统'}
@@ -338,8 +420,70 @@ class DialogueGui:
         state = 'disabled' if busy else 'normal'
         self.send_button.configure(state=state)
         self.input_box.configure(state=state)
+        if hasattr(self, 'open_gripper_button'):
+            self._refresh_gripper_controls()
         if not busy:
             self.input_box.focus_set()
+
+    def _set_gripper_buttons(self, state: str) -> None:
+        self.open_gripper_button.configure(state=state)
+        self.close_gripper_button.configure(state=state)
+
+    def _refresh_gripper_controls(self) -> None:
+        try:
+            ready = self.bridge.gripper_server_ready()
+        except Exception:
+            ready = False
+        try:
+            robot_state, _observed = self.bridge.state_snapshot()
+            task_active = bool(
+                self.bridge.guard.snapshot().active
+                or robot_state.get('action_active'))
+        except Exception:
+            task_active = True
+        try:
+            bridge_busy = self.bridge.gripper_command_active()
+        except Exception:
+            bridge_busy = self._gripper_busy
+        busy = bool(self._gripper_busy or bridge_busy)
+        if busy:
+            self.gripper_service_var.set('夹爪服务：正在执行命令')
+        elif task_active:
+            self.gripper_service_var.set('夹爪服务：抓取任务运行中，手动控制已锁定')
+        elif ready:
+            self.gripper_service_var.set('夹爪服务：就绪')
+        else:
+            self.gripper_service_var.set('夹爪服务：Action 未就绪')
+        enabled = ready and not task_active and not busy and not self._dialogue_busy
+        self._set_gripper_buttons('normal' if enabled else 'disabled')
+
+    def command_gripper(self, command: str) -> None:
+        labels = {'open': '打开', 'close': '闭合'}
+        if command not in labels:
+            raise ValueError(f'unsupported gripper command: {command}')
+        if self._dialogue_busy or self._gripper_busy:
+            self.gripper_result_var.set('当前请求尚未结束，未发送夹爪命令。')
+            return
+        robot_state, _observed = self.bridge.state_snapshot()
+        if (self.bridge.guard.snapshot().active
+                or robot_state.get('action_active')):
+            self.gripper_result_var.set('抓取任务运行中，手动夹爪命令已锁定。')
+            self._refresh_gripper_controls()
+            return
+        if not self.bridge.gripper_server_ready():
+            self.gripper_result_var.set('夹爪 Action 服务不可用，未发送命令。')
+            self._refresh_gripper_controls()
+            return
+        self._pause_wake()
+        self._gripper_request = uuid.uuid4().hex
+        self._gripper_busy = True
+        self.gripper_result_var.set(f'正在提交“{labels[command]}夹爪”命令…')
+        self._refresh_gripper_controls()
+        if not self.bridge.command_gripper(self._gripper_request, command):
+            self._gripper_busy = False
+            self._gripper_request = ''
+            self._schedule_wake('wake')
+            self._refresh_gripper_controls()
 
     # -- wake / continuous voice --------------------------------------- #
 
@@ -363,7 +507,9 @@ class DialogueGui:
 
     def _wake_can_listen(self) -> bool:
         if (not self._wake_is_enabled() or self._closing or self._voice_request
-                or self._dialogue_busy or self._playback_busy):
+                or self._dialogue_busy
+                or getattr(self, '_gripper_busy', False)
+                or self._playback_busy):
             return False
         try:
             robot, _observed = self.bridge.state_snapshot()
@@ -393,9 +539,10 @@ class DialogueGui:
         if rid:
             self._wake_request = rid
             self._wake_mode = mode
+            phrase = (self.wake.phrases[0] if self.wake.phrases else '唤醒词')
             self._status_values['voice'].set(
                 '唤醒：已唤醒 · 正在准备接收问题' if mode == 'followup'
-                else '唤醒：未唤醒 · 正在准备监听 9527')
+                else f'唤醒：未唤醒 · 正在准备监听 {phrase}')
 
     def _on_wake_toggle(self) -> None:
         if not self._wake_is_enabled():
@@ -513,7 +660,8 @@ class DialogueGui:
             self._reply_request = request_id
             self._handle_intent(request_id, text, shortcut)
             return
-        if self._dialogue_busy or self.bridge.guard.snapshot().active:
+        if (self._dialogue_busy or getattr(self, '_gripper_busy', False)
+                or self.bridge.guard.snapshot().active):
             self._append('system', '当前请求尚未结束。可随时使用“停止抓取”。')
             self._resume_after_request(request_id, allow_followup=False)
             return
@@ -612,7 +760,9 @@ class DialogueGui:
     def ask_image(self) -> None:
         from tkinter import simpledialog
 
-        if self._voice_request or self._dialogue_busy or self.bridge.guard.snapshot().active:
+        if (self._voice_request or self._dialogue_busy
+                or getattr(self, '_gripper_busy', False)
+                or self.bridge.guard.snapshot().active):
             self._append('system', '任务运行中，暂不启动视觉问答。')
             return
         self._pause_wake()
@@ -776,7 +926,8 @@ class DialogueGui:
             self._append('system', '语音输入未配置。')
             return
         robot, _ = self.bridge.state_snapshot()
-        if (self._dialogue_busy or self.bridge.guard.snapshot().active
+        if (self._dialogue_busy or getattr(self, '_gripper_busy', False)
+                or self.bridge.guard.snapshot().active
                 or robot.get('action_active')):
             self._append('system', '当前请求尚未结束。停止抓取按钮始终可用。')
             return
@@ -999,6 +1150,8 @@ class DialogueGui:
             self._status_values['vision'].set('视觉：推理暂停')
         else:
             self._status_values['vision'].set('视觉：就绪')
+        if hasattr(self, 'gripper_service_var'):
+            self._refresh_gripper_controls()
 
     def _drain_ui_events(self) -> None:
         for _ in range(self.MAX_EVENTS_PER_POLL):
@@ -1087,7 +1240,24 @@ class DialogueGui:
                 'error_code=%s executed=%s detail=%s',
                 event.kind, event.request_id, event.phase, event.success,
                 event.error_code, event.executed, event.detail)
-            if event.kind == 'accepted':
+            if event.kind == 'gripper_submitted':
+                if event.request_id == self._gripper_request:
+                    label = '打开' if event.phase == 'open' else '闭合'
+                    self.gripper_result_var.set(f'{label}命令已提交，等待驱动接受。')
+            elif event.kind == 'gripper_accepted':
+                if event.request_id == self._gripper_request:
+                    label = '打开' if event.phase == 'open' else '闭合'
+                    self.gripper_result_var.set(f'夹爪正在{label}…')
+            elif event.kind == 'gripper_result':
+                if (not self._gripper_request
+                        or event.request_id == self._gripper_request):
+                    prefix = '完成' if event.success else '失败'
+                    self.gripper_result_var.set(f'{prefix}：{event.detail}')
+                    self._gripper_busy = False
+                    self._gripper_request = ''
+                    self._schedule_wake('wake')
+                    self._refresh_gripper_controls()
+            elif event.kind == 'accepted':
                 self._append('system', '抓取请求已接受，正在等待实际执行结果。')
             elif event.kind == 'result':
                 if event.success and event.executed:
@@ -1235,10 +1405,19 @@ def main() -> int:
                 'speech service not available at %s; replies will not be spoken',
                 speech_path)
         speech = StreamingSpeaker(speech_client, enabled=True)
-        DialogueGui(
+        gui = DialogueGui(
             root, ModelServiceClient(socket_path), runtime, log_path,
             speech=speech, workspace=workspace,
             dialogue_settings=dialogue_settings)
+
+        def request_close(_signum, _frame):
+            # Python dispatches signal handlers on the Tk/main thread. Queue
+            # the regular window-close path so ASR/KWS workers, ROS and active
+            # playback are all released before the process exits.
+            root.after_idle(gui.close)
+
+        signal.signal(signal.SIGINT, request_close)
+        signal.signal(signal.SIGTERM, request_close)
         root.mainloop()
         return 0
     except Exception:

@@ -1,11 +1,12 @@
 {
   "reference_root": "/home/industio/DofbotPro_JetsonNano_0106/rknn-llm-main/ASR",
-  "model_directory": "sherpa-onnx-rk3588-streaming-zipformer-small-bilingual-zh-en-2023-02-16",
+  "model_directory": "sherpa-onnx-rk3588-streaming-zipformer-bilingual-zh-en-2023-02-20",
   "c_api_library": ".venv/lib/python3.9/site-packages/sherpa_onnx/lib/libsherpa-onnx-c-api.so",
   "runtime_directory": "rknn-runtime",
   "capture_device": "plughw:CARD=Device,DEV=0",
   "sample_rate": 16000,
   "num_threads": -1,
+  "hotwords_score": 3.0,
   "trailing_silence_s": 0.65,
   "initial_silence_s": 5.0,
   "maximum_record_s": 30.0,

@@ -1,0 +1,83 @@
+{"time_ns":1789787938947011010,"event":"run_started","detail":"execution"}
+{"time_ns":1789787938947096470,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1789787938953315747,"event":"gripper_pre_open_started","detail":"requested_position_m=0.060000"}
+{"time_ns":1789787941341322026,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,requested_position_m=0.06,reported_position_m=0.06,stalled=0"}
+{"time_ns":1789787941346982172,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1789787941355355431,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube added"}
+{"time_ns":1789787941506371015,"event":"plan_candidate_0_approach","detail":"return_code=1"}
+{"time_ns":1789787941527902961,"event":"plan_candidate_0_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0249063161"}
+{"time_ns":1789787941530976578,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789787941541932865,"event":"plan_candidate_0_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0374805881"}
+{"time_ns":1789787941669267480,"event":"plan_candidate_0_place_approach","detail":"return_code=1"}
+{"time_ns":1789787941686455003,"event":"plan_candidate_0_place_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0424577111"}
+{"time_ns":1789787941695978024,"event":"cube_released_scene","detail":"color=green"}
+{"time_ns":1789787941706732185,"event":"plan_candidate_0_place_retreat","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0426138299"}
+{"time_ns":1789787941764866368,"event":"plan_candidate_0_return_home","detail":"return_code=1"}
+{"time_ns":1789787941768464116,"event":"grasp_candidate_valid","detail":"index=0,yaw_rad=-1.74468521,joint_space_path_length_rad=13.6504521,joint1_travel_rad=7.21371579,joint2_travel_rad=4.06407216,joint3_travel_rad=1.38921192,joint4_travel_rad=3.08553273,joint5_travel_rad=6.29086185,joint6_travel_rad=4.6262426"}
+{"time_ns":1789787941859325411,"event":"plan_candidate_1_approach","detail":"return_code=1"}
+{"time_ns":1789787941874228284,"event":"plan_candidate_1_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0258551988"}
+{"time_ns":1789787941876298848,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789787941883960433,"event":"plan_candidate_1_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0405330501"}
+{"time_ns":1789787942027687478,"event":"plan_candidate_1_place_approach","detail":"return_code=1"}
+{"time_ns":1789787942045081212,"event":"plan_candidate_1_place_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0390254528"}
+{"time_ns":1789787942053969851,"event":"cube_released_scene","detail":"color=green"}
+{"time_ns":1789787942086735172,"event":"plan_candidate_1_place_retreat","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.039046972"}
+{"time_ns":1789787942194109774,"event":"plan_candidate_1_return_home","detail":"return_code=1"}
+{"time_ns":1789787942204852267,"event":"grasp_candidate_valid","detail":"index=1,yaw_rad=-0.173888888,joint_space_path_length_rad=10.8128329,joint1_travel_rad=3.6007054,joint2_travel_rad=4.90732427,joint3_travel_rad=1.41432688,joint4_travel_rad=3.8865843,joint5_travel_rad=6.28954906,joint6_travel_rad=2.73818006"}
+{"time_ns":1789787942287683890,"event":"plan_candidate_2_approach","detail":"return_code=1"}
+{"time_ns":1789787942307259314,"event":"plan_candidate_2_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0248873052"}
+{"time_ns":1789787942309371004,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789787942337556524,"event":"plan_candidate_2_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0374967722"}
+{"time_ns":1789787942442157512,"event":"plan_candidate_2_place_approach","detail":"return_code=1"}
+{"time_ns":1789787942452445875,"event":"plan_candidate_2_place_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0424410834"}
+{"time_ns":1789787942455754579,"event":"cube_released_scene","detail":"color=green"}
+{"time_ns":1789787942479536175,"event":"plan_candidate_2_place_retreat","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.042428538"}
+{"time_ns":1789787942600129131,"event":"plan_candidate_2_return_home","detail":"return_code=1"}
+{"time_ns":1789787942611327504,"event":"grasp_candidate_valid","detail":"index=2,yaw_rad=1.39690744,joint_space_path_length_rad=13.3376292,joint1_travel_rad=3.5871817,joint2_travel_rad=4.09468927,joint3_travel_rad=6.19799957,joint4_travel_rad=2.18020361,joint5_travel_rad=6.29056112,joint6_travel_rad=3.38333177"}
+{"time_ns":1789787942727442745,"event":"plan_candidate_3_approach","detail":"return_code=1"}
+{"time_ns":1789787942735082746,"event":"plan_candidate_3_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0249101189"}
+{"time_ns":1789787942737285728,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789787942745815614,"event":"plan_candidate_3_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0374744329"}
+{"time_ns":1789787942814722917,"event":"plan_candidate_3_place_approach","detail":"return_code=1"}
+{"time_ns":1789787942827600725,"event":"plan_candidate_3_place_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0390192018"}
+{"time_ns":1789787942831600686,"event":"cube_released_scene","detail":"color=green"}
+{"time_ns":1789787942839868652,"event":"plan_candidate_3_place_retreat","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0390693805"}
+{"time_ns":1789787942930478236,"event":"plan_candidate_3_return_home","detail":"return_code=1"}
+{"time_ns":1789787942944016094,"event":"grasp_candidate_valid","detail":"index=3,yaw_rad=2.96770377,joint_space_path_length_rad=12.4988379,joint1_travel_rad=5.50640311,joint2_travel_rad=3.91098496,joint3_travel_rad=1.3497127,joint4_travel_rad=3.55018404,joint5_travel_rad=6.28942565,joint6_travel_rad=5.7096793"}
+{"time_ns":1789787942964894408,"event":"grasp_candidate_selected","detail":"yaw_rad=-0.173889,joint_space_path_length_rad=10.812833"}
+{"time_ns":1789787942967845524,"event":"preview_complete","detail":"grasp, place, release, retreat and return-home paths planned"}
+{"time_ns":1789787942968130193,"event":"latency","detail":"\"stage\":\"planning_done\",\"elapsed_ms\":5073.5"}
+{"time_ns":1789787942968337862,"event":"target_locked","detail":"locked top=[0.0335242635,-0.500400479,0.031024781] m, object_yaw=-0.173888888 rad, applied_grasp_yaw=-0.173888888 rad"}
+{"time_ns":1789787942969006370,"event":"p6_gate","detail":"before approach passed"}
+{"time_ns":1789787942969036120,"event":"target_lock","detail":"before approach uses immutable start snapshot"}
+{"time_ns":1789787942969073745,"event":"latency","detail":"\"stage\":\"approach_command\",\"elapsed_ms\":5074.5"}
+{"time_ns":1789787942969244664,"event":"trajectory_execution_metrics","detail":"segment=approach,joint_space_path_length_rad=0.780885638,joint1_travel_rad=0.0273254946,joint2_travel_rad=0.646677433,joint3_travel_rad=0.0583386585,joint4_travel_rad=0.413148989,joint5_travel_rad=0.00320943548,joint6_travel_rad=0.129376228"}
+{"time_ns":1789787946630243246,"event":"execute_approach","detail":"return_code=1"}
+{"time_ns":1789787946634219874,"event":"arrival_approach","detail":"position_error_m=0.000308143884,orientation_error_rad=0.00109870091"}
+{"time_ns":1789787946634265957,"event":"state","detail":"waiting_for_descend_command: inspect high-clearance alignment, then call descend_and_close"}
+{"time_ns":1789787946634397209,"event":"state","detail":"descending_and_closing: planning from actual state, then descending and closing"}
+{"time_ns":1789787946634456126,"event":"target_lock","detail":"before descend uses immutable start snapshot"}
+{"time_ns":1789787946651375896,"event":"plan_descend_execute","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0259974448"}
+{"time_ns":1789787946656701788,"event":"trajectory_execution_metrics","detail":"segment=descend_execute,joint_space_path_length_rad=0.118290171,joint1_travel_rad=0.000330626784,joint2_travel_rad=0.0233029324,joint3_travel_rad=0.0690684534,joint4_travel_rad=0.0931002381,joint5_travel_rad=0.000816446962,joint6_travel_rad=0.000234296945"}
+{"time_ns":1789787947418819369,"event":"execute_descend_execute","detail":"return_code=1"}
+{"time_ns":1789787947426030323,"event":"arrival_descend_execute","detail":"position_error_m=0.000428508903,orientation_error_rad=0.000225082493"}
+{"time_ns":1789787947429586071,"event":"gripper_close_started","detail":"requested_position_m=0.026000"}
+{"time_ns":1789787949737986221,"event":"gripper_close","detail":"result_code=4,reached_goal=1,requested_position_m=0.026,reported_position_m=0.026,stalled=0"}
+{"time_ns":1789787949746012101,"event":"gripper_state_close","detail":"estimated_position_m=0.026000"}
+{"time_ns":1789787949746072769,"event":"state","detail":"waiting_for_manual_grip_confirmation: 26 mm close was commanded open-loop; continuing without a grip sensor claim"}
+{"time_ns":1789787949746189728,"event":"state","detail":"attaching_and_lifting: close command completed; attaching cube in the scene and planning lift"}
+{"time_ns":1789787949746349272,"event":"target_lock","detail":"before lift uses immutable start snapshot"}
+{"time_ns":1789787949747834746,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1789787949779919309,"event":"plan_lift_execute","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0405346121"}
+{"time_ns":1789787949788399611,"event":"trajectory_execution_metrics","detail":"segment=lift_execute,joint_space_path_length_rad=0.24369466,joint1_travel_rad=1.91519856e-05,joint2_travel_rad=0.0373608949,joint3_travel_rad=0.150329533,joint4_travel_rad=0.18763742,joint5_travel_rad=1.12632003e-05,joint6_travel_rad=2.04739926e-05"}
+{"time_ns":1789787950922645424,"event":"execute_lift_execute","detail":"return_code=1"}
+{"time_ns":1789787950930037506,"event":"arrival_lift_execute","detail":"position_error_m=0.000344711753,orientation_error_rad=2.08775638e-05"}
+{"time_ns":1789787950930274342,"event":"state","detail":"placing: moving the grasped cube to its color region"}
+{"time_ns":1789787951060952951,"event":"plan_place_approach_execute","detail":"return_code=1"}
+{"time_ns":1789787951063924192,"event":"trajectory_execution_metrics","detail":"segment=place_approach_execute,joint_space_path_length_rad=4.70002057,joint1_travel_rad=1.77232248,joint2_travel_rad=2.23787122,joint3_travel_rad=0.496240484,joint4_travel_rad=1.39935053,joint5_travel_rad=3.14082377,joint6_travel_rad=1.36813314"}
+{"time_ns":1789787964779295644,"event":"execute_place_approach_execute","detail":"return_code=1"}
+{"time_ns":1789787964786233596,"event":"arrival_place_approach_execute","detail":"position_error_m=0.000359697133,orientation_error_rad=0.00276229866"}
+{"time_ns":1789787964793981223,"event":"validated_segment_start","detail":"segment=place_descend_execute,maximum_arm_joint_difference_rad=0.000609001929,limit_rad=0.01"}
+{"time_ns":1789787964794220684,"event":"trajectory_execution_metrics","detail":"segment=place_descend_execute,joint_space_path_length_rad=0.230849093,joint1_travel_rad=0.000604856956,joint2_travel_rad=0.17869158,joint3_travel_rad=0.140595899,joint4_travel_rad=0.0374821391,joint5_travel_rad=0.000748449288,joint6_travel_rad=0.000366659296"}
+{"time_ns":1789787968482624361,"event":"execute_place_descend_execute","detail":"return_code=-6"}
+{"time_ns":1789787968482956281,"event":"state","detail":"failed_holding_state_unchanged: place_descend_execute execution failed with MoveIt code -6"}

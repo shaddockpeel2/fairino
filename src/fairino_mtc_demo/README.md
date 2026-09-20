@@ -90,11 +90,12 @@ but does not block this first 5%-speed proof-of-concept cycle. Set
 `payload.required: true`, measure/apply the complete installed end effector,
 and enter its mass, flange-relative CoG and basis before accuracy/dynamics work
 or higher-speed operation. Any failed check overwrites the execution gate with
-`passed=false`. A P5 process initially accepts only a fresh passing gate, then
-remembers that exact gate for the lifetime of the running stack. Every
-operator-authorized segment still checks that the file remains present,
-unchanged and passing. Restarting the full stack invalidates the old gate and
-runs a new P6 snapshot; an arbitrary ten-minute session timeout is not used.
+`passed=false`. A P5 process initially accepts only a passing gate generated
+within the previous hour, then remembers that exact gate for the lifetime of
+the running stack. Every operator-authorized segment still checks that the
+file remains present, unchanged and passing. Restarting the full stack
+invalidates the old gate and runs a new P6 snapshot; the one-hour limit applies
+only to first acceptance, not to an already accepted running session.
 
 ## P5 one-shot RGB box task
 

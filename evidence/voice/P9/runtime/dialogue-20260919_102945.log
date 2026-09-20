@@ -1,0 +1,11 @@
+2026-09-19 10:29:46,177 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-19 10:30:00,889 INFO fr3c_dialogue_gui speech playback first_write=0.155s playback_end=0.681s
+2026-09-19 10:30:20,203 INFO fr3c_dialogue_gui intent request_id=8b882e75983c4f9fb7a1eb9b15697fcc route=clarify task=None color=None zone=None support_color=None raw='{"schema_version":"1.0","route":"clarify","task":null,"color":null,"zone":null,"support_color":null,"reply":"请说明要放置到哪个区域，以及具体颜色的方块。"}'
+2026-09-19 10:30:25,573 INFO fr3c_dialogue_gui speech playback first_write=0.737s playback_end=5.264s
+2026-09-19 10:30:59,740 WARNING fr3c_dialogue_gui intent_rejected request_id=7302a8a8cc1f4c639ca9acee034dbde5 code=sort_without_sort_cue detail=把绿色方块放到放置区
+2026-09-19 10:31:31,888 INFO fr3c_dialogue_gui speech playback first_write=0.170s playback_end=0.717s
+2026-09-19 10:31:38,552 INFO fr3c_dialogue_gui local_action_route request_id=ca332e542efb48f1bcd7403f92722c47 task=pick_sort color=green zone=None support_color=None
+2026-09-19 10:31:38,568 INFO fr3c_dialogue_gui action_dispatched request_id=ca332e542efb48f1bcd7403f92722c47 task=pick_sort color=green zone=None support_color=None
+2026-09-19 10:31:38,572 INFO fr3c_dialogue_gui action_event kind=accepted request_id=ca332e542efb48f1bcd7403f92722c47 phase=accepted success=None error_code=None executed=None detail=抓取请求已接受，等待实际执行结果。
+2026-09-19 10:31:38,580 INFO fr3c_dialogue_gui action_event kind=result request_id=ca332e542efb48f1bcd7403f92722c47 phase=failed success=False error_code=6 executed=False detail=P6 execution gate refused the task: P6 gate has not yet been accepted in this grasp session and is stale: age_s=4572.54, initial_limit_s=600
+2026-09-19 10:31:42,168 INFO fr3c_dialogue_gui speech playback first_write=0.440s playback_end=3.569s

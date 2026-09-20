@@ -19,6 +19,7 @@ import unicodedata
 import uuid
 
 from .trace import TraceWriter
+from .asr_text import normalize_robot_asr_text
 from .voice_input import CAPTURE_LOCK_PATH
 
 
@@ -29,11 +30,11 @@ KWS_MODEL_FILES = (
     'joiner-epoch-12-avg-2-chunk-16-left-64.int8.onnx',
 )
 _SEPARATORS = r'[\s，。！？、,.!?：:；;·\-]*'
-_WAKE_9527_GROUPS = (
-    frozenset('9九玖久酒韭灸就旧救舅究疚咎揪纠鸠'),
-    frozenset('5五伍武舞午侮吴无吾梧乌屋污物务误悟雾勿'),
-    frozenset('2二贰儿而耳尔饵'),
-    frozenset('7七柒妻期漆戚欺凄栖齐其奇棋旗骑祈琪起启乞企岂杞器气汽弃契泣'),
+_WAKE_FAIRINO_GROUPS = (
+    frozenset('法发罚伐乏阀珐筏'),
+    frozenset('奥澳傲熬袄凹敖鳌'),
+    frozenset('同童通桶统痛铜桐瞳彤'),
+    frozenset('学雪血穴靴薛'),
 )
 
 
@@ -41,19 +42,19 @@ def _wake_pattern(phrase: str) -> str:
     compact = re.sub(
         r'[\s，。！？、,.!?：:；;·\-]+', '',
         unicodedata.normalize('NFKC', phrase).strip().casefold())
-    if compact in ('9527', '九五二七'):
+    if compact == '法奥同学':
         return _SEPARATORS.join(
             '[' + ''.join(sorted(group)) + ']'
-            for group in _WAKE_9527_GROUPS)
+            for group in _WAKE_FAIRINO_GROUPS)
     return _SEPARATORS.join(re.escape(char) for char in compact)
 
 
-def _is_9527_fragment(compact: str) -> bool:
-    """Recognize a truncated contiguous part of the 9527 homophone pattern."""
-    if not 1 <= len(compact) <= len(_WAKE_9527_GROUPS):
+def _is_wake_fragment(compact: str, groups) -> bool:
+    """Recognize a truncated contiguous part of a homophone wake pattern."""
+    if not 1 <= len(compact) <= len(groups):
         return False
-    for offset in range(len(_WAKE_9527_GROUPS) - len(compact) + 1):
-        if all(char in _WAKE_9527_GROUPS[offset + index]
+    for offset in range(len(groups) - len(compact) + 1):
+        if all(char in groups[offset + index]
                for index, char in enumerate(compact)):
             return True
     return False
@@ -101,10 +102,8 @@ def wake_query_from_asr(text: str, phrases: tuple[str, ...]) -> str:
         unicodedata.normalize('NFKC', str(text)).strip().casefold())
     if len(compact) < 2:
         return ''
-    canonical_9527 = any(
-        re.sub(r'\D+', '', phrase) == '9527' or phrase == '九五二七'
-        for phrase in phrases)
-    if canonical_9527 and _is_9527_fragment(compact):
+    fairino_wake = any(phrase == '法奥同学' for phrase in phrases)
+    if fairino_wake and _is_wake_fragment(compact, _WAKE_FAIRINO_GROUPS):
         return ''
     for phrase in phrases:
         normalized = re.sub(
@@ -270,6 +269,7 @@ class WakeInput:
             '--c-api-library', str(library),
             '--model-dir', str(root / cfg['model_directory']),
             '--hotwords-file', str(self.workspace / 'config/voice/asr_hotwords.txt'),
+            '--hotwords-score', str(cfg.get('hotwords_score', 2.0)),
             '--sample-rate', str(cfg['sample_rate']),
             '--num-threads', str(cfg['num_threads']), '--chunk-samples', '800',
             '--speech-endpoint-seconds', str(cfg['trailing_silence_s']),
@@ -401,13 +401,16 @@ class WakeInput:
                             recognized = True
                         self._event('wake_partial', rid, text=partial)
                     elif kind == 'final':
-                        text = str(event.get('text', '')).strip()
+                        raw_text = str(event.get('text', '')).strip()
+                        text = normalize_robot_asr_text(raw_text)
                         data = dict(
                             text=text, mode=mode,
                             reason=reason or event.get('reason', ''),
                             audio_s=total, voiced_s=voiced,
                             speech_end_monotonic_ns=(
                                 int(last_voice * 1e9) if last_voice else None))
+                        if text != raw_text:
+                            data['raw_text'] = raw_text
                         return ('wake_final' if text else 'wake_empty'), data
                     elif kind in ('error', 'eof'):
                         raise RuntimeError(event.get('message', 'ASR 未返回定稿'))

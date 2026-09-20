@@ -97,6 +97,9 @@ if(BUILD_TESTING)
   ament_add_pytest_test(test_idle_cancel test/test_idle_cancel.py)
   ament_add_pytest_test(test_source_height test/test_source_height.py)
   ament_add_pytest_test(test_release_hold test/test_release_hold.py)
+  ament_add_pytest_test(
+    test_candidate_duration_selection
+    test/test_candidate_duration_selection.py)
 endif()
 
 ament_package()

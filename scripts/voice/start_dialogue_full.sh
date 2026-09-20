@@ -29,6 +29,62 @@ while [ $# -gt 0 ]; do
   esac
 done
 
+GUI_PID=""
+SHUTTING_DOWN=0
+
+shutdown_stack() {
+  local status="${1:-0}"
+  if [ "${SHUTTING_DOWN}" = "1" ]; then
+    return
+  fi
+  SHUTTING_DOWN=1
+  trap - INT TERM EXIT
+
+  echo
+  echo "== 正在平滑关闭整套对话服务"
+  if [ -n "${GUI_PID}" ] && kill -0 "${GUI_PID}" 2>/dev/null; then
+    echo "   关闭 GUI、唤醒与 ASR..."
+    kill -TERM "${GUI_PID}" 2>/dev/null || true
+    local gui_exited=0 gui_state=""
+    for _ in $(seq 1 150); do
+      if ! kill -0 "${GUI_PID}" 2>/dev/null; then
+        gui_exited=1
+        break
+      fi
+      gui_state="$(ps -o stat= -p "${GUI_PID}" 2>/dev/null || true)"
+      case "${gui_state}" in
+        Z*) gui_exited=1; break ;;
+      esac
+      sleep 0.1
+    done
+    if [ "${gui_exited}" = "0" ]; then
+      echo "   GUI 未及时退出，终止其剩余进程..." >&2
+      kill -TERM -- "-${GUI_PID}" 2>/dev/null || true
+      sleep 1
+      kill -KILL -- "-${GUI_PID}" 2>/dev/null || true
+    fi
+    wait "${GUI_PID}" 2>/dev/null || true
+  fi
+  "${ROOT}/scripts/voice/stop_voice_demo.sh" || true
+  echo "== 全部关闭完成"
+  return "${status}"
+}
+
+handle_signal() {
+  local status="$1"
+  shutdown_stack "${status}" || true
+  exit "${status}"
+}
+
+# In interactive mode this script owns the whole stack, including services
+# which were already healthy when it started.  Keep --check-only non-owning so
+# it remains useful as a readiness probe.
+if [ "${CHECK_ONLY}" != "1" ]; then
+  trap 'handle_signal 130' INT
+  trap 'handle_signal 143' TERM
+  trap 'status=$?; shutdown_stack "${status}" || true; exit "${status}"' EXIT
+fi
+
 start_if_needed() {
   # $1 = description, $2 = pgrep pattern, $3 = socket path, $4 = command
   local description="$1" pattern="$2" socket="$3" command="$4"
@@ -111,7 +167,15 @@ if [ "${CHECK_ONLY}" = "1" ]; then
 fi
 
 echo
-echo "打开对话页。关闭窗口即退出；服务仍在运行，停止请执行"
-echo "  scripts/voice/stop_voice_demo.sh"
+echo "打开对话页。关闭窗口或按 Ctrl+C 将平滑关闭全部相关进程。"
 echo
-exec "${ROOT}/scripts/voice/start_dialogue_gui.sh" "$@"
+# Give the GUI its own process group.  Ctrl+C is handled here and converted to
+# SIGTERM so Tk can run its normal close path before the services are stopped.
+setsid "${ROOT}/scripts/voice/start_dialogue_gui.sh" "$@" &
+GUI_PID=$!
+set +e
+wait "${GUI_PID}"
+gui_status=$?
+set -e
+GUI_PID=""
+exit "${gui_status}"

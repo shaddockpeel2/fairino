@@ -51,6 +51,11 @@ fr3c_first_grasp:
     # 0.8 s open burst before arm motion. Repeating the same open command made
     # the fingers visibly hunt and added about 2.3 s before the arm could move.
     pre_open_command_repetitions: 1
+    # The driver is open-loop, so action success confirms only that a PWM burst
+    # was sent. At the stationary placement pose, send two independent open
+    # bursts and wait for both before scene detach and arm retreat. Never close
+    # between them: closing could re-grip or displace the placed cube.
+    release_command_repetitions: 2
     # P3 publishes either [30, 30, 30] mm or [60, 30, 30] mm together with
     # the pose. This fallback is used only when use_target_size=false.
     object_size_m: [0.060, 0.030, 0.030]
@@ -149,6 +154,6 @@ fr3c_first_grasp:
     # joint ServoJ path. Once accepted, that exact gate remains valid for this
     # P5 process; stack restart invalidates it and requires a new startup P6.
     p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
-    # Freshness limit for accepting a new gate, not a timeout on an already
-    # accepted running session.
-    p6_gate_max_age_s: 600.0
+    # One-hour freshness limit for accepting a new gate. This is not a timeout
+    # on a gate already accepted by the running P5 process.
+    p6_gate_max_age_s: 3600.0

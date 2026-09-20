@@ -1,0 +1,38 @@
+2026-09-19 09:15:47,246 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-19 09:16:28,362 INFO fr3c_dialogue_gui speech playback first_write=0.201s playback_end=0.727s
+2026-09-19 09:17:05,974 WARNING fr3c_dialogue_gui intent_rejected request_id=fd04b01f75ed4ac2939313035c62e9fa code=explicit_action_not_routed detail=大绿色方块放到地区
+2026-09-19 09:17:23,227 INFO fr3c_dialogue_gui speech playback first_write=0.162s playback_end=0.689s
+2026-09-19 09:17:56,825 WARNING fr3c_dialogue_gui intent_rejected request_id=eb5f275aa217414d89ee4e9208df4aa3 code=non_action_with_parameters detail=route=clarify, task=None, color=green, zone=None, support_color=None
+2026-09-19 10:10:39,793 INFO fr3c_dialogue_gui local_route request_id=f937caf11f614df59624be1909a4fcd7 route=chat
+2026-09-19 10:10:47,108 INFO fr3c_dialogue_gui speech playback first_write=1.832s playback_end=7.261s
+2026-09-19 10:10:54,170 INFO fr3c_dialogue_gui local_route request_id=c4374deb444347acb4dd22023db44465 route=chat
+2026-09-19 10:11:01,628 INFO fr3c_dialogue_gui speech playback first_write=1.933s playback_end=7.379s
+2026-09-19 10:11:07,718 INFO fr3c_dialogue_gui local_route request_id=0b3ebd0f6ea54ec29afaefd9b0df2d96 route=chat
+2026-09-19 10:11:12,489 INFO fr3c_dialogue_gui speech playback first_write=1.949s playback_end=4.676s
+2026-09-19 10:11:36,465 INFO fr3c_dialogue_gui intent request_id=a42c251d63514d46b4e7e1ad128cd410 route=clarify task=None color=None zone=None support_color=None raw='{"schema_version":"1.0","route":"clarify","task":null,"color":null,"zone":null,"support_color":null,"reply":"请说明要放的具体区域和颜色。"}'
+2026-09-19 10:11:39,899 INFO fr3c_dialogue_gui speech playback first_write=0.373s playback_end=3.279s
+2026-09-19 10:12:10,837 INFO fr3c_dialogue_gui local_route request_id=1c86056c0a5846de9b5cf2f9def0492a route=chat
+2026-09-19 10:12:18,440 INFO fr3c_dialogue_gui speech playback first_write=2.102s playback_end=7.529s
+2026-09-19 10:13:31,447 WARNING fr3c_dialogue_gui speech failed: PcmPlayerError: ALSA drop failed (-19): No such device
+2026-09-19 10:13:54,989 WARNING fr3c_dialogue_gui speech failed: PcmPlayerError: ALSA drop failed (-19): No such device
+2026-09-19 10:14:24,799 INFO fr3c_dialogue_gui speech service availability changed to False
+2026-09-19 10:28:07,495 ERROR fr3c_dialogue_gui vision_question_failed request_id=06f442b23fbb4772bcf87d0a9d2ec049
+Traceback (most recent call last):
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/model_client.py", line 28, in _request
+    connection.connect(str(self.socket_path))
+FileNotFoundError: [Errno 2] No such file or directory
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/dialogue_gui.py", line 751, in _vision_worker
+    answer = self._generate_answer(
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/dialogue_gui.py", line 713, in _generate_answer
+    answer = self.generator.generate(prompt, **arguments).strip()
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/model_client.py", line 116, in generate
+    return self.client.generate(
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/model_client.py", line 78, in generate
+    records = self._request(payload, on_event=forward if on_token else None)
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/model_client.py", line 38, in _request
+    raise ModelServiceError(f'model service request failed: {error}') from error
+fr3c_voice.model_client.ModelServiceError: model service request failed: [Errno 2] No such file or directory
