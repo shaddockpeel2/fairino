@@ -106,3 +106,44 @@ MoveIt/RViz 的未标定预览会发布 `camera_housing_link -> camera_link`。�
 
 快速测试只证明已稳定获得有效深度，不替代尺量距离精度、材质覆盖、60 分钟稳定性、
 冷启动/热插拔以及完整抓取闭环验收。
+
+## 6. 15 FPS 试验配置（2026-09-22）
+
+当前 MoveIt/RViz 路径默认加载 `dabai_dcw2_rviz.yaml`，其中彩色和深度均显式设为
+10 FPS。设备历史 profile 枚举同时列出了彩色 `640×480 MJPG@15` 和深度
+`640×400 Y11@15`；但这只证明单路模式存在，不证明两路同时开启并硬件 D2C 时可稳定
+得到 15 FPS。此前 Astra 的 15 FPS 通过记录不能作为 DaBai 的验收结果。DaBai 先前的
+15 FPS 原始深度单路测试虽然达到 15.07 FPS，但在当时启用 LDP、近距遮挡的条件下，
+整图有效深度仅约 0.82%，也不能作为 RGB-D 质量合格证据。
+
+`src/fr3c_camera/config/dabai_dcw2_rviz_15fps.yaml` 是与当前 MoveIt/RViz 配置相比
+仅将 `color_fps`、`depth_fps` 改为 15 的试验配置。它保留硬件 D2C、
+`full_frame` 聚合、彩色点云，以及关闭软滤波和 LDP 等条件，以便直接比较。生产默认值
+仍为 10 FPS，直至同一相机、同一场景完成彩深同步和深度质量复测。
+另有 `dabai_dcw2_15fps.yaml`，仅相对不发布点云的生产基线提高两路帧率，
+可用于判断彩色点云生成及 RViz 负载是否妨碍达到目标帧率。驱动当前在同一彩色帧
+处理线程中依次解码 MJPG、生成彩色点云、发布彩色图像；RViz 订阅点云时，这部分
+计算会直接占用彩色帧发布路径。因此若带点云配置达不到目标，先对比无点云配置，
+再决定是否调整可视化负载。驱动在没有点云订阅者时跳过点云计算，单独运行
+`bench.launch.py` 不代表 RViz 点云负载。
+
+在当前相机节点和机器人任务结束后，先用原配置记录一轮基线，再单独启动 15 FPS
+配置；不要并行启动两个相机驱动实例：
+
+```bash
+scripts/camera/run_bench.sh config:=/home/industio/fairino_ws/src/fr3c_camera/config/dabai_dcw2_rviz_15fps.yaml
+```
+
+另一终端在相同 ROS 域运行 60 秒审计：
+
+```bash
+FR3C_CAMERA_MINIMUM_FPS=14 FR3C_CAMERA_MINIMUM_PAIRED_FPS=12 \
+  FR3C_CAMERA_MAXIMUM_RECEIVE_GAP=0.3 \
+  scripts/camera/audit.sh /tmp/dabai_dcw2_15fps_audit 60
+```
+
+报告需同时满足彩色与对齐深度实测至少 14 FPS、每秒至少 12 组有效彩深配对、
+彩深时间差 P95 不超过 60 ms、无时间戳回退、最大接收空窗低于 0.3 秒，且深度有效率及固定
+哑光平面 ROI 的稳定性不低于同场景 10 FPS 基线。再在实际 MoveIt/RViz 与感知负载下
+复测；其中带点云的负载测试须让 RViz 实际订阅 `/camera/depth_registered/points`。
+只有这些结果均通过，才将正式启动配置切到 15 FPS。

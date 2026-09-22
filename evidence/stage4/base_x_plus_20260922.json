@@ -1,0 +1,118 @@
+{
+  "actual_pulse_wall_s": 0.40898165200087533,
+  "camera_tf_age_s_at_start": 0.47618579864501953,
+  "command_xy_mps": [
+    0.005,
+    0.0
+  ],
+  "control_state_after": "monitoring_manual_ready",
+  "controller_state_count": 17,
+  "detail": "",
+  "direction": "x+",
+  "duration_s": 0.4,
+  "end_joints_rad": [
+    -1.560373646394708,
+    -1.6390851034667084,
+    -1.2785729867026818,
+    -1.7909377498746994,
+    1.5223544918307912,
+    0.03635990117506725
+  ],
+  "end_target": {
+    "center_px": [
+      322.218017578125,
+      243.452392578125
+    ],
+    "error_px": [
+      17.747294207705863,
+      -32.6907210142987
+    ],
+    "image_size_px": [
+      640.0,
+      480.0
+    ],
+    "stamp_s": 1790043226.702404,
+    "target_px": [
+      339.96531178583086,
+      210.7616715638263
+    ]
+  },
+  "end_tcp": {
+    "quaternion_xyzw": [
+      0.013004823662466507,
+      0.9996203403550923,
+      -0.002463904079174152,
+      -0.024165655103191994
+    ],
+    "xyz_m": [
+      -0.11113699283504382,
+      -0.3543850767688967,
+      0.18869685016628865
+    ]
+  },
+  "heartbeat_count": 4,
+  "image_error_improved": null,
+  "lease_acquired_wall_s": 1790043224.9406652,
+  "lease_released_wall_s": 1790043226.8875494,
+  "measured_max_tcp_speed_mps": 0.0,
+  "motion_verdict": "direction_confirmed",
+  "nominal_displacement_m": 0.002,
+  "nonzero_twist_count": 122,
+  "orientation_change_deg": 0.008235939948619516,
+  "outcome": "passed",
+  "pose_drift_ok": true,
+  "scene_object_ids": [
+    "rviz_ground_plane"
+  ],
+  "servo_status_history": [
+    0
+  ],
+  "servo_trajectory_count": 20,
+  "start_joints_rad": [
+    -1.5606583383152375,
+    -1.6391419619559817,
+    -1.278489496602508,
+    -1.7909340214491734,
+    1.5223544918307912,
+    0.035927045951766906
+  ],
+  "start_target": {
+    "center_px": [
+      322.218017578125,
+      243.452392578125
+    ],
+    "error_px": [
+      17.53080871295475,
+      -32.787668602084864
+    ],
+    "image_size_px": [
+      640.0,
+      480.0
+    ],
+    "stamp_s": 1790043225.206302,
+    "target_px": [
+      339.74882629107975,
+      210.66472397604014
+    ]
+  },
+  "start_tcp": {
+    "quaternion_xyzw": [
+      0.01293296586292686,
+      0.9996212545176244,
+      -0.0024647936757523446,
+      -0.024166313387342233
+    ],
+    "xyz_m": [
+      -0.11123900140696512,
+      -0.3543739585065098,
+      0.18870388823919687
+    ]
+  },
+  "tcp_delta_xyz_m": [
+    0.00010200857192130264,
+    -1.111826238686664e-05,
+    -7.038072908222004e-06
+  ],
+  "tcp_tf_age_s_at_end": 0.019594430923461914,
+  "watchdog_release_delay_s": null
+}

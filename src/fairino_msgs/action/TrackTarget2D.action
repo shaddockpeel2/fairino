@@ -1,0 +1,34 @@
+# Continuously keep one configured color target near the image center.
+# A zero max_duration_s keeps the goal active until cancellation or a fault.
+string color
+float32 max_duration_s
+---
+uint16 OK=0
+uint16 INVALID_COLOR=1
+uint16 BUSY=2
+uint16 TARGET_NOT_FOUND=3
+uint16 TARGET_NOT_UNIQUE=4
+uint16 TARGET_STALE=5
+uint16 CONTROL_UNAVAILABLE=6
+uint16 SERVO_FAULT=7
+uint16 SAFETY_LIMIT=8
+uint16 CANCELED=9
+uint16 INTERNAL_ERROR=10
+
+bool success
+uint16 error_code
+string message
+float32 final_error_x_px
+float32 final_error_y_px
+float32 elapsed_s
+---
+string phase
+string detail
+float32 target_u_px
+float32 target_v_px
+float32 error_x_px
+float32 error_y_px
+float32 command_x_mps
+float32 command_y_mps
+float32 observation_age_s
+bool centered

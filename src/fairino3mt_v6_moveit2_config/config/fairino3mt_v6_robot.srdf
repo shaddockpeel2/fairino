@@ -55,8 +55,12 @@
     <disable_collisions link1="wrist2_link" link2="wrist3_link" reason="Adjacent"/>
     <disable_collisions link1="wrist3_link" link2="flange_link" reason="Adjacent"/>
     <disable_collisions link1="flange_link" link2="gripper_mount_link" reason="Adjacent"/>
-    <!-- Only mounting contact pairs are allowed; all other tool/arm pairs are checked. -->
+    <!-- Only fixed mounting-stack pairs are allowed; all other tool/arm pairs
+         remain checked. The 3 mm spacer leaves wrist3 and the gripper body at
+         a constant 3 mm separation, so that pair cannot become a collision as
+         the arm moves and must not trigger Servo's proximity slowdown. -->
     <disable_collisions link1="wrist3_link" link2="gripper_spacer_link" reason="Adjacent"/>
+    <disable_collisions link1="wrist3_link" link2="gripper_link" reason="Never"/>
     <disable_collisions link1="gripper_spacer_link" link2="gripper_link" reason="Adjacent"/>
     <disable_collisions link1="gripper_link" link2="gripper_command_link" reason="Adjacent"/>
     <disable_collisions link1="gripper_link" link2="grasp_frame" reason="Adjacent"/>
@@ -67,6 +71,10 @@
     <disable_collisions link1="gripper_link" link2="gripper_finger_px_ny_link" reason="Adjacent"/>
     <disable_collisions link1="gripper_link" link2="gripper_finger_nx_py_link" reason="Adjacent"/>
     <disable_collisions link1="gripper_link" link2="gripper_finger_nx_ny_link" reason="Adjacent"/>
-    <!-- Camera padding slightly overlaps the fixed housing at the mount. -->
+    <!-- The camera, spacer and wrist are one rigid mounting assembly. Their
+         6.1/9 mm clearances are invariant and cannot become collisions. -->
+    <disable_collisions link1="camera_housing_link" link2="wrist3_link" reason="Never"/>
+    <disable_collisions link1="camera_housing_link" link2="gripper_spacer_link" reason="Never"/>
+    <!-- Camera padding slightly overlaps the fixed gripper housing. -->
     <disable_collisions link1="camera_housing_link" link2="gripper_link" reason="Adjacent"/>
 </robot>

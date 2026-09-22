@@ -15,9 +15,11 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "action/PickColor.action"
+  "action/TrackTarget2D.action"
   "srv/RemoteCmdInterface.srv"
   "srv/RemoteScriptContent.srv"
   "srv/SetTargetColor.srv"
+  "srv/ControlLease.srv"
   "msg/RobotNonrtState.msg"
 )
 

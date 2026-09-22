@@ -1,0 +1,13 @@
+uint8 ACQUIRE=0
+uint8 HEARTBEAT=1
+uint8 RELEASE=2
+
+uint8 operation
+string owner
+string lease_id
+float32 heartbeat_timeout_s
+---
+bool success
+string lease_id
+string owner_state
+string message

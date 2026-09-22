@@ -1,0 +1,39 @@
+/perception/color_target_2d:
+  ros__parameters:
+    image_topic: /camera/color/image_raw
+    camera_info_topic: /camera/color/camera_info
+
+    # The first-stage requested target is red. Supported values are red,
+    # yellow, blue, and green; the launch argument can override this.
+    target_color: red
+
+    # OpenCV hue range is 0..179. Keep these aligned with the existing
+    # cube_perception four-color configuration; red crosses the HSV seam.
+    red_hue_intervals: [0, 10, 170, 179]
+    yellow_hue_intervals: [18, 34]
+    blue_hue_intervals: [90, 135]
+    green_hue_intervals: [40, 85]
+    saturation_min: 80
+    value_min: 35
+    morphology_size: 3
+
+    min_area_px: 120.0
+    max_area_px: 12000.0
+    min_aspect_ratio: 0.45
+    max_aspect_ratio: 2.2
+    min_solidity: 0.72
+    min_rectangularity: 0.55
+    interior_fraction: 0.23
+
+    # At 10 FPS, two consecutive frames reject one-frame noise while keeping
+    # acquisition latency near 0.1 s after the first candidate appears.
+    required_stable_frames: 2
+    maximum_center_jump_px: 45.0
+    # The live color stream is usually 6-8 FPS with occasional longer gaps.
+    # Allow brief scheduling jitter while still stopping on a lost image.
+    stale_after_s: 0.40
+    future_stamp_tolerance_s: 0.05
+
+    # Square 80 x 80 px center region, using the former rectangle's long side.
+    center_half_width_px: 40
+    center_half_height_px: 40

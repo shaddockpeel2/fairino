@@ -1,0 +1,46 @@
+/fr3c_visual_servo/track_2d_action_server:
+  ros__parameters:
+    # Default launch never enables motion; real hardware explicitly opts in.
+    execute: false
+    action_name: /fr3c_visual_servo/track_2d
+    observation_topic: /perception/color_target_2d/status
+    perception_target_color: red
+
+    expected_twist_topic: /fr3c_visual_servo/dry_run/expected_twist
+    dry_run_status_topic: /fr3c_visual_servo/dry_run/status
+    dry_run_command_frame: camera_color_optical_frame
+    camera_command_frame: camera_color_optical_frame
+    base_frame: base_link
+    tf_timeout_s: 0.05
+    tcp_frame: grasp_frame
+    max_tf_age_s: 0.5
+    max_z_drift_m: 0.005
+    max_orientation_drift_rad: 0.05
+
+    servo_twist_topic: /servo_node/delta_twist_cmds
+    servo_status_topic: /servo_node/status
+    control_state_topic: /fairino/control_state
+    control_lease_service: /fairino/control_lease
+    heartbeat_period_s: 0.10
+    heartbeat_timeout_s: 0.50
+
+    control_rate_hz: 50.0
+    gain_x_mps: 0.020
+    gain_y_mps: 0.020
+    axis_sign_x: 1.0
+    axis_sign_y: 1.0
+    max_speed_mps: 0.005
+    max_acceleration_mps2: 0.030
+
+    enter_half_width_px: 40.0
+    enter_half_height_px: 30.0
+    exit_half_width_px: 55.0
+    exit_half_height_px: 45.0
+    enter_frames: 3
+    exit_frames: 2
+
+    observation_stale_s: 0.40
+    lost_timeout_s: 1.0
+    acquisition_timeout_s: 5.0
+    max_relative_xy_m: 0.08
+    stop_publish_cycles: 5
