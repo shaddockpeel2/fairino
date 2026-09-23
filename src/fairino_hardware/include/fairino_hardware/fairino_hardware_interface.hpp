@@ -2,6 +2,7 @@
 #define FAIRINO_HARDWARE__FAIRINO_HARDWARE_INTERFACE_HPP_
 
 #include <array>
+#include <chrono>
 #include <cstddef>
 #include <memory>
 #include <string>
@@ -20,7 +21,7 @@ namespace fairino_hardware
 {
 
 inline constexpr std::size_t kJointCount = 6;
-inline constexpr std::size_t kStatusInterfaceCount = 35;
+inline constexpr std::size_t kStatusInterfaceCount = 40;
 inline constexpr char kDefaultControllerIp[] = "192.168.58.2";
 inline constexpr double kDefaultServoCommandPeriodSec = 0.008;
 
@@ -114,6 +115,7 @@ private:
   std::array<double, kJointCount> joint_torque_state_{};
   std::array<double, kStatusInterfaceCount> status_state_{};
   bool status_interfaces_enabled_{false};
+  bool velocity_state_enabled_{false};
   int control_mode_{0};
   std::string controller_ip_{kDefaultControllerIp};
   double servo_command_period_sec_{kDefaultServoCommandPeriodSec};
@@ -123,6 +125,8 @@ private:
   bool position_command_active_{false};
   bool write_failed_{false};
   bool period_reported_{false};
+  std::chrono::steady_clock::time_point last_servo_j_call_start_{};
+  bool have_last_servo_j_call_start_{false};
   std::unique_ptr<RobotClient> robot_client_;
 };
 

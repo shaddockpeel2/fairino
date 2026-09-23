@@ -64,11 +64,16 @@
     sorting_max_cube_plane_gap_m: 0.010
     # Allow millimetre-scale depth/calibration error below the nominal plane.
     sorting_max_cube_plane_penetration_m: 0.002
-    # P2 stacking. A cube placed on top of another cube publishes its top one
-    # cube height above the plane; that tier must stay detectable so the lower
-    # cube is still reported (and reported as tier 1) after the upper cube has
-    # been stacked on it. Empty list disables stack-tier detection.
-    stacking_cube_height_offsets_m: [0.030]
+    # P2 stacking. One entry per supported stacked tier: a cube whose top sits
+    # (k + 1) cube heights above the plane is reported as tier k, so this list
+    # is what pick_stack consumes as "the tower may be this tall". Three entries
+    # make a four-cube tower detectable; a shorter list silently caps the tower
+    # height the planner can see. Only the top cube of a tower is visible, so it
+    # is the tier that identifies how much is already underneath it. The
+    # tolerance is wider than sorting_max_cube_plane_gap_m on purpose: the
+    # expected height of tier k accumulates k independent cube-height estimates.
+    # Empty list disables stack-tier detection.
+    stacking_cube_height_offsets_m: [0.030, 0.060, 0.090]
     stacking_tier_tolerance_m: 0.012
     # A batch planning failure excludes only the same color target within this
     # small XY radius, allowing the selector to continue with other cubes.

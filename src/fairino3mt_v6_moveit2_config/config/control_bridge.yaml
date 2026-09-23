@@ -1,11 +1,15 @@
 /fr3c_trajectory_control_bridge:
   ros__parameters:
     execution_controller: fairino3mt_execution_controller
+    servo_controller: fairino3mt_servo_position_controller
     switch_service: /controller_manager/switch_controller
+    list_controllers_service: /controller_manager/list_controllers
     control_lease_service: /fairino/control_lease
     servo_start_service: /servo_node/start_servo
     servo_stop_service: /servo_node/stop_servo
     servo_status_topic: /servo_node/status
+    servo_command_topic: /fairino3mt_servo_position_controller/commands
+    servo_command_timeout_s: 0.25
     tracking_heartbeat_timeout_s: 0.5
     watchdog_period_s: 0.1
     service_wait_timeout_s: 10.0

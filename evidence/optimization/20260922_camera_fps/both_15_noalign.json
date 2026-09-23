@@ -1,0 +1,187 @@
+{
+  "pass": false,
+  "checks": {
+    "streams_meet_minimum_fps": true,
+    "no_long_receive_gap": true,
+    "monotonic_timestamps": true,
+    "fresh_timestamps": true,
+    "enough_aligned_pairs": false,
+    "rgb_depth_skew_bounded": false,
+    "valid_pair_contract": false,
+    "some_valid_depth": false,
+    "camera_info_received": true,
+    "optical_tf_received": true
+  },
+  "duration_s": 30.0,
+  "streams": {
+    "color": {
+      "frames": 411,
+      "fps": 13.688311099159897,
+      "max_gap_s": 0.2800419140003214,
+      "timestamp_regressions": 0
+    },
+    "depth": {
+      "frames": 446,
+      "fps": 14.853997708919804,
+      "max_gap_s": 0.0832123740001407,
+      "timestamp_regressions": 0
+    }
+  },
+  "aligned_pairs": 0,
+  "pair_failures": {
+    "unaligned_optical_frames": 406
+  },
+  "skew_p50_s": null,
+  "skew_p95_s": null,
+  "max_age_s": 0.1549370288848877,
+  "median_valid_depth_fraction": null,
+  "camera_info": {
+    "di": {
+      "width": 640,
+      "height": 400,
+      "frame_id": "camera_depth_optical_frame",
+      "k": [
+        306.20953369140625,
+        0.0,
+        319.79052734375,
+        0.0,
+        306.20953369140625,
+        198.16514587402344,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "d": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p": [
+        306.20953369140625,
+        0.0,
+        319.79052734375,
+        0.0,
+        0.0,
+        306.20953369140625,
+        198.16514587402344,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "distortion_model": "rational_polynomial"
+    },
+    "ci": {
+      "width": 640,
+      "height": 480,
+      "frame_id": "camera_color_optical_frame",
+      "k": [
+        479.73828125,
+        0.0,
+        322.218017578125,
+        0.0,
+        479.7537841796875,
+        243.452392578125,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "d": [
+        -0.015910401940345764,
+        0.003102334216237068,
+        -0.00044000407797284424,
+        -0.00047369441017508507,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "p": [
+        479.73828125,
+        0.0,
+        322.218017578125,
+        0.0,
+        0.0,
+        479.7537841796875,
+        243.452392578125,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "distortion_model": "rational_polynomial"
+    }
+  },
+  "tf_static": {
+    "camera_color_frame": {
+      "parent": "camera_depth_frame",
+      "translation": [
+        0.001570392608642578,
+        -0.012257771492004394,
+        2.595984376966953e-05
+      ],
+      "rotation_xyzw": [
+        0.0014432800235226748,
+        0.0010245944140478969,
+        0.00025442737387493253,
+        0.9999983906745911
+      ]
+    },
+    "camera_color_optical_frame": {
+      "parent": "camera_color_frame",
+      "translation": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "rotation_xyzw": [
+        -0.5,
+        0.4999999999999999,
+        -0.5,
+        0.5000000000000001
+      ]
+    },
+    "camera_depth_optical_frame": {
+      "parent": "camera_depth_frame",
+      "translation": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "rotation_xyzw": [
+        -0.5,
+        0.4999999999999999,
+        -0.5,
+        0.5000000000000001
+      ]
+    },
+    "camera_depth_frame": {
+      "parent": "camera_link",
+      "translation": [
+        0.0,
+        -0.0,
+        -0.0
+      ],
+      "rotation_xyzw": [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    }
+  },
+  "last_five_patch_samples": [],
+  "limitations": [
+    "Bench only, no hand-eye or base_link transform.",
+    "No measured distance ground truth; valid fraction depends on scene.",
+    "System timestamps do not prove hardware exposure synchronisation.",
+    "Pixel probe is not an object detector or grasp command."
+  ]
+}

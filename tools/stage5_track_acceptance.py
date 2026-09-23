@@ -2,6 +2,7 @@
 """Bounded real Action client and JSON evidence recorder; Ctrl-C cancels goal."""
 import argparse
 import json
+import math
 from pathlib import Path
 import time
 import subprocess
@@ -12,9 +13,12 @@ from rclpy.action import ActionClient
 from rclpy.node import Node
 from rclpy.signals import SignalHandlerOptions
 from rclpy.qos import QoSProfile, DurabilityPolicy
+from rclpy.time import Time
 from fairino_msgs.action import TrackTarget2D
 from geometry_msgs.msg import TwistStamped
+from sensor_msgs.msg import JointState
 from std_msgs.msg import String, Int8
+from tf2_ros import Buffer, TransformListener
 
 
 def main():
@@ -27,10 +31,14 @@ def main():
         parser.error('duration must be in (0, 180] seconds')
     rclpy.init(signal_handler_options=SignalHandlerOptions.NO)
     node = Node('stage5_acceptance_client')
+    tf_buffer = Buffer()
+    tf_listener = TransformListener(tf_buffer, node)
     client = ActionClient(node, TrackTarget2D, '/fr3c_visual_servo/track_2d')
     started = time.monotonic()
     record = {'duration_s': args.duration, 'feedback': [], 'commands': [],
-              'control_states': [], 'servo_states': [], 'status': [], 'result': None}
+              'control_states': [], 'servo_states': [], 'status': [],
+              'tcp_positions': [], 'joint_states': [],
+              'perception_status': [], 'result': None}
     def elapsed():
         return time.monotonic() - started
     def state(msg):
@@ -45,6 +53,42 @@ def main():
         v = msg.twist
         record['commands'].append([elapsed(), v.linear.x, v.linear.y, v.linear.z,
                                     v.angular.x, v.angular.y, v.angular.z])
+    def sample_tcp():
+        try:
+            transform = tf_buffer.lookup_transform('base_link', 'grasp_frame',
+                                                   Time())
+        except Exception:
+            return
+        stamp = transform.header.stamp
+        age_s = (node.get_clock().now().nanoseconds * 1e-9
+                 - stamp.sec - stamp.nanosec * 1e-9)
+        p = transform.transform.translation
+        xyz = [float(p.x), float(p.y), float(p.z)]
+        if (not -0.05 <= age_s <= 0.5
+                or not all(math.isfinite(value) for value in xyz)):
+            return
+        positions = record['tcp_positions']
+        if not positions or positions[-1][1:4] != xyz:
+            positions.append([elapsed(), *xyz, age_s])
+    def perception(msg):
+        try:
+            data = json.loads(msg.data)
+        except (ValueError, TypeError):
+            return
+        record['perception_status'].append([elapsed(), {
+            key: data.get(key) for key in (
+                'valid', 'reason', 'candidate_count', 'target_center_px',
+                'bbox_xywh', 'quality', 'observation_age_s')
+        }])
+    last_joint_sample_s = -1.0
+    def joint_state(msg):
+        nonlocal last_joint_sample_s
+        now_s = elapsed()
+        if now_s - last_joint_sample_s < 0.05:
+            return
+        last_joint_sample_s = now_s
+        record['joint_states'].append([now_s, list(msg.name),
+                                       list(msg.position), list(msg.velocity)])
     node.create_subscription(String, '/fairino/control_state', state,
         QoSProfile(depth=1, durability=DurabilityPolicy.TRANSIENT_LOCAL))
     node.create_subscription(TwistStamped, '/servo_node/delta_twist_cmds', command, 100)
@@ -52,6 +96,9 @@ def main():
         lambda msg: record['servo_states'].append([elapsed(), msg.data]), 100)
     node.create_subscription(String, '/fr3c_visual_servo/dry_run/status',
         lambda msg: record['status'].append([elapsed(), json.loads(msg.data)]), 100)
+    node.create_subscription(String, '/perception/color_target_2d/status',
+        perception, 100)
+    node.create_subscription(JointState, '/joint_states', joint_state, 100)
     handle = None
     result_future = None
     try:
@@ -78,6 +125,7 @@ def main():
         canceled = False
         while not result_future.done():
             rclpy.spin_once(node, timeout_sec=0.02)
+            sample_tcp()
             age = time.monotonic() - goal_start
             if args.cancel_after and age >= args.cancel_after and not canceled:
                 handle.cancel_goal_async()
@@ -100,6 +148,7 @@ def main():
         until = time.monotonic() + 1
         while time.monotonic() < until:
             rclpy.spin_once(node, timeout_sec=0.02)
+            sample_tcp()
         record['final_control_state'] = (record['control_states'][-1][1]
                                          if record['control_states'] else 'unknown')
         path = Path(args.output)

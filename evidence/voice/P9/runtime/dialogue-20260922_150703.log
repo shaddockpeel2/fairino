@@ -1,0 +1,22 @@
+2026-09-22 15:07:03,773 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-22 15:07:12,540 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=a2112ce386d54f6d9b7815061419685e phase=open success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-22 15:07:12,540 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=a2112ce386d54f6d9b7815061419685e phase=open success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-22 15:07:14,973 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=a2112ce386d54f6d9b7815061419685e phase=open success=True error_code=None executed=None detail=夹爪已打开。
+2026-09-22 15:07:15,496 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=aee693871b5d4f5894610cdd7b318ede phase=close success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-22 15:07:15,633 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=aee693871b5d4f5894610cdd7b318ede phase=close success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-22 15:07:17,889 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=aee693871b5d4f5894610cdd7b318ede phase=close success=True error_code=None executed=None detail=夹爪已执行闭合；有物体时为夹持，无物体时为完全闭合。
+2026-09-22 15:07:34,812 INFO fr3c_dialogue_gui local_route request_id=f51ca1bef2494332a141bd4456c2d894 route=chat
+2026-09-22 15:08:07,029 INFO fr3c_dialogue_gui local_route request_id=8b7cba5160a547c5a2ff9886782106c0 route=chat
+2026-09-22 15:08:42,568 INFO fr3c_dialogue_gui local_route request_id=90df7fe84cb7440da28b4ff8d2204531 route=chat
+2026-09-22 15:10:31,177 INFO fr3c_dialogue_gui local_action_route request_id=90f35b43afc5451a926438384b41d486 task=pick_sort color=red zone=None support_color=None
+2026-09-22 15:10:31,183 INFO fr3c_dialogue_gui action_dispatched request_id=90f35b43afc5451a926438384b41d486 task=pick_sort color=red zone=None support_color=None
+2026-09-22 15:10:31,290 INFO fr3c_dialogue_gui action_event kind=accepted request_id=90f35b43afc5451a926438384b41d486 phase=accepted success=None error_code=None executed=None detail=抓取请求已接受，等待实际执行结果。
+2026-09-22 15:10:31,309 INFO fr3c_dialogue_gui action_event kind=feedback request_id=90f35b43afc5451a926438384b41d486 phase=waiting_for_target success=None error_code=None executed=None detail=pick_sort accepted; requesting a fresh unique red target
+2026-09-22 15:10:42,758 INFO fr3c_dialogue_gui action_event kind=feedback request_id=90f35b43afc5451a926438384b41d486 phase=waiting_for_descend_command success=None error_code=None executed=None detail=inspect high-clearance alignment, then call descend_and_close
+2026-09-22 15:10:42,759 INFO fr3c_dialogue_gui action_event kind=feedback request_id=90f35b43afc5451a926438384b41d486 phase=descending_and_closing success=None error_code=None executed=None detail=planning from actual state, then descending and closing
+2026-09-22 15:10:45,883 INFO fr3c_dialogue_gui action_event kind=feedback request_id=90f35b43afc5451a926438384b41d486 phase=waiting_for_manual_grip_confirmation success=None error_code=None executed=None detail=26 mm close was commanded open-loop; continuing without a grip sensor claim
+2026-09-22 15:10:45,884 INFO fr3c_dialogue_gui action_event kind=feedback request_id=90f35b43afc5451a926438384b41d486 phase=attaching_and_lifting success=None error_code=None executed=None detail=close command completed; attaching cube in the scene and planning lift
+2026-09-22 15:10:47,111 INFO fr3c_dialogue_gui action_event kind=feedback request_id=90f35b43afc5451a926438384b41d486 phase=placing success=None error_code=None executed=None detail=moving the grasped cube to its color region
+2026-09-22 15:10:59,163 INFO fr3c_dialogue_gui action_event kind=feedback request_id=90f35b43afc5451a926438384b41d486 phase=returning_home success=None error_code=None executed=None detail=release command sequence completed; retreating from the placed cube
+2026-09-22 15:11:06,891 INFO fr3c_dialogue_gui action_event kind=feedback request_id=90f35b43afc5451a926438384b41d486 phase=complete_sorted_home success=None error_code=None executed=None detail=cube placed in red region and arm returned to start joints
+2026-09-22 15:11:06,891 INFO fr3c_dialogue_gui action_event kind=result request_id=90f35b43afc5451a926438384b41d486 phase=done success=True error_code=0 executed=True detail=pick_sort motion completed once; the cube was released in its color region

@@ -1,0 +1,4 @@
+2026-09-23 13:28:32,689 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-23 13:31:23,152 INFO fr3c_dialogue_gui action_event kind=gripper_submitted request_id=1563803196d3432980b81cd4ba13203a phase=close success=None error_code=None executed=None detail=夹爪命令已提交。
+2026-09-23 13:31:23,157 INFO fr3c_dialogue_gui action_event kind=gripper_accepted request_id=1563803196d3432980b81cd4ba13203a phase=close success=None error_code=None executed=None detail=夹爪正在动作。
+2026-09-23 13:31:25,510 INFO fr3c_dialogue_gui action_event kind=gripper_result request_id=1563803196d3432980b81cd4ba13203a phase=close success=True error_code=None executed=None detail=夹爪已执行闭合；有物体时为夹持，无物体时为完全闭合。

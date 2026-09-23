@@ -1,0 +1,89 @@
+{
+  "capture_safety_passed": false,
+  "command_xy_mps": [
+    0.005,
+    0.0
+  ],
+  "control_state_after": "monitoring_manual_ready",
+  "controller_states": [],
+  "detail": "RuntimeError:table_collision_object_missing",
+  "direction": "x+",
+  "duration_s": 2.0,
+  "end_tcp": null,
+  "final_tcp": {
+    "quaternion_xyzw": [
+      0.009368320303994062,
+      0.9996490714353069,
+      0.007185063572842542,
+      -0.02371378111277508
+    ],
+    "xyz_m": [
+      -0.13255123690403559,
+      -0.3313402022563244,
+      0.1888329939330831
+    ]
+  },
+  "hardware_timing": [],
+  "heartbeat_latencies_s": [],
+  "joint_states": [],
+  "lease_acquired_wall_s": null,
+  "lease_released_wall_s": null,
+  "nominal_displacement_m": 0.01,
+  "outcome": "failed_before_acquire",
+  "scene_object_ids": [],
+  "schema_version": 1,
+  "servo_status_history": [],
+  "servo_trajectories": [],
+  "start_tcp": null,
+  "stop_tcp": null,
+  "summary": {
+    "command_publish_timing": {
+      "sample_count": 0
+    },
+    "controller_feedback_velocity_norm_radps": {
+      "sample_count": 0
+    },
+    "controller_reference_velocity_norm_radps": {
+      "sample_count": 0
+    },
+    "controller_state_timing": {
+      "sample_count": 0
+    },
+    "controller_velocity_error_norm_radps": {
+      "sample_count": 0
+    },
+    "hardware_metrics_ms": {
+      "control_period_ms": {
+        "sample_count": 0
+      },
+      "read_position_call_ms": {
+        "sample_count": 0
+      },
+      "read_status_call_ms": {
+        "sample_count": 0
+      },
+      "servo_j_call_ms": {
+        "sample_count": 0
+      },
+      "servo_j_interval_ms": {
+        "sample_count": 0
+      }
+    },
+    "hardware_timing_message_rate": {
+      "sample_count": 0
+    },
+    "joint_state_timing": {
+      "sample_count": 0
+    },
+    "servo_trajectory_has_velocity_count": 0,
+    "servo_trajectory_timing": {
+      "sample_count": 0
+    },
+    "tcp_along_command_speed_mps": {
+      "sample_count": 0
+    }
+  },
+  "tcp": [],
+  "test": "constant_twist_control_chain_diagnostic",
+  "twists": []
+}

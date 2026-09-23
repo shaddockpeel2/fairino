@@ -1,8 +1,11 @@
-"""Start red-cube perception, MoveIt Servo, and the TrackTarget2D server.
+"""Start the retained V1 JTC red-cube tracking stack.
 
 The base MoveIt/ros2_control stack (including the trajectory control bridge)
 must already be running.  This launch never sends a motion command by itself;
 an explicit TrackTarget2D goal is still required.
+
+P1 uses p1_servo_forward.launch.py instead.  Do not use this V1 launch with
+the V2 forward-controller bridge for real motion.
 """
 
 from pathlib import Path
@@ -38,6 +41,23 @@ def generate_launch_description():
     execute = LaunchConfiguration('execute')
     return LaunchDescription([
         DeclareLaunchArgument('observation_stale_s', default_value='0.40'),
+        DeclareLaunchArgument(
+            'dropout_grace_s', default_value='0.16',
+            description='Brief target detection gap allowance, capped at 5 mm nominal travel.'),
+        DeclareLaunchArgument(
+            'lost_timeout_s', default_value='0.0',
+            description='0 waits at zero speed for target recovery until cancel or goal expiry.'),
+        DeclareLaunchArgument(
+            'max_speed_mps', default_value='0.005',
+            description='Tracking Twist speed limit. Default 0.005 m/s; '
+                        '0.075 m/s is available only after staged direction '
+                        'and stop validation.'),
+        DeclareLaunchArgument(
+            'gain_mps', default_value='0.080',
+            description='Camera-plane proportional gain.'),
+        DeclareLaunchArgument(
+            'max_acceleration_mps2', default_value='0.030',
+            description='Tracking acceleration limit, at most 0.090 m/s^2.'),
         DeclareLaunchArgument(
             'target_color', default_value='red',
             description='Perception and action color.'),
@@ -86,6 +106,19 @@ def generate_launch_description():
                     'perception_target_color': color,
                     'observation_stale_s': ParameterValue(
                         LaunchConfiguration('observation_stale_s'), value_type=float),
+                    'dropout_grace_s': ParameterValue(
+                        LaunchConfiguration('dropout_grace_s'), value_type=float),
+                    'lost_timeout_s': ParameterValue(
+                        LaunchConfiguration('lost_timeout_s'), value_type=float),
+                    'max_speed_mps': ParameterValue(
+                        LaunchConfiguration('max_speed_mps'), value_type=float),
+                    'gain_x_mps': ParameterValue(
+                        LaunchConfiguration('gain_mps'), value_type=float),
+                    'gain_y_mps': ParameterValue(
+                        LaunchConfiguration('gain_mps'), value_type=float),
+                    'max_acceleration_mps2': ParameterValue(
+                        LaunchConfiguration('max_acceleration_mps2'),
+                        value_type=float),
                 },
             ],
             condition=IfCondition(LaunchConfiguration('start_action_server')),

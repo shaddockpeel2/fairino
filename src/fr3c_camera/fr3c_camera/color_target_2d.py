@@ -75,6 +75,7 @@ class TargetContinuity:
         self.maximum_jump_px = float(maximum_jump_px)
         self._samples = deque(maxlen=self.required_samples)
         self._last_seen_stamp = None
+        self._transient_reject_used = False
 
     @property
     def sample_count(self):
@@ -82,9 +83,14 @@ class TargetContinuity:
 
     def reset(self):
         self._samples.clear()
+        self._transient_reject_used = False
 
-    def reject(self):
-        """A missing or ambiguous frame breaks consecutive-frame validity."""
+    def reject(self, *, transient=False):
+        """Keep one detection glitch after lock; repeated loss clears it."""
+        if (transient and not self._transient_reject_used
+                and len(self._samples) == self.required_samples):
+            self._transient_reject_used = True
+            return
         self.reset()
 
     def update(self, stamp_s, center_px):
@@ -98,7 +104,11 @@ class TargetContinuity:
         if self._last_seen_stamp is not None and stamp_s <= self._last_seen_stamp:
             self.reset()
             return False, 'timestamp_not_increasing'
+        if (self._transient_reject_used and self._last_seen_stamp is not None
+                and stamp_s - self._last_seen_stamp > 0.25):
+            self.reset()
         self._last_seen_stamp = float(stamp_s)
+        self._transient_reject_used = False
         if self._samples:
             jump = float(np.linalg.norm(center - self._samples[-1][1]))
             if jump > self.maximum_jump_px:
@@ -288,7 +298,7 @@ class ColorTarget2D(Node):
                     **self._segmentation, **self._candidate_options)
                 status['candidate_count'] = detection.candidate_count
                 if detection.candidate is None:
-                    self._continuity.reject()
+                    self._continuity.reject(transient=True)
                     status.update(valid=False, reason=detection.reason)
                 else:
                     candidate = detection.candidate

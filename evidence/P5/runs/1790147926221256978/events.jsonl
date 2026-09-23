@@ -1,0 +1,29 @@
+{"time_ns":1790147926222517575,"event":"run_started","detail":"execution"}
+{"time_ns":1790147926222613243,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1790147926227985510,"event":"gripper_pre_open_started","detail":"requested_position_m=0.060000"}
+{"time_ns":1790147928573250121,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,requested_position_m=0.06,reported_position_m=0.06,stalled=0"}
+{"time_ns":1790147928575451062,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1790147928576898036,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube and stack support cube added"}
+{"time_ns":1790147928688207424,"event":"plan_candidate_0_approach","detail":"return_code=1"}
+{"time_ns":1790147928714607047,"event":"plan_candidate_0_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0196350001"}
+{"time_ns":1790147928717201742,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1790147928761912983,"event":"plan_candidate_0_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0196350001"}
+{"time_ns":1790147928806958185,"event":"plan_candidate_0_place_approach","detail":"return_code=1"}
+{"time_ns":1790147928814819563,"event":"plan_candidate_0_place_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0196350002"}
+{"time_ns":1790147928822548815,"event":"cube_released_scene","detail":"color=red"}
+{"time_ns":1790147928845531234,"event":"plan_candidate_0_place_retreat","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0196350002"}
+{"time_ns":1790147928965125796,"event":"plan_candidate_0_return_home","detail":"return_code=1"}
+{"time_ns":1790147928970031391,"event":"stack_candidate_rotation","detail":"index=0,source_yaw_rad=-1.476492,placement_yaw_offset_rad=0.168690"}
+{"time_ns":1790147928974351605,"event":"grasp_candidate_valid","detail":"index=0,yaw_rad=-1.47649245,tilt_rad=0,planned_duration_s=33.3025782,joint_space_path_length_rad=11.0427854,joint1_travel_rad=5.70671909,joint2_travel_rad=3.66322661,joint3_travel_rad=0.925680893,joint4_travel_rad=3.05758924,joint5_travel_rad=6.31520108,joint6_travel_rad=3.61514698"}
+{"time_ns":1790147928974412856,"event":"manual_stack_first_feasible","detail":"index=0,yaw_rad=-1.476492,tilt_rad=0.000000"}
+{"time_ns":1790147928979626747,"event":"grasp_candidate_selected","detail":"yaw_rad=-1.476492,tilt_rad=0.000000,planned_duration_s=33.302578,joint_space_path_length_rad=11.042785"}
+{"time_ns":1790147928979660580,"event":"stack_candidate_selected","detail":"source_yaw_rad=-1.476492,source_tilt_rad=0.000000,destination_yaw_rad=0.262994,placement_yaw_offset_rad=0.168690,placement_orientation_xyzw=[0.672992,0.739650,0.000000,0.000000]"}
+{"time_ns":1790147928980765718,"event":"preview_complete","detail":"grasp, aligned stack placement, release, retreat and return-home paths planned"}
+{"time_ns":1790147928980858177,"event":"latency","detail":"\"stage\":\"planning_done\",\"elapsed_ms\":3752.7"}
+{"time_ns":1790147928981026179,"event":"target_locked","detail":"locked top=[0.0248281069,-0.457477437,0.0298472706] m, object_yaw=0.094303877 rad, applied_grasp_yaw=-1.47649245 rad"}
+{"time_ns":1790147928981416433,"event":"p6_gate","detail":"before approach passed"}
+{"time_ns":1790147928981426350,"event":"target_lock","detail":"before approach uses immutable start snapshot"}
+{"time_ns":1790147928981438600,"event":"latency","detail":"\"stage\":\"approach_command\",\"elapsed_ms\":3753.3"}
+{"time_ns":1790147928981529893,"event":"trajectory_execution_metrics","detail":"segment=approach,planned_duration_s=14.7494438,joint_space_path_length_rad=5.10357414,joint1_travel_rad=2.85339057,joint2_travel_rad=1.65727806,joint3_travel_rad=0.0938969427,joint4_travel_rad=1.49228117,joint5_travel_rad=3.15752707,joint6_travel_rad=1.71824438"}
+{"time_ns":1790147934334688717,"event":"execute_approach","detail":"return_code=-7"}
+{"time_ns":1790147934334740634,"event":"state","detail":"canceled_holding_state_unchanged: approach execution failed with MoveIt code -7"}

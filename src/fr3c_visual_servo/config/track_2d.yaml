@@ -25,22 +25,38 @@
     heartbeat_timeout_s: 0.50
 
     control_rate_hz: 50.0
-    gain_x_mps: 0.020
-    gain_y_mps: 0.020
+    # 2026-09-22 stage-five tuning.  Measured closed loop: 1.6 mm/s commanded
+    # produced about 0.35 mm/s of real TCP closing speed (servo/JTC/ServoJ
+    # follows only 22-28 % of the commanded Twist), so the old 0.020 gain gave
+    # a ~87 s image-error time constant and looked stationary.  0.080 reaches
+    # the 0.005 m/s cap at a 40 px error and brings the loop to ~20 s.
+    # The default stays at the low-speed profile; higher speeds are explicit
+    # launch arguments and require bounded direction/stop validation first.
+    gain_x_mps: 0.080
+    gain_y_mps: 0.080
     axis_sign_x: 1.0
     axis_sign_y: 1.0
     max_speed_mps: 0.005
     max_acceleration_mps2: 0.030
+    # Startup centering must reach a visibly tighter region before the
+    # normal CENTER_HOLD / TRACKING hysteresis takes over.
+    initial_center_half_width_px: 12.0
+    initial_center_half_height_px: 9.0
 
-    enter_half_width_px: 40.0
-    enter_half_height_px: 30.0
-    exit_half_width_px: 55.0
-    exit_half_height_px: 45.0
+    # 0.60 mm/px on this camera, so the old 55/45 px exit region meant the arm
+    # ignored the cube until it was ~33/27 mm off centre.  The new region is
+    # ~20/16 mm, still far above the ~1 px detection noise.
+    enter_half_width_px: 24.0
+    enter_half_height_px: 18.0
+    exit_half_width_px: 34.0
+    exit_half_height_px: 26.0
     enter_frames: 3
     exit_frames: 2
 
     observation_stale_s: 0.40
-    lost_timeout_s: 1.0
+    # Bridge a brief detection glitch, capped at 5 mm nominal travel.
+    dropout_grace_s: 0.16
+    # Wait at zero speed for the target to return, until cancel or goal expiry.
+    lost_timeout_s: 0.0
     acquisition_timeout_s: 5.0
-    max_relative_xy_m: 0.08
     stop_publish_cycles: 5

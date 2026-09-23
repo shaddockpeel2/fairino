@@ -1,4 +1,4 @@
-"""Dialogue and manual gripper GUI for safe local robot operation."""
+"""Dialogue and direct Action/gripper GUI for safe local robot operation."""
 
 from __future__ import annotations
 
@@ -40,9 +40,40 @@ from .speech_client import SpeechClient, SpeechServiceError, StreamingSpeaker
 
 LOG = logging.getLogger('fr3c_dialogue_gui')
 
+ACTION_OPTIONS = (
+    ('抓取并保持', 'pick_hold'),
+    ('抓取并分类', 'pick_sort'),
+    ('抓取到指定区域', 'pick_place'),
+    ('单次码垛', 'pick_stack'),
+    ('自动码垛', 'pick_auto_stack'),
+)
+ACTION_LABEL_TO_TASK = dict(ACTION_OPTIONS)
+ACTION_TASK_TO_LABEL = {task: label for label, task in ACTION_OPTIONS}
+ACTION_TASK_TO_LABEL['move_to_pose'] = 'XYZ 点位移动'
+COLOR_OPTIONS = (
+    ('红色', 'red'), ('黄色', 'yellow'), ('蓝色', 'blue'), ('绿色', 'green'))
+COLOR_LABEL_TO_VALUE = dict(COLOR_OPTIONS)
+COLOR_VALUE_TO_LABEL = {value: label for label, value in COLOR_OPTIONS}
+ZONE_OPTIONS = tuple(
+    (label, value)
+    for letter in ('A', 'B', 'C', 'D')
+    for label, value in (
+        (f'{letter} 区（自动空位）', letter.lower()),
+        *((f'{letter}{slot} 槽位', f'{letter.lower()}{slot}') for slot in range(1, 5)),
+    ))
+ZONE_LABEL_TO_VALUE = dict(ZONE_OPTIONS)
+
+ACTION_DESCRIPTIONS = {
+    'pick_hold': '抓取所选颜色方块并保持夹持；取下物体后需要确认释放状态。',
+    'pick_sort': '抓取所选颜色方块，并放入该颜色对应的分类区域。',
+    'pick_place': '抓取所选颜色方块，并放入指定的桌面区域。',
+    'pick_stack': '抓取源方块，放到另一颜色的支撑方块上。',
+    'pick_auto_stack': '自动识别桌面现有方块，并按预设顺序完成整塔码放。',
+}
+
 
 class DialogueGui:
-    """One operational page; intentionally contains no jog/manual controls."""
+    """Dialogue plus bounded Action controls; intentionally contains no joint jog."""
 
     POLL_MS = 100
     HEALTH_INTERVAL_S = 2.0
@@ -150,6 +181,12 @@ class DialogueGui:
             'Gripper.TButton', font=('Noto Sans CJK SC', 13, 'bold'),
             padding=(24, 18))
         style.configure(
+            'Action.TButton', font=('Noto Sans CJK SC', 11, 'bold'),
+            padding=(20, 11))
+        style.configure(
+            'Field.TLabel', background='#ffffff', foreground='#34445b',
+            font=('Noto Sans CJK SC', 10, 'bold'))
+        style.configure(
             'Section.TLabel', background='#ffffff', foreground='#152238',
             font=('Noto Sans CJK SC', 13, 'bold'))
         style.configure(
@@ -166,17 +203,17 @@ class DialogueGui:
             title_row, text='FR3C 离线智能助手', style='Title.TLabel').pack(
                 side='left')
         self.ttk.Label(
-            title_row, text='智能对话 · 视觉任务 · 夹爪控制', style='Sub.TLabel').pack(
+            title_row, text='智能对话 · 视觉任务 · 机械臂控制', style='Sub.TLabel').pack(
                 side='right', pady=(8, 0))
 
         self.pages = self.ttk.Notebook(outer)
         self.pages.pack(fill='both', expand=True, pady=(12, 0))
         dialogue_page = self.ttk.Frame(
             self.pages, style='App.TFrame', padding=(4, 10, 4, 4))
-        gripper_page = self.ttk.Frame(
-            self.pages, style='App.TFrame', padding=(18, 20))
+        robot_page = self.ttk.Frame(
+            self.pages, style='App.TFrame', padding=(18, 16))
         self.pages.add(dialogue_page, text='  智能对话  ')
-        self.pages.add(gripper_page, text='  夹爪控制  ')
+        self.pages.add(robot_page, text='  机械臂控制抓取  ')
 
         status_card = self.ttk.Frame(dialogue_page, style='Card.TFrame', padding=8)
         status_card.pack(fill='x', pady=(0, 10))
@@ -275,68 +312,318 @@ class DialogueGui:
         self.ttk.Button(
             tools, text='停止抓取', style='Tool.TButton',
             command=self.stop_action).pack(side='right', padx=7)
-        self._build_gripper_page(gripper_page)
+        self.reset_tabletop_button = self.ttk.Button(
+            tools, text='重置桌面物体状态', style='Tool.TButton',
+            command=self.reset_tabletop_objects)
+        self.reset_tabletop_button.pack(side='right', padx=7)
+        self._build_robot_control_page(robot_page)
         self.input_box.focus_set()
 
-    def _build_gripper_page(self, page) -> None:
+    def _build_robot_control_page(self, page) -> None:
         intro = self.ttk.Frame(page, style='Card.TFrame', padding=22)
         intro.pack(fill='x')
         self.ttk.Label(
-            intro, text='夹爪手动控制', style='Section.TLabel').pack(anchor='w')
+            intro, text='机械臂控制抓取', style='Section.TLabel').pack(anchor='w')
         self.ttk.Label(
             intro,
-            text='YDI-J22 当前只支持两个标定动作。闭合时，有物体会形成夹持；'
-                 '没有物体会到达完全闭合位置。',
+            text='直接选择任务与参数，绕过语言模型发送 ROS 2 Action。'
+                 '下拉选项会按任务自动启用，避免提交无效组合。',
             style='Hint.TLabel', wraplength=720, justify='left').pack(
                 anchor='w', pady=(8, 0))
         self.ttk.Label(
             intro,
-            text='⚠ 动作会直接驱动真实夹爪。操作前请让手指、线缆和障碍物远离夹爪。',
+            text='⚠ 执行按钮会直接驱动真实机械臂。请先确认工作区无人、桌面状态与画面一致。',
             style='Wake.TLabel', wraplength=720, justify='left').pack(
                 fill='x', pady=(16, 0))
 
-        state_card = self.ttk.Frame(page, style='Card.TFrame', padding=22)
-        state_card.pack(fill='x', pady=(14, 0))
+        action_card = self.ttk.Frame(page, style='Card.TFrame', padding=20)
+        action_card.pack(fill='x', pady=(12, 0))
+        for column in range(4):
+            action_card.columnconfigure(column, weight=1)
+
+        self.action_task_var = self.tk.StringVar(value='抓取并保持')
+        self.action_color_var = self.tk.StringVar(value='红色')
+        self.action_zone_var = self.tk.StringVar(value='A 区（自动空位）')
+        self.action_support_var = self.tk.StringVar(value='蓝色')
+        self.action_hint_var = self.tk.StringVar()
+        self.action_result_var = self.tk.StringVar(value='请选择任务参数')
+
+        fields = (
+            ('任务 Action', self.action_task_var, tuple(ACTION_LABEL_TO_TASK)),
+            ('源方块颜色', self.action_color_var, tuple(COLOR_LABEL_TO_VALUE)),
+            ('目标区域', self.action_zone_var, tuple(ZONE_LABEL_TO_VALUE)),
+            ('支撑方块颜色', self.action_support_var, tuple(COLOR_LABEL_TO_VALUE)),
+        )
+        combos = []
+        for column, (title, variable, values) in enumerate(fields):
+            self.ttk.Label(
+                action_card, text=title, style='Field.TLabel').grid(
+                    row=0, column=column, sticky='w', padx=(0, 12))
+            combo = self.ttk.Combobox(
+                action_card, textvariable=variable, values=values,
+                state='readonly', font=('Noto Sans CJK SC', 10), width=17)
+            combo.grid(row=1, column=column, sticky='ew', padx=(0, 12), pady=(7, 0))
+            combos.append(combo)
+        (self.action_task_combo, self.action_color_combo,
+         self.action_zone_combo, self.action_support_combo) = combos
+        self.action_task_combo.bind('<<ComboboxSelected>>', self._on_action_task_changed)
+        self.action_color_combo.bind('<<ComboboxSelected>>', self._on_action_parameter_changed)
+        self.action_support_combo.bind('<<ComboboxSelected>>', self._on_action_parameter_changed)
+
+        self.ttk.Label(
+            action_card, textvariable=self.action_hint_var,
+            style='Hint.TLabel', wraplength=700, justify='left').grid(
+                row=2, column=0, columnspan=4, sticky='w', pady=(13, 0))
+
+        action_footer = self.ttk.Frame(action_card, style='Card.TFrame')
+        action_footer.grid(row=3, column=0, columnspan=4, sticky='ew', pady=(14, 0))
+        action_footer.columnconfigure(0, weight=1)
+        self.ttk.Label(
+            action_footer, textvariable=self.action_result_var,
+            style='Hint.TLabel', wraplength=500, justify='left').grid(
+                row=0, column=0, sticky='w')
+        self.stop_action_button = self.ttk.Button(
+            action_footer, text='停止当前任务', style='Tool.TButton',
+            command=self.stop_action)
+        self.stop_action_button.grid(row=0, column=1, padx=(12, 8))
+        self.execute_action_button = self.ttk.Button(
+            action_footer, text='执行所选 Action', style='Action.TButton',
+            command=self.execute_selected_action)
+        self.execute_action_button.grid(row=0, column=2)
+
+        pose_card = self.ttk.Frame(page, style='Card.TFrame', padding=18)
+        pose_card.pack(fill='x', pady=(12, 0))
+        for column in range(5):
+            pose_card.columnconfigure(column, weight=1 if column < 4 else 0)
+        self.ttk.Label(
+            pose_card, text='XYZ 点位移动', style='Section.TLabel').grid(
+                row=0, column=0, sticky='w')
+        self.ttk.Label(
+            pose_card,
+            text='base_link · 单位 m · 保持当前末端姿态',
+            style='Hint.TLabel').grid(
+                row=0, column=1, columnspan=3, sticky='w', padx=(12, 0))
+        self.pose_x_var = self.tk.StringVar(value='0.000')
+        self.pose_y_var = self.tk.StringVar(value='-0.400')
+        self.pose_z_var = self.tk.StringVar(value='0.350')
+        self.pose_result_var = self.tk.StringVar(value='输入目标坐标后规划并移动')
+        for column, (axis, variable) in enumerate((
+                ('X', self.pose_x_var), ('Y', self.pose_y_var),
+                ('Z', self.pose_z_var))):
+            field = self.ttk.Frame(pose_card, style='Card.TFrame')
+            field.grid(row=1, column=column, sticky='ew', padx=(0, 10), pady=(12, 0))
+            field.columnconfigure(1, weight=1)
+            self.ttk.Label(
+                field, text=axis, style='Field.TLabel').grid(row=0, column=0, padx=(0, 7))
+            self.ttk.Entry(
+                field, textvariable=variable, width=12,
+                font=('Noto Sans CJK SC', 10)).grid(row=0, column=1, sticky='ew')
+        self.ttk.Label(
+            pose_card, textvariable=self.pose_result_var,
+            style='Hint.TLabel', wraplength=260, justify='left').grid(
+                row=1, column=3, sticky='w', padx=(4, 12), pady=(12, 0))
+        self.execute_pose_button = self.ttk.Button(
+            pose_card, text='碰撞审核并移动', style='Action.TButton',
+            command=self.execute_xyz_move)
+        self.execute_pose_button.grid(row=1, column=4, sticky='e', pady=(12, 0))
+        self.ttk.Label(
+            pose_card,
+            text='安全范围：X −0.45～0.45，Y −0.80～−0.10，Z 0.12～0.65 m；'
+                 'MoveIt 会审核逆解、桌面、方块及整条路径碰撞。',
+            style='Hint.TLabel', wraplength=760, justify='left').grid(
+                row=2, column=0, columnspan=5, sticky='w', pady=(10, 0))
+
+        gripper_card = self.ttk.Frame(page, style='Card.TFrame', padding=20)
+        gripper_card.pack(fill='both', expand=True, pady=(12, 0))
+        gripper_card.columnconfigure(0, weight=1)
+        gripper_card.columnconfigure(1, weight=1)
         self.gripper_service_var = self.tk.StringVar(value='夹爪服务：检查中')
         self.gripper_result_var = self.tk.StringVar(value='尚未发送手动命令')
         self.ttk.Label(
-            state_card, textvariable=self.gripper_service_var,
-            style='Section.TLabel').pack(anchor='w')
+            gripper_card, text='夹爪手动控制', style='Section.TLabel').grid(
+                row=0, column=0, sticky='w')
         self.ttk.Label(
-            state_card, textvariable=self.gripper_result_var,
-            style='Hint.TLabel', wraplength=720, justify='left').pack(
-                anchor='w', pady=(8, 0))
-
-        actions = self.ttk.Frame(page, style='Card.TFrame', padding=22)
-        actions.pack(fill='both', expand=True, pady=(14, 0))
-        actions.columnconfigure(0, weight=1)
-        actions.columnconfigure(1, weight=1)
+            gripper_card, textvariable=self.gripper_service_var,
+            style='Hint.TLabel').grid(row=0, column=1, sticky='e')
         self.open_gripper_button = self.ttk.Button(
-            actions, text='打开夹爪\n60 mm · 70°', style='Gripper.TButton',
+            gripper_card, text='打开夹爪\n60 mm · 70°', style='Gripper.TButton',
             command=lambda: self.command_gripper('open'))
         self.open_gripper_button.grid(
-            row=0, column=0, sticky='nsew', padx=(0, 8), pady=(0, 12))
+            row=1, column=0, sticky='nsew', padx=(0, 8), pady=(14, 8))
         self.close_gripper_button = self.ttk.Button(
-            actions, text='闭合夹爪\n26 mm · 31°', style='Gripper.TButton',
+            gripper_card, text='闭合夹爪\n26 mm · 31°', style='Gripper.TButton',
             command=lambda: self.command_gripper('close'))
         self.close_gripper_button.grid(
-            row=0, column=1, sticky='nsew', padx=(8, 0), pady=(0, 12))
+            row=1, column=1, sticky='nsew', padx=(8, 0), pady=(14, 8))
         self.ttk.Label(
-            actions,
-            text='打开：释放或预张开夹爪。', style='Hint.TLabel').grid(
-                row=1, column=0, sticky='nw', padx=(4, 8))
+            gripper_card, textvariable=self.gripper_result_var,
+            style='Hint.TLabel', wraplength=700, justify='left').grid(
+                row=2, column=0, columnspan=2, sticky='w', pady=(2, 0))
         self.ttk.Label(
-            actions,
-            text='闭合：有物体时夹持；无物体时完全闭合。',
-            style='Hint.TLabel', wraplength=330, justify='left').grid(
-                row=1, column=1, sticky='nw', padx=(12, 4))
-        self.ttk.Label(
-            actions,
-            text='说明：夹爪为开环控制，没有位置、夹持力或物体检测反馈。'
+            gripper_card,
+            text='打开用于预张开或释放；闭合时有物体会形成夹持；无物体时完全闭合。'
+                 '夹爪为开环控制，没有位置、夹持力或物体检测反馈。'
                  '“动作完成”仅表示驱动命令执行完毕。手动打开不会自动解除抓取任务的持物状态。',
             style='Hint.TLabel', wraplength=720, justify='left').grid(
-                row=2, column=0, columnspan=2, sticky='sw', pady=(28, 0))
+                row=3, column=0, columnspan=2, sticky='w', pady=(7, 0))
+        self._on_action_task_changed()
         self._set_gripper_buttons('disabled')
+        self._refresh_pose_controls()
+
+    def _selected_action_values(self) -> tuple[str, str, str, str]:
+        task = ACTION_LABEL_TO_TASK.get(self.action_task_var.get(), '')
+        if task == 'pick_auto_stack':
+            return task, '', '', ''
+        color = COLOR_LABEL_TO_VALUE.get(self.action_color_var.get(), '')
+        zone = (
+            ZONE_LABEL_TO_VALUE.get(self.action_zone_var.get(), '')
+            if task == 'pick_place' else '')
+        support = (
+            COLOR_LABEL_TO_VALUE.get(self.action_support_var.get(), '')
+            if task == 'pick_stack' else '')
+        return task, color, zone, support
+
+    def _on_action_task_changed(self, _event=None) -> None:
+        task = ACTION_LABEL_TO_TASK.get(self.action_task_var.get(), 'pick_hold')
+        color_enabled = task != 'pick_auto_stack'
+        self.action_color_combo.configure(
+            state='readonly' if color_enabled else 'disabled')
+        self.action_zone_combo.configure(
+            state='readonly' if task == 'pick_place' else 'disabled')
+        self.action_support_combo.configure(
+            state='readonly' if task == 'pick_stack' else 'disabled')
+        self.action_hint_var.set(ACTION_DESCRIPTIONS[task])
+        self._on_action_parameter_changed()
+        self._refresh_action_controls()
+
+    def _on_action_parameter_changed(self, _event=None) -> None:
+        task = ACTION_LABEL_TO_TASK.get(self.action_task_var.get(), 'pick_hold')
+        if task != 'pick_stack':
+            return
+        source = COLOR_LABEL_TO_VALUE.get(self.action_color_var.get(), '')
+        support = COLOR_LABEL_TO_VALUE.get(self.action_support_var.get(), '')
+        if source == support:
+            replacement = next(
+                label for label, value in COLOR_OPTIONS if value != source)
+            self.action_support_var.set(replacement)
+
+    def _refresh_action_controls(self) -> None:
+        if not hasattr(self, 'execute_action_button'):
+            return
+        try:
+            snapshot = self.bridge.guard.snapshot()
+            robot, _observed = self.bridge.state_snapshot()
+            active = bool(snapshot.active or robot.get('action_active'))
+            task = ACTION_LABEL_TO_TASK.get(self.action_task_var.get(), '')
+            ready = self.bridge.action_server_ready(task) if task else False
+        except Exception:
+            active = True
+            ready = False
+        try:
+            gripper_busy = bool(
+                self._gripper_busy or self.bridge.gripper_command_active())
+        except Exception:
+            gripper_busy = True
+        can_execute = ready and not active and not gripper_busy and not self._dialogue_busy
+        self.execute_action_button.configure(
+            state='normal' if can_execute else 'disabled')
+        self.stop_action_button.configure(
+            state='normal' if active else 'disabled')
+        if active:
+            task_label = ACTION_TASK_TO_LABEL.get(snapshot.task, snapshot.task)
+            self.action_result_var.set(
+                f'正在执行：{task_label} · {snapshot.phase}')
+        elif not ready:
+            self.action_result_var.set('所选 Action 服务未就绪')
+        elif not self.action_result_var.get().startswith(('完成', '失败', '已取消')):
+            self.action_result_var.set('参数已就绪，可以执行')
+
+    def execute_selected_action(self) -> None:
+        if self._dialogue_busy or self._gripper_busy:
+            self.action_result_var.set('当前请求尚未结束，未发送 Action。')
+            return
+        task, color, zone, support = self._selected_action_values()
+        source_label = COLOR_VALUE_TO_LABEL.get(color, '')
+        summary = ACTION_TASK_TO_LABEL.get(task, task)
+        if source_label:
+            summary += f' · {source_label}方块'
+        if zone:
+            summary += f' → {zone.upper()} 区'
+        if support:
+            summary += f' → {COLOR_VALUE_TO_LABEL.get(support, support)}方块上'
+        request_id = uuid.uuid4().hex
+        self._pause_wake()
+        self.action_result_var.set(f'正在提交：{summary}')
+        try:
+            self.bridge.send(request_id, task, color, zone, support)
+        except Exception as error:
+            LOG.exception('manual_action_dispatch_failed request_id=%s', request_id)
+            self.action_result_var.set(f'失败：{error}')
+            self._schedule_wake('wake')
+            self._refresh_action_controls()
+            return
+        self._request_sources[request_id] = 'robot_control_page'
+        self._active_action_request = request_id
+        self._set_busy(True)
+        self._refresh_action_controls()
+        LOG.info(
+            'manual_action_dispatched request_id=%s task=%s color=%s zone=%s '
+            'support_color=%s', request_id, task, color, zone, support)
+
+    def _refresh_pose_controls(self) -> None:
+        if not hasattr(self, 'execute_pose_button'):
+            return
+        try:
+            snapshot = self.bridge.guard.snapshot()
+            robot, _observed = self.bridge.state_snapshot()
+            active = bool(snapshot.active or robot.get('action_active'))
+            ready = self.bridge.action_server_ready('move_to_pose')
+            gripper_busy = self.bridge.gripper_command_active()
+        except Exception:
+            active = True
+            ready = False
+            gripper_busy = True
+        enabled = (
+            ready and not active and not gripper_busy and
+            not self._gripper_busy and not self._dialogue_busy)
+        self.execute_pose_button.configure(
+            state='normal' if enabled else 'disabled')
+        if active and snapshot.task == 'move_to_pose':
+            self.pose_result_var.set(f'正在处理：{snapshot.phase}')
+        elif not ready:
+            self.pose_result_var.set('XYZ 移动 Action 服务未就绪')
+
+    def execute_xyz_move(self) -> None:
+        if self._dialogue_busy or self._gripper_busy:
+            self.pose_result_var.set('当前请求尚未结束，未发送 XYZ 目标。')
+            return
+        try:
+            coordinates = tuple(float(variable.get().strip()) for variable in (
+                self.pose_x_var, self.pose_y_var, self.pose_z_var))
+            if not all(math.isfinite(value) for value in coordinates):
+                raise ValueError('坐标必须是有限数值')
+        except (TypeError, ValueError) as error:
+            self.pose_result_var.set(f'输入无效：{error}')
+            return
+        request_id = uuid.uuid4().hex
+        self._pause_wake()
+        self.pose_result_var.set(
+            '正在提交：(' + ', '.join(f'{value:.3f}' for value in coordinates) + ') m')
+        try:
+            self.bridge.send_pose(request_id, *coordinates)
+        except Exception as error:
+            LOG.exception('manual_xyz_dispatch_failed request_id=%s', request_id)
+            self.pose_result_var.set(f'提交失败：{error}')
+            self._schedule_wake('wake')
+            self._refresh_pose_controls()
+            return
+        self._request_sources[request_id] = 'robot_control_page'
+        self._active_action_request = request_id
+        self._set_busy(True)
+        self._refresh_pose_controls()
+        LOG.info(
+            'manual_xyz_dispatched request_id=%s x=%.6f y=%.6f z=%.6f',
+            request_id, *coordinates)
 
     def _append(self, role: str, message: str) -> None:
         labels = {'user': '你', 'assistant': '助手', 'system': '系统'}
@@ -422,6 +709,10 @@ class DialogueGui:
         self.input_box.configure(state=state)
         if hasattr(self, 'open_gripper_button'):
             self._refresh_gripper_controls()
+        if hasattr(self, 'execute_action_button'):
+            self._refresh_action_controls()
+        if hasattr(self, 'execute_pose_button'):
+            self._refresh_pose_controls()
         if not busy:
             self.input_box.focus_set()
 
@@ -1071,6 +1362,11 @@ class DialogueGui:
         if not requested:
             self._append('system', '停止请求未送达；取消服务当前不可用。')
 
+    def reset_tabletop_objects(self) -> None:
+        self.reset_tabletop_button.configure(state='disabled')
+        self._append('system', '正在清除桌面方块的历史位姿和放置记录…')
+        self.bridge.reset_tabletop_direct()
+
     def acknowledge_release(self, message: str = '') -> None:
         if message:
             self._append('assistant', message)
@@ -1152,6 +1448,10 @@ class DialogueGui:
             self._status_values['vision'].set('视觉：就绪')
         if hasattr(self, 'gripper_service_var'):
             self._refresh_gripper_controls()
+        if hasattr(self, 'execute_action_button'):
+            self._refresh_action_controls()
+        if hasattr(self, 'execute_pose_button'):
+            self._refresh_pose_controls()
 
     def _drain_ui_events(self) -> None:
         for _ in range(self.MAX_EVENTS_PER_POLL):
@@ -1240,7 +1540,11 @@ class DialogueGui:
                 'error_code=%s executed=%s detail=%s',
                 event.kind, event.request_id, event.phase, event.success,
                 event.error_code, event.executed, event.detail)
-            if event.kind == 'gripper_submitted':
+            if event.kind == 'tabletop_reset_result':
+                self.reset_tabletop_button.configure(state='normal')
+                label = '重置完成' if event.success else '重置未完成'
+                self._append('system', f'{label}：{event.detail}')
+            elif event.kind == 'gripper_submitted':
                 if event.request_id == self._gripper_request:
                     label = '打开' if event.phase == 'open' else '闭合'
                     self.gripper_result_var.set(f'{label}命令已提交，等待驱动接受。')
@@ -1257,19 +1561,58 @@ class DialogueGui:
                     self._gripper_request = ''
                     self._schedule_wake('wake')
                     self._refresh_gripper_controls()
+            elif event.kind == 'pose_accepted':
+                self.pose_result_var.set('请求已接受，正在审核逆解与碰撞…')
+                self._refresh_pose_controls()
+            elif event.kind == 'pose_feedback':
+                self.pose_result_var.set(event.detail or event.phase or '正在处理')
+            elif event.kind == 'pose_result':
+                if event.success and event.executed:
+                    prefix = '移动完成'
+                    self._append('assistant', f'XYZ 点位移动完成：{event.detail}')
+                elif event.success:
+                    prefix = '规划通过'
+                    self._append('system', f'XYZ 轨迹规划通过但未执行：{event.detail}')
+                elif event.phase == 'canceled':
+                    prefix = '已取消'
+                    self._append('system', 'XYZ 点位移动已取消。')
+                else:
+                    prefix = '未执行'
+                    self._append('system', f'XYZ 点位移动未执行：{event.detail}')
+                self.pose_result_var.set(f'{prefix}：{event.detail}')
+                self._active_action_request = ''
+                self._set_busy(False)
+                self._resume_after_request(event.request_id, allow_followup=False)
             elif event.kind == 'accepted':
+                if hasattr(self, 'action_result_var'):
+                    task = ACTION_TASK_TO_LABEL.get(
+                        self.bridge.guard.snapshot().task, '抓取任务')
+                    self.action_result_var.set(f'正在执行：{task} · 请求已接受')
+                    self._refresh_action_controls()
                 self._append('system', '抓取请求已接受，正在等待实际执行结果。')
+            elif event.kind == 'feedback':
+                if hasattr(self, 'action_result_var'):
+                    task = ACTION_TASK_TO_LABEL.get(
+                        self.bridge.guard.snapshot().task, '抓取任务')
+                    self.action_result_var.set(
+                        f'正在执行：{task} · {event.phase or "处理中"}')
             elif event.kind == 'result':
                 if event.success and event.executed:
-                    color = COLOR_DISPLAY.get(event.color, event.color)
-                    destination = (
-                        f'，已放到{event.zone.upper()}区域'
-                        if event.zone else
-                        f'，已码放到{COLOR_DISPLAY.get(event.support_color, event.support_color)}'
-                        '方块上'
-                        if event.support_color else '')
-                    self._append(
-                        'assistant', f'任务已实际完成：{color}方块{destination}。')
+                    if self.bridge.guard.snapshot().task == 'pick_auto_stack':
+                        # The automatic stack reports the whole tower in its own
+                        # message; its colour fields carry only the two ends.
+                        summary = event.detail or '自动码垛已完成。'
+                    else:
+                        color = COLOR_DISPLAY.get(event.color, event.color)
+                        destination = (
+                            f'，已放到{event.zone.upper()}区域'
+                            if event.zone else
+                            f'，已码放到'
+                            f'{COLOR_DISPLAY.get(event.support_color, event.support_color)}'
+                            '方块上'
+                            if event.support_color else '')
+                        summary = f'任务已实际完成：{color}方块{destination}。'
+                    self._append('assistant', summary)
                 elif event.success:
                     self._append('assistant', '任务规划完成，但未执行真实运动。')
                 elif event.phase == 'canceled':
@@ -1287,6 +1630,15 @@ class DialogueGui:
                         'system', f'指定区域暂时不可用：{event.detail or "没有空闲槽位"}')
                 else:
                     self._append('system', f'抓取未完成：{event.detail or "未知错误"}')
+                if hasattr(self, 'action_result_var'):
+                    if event.success:
+                        outcome = '完成'
+                    elif event.phase == 'canceled':
+                        outcome = '已取消'
+                    else:
+                        outcome = '失败'
+                    self.action_result_var.set(
+                        f'{outcome}：{event.detail or "没有详细信息"}')
                 self._active_action_request = ''
                 self._set_busy(False)
                 self._resume_after_request(event.request_id, allow_followup=False)

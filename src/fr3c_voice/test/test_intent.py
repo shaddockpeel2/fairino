@@ -280,3 +280,109 @@ def test_any_control_related_text_still_requires_strict_routing(text):
     route = safe_local_non_action_route(text)
     assert route is None or route.route in {
         'stop_action', 'stop_playback', 'release_ack'}
+
+
+AUTO_STACK_REPLY = (
+    '准备自动码垛：按红、黄、蓝、绿从上到下的顺序堆叠桌面上现有的方块。')
+
+
+@pytest.mark.parametrize('text', [
+    '自动码垛', '自动堆叠', '自动码放', '一键码垛', '全自动堆叠',
+    '帮我自动码垛', '自动把它们码起来',
+])
+def test_auto_stack_phrases_take_the_safe_local_route(text):
+    route = safe_local_action_route(text)
+
+    assert route is not None
+    assert route.route == 'action'
+    assert route.task == 'pick_auto_stack'
+    assert route.color is None
+    assert route.zone is None
+    assert route.support_color is None
+    assert route.reply == AUTO_STACK_REPLY
+
+
+@pytest.mark.parametrize('text', ['自动码垛', '自动码放'])
+def test_auto_stack_commands_are_never_fast_routed_to_chat(text):
+    assert safe_local_non_action_route(text) is None
+
+
+@pytest.mark.parametrize('raw', [
+    encoded('action', 'pick_auto_stack', 'red'),
+    encoded('action', 'pick_auto_stack', zone='d'),
+    encoded('action', 'pick_auto_stack', support_color='blue'),
+])
+def test_parser_rejects_parameters_on_pick_auto_stack(raw):
+    with pytest.raises(IntentProtocolError) as caught:
+        parse_dialogue_intent(raw)
+    assert caught.value.code == 'auto_stack_parameters_not_allowed'
+
+
+def test_model_auto_stack_route_is_accepted_for_colourless_text():
+    raw = encoded('action', 'pick_auto_stack', reply='准备自动码垛。')
+
+    intent, _ = classify_text('自动堆叠', lambda _prompt: raw)
+
+    assert intent.route == 'action'
+    assert intent.task == 'pick_auto_stack'
+    assert intent.color is None
+    assert intent.zone is None
+    assert intent.support_color is None
+
+
+def test_model_auto_stack_route_is_rejected_when_text_names_a_colour():
+    raw = encoded('action', 'pick_auto_stack', reply='准备自动码垛。')
+
+    with pytest.raises(IntentProtocolError) as caught:
+        classify_text('把红色方块自动码垛', lambda _prompt: raw)
+
+    assert caught.value.code == 'auto_stack_with_colors'
+
+
+@pytest.mark.parametrize('route,task,color,code', [
+    ('action', 'pick_hold', 'red', 'auto_stack_task_required'),
+    ('action', 'pick_sort', 'red', 'auto_stack_task_required'),
+    ('chat', None, None, 'explicit_action_not_routed'),
+])
+def test_auto_stack_text_cannot_be_routed_to_another_task(
+        route, task, color, code):
+    raw = encoded(route, task, color, reply='好的。')
+
+    with pytest.raises(IntentProtocolError) as caught:
+        classify_text('自动码垛', lambda _prompt: raw)
+
+    assert caught.value.code == code
+
+
+def test_model_cannot_invent_auto_stack_without_the_automatic_marker():
+    raw = encoded('action', 'pick_auto_stack', reply='准备自动码垛。')
+
+    with pytest.raises(IntentProtocolError) as caught:
+        classify_text('把红色方块放到蓝色方块上面', lambda _prompt: raw)
+
+    assert caught.value.code in {'auto_stack_with_colors', 'auto_stack_without_cue'}
+
+
+def test_auto_marker_with_explicit_colours_still_means_pick_stack():
+    route = safe_local_action_route('自动把红色方块放到蓝色方块上面')
+    assert route is not None
+    assert route.task == 'pick_stack'
+    assert (route.color, route.support_color) == ('red', 'blue')
+
+    raw = encoded(
+        'action', 'pick_stack', 'red', support_color='blue',
+        reply='准备码放。')
+    intent, _ = classify_text('把红色方块放到蓝色方块上面', lambda _prompt: raw)
+    assert intent.task == 'pick_stack'
+    assert intent.color == 'red'
+    assert intent.support_color == 'blue'
+
+
+@pytest.mark.parametrize('text', [
+    '把红色方块放到蓝色方块上面',
+    '把红色方块码到蓝色方块上面',
+])
+def test_bare_stack_words_never_become_auto_stack(text):
+    route = safe_local_action_route(text)
+    assert route is not None
+    assert route.task == 'pick_stack'

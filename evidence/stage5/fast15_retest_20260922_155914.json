@@ -1,0 +1,3929 @@
+{
+  "duration_s": 180.0,
+  "feedback": [
+    {
+      "t": 5.0540598460002,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.20921693742275238
+    },
+    {
+      "t": 5.0822724560002825,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.2364034503698349
+    },
+    {
+      "t": 5.108276750000186,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.2588786780834198
+    },
+    {
+      "t": 5.133669538000504,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.2868616580963135
+    },
+    {
+      "t": 5.154488065000805,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:collecting_stable_samples",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.02583301067352295
+    },
+    {
+      "t": 5.177373782000359,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:collecting_stable_samples",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.04808930307626724
+    },
+    {
+      "t": 5.200218123000013,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:collecting_stable_samples",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.07124572992324829
+    },
+    {
+      "t": 5.222479833000762,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:collecting_stable_samples",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.09370927512645721
+    },
+    {
+      "t": 5.250146396000673,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:collecting_stable_samples",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.11994344741106033
+    },
+    {
+      "t": 5.280627657000878,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:collecting_stable_samples",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.15043725073337555
+    },
+    {
+      "t": 5.304131131000759,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.030052319169044495
+    },
+    {
+      "t": 5.331549858000471,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.05553102120757103
+    },
+    {
+      "t": 5.366300959,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.04349229112267494
+    },
+    {
+      "t": 5.391218908000155,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.06788727641105652
+    },
+    {
+      "t": 5.415175512000133,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.0925050899386406
+    },
+    {
+      "t": 5.437851060000867,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.11612536013126373
+    },
+    {
+      "t": 5.462312795000798,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.13986288011074066
+    },
+    {
+      "t": 5.485055885000293,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:target_not_unique",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.16303588449954987
+    },
+    {
+      "t": 5.517282791000071,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:collecting_stable_samples",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.03725595772266388
+    },
+    {
+      "t": 5.536691386000712,
+      "phase": "ACQUIRING",
+      "detail": "waiting_for_target:collecting_stable_samples",
+      "error_px": [
+        0.0,
+        0.0
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.060158178210258484
+    },
+    {
+      "t": 5.757069378000779,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.030789827927947044
+    },
+    {
+      "t": 5.785010652000892,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.05745963007211685
+    },
+    {
+      "t": 5.8125478380006825,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.08489160984754562
+    },
+    {
+      "t": 5.8401724840005045,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.11050577461719513
+    },
+    {
+      "t": 5.888110526000673,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_unique",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.0723014548420906
+    },
+    {
+      "t": 5.914615367000806,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_unique",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.04653254151344299
+    },
+    {
+      "t": 5.949723556000208,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_unique",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.07127773761749268
+    },
+    {
+      "t": 5.964479514000232,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_unique",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.0989869236946106
+    },
+    {
+      "t": 6.012044177000462,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_unique",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.13831308484077454
+    },
+    {
+      "t": 6.043811411000206,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:collecting_stable_samples",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.04051006957888603
+    },
+    {
+      "t": 6.066017412000292,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:collecting_stable_samples",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.06496484577655792
+    },
+    {
+      "t": 6.090238270000555,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:collecting_stable_samples",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.08823981881141663
+    },
+    {
+      "t": 6.147687919000418,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:collecting_stable_samples",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.1417565941810608
+    },
+    {
+      "t": 6.1692878720004956,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.039678726345300674
+    },
+    {
+      "t": 6.204576104000807,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.06908368319272995
+    },
+    {
+      "t": 6.229608679000194,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.036260418593883514
+    },
+    {
+      "t": 6.277836307000143,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.07975132763385773
+    },
+    {
+      "t": 6.304892780000046,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:collecting_stable_samples",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.03181375563144684
+    },
+    {
+      "t": 6.338363992000268,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:collecting_stable_samples",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.058867935091257095
+    },
+    {
+      "t": 6.364722623000489,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:collecting_stable_samples",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.0915590152144432
+    },
+    {
+      "t": 6.412289119000889,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:collecting_stable_samples",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.14234612882137299
+    },
+    {
+      "t": 6.438107036000474,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.040741752833127975
+    },
+    {
+      "t": 6.465842683000119,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.06774530559778214
+    },
+    {
+      "t": 6.492334399000356,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.09290613234043121
+    },
+    {
+      "t": 6.533097902000009,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.13482815027236938
+    },
+    {
+      "t": 6.557279467000626,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.16100211441516876
+    },
+    {
+      "t": 6.584525442000086,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:collecting_stable_samples",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.032389815896749496
+    },
+    {
+      "t": 6.6100382720005655,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:collecting_stable_samples",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.05743005871772766
+    },
+    {
+      "t": 6.645041668000886,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.04028920456767082
+    },
+    {
+      "t": 6.670399496000755,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.06526611000299454
+    },
+    {
+      "t": 6.696335498000735,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.09150240570306778
+    },
+    {
+      "t": 6.724378523000269,
+      "phase": "LOST_HOLD",
+      "detail": "holding_for_target_recovery:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.12205508351325989
+    },
+    {
+      "t": 6.770388960000673,
+      "phase": "STOPPING",
+      "detail": "target_loss_timeout:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.1654692441225052
+    },
+    {
+      "t": 6.774694592000742,
+      "phase": "STOPPING",
+      "detail": "target_loss_timeout:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.1654692441225052
+    },
+    {
+      "t": 6.798124524000741,
+      "phase": "STOPPING",
+      "detail": "target_loss_timeout:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.1654692441225052
+    },
+    {
+      "t": 6.820760988000075,
+      "phase": "STOPPING",
+      "detail": "target_loss_timeout:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.1654692441225052
+    },
+    {
+      "t": 6.842602401000477,
+      "phase": "STOPPING",
+      "detail": "target_loss_timeout:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.1654692441225052
+    },
+    {
+      "t": 6.875991612000689,
+      "phase": "STOPPING",
+      "detail": "target_loss_timeout:target_not_found",
+      "error_px": [
+        -78.40792846679688,
+        43.39330291748047
+      ],
+      "command_xy": [
+        0.0,
+        0.0
+      ],
+      "age_s": 0.1654692441225052
+    }
+  ],
+  "commands": [
+    [
+      5.75500902100066,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      5.790632590000314,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      5.810229062000872,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      5.836349857000641,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      5.890438927000105,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      5.911412039000425,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      5.952097249000872,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      5.9629301640006815,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.013409776000117,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.041692137000609,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.06693383900074,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.089014131000113,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.144673510000757,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.171268019000308,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.202214161000484,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.228276914000162,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.273447258000488,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.301759661000688,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.331946378000794,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.361872133000361,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.414111182000852,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.436001179000414,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.463414822000232,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.488883652000368,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.530697166000209,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.558807526000237,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.581856662000064,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.61175620800077,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.649578219000432,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.667287377000321,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.693527007000739,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.723094883000158,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.767036214000655,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.776258818000315,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.8053933560004225,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.818431128000157,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.843980542000281,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    [
+      6.864034102000005,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  ],
+  "control_states": [
+    [
+      5.0398963110001205,
+      "monitoring_manual_ready"
+    ],
+    [
+      5.566109260000303,
+      "acquiring_servo_tracking_control"
+    ],
+    [
+      5.741012196000156,
+      "executing_servo_tracking"
+    ],
+    [
+      6.892206462000104,
+      "releasing_servo_tracking_control"
+    ],
+    [
+      6.952963149000425,
+      "monitoring_manual_ready"
+    ]
+  ],
+  "servo_states": [
+    [
+      5.040000145000704,
+      0
+    ],
+    [
+      5.042116502000681,
+      0
+    ],
+    [
+      5.043907939000746,
+      0
+    ],
+    [
+      5.046875431000444,
+      0
+    ],
+    [
+      5.0483708230003685,
+      0
+    ],
+    [
+      5.049973550000686,
+      0
+    ],
+    [
+      5.051523192000786,
+      0
+    ],
+    [
+      5.05312941900047,
+      0
+    ],
+    [
+      5.055228567000086,
+      0
+    ],
+    [
+      5.057134339000186,
+      0
+    ],
+    [
+      5.058978860000025,
+      0
+    ],
+    [
+      5.06044654300058,
+      0
+    ],
+    [
+      5.061670682000113,
+      0
+    ],
+    [
+      5.062658276000548,
+      0
+    ],
+    [
+      5.063630121000642,
+      0
+    ],
+    [
+      5.064602548000039,
+      0
+    ],
+    [
+      5.065512559000126,
+      0
+    ],
+    [
+      5.066521737000585,
+      0
+    ],
+    [
+      5.0674944560005315,
+      0
+    ],
+    [
+      5.068619510000644,
+      0
+    ],
+    [
+      5.069710939000288,
+      0
+    ],
+    [
+      5.116041588000371,
+      0
+    ],
+    [
+      5.315222924000409,
+      0
+    ],
+    [
+      5.518474555000466,
+      0
+    ],
+    [
+      5.7174802630006525,
+      0
+    ],
+    [
+      5.918897374000153,
+      0
+    ],
+    [
+      6.116121062000275,
+      0
+    ],
+    [
+      6.317006167000727,
+      0
+    ],
+    [
+      6.516417005000221,
+      0
+    ],
+    [
+      6.715962970000874,
+      0
+    ],
+    [
+      6.917349163000836,
+      0
+    ],
+    [
+      7.119020485000874,
+      0
+    ],
+    [
+      7.316716471000291,
+      0
+    ],
+    [
+      7.516656106000482,
+      0
+    ],
+    [
+      7.716139737000049,
+      0
+    ],
+    [
+      7.916199499000868,
+      0
+    ]
+  ],
+  "status": [
+    [
+      5.055459570000494,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "goal_started",
+        "elapsed_s": 0.004411800000525545,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.05078191007880728,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.057431551000263,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.006168820000311825,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.0835123450005995,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.03368900599980407,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.111397327000304,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.060428600000705046,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.134608131000277,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.08435837100023491,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.155098530000032,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:collecting_stable_samples",
+        "elapsed_s": 0.10667374800050311,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.178280292000636,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:collecting_stable_samples",
+        "elapsed_s": 0.12943463000010524,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.2008460890001516,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:collecting_stable_samples",
+        "elapsed_s": 0.15238601500004734,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.223330635000821,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:collecting_stable_samples",
+        "elapsed_s": 0.17460426600064238,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.253779437000048,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:collecting_stable_samples",
+        "elapsed_s": 0.20157198700053414,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.282062965000478,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:collecting_stable_samples",
+        "elapsed_s": 0.2323414190004769,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.306853871000385,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.2551066760006506,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.335672030000751,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.28145514100015134,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.369676164000339,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.3173750880005173,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.394893658000001,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.341974824999852,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.418955430000096,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.36571705200003635,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.4449613900005716,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.3888458549999996,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.467577146000622,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.4124171210005443,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.48663907000082,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:target_not_unique",
+        "elapsed_s": 0.435486590000437,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.519196438000108,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:collecting_stable_samples",
+        "elapsed_s": 0.46299369300049875,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.538582282000789,
+      {
+        "color": "red",
+        "control_state": "monitoring_manual_ready",
+        "detail": "waiting_for_target:collecting_stable_samples",
+        "elapsed_s": 0.48653700100021524,
+        "estimated_displacement_xy_m": [
+          0.0,
+          0.0
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 0.0,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "ACQUIRING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.7578793450002195,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 0.7071074949999456,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.691738213894246e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.792806407000171,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 0.7362040739999429,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.691738213894246e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.813454932000241,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 0.7626221230002557,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 1.7249392168188904e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.843469813000411,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 0.7871874420006861,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 1.7249392168188904e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.8920008200002485,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_unique",
+        "elapsed_s": 0.8379608080003891,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 1.7212682316289923e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.915990591000082,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_unique",
+        "elapsed_s": 0.8627798799998345,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 1.7212682316289923e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.953104677000738,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_unique",
+        "elapsed_s": 0.8873585330002243,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 1.7212682316289923e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      5.965056729000025,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_unique",
+        "elapsed_s": 0.9155119349998131,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 2.403158305608662e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.01716561000012,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_unique",
+        "elapsed_s": 0.9665465950001817,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 2.403158305608662e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.044859382000141,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:collecting_stable_samples",
+        "elapsed_s": 0.9937984859998323,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 2.227153300646531e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.068087394000031,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:collecting_stable_samples",
+        "elapsed_s": 1.0176947150002889,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 2.227153300646531e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.0907031920005466,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:collecting_stable_samples",
+        "elapsed_s": 1.0414588170006027,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 1.3881159163737984e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.151282168000762,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:collecting_stable_samples",
+        "elapsed_s": 1.0942630389999977,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 1.3881159163737984e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.1743031370006065,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.1196100759998444,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 1.572439553137606e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.206683128000805,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.1553451460003998,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 1.572439553137606e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.230477855000572,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.1814484410006116,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 2.227153300646531e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.281732143000227,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.2279295500002263,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 2.227153300646531e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.305984501000239,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:collecting_stable_samples",
+        "elapsed_s": 1.2531951689998095,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.197349674756814e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.340274722000686,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:collecting_stable_samples",
+        "elapsed_s": 1.2833544690001872,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.197349674756814e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.366980440000589,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:collecting_stable_samples",
+        "elapsed_s": 1.3138848560001861,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.1474223665221066e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.4162917060002655,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:collecting_stable_samples",
+        "elapsed_s": 1.363646460000382,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.1474223665221066e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.439967891000379,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.3878076910004893,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.0365548320261516e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.466909028000373,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.4153231270001925,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.0365548320261516e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.494133420000253,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.4403643690002355,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.0365548320261516e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.53523292600039,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.4824059689999558,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.499239831715659e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.561038218000249,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.507975883000654,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.499239831715659e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.585350868000205,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:collecting_stable_samples",
+        "elapsed_s": 1.5333957120001287,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 2.9624528657760686e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.61270851000063,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:collecting_stable_samples",
+        "elapsed_s": 1.5586813320005604,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 2.9624528657760686e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.650346186000206,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.5933347240006697,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 2.9624528657760686e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.671727178000765,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.6190787229998023,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.3711930123193425e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.697191257000668,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.6452107270006309,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 3.3711930123193425e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.728153316000316,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "holding_for_target_recovery:target_not_found",
+        "elapsed_s": 1.6789063160003934,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 4.372494460497049e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "LOST_HOLD",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ],
+    [
+      6.771817559000738,
+      {
+        "color": "red",
+        "control_state": "executing_servo_tracking",
+        "detail": "target_loss_timeout:target_not_found",
+        "elapsed_s": 1.7185571810005058,
+        "estimated_displacement_xy_m": [
+          -3.858973048007135e-05,
+          2.847562256862881e-05
+        ],
+        "execute": true,
+        "expected_command_xy_mps": [
+          0.0,
+          0.0
+        ],
+        "measured_relative_xy_m": 4.372494460497049e-06,
+        "parameter_snapshot": {
+          "acquisition_timeout_s": 5.0,
+          "axis_sign_x": 1.0,
+          "axis_sign_y": 1.0,
+          "control_rate_hz": 50.0,
+          "enter_frames": 3,
+          "enter_half_height_px": 18.0,
+          "enter_half_width_px": 24.0,
+          "exit_frames": 2,
+          "exit_half_height_px": 26.0,
+          "exit_half_width_px": 34.0,
+          "gain_x_mps": 0.24,
+          "gain_y_mps": 0.24,
+          "initial_center_half_height_px": 9.0,
+          "initial_center_half_width_px": 12.0,
+          "lost_timeout_s": 1.0,
+          "max_acceleration_mps2": 0.09,
+          "max_speed_mps": 0.04,
+          "observation_stale_s": 0.4
+        },
+        "phase": "STOPPING",
+        "run_id": "53c6dc27-33cf-4755-aad2-129be10e3df3",
+        "schema_version": 1
+      }
+    ]
+  ],
+  "tcp_positions": [
+    [
+      5.144091197000307,
+      -0.1358615560147671,
+      -0.41227320423869285,
+      0.1936315511960544,
+      0.4373750051113281
+    ],
+    [
+      5.145020458000545,
+      -0.13585741913191404,
+      -0.4122761118975402,
+      0.19363248874898242,
+      0.3662449404321289
+    ],
+    [
+      5.146893562000514,
+      -0.1358589167687162,
+      -0.4122747943148672,
+      0.19363121365955865,
+      0.2961170293709717
+    ],
+    [
+      5.147836531000394,
+      -0.1358601056516288,
+      -0.4122766376779901,
+      0.19363294987319904,
+      0.22516514554748535
+    ],
+    [
+      5.148735166000733,
+      -0.13586005642747334,
+      -0.412275626904437,
+      0.1936332347391438,
+      0.15407158852075192
+    ],
+    [
+      5.150425102000554,
+      -0.13585900920988558,
+      -0.41227669234322234,
+      0.19363289720278443,
+      0.08372974478100581
+    ],
+    [
+      5.151260153000294,
+      -0.13586275632431613,
+      -0.4122760602553632,
+      0.19363300073141376,
+      0.012513436807861322
+    ],
+    [
+      5.2133562300005,
+      -0.13586002664549757,
+      -0.41227501558557667,
+      0.1936303996891828,
+      0.0026246914113768893
+    ],
+    [
+      5.2857161320007435,
+      -0.13586173908568255,
+      -0.4122769628025833,
+      0.193634904212809,
+      0.002939834564331001
+    ],
+    [
+      5.360835064000639,
+      -0.13586005642747334,
+      -0.412275626904437,
+      0.1936332347391438,
+      0.006077341358398436
+    ],
+    [
+      5.432946338000875,
+      -0.13586001321047894,
+      -0.41227473965003786,
+      0.19363126632998293,
+      0.006179894537719721
+    ],
+    [
+      5.513685626000552,
+      -0.1358588656558873,
+      -0.4122737448112261,
+      0.1936308192983455,
+      0.014890738489257704
+    ],
+    [
+      5.578259356000672,
+      -0.13585896970692793,
+      -0.41227588129923254,
+      0.19363162210923063,
+      0.007450694409423808
+    ],
+    [
+      5.646945716000118,
+      -0.13586015845763355,
+      -0.4122774839806049,
+      0.1936349047292636,
+      0.008824005232177731
+    ],
+    [
+      5.713062338000782,
+      -0.1358616976913103,
+      -0.41227611303976297,
+      0.19363294987319898,
+      0.0063088942410888665
+    ],
+    [
+      5.789857332000793,
+      -0.13586050880127942,
+      -0.41227426968123104,
+      0.1936312136595586,
+      0.010955219461547844
+    ],
+    [
+      5.860003541000879,
+      -0.13586002664549757,
+      -0.41227501558557667,
+      0.1936303996891828,
+      0.008527650983276347
+    ],
+    [
+      5.945864762000383,
+      -0.13586006614868087,
+      -0.4122758266341999,
+      0.19363167477965001,
+      0.015452017379760707
+    ],
+    [
+      6.009027726000568,
+      -0.13586005642747334,
+      -0.412275626904437,
+      0.1936332347391438,
+      0.003796010215331991
+    ],
+    [
+      6.077384374000758,
+      -0.13586000348934563,
+      -0.412274539921796,
+      0.1936328262854192,
+      0.0025764780754394256
+    ],
+    [
+      6.151016748000075,
+      -0.13586001692452132,
+      -0.4122748158605623,
+      0.1936319596456491,
+      0.008888621371948235
+    ],
+    [
+      6.213916251000228,
+      -0.13586005642747334,
+      -0.412275626904437,
+      0.1936332347391438,
+      0.0031844677247313546
+    ],
+    [
+      6.281479849000789,
+      -0.13586165818523044,
+      -0.41227530199612533,
+      0.19363167477964996,
+      0.0032826391350097017
+    ],
+    [
+      6.353050283000812,
+      -0.1358601056516288,
+      -0.4122766376779901,
+      0.19363294987319904,
+      0.006255127493896451
+    ],
+    [
+      6.423356244000388,
+      -0.13586112478189988,
+      -0.41227577385408104,
+      0.19363172563786948,
+      0.004549043863281144
+    ],
+    [
+      6.500650035000035,
+      -0.1358611659783023,
+      -0.4122763817026131,
+      0.193634561210439,
+      0.009702272953369118
+    ],
+    [
+      6.5676629180006785,
+      -0.13586010734510404,
+      -0.4122764344831152,
+      0.1936345103521857,
+      0.004866796867797785
+    ],
+    [
+      6.648943545000293,
+      -0.13586010584645358,
+      -0.41227687959506004,
+      0.19363206863235893,
+      0.014203947177490232
+    ],
+    [
+      6.71189825700003,
+      -0.1358612170908225,
+      -0.4122774311999132,
+      0.19363495558751248,
+      0.005140809782714834
+    ],
+    [
+      6.784747956000501,
+      -0.13585900940470796,
+      -0.4122769342602879,
+      0.1936320159619888,
+      0.00596571627966308
+    ],
+    [
+      6.856096012000307,
+      -0.13585753458962455,
+      -0.4122782449195816,
+      0.19363329209238092,
+      0.005224252933715812
+    ],
+    [
+      6.950235452000015,
+      -0.13585907173741257,
+      -0.41227773838201615,
+      0.19363329209238092,
+      0.008906473097412104
+    ],
+    [
+      7.019971990000158,
+      -0.13586013543267142,
+      -0.4122772489776869,
+      0.19363578493537817,
+      0.008868037057373046
+    ],
+    [
+      7.093431696000152,
+      -0.13586011726135466,
+      -0.41227687613465497,
+      0.1936320691488336,
+      0.010630617155029276
+    ],
+    [
+      7.23732144800033,
+      -0.13586276793496296,
+      -0.4122762987119866,
+      0.19363212000704838,
+      0.01049819736083979
+    ],
+    [
+      7.305025463000675,
+      -0.13586011726135466,
+      -0.41227687613465497,
+      0.1936320691488336,
+      0.0062557606879882766
+    ],
+    [
+      7.371367172000646,
+      -0.13586015676422977,
+      -0.41227768717695024,
+      0.19363334424637008,
+      0.00553496341149895
+    ],
+    [
+      7.445202257000346,
+      -0.13586006614868087,
+      -0.4122758266341999,
+      0.19363167477965001,
+      0.0051833101035155815
+    ],
+    [
+      7.513135067000803,
+      -0.13586010754007566,
+      -0.4122766764034236,
+      0.19363362911224505,
+      0.006373178547485314
+    ],
+    [
+      7.586566105000202,
+      -0.1358601470427196,
+      -0.4122774874409703,
+      0.19363490421280904,
+      0.007841967422241192
+    ],
+    [
+      7.658187623000231,
+      -0.1358627070962577,
+      -0.4122750494820037,
+      0.1936332855973587,
+      0.007267062562499996
+    ],
+    [
+      7.72873100400011,
+      -0.13586019998062118,
+      -0.4122785744189665,
+      0.19363531267892364,
+      0.0058960852640380645
+    ],
+    [
+      7.804234316000475,
+      -0.13586015676422977,
+      -0.41227768717695024,
+      0.19363334424637008,
+      0.009473733262207018
+    ],
+    [
+      7.876720928000395,
+      -0.1358601470427196,
+      -0.4122774874409703,
+      0.19363490421280904,
+      0.0098733970751953
+    ],
+    [
+      7.96143905200006,
+      -0.13586011706654286,
+      -0.4122766342176285,
+      0.19363295038967523,
+      0.022548487111938464
+    ]
+  ],
+  "result": {
+    "status": 6,
+    "success": false,
+    "error_code": 3,
+    "message": "target_loss_timeout:target_not_found",
+    "elapsed_s": 1.9177160263061523,
+    "final_error_px": [
+      -78.40792846679688,
+      43.39330291748047
+    ]
+  },
+  "scene_preflight": "{'operation': 'add', 'ground': {'id': 'rviz_ground_plane', 'frame': 'base_link', 'dimensions_m': [2.0, 2.0, 0.02], 'center_z_m': -0.01001}, 'scene_object_ids': ['rviz_ground_plane'], 'servo_scene_update_seen': True}\n",
+  "final_control_state": "monitoring_manual_ready"
+}

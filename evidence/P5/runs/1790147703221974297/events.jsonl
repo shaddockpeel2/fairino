@@ -1,0 +1,10 @@
+{"time_ns":1790147703222429594,"event":"run_started","detail":"execution"}
+{"time_ns":1790147703222535762,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1790147703233750468,"event":"state","detail":"retryable_failure_before_arm_motion: gripper rejected pre_open; no arm motion started, fix the condition and call /start again"}
+{"time_ns":1790147709774123898,"event":"previous_cube_absent","detail":"world_id=target_cube"}
+{"time_ns":1790147709774530486,"event":"state","detail":"waiting_for_target: pick_stack accepted; locating one fresh red cube on the table and the yellow cube it will be placed on"}
+{"time_ns":1790147709907034651,"event":"target_filter_set","detail":"color=red,generation=2"}
+{"time_ns":1790147710586569536,"event":"stack_destination_locked","detail":"color=yellow,top_xyz_m=[0.15484169,-0.460820785,0.0316581815],yaw_rad=0.27943501,tier=0,bottom_z_m=0.00165818148,tower_cubes_after_placement=2"}
+{"time_ns":1790147710586734913,"event":"stack_pair_snapshot_locked","detail":"source=red,support=yellow,filter_generation=2,same_rgbd_status=true"}
+{"time_ns":1790147710589993449,"event":"stack_pair_validated","detail":"lower=yellow,upper=red,same_snapshot=true,support_tier=0,tower_cubes_after_placement=2,maximum_stack_cubes=4,xy_separation_m=0.130215277,tabletop_bottom_difference_m=-0.00178292671,source_bottom_m=-0.000124745238,destination_bottom_m=0.00165818148"}
+{"time_ns":1790147710591448006,"event":"latency","detail":"\"stage\":\"target_acquired\",\"elapsed_ms\":831.2"}

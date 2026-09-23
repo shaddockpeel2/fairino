@@ -32,6 +32,40 @@ class Logger:
         pass
 
 
+class FakeListControllersClient:
+    def __init__(self, states):
+        self.states = states
+
+    def wait_for_service(self, timeout_sec):
+        return timeout_sec > 0.0
+
+    async def call_async(self, _request):
+        return SimpleNamespace(controller=[
+            SimpleNamespace(name=name, state=state)
+            for name, state in self.states.items()
+        ])
+
+
+class FakeSwitchControllerClient:
+    def __init__(self, states):
+        self.states = states
+        self.requests = []
+
+    def wait_for_service(self, timeout_sec):
+        return timeout_sec > 0.0
+
+    async def call_async(self, request):
+        self.requests.append(request)
+        for name in request.deactivate_controllers:
+            self.states[name] = 'inactive'
+        # Model controller_manager's stop-before-start resource switch.
+        assert sum(state == 'active' for state in self.states.values()) <= 1
+        for name in request.activate_controllers:
+            self.states[name] = 'active'
+        assert sum(state == 'active' for state in self.states.values()) <= 1
+        return SimpleNamespace(ok=True)
+
+
 def bridge_fixture():
     bridge = object.__new__(BRIDGE_MODULE.TrajectoryControlBridge)
     bridge._lock = threading.RLock()
@@ -43,22 +77,29 @@ def bridge_fixture():
     bridge._last_tracking_heartbeat_s = 0.0
     bridge._lease_timeout_s = 0.5
     bridge._tracking_heartbeat_timeout_s = 0.5
+    bridge._service_wait_timeout_s = 1.0
+    bridge._switch_timeout_s = 1.0
     bridge._cleanup_in_progress = False
     bridge._fault_latched = False
     bridge._servo_hard_fault = None
+    bridge._servo_command_fault = None
+    bridge._last_servo_command_s = time.monotonic()
+    bridge._servo_command_timeout_s = 0.25
     bridge._last_released_lease_id = ''
+    bridge._execution_controller = 'fairino3mt_execution_controller'
+    bridge._servo_controller = 'fairino3mt_servo_position_controller'
     bridge._servo_start_client = object()
     bridge._servo_stop_client = object()
     bridge.get_logger = lambda: Logger()
     bridge._publish_state = lambda _state: None
 
-    async def switch(_activate):
+    async def switch(_controller, _activate):
         return True
 
     async def trigger(_client, _operation):
         return True
 
-    bridge._switch_execution_controller = switch
+    bridge._switch_controller = switch
     bridge._call_servo_trigger = trigger
     return bridge
 
@@ -77,6 +118,45 @@ def lease_request(operation, lease_id=''):
     )
 
 
+def test_mock_controller_switch_is_atomic_and_mutually_exclusive():
+    bridge = bridge_fixture()
+    states = {
+        bridge._execution_controller: 'active',
+        bridge._servo_controller: 'inactive',
+    }
+    bridge._list_controllers_client = FakeListControllersClient(states)
+    switch_client = FakeSwitchControllerClient(states)
+    bridge._switch_client = switch_client
+    switched = asyncio.run(
+        BRIDGE_MODULE.TrajectoryControlBridge._switch_controller(
+            bridge, bridge._servo_controller, True))
+    assert switched
+    assert states == {
+        bridge._execution_controller: 'inactive',
+        bridge._servo_controller: 'active',
+    }
+    assert len(switch_client.requests) == 1
+    assert switch_client.requests[0].activate_controllers == [
+        bridge._servo_controller]
+    assert switch_client.requests[0].deactivate_controllers == [
+        bridge._execution_controller]
+
+
+def test_mock_detects_and_stops_double_active_controller_state():
+    bridge = bridge_fixture()
+    states = {
+        bridge._execution_controller: 'active',
+        bridge._servo_controller: 'active',
+    }
+    bridge._list_controllers_client = FakeListControllersClient(states)
+    bridge._switch_client = FakeSwitchControllerClient(states)
+    switched = asyncio.run(
+        BRIDGE_MODULE.TrajectoryControlBridge._switch_controller(
+            bridge, bridge._servo_controller, True))
+    assert not switched
+    assert set(states.values()) == {'inactive'}
+
+
 def test_tracking_owner_blocks_trajectory_and_releases_cleanly():
     bridge = bridge_fixture()
     acquired = asyncio.run(bridge._control_lease_callback(
@@ -90,6 +170,44 @@ def test_tracking_owner_blocks_trajectory_and_releases_cleanly():
         ControlLease.Response()))
     assert released.success
     assert bridge._owner is None
+
+
+def test_servo_start_failure_rolls_back_forward_controller():
+    bridge = bridge_fixture()
+    calls = []
+
+    async def switch(controller, activate):
+        calls.append((controller, activate))
+        return True
+
+    async def trigger(_client, operation):
+        return operation == 'stop'
+
+    bridge._switch_controller = switch
+    bridge._call_servo_trigger = trigger
+    response = asyncio.run(bridge._control_lease_callback(
+        lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
+    assert not response.success
+    assert calls == [
+        ('fairino3mt_servo_position_controller', True),
+        ('fairino3mt_servo_position_controller', False),
+    ]
+    assert bridge._owner is None
+    assert not bridge._fault_latched
+
+
+def test_failed_startup_rollback_latches_fault():
+    bridge = bridge_fixture()
+
+    async def switch(_controller, _activate):
+        return False
+
+    bridge._switch_controller = switch
+    response = asyncio.run(bridge._control_lease_callback(
+        lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
+    assert not response.success
+    assert bridge._owner == 'FAULT'
+    assert bridge._fault_latched
 
 
 def test_trajectory_reservation_blocks_tracking_acquisition():
@@ -127,15 +245,94 @@ def test_expired_tracking_heartbeat_forces_release():
     assert not bridge._control_acquired
 
 
+def test_forward_command_timeout_forces_controller_release():
+    bridge = bridge_fixture()
+    calls = []
+
+    async def switch(controller, activate):
+        calls.append((controller, activate))
+        return True
+
+    bridge._switch_controller = switch
+    acquired = asyncio.run(bridge._control_lease_callback(
+        lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
+    assert acquired.success
+    bridge._last_servo_command_s = time.monotonic() - 1.0
+    asyncio.run(bridge._watchdog())
+    assert calls == [
+        ('fairino3mt_servo_position_controller', True),
+        ('fairino3mt_servo_position_controller', False),
+    ]
+    assert bridge._owner is None
+    assert not bridge._control_acquired
+
+
+def test_valid_forward_command_refreshes_watchdog():
+    bridge = bridge_fixture()
+    acquired = asyncio.run(bridge._control_lease_callback(
+        lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
+    assert acquired.success
+    bridge._last_servo_command_s = time.monotonic() - 1.0
+    bridge._on_servo_command(SimpleNamespace(data=[0.0] * 6))
+    asyncio.run(bridge._watchdog())
+    assert bridge._owner == 'SERVO_TRACKING'
+
+
+@pytest.mark.parametrize('data', [[0.0] * 5, [0.0] * 5 + [float('nan')]])
+def test_invalid_forward_command_latches_stop(data):
+    bridge = bridge_fixture()
+    acquired = asyncio.run(bridge._control_lease_callback(
+        lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
+    assert acquired.success
+    bridge._on_servo_command(SimpleNamespace(data=data))
+    asyncio.run(bridge._watchdog())
+    assert bridge._owner is None
+
+
+@pytest.mark.parametrize('status', [2, 5])
+def test_reachability_halt_keeps_tracking_lease(status):
+    bridge = bridge_fixture()
+    acquired = asyncio.run(bridge._control_lease_callback(
+        lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
+    assert acquired.success
+    bridge._on_servo_status(SimpleNamespace(data=status))
+    asyncio.run(bridge._watchdog())
+    assert bridge._owner == 'SERVO_TRACKING'
+    assert bridge._control_acquired
+
+
+def test_collision_halt_forces_tracking_release():
+    bridge = bridge_fixture()
+    acquired = asyncio.run(bridge._control_lease_callback(
+        lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
+    assert acquired.success
+    bridge._on_servo_status(SimpleNamespace(data=4))
+    asyncio.run(bridge._watchdog())
+    assert bridge._owner is None
+    assert not bridge._control_acquired
+
+
+def test_action_server_only_latches_collision_halt():
+    from fr3c_visual_servo.track_2d_action_server import Track2DActionServer
+    server = object.__new__(Track2DActionServer)
+    server._lock = threading.Lock()
+    server._servo_fault = None
+    for status in (2, 5):
+        server._on_servo_status(SimpleNamespace(data=status))
+        assert server._servo_fault is None
+    server._on_servo_status(SimpleNamespace(data=4))
+    assert server._servo_fault == 4
+
+
 def test_failed_controller_release_latches_fault():
     bridge = bridge_fixture()
     calls = []
 
-    async def switch(activate):
+    async def switch(_controller, activate):
         calls.append(activate)
         return activate
 
-    bridge._switch_execution_controller = switch
+    bridge._switch_controller = switch
     acquired = asyncio.run(bridge._control_lease_callback(
         lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
     released = asyncio.run(bridge._control_lease_callback(
@@ -178,7 +375,6 @@ def test_stop_sequence_runs_without_an_asyncio_event_loop():
 
 
 @pytest.mark.parametrize('xyz,quaternion,reason', [
-    ((0.081, 0, 0), (0, 0, 0, 1), 'measured_relative_xy'),
     ((0, 0, 0.006), (0, 0, 0, 1), 'height_drift'),
     ((0, 0, 0), (0, 0, 0.1, 0.995), 'orientation_drift'),
 ])
@@ -187,7 +383,6 @@ def test_real_tcp_bounds_include_height_and_orientation(xyz, quaternion, reason)
     server = object.__new__(Track2DActionServer)
     server._base_frame = 'base_link'
     server._tf_timeout_s = 0.01
-    server._config = SimpleNamespace(max_relative_xy_m=0.08)
     server._tcp_origin = (0, 0, 0, 0, 0, 0, 1)
     server._check_transform_age = lambda _: None
     values = {'tcp_frame': 'grasp_frame', 'max_z_drift_m': 0.005,
@@ -199,3 +394,21 @@ def test_real_tcp_bounds_include_height_and_orientation(xyz, quaternion, reason)
     server._tf_buffer = SimpleNamespace(lookup_transform=lambda *a, **kw: transform)
     with pytest.raises(ValueError, match=reason):
         server._check_tcp_bounds()
+
+
+def test_real_tcp_can_move_beyond_old_80_mm_boundary():
+    from fr3c_visual_servo.track_2d_action_server import Track2DActionServer
+    server = object.__new__(Track2DActionServer)
+    server._base_frame = 'base_link'
+    server._tf_timeout_s = 0.01
+    server._tcp_origin = (0, 0, 0, 0, 0, 0, 1)
+    server._check_transform_age = lambda _: None
+    values = {'tcp_frame': 'grasp_frame', 'max_z_drift_m': 0.005,
+              'max_orientation_drift_rad': 0.05}
+    server.get_parameter = lambda name: SimpleNamespace(value=values[name])
+    transform = SimpleNamespace(transform=SimpleNamespace(
+        translation=SimpleNamespace(x=0.081, y=0.0, z=0.0),
+        rotation=SimpleNamespace(x=0, y=0, z=0, w=1)))
+    server._tf_buffer = SimpleNamespace(lookup_transform=lambda *a, **kw: transform)
+    server._check_tcp_bounds()
+    assert server._measured_xy_m == pytest.approx(0.081)

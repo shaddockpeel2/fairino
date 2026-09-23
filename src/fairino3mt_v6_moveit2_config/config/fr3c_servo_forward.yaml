@@ -1,0 +1,48 @@
+############################################################
+# FR3-C MoveIt Servo P1 continuous-position backend
+#
+# Keep fr3c_servo.yaml unchanged as the 10 Hz JointTrajectory A/B baseline.
+############################################################
+use_gazebo: false
+
+command_in_type: speed_units
+scale:
+  linear: 0.01
+  rotational: 0.10
+  joint: 0.10
+
+# First P1 matrix point: 50 Hz output into a position forward controller.
+# The remaining 100 Hz and 125 Hz points can be selected through the launch
+# argument without modifying this baseline file.
+publish_period: 0.020
+low_latency_mode: false
+command_out_type: std_msgs/Float64MultiArray
+publish_joint_positions: true
+publish_joint_velocities: false
+publish_joint_accelerations: false
+smoothing_filter_plugin_name: online_signal_smoothing::ButterworthFilterPlugin
+
+is_primary_planning_scene_monitor: false
+move_group_name: fairino3mt_v6_group
+planning_frame: base_link
+ee_frame_name: grasp_frame
+robot_link_command_frame: base_link
+
+incoming_command_timeout: 0.10
+num_outgoing_halt_msgs_to_publish: 5
+
+lower_singularity_threshold: 17.0
+hard_stop_singularity_threshold: 30.0
+joint_limit_margin: 0.08
+leaving_singularity_threshold_multiplier: 2.0
+
+cartesian_command_in_topic: ~/delta_twist_cmds
+joint_command_in_topic: ~/delta_joint_cmds
+joint_topic: /joint_states
+status_topic: ~/status
+command_out_topic: /fairino3mt_servo_position_controller/commands
+
+check_collisions: true
+collision_check_rate: 10.0
+self_collision_proximity_threshold: 0.010
+scene_collision_proximity_threshold: 0.020

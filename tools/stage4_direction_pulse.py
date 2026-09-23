@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one leased, at-most-2.5-mm nominal stage-four direction pulse.
+"""Run one leased, bounded stage-four direction pulse.
 
 Run each direction separately. This is deliberately not a closed-loop tracker.
 """
@@ -20,16 +20,17 @@ from rclpy.time import Time
 
 from stage4_base_x_pulse import BaseXPulse, HARD_SERVO_FAULTS, summarize_trace
 from stage4_pulse_logic import (
-    MAX_DURATION_S, MAX_SPEED_MPS, TARGET_MAX_AGE_S,
-    command_for_side, error_improved, pulse_verdict,
+    DEFAULT_SPEED_MPS, MAX_DURATION_S, MAX_SPEED_MPS, TARGET_MAX_AGE_S,
+    VERIFIED_SPEED_MPS, command_for_side, error_improved,
+    pulse_nominal_limit_m, pulse_observed_limit_m, pulse_verdict,
 )
 
 
 BASE_DIRECTIONS = {
-    'x+': (MAX_SPEED_MPS, 0.0),
-    'x-': (-MAX_SPEED_MPS, 0.0),
-    'y+': (0.0, MAX_SPEED_MPS),
-    'y-': (0.0, -MAX_SPEED_MPS),
+    'x+': (1.0, 0.0),
+    'x-': (-1.0, 0.0),
+    'y+': (0.0, 1.0),
+    'y-': (0.0, -1.0),
 }
 
 
@@ -273,6 +274,10 @@ def main():
     parser.add_argument('direction', choices=[
         *BASE_DIRECTIONS, 'left', 'right', 'up', 'down'])
     parser.add_argument('--duration-s', type=float, default=MAX_DURATION_S)
+    parser.add_argument('--speed-mps', type=float, default=DEFAULT_SPEED_MPS,
+                        help='Twist speed; default 0.005, maximum 0.075 m/s.')
+    parser.add_argument('--high-speed-validation', action='store_true',
+                        help='Required above the previously verified 0.015 m/s.')
     parser.add_argument('--output', type=Path,
                         help='Write JSON evidence to this path.')
     parser.add_argument('--operator-ready', action='store_true',
@@ -296,6 +301,16 @@ def main():
     if (not math.isfinite(args.duration_s)
             or not 0.0 < args.duration_s <= MAX_DURATION_S):
         parser.error(f'--duration-s must be within (0, {MAX_DURATION_S}]')
+    if (not math.isfinite(args.speed_mps)
+            or not 0.0 < args.speed_mps <= MAX_SPEED_MPS):
+        parser.error(f'--speed-mps must be within (0, {MAX_SPEED_MPS}]')
+    if args.speed_mps > VERIFIED_SPEED_MPS and not args.high_speed_validation:
+        parser.error('--high-speed-validation required above 0.015 m/s')
+    nominal_limit_m = pulse_nominal_limit_m(args.speed_mps)
+    if args.speed_mps * args.duration_s > nominal_limit_m + 1e-12:
+        parser.error(
+            f'nominal pulse displacement must not exceed '
+            f'{nominal_limit_m * 1000:g} mm')
     for option, value in (('--cancel-after-s', args.cancel_after_s),
                           ('--target-loss-after-s', args.target_loss_after_s)):
         if value is not None and (not math.isfinite(value)
@@ -338,10 +353,17 @@ def main():
         if not node.wait_until(node.target_fresh, 5.0):
             raise RuntimeError('fresh_unique_red_target_unavailable_after_scene_check')
         if args.direction in BASE_DIRECTIONS:
-            node.command_xy = BASE_DIRECTIONS[args.direction]
+            node.command_xy = tuple(
+                component * args.speed_mps
+                for component in BASE_DIRECTIONS[args.direction])
         else:
             node.command_xy = command_for_side(
-                args.direction, node.latest_target, quaternion)
+                args.direction, node.latest_target, quaternion,
+                gain_mps=(1.200 if args.speed_mps > VERIFIED_SPEED_MPS else
+                          0.240 if args.speed_mps > 0.010 else
+                          0.120 if args.speed_mps > DEFAULT_SPEED_MPS
+                          else 0.020),
+                max_speed_mps=args.speed_mps)
         acquired = node.call_lease(
             ControlLease.Request.ACQUIRE,
             heartbeat_timeout_s=(0.4 if args.watchdog_during_pulse else 0.5))
@@ -485,7 +507,8 @@ def main():
                 and released_at is not None
                 and node.control_state == 'monitoring_manual_ready'
                 and tcp_delta is not None
-                and math.hypot(*tcp_delta[:2]) <= 0.005
+                and math.hypot(*tcp_delta[:2]) <= pulse_observed_limit_m(
+                    math.hypot(*node.command_xy), args.duration_s)
                 and settled_tcp is not None and end_tcp is not None
                 and math.dist(settled_tcp['xyz_m'], end_tcp['xyz_m'])
                     <= 0.0005

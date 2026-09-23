@@ -1,0 +1,6 @@
+{"time_ns":1790142719323439846,"event":"run_started","detail":"execution"}
+{"time_ns":1790142719323469596,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1790142719329975293,"event":"state","detail":"retryable_failure_before_arm_motion: gripper rejected pre_open; no arm motion started, fix the condition and call /start again"}
+{"time_ns":1790142763245905202,"event":"state","detail":"waiting_for_target: pick_hold accepted; requesting a fresh unique red target"}
+{"time_ns":1790142763376251602,"event":"target_filter_set","detail":"color=red,generation=4"}
+{"time_ns":1790142763990818735,"event":"latency","detail":"\"stage\":\"target_acquired\",\"elapsed_ms\":763.0"}

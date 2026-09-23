@@ -1,0 +1,17 @@
+{
+  "duration_s": 60.0,
+  "feedback": [],
+  "commands": [],
+  "control_states": [
+    [
+      3.524469468999996,
+      "acquiring_servo_tracking_control"
+    ]
+  ],
+  "servo_states": [],
+  "status": [],
+  "result": null,
+  "scene_preflight": "{'operation': 'add', 'ground': {'id': 'rviz_ground_plane', 'frame': 'base_link', 'dimensions_m': [2.0, 2.0, 0.02], 'center_z_m': -0.01001}, 'scene_object_ids': ['rviz_ground_plane'], 'servo_scene_update_seen': True}\n",
+  "client_error": "goal_rejected",
+  "final_control_state": "acquiring_servo_tracking_control"
+}

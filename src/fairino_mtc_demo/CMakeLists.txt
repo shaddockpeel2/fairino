@@ -94,9 +94,11 @@ if(BUILD_TESTING)
   ament_add_pytest_test(test_sort_regions test/test_sort_regions.py)
   ament_add_pytest_test(test_place_zone test/test_place_zone.py)
   ament_add_pytest_test(test_stack_task test/test_stack_task.py)
+  ament_add_pytest_test(test_auto_stack_task test/test_auto_stack_task.py)
   ament_add_pytest_test(test_idle_cancel test/test_idle_cancel.py)
   ament_add_pytest_test(test_source_height test/test_source_height.py)
   ament_add_pytest_test(test_release_hold test/test_release_hold.py)
+  ament_add_pytest_test(test_manual_xyz_action test/test_manual_xyz_action.py)
   ament_add_pytest_test(
     test_candidate_duration_selection
     test/test_candidate_duration_selection.py)

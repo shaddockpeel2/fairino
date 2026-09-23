@@ -1,6 +1,12 @@
-# DaBai DCW2 15 FPS trial for the current MoveIt/RViz camera path.
-# Keep every setting identical to dabai_dcw2_rviz.yaml except both stream FPS.
-# This profile needs live RGB-D and depth-quality validation before becoming a default.
+# DaBai DCW2 runtime camera profile (grasp / MoveIt / RViz). 15 FPS request.
+# Identical to dabai_dcw2_rviz.yaml except both stream FPS.
+# The device only offers 5/10/15/20/25/30 FPS, so 12 is not selectable; requesting 10
+# yields only ~9, while requesting 15 yields ~13.5 color and ~12.6 depth. Measured
+# 2026-09-22 on the current USB 2.0 link (D2C on, colored point cloud on):
+#   color 13.53 FPS, depth 12.58 FPS, 691 aligned pairs/60 s, 94.3% valid depth
+#   (10 FPS baseline: 9.80/9.05, 531 pairs, 95.6% valid)
+# The USB 2.0 path and D2C scheduling may contribute to the shortfall from 15.
+# A faster host port alone does not guarantee a faster camera connection.
 camera_name: camera
 serial_number: CH82C5201C9
 camera:

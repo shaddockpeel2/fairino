@@ -1,0 +1,60 @@
+{"time_ns":1790151183018894497,"event":"run_started","detail":"execution"}
+{"time_ns":1790151183018922789,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1790151183019919717,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube and stack support cube added"}
+{"time_ns":1790151183087037361,"event":"plan_candidate_0_approach","detail":"fraction=0.545454545,moveit_code=1,maximum_joint_step_rad=0.0235614206"}
+{"time_ns":1790151183087148488,"event":"grasp_candidate_rejected","detail":"index=0,yaw_rad=-1.092923,tilt_rad=0.000000,reason=candidate_0_approach Cartesian path incomplete: fraction=0.545455, code=1"}
+{"time_ns":1790151183233203121,"event":"plan_candidate_1_approach","detail":"fraction=0.587719298,moveit_code=1,maximum_joint_step_rad=0.0235575033"}
+{"time_ns":1790151183233280705,"event":"grasp_candidate_rejected","detail":"index=1,yaw_rad=0.477873,tilt_rad=0.000000,reason=candidate_1_approach Cartesian path incomplete: fraction=0.587719, code=1"}
+{"time_ns":1790151184017899286,"event":"plan_candidate_2_approach","detail":"fraction=0.547557841,moveit_code=1,maximum_joint_step_rad=0.0235575062"}
+{"time_ns":1790151184018005745,"event":"grasp_candidate_rejected","detail":"index=2,yaw_rad=2.048669,tilt_rad=0.000000,reason=candidate_2_approach Cartesian path incomplete: fraction=0.547558, code=1"}
+{"time_ns":1790151184099081550,"event":"plan_candidate_3_approach","detail":"fraction=0.547112462,moveit_code=1,maximum_joint_step_rad=0.0235575293"}
+{"time_ns":1790151184099166717,"event":"grasp_candidate_rejected","detail":"index=3,yaw_rad=-2.663720,tilt_rad=0.000000,reason=candidate_3_approach Cartesian path incomplete: fraction=0.547112, code=1"}
+{"time_ns":1790151184158599732,"event":"plan_candidate_4_approach","detail":"fraction=0.488549618,moveit_code=1,maximum_joint_step_rad=0.0235601703"}
+{"time_ns":1790151184158861069,"event":"grasp_candidate_rejected","detail":"index=4,yaw_rad=-1.092923,tilt_rad=0.174533,reason=candidate_4_approach Cartesian path incomplete: fraction=0.48855, code=1"}
+{"time_ns":1790151184306765765,"event":"plan_candidate_5_approach","detail":"fraction=0.602451839,moveit_code=1,maximum_joint_step_rad=0.0235575223"}
+{"time_ns":1790151184306860557,"event":"grasp_candidate_rejected","detail":"index=5,yaw_rad=0.477873,tilt_rad=0.174533,reason=candidate_5_approach Cartesian path incomplete: fraction=0.602452, code=1"}
+{"time_ns":1790151185198235029,"event":"plan_candidate_6_approach","detail":"fraction=0.661953728,moveit_code=1,maximum_joint_step_rad=0.0235575596"}
+{"time_ns":1790151185198512115,"event":"grasp_candidate_rejected","detail":"index=6,yaw_rad=2.048669,tilt_rad=0.174533,reason=candidate_6_approach Cartesian path incomplete: fraction=0.661954, code=1"}
+{"time_ns":1790151185314502862,"event":"plan_candidate_7_approach","detail":"fraction=0.521084337,moveit_code=1,maximum_joint_step_rad=0.0235602402"}
+{"time_ns":1790151185314707906,"event":"grasp_candidate_rejected","detail":"index=7,yaw_rad=-2.663720,tilt_rad=0.174533,reason=candidate_7_approach Cartesian path incomplete: fraction=0.521084, code=1"}
+{"time_ns":1790151185385618136,"event":"plan_candidate_8_approach","detail":"fraction=0.824427481,moveit_code=1,maximum_joint_step_rad=0.0235599811"}
+{"time_ns":1790151185385787304,"event":"grasp_candidate_rejected","detail":"index=8,yaw_rad=-1.092923,tilt_rad=-0.174533,reason=candidate_8_approach Cartesian path incomplete: fraction=0.824427, code=1"}
+{"time_ns":1790151185522331162,"event":"plan_candidate_9_approach","detail":"fraction=0.563922942,moveit_code=1,maximum_joint_step_rad=0.0235575824"}
+{"time_ns":1790151185522415746,"event":"grasp_candidate_rejected","detail":"index=9,yaw_rad=0.477873,tilt_rad=-0.174533,reason=candidate_9_approach Cartesian path incomplete: fraction=0.563923, code=1"}
+{"time_ns":1790151185659008312,"event":"plan_candidate_10_approach","detail":"fraction=0.434447301,moveit_code=1,maximum_joint_step_rad=0.0235574993"}
+{"time_ns":1790151185659137522,"event":"grasp_candidate_rejected","detail":"index=10,yaw_rad=2.048669,tilt_rad=-0.174533,reason=candidate_10_approach Cartesian path incomplete: fraction=0.434447, code=1"}
+{"time_ns":1790151185739132106,"event":"plan_candidate_11_approach","detail":"fraction=0.548192771,moveit_code=1,maximum_joint_step_rad=0.0235574911"}
+{"time_ns":1790151185739314691,"event":"grasp_candidate_rejected","detail":"index=11,yaw_rad=-2.663720,tilt_rad=-0.174533,reason=candidate_11_approach Cartesian path incomplete: fraction=0.548193, code=1"}
+{"time_ns":1790151185799275921,"event":"plan_candidate_12_approach","detail":"fraction=0.445859873,moveit_code=1,maximum_joint_step_rad=0.0235575005"}
+{"time_ns":1790151185799466089,"event":"grasp_candidate_rejected","detail":"index=12,yaw_rad=-1.092923,tilt_rad=0.349066,reason=candidate_12_approach Cartesian path incomplete: fraction=0.44586, code=1"}
+{"time_ns":1790151185955227792,"event":"plan_candidate_13_approach","detail":"fraction=0.613913043,moveit_code=1,maximum_joint_step_rad=0.0235575975"}
+{"time_ns":1790151185955481545,"event":"grasp_candidate_rejected","detail":"index=13,yaw_rad=0.477873,tilt_rad=0.349066,reason=candidate_13_approach Cartesian path incomplete: fraction=0.613913, code=1"}
+{"time_ns":1790151186994453292,"event":"plan_candidate_14_approach","detail":"fraction=0.653401797,moveit_code=1,maximum_joint_step_rad=0.0235576528"}
+{"time_ns":1790151186994754295,"event":"grasp_candidate_rejected","detail":"index=14,yaw_rad=2.048669,tilt_rad=0.349066,reason=candidate_14_approach Cartesian path incomplete: fraction=0.653402, code=1"}
+{"time_ns":1790151187075548055,"event":"plan_candidate_15_approach","detail":"fraction=0.497076023,moveit_code=1,maximum_joint_step_rad=0.0235575001"}
+{"time_ns":1790151187075776141,"event":"grasp_candidate_rejected","detail":"index=15,yaw_rad=-2.663720,tilt_rad=0.349066,reason=candidate_15_approach Cartesian path incomplete: fraction=0.497076, code=1"}
+{"time_ns":1790151187153018235,"event":"plan_candidate_16_approach","detail":"fraction=0.815286624,moveit_code=1,maximum_joint_step_rad=0.0235598971"}
+{"time_ns":1790151187153091444,"event":"grasp_candidate_rejected","detail":"index=16,yaw_rad=-1.092923,tilt_rad=-0.349066,reason=candidate_16_approach Cartesian path incomplete: fraction=0.815287, code=1"}
+{"time_ns":1790151187282785431,"event":"plan_candidate_17_approach","detail":"fraction=0.546086957,moveit_code=1,maximum_joint_step_rad=0.023558962"}
+{"time_ns":1790151187282888099,"event":"grasp_candidate_rejected","detail":"index=17,yaw_rad=0.477873,tilt_rad=-0.349066,reason=candidate_17_approach Cartesian path incomplete: fraction=0.546087, code=1"}
+{"time_ns":1790151187403754110,"event":"plan_candidate_18_approach","detail":"fraction=0.372272144,moveit_code=1,maximum_joint_step_rad=0.0235574981"}
+{"time_ns":1790151187403986863,"event":"grasp_candidate_rejected","detail":"index=18,yaw_rad=2.048669,tilt_rad=-0.349066,reason=candidate_18_approach Cartesian path incomplete: fraction=0.372272, code=1"}
+{"time_ns":1790151187487831782,"event":"plan_candidate_19_approach","detail":"fraction=0.546783626,moveit_code=1,maximum_joint_step_rad=0.0235574795"}
+{"time_ns":1790151187487921617,"event":"grasp_candidate_rejected","detail":"index=19,yaw_rad=-2.663720,tilt_rad=-0.349066,reason=candidate_19_approach Cartesian path incomplete: fraction=0.546784, code=1"}
+{"time_ns":1790151187549886619,"event":"plan_candidate_20_approach","detail":"fraction=0.40625,moveit_code=1,maximum_joint_step_rad=0.0235575003"}
+{"time_ns":1790151187549959828,"event":"grasp_candidate_rejected","detail":"index=20,yaw_rad=-1.092923,tilt_rad=0.523599,reason=candidate_20_approach Cartesian path incomplete: fraction=0.40625, code=1"}
+{"time_ns":1790151187706676458,"event":"plan_candidate_21_approach","detail":"fraction=0.620274914,moveit_code=1,maximum_joint_step_rad=0.0235620114"}
+{"time_ns":1790151187707033463,"event":"grasp_candidate_rejected","detail":"index=21,yaw_rad=0.477873,tilt_rad=0.523599,reason=candidate_21_approach Cartesian path incomplete: fraction=0.620275, code=1"}
+{"time_ns":1790151188768387966,"event":"plan_candidate_22_approach","detail":"fraction=0.644501279,moveit_code=1,maximum_joint_step_rad=0.0235580152"}
+{"time_ns":1790151188768784054,"event":"grasp_candidate_rejected","detail":"index=22,yaw_rad=2.048669,tilt_rad=0.523599,reason=candidate_22_approach Cartesian path incomplete: fraction=0.644501, code=1"}
+{"time_ns":1790151188856508768,"event":"plan_candidate_23_approach","detail":"fraction=0.472067039,moveit_code=1,maximum_joint_step_rad=0.0235575002"}
+{"time_ns":1790151188856900481,"event":"grasp_candidate_rejected","detail":"index=23,yaw_rad=-2.663720,tilt_rad=0.523599,reason=candidate_23_approach Cartesian path incomplete: fraction=0.472067, code=1"}
+{"time_ns":1790151188949297748,"event":"plan_candidate_24_approach","detail":"fraction=0.802083333,moveit_code=1,maximum_joint_step_rad=0.0235602945"}
+{"time_ns":1790151188949667586,"event":"grasp_candidate_rejected","detail":"index=24,yaw_rad=-1.092923,tilt_rad=-0.523599,reason=candidate_24_approach Cartesian path incomplete: fraction=0.802083, code=1"}
+{"time_ns":1790151189059693389,"event":"plan_candidate_25_approach","detail":"fraction=0.534364261,moveit_code=1,maximum_joint_step_rad=0.0235605604"}
+{"time_ns":1790151189059913308,"event":"grasp_candidate_rejected","detail":"index=25,yaw_rad=0.477873,tilt_rad=-0.523599,reason=candidate_25_approach Cartesian path incomplete: fraction=0.534364, code=1"}
+{"time_ns":1790151189166059609,"event":"plan_candidate_26_approach","detail":"fraction=0.332480818,moveit_code=1,maximum_joint_step_rad=0.0235589645"}
+{"time_ns":1790151189166135151,"event":"grasp_candidate_rejected","detail":"index=26,yaw_rad=2.048669,tilt_rad=-0.523599,reason=candidate_26_approach Cartesian path incomplete: fraction=0.332481, code=1"}
+{"time_ns":1790151189248231218,"event":"plan_candidate_27_approach","detail":"fraction=0.544692737,moveit_code=1,maximum_joint_step_rad=0.0235575"}
+{"time_ns":1790151189248307344,"event":"grasp_candidate_rejected","detail":"index=27,yaw_rad=-2.663720,tilt_rad=-0.523599,reason=candidate_27_approach Cartesian path incomplete: fraction=0.544693, code=1"}
+{"time_ns":1790151189248393970,"event":"state","detail":"retryable_failure_before_arm_motion: no equivalent yellow grasp can place the cube on the blue cube within 0.785398 rad of wrist rotation and with a complete collision-free trajectory; no arm motion started, fix the condition and call /start again"}

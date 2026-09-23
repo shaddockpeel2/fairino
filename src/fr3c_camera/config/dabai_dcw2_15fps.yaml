@@ -1,6 +1,9 @@
-# DaBai DCW2 15 FPS trial without the optional RViz point cloud.
-# Keep every setting identical to dabai_dcw2.yaml except both stream FPS.
-# Validate aligned RGB-D quality on hardware before using as a default.
+# DaBai DCW2 15 FPS variant without the optional RViz point cloud.
+# Identical to dabai_dcw2.yaml except both stream FPS. Not a runtime default; kept for
+# bench comparison against dabai_dcw2.yaml.
+# Measured 2026-09-22: color 13.67 FPS, depth 12.15 FPS. Disabling the point cloud did not
+# change the result, so the point cloud is unlikely to be the main bottleneck.
+# See docs/hardware/DaBai_DCW2_接入说明.md section 6.
 camera_name: camera
 serial_number: CH82C5201C9
 camera:

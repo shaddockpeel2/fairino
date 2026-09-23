@@ -22,7 +22,21 @@ constexpr std::array<std::string_view, kStatusInterfaceCount> kStatusInterfaceNa
   "payload_cog_y_mm", "payload_cog_z_mm", "tool_x_mm", "tool_y_mm", "tool_z_mm",
   "tool_rx_deg", "tool_ry_deg", "tool_rz_deg", "wobj_x_mm", "wobj_y_mm", "wobj_z_mm",
   "wobj_rx_deg", "wobj_ry_deg", "wobj_rz_deg", "flange_x_mm", "flange_y_mm",
-  "flange_z_mm", "flange_rx_deg", "flange_ry_deg", "flange_rz_deg"};
+  "flange_z_mm", "flange_rx_deg", "flange_ry_deg", "flange_rz_deg",
+  "read_position_call_ms", "read_status_call_ms", "servo_j_call_ms",
+  "servo_j_interval_ms", "control_period_ms"};
+
+constexpr std::size_t kReadPositionCallMsIndex = 35;
+constexpr std::size_t kReadStatusCallMsIndex = 36;
+constexpr std::size_t kServoJCallMsIndex = 37;
+constexpr std::size_t kServoJIntervalMsIndex = 38;
+constexpr std::size_t kControlPeriodMsIndex = 39;
+
+double milliseconds_since(const std::chrono::steady_clock::time_point & start)
+{
+  return std::chrono::duration<double, std::milli>(
+    std::chrono::steady_clock::now() - start).count();
+}
 
 double parse_positive_double(
   const std::unordered_map<std::string, std::string> & parameters, const char * name,
@@ -151,6 +165,10 @@ bool FairinoHardwareInterface::load_status_interfaces()
 
 void FairinoHardwareInterface::update_status_state(const ROBOT_STATE_PKG & state)
 {
+  const std::array<double, 5> timing_metrics{
+    status_state_[kReadPositionCallMsIndex], status_state_[kReadStatusCallMsIndex],
+    status_state_[kServoJCallMsIndex], status_state_[kServoJIntervalMsIndex],
+    status_state_[kControlPeriodMsIndex]};
   status_state_ = {
     static_cast<double>(state.program_state), static_cast<double>(state.robot_state),
     static_cast<double>(state.main_code), static_cast<double>(state.sub_code),
@@ -165,7 +183,8 @@ void FairinoHardwareInterface::update_status_state(const ROBOT_STATE_PKG & state
     state.wobjCoord[0], state.wobjCoord[1], state.wobjCoord[2],
     state.wobjCoord[3], state.wobjCoord[4], state.wobjCoord[5],
     state.flange_cur_pos[0], state.flange_cur_pos[1], state.flange_cur_pos[2],
-    state.flange_cur_pos[3], state.flange_cur_pos[4], state.flange_cur_pos[5]};
+    state.flange_cur_pos[3], state.flange_cur_pos[4], state.flange_cur_pos[5],
+    timing_metrics[0], timing_metrics[1], timing_metrics[2], timing_metrics[3], timing_metrics[4]};
 }
 
 hardware_interface::CallbackReturn FairinoHardwareInterface::on_init(
@@ -188,6 +207,11 @@ hardware_interface::CallbackReturn FairinoHardwareInterface::on_init(
     return hardware_interface::CallbackReturn::ERROR;
   }
 
+  velocity_state_enabled_ = info_.joints.front().state_interfaces.size() == 2U;
+  if (velocity_state_enabled_ && !status_interfaces_enabled_) {
+    RCLCPP_FATAL(kLogger, "Velocity state requires FAIRINO realtime status feedback");
+    return hardware_interface::CallbackReturn::ERROR;
+  }
   for (const hardware_interface::ComponentInfo & joint : info_.joints) {
     if (joint.command_interfaces.size() != 1) {
       RCLCPP_FATAL(
@@ -202,9 +226,9 @@ hardware_interface::CallbackReturn FairinoHardwareInterface::on_init(
         hardware_interface::HW_IF_POSITION);
       return hardware_interface::CallbackReturn::ERROR;
     }
-    if (joint.state_interfaces.size() != 1) {
+    if (joint.state_interfaces.size() != (velocity_state_enabled_ ? 2U : 1U)) {
       RCLCPP_FATAL(
-        kLogger, "Joint '%s' has %zu state interfaces; exactly 1 is required",
+        kLogger, "Joint '%s' has %zu state interfaces; inconsistent velocity state configuration",
         joint.name.c_str(), joint.state_interfaces.size());
       return hardware_interface::CallbackReturn::ERROR;
     }
@@ -212,6 +236,14 @@ hardware_interface::CallbackReturn FairinoHardwareInterface::on_init(
       RCLCPP_FATAL(
         kLogger, "Joint '%s' state interface is '%s'; '%s' is required", joint.name.c_str(),
         joint.state_interfaces[0].name.c_str(), hardware_interface::HW_IF_POSITION);
+      return hardware_interface::CallbackReturn::ERROR;
+    }
+    if (velocity_state_enabled_ &&
+      joint.state_interfaces[1].name != hardware_interface::HW_IF_VELOCITY)
+    {
+      RCLCPP_FATAL(
+        kLogger, "Joint '%s' second state interface must be velocity",
+        joint.name.c_str());
       return hardware_interface::CallbackReturn::ERROR;
     }
   }
@@ -222,11 +254,18 @@ std::vector<hardware_interface::StateInterface>
 FairinoHardwareInterface::export_state_interfaces()
 {
   std::vector<hardware_interface::StateInterface> state_interfaces;
-  state_interfaces.reserve(kJointCount + (status_interfaces_enabled_ ? kStatusInterfaceCount : 0U));
+  state_interfaces.reserve(
+    kJointCount * (velocity_state_enabled_ ? 2U : 1U) +
+    (status_interfaces_enabled_ ? kStatusInterfaceCount : 0U));
   for (std::size_t index = 0; index < kJointCount; ++index) {
     state_interfaces.emplace_back(
       info_.joints[index].name, hardware_interface::HW_IF_POSITION,
       &joint_position_state_[index]);
+    if (velocity_state_enabled_) {
+      state_interfaces.emplace_back(
+        info_.joints[index].name, hardware_interface::HW_IF_VELOCITY,
+        &joint_velocity_state_[index]);
+    }
   }
   if (status_interfaces_enabled_) {
     for (std::size_t index = 0; index < kStatusInterfaceNames.size(); ++index) {
@@ -264,6 +303,7 @@ hardware_interface::CallbackReturn FairinoHardwareInterface::on_activate(
   write_failed_ = false;
   period_reported_ = false;
   position_command_active_ = false;
+  have_last_servo_j_call_start_ = false;
   const errno_t rpc_result = robot_client_->rpc(controller_ip_.c_str());
   if (rpc_result != 0) {
     RCLCPP_ERROR(kLogger, "FAIRINO RPC connection failed, SDK error code: %d", rpc_result);
@@ -299,6 +339,18 @@ hardware_interface::CallbackReturn FairinoHardwareInterface::on_activate(
       return hardware_interface::CallbackReturn::ERROR;
     }
     update_status_state(controller_state);
+    if (velocity_state_enabled_) {
+      for (std::size_t index = 0; index < kJointCount; ++index) {
+        const double velocity = controller_state.actual_qd[index] * M_PI / 180.0;
+        if (!std::isfinite(velocity)) {
+          RCLCPP_ERROR(kLogger, "Non-finite FAIRINO joint velocity at index %zu", index);
+          write_failed_ = true;
+          stop_and_disconnect("invalid joint velocity feedback");
+          return hardware_interface::CallbackReturn::ERROR;
+        }
+        joint_velocity_state_[index] = velocity;
+      }
+    }
   }
 
   RCLCPP_INFO(
@@ -424,6 +476,7 @@ hardware_interface::return_type FairinoHardwareInterface::perform_command_mode_s
 
   if (contains_arm_interface(stop_interfaces)) {
     position_command_active_ = false;
+    have_last_servo_j_call_start_ = false;
     if (servo_mode_active_) {
       const errno_t end_result = robot_client_->servo_move_end();
       servo_mode_active_ = false;
@@ -484,6 +537,7 @@ hardware_interface::return_type FairinoHardwareInterface::perform_command_mode_s
       servo_mode_active_ = true;
     }
     period_reported_ = false;
+    have_last_servo_j_call_start_ = false;
     position_command_active_ = true;
     RCLCPP_INFO(
       kLogger, "Arm trajectory controller acquired all six joints; ServoJ enabled");
@@ -500,8 +554,10 @@ hardware_interface::return_type FairinoHardwareInterface::read(
   }
 
   JointPos state_data{};
+  const auto position_read_started = std::chrono::steady_clock::now();
   const errno_t return_code =
     robot_client_->get_actual_joint_position_degree(1, &state_data);
+  status_state_[kReadPositionCallMsIndex] = milliseconds_since(position_read_started);
   if (return_code != 0) {
     RCLCPP_ERROR(kLogger, "Joint-state read failed, SDK error code: %d", return_code);
     write_failed_ = true;
@@ -513,7 +569,9 @@ hardware_interface::return_type FairinoHardwareInterface::read(
   }
   if (status_interfaces_enabled_) {
     ROBOT_STATE_PKG controller_state{};
+    const auto status_read_started = std::chrono::steady_clock::now();
     const errno_t status_result = robot_client_->get_robot_realtime_state(&controller_state);
+    status_state_[kReadStatusCallMsIndex] = milliseconds_since(status_read_started);
     if (status_result != 0) {
       RCLCPP_ERROR(kLogger, "FAIRINO status read failed, SDK error code: %d", status_result);
       write_failed_ = true;
@@ -521,6 +579,18 @@ hardware_interface::return_type FairinoHardwareInterface::read(
       return hardware_interface::return_type::ERROR;
     }
     update_status_state(controller_state);
+    if (velocity_state_enabled_) {
+      for (std::size_t index = 0; index < kJointCount; ++index) {
+        const double velocity = controller_state.actual_qd[index] * M_PI / 180.0;
+        if (!std::isfinite(velocity)) {
+          RCLCPP_ERROR(kLogger, "Non-finite FAIRINO joint velocity at index %zu", index);
+          write_failed_ = true;
+          stop_and_disconnect("invalid joint velocity feedback");
+          return hardware_interface::return_type::ERROR;
+        }
+        joint_velocity_state_[index] = velocity;
+      }
+    }
   }
   return hardware_interface::return_type::OK;
 }
@@ -559,6 +629,7 @@ hardware_interface::return_type FairinoHardwareInterface::write(
     }
     period_reported_ = true;
   }
+  status_state_[kControlPeriodMsIndex] = period.seconds() * 1000.0;
 
   if (control_mode_ == 0) {
     if (!detail::all_commands_finite(joint_position_command_)) {
@@ -573,8 +644,16 @@ hardware_interface::return_type FairinoHardwareInterface::write(
     for (std::size_t index = 0; index < kJointCount; ++index) {
       command.jPos[index] = joint_position_command_[index] / M_PI * 180.0;
     }
+    const auto servo_call_started = std::chrono::steady_clock::now();
+    if (have_last_servo_j_call_start_) {
+      status_state_[kServoJIntervalMsIndex] = std::chrono::duration<double, std::milli>(
+        servo_call_started - last_servo_j_call_start_).count();
+    }
+    last_servo_j_call_start_ = servo_call_started;
+    have_last_servo_j_call_start_ = true;
     const errno_t return_code = robot_client_->servo_j(
       &command, &external_axes, static_cast<float>(servo_command_period_sec_));
+    status_state_[kServoJCallMsIndex] = milliseconds_since(servo_call_started);
     if (return_code != 0) {
       write_failed_ = true;
       RCLCPP_ERROR(

@@ -10,7 +10,9 @@ from typing import Callable
 
 SCHEMA_VERSION = '1.0'
 COLORS = frozenset({'red', 'yellow', 'blue', 'green'})
-TASKS = frozenset({'pick_hold', 'pick_sort', 'pick_place', 'pick_stack'})
+TASKS = frozenset({
+    'pick_hold', 'pick_sort', 'pick_place', 'pick_stack', 'pick_auto_stack',
+})
 ROUTES = frozenset({
     'action', 'chat', 'vision', 'clarify', 'stop_action', 'stop_playback',
     'release_ack',
@@ -42,6 +44,19 @@ SORT_CUE = re.compile(
     r'分类|对应(?:分类)?(?:区|区域)|'
     r'(?:(?:指定|预设)(?:放置)?|放置)(?:区|区域)')
 STACK_CUE = re.compile(r'上面|上方|顶面|顶部|之上|码垛|堆叠')
+# pick_auto_stack ("stack everything on the table automatically") is only
+# selected by an explicit automatic / one-key marker.  The bare words 码垛
+# and 堆叠 keep their established pick_stack meaning, so they are deliberately
+# not part of this cue on their own.
+AUTO_STACK_CUE = re.compile(
+    r'(?:全自动|一键式?|自动)(?:地)?'
+    r'(?:把|将|帮我|帮忙|给|来)?'
+    r'(?:它们|这些|那些|所有|全部|桌面上的|桌上的)?'
+    r'(?:方块|积木|塔)?'
+    r'(?:都|全部)?'
+    r'(?:码垛|码放|码起来|码好|堆叠|堆起来|摞起来|摞好|叠起来)')
+AUTO_STACK_REPLY = (
+    '准备自动码垛：按红、黄、蓝、绿从上到下的顺序堆叠桌面上现有的方块。')
 ZONE_TOKEN = re.compile(r'^[a-z]+(?:[1-9][0-9]?)?$', re.IGNORECASE)
 ZONE_MENTIONS = (
     re.compile(
@@ -118,6 +133,17 @@ def _normalized_shortcut(text: str) -> str:
     return re.sub(r'[，。！？!?、,.\s]+', '', text).lower()
 
 
+def _has_action_cue(text: str) -> bool:
+    """True when the text carries any cue that can command a grasp action.
+
+    AUTO_STACK_CUE counts as an action cue as well: phrases such as "自动码放"
+    contain none of the established ACTION_CUE verbs, and they must never be
+    fast-routed to chat or rejected as if no action had been requested.
+    """
+    return (ACTION_CUE.search(text) is not None
+            or AUTO_STACK_CUE.search(text) is not None)
+
+
 def direct_shortcut(user_text: str) -> DialogueIntent | None:
     normalized = _normalized_shortcut(user_text)
     normalized = re.sub(
@@ -154,7 +180,7 @@ def safe_local_non_action_route(user_text: str) -> DialogueIntent | None:
             SCHEMA_VERSION, 'vision', None, None, None, None, '正在获取当前相机画面。')
     normalized = _normalized_shortcut(text)
     safety_sensitive = (
-        ACTION_CUE.search(text) is not None
+        _has_action_cue(text)
         or bool(mentioned_colors(text))
         or RELEASE_CONFIRM_CUE.search(text) is not None
         or any(cue in normalized for cue in (
@@ -180,7 +206,7 @@ def safe_local_action_route(user_text: str) -> DialogueIntent | None:
             NEGATION_CUE, QUESTION_CUE, CONDITIONAL_CUE, QUOTE_CUE,
             MULTI_STEP_CUE, FUSED_COLOR_CUE, VISION_CUE)):
         return None
-    if ACTION_CUE.search(text) is None:
+    if not _has_action_cue(text):
         return None
 
     colors = mentioned_colors(text)
@@ -188,11 +214,14 @@ def safe_local_action_route(user_text: str) -> DialogueIntent | None:
     has_sort_cue = SORT_CUE.search(text) is not None
     has_stack_cue = STACK_CUE.search(text) is not None
     task: str
-    color: str
+    color: str | None = None
     zone: str | None = None
     support_color: str | None = None
 
-    if len(colors) == 2 and has_stack_cue and not zones and not has_sort_cue:
+    if not colors and not zones and AUTO_STACK_CUE.search(text):
+        task = 'pick_auto_stack'
+        reply = AUTO_STACK_REPLY
+    elif len(colors) == 2 and has_stack_cue and not zones and not has_sort_cue:
         sequence = mentioned_color_sequence(text)
         if len(sequence) != 2 or PLACEMENT_CUE.search(text) is None:
             return None
@@ -238,7 +267,7 @@ def build_intent_prompt(user_text: str) -> str:
 固定字段必须且只能是：schema_version、route、task、color、zone、support_color、reply。
 schema_version必须是字符串"1.0"。
 route只能是action、chat、vision、clarify、stop_action、stop_playback、release_ack之一。
-task只能是pick_hold、pick_sort、pick_place、pick_stack或null；color和support_color只能是red、yellow、blue、green或null。
+task只能是pick_hold、pick_sort、pick_place、pick_stack、pick_auto_stack或null；color和support_color只能是red、yellow、blue、green或null。
 zone只能是区域名加可选的1起算槽位号（如"D"、"A3"）或null。
 
 规则：
@@ -251,18 +280,23 @@ zone只能是区域名加可选的1起算槽位号（如"D"、"A3"）或null。
 4. 用户明确要求把一种颜色方块放到另一种颜色方块的上面/顶面：route=action,
    task=pick_stack。color是被抓起的上方方块，support_color是留在桌面的下方方块，
    两者必须明确且不同，zone必须为null。
-5. action必须同时有明确任务和必要参数；pick_place必须有唯一zone，pick_stack必须有
-   唯一color和support_color，其他任务的support_color必须为null。不得生成坐标、轨迹、
-   速度或关节参数。
-6. 否定、咨询、能力询问、条件句、多步命令、模糊代词、缺必要颜色或缺任务都不得action；需要补充参数用clarify。
-5. “怎么抓红色方块”“不要抓红色方块”“如果有红色再告诉我”绝不是action。
-6. “你看到了什么/看看桌面”是vision；普通问答是chat。
-7. “停止抓取/取消任务”是stop_action；“停止播报/别说了”是stop_playback。
-8. 非action的task、color、zone和support_color必须为null。reply是给用户看的简短中文，最多120字，不得含JSON、坐标、关节或命令路径。
-9. 红方块、黄方块、蓝方块、绿方块分别是明确的red、yellow、blue、green；明确动作和其中一个颜色时不得clarify。
+5. 用户带“自动/一键/全自动”这类标记，要求把桌面上现有的方块整体码成塔且没有指定
+   任何颜色：route=action, task=pick_auto_stack，color、zone、support_color必须都为null；
+   码垛的颜色顺序与跳过规则由机械臂端决定，不得编造颜色。只要用户提到任何一种颜色，
+   就绝不能是pick_auto_stack；只有“码垛/堆叠”而没有“自动/一键/全自动”标记时，
+   仍按pick_stack规则处理。
+6. action必须同时有明确任务和必要参数；pick_place必须有唯一zone，pick_stack必须有
+   唯一color和support_color，pick_auto_stack必须color、zone、support_color都为null，
+   其他任务的support_color必须为null。不得生成坐标、轨迹、速度或关节参数。
+7. 否定、咨询、能力询问、条件句、多步命令、模糊代词、缺必要颜色或缺任务都不得action；需要补充参数用clarify。
+8. “怎么抓红色方块”“不要抓红色方块”“如果有红色再告诉我”绝不是action。
+9. “你看到了什么/看看桌面”是vision；普通问答是chat。
+10. “停止抓取/取消任务”是stop_action；“停止播报/别说了”是stop_playback。
+11. 非action的task、color、zone和support_color必须为null。reply是给用户看的简短中文，最多120字，不得含JSON、坐标、关节或命令路径。
+12. 红方块、黄方块、蓝方块、绿方块分别是明确的red、yellow、blue、green；明确动作和其中一个颜色时不得clarify。
    “分类红色方块/分类黄色方块/分类蓝色方块/分类绿色方块”依次是pick_sort加red/yellow/blue/green，不缺任何参数。
-10. 引用、复述或翻译一句动作命令只是在谈论文字，route=chat，绝不能action。
-11. 用户明确确认上一物体已经取下、拿走、释放或放下时，route=release_ack；这只是状态同步，不是抓取动作。含糊的“好了”不得release_ack。
+13. 引用、复述或翻译一句动作命令只是在谈论文字，route=chat，绝不能action。
+14. 用户明确确认上一物体已经取下、拿走、释放或放下时，route=release_ack；这只是状态同步，不是抓取动作。含糊的“好了”不得release_ack。
 
 正确示例：
 用户：帮我拿一下红色的小方块
@@ -275,6 +309,8 @@ zone只能是区域名加可选的1起算槽位号（如"D"、"A3"）或null。
 输出：{{"schema_version":"1.0","route":"action","task":"pick_place","color":"red","zone":"A3","support_color":null,"reply":"准备将红色方块放到A区第3个槽位。"}}
 用户：把红色方块放到蓝色方块上面
 输出：{{"schema_version":"1.0","route":"action","task":"pick_stack","color":"red","zone":null,"support_color":"blue","reply":"准备将红色方块码放到蓝色方块上。"}}
+用户：自动码垛
+输出：{{"schema_version":"1.0","route":"action","task":"pick_auto_stack","color":null,"zone":null,"support_color":null,"reply":"{AUTO_STACK_REPLY}"}}
 用户：分类绿色方块
 输出：{{"schema_version":"1.0","route":"action","task":"pick_sort","color":"green","zone":null,"support_color":null,"reply":"准备将绿色方块放入对应分类区。"}}
 用户：抓取红色方块并放到对应区
@@ -342,23 +378,33 @@ def parse_dialogue_intent(raw_text: str,
     if FORBIDDEN_REPLY.search(reply):
         raise IntentProtocolError('forbidden_reply', reply)
     if route == 'action':
-        if task not in TASKS or color not in COLORS:
-            raise IntentProtocolError(
-                'action_missing_parameters', f'task={task!r}, color={color!r}')
-        if task == 'pick_place' and zone is None:
-            raise IntentProtocolError('action_missing_zone', 'pick_place requires zone')
-        if task != 'pick_place' and zone is not None:
-            raise IntentProtocolError(
-                'zone_not_allowed', f'task={task!r}, zone={zone!r}')
-        if task == 'pick_stack':
-            if support_color not in COLORS or support_color == color:
+        if task == 'pick_auto_stack':
+            # The colour sequence is decided by the robot side, so the goal must
+            # stay completely empty; any parameter here is a routing error.
+            if (color is not None or zone is not None
+                    or support_color is not None):
                 raise IntentProtocolError(
-                    'action_missing_support_color',
-                    f'color={color!r}, support_color={support_color!r}')
-        elif support_color is not None:
-            raise IntentProtocolError(
-                'support_color_not_allowed',
-                f'task={task!r}, support_color={support_color!r}')
+                    'auto_stack_parameters_not_allowed',
+                    f'color={color!r}, zone={zone!r}, '
+                    f'support_color={support_color!r}')
+        else:
+            if task not in TASKS or color not in COLORS:
+                raise IntentProtocolError(
+                    'action_missing_parameters', f'task={task!r}, color={color!r}')
+            if task == 'pick_place' and zone is None:
+                raise IntentProtocolError('action_missing_zone', 'pick_place requires zone')
+            if task != 'pick_place' and zone is not None:
+                raise IntentProtocolError(
+                    'zone_not_allowed', f'task={task!r}, zone={zone!r}')
+            if task == 'pick_stack':
+                if support_color not in COLORS or support_color == color:
+                    raise IntentProtocolError(
+                        'action_missing_support_color',
+                        f'color={color!r}, support_color={support_color!r}')
+            elif support_color is not None:
+                raise IntentProtocolError(
+                    'support_color_not_allowed',
+                    f'task={task!r}, support_color={support_color!r}')
     elif (task is not None or color is not None or zone is not None
           or support_color is not None):
         raise IntentProtocolError(
@@ -412,12 +458,23 @@ def validate_action_semantics(user_text: str,
         raise IntentProtocolError('quoted_text_not_action', text)
     if MULTI_STEP_CUE.search(text):
         raise IntentProtocolError('multi_step_not_supported', text)
-    if not ACTION_CUE.search(text):
+    if not _has_action_cue(text):
         raise IntentProtocolError('missing_action_cue', text)
     colors = mentioned_colors(text)
     if FUSED_COLOR_CUE.search(text):
         raise IntentProtocolError('color_not_unique', repr(sorted(colors)))
-    if intent.task == 'pick_stack':
+    # Any automatic-stacking wording without a colour must be routed to
+    # pick_auto_stack, never to a colour-targeted task.
+    if (intent.task != 'pick_auto_stack' and not colors
+            and AUTO_STACK_CUE.search(text)):
+        raise IntentProtocolError('auto_stack_task_required', text)
+    if intent.task == 'pick_auto_stack':
+        if colors:
+            raise IntentProtocolError(
+                'auto_stack_with_colors', repr(sorted(colors)))
+        if AUTO_STACK_CUE.search(text) is None:
+            raise IntentProtocolError('auto_stack_without_cue', text)
+    elif intent.task == 'pick_stack':
         sequence = mentioned_color_sequence(text)
         if len(colors) != 2 or len(sequence) != 2:
             raise IntentProtocolError('stack_colors_not_unique', repr(sequence))
@@ -472,11 +529,14 @@ def validate_route_semantics(user_text: str,
         MULTI_STEP_CUE,
     ))
     colors = mentioned_colors(user_text)
+    auto_stack_command = (
+        not colors and AUTO_STACK_CUE.search(user_text) is not None)
     explicit_action = (
         not blocked
-        and ACTION_CUE.search(user_text) is not None
+        and _has_action_cue(user_text)
         and (len(colors) == 1 or
-             (len(colors) == 2 and STACK_CUE.search(user_text) is not None))
+             (len(colors) == 2 and STACK_CUE.search(user_text) is not None) or
+             auto_stack_command)
         and FUSED_COLOR_CUE.search(user_text) is None
     )
     if explicit_action and intent.route != 'action':

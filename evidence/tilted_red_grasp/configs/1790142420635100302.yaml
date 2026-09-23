@@ -1,0 +1,90 @@
+fr3c_first_grasp:
+  ros__parameters:
+    arm_group: fairino3mt_v6_group
+    base_frame: base_link
+    tip_frame: grasp_frame
+    gripper_joint: gripper_command_joint
+    gripper_action: /ydi_j22_gripper_controller/gripper_cmd
+    target_pose_topic: /perception/blue_cube_localizer/top_pose
+    target_valid_topic: /perception/blue_cube_localizer/valid
+    target_status_topic: /perception/blue_cube_localizer/status
+    target_size_topic: /perception/blue_cube_localizer/object_size
+    perception_reset_service: /perception/blue_cube_localizer/reset
+    perception_skip_service: /perception/blue_cube_localizer/skip_current_sort_target
+    perception_color_service: /perception/blue_cube_localizer/set_target_color
+    batch_empty_timeout_s: 10.0
+    batch_target_match_distance_m: 0.025
+    approach_clearance_m: 0.05
+    grasp_depth_m: 0.015
+    lift_distance_m: 0.05
+    release_bottom_gap_m: 0.005
+    zone_slot_clearance_m: 0.025
+    pre_open_position_m: 0.06
+    close_position_m: 0.026
+    pre_open_command_repetitions: 1
+    release_command_repetitions: 2
+    object_size_m:
+    - 0.03
+    - 0.03
+    - 0.03
+    use_target_size: true
+    square_aspect_ratio_max: 1.1
+    grasp_orientation_xyzw:
+    - 0.0
+    - 0.984807753012208
+    - -0.17364817766693033
+    - 0.0
+    use_target_yaw: true
+    target_yaw_offset_rad: -1.5707963267948966
+    target_yaw_symmetry_rad: 3.141592653589793
+    maximum_target_tilt_rad: 0.087266463
+    target_x_bounds_m:
+    - -1.0
+    - 1.0
+    target_y_bounds_m:
+    - -1.0
+    - -0.1
+    target_top_z_bounds_m:
+    - 0.025
+    - 0.04
+    cube_id: target_cube
+    stack_support_id: stack_support_cube
+    maximum_stack_placement_rotation_rad: 0.7853981633974483
+    stack_approach_clearance_m: 0.03
+    stack_height_tolerance_m: 0.012
+    stack_footprint_tolerance_m: 0.02
+    maximum_stack_cubes: 4
+    ground_plane_id: rviz_ground_plane
+    ground_plane_z_m: 0.0
+    ground_plane_xy_size_m:
+    - 2.0
+    - 2.0
+    ground_plane_thickness_m: 0.02
+    ground_plane_contact_epsilon_m: 1.0e-05
+    maximum_cube_plane_gap_m: 0.01
+    touch_links:
+    - gripper_finger_px_py_link
+    - gripper_finger_px_ny_link
+    - gripper_finger_nx_py_link
+    - gripper_finger_nx_ny_link
+    velocity_scale: 0.03
+    acceleration_scale: 0.03
+    planning_time_s: 10.0
+    planning_attempts: 5
+    cartesian_step_m: 0.001
+    cartesian_jump_threshold: 0.0
+    maximum_cartesian_joint_step_rad: 0.1
+    validated_segment_start_tolerance_rad: 0.01
+    minimum_cartesian_fraction: 0.999999
+    target_message_timeout_s: 1.0
+    target_acquisition_timeout_s: 4.0
+    arrival_position_tolerance_m: 0.003
+    arrival_orientation_tolerance_rad: 0.034906585
+    action_timeout_s: 12.0
+    state_timeout_s: 3.0
+    gripper_state_tolerance_m: 0.003
+    log_directory: /home/industio/fairino_ws/evidence/tilted_red_grasp/runs
+    p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+    p6_gate_max_age_s: 3600.0
+    sort_enabled: false
+    stack_enabled: false

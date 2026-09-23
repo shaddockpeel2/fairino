@@ -219,7 +219,7 @@ def test_stack_placement_height_puts_the_upper_cube_on_the_lower_top(tmp_path):
     # The production placement height and the attached-cube offset, plus the
     # rotation helper, are all plain math.
     assert 'pose.position.z = destination_top_z + release_bottom_gap_m_' in source
-    assert 'locked_object_size_m_[2] - grasp_depth_m_' in source
+    assert 'locked_object_size_m_[2] - activeGraspDepth()' in source
     harness = r'''
 #include <cstdio>
 int failures = 0;
@@ -319,8 +319,8 @@ def test_pick_stack_requires_an_explicit_support_colour():
     assert 'use /fr3c_first_grasp/pick_stack to stack one cube on another' in source
 
 
-def test_pick_stack_locks_both_tabletop_cubes_from_one_initial_snapshot():
-    """Both separate tabletop cubes come from one immutable RGB-D status."""
+def test_pick_stack_freezes_the_pair_and_the_support_tier_from_one_snapshot():
+    """The pair, including the tier the support already sits at, is one status."""
     source = _grasp_source()
     assert 'bool lockStackDestinationFromSourceSnapshot(' in source
     acquisition = source[
@@ -339,17 +339,93 @@ def test_pick_stack_locks_both_tabletop_cubes_from_one_initial_snapshot():
         source.index('bool validateStackPair(std::string & reason)'):
         source.index('// A slot is unusable', source.index(
             'bool validateStackPair(std::string & reason)'))]
+    # The cube that is picked up still has to come off the tabletop.
     assert 'source->stack_tier != 0' in body
     assert 'source_bottom - destination_bottom' in body
     assert 'std::abs(tabletop_difference) > stack_height_tolerance_m_' in body
     assert 'xy_separation <= stack_footprint_tolerance_m_' in body
+    # The support may be the top of a shorter tower, so the shared-tabletop
+    # comparison only applies while that support is still a tier-0 cube, and the
+    # tier itself has to survive the re-read of the frozen snapshot.
+    assert 'destination.stack_tier == 0 ? source_bottom - destination_bottom : 0.0' in body
+    assert 'support->stack_tier != destination.stack_tier' in body
+    assert 'stackSupportTierAcceptable(*support, reason)' in body
+
     # A support cube that already carries a cube is refused before planning.
     assert 'bool lockStackDestinationSnapshot(' in source
     lock_body = source[
         source.index('bool lockStackDestinationSnapshot('):
         source.index('bool lockStackDestinationFromSourceSnapshot(')]
-    assert 'cube.stack_tier != 0' in lock_body
-    assert 'pick_stack builds only a two-cube stack' in lock_body
+    assert 'if (!stackSupportTierAcceptable(cube, reason)) {' in lock_body
+    assert 'destination.stack_tier = cube.stack_tier;' in lock_body
+    assert 'other.center.z >= cube.top_z + 0.5 * cube.object_size_m[2]' in lock_body
+    assert 'pick_stack adds to a tower only from its top face' in lock_body
+
+
+def test_pick_stack_tops_up_an_existing_tower_until_maximum_stack_cubes():
+    """
+    One request adds one cube, so four cubes take three requests.
+
+    The support of a new pair may therefore already be the top of a shorter
+    tower. Two things have to stay impossible: a request that pushes the tower
+    past the configured limit, and a support whose reported tier disagrees with
+    the height it is actually measured at.
+    """
+    source = _grasp_source()
+    assert 'kMaximumStackCubesDefault = 4' in source
+    assert 'maximum_stack_cubes_ = node_->declare_parameter<int>(' in source
+    assert '"maximum_stack_cubes", kMaximumStackCubesDefault)' in source
+    assert 'maximum_stack_tier_ = maximum_stack_cubes_ - 1;' in source
+    assert 'cube.stack_tier > maximum_stack_tier_' in source
+    assert 'maximum_stack_cubes_ < 2 || maximum_stack_cubes_ > kMaximumStackCubesLimit' in source
+
+    tier = source[
+        source.index('bool stackSupportTierAcceptable('):
+        source.index('bool lockStackDestinationSnapshot(')]
+    # Topping up is allowed, exceeding the limit is not.
+    assert 'cube.stack_tier + 1 >= maximum_stack_cubes_' in tier
+    assert 'maximum_stack_cubes is ' in tier
+    # Tier 0 keeps the original tabletop check ...
+    assert 'plane_gap < -maximum_cube_plane_gap_m_' in tier
+    assert 'plane_gap > maximum_cube_plane_gap_m_' in tier
+    # ... while a stacked support is checked against the height its tier implies,
+    # because the accumulated cube-height error of a taller tower makes one
+    # absolute millimetre window meaningless.
+    assert 'plane_gap / cube.stack_tier' in tier
+    assert 'implied_cube_height < cube.object_size_m[2] - stack_height_tolerance_m_' in tier
+    assert 'implied_cube_height > cube.object_size_m[2] + stack_height_tolerance_m_' in tier
+
+
+def test_a_stacked_support_brings_the_invisible_tower_into_the_scene():
+    """
+    Only the top face of a tower is visible to the camera.
+
+    Once the support cube is itself stacked, the cubes underneath it are real
+    obstacles that perception cannot report, so the planner has to be given the
+    column between the table plane and the support cube's bottom. A tier-0
+    support has no such column and keeps the two-cube scene unchanged.
+    """
+    source = _grasp_source()
+    assert 'moveit_msgs::msg::CollisionObject stackColumnObject() const' in source
+    assert 'bool stackColumnPresent() const' in source
+    assert 'locked_stack_destination_.stack_tier > 0' in source
+
+    column = source[
+        source.index('moveit_msgs::msg::CollisionObject stackColumnObject() const'):
+        source.index('bool stackColumnPresent() const')]
+    # The column ends where the support cube starts.
+    assert 'locked_stack_destination_.top_pose.position.z -\n' in column
+    assert 'locked_stack_destination_.object_size_m[2] - ground_plane_z_m_' in column
+    assert 'ground_plane_z_m_ + column_height * 0.5' in column
+
+    # It must be part of the scene before the approach is planned, and cleared
+    # together with the support cube afterwards.
+    assert 'objects.push_back(stackColumnObject());' in source
+    assert 'planning_scene_.applyCollisionObject(stackColumnObject())' in source
+    cleanup = source[
+        source.index('bool clearStackSupportObject(std::string & reason)'):
+        source.index('std::vector<GraspCandidate> graspCandidates() const')]
+    assert '{stack_support_id_, stackColumnId()}' in cleanup
 
 
 def test_pick_stack_never_reobserves_after_motion_starts():
@@ -411,7 +487,7 @@ def test_next_task_can_reclaim_the_upper_cube_from_a_finished_stack():
 
     reclaim = source[
         source.index('bool clearArchivedObstacleAtTarget(std::string & reason)'):
-        source.index('// Remove the virtual lower-cube obstacle of pick_stack')]
+        source.index('// Remove the virtual stack obstacles from the planning scene')]
     assert 'const std::string prefix = cube_id_ + "_sorted_"' in reclaim
     assert 'collisionPrimitivePosition(entry.second, pose)' in reclaim
     assert 'positionDistance(archived, target)' in reclaim
@@ -456,10 +532,119 @@ def test_stack_placement_uses_the_measured_lower_cube_top():
         source.index('geometry_msgs::msg::Pose stackPlacePose() const'):
         source.index('geometry_msgs::msg::Pose stackPlaceApproachPose() const')]
     assert 'destination_top_z + release_bottom_gap_m_' in body
-    assert 'locked_object_size_m_[2] - grasp_depth_m_' in body
+    assert 'locked_object_size_m_[2] - activeGraspDepth()' in body
     # X/Y come from the lower cube, never from the A4 colour region.
     assert 'locked_stack_destination_.top_pose.position.x' in body
     assert 'locked_place_center_' not in body
+
+
+def test_all_grasp_actions_share_tilt_search_and_ten_mm_contact_depth():
+    """Every grasp entry point must use the promoted reachability strategy."""
+    yaml = pytest.importorskip('yaml')
+    source = _grasp_source()
+    config = next(iter(yaml.safe_load(
+        (Path(__file__).parents[1] / 'config' / 'first_grasp.yaml')
+        .read_text(encoding='utf-8')).values()))['ros__parameters']
+
+    assert config['grasp_depth_m'] == pytest.approx(0.010)
+    assert config['candidate_planning_time_s'] == pytest.approx(0.25)
+    assert config['candidate_planning_attempts'] == 1
+    assert config['candidate_ik_timeout_s'] == pytest.approx(0.05)
+    tilts = config['grasp_tilt_candidates_rad']
+    assert tilts == pytest.approx([
+        0.0, 0.17453292519943295, -0.17453292519943295,
+        0.3490658503988659, -0.3490658503988659,
+        0.5235987755982988, -0.5235987755982988,
+    ])
+    assert max(abs(value) for value in tilts) == pytest.approx(3.141592653589793 / 6)
+
+    assert 'task_manual_tilted_stack_' not in source
+    assert 'manual_stack_' not in source
+    candidates = source[
+        source.index('std::vector<GraspCandidate> graspCandidates() const'):
+        source.index('geometry_msgs::msg::Pose approachPose() const')]
+    assert 'grasp_tilt_candidates_rad_' in candidates
+    assert 'rollQuaternion(tilt)' in candidates
+    assert candidates.index(
+        'for (const double tilt : grasp_tilt_candidates_rad_)') < candidates.index(
+        'for (int equivalent = 0; equivalent < symmetry_count; ++equivalent)')
+    depth = source[
+        source.index('double activeGraspDepth() const'):
+        source.index('geometry_msgs::msg::Pose approachPose() const')]
+    assert 'return grasp_depth_m_;' in depth
+
+
+def test_all_actions_use_ordered_first_feasible_tilt_fallback():
+    """A valid vertical route must execute without planning all alternatives."""
+    source = _grasp_source()
+    preview = source[
+        source.index('std::vector<PlannedMotion> previewAll()'):
+        source.index('void publishPreview(')]
+
+    fallback = preview[
+        preview.index('recordEvent(\n          "grasp_first_feasible"'):
+        preview.index('} catch (const std::exception & error)', preview.index('"grasp_first_feasible"'))]
+    assert preview.index('best_motions = std::move(motions);') < preview.index(
+        '"grasp_first_feasible"')
+    assert 'break;' in fallback
+
+
+def test_all_actions_reject_candidates_with_seeded_ik_and_short_planning_budget():
+    """An unreachable tilt must not consume the normal ten-second OMPL budget."""
+    source = _grasp_source()
+    seeded = source[
+        source.index('PlannedMotion planPoseFromSeededIk('):
+        source.index('PlannedMotion planHome(')]
+    planner = source[
+        source.index('bool isCandidatePlan('):
+        source.index('PlannedMotion planPoseFromSeededIk(')]
+    preview = source[
+        source.index('std::vector<PlannedMotion> previewAll()'):
+        source.index('void publishPreview(')]
+
+    assert 'target_state->setFromIK(' in seeded
+    assert 'candidate_ik_timeout_s_' in seeded
+    assert 'has no seeded IK solution' in seeded
+    assert 'candidate_planning_time_s_' in planner
+    assert 'candidate_planning_attempts_' in planner
+    assert 'name.rfind("candidate_", 0) == 0' in planner
+    assert preview.count('planPoseFromSeededIk(') == 2
+    assert 'task_direct_approach_' in preview
+
+
+def test_execution_plans_keep_the_normal_production_budget():
+    """The 250 ms limit is only for candidate filtering, never robot execution."""
+    source = _grasp_source()
+    planner = source[
+        source.index('bool isCandidatePlan('):
+        source.index('PlannedMotion planPoseFromSeededIk(')]
+    cycle = source[
+        source.index('bool runCycleBody()'):
+        source.index('void run()', source.index('bool runCycleBody()'))]
+
+    assert 'name.rfind("candidate_", 0) == 0' in planner
+    assert 'descend_execute' in cycle
+    assert 'lift_execute' in cycle
+    assert 'place_approach_execute' in cycle
+    assert 'candidate_' not in '\n'.join(
+        line for line in cycle.splitlines() if '_execute"' in line)
+
+
+def test_tilted_stack_release_preserves_the_cube_to_tool_orientation():
+    source = _grasp_source()
+    orientation = source[
+        source.index('geometry_msgs::msg::Quaternion stackedCubeOrientation() const'):
+        source.index('moveit_msgs::msg::CollisionObject stackedCubeObject() const')]
+    assert 'conjugate(locked_grasp_orientation_)' in orientation
+    assert 'source_cube_orientation' in orientation
+    assert 'placement_tool_orientation' in orientation
+    assert 'multiply(placement_tool_orientation, cube_in_tool)' in orientation
+
+    settled = source[
+        source.index('moveit_msgs::msg::CollisionObject stackedCubeObject() const'):
+        source.index('moveit_msgs::msg::CollisionObject stackSupportObject() const')]
+    assert 'pose.orientation = stackedCubeOrientation();' in settled
+    assert 'pose.orientation = stackPlacementOrientation(' not in settled
 
 
 def test_pick_stack_requires_orientation_and_size_feedback():
@@ -514,6 +699,47 @@ def test_shipped_config_passes_the_startup_rotation_guard():
         'the guard must reject a limit below half the smallest step')
 
 
+def test_shipped_configs_offer_one_perception_tier_per_stacked_cube():
+    """
+    The two shipped configurations have to agree on how tall a tower may get.
+
+    pick_stack refuses to add a cube on top of a support that is already at tier
+    maximum_stack_cubes - 1, and the localizer can only report tiers it has an
+    offset for. Fewer perception offsets than stacked tiers would leave the top
+    of a tall tower unrecognised, so the next request would fail at target
+    acquisition instead of stacking; more offsets would let the planner see a
+    tower it has to refuse anyway.
+    """
+    yaml = pytest.importorskip('yaml')
+    grasp = next(iter(yaml.safe_load(
+        (Path(__file__).parents[1] / 'config' / 'first_grasp.yaml')
+        .read_text(encoding='utf-8')).values()))['ros__parameters']
+    camera = next(iter(yaml.safe_load(
+        (Path(__file__).parents[2] / 'fr3c_camera' / 'config'
+         / 'blue_cube_localizer.yaml').read_text(encoding='utf-8')).values()))[
+             'ros__parameters']
+
+    maximum_cubes = int(grasp['maximum_stack_cubes'])
+    cube_height = float(camera['cube_size_m'][2])
+    offsets = [float(offset) for offset in camera['stacking_cube_height_offsets_m']]
+
+    assert maximum_cubes >= 2, 'a tower of one cube has nothing to stack'
+    assert len(offsets) == maximum_cubes - 1
+    assert offsets == pytest.approx(
+        [cube_height * (index + 1) for index in range(len(offsets))]), (
+        'the tier offsets must be whole cube heights of the configured cube')
+    # Adjacent tiers must never both match one measured top.
+    assert 2 * float(camera['stacking_tier_tolerance_m']) < cube_height
+
+    # The node has to declare the same tier list it documents, so a standalone
+    # run without the launch file cannot silently keep the older ceiling.
+    localizer = (
+        Path(__file__).parents[2] / 'fr3c_camera' / 'fr3c_camera'
+        / 'blue_cube_localizer.py').read_text(encoding='utf-8')
+    declared = ', '.join(f'{offset:.3f}' for offset in offsets)
+    assert f"'stacking_cube_height_offsets_m': [{declared}]," in localizer
+
+
 def test_clearing_an_absent_cube_is_a_no_op_not_a_failure():
     """
     An empty planning scene must not block the first task.
@@ -538,15 +764,20 @@ def test_clearing_an_absent_cube_is_a_no_op_not_a_failure():
         'remove.operation = moveit_msgs::msg::CollisionObject::REMOVE'), (
         'the existence check must run before the REMOVE request')
 
-    # The same hazard must not be reintroduced in the other cleanup paths.
+    # The same hazard must not be reintroduced in the other cleanup paths. The
+    # stack cleanup covers the support cube and the virtual column below it, so
+    # the guard is written against the id of the loop.
     support = source[
         source.index('bool clearStackSupportObject(std::string & reason)'):
         source.index('std::vector<GraspCandidate> graspCandidates() const')]
-    assert 'planning_scene_.getObjects({stack_support_id_}).count(stack_support_id_) == 0' \
-        in support, 'the support-cube cleanup lost its existence guard'
+    guard = 'planning_scene_.getObjects({id}).count(id) == 0'
+    assert guard in support, 'the stack-obstacle cleanup lost its existence guard'
+    assert support.index(guard) < support.index(
+        'remove.operation = moveit_msgs::msg::CollisionObject::REMOVE'), (
+        'the existence check must run before the REMOVE request')
 
     archive = source[
         source.index('bool archivePreviousSortedCubeScene(std::string & reason)'):
-        source.index('// Remove the virtual lower-cube obstacle of pick_stack')]
+        source.index('// Remove the virtual stack obstacles from the planning scene')]
     assert 'if (previous.count(cube_id_) != 0) {' in archive, (
         'the archived-cube removal must stay conditional on the cube existing')

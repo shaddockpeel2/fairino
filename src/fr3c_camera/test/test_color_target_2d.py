@@ -91,6 +91,33 @@ def test_missing_frame_breaks_consecutive_validity():
     assert continuity.sample_count == 1
 
 
+def test_one_transient_bad_frame_recovers_a_nearby_locked_target():
+    continuity = TargetContinuity(required_samples=2, maximum_jump_px=20.0)
+    continuity.update(1.0, (100.0, 80.0))
+    assert continuity.update(1.1, (101.0, 80.0))[0]
+    continuity.reject(transient=True)
+    assert continuity.update(1.2, (103.0, 81.0)) == \
+        (True, 'stable_target')
+
+    continuity.reject(transient=True)
+    continuity.reject(transient=True)
+    assert continuity.update(1.3, (104.0, 81.0)) == \
+        (False, 'collecting_stable_samples')
+
+
+def test_transient_recovery_rejects_old_or_distant_candidate():
+    continuity = TargetContinuity(required_samples=2, maximum_jump_px=20.0)
+    continuity.update(1.0, (100.0, 80.0))
+    continuity.update(1.1, (101.0, 80.0))
+    continuity.reject(transient=True)
+    assert continuity.update(1.2, (150.0, 80.0)) == (False, 'center_jump')
+    assert continuity.sample_count == 1
+    continuity.update(1.3, (151.0, 80.0))
+    continuity.reject(transient=True)
+    assert continuity.update(1.6, (152.0, 80.0)) == \
+        (False, 'collecting_stable_samples')
+
+
 def test_center_jump_restarts_window_with_current_observation():
     continuity = TargetContinuity(required_samples=3, maximum_jump_px=20.0)
     continuity.update(1.0, (100.0, 80.0))

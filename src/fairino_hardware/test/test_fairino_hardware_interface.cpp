@@ -110,7 +110,8 @@ private:
   std::shared_ptr<FakeRobotState> state_;
 };
 
-hardware_interface::HardwareInfo make_hardware_info(bool include_status = false)
+hardware_interface::HardwareInfo make_hardware_info(
+  bool include_status = false, bool include_velocity = false)
 {
   hardware_interface::HardwareInfo info;
   info.name = "FairinoTestSystem";
@@ -129,6 +130,11 @@ hardware_interface::HardwareInfo make_hardware_info(bool include_status = false)
     hardware_interface::InterfaceInfo state_interface;
     state_interface.name = hardware_interface::HW_IF_POSITION;
     joint.state_interfaces.push_back(state_interface);
+    if (include_velocity) {
+      hardware_interface::InterfaceInfo velocity_interface;
+      velocity_interface.name = hardware_interface::HW_IF_VELOCITY;
+      joint.state_interfaces.push_back(velocity_interface);
+    }
     info.joints.push_back(std::move(joint));
   }
   if (include_status) {
@@ -142,7 +148,9 @@ hardware_interface::HardwareInfo make_hardware_info(bool include_status = false)
       "payload_cog_y_mm", "payload_cog_z_mm", "tool_x_mm", "tool_y_mm", "tool_z_mm",
       "tool_rx_deg", "tool_ry_deg", "tool_rz_deg", "wobj_x_mm", "wobj_y_mm", "wobj_z_mm",
       "wobj_rx_deg", "wobj_ry_deg", "wobj_rz_deg", "flange_x_mm", "flange_y_mm",
-      "flange_z_mm", "flange_rx_deg", "flange_ry_deg", "flange_rz_deg"};
+      "flange_z_mm", "flange_rx_deg", "flange_ry_deg", "flange_rz_deg",
+      "read_position_call_ms", "read_status_call_ms", "servo_j_call_ms",
+      "servo_j_interval_ms", "control_period_ms"};
     for (const auto & name : names) {
       hardware_interface::InterfaceInfo state_interface;
       state_interface.name = name;
@@ -201,10 +209,64 @@ TEST(FairinoHardwareInterface, ExportsRealtimeControllerStatusWithoutAnotherSdkC
   EXPECT_DOUBLE_EQ(interfaces[kJointCount + 13].get_value(), 0.625);
   EXPECT_DOUBLE_EQ(interfaces[kJointCount + 14].get_value(), 1.5);
   EXPECT_DOUBLE_EQ(interfaces[kJointCount + 29].get_value(), -32.5);
+  EXPECT_EQ(
+    hardware.perform_command_mode_switch(arm_position_interfaces(), {}),
+    hardware_interface::return_type::OK);
+  EXPECT_EQ(
+    hardware.write(rclcpp::Time(0), rclcpp::Duration::from_seconds(0.008)),
+    hardware_interface::return_type::OK);
+  const auto timing_interfaces = hardware.export_state_interfaces();
+  EXPECT_NEAR(timing_interfaces[kJointCount + 39].get_value(), 8.0, 1e-9);
+  EXPECT_GE(timing_interfaces[kJointCount + 37].get_value(), 0.0);
 
   EXPECT_EQ(
     hardware.on_deactivate(rclcpp_lifecycle::State()),
     hardware_interface::CallbackReturn::SUCCESS);
+}
+
+TEST(FairinoHardwareInterface, ExportsSdkVelocityStateInRadiansPerSecond)
+{
+  auto fake_state = std::make_shared<FakeRobotState>();
+  fake_state->controller_status.actual_qd[0] = 90.0;
+  fake_state->controller_status.actual_qd[5] = -45.0;
+  FairinoHardwareInterface hardware(std::make_unique<FakeRobotClient>(fake_state));
+  ASSERT_EQ(
+    hardware.on_init(make_hardware_info(true, true)),
+    hardware_interface::CallbackReturn::SUCCESS);
+  ASSERT_EQ(
+    hardware.on_activate(rclcpp_lifecycle::State()),
+    hardware_interface::CallbackReturn::SUCCESS);
+  ASSERT_EQ(
+    hardware.read(rclcpp::Time(0), rclcpp::Duration::from_seconds(0.008)),
+    hardware_interface::return_type::OK);
+  const auto interfaces = hardware.export_state_interfaces();
+  ASSERT_EQ(interfaces.size(), 2U * kJointCount + kStatusInterfaceCount);
+  EXPECT_EQ(interfaces[1].get_interface_name(), hardware_interface::HW_IF_VELOCITY);
+  EXPECT_DOUBLE_EQ(interfaces[1].get_value(), M_PI / 2.0);
+  EXPECT_DOUBLE_EQ(interfaces[11].get_value(), -M_PI / 4.0);
+  EXPECT_EQ(
+    hardware.on_deactivate(rclcpp_lifecycle::State()),
+    hardware_interface::CallbackReturn::SUCCESS);
+}
+
+TEST(FairinoHardwareInterface, RejectsNonFiniteVelocityFeedback)
+{
+  auto fake_state = std::make_shared<FakeRobotState>();
+  FairinoHardwareInterface hardware(std::make_unique<FakeRobotClient>(fake_state));
+  ASSERT_EQ(
+    hardware.on_init(make_hardware_info(true, true)),
+    hardware_interface::CallbackReturn::SUCCESS);
+  ASSERT_EQ(
+    hardware.on_activate(rclcpp_lifecycle::State()),
+    hardware_interface::CallbackReturn::SUCCESS);
+  fake_state->controller_status.actual_qd[5] =
+    std::numeric_limits<double>::quiet_NaN();
+  EXPECT_EQ(
+    hardware.read(rclcpp::Time(0), rclcpp::Duration::from_seconds(0.008)),
+    hardware_interface::return_type::ERROR);
+  EXPECT_NE(
+    std::find(fake_state->calls.begin(), fake_state->calls.end(), "close"),
+    fake_state->calls.end());
 }
 
 TEST(FairinoHardwareInterface, MonitorsUntilControllerClaimsThenRunsServoLifecycle)

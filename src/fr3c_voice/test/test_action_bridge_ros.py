@@ -15,6 +15,7 @@ MultiThreadedExecutor = pytest.importorskip(
     'rclpy.executors').MultiThreadedExecutor
 Node = pytest.importorskip('rclpy.node').Node
 PickColor = pytest.importorskip('fairino_msgs.action').PickColor
+MoveToPose = pytest.importorskip('fairino_msgs.action').MoveToPose
 GripperCommand = pytest.importorskip('control_msgs.action').GripperCommand
 Trigger = pytest.importorskip('std_srvs.srv').Trigger
 Image = pytest.importorskip('sensor_msgs.msg').Image
@@ -334,4 +335,198 @@ def test_bridge_sends_source_and_support_to_pick_stack_server():
         action_server.destroy()
         bridge.destroy_node()
         server_node.destroy_node()
+        rclpy.shutdown()
+
+
+def test_bridge_sends_empty_goal_to_pick_stack_auto_server():
+    os.environ.setdefault('ROS_DOMAIN_ID', '231')
+    rclpy.init()
+    server_node = Node('pick_auto_stack_mock_server')
+    requests = []
+
+    def execute(goal_handle):
+        requests.append((
+            goal_handle.request.color, goal_handle.request.zone,
+            goal_handle.request.support_color))
+        # Give the client time to attach its feedback subscription before the
+        # first feedback is published.
+        time.sleep(0.3)
+        feedback = PickColor.Feedback()
+        feedback.phase = 'stacking'
+        feedback.detail = '正在按红、黄、蓝、绿顺序自动码垛。'
+        goal_handle.publish_feedback(feedback)
+        time.sleep(0.3)
+        goal_handle.succeed()
+        result = PickColor.Result()
+        result.success = True
+        result.error_code = PickColor.Result.OK
+        result.message = '自动码垛完成，共码放3层。'
+        result.color = goal_handle.request.color
+        result.zone = goal_handle.request.zone
+        result.support_color = goal_handle.request.support_color
+        result.executed = True
+        return result
+
+    action_server = ActionServer(
+        server_node, PickColor, ColorActionBridge.AUTO_STACK_ACTION, execute)
+    bridge = ColorActionBridge()
+    executor = MultiThreadedExecutor(num_threads=2)
+    executor.add_node(server_node)
+    executor.add_node(bridge)
+    spin_thread = threading.Thread(target=executor.spin, daemon=True)
+    spin_thread.start()
+    try:
+        bridge.send(
+            'auto-stack-all', 'pick_auto_stack', '', server_timeout_s=2.0)
+        feedback_event = None
+        result_event = None
+        deadline = time.monotonic() + 5.0
+        while time.monotonic() < deadline:
+            try:
+                event = bridge.events.get(timeout=0.2)
+            except queue.Empty:
+                continue
+            if event.kind == 'feedback' and feedback_event is None:
+                feedback_event = event
+            if event.kind == 'result':
+                result_event = event
+                break
+        assert requests == [('', '', '')]
+        assert feedback_event is not None
+        assert feedback_event.phase == 'stacking'
+        assert feedback_event.detail == '正在按红、黄、蓝、绿顺序自动码垛。'
+        assert result_event is not None
+        assert result_event.success is True
+        assert result_event.error_code == int(PickColor.Result.OK)
+        assert result_event.detail == '自动码垛完成，共码放3层。'
+        assert result_event.color == ''
+        assert result_event.zone == ''
+        assert result_event.support_color == ''
+        assert not bridge.guard.snapshot().active
+        with pytest.raises(ValueError, match='does not accept'):
+            bridge.send('auto-stack-red', 'pick_auto_stack', 'red')
+        with pytest.raises(ValueError, match='does not accept'):
+            bridge.send('auto-stack-zone', 'pick_auto_stack', '', 'd')
+        with pytest.raises(ValueError, match='does not accept'):
+            bridge.send(
+                'auto-stack-support', 'pick_auto_stack', '', '',
+                support_color='blue')
+        assert not bridge.guard.snapshot().active
+    finally:
+        executor.shutdown(timeout_sec=2.0)
+        spin_thread.join(timeout=2.0)
+        action_server.destroy()
+        bridge.destroy_node()
+        server_node.destroy_node()
+        rclpy.shutdown()
+
+
+def test_bridge_sends_xyz_goal_and_reports_collision_review_feedback():
+    os.environ.setdefault('ROS_DOMAIN_ID', '231')
+    rclpy.init()
+    server_node = Node('move_to_pose_mock_server')
+    requests = []
+
+    def execute(goal_handle):
+        requests.append((goal_handle.request.x, goal_handle.request.y,
+                         goal_handle.request.z))
+        feedback = MoveToPose.Feedback()
+        feedback.phase = 'collision_check'
+        feedback.detail = 'collision-free'
+        goal_handle.publish_feedback(feedback)
+        goal_handle.succeed()
+        result = MoveToPose.Result()
+        result.success = True
+        result.error_code = MoveToPose.Result.OK
+        result.message = 'arrived'
+        result.executed = True
+        return result
+
+    action_server = ActionServer(
+        server_node, MoveToPose, ColorActionBridge.MOVE_TO_POSE_ACTION, execute)
+    bridge = ColorActionBridge()
+    executor = MultiThreadedExecutor(num_threads=2)
+    executor.add_node(server_node)
+    executor.add_node(bridge)
+    spin_thread = threading.Thread(target=executor.spin, daemon=True)
+    spin_thread.start()
+    try:
+        bridge.send_pose('xyz', 0.10, -0.40, 0.35, server_timeout_s=2.0)
+        events = []
+        deadline = time.monotonic() + 3.0
+        while time.monotonic() < deadline:
+            try:
+                event = bridge.events.get(timeout=0.2)
+            except queue.Empty:
+                continue
+            events.append(event)
+            if event.kind == 'pose_result':
+                break
+        assert requests == [(0.10, -0.40, 0.35)]
+        assert any(event.kind == 'pose_accepted' for event in events)
+        assert any(event.kind == 'pose_feedback' for event in events)
+        result = [event for event in events if event.kind == 'pose_result'][0]
+        assert result.success is True
+        assert result.executed is True
+        assert not bridge.guard.snapshot().active
+        with pytest.raises(ValueError, match='finite'):
+            bridge.send_pose('bad', float('nan'), 0.0, 0.0)
+    finally:
+        executor.shutdown(timeout_sec=2.0)
+        spin_thread.join(timeout=2.0)
+        action_server.destroy()
+        bridge.destroy_node()
+        server_node.destroy_node()
+        rclpy.shutdown()
+
+
+@pytest.mark.parametrize('service_success', [True, False])
+def test_tabletop_reset_reports_backend_result(service_success):
+    os.environ.setdefault('ROS_DOMAIN_ID', '231')
+    rclpy.init()
+    server = Node('fake_tabletop_reset')
+    calls = []
+
+    def reset(request, response):
+        calls.append(request)
+        response.success = service_success
+        response.message = 'cleared' if service_success else 'task active'
+        return response
+
+    server.create_service(Trigger, ColorActionBridge.RESET_TABLETOP_SERVICE, reset)
+    bridge = ColorActionBridge()
+    executor = MultiThreadedExecutor(num_threads=2)
+    executor.add_node(server)
+    executor.add_node(bridge)
+    thread = threading.Thread(target=executor.spin, daemon=True)
+    thread.start()
+    try:
+        assert bridge.reset_tabletop_direct(service_timeout_s=2.0)
+        event = bridge.events.get(timeout=3.0)
+        assert event.kind == 'tabletop_reset_result'
+        assert event.success is service_success
+        assert event.detail == ('cleared' if service_success else 'task active')
+        assert len(calls) == 1
+    finally:
+        executor.shutdown(timeout_sec=2.0)
+        thread.join(timeout=2.0)
+        bridge.destroy_node()
+        server.destroy_node()
+        rclpy.shutdown()
+
+
+def test_tabletop_reset_missing_service_and_busy_gripper_fail_closed():
+    os.environ.setdefault('ROS_DOMAIN_ID', '231')
+    rclpy.init()
+    bridge = ColorActionBridge()
+    try:
+        assert not bridge.reset_tabletop_direct(service_timeout_s=0.01)
+        assert bridge.events.get(timeout=1.0).success is False
+        bridge.gripper_command_active = lambda: True
+        assert not bridge.reset_tabletop_direct(service_timeout_s=0.01)
+        event = bridge.events.get(timeout=1.0)
+        assert event.success is False
+        assert '仍在运行' in event.detail
+    finally:
+        bridge.destroy_node()
         rclpy.shutdown()

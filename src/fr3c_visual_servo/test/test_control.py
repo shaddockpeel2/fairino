@@ -40,6 +40,40 @@ def test_invalid_configuration_is_rejected():
         ControllerConfig(exit_half_width_px=30.0).validate()
     with pytest.raises(ValueError, match='axis_sign'):
         ControllerConfig(axis_sign_x=0.0).validate()
+    with pytest.raises(ValueError, match='75_mm_per_second'):
+        ControllerConfig(max_speed_mps=0.0751).validate()
+    with pytest.raises(ValueError, match='dropout_grace'):
+        ControllerConfig(dropout_grace_s=0.21).validate()
+    with pytest.raises(ValueError, match='max_acceleration_mps2_exceeds'):
+        ControllerConfig(max_acceleration_mps2=0.091).validate()
+    with pytest.raises(ValueError, match='initial_center_region'):
+        ControllerConfig(initial_center_half_width_px=41.0).validate()
+
+
+@pytest.mark.parametrize('gain,speed,acceleration', [
+    (0.120, 0.010, 0.030),
+    (0.240, 0.015, 0.090),
+    (1.200, 0.075, 0.090),
+])
+def test_fast_profile_caps_diagonal_speed_and_stops_on_target_loss(
+        gain, speed, acceleration):
+    config = ControllerConfig(
+        gain_x_mps=gain, gain_y_mps=gain,
+        max_speed_mps=speed, max_acceleration_mps2=acceleration,
+        dropout_grace_s=0.0)
+    tracker = controller(config)
+    output = None
+    for index in range(50):
+        now = index * 0.02
+        output = tracker.update(
+            observation(now, sample_id=index, error=(100.0, 100.0)), now)
+    assert output.phase == Phase.INITIAL_CENTERING
+    assert math.hypot(output.command_x_mps, output.command_y_mps) == \
+        pytest.approx(speed)
+    lost = tracker.update(observation(
+        1.00, sample_id=50, valid=False, reason='target_not_found'), 1.00)
+    assert lost.phase == Phase.LOST_HOLD
+    assert (lost.command_x_mps, lost.command_y_mps) == (0.0, 0.0)
 
 
 def test_no_target_stays_acquiring_and_commands_zero():
@@ -60,12 +94,12 @@ def test_acquisition_timeout_reports_not_found():
 
 
 def test_off_center_control_has_expected_direction_acceleration_and_speed_limits():
-    config = ControllerConfig(max_acceleration_mps2=1.0)
+    config = ControllerConfig(max_acceleration_mps2=0.090)
     tracker = controller(config)
     tracker.update(observation(0.0, error=(320.0, 0.0)), 0.0)
     output = tracker.update(observation(
         0.1, sample_id=2, error=(320.0, 0.0)), 0.1)
-    assert output.phase == Phase.TRACKING
+    assert output.phase == Phase.INITIAL_CENTERING
     assert output.command_x_mps == pytest.approx(config.max_speed_mps)
     assert output.command_y_mps == 0.0
 
@@ -90,10 +124,10 @@ def test_acceleration_limit_applies_between_tracking_commands():
 def test_center_entry_counts_unique_camera_frames_only():
     tracker = controller()
     first = observation(0.0, sample_id=10, error=(10.0, 5.0))
-    assert tracker.update(first, 0.0).phase == Phase.TRACKING
-    assert tracker.update(first, 0.02).phase == Phase.TRACKING
+    assert tracker.update(first, 0.0).phase == Phase.INITIAL_CENTERING
+    assert tracker.update(first, 0.02).phase == Phase.INITIAL_CENTERING
     second = observation(0.1, sample_id=11, error=(9.0, 4.0))
-    assert tracker.update(second, 0.1).phase == Phase.TRACKING
+    assert tracker.update(second, 0.1).phase == Phase.INITIAL_CENTERING
     third = observation(0.2, sample_id=12, error=(8.0, 3.0))
     output = tracker.update(third, 0.2)
     assert output.phase == Phase.CENTER_HOLD
@@ -127,8 +161,37 @@ def test_center_exit_requires_two_unique_frames():
     assert output.command_x_mps > 0.0
 
 
+def test_visible_off_center_target_is_centered_before_normal_tracking():
+    tracker = controller(ControllerConfig(max_acceleration_mps2=0.090))
+    first = tracker.update(observation(0.1, error=(100.0, -60.0)), 0.1)
+    assert first.phase == Phase.INITIAL_CENTERING
+    assert first.detail == 'centering_initial_target'
+    assert first.command_x_mps > 0.0
+    assert first.command_y_mps < 0.0
+    assert not first.centered
+
+    nearly_centered = tracker.update(observation(
+        0.2, sample_id=2, error=(20.0, 0.0)), 0.2)
+    assert nearly_centered.phase == Phase.INITIAL_CENTERING
+    assert nearly_centered.command_x_mps > 0.0
+
+    for sample_id, now in enumerate((0.3, 0.4, 0.5), start=3):
+        centered = tracker.update(observation(
+            now, sample_id=sample_id, error=(5.0, 4.0)), now)
+    assert centered.phase == Phase.CENTER_HOLD
+    assert centered.centered
+    assert centered.command_x_mps == centered.command_y_mps == 0.0
+
+    tracker.update(observation(0.6, sample_id=6, error=(-90.0, 0.0)), 0.6)
+    following = tracker.update(observation(
+        0.7, sample_id=7, error=(-90.0, 0.0)), 0.7)
+    assert following.phase == Phase.TRACKING
+    assert following.command_x_mps < 0.0
+
+
 def test_invalid_observation_immediately_zeros_then_recovers_tracking():
-    tracker = controller(ControllerConfig(max_acceleration_mps2=1.0))
+    tracker = controller(ControllerConfig(
+        max_acceleration_mps2=0.090, dropout_grace_s=0.0))
     tracker.update(observation(0.0, error=(200.0, 0.0)), 0.0)
     moving = tracker.update(observation(
         0.1, sample_id=2, error=(200.0, 0.0)), 0.1)
@@ -140,7 +203,7 @@ def test_invalid_observation_immediately_zeros_then_recovers_tracking():
     assert (lost.command_x_mps, lost.command_y_mps) == (0.0, 0.0)
     recovered = tracker.update(observation(
         0.2, sample_id=4, error=(-100.0, 0.0)), 0.2)
-    assert recovered.phase == Phase.TRACKING
+    assert recovered.phase == Phase.INITIAL_CENTERING
     assert recovered.command_x_mps < 0.0
 
 
@@ -170,6 +233,73 @@ def test_sustained_non_unique_target_stops_with_specific_code():
     assert output.termination == Termination.TARGET_NOT_UNIQUE
 
 
+def test_default_target_loss_waits_at_zero_until_recovery_or_cancel():
+    tracker = controller()
+    tracker.update(observation(0.0, error=(100.0, 0.0)), 0.0)
+    for index, now in enumerate((0.1, 1.1, 5.1), start=2):
+        lost = tracker.update(observation(
+            now, sample_id=index, valid=False, reason='target_not_unique'),
+            now)
+        assert lost.phase == Phase.LOST_HOLD
+        assert not lost.done
+        assert (lost.command_x_mps, lost.command_y_mps) == (0.0, 0.0)
+    recovered = tracker.update(observation(
+        5.2, sample_id=5, error=(100.0, 0.0)), 5.2)
+    assert recovered.phase == Phase.INITIAL_CENTERING
+    assert recovered.command_x_mps > 0.0
+    canceled = tracker.stop(Termination.CANCELED, 'cancel_requested')
+    assert canceled.done and canceled.command_x_mps == 0.0
+
+
+def test_short_dropout_bridges_once_but_stops_after_time_or_distance_limit():
+    tracker = controller(ControllerConfig(
+        gain_x_mps=1.2, max_speed_mps=0.075,
+        max_acceleration_mps2=0.09))
+    for index in range(15):
+        now = index * 0.02
+        moving = tracker.update(observation(
+            now, sample_id=index, error=(320.0, 0.0)), now)
+    speed = moving.command_x_mps
+    invalid = observation(
+        0.30, sample_id=15, valid=False, reason='target_not_found')
+    bridged = tracker.update(invalid, 0.30)
+    assert bridged.phase == Phase.INITIAL_CENTERING
+    assert bridged.detail == 'bridging_short_target_gap:target_not_found'
+    assert bridged.command_x_mps == speed
+    # 5 mm / 25.2 mm/s is longer than the 160 ms grace.
+    lost = tracker.update(invalid, 0.45)
+    assert lost.phase == Phase.LOST_HOLD
+    assert lost.command_x_mps == 0.0
+
+    fast = controller(ControllerConfig(
+        gain_x_mps=1.2, max_speed_mps=0.075,
+        max_acceleration_mps2=0.09))
+    for index in range(46):
+        now = index * 0.02
+        moving = fast.update(observation(
+            now, sample_id=index, error=(320.0, 0.0)), now)
+    assert moving.command_x_mps == pytest.approx(0.075)
+    assert fast.update(observation(
+        0.94, sample_id=46, valid=False, reason='target_not_unique'),
+        0.94).phase == Phase.INITIAL_CENTERING
+    assert fast.update(observation(
+        0.98, sample_id=47, valid=False, reason='target_not_unique'),
+        0.98).phase == Phase.LOST_HOLD
+
+
+def test_stale_image_stream_never_bridges_target_dropout():
+    tracker = controller(ControllerConfig(max_acceleration_mps2=0.09))
+    tracker.update(observation(0.0, error=(320.0, 0.0)), 0.0)
+    moving = tracker.update(observation(
+        0.1, sample_id=2, error=(320.0, 0.0)), 0.1)
+    assert moving.command_x_mps > 0
+    stale = tracker.update(observation(
+        0.12, sample_id=3, valid=False, reason='image_stream_stale'),
+        0.12)
+    assert stale.phase == Phase.LOST_HOLD
+    assert stale.command_x_mps == 0.0
+
+
 def test_stale_observation_can_only_produce_zero():
     tracker = controller()
     stale = observation(
@@ -187,24 +317,12 @@ def test_nonzero_max_duration_is_a_successful_bounded_run():
     assert output.termination == Termination.OK
 
 
-def test_estimated_relative_displacement_limit_stops_dry_run():
-    config = ControllerConfig(
-        max_acceleration_mps2=1.0, max_relative_xy_m=0.0001)
-    tracker = controller(config)
-    tracker.update(observation(0.0, error=(320.0, 0.0)), 0.0)
-    output = tracker.update(observation(
-        0.1, sample_id=2, error=(320.0, 0.0)), 0.1)
-    assert output.phase == Phase.STOPPING
-    assert output.termination == Termination.SAFETY_LIMIT
-    assert output.command_x_mps == 0.0
-
-
-def test_measured_displacement_does_not_accumulate_requested_motion():
-    tracker = controller(ControllerConfig(max_relative_xy_m=0.001))
-    for i in range(30):
-        output = tracker.update(observation(i * 0.1, sample_id=i), i * 0.1,
-                                measured_xy_m=0.0002)
+def test_tracking_continues_past_old_80_mm_relative_displacement():
+    tracker = controller(ControllerConfig(max_acceleration_mps2=0.090))
+    for i in range(200):
+        now = i * 0.1
+        output = tracker.update(
+            observation(now, sample_id=i, error=(320.0, 0.0)), now)
         assert not output.done
-    output = tracker.update(observation(3.0, sample_id=31), 3.0,
-                            measured_xy_m=0.0011)
-    assert output.termination == Termination.SAFETY_LIMIT
+    assert tracker.estimated_displacement_xy_m[0] > 0.08
+    assert output.command_x_mps > 0.0

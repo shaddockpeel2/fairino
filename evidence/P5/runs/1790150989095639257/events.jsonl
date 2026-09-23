@@ -1,0 +1,96 @@
+{"time_ns":1790150989096140638,"event":"run_started","detail":"execution"}
+{"time_ns":1790150989096185264,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1790150989100767691,"event":"gripper_pre_open_started","detail":"requested_position_m=0.060000"}
+{"time_ns":1790150991415239838,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,requested_position_m=0.06,reported_position_m=0.06,stalled=0"}
+{"time_ns":1790150991416350226,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1790150991417301070,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube and stack support cube added"}
+{"time_ns":1790150991425623874,"event":"plan_candidate_0_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150991466071506,"event":"plan_candidate_0_approach","detail":"return_code=-27"}
+{"time_ns":1790150991466237466,"event":"grasp_candidate_rejected","detail":"index=0,yaw_rad=-1.157492,tilt_rad=0.000000,reason=candidate_0_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150991466782014,"event":"plan_candidate_1_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150991495989850,"event":"plan_candidate_1_approach","detail":"return_code=-27"}
+{"time_ns":1790150991496210352,"event":"grasp_candidate_rejected","detail":"index=1,yaw_rad=0.413304,tilt_rad=0.000000,reason=candidate_1_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150991496845318,"event":"plan_candidate_2_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150991558760738,"event":"plan_candidate_2_approach","detail":"return_code=-27"}
+{"time_ns":1790150991558844156,"event":"grasp_candidate_rejected","detail":"index=2,yaw_rad=1.984101,tilt_rad=0.000000,reason=candidate_2_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150991559018866,"event":"plan_candidate_3_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150991620409280,"event":"plan_candidate_3_approach","detail":"return_code=-27"}
+{"time_ns":1790150991620557740,"event":"grasp_candidate_rejected","detail":"index=3,yaw_rad=-2.728288,tilt_rad=0.000000,reason=candidate_3_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150991620856702,"event":"plan_candidate_4_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150991678499156,"event":"plan_candidate_4_approach","detail":"return_code=-27"}
+{"time_ns":1790150991678647033,"event":"grasp_candidate_rejected","detail":"index=4,yaw_rad=-1.157492,tilt_rad=0.174533,reason=candidate_4_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150991679197706,"event":"plan_candidate_5_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150991742219430,"event":"plan_candidate_5_approach","detail":"return_code=-27"}
+{"time_ns":1790150991742434683,"event":"grasp_candidate_rejected","detail":"index=5,yaw_rad=0.413304,tilt_rad=0.174533,reason=candidate_5_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150991742749103,"event":"plan_candidate_6_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150991807455222,"event":"plan_candidate_6_approach","detail":"return_code=-27"}
+{"time_ns":1790150991807630515,"event":"grasp_candidate_rejected","detail":"index=6,yaw_rad=1.984101,tilt_rad=0.174533,reason=candidate_6_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150991808365815,"event":"plan_candidate_7_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150991871094995,"event":"plan_candidate_7_approach","detail":"return_code=-27"}
+{"time_ns":1790150991871221288,"event":"grasp_candidate_rejected","detail":"index=7,yaw_rad=-2.728288,tilt_rad=0.174533,reason=candidate_7_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150991871510916,"event":"plan_candidate_8_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150991906249399,"event":"plan_candidate_8_approach","detail":"return_code=-27"}
+{"time_ns":1790150991906658904,"event":"grasp_candidate_rejected","detail":"index=8,yaw_rad=-1.157492,tilt_rad=-0.174533,reason=candidate_8_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150991907351912,"event":"plan_candidate_9_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150991966562384,"event":"plan_candidate_9_approach","detail":"return_code=-27"}
+{"time_ns":1790150991966645510,"event":"grasp_candidate_rejected","detail":"index=9,yaw_rad=0.413304,tilt_rad=-0.174533,reason=candidate_9_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150991966904221,"event":"plan_candidate_10_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992031119751,"event":"plan_candidate_10_approach","detail":"return_code=-27"}
+{"time_ns":1790150992031283378,"event":"grasp_candidate_rejected","detail":"index=10,yaw_rad=1.984101,tilt_rad=-0.174533,reason=candidate_10_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992031855634,"event":"plan_candidate_11_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992093820347,"event":"plan_candidate_11_approach","detail":"return_code=-27"}
+{"time_ns":1790150992093976682,"event":"grasp_candidate_rejected","detail":"index=11,yaw_rad=-2.728288,tilt_rad=-0.174533,reason=candidate_11_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992094568189,"event":"plan_candidate_12_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992128387911,"event":"plan_candidate_12_approach","detail":"return_code=-27"}
+{"time_ns":1790150992128531412,"event":"grasp_candidate_rejected","detail":"index=12,yaw_rad=-1.157492,tilt_rad=0.349066,reason=candidate_12_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992129148003,"event":"plan_candidate_13_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992159495393,"event":"plan_candidate_13_approach","detail":"return_code=-27"}
+{"time_ns":1790150992159590186,"event":"grasp_candidate_rejected","detail":"index=13,yaw_rad=0.413304,tilt_rad=0.349066,reason=candidate_13_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992159794647,"event":"plan_candidate_14_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992191259425,"event":"plan_candidate_14_approach","detail":"return_code=-27"}
+{"time_ns":1790150992191454552,"event":"grasp_candidate_rejected","detail":"index=14,yaw_rad=1.984101,tilt_rad=0.349066,reason=candidate_14_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992192160685,"event":"plan_candidate_15_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992253027260,"event":"plan_candidate_15_approach","detail":"return_code=-27"}
+{"time_ns":1790150992253170762,"event":"grasp_candidate_rejected","detail":"index=15,yaw_rad=-2.728288,tilt_rad=0.349066,reason=candidate_15_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992253696643,"event":"plan_candidate_16_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992313450496,"event":"plan_candidate_16_approach","detail":"return_code=-27"}
+{"time_ns":1790150992313720583,"event":"grasp_candidate_rejected","detail":"index=16,yaw_rad=-1.157492,tilt_rad=-0.349066,reason=candidate_16_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992314537842,"event":"plan_candidate_17_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992380958981,"event":"plan_candidate_17_approach","detail":"return_code=-27"}
+{"time_ns":1790150992381103357,"event":"grasp_candidate_rejected","detail":"index=17,yaw_rad=0.413304,tilt_rad=-0.349066,reason=candidate_17_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992381637697,"event":"plan_candidate_18_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992437561048,"event":"plan_candidate_18_approach","detail":"return_code=-27"}
+{"time_ns":1790150992437647674,"event":"grasp_candidate_rejected","detail":"index=18,yaw_rad=1.984101,tilt_rad=-0.349066,reason=candidate_18_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992437887135,"event":"plan_candidate_19_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992464853778,"event":"plan_candidate_19_approach","detail":"return_code=-27"}
+{"time_ns":1790150992464924363,"event":"grasp_candidate_rejected","detail":"index=19,yaw_rad=-2.728288,tilt_rad=-0.349066,reason=candidate_19_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992465120365,"event":"plan_candidate_20_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992497329485,"event":"plan_candidate_20_approach","detail":"return_code=-27"}
+{"time_ns":1790150992497403569,"event":"grasp_candidate_rejected","detail":"index=20,yaw_rad=-1.157492,tilt_rad=0.523599,reason=candidate_20_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992497612405,"event":"plan_candidate_21_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992549068538,"event":"plan_candidate_21_approach","detail":"return_code=-27"}
+{"time_ns":1790150992549271540,"event":"grasp_candidate_rejected","detail":"index=21,yaw_rad=0.413304,tilt_rad=0.523599,reason=candidate_21_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992550045341,"event":"plan_candidate_22_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992591353107,"event":"plan_candidate_22_approach","detail":"return_code=-27"}
+{"time_ns":1790150992591430983,"event":"grasp_candidate_rejected","detail":"index=22,yaw_rad=1.984101,tilt_rad=0.523599,reason=candidate_22_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992646297906,"event":"plan_candidate_23_approach_ik","detail":"success=false,timeout_s=0.050000"}
+{"time_ns":1790150992646496825,"event":"grasp_candidate_rejected","detail":"index=23,yaw_rad=-2.728288,tilt_rad=0.523599,reason=candidate_23_approach has no seeded IK solution"}
+{"time_ns":1790150992646812995,"event":"plan_candidate_24_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992670155638,"event":"plan_candidate_24_approach","detail":"return_code=-27"}
+{"time_ns":1790150992670242264,"event":"grasp_candidate_rejected","detail":"index=24,yaw_rad=-1.157492,tilt_rad=-0.523599,reason=candidate_24_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992720398424,"event":"plan_candidate_25_approach_ik","detail":"success=false,timeout_s=0.050000"}
+{"time_ns":1790150992720466967,"event":"grasp_candidate_rejected","detail":"index=25,yaw_rad=0.413304,tilt_rad=-0.523599,reason=candidate_25_approach has no seeded IK solution"}
+{"time_ns":1790150992720607260,"event":"plan_candidate_26_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992740917410,"event":"plan_candidate_26_approach","detail":"return_code=-27"}
+{"time_ns":1790150992740982452,"event":"grasp_candidate_rejected","detail":"index=26,yaw_rad=1.984101,tilt_rad=-0.523599,reason=candidate_26_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992741177580,"event":"plan_candidate_27_approach_ik","detail":"success=true,timeout_s=0.050000"}
+{"time_ns":1790150992766985710,"event":"plan_candidate_27_approach","detail":"return_code=-27"}
+{"time_ns":1790150992767084586,"event":"grasp_candidate_rejected","detail":"index=27,yaw_rad=-2.728288,tilt_rad=-0.523599,reason=candidate_27_approach planning failed with MoveIt code -27"}
+{"time_ns":1790150992767248796,"event":"state","detail":"retryable_failure_before_arm_motion: no equivalent yellow grasp can place the cube on the blue cube within 0.785398 rad of wrist rotation and with a complete collision-free trajectory; no arm motion started, fix the condition and call /start again"}
+{"time_ns":1790151075680380270,"event":"target_filter_set","detail":"color=red,generation=8"}
+{"time_ns":1790151075942898451,"event":"auto_stack_order_locked","detail":"top_to_bottom=红色、黄色、蓝色,filter_generation=8"}
+{"time_ns":1790151075974493897,"event":"state","detail":"waiting_for_target: pick_stack accepted; locating one fresh yellow cube on the table and the blue cube it will be placed on"}
+{"time_ns":1790151075975136446,"event":"stack_destination_locked","detail":"color=blue,top_xyz_m=[-0.0693976442,-0.466237567,0.0328990104],yaw_rad=0.28555222,tier=0,bottom_z_m=0.00289901038,tower_cubes_after_placement=2"}
+{"time_ns":1790151075975715120,"event":"stack_pair_validated","detail":"lower=blue,upper=yellow,same_snapshot=true,support_tier=0,tower_cubes_after_placement=2,maximum_stack_cubes=4,xy_separation_m=0.123774394,tabletop_bottom_difference_m=0.000683057512,source_bottom_m=0.00358206789,destination_bottom_m=0.00289901038"}
+{"time_ns":1790151075975909663,"event":"auto_stack_pair_snapshot_reused","detail":"source=yellow,support=blue,inventory_from_first_rgbd_status=true,support_tier=0"}
+{"time_ns":1790151075976151750,"event":"latency","detail":"\"stage\":\"target_acquired\",\"elapsed_ms\":16.2"}

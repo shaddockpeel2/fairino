@@ -1,30 +1,52 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ $# -lt 2 || $# -gt 3 ]]; then
+usage() {
   echo "Usage: $0 <hold|sort> <red|yellow|blue|green> [zone]" >&2
   echo "       $0 place <red|yellow|blue|green> <zone>" >&2
   echo "       $0 stack <red|yellow|blue|green> <lower red|yellow|blue|green>" >&2
+  echo "       $0 auto" >&2
   echo "  zone:  calibrated A4 region (A|B|C|D) or one 1-based slot (for example A3)" >&2
   echo "  stack: puts the first colour on top of the second colour" >&2
+  echo "  auto:  stacks every cube currently on the table (red on top); no parameters" >&2
+}
+
+if [[ $# -eq 0 ]]; then
+  usage
   exit 2
 fi
 
 task_mode="$1"
-target_color="$2"
-target_support="${3:-}"
+if [[ "$task_mode" == auto ]]; then
+  if [[ $# -ne 1 ]]; then
+    echo "auto takes no parameters, for example: $0 auto" >&2
+    usage
+    exit 2
+  fi
+  target_color=""
+  target_support=""
+elif [[ $# -ge 2 && $# -le 3 ]]; then
+  target_color="$2"
+  target_support="${3:-}"
+else
+  usage
+  exit 2
+fi
 
 case "$task_mode" in
   hold) action_name=/fr3c_first_grasp/pick_hold ;;
   sort) action_name=/fr3c_first_grasp/pick_sort ;;
   place) action_name=/fr3c_first_grasp/pick_place ;;
   stack) action_name=/fr3c_first_grasp/pick_stack ;;
-  *) echo "Unsupported task mode: $task_mode" >&2; exit 2 ;;
+  auto) action_name=/fr3c_first_grasp/pick_stack_auto ;;
+  *) echo "Unsupported task mode: $task_mode" >&2; usage; exit 2 ;;
 esac
-case "$target_color" in
-  red|yellow|blue|green) ;;
-  *) echo "Unsupported color: $target_color" >&2; exit 2 ;;
-esac
+if [[ "$task_mode" != auto ]]; then
+  case "$target_color" in
+    red|yellow|blue|green) ;;
+    *) echo "Unsupported color: $target_color" >&2; exit 2 ;;
+  esac
+fi
 
 target_zone=""
 target_support_color=""
@@ -42,13 +64,13 @@ if [[ "$task_mode" == stack ]]; then
     exit 2
   fi
   target_support_color="$target_support"
-else
+elif [[ "$task_mode" != auto ]]; then
   target_zone="$target_support"
 fi
 
 case "$task_mode:$target_zone" in
   place:) echo "place requires a zone, for example: $0 place red C" >&2; exit 2 ;;
-  hold:*|sort:*|stack:*)
+  hold:*|sort:*|stack:*|auto:*)
     if [[ -n "$target_zone" ]]; then
       echo "$task_mode does not accept a zone; use 'place' instead" >&2
       exit 2

@@ -15,6 +15,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "action/PickColor.action"
+  "action/MoveToPose.action"
   "action/TrackTarget2D.action"
   "srv/RemoteCmdInterface.srv"
   "srv/RemoteScriptContent.srv"

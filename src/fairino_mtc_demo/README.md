@@ -209,7 +209,7 @@ seconds. See `docs/four_color_sorting.md` for placement-slot behavior.
 ## Stage-2 color task actions
 
 In `detection_mode:=colors` with `sort_enabled:=true`, the node also exposes
-four single-request actions using `fairino_msgs/action/PickColor`:
+five task actions using `fairino_msgs/action/PickColor`:
 
 - `/fr3c_first_grasp/pick_hold`: approach, descend, open-loop close, and lift;
   success leaves the cube held and does not claim sensor-verified grasping.
@@ -221,11 +221,20 @@ four single-request actions using `fairino_msgs/action/PickColor`:
 - `/fr3c_first_grasp/pick_stack`: grasps the cube of `color` and stacks it on
   the cube of `support_color`. Requires `stack_enabled:=true`. The placement
   target is the lower cube's measured top face, not a calibrated zone, and the
-  upper cube is rotated so both top faces share one yaw. Two-cube stacks only.
+  upper cube is rotated so both top faces share one yaw. Repeated requests may
+  extend a tower up to `maximum_stack_cubes` (four by default).
+- `/fr3c_first_grasp/pick_stack_auto`: accepts an empty goal, discovers the
+  tabletop colours, and builds the complete tower in the fixed configured
+  order. It freezes all source coordinates from that first RGB-D inventory,
+  updates the computed tower top in memory after each release, and does not
+  return to the camera/start pose between layers. Only the final layer returns
+  to the automatic task's original start joints. It requires
+  `stack_enabled:=true` and real execution.
 
-Each goal first calls the perception `set_target_color` service. The returned
-filter generation invalidates every older pose, and the task accepts only a
-fresh stable pose whose color and generation match the goal. Zero matching
+Each public color-specific goal first calls the perception `set_target_color`
+service; `pick_stack_auto` calls it once for its initial full inventory. The
+returned filter generation invalidates every older pose, and the task accepts
+only a fresh stable pose whose color and generation match the goal. Zero matching
 physical targets, two or more matching targets, stale data, task busy, a held
 object, planning failure, execution failure, and cancellation have distinct
 result codes. A task is never silently retried.
@@ -261,6 +270,40 @@ differ by 90 degrees, so the nearest aligned placement is at most half of that
 symmetry step away. A candidate above the allowance is dropped before
 planning; if all four are dropped the pair is reported unstackable while the arm
 is still at home.
+
+Every grasp route used by `pick_hold`, `pick_sort`, `pick_place`, `pick_stack`,
+`pick_stack_auto`, and the legacy start/batch services evaluates local-X tool
+tilts of 0, ±10, ±20 and ±30 degrees. The physical contact point is 10 mm below
+the detected cube top. The selected pose is used by the attached-object model,
+lift and placement geometry; stack placement compensates the tool tilt so the
+cube remains upright and aligned with the support.
+Candidates are tried in the order 0, +10, -10, +20, -20, +30 and -30 degrees.
+The first complete collision-free route is used immediately;
+all equivalent square-face yaws are tried at 0 degrees before any tilted
+candidate, then all equivalent yaws at +10 degrees, and so on. This keeps tilt
+as a reachability fallback and avoids planning alternatives after a usable
+route is known.
+Each candidate first solves IK from the preceding joint state with a
+50 ms bound. An IK failure is rejected immediately. A pose with IK then gets
+one collision-path planning attempt bounded to 250 ms, instead of inheriting
+the normal 10 s production planning budget. Candidates are checked
+sequentially because each complete route temporarily updates the shared MoveIt
+attachment and planning scene; the short bounded checks remove the previous
+10-second stall without racing scene state. The complete descend, lift,
+placement, release-retreat, and return-home chain still has to validate before
+arm motion begins. Execution replans do not use the 250 ms candidate limit.
+
+For a tall tower the stack lift height is raised automatically until the
+attached cube clears the current tower top by `stack_approach_clearance_m`.
+For later automatic-stack layers, the source approach remains a checked
+Cartesian interpolation from the preceding tower retreat pose. This avoids a
+remote IK branch and unnecessary wrist loops while preserving collision and
+joint-step checks.
+From the second layer onward, the first move from the preceding tower retreat
+to the next source approach is a collision-checked Cartesian path. An
+incomplete path or excessive joint step rejects that candidate before motion,
+which prevents a free-space planner from taking a long IK-branch detour between
+two nearby poses.
 
 Slot occupancy is read from the live MoveIt planning scene: a slot counts as
 occupied when a known obstacle lies within `zone_slot_clearance_m` of it. No
@@ -307,3 +350,30 @@ attached/world cube from the MoveIt planning scene, clears the previous Action's
 perception color filter back to all colors, and returns the task to
 `waiting_for_target`. Calling it before the object is physically clear is
 unsafe because the next task begins by opening the gripper.
+
+## XYZ point motion
+
+The dialogue UI's **机械臂控制抓取** page also exposes an XYZ point-motion
+card backed by `/fr3c_first_grasp/move_to_pose`
+(`fairino_msgs/action/MoveToPose`). Coordinates are metres in `base_link`.
+Only the TCP position is changed; the current tool orientation is preserved.
+
+Before execution, the node requires an idle task with no recorded held object,
+checks the configured XYZ limits and the P6 execution gate, solves IK, and asks
+MoveIt to plan a complete path against the table, retained cube models, robot
+self-collision, joint limits, and every other planning-scene obstacle. The arm
+is commanded only after that complete plan succeeds. Set `execute:=false` to
+review the planned trajectory without moving hardware. The default UI limits
+from `config/first_grasp.yaml` are X `[-0.45, 0.45]`, Y `[-0.80, -0.10]`, and
+Z `[0.12, 0.65]` metres.
+
+
+### 重置桌面物体状态
+
+大模型对话 UI 的“重置桌面物体状态”按钮直接调用
+`/fr3c_first_grasp/reset_tabletop_objects`（`std_srvs/srv/Trigger`）。
+适用于人工重新摆放桌面方块后，清除抓取/放置任务保留的位姿。
+它清除当前及历史方块碰撞模型、码垛支撑/塔柱、放置槽位占用计数和锁定的方块位姿，
+保留桌面及其他障碍物，不发送机械臂或夹爪运动命令。
+任务仍在运行或仍记录持物时拒绝重置；清理成功后回到等待识别状态。
+重新构建后，需要重启抓取节点和对话 UI 才能使用新按钮与服务。

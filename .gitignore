@@ -4,3 +4,4 @@ log/
 /.venv-yolo/
 assets/voice/
 /.venv-tts/
+/.roslog/

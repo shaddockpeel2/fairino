@@ -276,10 +276,12 @@ class BlueCubeLocalizer(Node):
             'sorting_max_cube_plane_gap_m': 0.010,
             'sorting_max_cube_plane_penetration_m': 0.002,
             # P2 stacking: a cube whose bottom rests on top of another cube
-            # publishes its top one cube height higher. Recognising that tier is
-            # what lets the localizer keep reporting the lower cube after the
-            # upper one has been stacked on it. An empty list disables the tier.
-            'stacking_cube_height_offsets_m': [0.030],
+            # publishes its top one cube height higher, so one entry per stacked
+            # tier is needed to recognise it. Three entries cover the four-cube
+            # tower that pick_stack allows; the lower cube of the tower is
+            # occluded and is not reported separately. An empty list disables
+            # the tier detection.
+            'stacking_cube_height_offsets_m': [0.030, 0.060, 0.090],
             'stacking_tier_tolerance_m': 0.012,
             'sorting_skip_radius_m': 0.025,
             'yolo_model_path': '',

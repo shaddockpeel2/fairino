@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import json
+import math
 import queue
 import re
 import threading
@@ -20,6 +21,7 @@ from std_msgs.msg import String
 from std_srvs.srv import Trigger
 
 from fairino_msgs.action import PickColor
+from fairino_msgs.action import MoveToPose
 
 from .image_capture import RgbFrame, frame_from_message
 from .task_guard import TaskDispatchGuard
@@ -44,8 +46,11 @@ class ColorActionBridge(Node):
     SORT_ACTION = '/fr3c_first_grasp/pick_sort'
     PLACE_ACTION = '/fr3c_first_grasp/pick_place'
     STACK_ACTION = '/fr3c_first_grasp/pick_stack'
+    AUTO_STACK_ACTION = '/fr3c_first_grasp/pick_stack_auto'
+    MOVE_TO_POSE_ACTION = '/fr3c_first_grasp/move_to_pose'
     CANCEL_SERVICE = '/fr3c_first_grasp/cancel'
     RELEASE_ACK_SERVICE = '/fr3c_first_grasp/acknowledge_object_released'
+    RESET_TABLETOP_SERVICE = '/fr3c_first_grasp/reset_tabletop_objects'
     STATE_TOPIC = '/fr3c_first_grasp/state'
     PERCEPTION_STATUS_TOPIC = '/perception/blue_cube_localizer/status'
     DEFAULT_COLOR_TOPIC = '/camera/color/image_raw'
@@ -73,12 +78,18 @@ class ColorActionBridge(Node):
             'pick_sort': ActionClient(self, PickColor, self.SORT_ACTION),
             'pick_place': ActionClient(self, PickColor, self.PLACE_ACTION),
             'pick_stack': ActionClient(self, PickColor, self.STACK_ACTION),
+            'pick_auto_stack': ActionClient(
+                self, PickColor, self.AUTO_STACK_ACTION),
         }
         self._cancel_client = self.create_client(Trigger, self.CANCEL_SERVICE)
         self._release_ack_client = self.create_client(
             Trigger, self.RELEASE_ACK_SERVICE)
+        self._reset_tabletop_client = self.create_client(
+            Trigger, self.RESET_TABLETOP_SERVICE)
         self._gripper_client = ActionClient(
             self, GripperCommand, self.GRIPPER_ACTION)
+        self._move_to_pose_client = ActionClient(
+            self, MoveToPose, self.MOVE_TO_POSE_ACTION)
         self.create_subscription(String, self.STATE_TOPIC, self._on_state, 10)
         self.create_subscription(
             String, self.PERCEPTION_STATUS_TOPIC, self._on_perception, 10)
@@ -150,8 +161,15 @@ class ColorActionBridge(Node):
         return frame
 
     def action_servers_ready(self) -> bool:
-        return all(
-            client.server_is_ready() for client in self._action_clients.values())
+        return (all(client.server_is_ready()
+                    for client in self._action_clients.values())
+                and self._move_to_pose_client.server_is_ready())
+
+    def action_server_ready(self, task: str) -> bool:
+        if task == 'move_to_pose':
+            return self._move_to_pose_client.server_is_ready()
+        client = self._action_clients.get(task)
+        return bool(client is not None and client.server_is_ready())
 
     def gripper_server_ready(self) -> bool:
         return self._gripper_client.server_is_ready()
@@ -164,22 +182,30 @@ class ColorActionBridge(Node):
              support_color: str = '', server_timeout_s: float = 2.0) -> None:
         if task not in self._action_clients:
             raise ValueError(f'unsupported task: {task}')
-        if color not in {'red', 'yellow', 'blue', 'green'}:
-            raise ValueError(f'unsupported color: {color}')
         normalized_zone = re.sub(r'\s+', '', zone or '').lower()
         normalized_support = re.sub(r'\s+', '', support_color or '').lower()
-        if task == 'pick_place':
-            if not re.fullmatch(r'[a-z]+(?:[1-9][0-9]?)?', normalized_zone):
-                raise ValueError(f'invalid placement zone: {zone!r}')
-        elif normalized_zone:
-            raise ValueError(f'{task} does not accept a placement zone')
-        if task == 'pick_stack':
-            if normalized_support not in {'red', 'yellow', 'blue', 'green'}:
-                raise ValueError(f'invalid stack support color: {support_color!r}')
-            if normalized_support == color:
-                raise ValueError('stack source and support colors must differ')
-        elif normalized_support:
-            raise ValueError(f'{task} does not accept a support color')
+        if task == 'pick_auto_stack':
+            # The robot side reads the colours from perception and decides the
+            # whole stack order, so this goal must stay completely empty.
+            if color or normalized_zone or normalized_support:
+                raise ValueError(
+                    'pick_auto_stack does not accept a color, zone, or '
+                    'support color')
+        else:
+            if color not in {'red', 'yellow', 'blue', 'green'}:
+                raise ValueError(f'unsupported color: {color}')
+            if task == 'pick_place':
+                if not re.fullmatch(r'[a-z]+(?:[1-9][0-9]?)?', normalized_zone):
+                    raise ValueError(f'invalid placement zone: {zone!r}')
+            elif normalized_zone:
+                raise ValueError(f'{task} does not accept a placement zone')
+            if task == 'pick_stack':
+                if normalized_support not in {'red', 'yellow', 'blue', 'green'}:
+                    raise ValueError(f'invalid stack support color: {support_color!r}')
+                if normalized_support == color:
+                    raise ValueError('stack source and support colors must differ')
+            elif normalized_support:
+                raise ValueError(f'{task} does not accept a support color')
         if self.gripper_command_active():
             raise RuntimeError('manual gripper command is still active')
         self.guard.begin(
@@ -212,6 +238,39 @@ class ColorActionBridge(Node):
             return
         future.add_done_callback(
             lambda completed: self._on_goal_response(request_id, completed))
+
+    def send_pose(self, request_id: str, x: float, y: float, z: float,
+                  server_timeout_s: float = 2.0) -> None:
+        coordinates = (float(x), float(y), float(z))
+        if not all(math.isfinite(value) for value in coordinates):
+            raise ValueError('XYZ coordinates must be finite numbers')
+        if self.gripper_command_active():
+            raise RuntimeError('manual gripper command is still active')
+        self.guard.begin(request_id, 'move_to_pose', '', '', '')
+        if not self._move_to_pose_client.wait_for_server(
+                timeout_sec=server_timeout_s):
+            detail = 'XYZ 移动 Action 服务不可用。'
+            self.guard.finish(request_id, False, False, detail)
+            self._emit(ActionUiEvent(
+                kind='pose_result', request_id=request_id, phase='failed',
+                detail=detail, success=False))
+            return
+        goal = MoveToPose.Goal()
+        goal.x, goal.y, goal.z = coordinates
+        try:
+            future = self._move_to_pose_client.send_goal_async(
+                goal,
+                feedback_callback=lambda feedback: self._on_pose_feedback(
+                    request_id, feedback))
+        except Exception as error:
+            detail = f'XYZ Action goal提交失败：{error}'
+            self.guard.finish(request_id, False, False, detail)
+            self._emit(ActionUiEvent(
+                kind='pose_result', request_id=request_id,
+                phase='failed', detail=detail, success=False))
+            return
+        future.add_done_callback(
+            lambda completed: self._on_pose_goal_response(request_id, completed))
 
     def command_gripper(self, request_id: str, command: str) -> bool:
         """Send one of the two calibrated manual gripper commands.
@@ -365,6 +424,70 @@ class ColorActionBridge(Node):
         result_future.add_done_callback(
             lambda completed: self._on_result(request_id, completed))
 
+    def _on_pose_goal_response(self, request_id: str, future) -> None:
+        try:
+            goal_handle = future.result()
+        except Exception as error:
+            detail = f'XYZ Action goal提交失败：{error}'
+            self.guard.finish(request_id, False, False, detail)
+            self._emit(ActionUiEvent(
+                kind='pose_result', request_id=request_id,
+                phase='failed', detail=detail, success=False))
+            return
+        if goal_handle is None or not goal_handle.accepted:
+            detail = '机械臂拒绝了 XYZ 移动请求。'
+            self.guard.finish(request_id, False, False, detail)
+            self._emit(ActionUiEvent(
+                kind='pose_result', request_id=request_id,
+                phase='failed', detail=detail, success=False))
+            return
+        with self._lock:
+            self._active_goal = goal_handle
+            cancel_now = self._cancel_pending
+        self.guard.update(request_id, 'accepted', 'XYZ Action goal accepted')
+        self._emit(ActionUiEvent(
+            kind='pose_accepted', request_id=request_id, phase='accepted',
+            detail='XYZ 移动请求已接受，正在审核碰撞。'))
+        if cancel_now:
+            goal_handle.cancel_goal_async()
+        result_future = goal_handle.get_result_async()
+        result_future.add_done_callback(
+            lambda completed: self._on_pose_result(request_id, completed))
+
+    def _on_pose_feedback(self, request_id: str, feedback_message) -> None:
+        feedback = feedback_message.feedback
+        phase = str(feedback.phase)
+        detail = str(feedback.detail)
+        self.guard.update(request_id, phase, detail)
+        self._emit(ActionUiEvent(
+            kind='pose_feedback', request_id=request_id,
+            phase=phase, detail=detail))
+
+    def _on_pose_result(self, request_id: str, future) -> None:
+        try:
+            wrapped = future.result()
+            result = wrapped.result
+            success = bool(result.success)
+            error_code = int(result.error_code)
+            detail = str(result.message)
+            canceled = error_code == int(MoveToPose.Result.CANCELED)
+            self.guard.finish(request_id, success, canceled, detail)
+            self._emit(ActionUiEvent(
+                kind='pose_result', request_id=request_id,
+                phase='canceled' if canceled else 'done' if success else 'failed',
+                detail=detail, success=success, error_code=error_code,
+                executed=bool(result.executed)))
+        except Exception as error:
+            detail = f'读取 XYZ Action 结果失败：{error}'
+            self.guard.finish(request_id, False, False, detail)
+            self._emit(ActionUiEvent(
+                kind='pose_result', request_id=request_id,
+                phase='failed', detail=detail, success=False))
+        finally:
+            with self._lock:
+                self._active_goal = None
+                self._cancel_pending = False
+
     def _on_feedback(self, request_id: str, feedback_message) -> None:
         feedback = feedback_message.feedback
         phase = str(feedback.phase)
@@ -439,6 +562,36 @@ class ColorActionBridge(Node):
                 self._cancel_pending = False
         self._emit(ActionUiEvent(
             kind='cancel_result', detail=detail, success=success))
+
+    def reset_tabletop_direct(self, service_timeout_s: float = 0.1) -> bool:
+        """Clear retained desktop objects without using the model or moving the arm."""
+        if self.guard.snapshot().active or self.gripper_command_active():
+            self._emit(ActionUiEvent(
+                kind='tabletop_reset_result', success=False,
+                detail='任务或夹爪命令仍在运行，请等待结束后重置。'))
+            return False
+        try:
+            if not self._reset_tabletop_client.wait_for_service(
+                    timeout_sec=service_timeout_s):
+                raise RuntimeError('重置服务不可用，请确认抓取节点已更新并启动。')
+            future = self._reset_tabletop_client.call_async(Trigger.Request())
+            future.add_done_callback(self._on_reset_tabletop_service)
+            return True
+        except Exception as error:
+            self._emit(ActionUiEvent(
+                kind='tabletop_reset_result', success=False, detail=str(error)))
+            return False
+
+    def _on_reset_tabletop_service(self, future) -> None:
+        try:
+            response = future.result()
+            success = bool(response and response.success)
+            detail = str(response.message if response else '重置服务无响应')
+        except Exception as error:
+            success = False
+            detail = f'重置失败：{error}'
+        self._emit(ActionUiEvent(
+            kind='tabletop_reset_result', success=success, detail=detail))
 
     def acknowledge_release_direct(self, service_timeout_s: float = 1.0) -> bool:
         """Synchronize a physically empty gripper; this sends no motion command."""

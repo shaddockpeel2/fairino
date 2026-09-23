@@ -31,8 +31,8 @@ def generate_launch_description():
 
     return LaunchDescription([
         DeclareLaunchArgument(
-            'config', default_value=str(camera_share / 'config/dabai_dcw2_rviz.yaml'),
-            description='Camera parameter YAML. The default enables RGB point cloud.',
+            'config', default_value=str(camera_share / 'config/dabai_dcw2_rviz_15fps.yaml'),
+            description='Camera parameter YAML. The default enables RGB point cloud at 15 FPS.',
         ),
         DeclareLaunchArgument(
             'rviz_config', default_value=str(camera_share / 'rviz/dabai_dcw2.rviz'),

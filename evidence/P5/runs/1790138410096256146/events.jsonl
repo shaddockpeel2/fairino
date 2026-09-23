@@ -1,0 +1,31 @@
+{"time_ns":1790138410096636191,"event":"run_started","detail":"execution"}
+{"time_ns":1790138410096679067,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1790138410099877516,"event":"gripper_pre_open_started","detail":"requested_position_m=0.060000"}
+{"time_ns":1790138412395057315,"event":"gripper_pre_open","detail":"result_code=4,reached_goal=1,requested_position_m=0.06,reported_position_m=0.06,stalled=0"}
+{"time_ns":1790138412403510194,"event":"gripper_state_pre_open","detail":"estimated_position_m=0.060000"}
+{"time_ns":1790138412404414953,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube and stack support cube added"}
+{"time_ns":1790138412515535262,"event":"plan_candidate_0_approach","detail":"return_code=1"}
+{"time_ns":1790138412521183445,"event":"plan_candidate_0_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0235568367"}
+{"time_ns":1790138412523035255,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1790138412531844263,"event":"plan_candidate_0_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0235575001"}
+{"time_ns":1790138422647561614,"event":"plan_candidate_0_place_approach","detail":"return_code=99999"}
+{"time_ns":1790138422649946889,"event":"grasp_candidate_rejected","detail":"index=0,yaw_rad=-1.657990,reason=candidate_0_place_approach planning failed with MoveIt code 99999"}
+{"time_ns":1790138422748978657,"event":"plan_candidate_1_approach","detail":"return_code=1"}
+{"time_ns":1790138422756726278,"event":"plan_candidate_1_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0196350001"}
+{"time_ns":1790138422759728726,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1790138422769115530,"event":"plan_candidate_1_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0196350001"}
+{"time_ns":1790138432888491011,"event":"plan_candidate_1_place_approach","detail":"return_code=99999"}
+{"time_ns":1790138432896515719,"event":"grasp_candidate_rejected","detail":"index=1,yaw_rad=-0.087194,reason=candidate_1_place_approach planning failed with MoveIt code 99999"}
+{"time_ns":1790138433046355468,"event":"plan_candidate_2_approach","detail":"return_code=1"}
+{"time_ns":1790138433063019139,"event":"plan_candidate_2_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0196350001"}
+{"time_ns":1790138433065673041,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1790138433075645519,"event":"plan_candidate_2_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0196350001"}
+{"time_ns":1790138443182314419,"event":"plan_candidate_2_place_approach","detail":"return_code=99999"}
+{"time_ns":1790138443186586505,"event":"grasp_candidate_rejected","detail":"index=2,yaw_rad=1.483603,reason=candidate_2_place_approach planning failed with MoveIt code 99999"}
+{"time_ns":1790138443287779837,"event":"plan_candidate_3_approach","detail":"return_code=1"}
+{"time_ns":1790138443296083672,"event":"plan_candidate_3_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0196350001"}
+{"time_ns":1790138443298126235,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1790138443310497404,"event":"plan_candidate_3_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.0196350001"}
+{"time_ns":1790138453419861049,"event":"plan_candidate_3_place_approach","detail":"return_code=99999"}
+{"time_ns":1790138453434347989,"event":"grasp_candidate_rejected","detail":"index=3,yaw_rad=3.054399,reason=candidate_3_place_approach planning failed with MoveIt code 99999"}
+{"time_ns":1790138453434518324,"event":"state","detail":"retryable_failure_before_arm_motion: no equivalent red grasp can place the cube on the yellow cube within 0.785398 rad of wrist rotation and with a complete collision-free trajectory; no arm motion started, fix the condition and call /start again"}

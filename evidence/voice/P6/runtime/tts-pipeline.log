@@ -3,6 +3,5 @@
 /project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: shei2
 /project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: shei2
 /project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: shei2
-{"event": "ready", "socket": "/home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock", "pid": 9083, "candidate": "matcha-icefall-zh-baker", "sample_rate": 22050, "affinity": "big:4-7", "trace": "/home/industio/fairino_ws/evidence/voice/P6/runtime/service-trace.jsonl", "load_s": 4.223882607999997}
-/project/sherpa-onnx/csrc/character-lexicon.cc:ConvertTextToTokenIds:181 Ignore OOV 'B'
-/project/sherpa-onnx/csrc/character-lexicon.cc:ConvertTextToTokenIds:181 Ignore OOV 'H'
+{"event": "ready", "socket": "/home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock", "pid": 1238233, "candidate": "matcha-icefall-zh-baker", "sample_rate": 22050, "affinity": "big:4-7", "trace": "/home/industio/fairino_ws/evidence/voice/P6/runtime/service-trace.jsonl", "load_s": 4.004409807999764}
+/project/sherpa-onnx/csrc/character-lexicon.cc:ConvertTextToTokenIds:181 Ignore OOV '·'

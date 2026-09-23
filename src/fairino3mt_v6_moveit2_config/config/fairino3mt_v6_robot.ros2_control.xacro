@@ -18,36 +18,42 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint1']}</param>
                 </state_interface>
+                <state_interface name="velocity"/>
             </joint>
             <joint name="joint2">
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint2']}</param>
                 </state_interface>
+                <state_interface name="velocity"/>
             </joint>
             <joint name="joint3">
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint3']}</param>
                 </state_interface>
+                <state_interface name="velocity"/>
             </joint>
             <joint name="joint4">
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint4']}</param>
                 </state_interface>
+                <state_interface name="velocity"/>
             </joint>
             <joint name="joint5">
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint5']}</param>
                 </state_interface>
+                <state_interface name="velocity"/>
             </joint>
             <joint name="joint6">
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['joint6']}</param>
                 </state_interface>
+                <state_interface name="velocity"/>
             </joint>
 
             <!-- Read-only FAIRINO controller state exported by the existing
@@ -90,6 +96,12 @@
                 <state_interface name="flange_rx_deg"/>
                 <state_interface name="flange_ry_deg"/>
                 <state_interface name="flange_rz_deg"/>
+                <!-- Read-only timing metrics for diagnosing ServoJ stream jitter. -->
+                <state_interface name="read_position_call_ms"/>
+                <state_interface name="read_status_call_ms"/>
+                <state_interface name="servo_j_call_ms"/>
+                <state_interface name="servo_j_interval_ms"/>
+                <state_interface name="control_period_ms"/>
               </gpio>
             </xacro:if>
 

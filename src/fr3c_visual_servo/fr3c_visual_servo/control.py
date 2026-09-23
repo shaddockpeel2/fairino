@@ -11,6 +11,7 @@ SUPPORTED_COLORS = ('red', 'yellow', 'blue', 'green')
 
 class Phase(str, Enum):
     ACQUIRING = 'ACQUIRING'
+    INITIAL_CENTERING = 'INITIAL_CENTERING'
     TRACKING = 'TRACKING'
     CENTER_HOLD = 'CENTER_HOLD'
     LOST_HOLD = 'LOST_HOLD'
@@ -39,6 +40,8 @@ class ControllerConfig:
     axis_sign_y: float = 1.0
     max_speed_mps: float = 0.005
     max_acceleration_mps2: float = 0.030
+    initial_center_half_width_px: float = 12.0
+    initial_center_half_height_px: float = 9.0
     enter_half_width_px: float = 40.0
     enter_half_height_px: float = 30.0
     exit_half_width_px: float = 55.0
@@ -46,9 +49,11 @@ class ControllerConfig:
     enter_frames: int = 3
     exit_frames: int = 2
     observation_stale_s: float = 0.40
-    lost_timeout_s: float = 1.0
+    dropout_grace_s: float = 0.16
+    # Zero means keep the Action alive in LOST_HOLD until recovery, cancel,
+    # or the goal's maximum duration.
+    lost_timeout_s: float = 0.0
     acquisition_timeout_s: float = 5.0
-    max_relative_xy_m: float = 0.08
 
     def validate(self) -> None:
         positive = {
@@ -57,20 +62,33 @@ class ControllerConfig:
             'gain_y_mps': self.gain_y_mps,
             'max_speed_mps': self.max_speed_mps,
             'max_acceleration_mps2': self.max_acceleration_mps2,
+            'initial_center_half_width_px': self.initial_center_half_width_px,
+            'initial_center_half_height_px': self.initial_center_half_height_px,
             'enter_half_width_px': self.enter_half_width_px,
             'enter_half_height_px': self.enter_half_height_px,
             'exit_half_width_px': self.exit_half_width_px,
             'exit_half_height_px': self.exit_half_height_px,
             'observation_stale_s': self.observation_stale_s,
-            'lost_timeout_s': self.lost_timeout_s,
             'acquisition_timeout_s': self.acquisition_timeout_s,
-            'max_relative_xy_m': self.max_relative_xy_m,
         }
         if any(not math.isfinite(value) or value <= 0.0
                for value in positive.values()):
             raise ValueError('controller_limits_must_be_finite_and_positive')
+        if self.max_speed_mps > 0.075:
+            raise ValueError('max_speed_mps_exceeds_75_mm_per_second_limit')
+        if (not math.isfinite(self.dropout_grace_s)
+                or not 0.0 <= self.dropout_grace_s <= 0.20):
+            raise ValueError('dropout_grace_s_out_of_range')
+        if not math.isfinite(self.lost_timeout_s) or self.lost_timeout_s < 0.0:
+            raise ValueError('lost_timeout_s_must_be_nonnegative')
+        if self.max_acceleration_mps2 > 0.090:
+            raise ValueError('max_acceleration_mps2_exceeds_limit')
         if self.enter_frames < 1 or self.exit_frames < 1:
             raise ValueError('hysteresis_frame_counts_must_be_positive')
+        if (self.initial_center_half_width_px > self.enter_half_width_px
+                or self.initial_center_half_height_px
+                > self.enter_half_height_px):
+            raise ValueError('initial_center_region_must_fit_inside_enter_region')
         if (self.exit_half_width_px <= self.enter_half_width_px
                 or self.exit_half_height_px <= self.enter_half_height_px):
             raise ValueError('exit_region_must_enclose_enter_region')
@@ -144,7 +162,7 @@ class TrackingController:
         self.started_s = float(started_s)
         self.max_duration_s = float(max_duration_s)
         self.phase = Phase.ACQUIRING
-        self._phase_before_loss = Phase.TRACKING
+        self._phase_before_loss = Phase.INITIAL_CENTERING
         self._loss_started_s = None
         self._last_step_s = float(started_s)
         self._last_sample_id = None
@@ -154,6 +172,7 @@ class TrackingController:
         self._estimated_xy = (0.0, 0.0)
         self._last_error = (0.0, 0.0)
         self._last_target = (0.0, 0.0)
+        self._last_valid_source_s = None
 
     @property
     def estimated_displacement_xy_m(self) -> Tuple[float, float]:
@@ -167,7 +186,7 @@ class TrackingController:
             detail, observation_age_s, done=True, termination=termination)
 
     def update(self, observation: Optional[Observation],
-               now_s: float, *, measured_xy_m=None) -> ControlOutput:
+               now_s: float) -> ControlOutput:
         if not math.isfinite(now_s):
             return self.stop(Termination.INTERNAL_ERROR, 'invalid_clock')
         if self.phase == Phase.STOPPING:
@@ -186,7 +205,15 @@ class TrackingController:
 
         valid, reason, age_s = self._classify_observation(observation, now_s)
         if not valid:
+            if self._can_bridge_short_dropout(reason, now_s):
+                self._estimated_xy = (
+                    self._estimated_xy[0] + self._command[0] * dt_s,
+                    self._estimated_xy[1] + self._command[1] * dt_s,
+                )
+                return self._output(
+                    f'bridging_short_target_gap:{reason}', age_s)
             return self._handle_invalid(reason, age_s, now_s, elapsed_s)
+        self._last_valid_source_s = now_s - age_s
 
         is_new = observation.sample_id != self._last_sample_id
         if is_new:
@@ -197,21 +224,32 @@ class TrackingController:
         self._last_error = (error_x, error_y)
         self._last_target = (
             observation.target_u_px, observation.target_v_px)
+        initial_centering = (
+            self.phase in (Phase.ACQUIRING, Phase.INITIAL_CENTERING)
+            or (self.phase == Phase.LOST_HOLD
+                and self._phase_before_loss == Phase.INITIAL_CENTERING))
+        enter_width = (self.config.initial_center_half_width_px
+                       if initial_centering
+                       else self.config.enter_half_width_px)
+        enter_height = (self.config.initial_center_half_height_px
+                        if initial_centering
+                        else self.config.enter_half_height_px)
         inside_enter = (
-            abs(error_x) <= self.config.enter_half_width_px
-            and abs(error_y) <= self.config.enter_half_height_px)
+            abs(error_x) <= enter_width and abs(error_y) <= enter_height)
         outside_exit = (
             abs(error_x) > self.config.exit_half_width_px
             or abs(error_y) > self.config.exit_half_height_px)
 
         if self.phase == Phase.ACQUIRING:
-            self.phase = Phase.TRACKING
-            self._phase_before_loss = Phase.TRACKING
+            self.phase = Phase.INITIAL_CENTERING
+            self._phase_before_loss = Phase.INITIAL_CENTERING
             self._loss_started_s = None
         elif self.phase == Phase.LOST_HOLD:
             if (self._phase_before_loss == Phase.CENTER_HOLD
                     and not outside_exit):
                 self.phase = Phase.CENTER_HOLD
+            elif self._phase_before_loss == Phase.INITIAL_CENTERING:
+                self.phase = Phase.INITIAL_CENTERING
             else:
                 self.phase = Phase.TRACKING
             self._loss_started_s = None
@@ -246,16 +284,11 @@ class TrackingController:
             self._estimated_xy[0] + command[0] * dt_s,
             self._estimated_xy[1] + command[1] * dt_s,
         )
-        displacement = (math.hypot(*candidate_xy) if measured_xy_m is None
-                        else measured_xy_m)
-        if (not math.isfinite(displacement) or displacement < 0.0
-                or displacement >= self.config.max_relative_xy_m):
-            return self.stop(
-                Termination.SAFETY_LIMIT,
-                'estimated_relative_xy_limit_reached', age_s)
         self._estimated_xy = candidate_xy
         self._command = command
-        return self._output('tracking_target', age_s)
+        return self._output(
+            'centering_initial_target' if self.phase == Phase.INITIAL_CENTERING
+            else 'tracking_target', age_s)
 
     def _classify_observation(self, observation, now_s):
         if observation is None:
@@ -285,11 +318,25 @@ class TrackingController:
             self._phase_before_loss = self.phase
             self.phase = Phase.LOST_HOLD
             self._loss_started_s = now_s
-        if (self._loss_started_s is not None
+        if (self.config.lost_timeout_s > 0.0
+                and self._loss_started_s is not None
                 and now_s - self._loss_started_s >= self.config.lost_timeout_s):
             return self.stop(self._termination_for_reason(reason),
                              f'target_loss_timeout:{reason}', age_s)
         return self._output(f'holding_for_target_recovery:{reason}', age_s)
+
+    def _can_bridge_short_dropout(self, reason, now_s):
+        if (reason not in ('target_not_found', 'target_not_unique',
+                           'collecting_stable_samples')
+                or self.phase not in (Phase.INITIAL_CENTERING, Phase.TRACKING)
+                or self._last_valid_source_s is None):
+            return False
+        speed = math.hypot(*self._command)
+        if speed <= 0.0:
+            return False
+        # Never continue a blind command for more than 5 mm nominal travel.
+        grace_s = min(self.config.dropout_grace_s, 0.005 / speed)
+        return now_s - self._last_valid_source_s <= grace_s
 
     @staticmethod
     def _termination_for_reason(reason):

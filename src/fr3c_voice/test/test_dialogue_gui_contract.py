@@ -10,7 +10,7 @@ WORKSPACE = Path(__file__).resolve().parents[3]
 SOURCE = WORKSPACE / 'src/fr3c_voice/fr3c_voice/dialogue_gui.py'
 
 
-def test_gui_exposes_dialogue_and_two_state_gripper_pages():
+def test_gui_exposes_dialogue_and_robot_action_control_pages():
     source = SOURCE.read_text(encoding='utf-8')
     assert 'ttk.Notebook' in source
     assert '点动' not in source
@@ -18,9 +18,17 @@ def test_gui_exposes_dialogue_and_two_state_gripper_pages():
             '发送', '开始说话', '截图问答', '自动播报',
             '停止播报', '停止抓取', '模型', '视觉', '任务',
             '知识', '资料来源', '唤醒：未唤醒', '正在接收问题',
-            '秒后退出', '我在', '夹爪控制', '打开夹爪', '闭合夹爪',
+            '秒后退出', '我在', '机械臂控制抓取', '打开夹爪', '闭合夹爪',
             '夹持；无物体时完全闭合', '夹爪 Action 服务不可用'):
         assert label in source
+    for task in ('pick_hold', 'pick_sort', 'pick_place',
+                 'pick_stack', 'pick_auto_stack'):
+        assert task in source
+    assert "state='readonly'" in source
+    assert '执行所选 Action' in source
+    assert '停止当前任务' in source
+    assert 'A 区（自动空位）' in source
+    assert 'range(1, 5)' in source
     assert "command=lambda: self.command_gripper('open')" in source
     assert "command=lambda: self.command_gripper('close')" in source
     assert '60 mm · 70°' in source
@@ -195,3 +203,127 @@ def test_stage8_generation_streams_same_tokens_to_ui_and_speech():
     assert events == [
         'speech_stream_started', 'answer_token', 'answer_token',
         'answer_result', 'speech_done']
+
+
+def test_automatic_stack_shows_the_action_summary_not_a_single_cube():
+    """
+    The automatic stack reports a whole tower, not one placed cube.
+
+    Its result reuses the colour fields for the two ends of the tower, so the
+    generic "put <colour> on <colour>" sentence would describe the wrong thing.
+    The action's own message already lists the order, the height and the
+    remaining state, so it has to be the line the operator sees.
+    """
+    source = SOURCE.read_text(encoding='utf-8')
+    handler = source[
+        source.index("elif event.kind == 'result':"):
+        source.index("elif event.kind == 'cancel_requested':")]
+    assert "self.bridge.guard.snapshot().task == 'pick_auto_stack'" in handler
+    assert 'summary = event.detail' in handler
+    assert "summary = f'任务已实际完成" in handler
+    assert handler.index("task == 'pick_auto_stack'") < handler.index(
+        "summary = f'任务已实际完成")
+
+
+def test_tabletop_reset_button_calls_bridge_without_model_or_motion():
+    from fr3c_voice.dialogue_gui import DialogueGui
+
+    states = []
+    messages = []
+    calls = []
+    app = SimpleNamespace(
+        reset_tabletop_button=SimpleNamespace(configure=lambda **kw: states.append(kw)),
+        _append=lambda role, text: messages.append((role, text)),
+        bridge=SimpleNamespace(reset_tabletop_direct=lambda: calls.append('reset')))
+    DialogueGui.reset_tabletop_objects(app)
+    assert states == [{'state': 'disabled'}]
+    assert calls == ['reset']
+    assert '历史位姿' in messages[0][1]
+
+
+def test_robot_control_form_maps_each_action_to_valid_parameters():
+    from fr3c_voice.dialogue_gui import DialogueGui
+
+    class Value:
+        def __init__(self, value): self.value = value
+        def get(self): return self.value
+
+    gui = SimpleNamespace(
+        action_task_var=Value('抓取到指定区域'),
+        action_color_var=Value('黄色'),
+        action_zone_var=Value('C3 槽位'),
+        action_support_var=Value('蓝色'))
+    assert DialogueGui._selected_action_values(gui) == (
+        'pick_place', 'yellow', 'c3', '')
+
+    gui.action_task_var.value = '单次码垛'
+    assert DialogueGui._selected_action_values(gui) == (
+        'pick_stack', 'yellow', '', 'blue')
+
+    gui.action_task_var.value = '自动码垛'
+    assert DialogueGui._selected_action_values(gui) == (
+        'pick_auto_stack', '', '', '')
+
+
+def test_robot_control_execute_dispatches_directly_to_selected_action():
+    from fr3c_voice.dialogue_gui import DialogueGui
+
+    calls = []
+    states = []
+    bridge = SimpleNamespace(send=lambda *args: calls.append(args))
+    gui = SimpleNamespace(
+        _dialogue_busy=False,
+        _gripper_busy=False,
+        _selected_action_values=lambda: ('pick_stack', 'red', '', 'blue'),
+        _pause_wake=lambda: calls.append(('pause_wake',)),
+        action_result_var=SimpleNamespace(set=lambda value: states.append(value)),
+        bridge=bridge,
+        _request_sources={},
+        _active_action_request='',
+        _set_busy=lambda busy: calls.append(('busy', busy)),
+        _refresh_action_controls=lambda: calls.append(('refresh',)),
+        _schedule_wake=lambda _mode: None)
+    DialogueGui.execute_selected_action(gui)
+    dispatched = [call for call in calls if len(call) == 5]
+    assert len(dispatched) == 1
+    assert dispatched[0][1:] == ('pick_stack', 'red', '', 'blue')
+    assert gui._request_sources[dispatched[0][0]] == 'robot_control_page'
+    assert ('busy', True) in calls
+    assert states[0] == '正在提交：单次码垛 · 红色方块 → 蓝色方块上'
+
+
+def test_xyz_control_validates_and_dispatches_coordinates_without_model():
+    from fr3c_voice.dialogue_gui import DialogueGui
+
+    class Value:
+        def __init__(self, value): self.value = value
+        def get(self): return self.value
+        def set(self, value): self.value = value
+
+    calls = []
+    gui = SimpleNamespace(
+        _dialogue_busy=False,
+        _gripper_busy=False,
+        pose_x_var=Value('0.125'),
+        pose_y_var=Value('-0.450'),
+        pose_z_var=Value('0.320'),
+        pose_result_var=Value(''),
+        _pause_wake=lambda: calls.append(('pause',)),
+        bridge=SimpleNamespace(send_pose=lambda *args: calls.append(args)),
+        _request_sources={},
+        _active_action_request='',
+        _set_busy=lambda busy: calls.append(('busy', busy)),
+        _refresh_pose_controls=lambda: calls.append(('refresh',)),
+        _schedule_wake=lambda _mode: None)
+    DialogueGui.execute_xyz_move(gui)
+    sent = [call for call in calls if len(call) == 4][0]
+    assert sent[1:] == (0.125, -0.45, 0.32)
+    assert gui._request_sources[sent[0]] == 'robot_control_page'
+    assert ('busy', True) in calls
+
+    gui._dialogue_busy = False
+    gui.pose_x_var.value = 'not-a-number'
+    before = len(calls)
+    DialogueGui.execute_xyz_move(gui)
+    assert len(calls) == before
+    assert gui.pose_result_var.value.startswith('输入无效：')

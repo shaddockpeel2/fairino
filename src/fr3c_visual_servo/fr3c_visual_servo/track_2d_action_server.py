@@ -158,6 +158,8 @@ class Track2DActionServer(Node):
             'axis_sign_y': 1.0,
             'max_speed_mps': 0.005,
             'max_acceleration_mps2': 0.030,
+            'initial_center_half_width_px': 12.0,
+            'initial_center_half_height_px': 9.0,
             'enter_half_width_px': 40.0,
             'enter_half_height_px': 30.0,
             'exit_half_width_px': 55.0,
@@ -165,9 +167,9 @@ class Track2DActionServer(Node):
             'enter_frames': 3,
             'exit_frames': 2,
             'observation_stale_s': 0.40,
-            'lost_timeout_s': 1.0,
+            'dropout_grace_s': 0.16,
+            'lost_timeout_s': 0.0,
             'acquisition_timeout_s': 5.0,
-            'max_relative_xy_m': 0.08,
             'stop_publish_cycles': 5,
         }
         for name, value in defaults.items():
@@ -185,6 +187,10 @@ class Track2DActionServer(Node):
             axis_sign_y=float(value('axis_sign_y')),
             max_speed_mps=float(value('max_speed_mps')),
             max_acceleration_mps2=float(value('max_acceleration_mps2')),
+            initial_center_half_width_px=float(
+                value('initial_center_half_width_px')),
+            initial_center_half_height_px=float(
+                value('initial_center_half_height_px')),
             enter_half_width_px=float(value('enter_half_width_px')),
             enter_half_height_px=float(value('enter_half_height_px')),
             exit_half_width_px=float(value('exit_half_width_px')),
@@ -192,9 +198,9 @@ class Track2DActionServer(Node):
             enter_frames=int(value('enter_frames')),
             exit_frames=int(value('exit_frames')),
             observation_stale_s=float(value('observation_stale_s')),
+            dropout_grace_s=float(value('dropout_grace_s')),
             lost_timeout_s=float(value('lost_timeout_s')),
             acquisition_timeout_s=float(value('acquisition_timeout_s')),
-            max_relative_xy_m=float(value('max_relative_xy_m')),
         )
         config.validate()
         return config
@@ -298,7 +304,10 @@ class Track2DActionServer(Node):
 
     def _on_servo_status(self, message):
         status = int(message.data)
-        if status in (2, 4, 5):
+        # Servo itself halts at singularities and joint bounds (2, 5), then
+        # retries the current command when the target moves back into reach.
+        # A collision halt (4) still aborts the Action and releases control.
+        if status == 4:
             with self._lock:
                 self._servo_fault = status
 
@@ -356,9 +365,7 @@ class Track2DActionServer(Node):
                 else:
                     with self._lock:
                         observation = self._latest_observation
-                    final_output = controller.update(
-                        observation, now_s, measured_xy_m=(
-                            self._measured_xy_m if self._execute_enabled else None))
+                    final_output = controller.update(observation, now_s)
 
                 if (self._execute_enabled and not lease_id
                         and not final_output.done
@@ -565,8 +572,6 @@ class Track2DActionServer(Node):
             self._tcp_origin = pose
         origin = self._tcp_origin
         self._measured_xy_m = math.hypot(p.x - origin[0], p.y - origin[1])
-        if self._measured_xy_m >= self._config.max_relative_xy_m:
-            raise ValueError('measured_relative_xy_limit_reached')
         if abs(p.z - origin[2]) > float(self.get_parameter('max_z_drift_m').value):
             raise ValueError('tcp_height_drift_limit_reached')
         norm = math.sqrt(sum(v*v for v in pose[3:]) *

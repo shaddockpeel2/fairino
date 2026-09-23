@@ -1,0 +1,28 @@
+{"time_ns":1790142568177333953,"event":"run_started","detail":"plan_only"}
+{"time_ns":1790142568177364870,"event":"target_snapshot","detail":"stable target copied; equivalent yaws will be planned"}
+{"time_ns":1790142568178550508,"event":"scene_applied","detail":"RViz XY plane converted to a collision slab below Z=0.000000; visual target cube added"}
+{"time_ns":1790142568375604151,"event":"plan_candidate_0_approach","detail":"return_code=1"}
+{"time_ns":1790142568437845049,"event":"plan_candidate_0_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.00785400011"}
+{"time_ns":1790142568465406397,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1790142568483898560,"event":"plan_candidate_0_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.00785400001"}
+{"time_ns":1790142568506443476,"event":"grasp_candidate_valid","detail":"index=0,yaw_rad=-1.59798647,planned_duration_s=43.2957728,joint_space_path_length_rad=5.86250474,joint1_travel_rad=2.99002611,joint2_travel_rad=1.97838277,joint3_travel_rad=0.457522408,joint4_travel_rad=1.35187171,joint5_travel_rad=3.57701733,joint6_travel_rad=1.69734804"}
+{"time_ns":1790142568667355719,"event":"plan_candidate_1_approach","detail":"return_code=1"}
+{"time_ns":1790142568819299695,"event":"plan_candidate_1_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.00942499698"}
+{"time_ns":1790142569323814246,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1790142569364566656,"event":"plan_candidate_1_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.00942517774"}
+{"time_ns":1790142569370968811,"event":"grasp_candidate_valid","detail":"index=1,yaw_rad=-0.0271901403,planned_duration_s=80.4779356,joint_space_path_length_rad=9.08092856,joint1_travel_rad=2.70943348,joint2_travel_rad=4.29320902,joint3_travel_rad=3.54446242,joint4_travel_rad=1.90987986,joint5_travel_rad=3.10115165,joint6_travel_rad=0.90539769"}
+{"time_ns":1790142569460422219,"event":"plan_candidate_2_approach","detail":"return_code=1"}
+{"time_ns":1790142569484860657,"event":"plan_candidate_2_descend","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.00942300006"}
+{"time_ns":1790142569510569025,"event":"cube_attached","detail":"touch permission limited to configured finger links"}
+{"time_ns":1790142569525314980,"event":"plan_candidate_2_lift","detail":"fraction=1,moveit_code=1,maximum_joint_step_rad=0.00942300001"}
+{"time_ns":1790142569544981698,"event":"grasp_candidate_valid","detail":"index=2,yaw_rad=1.54360619,planned_duration_s=19.7915244,joint_space_path_length_rad=2.12832999,joint1_travel_rad=0.118094079,joint2_travel_rad=0.684545964,joint3_travel_rad=0.602543485,joint4_travel_rad=0.591238155,joint5_travel_rad=0.260322759,joint6_travel_rad=1.4097238"}
+{"time_ns":1790142579699842893,"event":"plan_candidate_3_approach","detail":"return_code=99999"}
+{"time_ns":1790142579705090910,"event":"grasp_candidate_rejected","detail":"index=3,yaw_rad=3.114403,reason=candidate_3_approach planning failed with MoveIt code 99999"}
+{"time_ns":1790142579716807289,"event":"grasp_candidate_selected","detail":"yaw_rad=1.543606,planned_duration_s=19.791524,joint_space_path_length_rad=2.128330"}
+{"time_ns":1790142579719132190,"event":"preview_complete","detail":"approach, full descend and attached full lift planned"}
+{"time_ns":1790142579719472569,"event":"latency","detail":"\"stage\":\"planning_done\",\"elapsed_ms\":12615.6"}
+{"time_ns":1790142579720449080,"event":"target_locked","detail":"locked top=[-0.0537550444,-0.46817298,0.0314924311] m, object_yaw=-0.0271901403 rad, applied_grasp_yaw=1.54360619 rad"}
+{"time_ns":1790142579721570551,"event":"state","detail":"plan_only_complete: three motions planned; no command was sent"}
+{"time_ns":1790142637454080850,"event":"state","detail":"waiting_for_target: pick_hold accepted; requesting a fresh unique red target"}
+{"time_ns":1790142637582375938,"event":"target_filter_set","detail":"color=red,generation=2"}
+{"time_ns":1790142638764789954,"event":"latency","detail":"\"stage\":\"target_acquired\",\"elapsed_ms\":1325.9"}

@@ -124,9 +124,10 @@ def tabletop_cube_tier(surface, cube_height_m, cube_max_axis_ratio,
 
     Tier 0 means a cube resting directly on the work plane. Tier ``k`` means a
     cube whose bottom rests on ``stacked_offsets_m[k - 1]``, which is how the
-    two-cube stack reports its upper cube. The returned tier is what the P2
-    stack task uses to decide whether a detected top can still be used as the
-    lower cube of a new stack.
+    stack reports the top cube of a tower. ``stacked_offsets_m`` therefore has
+    one entry per supported stacked tier: three entries make a four-cube tower
+    fully detectable. The returned tier is what the P2 stack task uses to decide
+    whether a detected top can still be used as the lower cube of a new stack.
     """
     offsets = tuple(stacked_offsets_m)
     if not np.isfinite((cube_height_m, cube_max_axis_ratio, plane_z_m,
@@ -150,12 +151,19 @@ def tabletop_cube_tier(surface, cube_height_m, cube_max_axis_ratio,
     gaps = [float(center[2] - cube_height_m - plane_z_m)]
     for offset in offsets:
         gaps.append(float(center[2] - cube_height_m - offset - plane_z_m))
+    # Tier 0 keeps the tight tabletop window. A stacked cube is measured on top
+    # of one or more other cubes, so its expected height carries one real
+    # cube-height estimate per interposed cube. Those errors add up, so the
+    # wider stack_tolerance_m window is what keeps the top cube of a tall tower
+    # detectable instead of losing it to accumulated millimetres. The windows of
+    # neighbouring tiers cannot overlap: the offsets are one cube apart and the
+    # tolerance stays well below half a cube.
     for tier, gap in enumerate(gaps):
         if tier == 0:
             if -lower_tolerance <= gap <= maximum_plane_gap_m:
                 return 0
-        elif -lower_tolerance <= gap <= maximum_plane_gap_m and \
-                gaps[tier - 1] > maximum_plane_gap_m:
+        elif -stack_tolerance_m <= gap <= stack_tolerance_m and \
+                gaps[tier - 1] > stack_tolerance_m:
             return tier
     return None
 

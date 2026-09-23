@@ -708,6 +708,76 @@
       "task": "pick_stack",
       "color": "blue",
       "support_color": "red"
+    },
+    {
+      "id": "auto-001",
+      "category": "auto_stack",
+      "text": "自动码垛",
+      "route": "action",
+      "task": "pick_auto_stack",
+      "color": null,
+      "zone": null,
+      "support_color": null
+    },
+    {
+      "id": "auto-002",
+      "category": "auto_stack",
+      "text": "自动堆叠",
+      "route": "action",
+      "task": "pick_auto_stack",
+      "color": null,
+      "zone": null,
+      "support_color": null
+    },
+    {
+      "id": "auto-003",
+      "category": "auto_stack",
+      "text": "一键码垛",
+      "route": "action",
+      "task": "pick_auto_stack",
+      "color": null,
+      "zone": null,
+      "support_color": null
+    },
+    {
+      "id": "auto-004",
+      "category": "auto_stack",
+      "text": "全自动码垛",
+      "route": "action",
+      "task": "pick_auto_stack",
+      "color": null,
+      "zone": null,
+      "support_color": null
+    },
+    {
+      "id": "auto-005",
+      "category": "auto_stack",
+      "text": "帮我自动码垛",
+      "route": "action",
+      "task": "pick_auto_stack",
+      "color": null,
+      "zone": null,
+      "support_color": null
+    },
+    {
+      "id": "auto-006",
+      "category": "auto_stack",
+      "text": "自动把方块码起来",
+      "route": "action",
+      "task": "pick_auto_stack",
+      "color": null,
+      "zone": null,
+      "support_color": null
+    },
+    {
+      "id": "auto-007",
+      "category": "auto_stack",
+      "text": "自动码放",
+      "route": "action",
+      "task": "pick_auto_stack",
+      "color": null,
+      "zone": null,
+      "support_color": null
     }
   ]
 }

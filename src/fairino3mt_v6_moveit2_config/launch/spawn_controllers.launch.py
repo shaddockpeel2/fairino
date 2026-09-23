@@ -26,6 +26,12 @@ def generate_launch_description():
         arguments=["fairino3mt_execution_controller", "--inactive"],
         output="screen",
     )
+    servo_controller = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["fairino3mt_servo_position_controller", "--inactive"],
+        output="screen",
+    )
     trajectory_bridge = Node(
         package="fairino3mt_v6_moveit2_config",
         executable="trajectory_control_bridge.py",
@@ -36,8 +42,14 @@ def generate_launch_description():
     return LaunchDescription([
         state_broadcaster,
         RegisterEventHandler(OnProcessExit(
-            target_action=execution_controller,
+            target_action=servo_controller,
             on_exit=[trajectory_bridge],
+        )),
+        # Load both arm controllers before starting the bridge.  Both are
+        # inactive, so only joint_state_broadcaster owns resources at idle.
+        RegisterEventHandler(OnProcessExit(
+            target_action=execution_controller,
+            on_exit=[servo_controller],
         )),
         execution_controller,
     ])

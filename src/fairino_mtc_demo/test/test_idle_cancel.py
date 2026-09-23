@@ -6,7 +6,7 @@ import subprocess
 def test_cancel_preserves_idle_terminal_states_and_stops_active_tasks(tmp_path):
     source = (Path(__file__).parents[1] / 'src/first_grasp_node.cpp').read_text()
     start = source.index('  void cancel(const std::shared_ptr<std_srvs::srv::Trigger::Response> & response)')
-    end = source.index('\n  void acknowledgeObjectReleased(', start)
+    end = source.index('\n  void resetTabletopObjects(', start)
     handler = source[start:end]
     harness = r'''
 #include <atomic>
@@ -21,6 +21,7 @@ struct Gripper { int stops = 0; void async_cancel_all_goals() { ++stops; } };
 struct Condition { int notices = 0; void notify_all() { ++notices; } };
 struct Task {
   std::atomic<bool> worker_running_{false}, action_goal_claimed_{false}, canceled_{false};
+  std::atomic<bool> auto_stack_active_{false};
   std::unique_ptr<Arm> move_group_ = std::make_unique<Arm>();
   std::unique_ptr<Gripper> gripper_client_ = std::make_unique<Gripper>();
   Condition condition_;
@@ -45,12 +46,14 @@ int main() {
       assert(task.condition_.notices == 0);
     }
   }
-  // A task awaiting target/authorization and a claimed Action must still stop.
-  for (int flags : {1, 2, 3}) {
+  // A task awaiting target/authorization, a claimed Action, or an automatic
+  // stack that is between two of its layers must still stop.
+  for (int flags : {1, 2, 3, 4, 5, 6, 7}) {
     Task task;
     task.state = 0;
     task.worker_running_ = flags & 1;
     task.action_goal_claimed_ = flags & 2;
+    task.auto_stack_active_ = flags & 4;
     auto response = std::make_shared<std_srvs::srv::Trigger::Response>();
     task.cancel(response);
     assert(response->success && task.canceled_);

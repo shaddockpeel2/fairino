@@ -1,0 +1,46 @@
+frame: base_link
+target_top_xyz_m: [0.166824674651, -0.572695637882, 0.0322577199032]
+target_object_orientation_xyzw: [0, 0, -0.0936069069737, 0.995609234071]
+object_long_axis_yaw_rad: -0.187488300102
+applied_grasp_yaw_rad: -0.187488300102
+selected_grasp_tilt_rad: 0.174532925199
+selected_grasp_orientation_xyzw: [0.0932507044319, 0.991820640352, -0.0867730622819, -0.0081583795036]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+equivalent_grasp_selection: minimum_planned_duration_then_joint_space_path_length
+approach_clearance_m: 0.01
+grasp_depth_m: 0.01
+nominal_grasp_depth_m: 0.015
+manual_stack_grasp_depth_m: 0.01
+manual_stack_tilt_enabled: true
+grasp_contact_offset_xyz_m: [0, 0, 0]
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.026
+release_command_repetitions: 2
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: red
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+stack_enabled: true
+stack_upper_color: red
+stack_lower_color: yellow
+maximum_stack_cubes: 4
+stack_support_tier: 0
+stack_support_top_xyz_m: [0.024701785026, -0.588668276321, 0.0306871527778]
+stack_support_yaw_rad: 0.504302993242
+stack_placement_yaw_offset_rad: 0.691791293344
+stack_approach_clearance_m: 0.03
+stack_height_tolerance_m: 0.012
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.237514324922, -0.22673331636, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 3600
+perception_status_json: '{"actionable_cube_count":1,"active_inferences":0,"candidate_area_px":2424.5,"center_base_m":[0.16682467465128498,-0.5726956378824671,0.032257719903217574],"color":"red","depth_valid_fraction":0.9973941368078176,"detected_targets":[{"center_base_m":[0.16682467465128498,-0.5726956378824671,0.032257719903217574],"color":"red","grasp_axis_yaw_base_rad":-0.19753186288786573,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.021689921597326883,0.022714313241126986],"stack_tier":0,"top_z_base_m":0.032257719903217574},{"center_base_m":[0.024701785025979795,-0.5886682763208668,0.030687152777755803],"color":"yellow","grasp_axis_yaw_base_rad":0.5043029932419096,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.022483069246073503,0.02299375684208657],"stack_tier":0,"top_z_base_m":0.030687152777755803}],"detection_mode":"colors","error_count":0,"filter_generation":2,"frames_inferred":784,"frames_skipped_paused":0,"frozen":false,"grasp_axis_yaw_base_rad":-0.1874883001016084,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":0.007346921491115394,"has_stable_pose":true,"inference_enabled":true,"last_inference_end_ns":23494697907140,"last_inference_start_ns":23494498121167,"last_success_ns":23494697907140,"nominal_object_size_m":[0.03,0.03,0.03],"npu_inference":false,"object_class":"cube_30mm","observed_short_long_m":[0.021689921597326883,0.022714313241126986],"orientation_source":"top_surface_square_min_area_edge","pause_generation":0,"physical_color_counts":{"blue":0,"green":0,"red":1,"yellow":1},"physical_cube_count":2,"position_std_m":[0.000129618188989936,0.00017238832485760546,1.1160399943835037e-05],"raw_center_base_m":[0.16682467465128498,-0.5726956378824671,0.03625771990321758],"reason":"stable_target_updated","rejected_color_regions":{"observed_size_out_of_range":2},"rejected_target_details":[{"color":"yellow","reason":"observed_size_out_of_range:0.0821,0.0914"},{"color":"yellow","reason":"observed_size_out_of_range:0.0124,0.0274"}],"requested_color_physical_count":1,"required_samples":3,"rgb_color_regions":4,"sample_stamp":1790148332.5290859,"samples":3,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":true,"stacked_cube_count":0,"target_filter_color":"red","top_axis_ratio":1.0559641601718621,"top_pose_z_compensation_m":-0.004,"top_z_spread_m":0.001136317317674329,"tracking":true,"valid":true}'

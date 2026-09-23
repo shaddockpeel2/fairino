@@ -201,12 +201,27 @@ def test_stacked_cube_tier_distinguishes_a_cube_on_the_table_from_one_on_top():
         stacked, 0.030, 1.25, 0.0, 0.010,
         stacked_offsets_m=[0.030], stack_tolerance_m=0.012) == 1
 
-    # A three-high tower is outside what pick_stack builds and must be refused
-    # rather than reported as another stackable tier.
+    # A three-high tower needs a third offset before its top is a cube again.
     too_high = top_surface_at(0.090)
     assert tabletop_cube_tier(
         too_high, 0.030, 1.25, 0.0, 0.010,
         stacked_offsets_m=[0.030], stack_tolerance_m=0.012) is None
+
+    # One offset per stacked tier covers a tower of that many cubes plus one:
+    # pick_stack tops a tower up one cube per request, so the shipped three
+    # offsets have to report the tops of a two-, three- and four-cube tower.
+    tower_offsets = [0.030, 0.060, 0.090]
+    for tier, top_z in ((0, 0.030), (1, 0.060), (2, 0.090), (3, 0.120)):
+        assert tabletop_cube_tier(
+            top_surface_at(top_z), 0.030, 1.25, 0.0, 0.010,
+            stacked_offsets_m=tower_offsets,
+            stack_tolerance_m=0.012) == tier
+
+    # The tower stops there: a fifth cube has no tier left and must not be
+    # reported as the top of a stackable tower.
+    assert tabletop_cube_tier(
+        top_surface_at(0.150), 0.030, 1.25, 0.0, 0.010,
+        stacked_offsets_m=tower_offsets, stack_tolerance_m=0.012) is None
 
     # With stack-tier detection disabled the stacked cube is simply invisible,
     # which preserves the pre-stack behavior of the colour filter.
@@ -216,6 +231,35 @@ def test_stacked_cube_tier_distinguishes_a_cube_on_the_table_from_one_on_top():
     assert tabletop_cube_tier(
         on_table, 0.030, 1.25, 0.0, 0.010,
         stacked_offsets_m=(), stack_tolerance_m=0.012) == 0
+
+
+def test_stacked_tier_window_absorbs_accumulated_cube_height_error():
+    """
+    Every stacked cube adds its own height estimate to the expected top height.
+
+    Offsets one nominal cube apart cannot describe a tower built from cubes that
+    are a little shorter than nominal: four 28.6 mm cubes put the top 4 mm below
+    the nominal 120 mm, and the tight tabletop window used for tier 0 would then
+    reject the tower top as "not a cube on the sorting plane" and make the fourth
+    cube unstackable. The wider tier window has to absorb that drift, while a
+    cube that really is floating above the tower stays rejected.
+    """
+    real_height = 0.0286
+    tower_offsets = [0.030, 0.060, 0.090]
+    for tier in range(4):
+        surface = SimpleNamespace(
+            center=np.array([0.25, -0.35, (tier + 1) * real_height]),
+            axis_ratio=1.2)
+        assert tabletop_cube_tier(
+            surface, 0.030, 1.40, 0.0, 0.010,
+            stacked_offsets_m=tower_offsets,
+            stack_tolerance_m=0.012) == tier
+
+    floating = SimpleNamespace(
+        center=np.array([0.25, -0.35, 0.150]), axis_ratio=1.2)
+    assert tabletop_cube_tier(
+        floating, 0.030, 1.40, 0.0, 0.010,
+        stacked_offsets_m=tower_offsets, stack_tolerance_m=0.012) is None
 
 
 def test_stacked_cube_tier_rejects_invalid_configuration_and_shapes():

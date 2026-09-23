@@ -9,6 +9,11 @@ controller_manager:
     fairino3mt_execution_controller:
       type: joint_trajectory_controller/JointTrajectoryController
 
+    # Dedicated continuous-position backend for MoveIt Servo.  It is spawned
+    # inactive and is never active at the same time as the trajectory
+    # controller; trajectory_control_bridge owns every transition.
+    fairino3mt_servo_position_controller:
+      type: forward_command_controller/ForwardCommandController
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
@@ -26,3 +31,16 @@ fairino3mt_execution_controller:
       - position
     state_interfaces:
       - position
+      # Use the SDK's measured joint velocity as the interpolation start state.
+      - velocity
+
+fairino3mt_servo_position_controller:
+  ros__parameters:
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
+    interface_name: position

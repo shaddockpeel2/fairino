@@ -1,0 +1,22 @@
+# Move the configured tool frame to an XYZ point in base_link while preserving
+# the tool's current orientation. Coordinates are metres.
+float64 x
+float64 y
+float64 z
+---
+uint16 OK=0
+uint16 INVALID_TARGET=1
+uint16 BUSY=2
+uint16 PRECONDITION_FAILED=3
+uint16 PLANNING_FAILED=4
+uint16 EXECUTION_FAILED=5
+uint16 CANCELED=6
+uint16 INTERNAL_ERROR=7
+
+bool success
+uint16 error_code
+string message
+bool executed
+---
+string phase
+string detail

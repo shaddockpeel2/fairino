@@ -3,13 +3,14 @@
 
 from __future__ import annotations
 
+import math
 import threading
 import time
 import uuid
 
 from action_msgs.msg import GoalStatus
 from control_msgs.action import FollowJointTrajectory
-from controller_manager_msgs.srv import SwitchController
+from controller_manager_msgs.srv import ListControllers, SwitchController
 from fairino_msgs.srv import ControlLease
 import rclpy
 from rclpy.action import (
@@ -22,8 +23,7 @@ from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.node import Node
 from rclpy.qos import DurabilityPolicy, QoSProfile, ReliabilityPolicy
-from std_msgs.msg import String
-from std_msgs.msg import Int8
+from std_msgs.msg import Float64MultiArray, Int8, String
 from std_srvs.srv import Trigger
 
 
@@ -41,18 +41,32 @@ class TrajectoryControlBridge(Node):
         self.declare_parameter(
             'execution_controller', 'fairino3mt_execution_controller')
         self.declare_parameter(
+            'servo_controller', 'fairino3mt_servo_position_controller')
+        self.declare_parameter(
             'switch_service', '/controller_manager/switch_controller')
+        self.declare_parameter(
+            'list_controllers_service',
+            '/controller_manager/list_controllers')
         self.declare_parameter('service_wait_timeout_s', 10.0)
         self.declare_parameter('switch_timeout_s', 5.0)
         self.declare_parameter('control_lease_service', '/fairino/control_lease')
         self.declare_parameter('servo_start_service', '/servo_node/start_servo')
         self.declare_parameter('servo_stop_service', '/servo_node/stop_servo')
         self.declare_parameter('servo_status_topic', '/servo_node/status')
+        self.declare_parameter(
+            'servo_command_topic',
+            '/fairino3mt_servo_position_controller/commands')
+        self.declare_parameter('servo_command_timeout_s', 0.25)
         self.declare_parameter('tracking_heartbeat_timeout_s', 0.5)
         self.declare_parameter('watchdog_period_s', 0.1)
 
         self._execution_controller = str(
             self.get_parameter('execution_controller').value)
+        self._servo_controller = str(
+            self.get_parameter('servo_controller').value)
+        if self._servo_controller == self._execution_controller:
+            raise ValueError(
+                'servo_controller and execution_controller must be distinct')
         self._service_wait_timeout_s = float(
             self.get_parameter('service_wait_timeout_s').value)
         self._switch_timeout_s = float(
@@ -61,10 +75,13 @@ class TrajectoryControlBridge(Node):
             self.get_parameter('tracking_heartbeat_timeout_s').value)
         self._watchdog_period_s = float(
             self.get_parameter('watchdog_period_s').value)
+        self._servo_command_timeout_s = float(
+            self.get_parameter('servo_command_timeout_s').value)
         if (self._service_wait_timeout_s <= 0.0
                 or self._switch_timeout_s <= 0.0
                 or self._tracking_heartbeat_timeout_s <= 0.0
-                or self._watchdog_period_s <= 0.0):
+                or self._watchdog_period_s <= 0.0
+                or self._servo_command_timeout_s <= 0.0):
             raise ValueError(
                 'bridge timeout parameters must be positive')
 
@@ -79,6 +96,11 @@ class TrajectoryControlBridge(Node):
         self._switch_client = self.create_client(
             SwitchController,
             str(self.get_parameter('switch_service').value),
+            callback_group=callback_group,
+        )
+        self._list_controllers_client = self.create_client(
+            ListControllers,
+            str(self.get_parameter('list_controllers_service').value),
             callback_group=callback_group,
         )
         self._execution_client = ActionClient(
@@ -105,6 +127,8 @@ class TrajectoryControlBridge(Node):
         self._cleanup_in_progress = False
         self._fault_latched = False
         self._servo_hard_fault = None
+        self._servo_command_fault = None
+        self._last_servo_command_s = 0.0
         self._last_released_lease_id = ''
         self._lease_service = self.create_service(
             ControlLease,
@@ -115,6 +139,10 @@ class TrajectoryControlBridge(Node):
         self.create_subscription(
             Int8, str(self.get_parameter('servo_status_topic').value),
             self._on_servo_status, 10, callback_group=callback_group)
+        self.create_subscription(
+            Float64MultiArray,
+            str(self.get_parameter('servo_command_topic').value),
+            self._on_servo_command, 10, callback_group=callback_group)
         self._watchdog_timer = self.create_timer(
             self._watchdog_period_s, self._watchdog,
             callback_group=callback_group)
@@ -173,18 +201,77 @@ class TrajectoryControlBridge(Node):
         duration.nanosec = int((seconds - whole_seconds) * 1_000_000_000)
         return duration
 
-    async def _switch_execution_controller(self, activate: bool) -> bool:
+    async def _controller_states(self):
+        if not self._list_controllers_client.wait_for_service(
+                timeout_sec=self._service_wait_timeout_s):
+            self.get_logger().error(
+                'controller_manager list service is unavailable')
+            return None
+        try:
+            response = await self._list_controllers_client.call_async(
+                ListControllers.Request())
+        except Exception as error:  # pragma: no cover
+            self.get_logger().error(
+                'Controller list call failed: '
+                f'{type(error).__name__}: {error}')
+            return None
+        return {controller.name: controller.state
+                for controller in response.controller}
+
+    async def _switch_controller(self, controller: str, activate: bool) -> bool:
+        """Switch one arm controller and verify strict mutual exclusion."""
         if not self._switch_client.wait_for_service(
                 timeout_sec=self._service_wait_timeout_s):
             self.get_logger().error(
                 'controller_manager switch service is unavailable')
             return False
 
+        managed = (self._execution_controller, self._servo_controller)
+        if controller not in managed:
+            self.get_logger().error(f'Unmanaged controller requested: {controller}')
+            return False
+        states = await self._controller_states()
+        if states is None:
+            return False
+        missing = [name for name in managed if name not in states]
+        if missing:
+            self.get_logger().error(
+                f'Arm controllers are not loaded: {missing}')
+            return False
+        active = {name for name in managed if states[name] == 'active'}
+        if len(active) > 1:
+            self.get_logger().error(
+                'Unsafe controller state: JTC and Servo forward controller '
+                'are active concurrently')
+            request = SwitchController.Request()
+            request.deactivate_controllers = sorted(active)
+            request.strictness = SwitchController.Request.BEST_EFFORT
+            request.activate_asap = True
+            request.timeout = self._duration(self._switch_timeout_s)
+            try:
+                await self._switch_client.call_async(request)
+            except Exception:  # pragma: no cover
+                pass
+            return False
+
         request = SwitchController.Request()
         if activate:
-            request.activate_controllers = [self._execution_controller]
+            if states[controller] != 'active':
+                request.activate_controllers = [controller]
+            request.deactivate_controllers = [
+                name for name in managed
+                if name != controller and states[name] == 'active']
         else:
-            request.deactivate_controllers = [self._execution_controller]
+            if states[controller] == 'active':
+                request.deactivate_controllers = [controller]
+            # A release never leaves the other arm controller running if it
+            # was activated outside this bridge.
+            request.deactivate_controllers.extend(
+                name for name in managed
+                if name != controller and states[name] == 'active')
+        if not (request.activate_controllers
+                or request.deactivate_controllers):
+            return not activate or states[controller] == 'active'
         request.strictness = SwitchController.Request.STRICT
         request.activate_asap = True
         request.timeout = self._duration(self._switch_timeout_s)
@@ -198,7 +285,18 @@ class TrajectoryControlBridge(Node):
         if not response.ok:
             operation = 'activate' if activate else 'deactivate'
             self.get_logger().error(
-                f'Failed to {operation} {self._execution_controller}')
+                f'Failed to {operation} {controller}')
+            return False
+        verified = await self._controller_states()
+        if verified is None:
+            return False
+        expected_state = 'active' if activate else 'inactive'
+        other_active = any(
+            verified[name] == 'active' for name in managed
+            if name != controller)
+        if verified[controller] != expected_state or other_active:
+            self.get_logger().error(
+                f'Controller switch verification failed: {verified}')
             return False
         return True
 
@@ -252,14 +350,18 @@ class TrajectoryControlBridge(Node):
                 self._lease_timeout_s = timeout_s
                 self._cleanup_in_progress = True
             self._publish_state('acquiring_servo_tracking_control')
-            activated = await self._switch_execution_controller(True)
+            activated = await self._switch_controller(
+                self._servo_controller, True)
             started = False
             if activated:
                 started = await self._call_servo_trigger(
                     self._servo_start_client, 'start')
             if not activated or not started:
-                released = (not activated or
-                            await self._switch_execution_controller(False))
+                # Even a failed activation can leave a controller in an
+                # unexpected state.  Verify that both arm controllers are
+                # inactive before claiming monitoring mode is restored.
+                released = await self._switch_controller(
+                    self._servo_controller, False)
                 with self._lock:
                     self._control_acquired = False
                     self._cleanup_in_progress = False
@@ -279,6 +381,10 @@ class TrajectoryControlBridge(Node):
                 self._last_tracking_heartbeat_s = time.monotonic()
                 self._cleanup_in_progress = False
                 self._servo_hard_fault = None
+                self._servo_command_fault = None
+                # Give MoveIt Servo one full watchdog window to publish the
+                # first six-axis command after start.
+                self._last_servo_command_s = time.monotonic()
             self._publish_state('executing_servo_tracking')
             return self._lease_response(
                 response, True, 'tracking_control_acquired', lease_id)
@@ -326,7 +432,8 @@ class TrajectoryControlBridge(Node):
         self._publish_state('releasing_servo_tracking_control')
         servo_stopped = await self._call_servo_trigger(
             self._servo_stop_client, 'stop')
-        controller_stopped = await self._switch_execution_controller(False)
+        controller_stopped = await self._switch_controller(
+            self._servo_controller, False)
         released = servo_stopped and controller_stopped
         with self._lock:
             self._control_acquired = False if controller_stopped else True
@@ -348,9 +455,24 @@ class TrajectoryControlBridge(Node):
         return released
 
     def _on_servo_status(self, message):
-        if int(message.data) in (2, 4, 5):
+        # Servo already stops motion for singularity and joint-bound statuses.
+        # Keep the tracking lease so a changed target can command motion away
+        # from that boundary; collision halt still forces a full stop.
+        if int(message.data) == 4:
             with self._lock:
                 self._servo_hard_fault = int(message.data)
+
+    def _on_servo_command(self, message):
+        values = list(message.data)
+        valid = (len(values) == 6
+                 and all(math.isfinite(float(value)) for value in values))
+        with self._lock:
+            if valid:
+                self._last_servo_command_s = time.monotonic()
+            elif self._owner in ('SERVO_TRACKING',
+                                 'SERVO_TRACKING_STARTING'):
+                self._servo_command_fault = (
+                    f'invalid_forward_command_size:{len(values)}')
 
     async def _watchdog(self):
         with self._lock:
@@ -362,13 +484,22 @@ class TrajectoryControlBridge(Node):
                 now_s - self._last_tracking_heartbeat_s
                 > self._lease_timeout_s)
             hard_fault = self._servo_hard_fault
-            if not heartbeat_expired and hard_fault is None:
+            command_fault = self._servo_command_fault
+            command_expired = (
+                now_s - self._last_servo_command_s
+                > self._servo_command_timeout_s)
+            if (not heartbeat_expired and hard_fault is None
+                    and command_fault is None and not command_expired):
                 return
             lease_id = self._lease_id
             self._cleanup_in_progress = True
             self._owner = 'SERVO_TRACKING_STOPPING'
         reason = ('tracking_heartbeat_timeout' if heartbeat_expired
-                  else f'servo_hard_fault:{hard_fault}')
+                  else f'servo_hard_fault:{hard_fault}'
+                  if hard_fault is not None
+                  else command_fault
+                  if command_fault is not None
+                  else 'servo_command_timeout')
         self.get_logger().error(f'Forcing tracking stop: {reason}')
         await self._stop_tracking_control(lease_id, reason)
 
@@ -398,7 +529,8 @@ class TrajectoryControlBridge(Node):
                 return self._error_result(
                     'trajectory canceled before control acquisition')
 
-            if not await self._switch_execution_controller(True):
+            if not await self._switch_controller(
+                    self._execution_controller, True):
                 proxy_goal_handle.abort()
                 return self._error_result(
                     'automatic control acquisition failed; release the flange '
@@ -431,7 +563,8 @@ class TrajectoryControlBridge(Node):
 
             wrapped_result = await execution_goal_handle.get_result_async()
             self._publish_state('releasing_automatic_control')
-            released = await self._switch_execution_controller(False)
+            released = await self._switch_controller(
+                self._execution_controller, False)
             if released:
                 acquired = False
                 with self._lock:
@@ -465,7 +598,8 @@ class TrajectoryControlBridge(Node):
         finally:
             if acquired and not released:
                 self._publish_state('releasing_automatic_control')
-                if await self._switch_execution_controller(False):
+                if await self._switch_controller(
+                        self._execution_controller, False):
                     with self._lock:
                         self._control_acquired = False
                         self._owner = None

@@ -9,13 +9,17 @@ scale:
   rotational: 0.10
   joint: 0.10
 
-# The ServoJ path lags 20 ms single-point setpoints on this robot. 100 ms
-# yielded repeatable sub-millimeter short pulses at the 0.005 m/s limit.
+# The 0.20 s tuning improved travel but sends only 5 joint waypoints/s. For
+# smoother tracking, use the previously motion-verified 0.10 s period (10/s).
+# The 2026-09-22 0.005 m/s pulse moved 0.70 mm at 0.10 s versus 1.24 mm at
+# 0.20 s; restoring this period trades tracking speed for finer motion.
 publish_period: 0.10
 low_latency_mode: false
 command_out_type: trajectory_msgs/JointTrajectory
 publish_joint_positions: true
-publish_joint_velocities: false
+# Position plus velocity lets Humble joint_trajectory_controller interpolate
+# with a cubic spline instead of a velocity-discontinuous linear segment.
+publish_joint_velocities: true
 publish_joint_accelerations: false
 smoothing_filter_plugin_name: online_signal_smoothing::ButterworthFilterPlugin
 

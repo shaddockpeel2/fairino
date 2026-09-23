@@ -124,7 +124,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         DeclareLaunchArgument(
-            'camera_config', default_value=str(camera_share / 'config/dabai_dcw2_rviz.yaml'),
+            'camera_config', default_value=str(camera_share / 'config/dabai_dcw2_rviz_15fps.yaml'),
         ),
         DeclareLaunchArgument(
             'rviz_config', default_value=str(moveit_share / 'config/moveit_camera.rviz'),
