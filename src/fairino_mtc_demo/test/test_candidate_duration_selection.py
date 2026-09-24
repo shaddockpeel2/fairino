@@ -29,3 +29,18 @@ def test_first_complete_candidate_is_selected_without_exhaustive_comparison():
 
 def test_candidate_and_execution_logs_include_planned_duration():
     assert SOURCE.count("planned_duration_s=") >= 3
+
+
+def test_sort_wrist_bound_is_checked_before_candidate_choice_and_execution():
+    preview = SOURCE[
+        SOURCE.index("std::vector<PlannedMotion> previewAll()"):
+        SOURCE.index("void publishPreview(")]
+    execution = SOURCE[
+        SOURCE.index("bool executeMotion("):
+        SOURCE.index("std::optional<PendingGripperCommand> beginGripperCommand(")]
+
+    assert preview.index("requireBoundedSortTransferWrist(motions.back());") < preview.index(
+        "best_motions = std::move(motions);")
+    assert execution.index("requireBoundedSortTransferWrist(motion);") < execution.index(
+        "arm_motion_started_.store(true);")
+    assert "constexpr double kMaximumJoint6TravelRad = kPi * 0.5;" in SOURCE

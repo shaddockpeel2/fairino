@@ -339,17 +339,21 @@ def test_pick_stack_freezes_the_pair_and_the_support_tier_from_one_snapshot():
         source.index('bool validateStackPair(std::string & reason)'):
         source.index('// A slot is unusable', source.index(
             'bool validateStackPair(std::string & reason)'))]
-    # The cube that is picked up still has to come off the tabletop.
-    assert 'source->stack_tier != 0' in body
+    # A source on another tower is allowed only when its reported tier agrees
+    # with its measured height and no visible cube sits on top of it.
+    assert 'stackCubeTierHeightAcceptable(*source, "source", reason)' in body
+    assert 'other.center.z >= source->top_z + 0.5 * source->object_size_m[2]' in body
+    assert "pick_stack can only take a cube from a tower's top" in body
     assert 'source_bottom - destination_bottom' in body
     assert 'std::abs(tabletop_difference) > stack_height_tolerance_m_' in body
     assert 'xy_separation <= stack_footprint_tolerance_m_' in body
     # The support may be the top of a shorter tower, so the shared-tabletop
     # comparison only applies while that support is still a tier-0 cube, and the
     # tier itself has to survive the re-read of the frozen snapshot.
-    assert 'destination.stack_tier == 0 ? source_bottom - destination_bottom : 0.0' in body
+    assert 'source->stack_tier == 0 && destination.stack_tier == 0 ?' in body
     assert 'support->stack_tier != destination.stack_tier' in body
     assert 'stackSupportTierAcceptable(*support, reason)' in body
+    assert 'locked_stack_source_ = *source;' in body
 
     # A support cube that already carries a cube is refused before planning.
     assert 'bool lockStackDestinationSnapshot(' in source
@@ -380,7 +384,7 @@ def test_pick_stack_tops_up_an_existing_tower_until_maximum_stack_cubes():
     assert 'maximum_stack_cubes_ < 2 || maximum_stack_cubes_ > kMaximumStackCubesLimit' in source
 
     tier = source[
-        source.index('bool stackSupportTierAcceptable('):
+        source.index('bool stackCubeTierHeightAcceptable('):
         source.index('bool lockStackDestinationSnapshot(')]
     # Topping up is allowed, exceeding the limit is not.
     assert 'cube.stack_tier + 1 >= maximum_stack_cubes_' in tier
@@ -394,6 +398,7 @@ def test_pick_stack_tops_up_an_existing_tower_until_maximum_stack_cubes():
     assert 'plane_gap / cube.stack_tier' in tier
     assert 'implied_cube_height < cube.object_size_m[2] - stack_height_tolerance_m_' in tier
     assert 'implied_cube_height > cube.object_size_m[2] + stack_height_tolerance_m_' in tier
+    assert 'return stackCubeTierHeightAcceptable(cube, "support", reason);' in tier
 
 
 def test_a_stacked_support_brings_the_invisible_tower_into_the_scene():
@@ -425,7 +430,20 @@ def test_a_stacked_support_brings_the_invisible_tower_into_the_scene():
     cleanup = source[
         source.index('bool clearStackSupportObject(std::string & reason)'):
         source.index('std::vector<GraspCandidate> graspCandidates() const')]
-    assert '{stack_support_id_, stackColumnId()}' in cleanup
+    assert '{stack_support_id_, stackColumnId(), stackSourceColumnId()}' in cleanup
+
+
+def test_a_stacked_source_keeps_its_remaining_tower_in_the_scene():
+    source = _grasp_source()
+    assert 'moveit_msgs::msg::CollisionObject stackSourceColumnObject() const' in source
+    assert 'locked_stack_source_.top_z -' in source
+    assert 'locked_stack_source_.object_size_m[2] - ground_plane_z_m_' in source
+    assert 'locked_stack_source_.stack_tier > 0' in source
+    assert 'pose.orientation = yawQuaternion(locked_stack_source_.grasp_axis_yaw_rad);' in source
+    assert 'objects.push_back(stackSourceColumnObject());' in source
+    assert 'planning_scene_.applyCollisionObject(stackSourceColumnObject())' in source
+    assert 'source_clearance_tcp_z' in source
+    assert 'entry.first != stackSourceColumnId()' in source
 
 
 def test_pick_stack_never_reobserves_after_motion_starts():
@@ -481,9 +499,11 @@ def test_next_task_can_reclaim_the_upper_cube_from_a_finished_stack():
     source = _grasp_source()
     acquisition = source[
         source.index('if (!waitForRequestedTarget('):
-        source.index('if (mode == PickTaskMode::STACK) {',
+        source.index('recordLatency("target_acquired");',
                      source.index('if (!waitForRequestedTarget('))]
     assert 'clearArchivedObstacleAtTarget(reason)' in acquisition
+    assert acquisition.index('validateStackPair(reason)') < acquisition.index(
+        'clearArchivedObstacleAtTarget(reason)')
 
     reclaim = source[
         source.index('bool clearArchivedObstacleAtTarget(std::string & reason)'):

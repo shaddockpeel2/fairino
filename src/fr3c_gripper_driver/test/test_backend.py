@@ -14,8 +14,9 @@ class FakeGpio:
         self.closed = False
         self.instances.append(self)
 
-    def configure(self, *_args, **_kwargs):
+    def configure(self, *_args, **kwargs):
         self.configured = True
+        self.frequency = float(kwargs['frequency'])
 
     def write(self, payload):
         self.writes.append(payload)
@@ -69,6 +70,29 @@ def test_backend_emits_one_finite_burst_and_pulls_ad7_low(
     assert backend.current_us == effective_us
     assert backend.frames_written == 40
     assert backend.bytes_written == 8_000
+
+
+def test_27mm_close_uses_a_distinct_820us_pulse_at_50khz():
+    FakeGpio.instances.clear()
+    backend = Ft232hPwmBackend(
+        url='fake', sample_rate_hz=50_000, frame_us=20_000,
+        signal_pin=7, command_duration_s=0.8, post_write_delay_s=0.05,
+        controller_factory=FakeGpio, sleep=lambda _seconds: None,
+    )
+
+    assert backend.command(820) == 820
+    gpio = FakeGpio.instances[-1]
+    payload, final_low = gpio.writes
+    assert final_low == 0
+    assert len(payload) == 40_000
+    frame = payload[:1000]
+    assert frame == bytes([0x80]) * 41 + bytes(959)
+    assert payload == frame * 40
+
+    assert backend.command(1300) == 1300
+    release_payload, release_low = FakeGpio.instances[-1].writes
+    assert release_low == 0
+    assert release_payload[:1000] == bytes([0x80]) * 65 + bytes(935)
 
 
 def test_next_command_reopens_after_usb_error():

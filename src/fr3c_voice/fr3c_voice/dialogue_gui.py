@@ -33,6 +33,7 @@ from .intent import (
     direct_shortcut,
     safe_local_action_route,
     safe_local_non_action_route,
+    source_location_for_intent,
 )
 from .model_client import CancellableGeneration, ModelServiceClient, ModelServiceError
 from .speech_client import SpeechClient, SpeechServiceError, StreamingSpeaker
@@ -68,7 +69,7 @@ ACTION_DESCRIPTIONS = {
     'pick_sort': '抓取所选颜色方块，并放入该颜色对应的分类区域。',
     'pick_place': '抓取所选颜色方块，并放入指定的桌面区域。',
     'pick_stack': '抓取源方块，放到另一颜色的支撑方块上。',
-    'pick_auto_stack': '自动识别桌面现有方块，并按预设顺序完成整塔码放。',
+    'pick_auto_stack': '自动识别桌面现有方块，并按预设顺序完成整塔码放。语音可说“自动码垛”“自动堆叠”“自动堆放”或“自动码放”。',
 }
 
 
@@ -446,12 +447,12 @@ class DialogueGui:
             gripper_card, textvariable=self.gripper_service_var,
             style='Hint.TLabel').grid(row=0, column=1, sticky='e')
         self.open_gripper_button = self.ttk.Button(
-            gripper_card, text='打开夹爪\n60 mm · 70°', style='Gripper.TButton',
+            gripper_card, text='打开夹爪\n60 mm · 1300 µs', style='Gripper.TButton',
             command=lambda: self.command_gripper('open'))
         self.open_gripper_button.grid(
             row=1, column=0, sticky='nsew', padx=(0, 8), pady=(14, 8))
         self.close_gripper_button = self.ttk.Button(
-            gripper_card, text='闭合夹爪\n26 mm · 31°', style='Gripper.TButton',
+            gripper_card, text='闭合夹爪\n目标 27 mm · 820 µs', style='Gripper.TButton',
             command=lambda: self.command_gripper('close'))
         self.close_gripper_button.grid(
             row=1, column=1, sticky='nsew', padx=(8, 0), pady=(14, 8))
@@ -1024,7 +1025,8 @@ class DialogueGui:
             try:
                 self.bridge.send(
                     request_id, intent.task or '', intent.color or '',
-                    intent.zone or '', intent.support_color or '')
+                    intent.zone or '', intent.support_color or '',
+                    source_location=source_location_for_intent(text, intent))
                 self._active_action_request = request_id
                 self._set_busy(True)
                 LOG.info(

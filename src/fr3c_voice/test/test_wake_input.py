@@ -1,16 +1,30 @@
 from pathlib import Path
+from collections import deque
 from types import SimpleNamespace
 import time
+import wave
+
+import pytest
 
 from fr3c_voice.dialogue_gui import DialogueGui
 from fr3c_voice.wake_input import (
     WakeInput,
+    _append_pre_roll,
     extract_wake_query,
     wake_query_from_asr,
 )
 
 
 WORKSPACE = Path(__file__).resolve().parents[3]
+
+
+def test_pre_roll_keeps_time_by_bytes_with_short_capture_reads():
+    ring = deque()
+    size = 0
+    for value in range(8):
+        size = _append_pre_roll(ring, size, bytes([value]) * 2, 10)
+    assert size == 10
+    assert b''.join(ring) == b''.join(bytes([value]) * 2 for value in range(3, 8))
 
 
 def test_wake_query_parser_keeps_same_utterance_question():
@@ -31,6 +45,13 @@ def test_cpu_kws_is_authority_but_wake_fragments_are_not_questions():
     assert wake_query_from_asr('澳童雪', phrases) == ''
     assert wake_query_from_asr('发澳童雪', phrases) == ''
     assert wake_query_from_asr('法奥同学', phrases) == ''
+    assert wake_query_from_asr('打奥同学', phrases) == ''
+    assert wake_query_from_asr('浩同学', phrases) == ''
+    assert wake_query_from_asr('老同学', phrases) == ''
+    assert wake_query_from_asr('啥好同学', phrases) == ''
+    assert wake_query_from_asr('打奥同学，介绍一下机械臂', phrases) == '介绍一下机械臂'
+    assert wake_query_from_asr('浩同学，抓起红色方块', phrases) == '抓起红色方块'
+    assert wake_query_from_asr('法奥同介绍一下机械臂', phrases) == '介绍一下机械臂'
     assert wake_query_from_asr('介绍一下机械臂', phrases) == '介绍一下机械臂'
 
 
@@ -39,11 +60,29 @@ def test_stage9_assets_and_timing_configuration_are_valid():
     wake.validate()
     assert wake.enabled_by_default is True
     assert wake.phrases == ('法奥同学',)
-    assert wake.asr['hotwords_score'] == 3.0
-    assert wake.config['pre_roll_s'] == 2.0
+    command, _env = wake._asr_command()
+    assert '--hotwords-file' not in command
+    assert wake.config['pre_roll_s'] == 3.0
     assert wake.config['followup_initial_silence_s'] == 7.0
+    assert wake.config['save_debug_audio'] is True
     assert wake.asr['trailing_silence_s'] == 0.65
     assert wake.asr['maximum_record_s'] == 30.0
+
+
+def test_debug_recording_preserves_asr_pcm(tmp_path):
+    path = tmp_path / 'asr.wav'
+    wake = object.__new__(WakeInput)
+    wake._debug_audio = wave.open(str(path), 'wb')
+    wake._debug_audio.setnchannels(1)
+    wake._debug_audio.setsampwidth(2)
+    wake._debug_audio.setframerate(16000)
+    wake.trace = SimpleNamespace(write=lambda *_args, **_kwargs: None)
+    raw = b'\x01\x00\xff\x7f' * 100
+    wake._append_debug_audio('test', raw)
+    wake._debug_audio.close()
+    with wave.open(str(path), 'rb') as recording:
+        assert recording.getframerate() == 16000
+        assert recording.readframes(recording.getnframes()) == raw
 
 
 def _event_gui():
@@ -99,6 +138,17 @@ def test_wake_only_says_ack_then_opens_one_followup_window():
     assert values == ['']
     assert submissions == []
     assert ('assistant', '我在') in displayed
+    assert ('speak', '我在') in displayed
+    assert scheduled == [('followup', 0.0)]
+
+
+@pytest.mark.parametrize('asr_text', ('打奥同学', '浩同学', '老同学', '啥好同学'))
+def test_misrecognized_wake_only_never_reaches_model(asr_text):
+    gui, displayed, values, submissions, scheduled = _event_gui()
+    DialogueGui._handle_wake_event(
+        gui, 'wake_final', 'wake-1', {'mode': 'wake', 'text': asr_text})
+    assert values == ['']
+    assert submissions == []
     assert ('speak', '我在') in displayed
     assert scheduled == [('followup', 0.0)]
 

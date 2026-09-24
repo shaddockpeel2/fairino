@@ -43,12 +43,12 @@ def test_release_redundancy_defaults_to_two_bounded_open_commands():
     assert 'release_command_repetitions_ > 3' in source
 
 
-def test_p6_gate_can_be_first_accepted_for_one_hour():
+def test_p6_gate_can_be_first_accepted_for_100_hours():
     config = yaml.safe_load((PACKAGE / 'config' / 'first_grasp.yaml').read_text())
     parameters = config['fr3c_first_grasp']['ros__parameters']
 
-    assert parameters['p6_gate_max_age_s'] == 3600.0
-    assert 'p6_gate_max_age_s_{3600.0}' in _source()
+    assert parameters['p6_gate_max_age_s'] == 360000.0
+    assert 'p6_gate_max_age_s_{360000.0}' in _source()
 
 
 def test_release_overlap_timing_contract_is_removed():

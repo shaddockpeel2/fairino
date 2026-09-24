@@ -1,0 +1,3 @@
+2026-09-24 08:52:22,061 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-24 08:52:41,174 INFO fr3c_dialogue_gui local_route request_id=413c252dfe1747fb84c2a828bfbcc797 route=chat
+2026-09-24 08:52:48,455 INFO fr3c_dialogue_gui speech playback first_write=1.834s playback_end=7.260s

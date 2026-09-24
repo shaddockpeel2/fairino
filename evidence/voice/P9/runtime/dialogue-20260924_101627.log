@@ -1,0 +1,8 @@
+2026-09-24 10:16:27,822 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-24 10:19:32,136 INFO fr3c_dialogue_gui local_route request_id=9583f7f868e04c97866cd189c8a303fd route=chat
+2026-09-24 10:19:36,529 INFO fr3c_dialogue_gui speech playback first_write=1.731s playback_end=4.278s
+2026-09-24 10:21:31,474 INFO fr3c_dialogue_gui local_action_route request_id=ba2d74577ed24b9d836574c7136e8a64 task=pick_stack color=green zone=None support_color=yellow
+2026-09-24 10:21:31,485 INFO fr3c_dialogue_gui action_dispatched request_id=ba2d74577ed24b9d836574c7136e8a64 task=pick_stack color=green zone=None support_color=yellow
+2026-09-24 10:21:31,603 INFO fr3c_dialogue_gui action_event kind=accepted request_id=ba2d74577ed24b9d836574c7136e8a64 phase=accepted success=None error_code=None executed=None detail=抓取请求已接受，等待实际执行结果。
+2026-09-24 10:21:31,611 INFO fr3c_dialogue_gui action_event kind=result request_id=ba2d74577ed24b9d836574c7136e8a64 phase=failed success=False error_code=6 executed=False detail=P6 execution gate refused the task: P6 gate has not yet been accepted in this grasp session and is stale: age_s=4290.08, initial_limit_s=3600
+2026-09-24 10:21:35,312 INFO fr3c_dialogue_gui speech playback first_write=0.451s playback_end=3.797s

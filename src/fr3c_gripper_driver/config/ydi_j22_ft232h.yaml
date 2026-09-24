@@ -5,28 +5,27 @@ ydi_j22_gripper:
     backend: mock
 
     # The project intentionally exposes only its two required working states.
-    # 26 mm is the grasp position tested with 31 degrees; 60 mm is the
-    # pre-open/release position tested with 70 degrees.
-    closed_position_m: 0.026
+    # The 27 mm grasp command uses an estimated 820 us pulse. The former
+    # 26 mm/31-degree bench command produced 800 us at 10 kHz. The 60 mm
+    # release command retains its effective 1300 us pulse.
+    closed_position_m: 0.027
     open_position_m: 0.060
     # Published immediately as an unverified state estimate for MoveIt. This
     # does not emit PWM; issue an explicit pre-open command before grasp
     # planning.
     startup_position_m: 0.060
-    allowed_positions_m: [0.026, 0.060]
-    closed_angle_deg: 31.0
-    open_angle_deg: 70.0
+    allowed_positions_m: [0.027, 0.060]
 
-    # At 10 kHz, 31 degrees (844.4 us nominal) is represented by 8 samples =
-    # 800 us; 70 degrees (1277.8 us nominal) is 13 samples = 1300 us.
-    operating_close_us: 800
+    # At 50 kHz, one bit-bang sample is 20 us. The new close pulse is one
+    # sample wider than the previous 800 us; release remains 1300 us.
+    operating_close_us: 820
     operating_open_us: 1300
     electrical_min_us: 500
     electrical_max_us: 2500
-    aperture_calibrated: true
+    aperture_calibrated: false
 
-    calibration_positions_m: [0.026, 0.060]
-    calibration_pulses_us: [800, 1300]
+    calibration_positions_m: [0.027, 0.060]
+    calibration_pulses_us: [820, 1300]
 
     # Real output requires both this parameter and the confirmation environment
     # variable documented in README.md. Starting the node emits no PWM.
@@ -38,9 +37,9 @@ ydi_j22_gripper:
 
     ftdi_url: ftdi://ftdi:232h/1
     pyftdi_site_packages: /home/industio/fairino_ws/test/jiazhua/.venv/lib/python3.10/site-packages
-    # Match /home/industio/YDI-J22.../gripper_ft232h.py exactly: one finite
-    # 0.8 s burst at 10 kHz/50 Hz, then 50 ms and AD7 low before close.
-    sample_rate_hz: 10000
+    # Keep the finite 0.8 s / 50 Hz burst, 50 ms drain and AD7-low shutdown.
+    # 50 kHz resolves the 20 us close-pulse adjustment.
+    sample_rate_hz: 50000
     frame_us: 20000
     signal_pin: 7
     command_duration_s: 0.8

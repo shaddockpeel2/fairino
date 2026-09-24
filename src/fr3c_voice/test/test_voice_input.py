@@ -6,6 +6,7 @@ import subprocess
 import sys
 import time
 from types import SimpleNamespace
+import wave
 
 import pytest
 
@@ -100,6 +101,21 @@ def test_manual_finish_and_cancel_release_capture(rig):
     voice.close()
     assert all(p.poll() is not None for p in processes)
     assert events.empty()
+
+
+def test_button_capture_saves_replayable_wav(rig):
+    voice, events, _, _, _ = rig
+    rid = voice.start()
+    result, _ = terminal(events)
+    voice._thread.join(1)
+    assert result[0] == 'asr_final'
+    path = voice.workspace / 'evidence/voice/P9/runtime/asr-recordings' / f'{rid}-button.wav'
+    with wave.open(str(path), 'rb') as recording:
+        assert recording.getnchannels() == 1
+        assert recording.getsampwidth() == 2
+        assert recording.getframerate() == voice.config['sample_rate']
+        assert recording.getnframes() > 0
+        assert recording.readframes(1) == b'\x00\x10'
 
 
 def test_stop_failure_prevents_microphone_open(rig):

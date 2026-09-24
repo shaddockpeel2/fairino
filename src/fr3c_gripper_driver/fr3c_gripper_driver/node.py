@@ -54,14 +54,6 @@ class GripperNode(Node):
                     self._calibration.open_position_m)):
             raise ValueError(
                 'allowed_positions_m must contain exactly [close, open]')
-        self._closed_angle_deg = float(
-            self.get_parameter('closed_angle_deg').value)
-        self._open_angle_deg = float(
-            self.get_parameter('open_angle_deg').value)
-        if not (0.0 <= self._closed_angle_deg < self._open_angle_deg <= 180.0):
-            raise ValueError(
-                'angles must satisfy 0 <= closed_angle < open_angle <= 180')
-
         self._backend_name = str(self.get_parameter('backend').value).lower()
         if self._backend_name not in ('mock', 'ft232h'):
             raise ValueError('backend must be mock or ft232h')
@@ -161,19 +153,17 @@ class GripperNode(Node):
             'action_name': '/ydi_j22_gripper_controller/gripper_cmd',
             'joint_name': 'gripper_command_joint',
             'backend': 'mock',
-            'closed_position_m': 0.026,
+            'closed_position_m': 0.027,
             'open_position_m': 0.060,
             'startup_position_m': 0.060,
-            'allowed_positions_m': [0.026, 0.060],
-            'closed_angle_deg': 31.0,
-            'open_angle_deg': 70.0,
-            'operating_close_us': 800,
+            'allowed_positions_m': [0.027, 0.060],
+            'operating_close_us': 820,
             'operating_open_us': 1300,
             'electrical_min_us': 500,
             'electrical_max_us': 2500,
-            'calibration_positions_m': [0.026, 0.060],
-            'calibration_pulses_us': [800, 1300],
-            'aperture_calibrated': True,
+            'calibration_positions_m': [0.027, 0.060],
+            'calibration_pulses_us': [820, 1300],
+            'aperture_calibrated': False,
             'hardware_output_enabled': False,
             'assume_reached_without_feedback': True,
             'settle_time_s': 0.6,
@@ -181,7 +171,7 @@ class GripperNode(Node):
             'slew_us_per_s': 400.0,
             'ftdi_url': 'ftdi://ftdi:232h/1',
             'pyftdi_site_packages': '',
-            'sample_rate_hz': 10000,
+            'sample_rate_hz': 50000,
             'frame_us': 20000,
             'signal_pin': 7,
             'command_duration_s': 0.8,
@@ -203,8 +193,8 @@ class GripperNode(Node):
                     position, allowed, rel_tol=0.0, abs_tol=1e-6)
                 for allowed in self._allowed_positions_m):
             self.get_logger().error(
-                'Rejecting unsupported gripper position: only 0.026 m '
-                '(31 deg) and 0.060 m (70 deg) are enabled')
+                'Rejecting unsupported gripper position: only 0.027 m '
+                'and 0.060 m are enabled')
             return GoalResponse.REJECT
         if not math.isfinite(effort) or effort < 0.0:
             self.get_logger().error('Rejecting invalid max_effort')
@@ -239,16 +229,7 @@ class GripperNode(Node):
                 self._last_result = 'executing'
             if self._backend_name == 'mock':
                 return self._execute_mock(goal_handle, start_m, target_m)
-            target_angle_deg = (
-                self._closed_angle_deg
-                if math.isclose(
-                    target_m,
-                    self._calibration.closed_position_m,
-                    rel_tol=0.0,
-                    abs_tol=1e-6)
-                else self._open_angle_deg)
-            return self._execute_ft232h(
-                goal_handle, target_m, target_angle_deg)
+            return self._execute_ft232h(goal_handle, target_m, target_us)
         except Exception as error:
             self.get_logger().error(
                 f'Gripper command failed: {type(error).__name__}: {error}')
@@ -287,16 +268,16 @@ class GripperNode(Node):
             self._last_result = 'estimated_reached_mock'
         return self._make_result(True)
 
-    def _execute_ft232h(self, goal_handle, target_m, target_angle_deg):
+    def _execute_ft232h(self, goal_handle, target_m, requested_us):
         prior_us = self._backend.current_us
         effective_duration_s = self._backend.command_duration_s
         self.get_logger().warning(
-            f'PWM burst starting: angle={target_angle_deg:.1f} deg, '
+            f'PWM burst starting: requested_pulse={requested_us} us, '
             f'aperture={target_m * 1000.0:.1f} mm, '
             f'burst_duration_s={effective_duration_s:.3f}')
-        target_us = self._backend.command_angle(target_angle_deg)
+        target_us = self._backend.command(requested_us)
         self.get_logger().warning(
-            f'PWM burst completed: angle={target_angle_deg:.1f} deg, '
+            f'PWM burst completed: requested_pulse={requested_us} us, '
             f'effective_target={target_us} us, '
             f'aperture={target_m * 1000.0:.1f} mm, '
             f'burst_duration_s={effective_duration_s:.3f}')
@@ -322,7 +303,7 @@ class GripperNode(Node):
             if current_us is not None:
                 # There is no position feedback. The actual FTDI clock may
                 # quantize the pulse a few microseconds away from the nominal
-                # 800/1300 us calibration, so publish the commanded two-state
+                # 820/1300 us calibration, so publish the commanded two-state
                 # aperture rather than treating clock quantization as motion.
                 self._set_position(target_m)
             goal_handle.publish_feedback(self._make_feedback(False))

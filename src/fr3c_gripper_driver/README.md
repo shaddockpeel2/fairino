@@ -7,24 +7,26 @@ This package exposes the YDI-J22 through the ROS 2
 /ydi_j22_gripper_controller/gripper_cmd
 ```
 
-The project intentionally enables only two tested states:
+The project enables two command states:
 
-| Project command | Bench angle | Nominal pulse | Effective 10 kHz pulse | Meaning |
-| ---: | ---: | ---: | ---: | --- |
-| `0.026 m` | `31 deg` | `844.4 us` | `800 us` | grasp |
-| `0.060 m` | `70 deg` | `1277.8 us` | `1300 us` | pre-open/release |
+| Project command | Requested pulse | Effective 50 kHz pulse | Meaning |
+| ---: | ---: | ---: | --- |
+| `0.027 m` | `820 us` | `820 us` | grasp target |
+| `0.060 m` | `1300 us` | `1300 us` | pre-open/release |
 
-At the standalone test's 10 kHz sample rate, each sample is 100 us, so the
-31-degree waveform has 8 high samples and the 70-degree waveform has 13. The
-driver emits those same waveforms. Any other ROS position is rejected; there
-is no sweep or intermediate-position command in the production interface.
+The former 26 mm/31-degree bench command produced an 800 us pulse at 10 kHz.
+At 50 kHz, one sample is 20 us, so the new close command produces a pulse one
+sample wider. The 27 mm aperture is an open-loop estimate based on the former
+26 mm/800 us and 60 mm/1300 us calibration points; measure the physical grip
+before relying on it. Any other ROS position is rejected; there is no sweep
+or intermediate-position command in the production interface.
 
 ## Output behavior
 
 The FT232H backend is encapsulated in `ft232h_servo.py`. Every accepted goal:
 
 1. opens FT232H asynchronous bit-bang on AD7;
-2. writes one complete 0.8 s, 50 Hz waveform (40 frames / 8000 bytes) for
+2. writes one complete 0.8 s, 50 Hz waveform (40 frames / 40000 bytes) for
    every pre-open, grasp, and release command;
 3. waits for the bounded waveform to drain;
 4. writes AD7 low and closes the controller.
@@ -58,9 +60,9 @@ In another sourced terminal:
 /home/industio/fairino_ws/scripts/gripper/command_gripper.sh open
 ```
 
-`close` sends 26 mm/31 degrees and `open` sends 60 mm/70 degrees. A numeric
+`close` sends the 27 mm target and `open` sends the 60 mm target. A numeric
 value is accepted by the shell helper, but the action server rejects anything
-other than exactly `0.026` or `0.060` m.
+other than exactly `0.027` or `0.060` m.
 
 ## Real FT232H operation
 

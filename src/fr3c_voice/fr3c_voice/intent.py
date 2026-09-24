@@ -43,6 +43,12 @@ PLACEMENT_CUE = re.compile(
 SORT_CUE = re.compile(
     r'分类|对应(?:分类)?(?:区|区域)|'
     r'(?:(?:指定|预设)(?:放置)?|放置)(?:区|区域)')
+SORT_DESTINATION_CUE = re.compile(
+    r'(?:放到|放进|放入|放置到|放置在|置于|放在)\s*'
+    r'(?:对应)?(?:分类区|分类区域|对应区)')
+SORT_SOURCE_CUE = re.compile(
+    r'(?:从)?分类(?:区|区域)(?:中|里|内|的|里面|里的|中的)?'
+    r'[^，。；;]{0,12}?(红色|红方块|黄色|黄方块|蓝色|蓝方块|绿色|绿方块)')
 STACK_CUE = re.compile(r'上面|上方|顶面|顶部|之上|码垛|堆叠')
 # pick_auto_stack ("stack everything on the table automatically") is only
 # selected by an explicit automatic / one-key marker.  The bare words 码垛
@@ -54,7 +60,7 @@ AUTO_STACK_CUE = re.compile(
     r'(?:它们|这些|那些|所有|全部|桌面上的|桌上的)?'
     r'(?:方块|积木|塔)?'
     r'(?:都|全部)?'
-    r'(?:码垛|码放|码起来|码好|堆叠|堆起来|摞起来|摞好|叠起来)')
+    r'(?:码垛|码放|码起来|码好|堆叠|堆放|堆起来|摞起来|摞好|叠起来)')
 AUTO_STACK_REPLY = (
     '准备自动码垛：按红、黄、蓝、绿从上到下的顺序堆叠桌面上现有的方块。')
 ZONE_TOKEN = re.compile(r'^[a-z]+(?:[1-9][0-9]?)?$', re.IGNORECASE)
@@ -75,7 +81,7 @@ NEGATION_CUE = re.compile(
     r'无需|不用|不需要|取消抓|停止抓')
 QUESTION_CUE = re.compile(
     r'怎么|如何|为什么|能不能|可不可以|可以吗|行不行|是否|介绍|说明|'
-    r'步骤|方法|教程|原理|什么意思|会不会|吗[？?]?\s*$|[？?]\s*$')
+    r'步骤|方法|教程|原理|什么意思|什么是|是什么|会不会|吗[？?]?\s*$|[？?]\s*$')
 CONDITIONAL_CUE = re.compile(r'如果|假如|要是|有的话|条件是|再决定|先告诉我')
 QUOTE_CUE = re.compile(r'这句话|举例|例句|复述|他说|她说|命令是|翻译')
 MULTI_STEP_CUE = re.compile(r'然后|接着|随后|之后再|完成后|同时')
@@ -211,14 +217,18 @@ def safe_local_action_route(user_text: str) -> DialogueIntent | None:
 
     colors = mentioned_colors(text)
     zones = mentioned_zones(text)
-    has_sort_cue = SORT_CUE.search(text) is not None
+    has_sort_cue = (SORT_DESTINATION_CUE.search(text) is not None or
+                    (SORT_CUE.search(text) is not None and
+                     sort_area_source_color(text) is None))
+    source_prefix = '分类区里的' if sort_area_source_color(text) else ''
     has_stack_cue = STACK_CUE.search(text) is not None
     task: str
     color: str | None = None
     zone: str | None = None
     support_color: str | None = None
 
-    if not colors and not zones and AUTO_STACK_CUE.search(text):
+    if (not colors and not zones and AUTO_STACK_CUE.search(text)
+            and SORT_CUE.search(text) is None):
         task = 'pick_auto_stack'
         reply = AUTO_STACK_REPLY
     elif len(colors) == 2 and has_stack_cue and not zones and not has_sort_cue:
@@ -228,7 +238,7 @@ def safe_local_action_route(user_text: str) -> DialogueIntent | None:
         task = 'pick_stack'
         color, support_color = sequence
         reply = (
-            f'准备将{COLOR_DISPLAY[color]}方块码放到'
+            f'准备将{source_prefix}{COLOR_DISPLAY[color]}方块码放到'
             f'{COLOR_DISPLAY[support_color]}方块上。')
     elif len(colors) == 1:
         color = next(iter(colors))
@@ -237,15 +247,15 @@ def safe_local_action_route(user_text: str) -> DialogueIntent | None:
                 return None
             task = 'pick_place'
             zone = next(iter(zones))
-            reply = f'准备将{COLOR_DISPLAY[color]}方块放到{zone.upper()}区域。'
+            reply = f'准备将{source_prefix}{COLOR_DISPLAY[color]}方块放到{zone.upper()}区域。'
         elif not zones and has_sort_cue and not has_stack_cue:
             task = 'pick_sort'
-            reply = f'准备将{COLOR_DISPLAY[color]}方块放入对应分类区。'
+            reply = f'准备将{source_prefix}{COLOR_DISPLAY[color]}方块放入对应分类区。'
         elif (not zones and not has_sort_cue and not has_stack_cue
               and HOLD_CUE.search(text) is not None
               and PLACEMENT_CUE.search(text) is None):
             task = 'pick_hold'
-            reply = f'准备抓取{COLOR_DISPLAY[color]}方块并在抬升后保持夹持。'
+            reply = f'准备抓取{source_prefix}{COLOR_DISPLAY[color]}方块并在抬升后保持夹持。'
         else:
             return None
     else:
@@ -274,6 +284,7 @@ zone只能是区域名加可选的1起算槽位号（如"D"、"A3"）或null。
 1. 用户明确要求抓起/拿起一个指定颜色方块，抓起后保持夹持：route=action, task=pick_hold。
 2. 用户明确要求把一个指定颜色方块放入分类区：route=action, task=pick_sort。
    只要明确说“放到/放进分类区、放到对应区”或“分类某色方块”，即使前面还有“抓取”，task也必须是pick_sort。
+   “分类区里的红色方块”描述抓取来源，不是放入分类区；按后续动作选择task。
 3. 用户明确要求把指定颜色方块放到指定的字母区域（如D区域、A3槽位）：route=action, task=pick_place，zone填用户指定的值。
    指定区域与颜色没有绑定；“红色放到D区”就是pick_place, color=red, zone="D"。
    “放置区”“指定放置区”“预设放置区”表示按颜色放到项目标定的默认区，必须task=pick_sort、zone=null；不得把这些中文词本身填入zone。
@@ -282,9 +293,11 @@ zone只能是区域名加可选的1起算槽位号（如"D"、"A3"）或null。
    两者必须明确且不同，zone必须为null。
 5. 用户带“自动/一键/全自动”这类标记，要求把桌面上现有的方块整体码成塔且没有指定
    任何颜色：route=action, task=pick_auto_stack，color、zone、support_color必须都为null；
-   码垛的颜色顺序与跳过规则由机械臂端决定，不得编造颜色。只要用户提到任何一种颜色，
-   就绝不能是pick_auto_stack；只有“码垛/堆叠”而没有“自动/一键/全自动”标记时，
-   仍按pick_stack规则处理。
+   “自动码垛”“自动堆叠”“自动堆放”“自动码放”“一键码垛”“全自动码垛”
+   都表示同一个pick_auto_stack动作。码垛的颜色顺序与跳过规则由机械臂端决定，
+   不得编造颜色。只要用户提到任何一种颜色，
+   就绝不能是pick_auto_stack；只有“码垛/堆叠/堆放”而没有“自动/一键/全自动”
+   标记时，不得执行整塔自动码垛，按单次码垛的参数规则处理。
 6. action必须同时有明确任务和必要参数；pick_place必须有唯一zone，pick_stack必须有
    唯一color和support_color，pick_auto_stack必须color、zone、support_color都为null，
    其他任务的support_color必须为null。不得生成坐标、轨迹、速度或关节参数。
@@ -309,7 +322,11 @@ zone只能是区域名加可选的1起算槽位号（如"D"、"A3"）或null。
 输出：{{"schema_version":"1.0","route":"action","task":"pick_place","color":"red","zone":"A3","support_color":null,"reply":"准备将红色方块放到A区第3个槽位。"}}
 用户：把红色方块放到蓝色方块上面
 输出：{{"schema_version":"1.0","route":"action","task":"pick_stack","color":"red","zone":null,"support_color":"blue","reply":"准备将红色方块码放到蓝色方块上。"}}
+用户：把分类区里的红色方块放到蓝色方块上面
+输出：{{"schema_version":"1.0","route":"action","task":"pick_stack","color":"red","zone":null,"support_color":"blue","reply":"准备将分类区里的红色方块码放到蓝色方块上。"}}
 用户：自动码垛
+输出：{{"schema_version":"1.0","route":"action","task":"pick_auto_stack","color":null,"zone":null,"support_color":null,"reply":"{AUTO_STACK_REPLY}"}}
+用户：自动堆放
 输出：{{"schema_version":"1.0","route":"action","task":"pick_auto_stack","color":null,"zone":null,"support_color":null,"reply":"{AUTO_STACK_REPLY}"}}
 用户：分类绿色方块
 输出：{{"schema_version":"1.0","route":"action","task":"pick_sort","color":"green","zone":null,"support_color":null,"reply":"准备将绿色方块放入对应分类区。"}}
@@ -422,6 +439,21 @@ def mentioned_colors(user_text: str) -> set[str]:
     }
 
 
+def sort_area_source_color(user_text: str) -> str | None:
+    """Return the source colour only when the sorting area is explicit."""
+    match = SORT_SOURCE_CUE.search(user_text)
+    if match is None:
+        return None
+    token = match.group(1)
+    return next((color for color, pattern in COLOR_PATTERNS.items()
+                 if pattern.fullmatch(token)), None)
+
+
+def source_location_for_intent(user_text: str, intent: DialogueIntent) -> str:
+    source_color = sort_area_source_color(user_text)
+    return 'sort_area' if intent.is_action and source_color == intent.color else ''
+
+
 def mentioned_color_sequence(user_text: str) -> list[str]:
     """Return distinct colours in textual order for fail-closed stack roles."""
     matches = []
@@ -469,6 +501,8 @@ def validate_action_semantics(user_text: str,
             and AUTO_STACK_CUE.search(text)):
         raise IntentProtocolError('auto_stack_task_required', text)
     if intent.task == 'pick_auto_stack':
+        if SORT_CUE.search(text):
+            raise IntentProtocolError('auto_stack_sort_area_not_supported', text)
         if colors:
             raise IntentProtocolError(
                 'auto_stack_with_colors', repr(sorted(colors)))
@@ -494,7 +528,11 @@ def validate_action_semantics(user_text: str,
             raise IntentProtocolError(
                 'model_color_mismatch', f'model={intent.color}, text={sorted(colors)}')
     zones = mentioned_zones(text)
-    has_sort_cue = bool(SORT_CUE.search(text))
+    source_color = sort_area_source_color(text)
+    if source_color is not None and intent.color != source_color:
+        raise IntentProtocolError('sort_source_color_mismatch', text)
+    has_sort_cue = (SORT_DESTINATION_CUE.search(text) is not None or
+                    (SORT_CUE.search(text) is not None and source_color is None))
     if intent.task == 'pick_place':
         if len(zones) != 1:
             raise IntentProtocolError('zone_not_unique', repr(sorted(zones)))

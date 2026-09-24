@@ -8,7 +8,7 @@ fi
 
 case "$1" in
   open) position='0.060' ;;
-  close) position='0.026' ;;
+  close) position='0.027' ;;
   *) position="$1" ;;
 esac
 

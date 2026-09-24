@@ -39,6 +39,10 @@ class ForwardKinematics:
             tip = joint.find('parent').get('link')
 
     def position(self, positions):
+        return self.transform(positions)[:3, 3]
+
+    def transform(self, positions):
+        """Return the full base-to-tip pose for offline Jacobian validation."""
         result = np.eye(4)
         for joint in self.chain:
             origin = joint.find('origin')
@@ -71,7 +75,7 @@ class ForwardKinematics:
             else:
                 raise ValueError(f'Unsupported joint type: {kind}')
             result = result @ transform
-        return result[:3, 3]
+        return result
 
 
 def analyze(record, fk, period_s=0.02, warmup_s=0.1,

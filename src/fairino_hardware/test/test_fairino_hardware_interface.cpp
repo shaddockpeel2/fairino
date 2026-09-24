@@ -437,6 +437,31 @@ TEST(FairinoHardwareInterface, PropagatesAndLatchesServoJFailure)
         "stop", "close"}));
 }
 
+TEST(FairinoHardwareInterface, FailedStopLatchesAndPreventsReacquisition)
+{
+  for (const bool fail_end : {false, true}) {
+    auto fake_state = std::make_shared<FakeRobotState>();
+    FairinoHardwareInterface hardware(std::make_unique<FakeRobotClient>(fake_state));
+    ASSERT_EQ(hardware.on_init(make_hardware_info()), hardware_interface::CallbackReturn::SUCCESS);
+    ASSERT_EQ(hardware.on_activate(rclcpp_lifecycle::State()), hardware_interface::CallbackReturn::SUCCESS);
+    ASSERT_EQ(hardware.perform_command_mode_switch(arm_position_interfaces(), {}),
+      hardware_interface::return_type::OK);
+    fake_state->servo_end_result = fail_end ? 14 : 0;
+    fake_state->stop_result = fail_end ? 0 : 14;
+    EXPECT_EQ(hardware.perform_command_mode_switch({}, arm_position_interfaces()),
+      hardware_interface::return_type::ERROR);
+    // Both stop calls are attempted even if the first one fails.
+    EXPECT_EQ(fake_state->calls[fake_state->calls.size() - 2], "end");
+    EXPECT_EQ(fake_state->calls.back(), "stop");
+    fake_state->servo_end_result = fake_state->stop_result = 0;
+    EXPECT_EQ(hardware.perform_command_mode_switch(arm_position_interfaces(), {}),
+      hardware_interface::return_type::ERROR);
+    EXPECT_EQ(hardware.write(rclcpp::Time(0), rclcpp::Duration::from_seconds(0.008)),
+      hardware_interface::return_type::ERROR);
+    EXPECT_EQ(fake_state->servo_j_calls, 0);
+  }
+}
+
 TEST(FairinoHardwareInterface, MakesAllArmCommandsUnavailableToRos2ControlAfterFailure)
 {
   auto fake_state = std::make_shared<FakeRobotState>();

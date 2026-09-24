@@ -13,6 +13,9 @@ string zone
 # the lower cube of the stack. Must differ from `color`. Every other task must
 # leave this empty, exactly like `zone`.
 string support_color
+# Explicit source location. Empty means the current/start camera view.
+# "sort_area" means acquire the source at the calibrated sort-area observation pose.
+string source_location
 ---
 uint16 OK=0
 uint16 INVALID_COLOR=1

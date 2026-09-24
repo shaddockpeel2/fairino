@@ -213,3 +213,79 @@ arecord: pcm_read:2221: 读取错误：被中断的系统调用
 arecord: pcm_read:2221: 读取错误：被中断的系统调用
 arecord: pcm_read:2221: 读取错误：被中断的系统调用
 arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+ALSA lib confmisc.c:165:(snd_config_get_card) Cannot get card index for Device
+arecord: main:831: 音乐打开错误： 没有那个设备
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: main:831: 音乐打开错误： 设备或资源忙
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: read error: Interrupted system call
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用
+arecord: pcm_read:2221: 读取错误：被中断的系统调用

@@ -55,7 +55,7 @@ class ColorActionBridge(Node):
     PERCEPTION_STATUS_TOPIC = '/perception/blue_cube_localizer/status'
     DEFAULT_COLOR_TOPIC = '/camera/color/image_raw'
     GRIPPER_ACTION = '/ydi_j22_gripper_controller/gripper_cmd'
-    GRIPPER_CLOSED_POSITION_M = 0.026
+    GRIPPER_CLOSED_POSITION_M = 0.027
     GRIPPER_OPEN_POSITION_M = 0.060
 
     def __init__(self, color_topic: str = DEFAULT_COLOR_TOPIC) -> None:
@@ -179,15 +179,18 @@ class ColorActionBridge(Node):
             return bool(self._gripper_request_id)
 
     def send(self, request_id: str, task: str, color: str, zone: str = '',
-             support_color: str = '', server_timeout_s: float = 2.0) -> None:
+             support_color: str = '', source_location: str = '',
+             server_timeout_s: float = 2.0) -> None:
         if task not in self._action_clients:
             raise ValueError(f'unsupported task: {task}')
         normalized_zone = re.sub(r'\s+', '', zone or '').lower()
         normalized_support = re.sub(r'\s+', '', support_color or '').lower()
+        if source_location not in {'', 'sort_area'}:
+            raise ValueError(f'unsupported source location: {source_location}')
         if task == 'pick_auto_stack':
             # The robot side reads the colours from perception and decides the
             # whole stack order, so this goal must stay completely empty.
-            if color or normalized_zone or normalized_support:
+            if color or normalized_zone or normalized_support or source_location:
                 raise ValueError(
                     'pick_auto_stack does not accept a color, zone, or '
                     'support color')
@@ -222,6 +225,7 @@ class ColorActionBridge(Node):
         goal.color = color
         goal.zone = normalized_zone
         goal.support_color = normalized_support
+        goal.source_location = source_location
         try:
             future = client.send_goal_async(
                 goal,

@@ -482,6 +482,9 @@ hardware_interface::return_type FairinoHardwareInterface::perform_command_mode_s
       servo_mode_active_ = false;
       const errno_t stop_result = robot_client_->stop_motion();
       if (end_result != 0 || stop_result != 0) {
+        // Inhibit all future writes/acquisitions after an unconfirmed stop.
+        // A later successful switch must not silently clear this SDK failure.
+        write_failed_ = true;
         RCLCPP_ERROR(
           kLogger, "Failed stopping arm controller: ServoMoveEnd=%d StopMotion=%d",
           end_result, stop_result);

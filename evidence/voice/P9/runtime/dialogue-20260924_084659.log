@@ -1,0 +1,11 @@
+2026-09-24 08:47:00,796 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-24 08:47:39,512 INFO fr3c_dialogue_gui speech playback first_write=0.161s playback_end=0.687s
+2026-09-24 08:47:44,004 INFO fr3c_dialogue_gui local_route request_id=6bb6962db482420c9fc1fb1b8cfe4392 route=chat
+2026-09-24 08:48:13,293 INFO fr3c_dialogue_gui local_route request_id=8b6102751ea5498ca7f8be835b342b43 route=chat
+2026-09-24 08:48:21,599 INFO fr3c_dialogue_gui speech playback first_write=2.389s playback_end=8.276s
+2026-09-24 08:48:26,754 INFO fr3c_dialogue_gui local_route request_id=561b935cdc394609a5a5e0d6bcfecb2f route=chat
+2026-09-24 08:48:35,290 INFO fr3c_dialogue_gui action_event kind=cancel_requested request_id= phase= success=None error_code=None executed=None detail=已直接请求停止抓取。
+2026-09-24 08:48:35,291 INFO fr3c_dialogue_gui action_event kind=cancel_result request_id= phase= success=True error_code=None executed=None detail=No active task to cancel; task and holding state unchanged.
+2026-09-24 08:48:41,342 INFO fr3c_dialogue_gui speech playback first_write=2.556s playback_end=14.563s
+2026-09-24 08:51:31,176 INFO fr3c_dialogue_gui local_route request_id=12dbea19d0204443a664ae7941d65e90 route=chat
+2026-09-24 08:51:31,178 WARNING fr3c_dialogue_gui stream speech did not start: PcmPlayerError: ALSA drop failed (-19): No such device

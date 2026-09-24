@@ -778,6 +778,36 @@
       "color": null,
       "zone": null,
       "support_color": null
+    },
+    {
+      "id": "auto-008",
+      "category": "auto_stack",
+      "text": "自动堆放",
+      "route": "action",
+      "task": "pick_auto_stack",
+      "color": null,
+      "zone": null,
+      "support_color": null
+    },
+    {
+      "id": "auto-009",
+      "category": "auto_stack_negative",
+      "text": "不要自动堆放",
+      "route": "chat",
+      "task": null,
+      "color": null,
+      "zone": null,
+      "support_color": null
+    },
+    {
+      "id": "auto-010",
+      "category": "auto_stack_question",
+      "text": "什么是自动堆放",
+      "route": "chat",
+      "task": null,
+      "color": null,
+      "zone": null,
+      "support_color": null
     }
   ]
 }

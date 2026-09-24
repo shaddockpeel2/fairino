@@ -10,9 +10,10 @@ import time
 from control_msgs.msg import DynamicJointState
 from fairino_msgs.srv import ControlLease
 import rclpy
-from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Float64MultiArray, String
 
 from constant_twist_diagnostic_logic import motion_summary, p1_acceptance
+from p1_parameter_snapshot import collect, forward_profile_errors
 from stage4_base_x_pulse import ARM_JOINTS, HARD_SERVO_FAULTS
 from stage4_direction_pulse import (
     BASE_DIRECTIONS,
@@ -63,6 +64,8 @@ class ConstantTwistDiagnostic(DirectionPulse):
         self.hardware_timing = []
         self.tcp_trace = []
         self.motion_origin_pose = None
+        self.stop_reports = []
+        self.create_subscription(String, '/fairino/stop_report', self._on_stop_report, 10)
         self.create_subscription(
             DynamicJointState,
             '/dynamic_joint_states',
@@ -78,6 +81,13 @@ class ConstantTwistDiagnostic(DirectionPulse):
 
     def elapsed(self):
         return time.monotonic() - self.origin_s
+
+    def _on_stop_report(self, message):
+        if self.recording:
+            try:
+                self.stop_reports.append({'t': self.elapsed(), **json.loads(message.data)})
+            except (ValueError, TypeError):
+                pass
 
     def publish_twist(self, speed_fraction=0.0):
         super().publish_twist(speed_fraction)
@@ -295,6 +305,8 @@ def main():
     stop_group.add_argument('--heartbeat-timeout-after-s', type=float)
     stop_group.add_argument('--publisher-exit-after-s', type=float)
     parser.add_argument('--operator-ready', action='store_true')
+    parser.add_argument('--zero-only', action='store_true',
+                        help='Acquire/stop/release with zero Twist only; no intended travel.')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     if not args.operator_ready:
@@ -330,12 +342,14 @@ def main():
     rclpy.init()
     node = ConstantTwistDiagnostic(args.backend)
     node.command_xy = tuple(
-        args.speed_mps * value for value in BASE_DIRECTIONS[args.direction])
+        (0.0 if args.zero_only else args.speed_mps) * value
+        for value in BASE_DIRECTIONS[args.direction])
     lease_id = ''
     outcome = 'failed_before_acquire'
     detail = ''
     start_tcp = stop_tcp = end_tcp = None
     acquired_wall_s = released_wall_s = None
+    parameter_snapshot = None
     try:
         if not node.lease_client.wait_for_service(timeout_sec=5.0):
             raise RuntimeError('control_lease_service_unavailable')
@@ -350,6 +364,12 @@ def main():
         if not node.wait_until(lambda: node.sample_tcp() is not None, 5.0):
             raise RuntimeError('tcp_tf_unavailable')
         node.check_scene()
+        # Read before acquisition, never block a leased motion loop on services.
+        parameter_snapshot = collect(node)
+        if args.backend == 'forward_position':
+            errors = forward_profile_errors(parameter_snapshot)
+            if errors:
+                raise RuntimeError('P1_parameter_preflight:' + ';'.join(errors))
         acquired = node.call_lease(ControlLease.Request.ACQUIRE)
         if not acquired.success:
             raise RuntimeError(f'control_acquire_rejected:{acquired.message}')
@@ -401,7 +421,10 @@ def main():
             lambda: node.control_state == 'monitoring_manual_ready', 3.0)
         record = {
             'schema_version': 2,
+            'parameter_snapshot_before_acquire': parameter_snapshot,
+            'stop_reports': node.stop_reports,
             'test': 'constant_twist_control_chain_diagnostic',
+            'zero_only': args.zero_only,
             'backend': args.backend,
             'outcome': outcome,
             'detail': detail,
@@ -410,7 +433,7 @@ def main():
             'duration_s': args.duration_s,
             'stop_mode': stop_mode,
             'stop_after_s': stop_after_s,
-            'nominal_displacement_m': args.speed_mps * args.duration_s,
+            'nominal_displacement_m': (0.0 if args.zero_only else args.speed_mps * args.duration_s),
             'control_state_after': node.control_state,
             'servo_status_history': node.status_history,
             'heartbeat_latencies_s': node.heartbeat_latencies_s,

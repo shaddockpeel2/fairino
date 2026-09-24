@@ -9,7 +9,7 @@ fi
 
 command_script='/home/industio/fairino_ws/scripts/gripper/command_gripper.sh'
 
-echo '阶段 1/2：只发送一次抓取位 26 mm（台架 31°）。'
+echo '阶段 1/2：只发送一次抓取位目标 27 mm（820 µs）。'
 "$command_script" close
 
 echo '阶段 2/2：只发送一次张开释放位 60 mm（台架 70°）。'

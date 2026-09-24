@@ -16,7 +16,7 @@ def test_ordinary_actions_do_not_require_the_source_bottom_at_z_zero():
     assert 'target_z_bounds_' in snapshot
 
 
-def test_pick_stack_checks_same_tabletop_before_building_the_scene():
+def test_pick_stack_checks_tier_height_and_only_compares_two_tabletop_cubes():
     source = _source()
     validation = source[
         source.index('bool validateStackPair('):
@@ -27,13 +27,10 @@ def test_pick_stack_checks_same_tabletop_before_building_the_scene():
         source.index('moveit_msgs::msg::AttachedCollisionObject attachedCube(')
     ]
 
-    assert 'std::abs(source_plane_gap) > maximum_cube_plane_gap_m_' in validation
-    # The shared-tabletop comparison only applies while the support cube is
-    # still a tier-0 cube. A support that is already the top of a shorter tower
-    # is higher by construction, so it is checked against the height its tier
-    # implies instead of against the source cube's bottom.
-    assert 'destination.stack_tier == 0 &&' in validation
+    assert 'stackCubeTierHeightAcceptable(*source, "source", reason)' in validation
+    # The shared-tabletop comparison applies only when both cubes are tier 0.
+    assert 'source->stack_tier == 0 && destination.stack_tier == 0 &&' in validation
     assert 'std::abs(tabletop_difference) > stack_height_tolerance_m_' in validation
-    assert 'it has to be picked from the tabletop' in validation
+    assert 'it has to be picked from the tabletop' not in validation
     assert 'stack source bottom must be within' not in scene
     assert 'stackDestinationHeight()' not in source

@@ -40,7 +40,7 @@ def test_forward_servo_profile_is_position_only_and_preserves_jtc_baseline():
     assert forward['publish_joint_velocities'] is False
     assert forward['publish_joint_accelerations'] is False
     assert forward['command_out_topic'] == (
-        '/fairino3mt_servo_position_controller/commands')
+        '/p1/servo_position_candidates')
     assert forward['publish_period'] == 0.020
     assert baseline['command_out_type'] == 'trajectory_msgs/JointTrajectory'
     assert baseline['command_out_topic'] == (

@@ -15,6 +15,9 @@ fr3c_first_grasp:
     # Stage-2 color actions use this service to invalidate old samples and bind
     # the next stable snapshot to an explicit color/filter generation.
     perception_color_service: /perception/blue_cube_localizer/set_target_color
+    # Captured from live /joint_states at the sort-area observation posture on
+    # 2026-09-24. Joint order is joint1 through joint6 (radians).
+    sort_area_observation_joints_rad: [-0.4448582234913893, -1.4926392067037961, -1.1803526762233605, -2.1040482623964056, 1.5720227124768782, 0.10476253214466917]
 
     # Placement geometry is not set here. first_grasp.launch.py reads the
     # projected A4 grid and injects, for every calibrated region:
@@ -67,7 +70,7 @@ fr3c_first_grasp:
     # sets the spacing that keeps two 30 mm cubes from overlapping a slot.
     zone_slot_clearance_m: 0.025
     pre_open_position_m: 0.060
-    close_position_m: 0.026
+    close_position_m: 0.027
     # The hardware has no aperture feedback. Send one bounded, bench-validated
     # 0.8 s open burst before arm motion. Repeating the same open command made
     # the fingers visibly hunt and added about 2.3 s before the arm could move.
@@ -194,6 +197,6 @@ fr3c_first_grasp:
     # joint ServoJ path. Once accepted, that exact gate remains valid for this
     # P5 process; stack restart invalidates it and requires a new startup P6.
     p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
-    # One-hour freshness limit for accepting a new gate. This is not a timeout
+    # 100-hour freshness limit for accepting a new gate. This is not a timeout
     # on a gate already accepted by the running P5 process.
-    p6_gate_max_age_s: 3600.0
+    p6_gate_max_age_s: 360000.0

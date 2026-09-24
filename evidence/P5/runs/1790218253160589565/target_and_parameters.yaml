@@ -1,0 +1,47 @@
+frame: base_link
+target_top_xyz_m: [-0.037585984959, -0.429125798763, 0.0624850136139]
+target_object_orientation_xyzw: [0, 0, -0.301866138257, 0.953350321012]
+object_long_axis_yaw_rad: -0.61329900365
+applied_grasp_yaw_rad: -2.18409533044
+selected_grasp_tilt_rad: 0
+selected_grasp_orientation_xyzw: [0.887572070206, 0.460668883461, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+equivalent_grasp_selection: first_complete_route_in_configured_order
+approach_clearance_m: 0.01
+grasp_depth_m: 0.01
+candidate_planning_time_s: 0.25
+candidate_planning_attempts: 1
+candidate_ik_timeout_s: 0.05
+grasp_tilt_candidates_rad: [0, 0.174532925199, -0.174532925199, 0.349065850399, -0.349065850399, 0.523598775598, -0.523598775598]
+grasp_contact_offset_xyz_m: [0, 0, 0]
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.027
+release_command_repetitions: 2
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: green
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+stack_enabled: false
+stack_upper_color: 
+stack_lower_color: 
+maximum_stack_cubes: 4
+stack_support_tier: 0
+stack_support_top_xyz_m: []
+stack_support_yaw_rad: -0.743117273724
+stack_placement_yaw_offset_rad: 0
+stack_approach_clearance_m: 0.03
+stack_height_tolerance_m: 0.012
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.34206370388, -0.226749644041, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 360000
+perception_status_json: '{"actionable_cube_count":1,"active_inferences":0,"candidate_area_px":1950.0,"center_base_m":[-0.0375570305033026,-0.4291674918207431,0.06248501361394143],"color":"green","depth_valid_fraction":0.986212489862125,"detected_targets":[{"center_base_m":[0.03054636806597082,-0.47844609738940463,0.03344768677677673],"color":"red","grasp_axis_yaw_base_rad":0.4732094811069767,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.02145385686262637,0.02371841349991647],"stack_tier":0,"top_z_base_m":0.03344768677677673},{"center_base_m":[-0.0375570305033026,-0.4291674918207431,0.06248501361394143],"color":"green","grasp_axis_yaw_base_rad":-0.6300348820473872,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.0222057226751642,0.02323323012856339],"stack_tier":1,"top_z_base_m":0.06248501361394143},{"center_base_m":[-0.0448855812647042,-0.5543857411572172,0.03387496534999007],"color":"yellow","grasp_axis_yaw_base_rad":-0.7023942215019585,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.02218110860559762,0.02408999157686273],"stack_tier":0,"top_z_base_m":0.03387496534999007}],"detection_mode":"colors","error_count":0,"filter_generation":3,"frames_inferred":4726,"frames_skipped_paused":0,"frozen":false,"grasp_axis_yaw_base_rad":-0.6132990036497399,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":0.013291634868707353,"has_stable_pose":true,"inference_enabled":true,"last_inference_end_ns":7821878950624,"last_inference_start_ns":7821640874964,"last_success_ns":7821878950624,"nominal_object_size_m":[0.03,0.03,0.03],"npu_inference":false,"object_class":"cube_30mm","observed_short_long_m":[0.0222057226751642,0.02323323012856339],"orientation_source":"top_surface_square_min_area_edge","pause_generation":0,"physical_color_counts":{"blue":0,"green":1,"red":1,"yellow":1},"physical_cube_count":3,"position_std_m":[3.0128517791783368e-05,6.763455455986333e-05,1.3085171750999852e-05],"raw_center_base_m":[-0.0375570305033026,-0.4291674918207431,0.06648501361394143],"reason":"stable_target_updated","rejected_color_regions":{"observed_size_out_of_range":1},"rejected_target_details":[{"color":"yellow","reason":"observed_size_out_of_range:0.0111,0.0218"}],"requested_color_physical_count":1,"required_samples":3,"rgb_color_regions":4,"sample_stamp":1790218252.742151,"samples":3,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":true,"stacked_cube_count":1,"target_filter_color":"green","top_axis_ratio":1.0400420793073284,"top_pose_z_compensation_m":-0.004,"top_z_spread_m":0.0009672274705499057,"tracking":true,"valid":true}'

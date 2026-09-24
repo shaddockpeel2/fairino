@@ -133,7 +133,7 @@ int main(int argc, char ** argv)
         .translation().x();
       return positive_x - negative_x + 0.012;
     };
-  state.setVariablePosition("gripper_command_joint", 0.026);
+  state.setVariablePosition("gripper_command_joint", 0.027);
   state.update();
   const double closed_span = fingerSpanX();
   state.setVariablePosition("gripper_command_joint", 0.060);
@@ -146,7 +146,7 @@ int main(int argc, char ** argv)
   {
     return 19;
   }
-  state.setVariablePosition("gripper_command_joint", 0.026);
+  state.setVariablePosition("gripper_command_joint", 0.027);
   state.update();
 
   collision_detection::CollisionRequest request;
@@ -224,7 +224,7 @@ int main(int argc, char ** argv)
 
   // A 30 mm cube at the grasp depth may touch only the four finger links.
   // Its centre is 15 mm behind the calibrated fingertip TCP.
-  state.setVariablePosition("gripper_command_joint", 0.026);
+  state.setVariablePosition("gripper_command_joint", 0.027);
   state.update();
   const Eigen::Isometry3d gripper_pose = state.getGlobalLinkTransform("gripper_link");
   const Eigen::Isometry3d grasp_cube_pose =

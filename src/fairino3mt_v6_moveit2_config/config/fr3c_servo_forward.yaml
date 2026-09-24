@@ -40,7 +40,7 @@ cartesian_command_in_topic: ~/delta_twist_cmds
 joint_command_in_topic: ~/delta_joint_cmds
 joint_topic: /joint_states
 status_topic: ~/status
-command_out_topic: /fairino3mt_servo_position_controller/commands
+command_out_topic: /p1/servo_position_candidates
 
 check_collisions: true
 collision_check_rate: 10.0

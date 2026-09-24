@@ -39,7 +39,7 @@
         <joint name="joint6" value="0"/>
     </group_state>
     <group_state name="closed" group="ydi_j22_gripper">
-        <joint name="gripper_command_joint" value="0.026"/>
+        <joint name="gripper_command_joint" value="0.027"/>
     </group_state>
     <group_state name="open" group="ydi_j22_gripper">
         <joint name="gripper_command_joint" value="0.060"/>

@@ -15,8 +15,9 @@ from fr3c_gripper_driver.node import GripperNode
 @pytest.mark.parametrize(
     ('position', 'expected'),
     [
-        (0.026, GoalResponse.ACCEPT),
+        (0.027, GoalResponse.ACCEPT),
         (0.060, GoalResponse.ACCEPT),
+        (0.026, GoalResponse.REJECT),
         (0.043, GoalResponse.REJECT),
         (0.100, GoalResponse.REJECT),
     ],

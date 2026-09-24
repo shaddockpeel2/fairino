@@ -17,6 +17,7 @@ import threading
 import time
 import unicodedata
 import uuid
+import wave
 
 from .trace import TraceWriter
 from .asr_text import normalize_robot_asr_text
@@ -32,7 +33,7 @@ KWS_MODEL_FILES = (
 _SEPARATORS = r'[\s，。！？、,.!?：:；;·\-]*'
 _WAKE_FAIRINO_GROUPS = (
     frozenset('法发罚伐乏阀珐筏'),
-    frozenset('奥澳傲熬袄凹敖鳌'),
+    frozenset('奥澳傲熬袄凹敖鳌浩好老'),
     frozenset('同童通桶统痛铜桐瞳彤'),
     frozenset('学雪血穴靴薛'),
 )
@@ -58,6 +59,42 @@ def _is_wake_fragment(compact: str, groups) -> bool:
                for index, char in enumerate(compact)):
             return True
     return False
+
+
+def _append_pre_roll(ring: deque[bytes], size: int,
+                     raw: bytes, capacity: int) -> int:
+    """Keep exactly the latest PCM bytes even when arecord returns short reads."""
+    ring.append(raw)
+    size += len(raw)
+    while size > capacity:
+        excess = size - capacity
+        if len(ring[0]) <= excess:
+            size -= len(ring.popleft())
+        else:
+            ring[0] = ring[0][excess:]
+            size -= excess
+    return size
+
+
+def _fuzzy_wake_prefix_end(candidate: str) -> int:
+    """Find the wake prefix with one lost or wrong character after CPU KWS.
+
+    KWS has already detected the phrase. ASR often writes 打奥同学 or
+    浩同学; neither is a user question. Keep this bounded to the configured
+    four-character wake phrase and require three acoustically matching slots.
+    """
+    chars = [(match.group(), match.end()) for match in re.finditer(
+        r'[^\s，。！？、,.!?：:；;·\-]', candidate)]
+    if len(chars) >= 3 and any(
+            all(chars[index][0] in _WAKE_FAIRINO_GROUPS[offset + index]
+                for index in range(3))
+            for offset in (0, 1)):
+        return chars[2][1]
+    if len(chars) >= 4 and sum(
+            char in group for (char, _), group in zip(
+                chars[:4], _WAKE_FAIRINO_GROUPS)) >= 3:
+        return chars[3][1]
+    return 0
 
 
 def extract_wake_query(text: str, phrases: tuple[str, ...]) -> tuple[bool, str]:
@@ -97,6 +134,15 @@ def wake_query_from_asr(text: str, phrases: tuple[str, ...]) -> str:
     matched, query = extract_wake_query(text, phrases)
     if matched:
         return query
+    candidate = re.sub(
+        r'^[\s，。！？、,.!?：:；;]+', '',
+        unicodedata.normalize('NFKC', str(text or '')).strip())
+    if any(phrase == '法奥同学' for phrase in phrases):
+        end = _fuzzy_wake_prefix_end(candidate)
+        if end:
+            return re.sub(
+                r'^[\s，。！？、,.!?：:；;]+', '',
+                candidate[end:]).strip()
     compact = re.sub(
         r'[\s，。！？、,.!?：:；;·\-]+', '',
         unicodedata.normalize('NFKC', str(text)).strip().casefold())
@@ -133,6 +179,8 @@ class WakeInput:
         self._cancel = threading.Event()
         self.request_id = ''
         self.mode = ''
+        self._debug_audio = None
+        self._debug_audio_path = None
 
     @property
     def enabled_by_default(self) -> bool:
@@ -268,8 +316,6 @@ class WakeInput:
             sys.executable, str(Path(__file__).with_name('asr_worker.py')),
             '--c-api-library', str(library),
             '--model-dir', str(root / cfg['model_directory']),
-            '--hotwords-file', str(self.workspace / 'config/voice/asr_hotwords.txt'),
-            '--hotwords-score', str(cfg.get('hotwords_score', 2.0)),
             '--sample-rate', str(cfg['sample_rate']),
             '--num-threads', str(cfg['num_threads']), '--chunk-samples', '800',
             '--speech-endpoint-seconds', str(cfg['trailing_silence_s']),
@@ -300,12 +346,24 @@ class WakeInput:
              '-f', 'S16_LE', '-r', str(cfg['sample_rate']), '-c', '1'],
             stdout=subprocess.PIPE, stderr=errors, bufsize=0)
 
+    def _append_debug_audio(self, rid: str, raw: bytes) -> None:
+        if self._debug_audio is None or not raw:
+            return
+        try:
+            self._debug_audio.writeframes(raw)
+        except (OSError, wave.Error) as error:
+            self.trace.write('wake_audio_save_error', rid, message=str(error))
+            self._debug_audio.close()
+            self._debug_audio = None
+            self._debug_audio_path = None
+
     def _wait_for_wake(self, rid: str, capture, kws, events) -> bytes:
         cfg = self.config
         sample_rate = int(self.asr['sample_rate'])
         chunk_bytes = sample_rate * int(cfg['kws_chunk_ms']) // 1000 * 2
-        ring = deque(maxlen=max(1, math.ceil(
-            float(cfg['pre_roll_s']) * 1000 / int(cfg['kws_chunk_ms']))))
+        pre_roll_bytes = int(float(cfg['pre_roll_s']) * sample_rate) * 2
+        ring = deque()
+        ring_bytes = 0
         pending = bytearray()
         os.set_blocking(capture.stdout.fileno(), False)
         os.set_blocking(kws.stdin.fileno(), False)
@@ -321,7 +379,8 @@ class WakeInput:
                     kind = event.get('event')
                     if kind == 'wake':
                         self._event(
-                            'wake_detected', rid, keyword=event.get('keyword', ''))
+                            'wake_detected', rid, keyword=event.get('keyword', ''),
+                            pre_roll_audio_s=ring_bytes / (sample_rate * 2))
                         return b''.join(ring)
                     if kind in ('error', 'eof'):
                         raise RuntimeError(event.get('message', 'KWS 意外退出'))
@@ -332,7 +391,8 @@ class WakeInput:
                     if len(raw) % 2:
                         raw = raw[:-1]
                     if raw:
-                        ring.append(raw)
+                        ring_bytes = _append_pre_roll(
+                            ring, ring_bytes, raw, pre_roll_bytes)
                         pending.extend(raw)
                 if pending:
                     try:
@@ -352,6 +412,20 @@ class WakeInput:
         sample_rate = int(cfg['sample_rate'])
         chunk_bytes = 1600
         pending = bytearray(initial_audio)
+        if self.config.get('save_debug_audio', False):
+            try:
+                directory = self.workspace / 'evidence/voice/P9/runtime/asr-recordings'
+                directory.mkdir(parents=True, exist_ok=True)
+                self._debug_audio_path = directory / f'{rid}-{mode}.wav'
+                self._debug_audio = wave.open(str(self._debug_audio_path), 'wb')
+                self._debug_audio.setnchannels(1)
+                self._debug_audio.setsampwidth(2)
+                self._debug_audio.setframerate(sample_rate)
+                self._append_debug_audio(rid, initial_audio)
+            except (OSError, wave.Error) as error:
+                self.trace.write('wake_audio_save_error', rid, message=str(error))
+                self._debug_audio = None
+                self._debug_audio_path = None
         total = len(initial_audio) / (sample_rate * 2)
         voiced = 0.0
         last_voice = None
@@ -439,6 +513,7 @@ class WakeInput:
                                 raise RuntimeError('麦克风断开或不可用')
                             if len(raw) % 2:
                                 raw = raw[:-1]
+                            self._append_debug_audio(rid, raw)
                             pending.extend(raw)
                             total += len(raw) / (sample_rate * 2)
                             inspect(raw)
@@ -509,6 +584,23 @@ class WakeInput:
             self._terminate(capture)
             self._terminate(kws)
             self._terminate(worker)
+            if self._debug_audio is not None:
+                try:
+                    self._debug_audio.close()
+                    self.trace.write('wake_audio_saved', rid, mode=mode,
+                                     path=str(self._debug_audio_path))
+                    directory = self._debug_audio_path.parent
+                    keep = max(1, int(self.config.get('debug_audio_keep', 20)))
+                    for old in sorted((path for path in directory.glob('*.wav')
+                                       if path.name.endswith(('-wake.wav', '-followup.wav'))),
+                                      key=lambda path: path.stat().st_mtime,
+                                      reverse=True)[keep:]:
+                        old.unlink(missing_ok=True)
+                except OSError as error:
+                    self.trace.write('wake_audio_save_error', rid, message=str(error))
+                finally:
+                    self._debug_audio = None
+                    self._debug_audio_path = None
             lock.close()
             with self._lock:
                 if self.request_id == rid:

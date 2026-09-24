@@ -14,6 +14,7 @@ import sys
 import threading
 import time
 import uuid
+import wave
 
 from .trace import TraceWriter
 from .asr_text import normalize_robot_asr_text
@@ -85,6 +86,7 @@ class VoiceInput:
 
     def _run(self, rid):
         worker = capture = None
+        debug_audio = debug_path = None
         terminal = ('asr_empty', {})
         cfg = self.config
         runtime = self.workspace / 'evidence/voice/P7/runtime'
@@ -103,8 +105,6 @@ class VoiceInput:
                                               str(library.parent), env.get('LD_LIBRARY_PATH', '')))
             command = [sys.executable, str(Path(__file__).with_name('asr_worker.py')),
                        '--c-api-library', str(library), '--model-dir', str(root / cfg['model_directory']),
-                       '--hotwords-file', str(self.workspace / 'config/voice/asr_hotwords.txt'),
-                       '--hotwords-score', str(cfg.get('hotwords_score', 2.0)),
                        '--sample-rate', str(cfg['sample_rate']),
                        '--num-threads', str(cfg['num_threads']), '--chunk-samples', '800',
                        '--speech-endpoint-seconds', str(cfg['trailing_silence_s']),
@@ -142,6 +142,18 @@ class VoiceInput:
                     ['arecord', '-q', '-D', cfg['capture_device'], '-t', 'raw',
                      '-f', 'S16_LE', '-r', str(cfg['sample_rate']), '-c', '1'],
                     stdout=subprocess.PIPE, stderr=errors, bufsize=0)
+                if cfg.get('save_debug_audio', False):
+                    try:
+                        directory = self.workspace / 'evidence/voice/P9/runtime/asr-recordings'
+                        directory.mkdir(parents=True, exist_ok=True)
+                        debug_path = directory / f'{rid}-button.wav'
+                        debug_audio = wave.open(str(debug_path), 'wb')
+                        debug_audio.setnchannels(1)
+                        debug_audio.setsampwidth(2)
+                        debug_audio.setframerate(cfg['sample_rate'])
+                    except (OSError, wave.Error) as error:
+                        self.trace.write('button_audio_save_error', rid, message=str(error))
+                        debug_audio = debug_path = None
                 os.set_blocking(worker.stdin.fileno(), False)
                 os.set_blocking(capture.stdout.fileno(), False)
                 self._event('asr_recording', rid)
@@ -200,6 +212,13 @@ class VoiceInput:
                                     raw = os.read(key.fd, 1600)
                                     if not raw:
                                         raise RuntimeError('麦克风断开或不可用，见 worker.log')
+                                    if debug_audio is not None:
+                                        try:
+                                            debug_audio.writeframes(raw)
+                                        except (OSError, wave.Error) as error:
+                                            self.trace.write('button_audio_save_error', rid, message=str(error))
+                                            debug_audio.close()
+                                            debug_audio = debug_path = None
                                     pending.extend(raw)
                                     duration = len(raw) / (cfg['sample_rate'] * 2)
                                     total += duration
@@ -239,6 +258,12 @@ class VoiceInput:
         finally:
             self._terminate(capture)
             self._terminate(worker)
+            if debug_audio is not None:
+                try:
+                    debug_audio.close()
+                    self.trace.write('button_audio_saved', rid, path=str(debug_path))
+                except OSError as error:
+                    self.trace.write('button_audio_save_error', rid, message=str(error))
             lock.close()
             if not self._cancel.is_set():
                 # Deliver final only after the microphone and NPU worker exit.

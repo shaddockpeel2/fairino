@@ -1,0 +1,47 @@
+frame: base_link
+target_top_xyz_m: [-0.0380663418899, -0.42972019046, 0.0623344898415]
+target_object_orientation_xyzw: [0, 0, -0.283776737908, 0.958890381129]
+object_long_axis_yaw_rad: -0.575460962098
+applied_grasp_yaw_rad: -0.575460962098
+selected_grasp_tilt_rad: 0
+selected_grasp_orientation_xyzw: [0.283776737908, 0.958890381129, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+equivalent_grasp_selection: first_complete_route_in_configured_order
+approach_clearance_m: 0.01
+grasp_depth_m: 0.01
+candidate_planning_time_s: 0.25
+candidate_planning_attempts: 1
+candidate_ik_timeout_s: 0.05
+grasp_tilt_candidates_rad: [0, 0.174532925199, -0.174532925199, 0.349065850399, -0.349065850399, 0.523598775598, -0.523598775598]
+grasp_contact_offset_xyz_m: [0, 0, 0]
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.027
+release_command_repetitions: 2
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: green
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+stack_enabled: false
+stack_upper_color: 
+stack_lower_color: 
+maximum_stack_cubes: 4
+stack_support_tier: 0
+stack_support_top_xyz_m: []
+stack_support_yaw_rad: 0
+stack_placement_yaw_offset_rad: 0
+stack_approach_clearance_m: 0.03
+stack_height_tolerance_m: 0.012
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.34206370388, -0.226749644041, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 360000
+perception_status_json: '{"actionable_cube_count":1,"active_inferences":0,"candidate_area_px":1915.0,"center_base_m":[-0.038154665721053735,-0.4298035755471185,0.062334489841452456],"color":"green","depth_valid_fraction":0.9866666666666667,"detected_targets":[{"center_base_m":[0.029819756947746606,-0.47841348387520205,0.03332050021685587],"color":"red","grasp_axis_yaw_base_rad":0.47576035381395765,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.02187545145176492,0.0243229514080326],"stack_tier":0,"top_z_base_m":0.03332050021685587},{"center_base_m":[-0.038154665721053735,-0.4298035755471185,0.062334489841452456],"color":"green","grasp_axis_yaw_base_rad":-0.5752592919106165,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.022330998754795543,0.0231197532920433],"stack_tier":1,"top_z_base_m":0.062334489841452456},{"center_base_m":[-0.04495583947212777,-0.55419292602494,0.03377103487202057],"color":"yellow","grasp_axis_yaw_base_rad":-0.7016382738661826,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.02243877486340929,0.024715980640348224],"stack_tier":0,"top_z_base_m":0.03377103487202057}],"detection_mode":"colors","error_count":0,"filter_generation":1,"frames_inferred":210,"frames_skipped_paused":0,"frozen":false,"grasp_axis_yaw_base_rad":-0.5754609620982245,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":0.008357695953478007,"has_stable_pose":true,"inference_enabled":true,"last_inference_end_ns":8811921445414,"last_inference_start_ns":8811734616792,"last_success_ns":8811921445414,"nominal_object_size_m":[0.03,0.03,0.03],"npu_inference":false,"object_class":"cube_30mm","observed_short_long_m":[0.022330998754795543,0.0231197532920433],"orientation_source":"top_surface_square_min_area_edge","pause_generation":0,"physical_color_counts":{"blue":0,"green":1,"red":1,"yellow":1},"physical_cube_count":3,"position_std_m":[7.423729418050629e-05,5.80568202121198e-05,1.841648596080368e-05],"raw_center_base_m":[-0.038154665721053735,-0.4298035755471185,0.06633448984145246],"reason":"stable_target_updated","rejected_color_regions":{},"rejected_target_details":[],"requested_color_physical_count":1,"required_samples":3,"rgb_color_regions":3,"sample_stamp":1790219242.833667,"samples":3,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":true,"stacked_cube_count":1,"target_filter_color":"green","top_axis_ratio":1.0302247382632068,"top_pose_z_compensation_m":-0.004,"top_z_spread_m":0.0009986815460338583,"tracking":true,"valid":true}'

@@ -5,3 +5,4 @@ log/
 assets/voice/
 /.venv-tts/
 /.roslog/
+/evidence/voice/P9/runtime/asr-recordings/

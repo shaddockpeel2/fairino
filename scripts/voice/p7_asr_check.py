@@ -48,8 +48,6 @@ def main():
     env = os.environ.copy()
     env['LD_LIBRARY_PATH'] = f"{root / cfg['runtime_directory']}:{lib.parent}"
     command = [sys.executable, str(ROOT / 'src/fr3c_voice/fr3c_voice/asr_worker.py'),
-               '--hotwords-file', str(ROOT / 'config/voice/asr_hotwords.txt'),
-               '--hotwords-score', str(cfg.get('hotwords_score', 2.0)),
                '--c-api-library', str(lib), '--model-dir', str(root / cfg['model_directory']),
                '--speech-endpoint-seconds', str(cfg['trailing_silence_s']), '--chunk-samples', '800']
     for round_id in range(args.rounds):

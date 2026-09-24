@@ -10,6 +10,7 @@ from fr3c_voice.intent import (
     parse_dialogue_intent,
     safe_local_action_route,
     safe_local_non_action_route,
+    source_location_for_intent,
 )
 
 
@@ -51,6 +52,34 @@ def test_parser_and_semantics_accept_pick_stack_with_ordered_roles():
     assert intent.color == 'red'
     assert intent.support_color == 'blue'
     assert intent.zone is None
+
+
+@pytest.mark.parametrize('text,task,source', [
+    ('把分类区里的红色方块放到蓝色方块上面', 'pick_stack', 'sort_area'),
+    ('把分类区里的红色方块拿起来', 'pick_hold', 'sort_area'),
+    ('把分类区里的红色方块放到A3', 'pick_place', 'sort_area'),
+    ('把红色方块放到分类区', 'pick_sort', ''),
+    ('把红色方块放到蓝色方块上面', 'pick_stack', ''),
+])
+def test_sort_area_source_requires_explicit_source_wording(text, task, source):
+    intent = safe_local_action_route(text)
+    assert intent is not None
+    assert intent.task == task
+    assert source_location_for_intent(text, intent) == source
+
+
+def test_model_cannot_swap_sort_area_source_color():
+    raw = encoded('action', 'pick_stack', 'blue', support_color='red')
+    with pytest.raises(IntentProtocolError):
+        classify_text('把分类区里的红色方块放到蓝色方块上面', lambda _: raw)
+
+
+def test_auto_stack_does_not_silently_treat_sort_area_as_tabletop():
+    text = '把分类区的方块自动码垛'
+    assert safe_local_action_route(text) is None
+    raw = encoded('action', 'pick_auto_stack', reply='准备自动码垛。')
+    with pytest.raises(IntentProtocolError):
+        classify_text(text, lambda _: raw)
 
 
 def test_stack_roles_cannot_be_swapped_by_the_model():
@@ -287,7 +316,8 @@ AUTO_STACK_REPLY = (
 
 
 @pytest.mark.parametrize('text', [
-    '自动码垛', '自动堆叠', '自动码放', '一键码垛', '全自动堆叠',
+    '自动码垛', '自动堆叠', '自动堆放', '自动码放',
+    '一键码垛', '一键堆放', '全自动堆叠',
     '帮我自动码垛', '自动把它们码起来',
 ])
 def test_auto_stack_phrases_take_the_safe_local_route(text):
@@ -302,9 +332,25 @@ def test_auto_stack_phrases_take_the_safe_local_route(text):
     assert route.reply == AUTO_STACK_REPLY
 
 
-@pytest.mark.parametrize('text', ['自动码垛', '自动码放'])
+@pytest.mark.parametrize('text', ['自动码垛', '自动堆叠', '自动堆放', '自动码放'])
 def test_auto_stack_commands_are_never_fast_routed_to_chat(text):
     assert safe_local_non_action_route(text) is None
+
+
+@pytest.mark.parametrize('text', [
+    '不要自动堆放', '什么是自动堆放', '自动堆放是什么',
+])
+def test_auto_stack_alias_does_not_turn_negation_or_questions_into_motion(text):
+    assert safe_local_action_route(text) is None
+
+
+def test_auto_stack_alias_with_explicit_color_does_not_dispatch_whole_tower():
+    text = '把红色方块自动堆放'
+    assert safe_local_action_route(text) is None
+    with pytest.raises(IntentProtocolError) as caught:
+        classify_text(
+            text, lambda _prompt: encoded('action', 'pick_auto_stack'))
+    assert caught.value.code == 'auto_stack_with_colors'
 
 
 @pytest.mark.parametrize('raw', [

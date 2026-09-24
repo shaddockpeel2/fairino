@@ -29,6 +29,15 @@ while [ $# -gt 0 ]; do
   esac
 done
 
+# A second window would compete with the first for the exclusive microphone.
+# Check before installing the shutdown trap so this invocation cannot stop the
+# services owned by the already running window.
+if [ "${CHECK_ONLY}" != "1" ] &&
+   pgrep -f "^/usr/bin/python3 -m fr3c_voice.dialogue_gui --workspace ${ROOT}( |$)" >/dev/null 2>&1; then
+  echo "对话窗口已在运行，请使用现有窗口；如需重启，请先关闭它。"
+  exit 0
+fi
+
 GUI_PID=""
 SHUTTING_DOWN=0
 

@@ -174,7 +174,7 @@ ros2 topic echo /fr3c_first_grasp/state   # target_zone 显示本次实际使用
 
 `pick_stack` 把“红色放在蓝色上面、黄色放在绿色上面”这类请求做成一次独立任务：抓取 `color` 方块，旋转对齐后放到 `support_color` 方块的顶面，释放并返航。
 
-**一次请求只加一个方块**。塔上的方块就是下一层的 `support_color`，所以在同一个塔上再发一条 `pick_stack` 就能继续往上加：`pick_stack(blue, red)` → `pick_stack(green, blue)` → `pick_stack(yellow, green)`，三次请求得到四层塔（red 在最下、yellow 在最上）。默认上限 `maximum_stack_cubes: 4`，即塔最多四个方块；已经满四层时再请求，会以 `STACK_GEOMETRY_REJECTED` 在运动前拒绝。
+**一次请求只移动一个方块**。塔上的方块就是下一层的 `support_color`，所以在同一个塔上再发一条 `pick_stack` 就能继续往上加：`pick_stack(blue, red)` → `pick_stack(green, blue)` → `pick_stack(yellow, green)`，三次请求得到四层塔（red 在最下、yellow 在最上）。也可把一座塔的塔顶方块取下，放到另一座塔的塔顶，例如蓝色上面的绿色可以移到黄色上面；原塔剩下的蓝色保持在原位。默认上限 `maximum_stack_cubes: 4`，即目标塔最多四个方块；已经满四层时再请求，会以 `STACK_GEOMETRY_REJECTED` 在运动前拒绝。
 
 ### 与 pick_place 的区别
 
@@ -186,10 +186,10 @@ ros2 topic echo /fr3c_first_grasp/state   # target_zone 显示本次实际使用
 
 1. 确认画面中恰好有一个 `color` 和一个 `support_color`；缺失或同色多个时在运动前拒绝。
 2. 从同一个 `sample_stamp` 的状态同时冻结两者的 XYZ、尺寸、偏航角和高度层级（`stack_tier`）。
-3. 确认 `color` 是桌面上的 `stack_tier == 0` 方块、`support_color` 顶面没有别的方块、且这层塔加完不超过上限，然后才做 MoveIt2 整路径可达与碰撞规划。
+3. 确认 `color` 是桌面方块或源塔塔顶，`support_color` 是另一座塔的塔顶且顶面没有别的方块，并确认目标塔加完不超过上限，然后才做 MoveIt2 整路径可达与碰撞规划。
 4. 机械臂一旦开始运动，后续抓取、旋转、放置全部使用这一份不可变快照，**不回初始位、不重新识别下方方块**。
 
-`support_color` **允许已经是塔顶**（`stack_tier > 0`），这正是继续加高的方式。相机只能看到塔顶那一个方块，塔身被挡住，所以除了塔顶方块本身，规划场景里还会补一个从桌面平面到塔顶方块底面的虚拟立柱障碍物（`stack_support_id` + `_column`），避免路径从塔身中间穿过去。下方方块仍在桌面时没有立柱，两层码垛的场景与之前完全一致。
+`color` 和 `support_color` **都允许是塔顶**（`stack_tier > 0`）。相机只能看到塔顶方块，塔身被挡住，所以规划场景会为目标塔补一个从桌面到目标方块底面的虚拟立柱（`stack_support_id` + `_column`）；源方块来自塔顶时也会为原塔补一个立柱（`stack_support_id` + `_source_column`）。机械臂从原塔取走顶层后，规划仍把留下的塔身当作障碍物，并先竖直抬升到净空高度再横向移动。桌面方块没有对应立柱。
 
 ### 旋转角度计算
 
@@ -216,11 +216,11 @@ ros2 topic echo /fr3c_first_grasp/state   # target_zone 显示本次实际使用
 
 ### 最高四层，且不覆盖已有方块
 
-- 待抓取的 `color` 必须是**落在地面平面上的**桌面方块（`stack_tier == 0`，底面与 `ground_plane_z_m` 的偏差不超过 `maximum_cube_plane_gap_m`）。塔上的方块只能当 `support_color`，不会被当成抓取目标。
+- 待抓取的 `color` 可以是桌面方块，也可以是**原塔塔顶**。桌面方块的底面必须接近 `ground_plane_z_m`；塔顶方块的实测底面高度必须与其 `stack_tier` 自洽，且同一 footprint 内不得有更高的可见方块。原塔塔身在整个任务中保持为碰撞障碍。
 - `support_color` 可以是桌面方块，也可以是塔顶方块，但**它自己顶面不能已经有方块**：感知对它所在水平 footprint（`stack_footprint_tolerance_m`）内、位置更高的方块会直接拒绝，报 `STACK_GEOMETRY_REJECTED`，不会悄悄码成比请求更高的塔。
 - `support_color` 的层数受上限约束：`stack_tier + 1 >= maximum_stack_cubes`（默认 4）时拒绝，说明里给出实际层数和上限。
-- `support_color` 报告的层级必须与它实测的底面高度自洽：塔顶方块底面应在桌面上方 `stack_tier × 方块高度` 处。因为每个真实方块的高度与标称值都有偏差、误差会随层数累加，这里比较的是“该层数隐含的单块平均高度”，容差 `stack_height_tolerance_m`（默认 12 mm），而不是一个绝对毫米窗口。
-- 当 `support_color` 还在桌面（`stack_tier == 0`）时，两个方块的底面高度差必须落在 `stack_height_tolerance_m` 内，且水平 footprint 不得重叠。`support_color` 已经是塔顶时不再比较两者底面——它按定义就高一层或多层。
+- `color` 和 `support_color` 报告的层级都必须与各自实测的底面高度自洽：塔顶方块底面应在桌面上方 `stack_tier × 方块高度` 处。因为每个真实方块的高度与标称值都有偏差、误差会随层数累加，这里比较的是“该层数隐含的单块平均高度”，容差 `stack_height_tolerance_m`（默认 12 mm）。
+- 只有双方都在桌面（`stack_tier == 0`）时，才比较两者底面高度差。任何情况下，源方块和目标方块的水平 footprint 都不得重叠。
 
 感知侧的对应配置是 `stacking_cube_height_offsets_m`：**每个已叠层需要一个高度偏移**，默认 `[0.030, 0.060, 0.090]` 覆盖到第 3 层（即四层塔的塔顶）。层高判定窗口用 `stacking_tier_tolerance_m`（默认 12 mm），比桌面的 `sorting_max_cube_plane_gap_m`（10 mm）宽，用来吸收上面提到的累加高度误差——否则真实方块略矮于标称时，四层塔的塔顶会直接不再被识别为方块。
 
@@ -253,6 +253,7 @@ ros2 topic echo /fr3c_first_grasp/state   # target_zone 显示本次实际使用
 
 - `pick_stack(red, blue)`：红色方块落正在蓝色方块顶面，四边大致对齐；`/fr3c_first_grasp/state` 的 `support_color` 为 `blue`、`stack_support_tier` 为 `0`、`stack_placement_yaw_rad` 是本次实际旋转角。
 - 完成后立即发第二条 `pick_stack`：应被接受并正常执行，不需要人工复位。
+- 先把绿色码到蓝色，再把绿色从蓝色塔顶移到黄色上面：只规划模式确认源塔有 `<stack_support_id>_source_column` 障碍、抓取后先竖直抬升、完整路径无碰撞；执行模式确认蓝色留在原处，绿色落到黄色顶面。规划失败时保持原塔不动。
 - 开始运动后不得移动或抽走下方方块：设计上刻意不做二次视觉重定位，任务会信任初始快照，现场必须保持两块方块静止。
 - 执行中取消：返航逻辑同样生效；若已闭爪，下一条任务返回 `HOLDING_OBJECT`。
 - 故意把两方块摆成同一朝向、再摆成相差 45 度：两种都能对齐，日志里 `stack_candidate_selected` 的 `placement_yaw_offset_rad` 应分别为接近 0 和接近 45 度。
@@ -296,8 +297,8 @@ scripts/grasp/send_color_task.sh auto
 ros2 action send_goal /fr3c_first_grasp/pick_stack_auto \
   fairino_msgs/action/PickColor "{color: '', zone: '', support_color: ''}" --feedback
 
-# 语音/大模型：说“自动码垛”“自动堆叠”“一键码垛”“全自动码垛”“自动码放”等。
-# 必须带“自动/一键/全自动”这类标记；只说“码垛/堆叠”仍然是原来的 pick_stack。
+# 语音/大模型：说“自动码垛”“自动堆叠”“自动堆放”“自动码放”“一键码垛”“全自动码垛”等。
+# 必须带“自动/一键/全自动”这类标记；只说“码垛/堆叠/堆放”不会执行整塔自动码垛。
 ```
 
 ### 与其他任务的关系

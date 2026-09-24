@@ -20,6 +20,12 @@
 
   <depend>moveit_ros_planning</depend>
   <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>moveit_msgs</depend>
+  <depend>controller_manager_msgs</depend>
+  <test_depend>ament_cmake_gtest</test_depend>
 
   <exec_depend>moveit_ros_move_group</exec_depend>
   <exec_depend>ament_index_python</exec_depend>
@@ -35,14 +41,11 @@
   <!-- <exec_depend>joint_trajectory_controller</exec_depend> -->
   <!-- <exec_depend>gazebo_ros_control</exec_depend> -->
   <exec_depend>controller_manager</exec_depend>
-  <exec_depend>controller_manager_msgs</exec_depend>
   <exec_depend>joint_state_broadcaster</exec_depend>
   <exec_depend>joint_trajectory_controller</exec_depend>
   <exec_depend>forward_command_controller</exec_depend>
   <exec_depend>rclpy</exec_depend>
   <exec_depend>action_msgs</exec_depend>
-  <exec_depend>std_msgs</exec_depend>
-  <exec_depend>std_srvs</exec_depend>
   <exec_depend>fairino_msgs</exec_depend>
   <exec_depend>fairino_description</exec_depend>
   <exec_depend>fr3c_camera</exec_depend>

@@ -119,7 +119,7 @@ demo. It copies the current stable P3 top pose and matching nominal size. P3
 classifies either a 30 x 30 x 30 mm cube or a 60 x 30 x 30 mm rectangular box,
 estimates a top-edge/long-axis yaw, and publishes both with the same timestamp.
 The task uses the P4 parameters directly:
-10 mm top clearance, 15 mm grasp depth, 50 mm lift, 60 mm pre-open and 26 mm
+10 mm top clearance, 15 mm grasp depth, 50 mm lift, 60 mm pre-open and 27 mm
 close. The old `mtc_node` remains available only as an upstream example.
 
 Before starting, review `config/first_grasp.yaml`, especially the target bounds,
@@ -180,7 +180,7 @@ ros2 service call /fr3c_first_grasp/start std_srvs/srv/Trigger '{}'
 # Call only after inspecting the 10 mm-above-top alignment.
 ros2 service call /fr3c_first_grasp/descend_and_close std_srvs/srv/Trigger '{}'
 
-# The 26 mm result is open-loop. Call only after physically confirming the cube is held.
+# The 27 mm result is open-loop. Call only after physically confirming the cube is held.
 ros2 service call /fr3c_first_grasp/confirm_grip_and_lift std_srvs/srv/Trigger '{}'
 ```
 
@@ -222,7 +222,8 @@ five task actions using `fairino_msgs/action/PickColor`:
   the cube of `support_color`. Requires `stack_enabled:=true`. The placement
   target is the lower cube's measured top face, not a calibrated zone, and the
   upper cube is rotated so both top faces share one yaw. Repeated requests may
-  extend a tower up to `maximum_stack_cubes` (four by default).
+  extend a tower up to `maximum_stack_cubes` (four by default), or move one
+  cube from the top of one tower onto another tower.
 - `/fr3c_first_grasp/pick_stack_auto`: accepts an empty goal, discovers the
   tabletop colours, and builds the complete tower in the fixed configured
   order. It freezes all source coordinates from that first RGB-D inventory,
@@ -253,10 +254,12 @@ Every other action rejects a non-empty `support_color` with
 `INVALID_SUPPORT_COLOR`. `pick_stack` first stabilizes the requested source
 colour, then locks both source and support from that status's same-frame
 `detected_targets` list. It never re-observes either coordinate after motion
-starts. Before any motion it also refuses a pair that is not two cubes lying side by side
-(`STACK_GEOMETRY_REJECTED`), including a lower cube that already carries a cube,
-so it cannot silently build a three-high tower. The lower cube stays a planning
-obstacle for the whole task and is cleared afterwards.
+starts. Before any motion it checks both reported tower tiers against measured
+height, requires the source and support to be exposed tower tops at separate
+locations, and enforces the destination tower limit (`STACK_GEOMETRY_REJECTED`).
+The support tower and, when the source starts above the table, the source tower
+remain planning obstacles for the whole task. Their virtual columns are
+cleared before the next task installs its own scene.
 
 `pick_stack` is the one action that promises the task slot back whatever
 happens: a failure after motion started triggers a return-home trajectory, the

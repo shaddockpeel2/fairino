@@ -1,0 +1,10 @@
+2026-09-24 12:25:40,023 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-09-24 12:30:55,866 INFO fr3c_dialogue_gui speech playback first_write=0.146s playback_end=0.672s
+2026-09-24 12:31:00,009 INFO fr3c_dialogue_gui local_route request_id=76eb93ae3c9e4725a7e4a4d7c4bd7172 route=chat
+2026-09-24 12:31:10,963 INFO fr3c_dialogue_gui speech playback first_write=2.380s playback_end=10.886s
+2026-09-24 12:31:20,891 INFO fr3c_dialogue_gui local_route request_id=8be450b6128747ed94074e0bcec55379 route=chat
+2026-09-24 12:31:39,183 INFO fr3c_dialogue_gui speech playback first_write=2.913s playback_end=18.239s
+2026-09-24 12:31:58,929 INFO fr3c_dialogue_gui speech playback first_write=0.259s playback_end=0.785s
+2026-09-24 12:32:04,953 INFO fr3c_dialogue_gui local_route request_id=477ba168309f472498ecb2d7a9e9ffff route=chat
+2026-09-24 12:32:37,981 INFO fr3c_dialogue_gui speech playback first_write=2.873s playback_end=33.019s
+2026-09-24 12:32:57,084 INFO fr3c_dialogue_gui speech playback first_write=0.173s playback_end=0.699s

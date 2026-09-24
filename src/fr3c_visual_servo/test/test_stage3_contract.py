@@ -81,6 +81,7 @@ def bridge_fixture():
     bridge._switch_timeout_s = 1.0
     bridge._cleanup_in_progress = False
     bridge._fault_latched = False
+    bridge._service_timeout_latched = False
     bridge._servo_hard_fault = None
     bridge._servo_command_fault = None
     bridge._last_servo_command_s = time.monotonic()
@@ -90,6 +91,9 @@ def bridge_fixture():
     bridge._servo_controller = 'fairino3mt_servo_position_controller'
     bridge._servo_start_client = object()
     bridge._servo_stop_client = object()
+    bridge._path_ready_client = object()
+    bridge._stop_witness = None
+    bridge._stop_report_publisher = SimpleNamespace(publish=lambda _msg: None)
     bridge.get_logger = lambda: Logger()
     bridge._publish_state = lambda _state: None
 
@@ -101,6 +105,14 @@ def bridge_fixture():
 
     bridge._switch_controller = switch
     bridge._call_servo_trigger = trigger
+    async def stationary():
+        return True
+
+    async def bounded(client, request, _timeout):
+        return await client.call_async(request)
+
+    bridge._wait_for_stationary = stationary
+    bridge._bounded_call = bounded
     return bridge
 
 
@@ -181,7 +193,7 @@ def test_servo_start_failure_rolls_back_forward_controller():
         return True
 
     async def trigger(_client, operation):
-        return operation == 'stop'
+        return operation != 'start'
 
     bridge._switch_controller = switch
     bridge._call_servo_trigger = trigger
@@ -343,6 +355,101 @@ def test_failed_controller_release_latches_fault():
     assert bridge._fault_latched
     assert bridge._owner == 'FAULT'
     assert bridge._goal_callback(trajectory_request()) == GoalResponse.REJECT
+
+
+def test_stop_requires_feedback_even_after_successful_sdk_switch():
+    bridge = bridge_fixture()
+    order = []
+    reports = []
+
+    async def switch(_controller, activate):
+        order.append('activate' if activate else 'inhibit_and_stop_hardware')
+        return True
+
+    async def trigger(_client, operation):
+        order.append(operation)
+        return True
+
+    async def stationary():
+        order.append('verify_stationary')
+        return False
+
+    bridge._switch_controller = switch
+    bridge._call_servo_trigger = trigger
+    bridge._wait_for_stationary = stationary
+    bridge._stop_report_publisher = SimpleNamespace(publish=reports.append)
+    acquired = asyncio.run(bridge._control_lease_callback(
+        lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
+    response = asyncio.run(bridge._control_lease_callback(
+        lease_request(ControlLease.Request.RELEASE, acquired.lease_id), ControlLease.Response()))
+    assert not response.success
+    assert bridge._fault_latched
+    assert order[-3:] == ['inhibit_and_stop_hardware', 'stop', 'verify_stationary']
+    assert '"stationary_verified": false' in reports[0].data
+
+
+def test_missing_path_guard_blocks_activation():
+    bridge = bridge_fixture()
+    activations = []
+
+    async def trigger(_client, operation):
+        return operation != 'path_guard_ready'
+
+    async def switch(_controller, activate):
+        activations.append(activate)
+        return True
+
+    bridge._switch_controller = switch
+    bridge._call_servo_trigger = trigger
+    response = asyncio.run(bridge._control_lease_callback(
+        lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
+    assert not response.success
+    assert True not in activations
+
+
+def test_path_fault_and_operator_stop_use_same_verified_transaction():
+    for path_fault in (False, True):
+        bridge = bridge_fixture()
+        asyncio.run(bridge._control_lease_callback(
+            lease_request(ControlLease.Request.ACQUIRE), ControlLease.Response()))
+        if path_fault:
+            asyncio.run(bridge._on_path_fault(SimpleNamespace(data='path_collision')))
+        else:
+            result = asyncio.run(bridge._operator_stop(None, SimpleNamespace()))
+            assert result.success
+        assert bridge._owner is None
+        assert bridge._stop_witness is not None
+
+
+def test_stop_witness_requires_fresh_distinct_stationary_window():
+    witness = BRIDGE_MODULE.StopWitness(10)
+    for i in range(12):
+        witness.observe(10 + i * 0.02, 100 + i * 0.02, 0.01, [0] * 6, [0] * 6)
+    assert witness.ready(10.22)
+    assert not witness.ready(10.5)
+    # Cached repeated source timestamps cannot manufacture stopped evidence.
+    witness.observe(10.24, 100.22, 0.01, [0] * 6, [0] * 6)
+    assert not witness.ready(10.24)
+
+
+@pytest.mark.parametrize('positions,velocities,age', [
+    ([0] * 6, [0.003] * 6, 0.01),
+    ([0] * 6, [0] * 6, 0.2),
+    ([0] * 6, [], 0.01),
+    ([float('nan')] * 6, [0] * 6, 0.01),
+])
+def test_stop_witness_rejects_moving_stale_missing_or_invalid_feedback(positions, velocities, age):
+    witness = BRIDGE_MODULE.StopWitness(0)
+    for i in range(30):
+        witness.observe(i * 0.02, 100 + i * 0.02, age, positions, velocities)
+    assert not witness.ready(0.58)
+
+
+def test_stop_witness_rejects_slow_position_drift_even_with_zero_reported_speed():
+    witness = BRIDGE_MODULE.StopWitness(0)
+    for i in range(30):
+        witness.observe(i * 0.02, 100 + i * 0.02, 0.01, [i * 0.0001] * 6, [0] * 6)
+    assert not witness.ready(0.58)
 
 
 def test_camera_vector_quaternion_rotation():

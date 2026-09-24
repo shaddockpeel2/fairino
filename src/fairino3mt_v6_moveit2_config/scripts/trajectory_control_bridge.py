@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import math
+import json
 import threading
 import time
 import uuid
@@ -22,9 +23,53 @@ from rclpy.action import (
 from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.node import Node
+from rclpy.task import Future
+from sensor_msgs.msg import JointState
 from rclpy.qos import DurabilityPolicy, QoSProfile, ReliabilityPolicy
 from std_msgs.msg import Float64MultiArray, Int8, String
 from std_srvs.srv import Trigger
+
+
+class StopWitness:
+    """Require distinct, fresh source samples and a continuous stationary window."""
+
+    def __init__(self, since):
+        self.since = since
+        self.start = None
+        self.origin = None
+        self.last_receive = None
+        self.last_stamp = None
+        self.count = 0
+        self.confirmed = False
+
+    def observe(self, now, stamp, source_age, positions, velocities):
+        valid = (now >= self.since and len(positions) == len(velocities) == 6
+                 and all(math.isfinite(v) for v in
+                         [now, stamp, source_age, *positions, *velocities])
+                 and 0 <= source_age <= 0.1
+                 and (self.last_stamp is None or stamp > self.last_stamp)
+                 and max(abs(v) for v in velocities) <= 0.002)
+        continuous = (self.last_receive is None or now - self.last_receive <= 0.1)
+        if not valid or not continuous:
+            self.start = self.origin = None
+            self.count = 0
+            self.confirmed = False
+        if not valid:
+            return
+        self.last_stamp = stamp
+        self.last_receive = now
+        if (self.origin is None
+                or max(abs(a - b) for a, b in zip(positions, self.origin)) > 0.0002):
+            self.origin = tuple(positions)
+            self.start = now
+            self.count = 0
+            self.confirmed = False
+        self.count += 1
+        self.confirmed = self.count >= 5 and now - self.start >= 0.2
+
+    def ready(self, now):
+        return (self.confirmed and self.last_receive is not None
+                and 0 <= now - self.last_receive <= 0.1)
 
 
 class TrajectoryControlBridge(Node):
@@ -59,6 +104,7 @@ class TrajectoryControlBridge(Node):
         self.declare_parameter('servo_command_timeout_s', 0.25)
         self.declare_parameter('tracking_heartbeat_timeout_s', 0.5)
         self.declare_parameter('watchdog_period_s', 0.1)
+        self.declare_parameter('stop_confirmation_timeout_s', 2.0)
 
         self._execution_controller = str(
             self.get_parameter('execution_controller').value)
@@ -77,6 +123,11 @@ class TrajectoryControlBridge(Node):
             self.get_parameter('watchdog_period_s').value)
         self._servo_command_timeout_s = float(
             self.get_parameter('servo_command_timeout_s').value)
+        self._stop_confirmation_timeout_s = float(
+            self.get_parameter('stop_confirmation_timeout_s').value)
+        if (not math.isfinite(self._stop_confirmation_timeout_s)
+                or not 0.3 <= self._stop_confirmation_timeout_s <= 5.0):
+            raise ValueError('stop_confirmation_timeout_s must be in [0.3, 5]')
         if (self._service_wait_timeout_s <= 0.0
                 or self._switch_timeout_s <= 0.0
                 or self._tracking_heartbeat_timeout_s <= 0.0
@@ -86,6 +137,7 @@ class TrajectoryControlBridge(Node):
                 'bridge timeout parameters must be positive')
 
         callback_group = ReentrantCallbackGroup()
+        self._callback_group = callback_group
         state_qos = QoSProfile(
             depth=1,
             reliability=ReliabilityPolicy.RELIABLE,
@@ -115,6 +167,10 @@ class TrajectoryControlBridge(Node):
         self._servo_stop_client = self.create_client(
             Trigger, str(self.get_parameter('servo_stop_service').value),
             callback_group=callback_group)
+        self._path_ready_client = self.create_client(
+            Trigger, '/p1/path_guard/ready', callback_group=callback_group)
+        self._stop_report_publisher = self.create_publisher(
+            String, '/fairino/stop_report', state_qos)
 
         self._lock = threading.RLock()
         self._goal_reserved = False
@@ -126,10 +182,12 @@ class TrajectoryControlBridge(Node):
         self._lease_timeout_s = self._tracking_heartbeat_timeout_s
         self._cleanup_in_progress = False
         self._fault_latched = False
+        self._service_timeout_latched = False
         self._servo_hard_fault = None
         self._servo_command_fault = None
         self._last_servo_command_s = 0.0
         self._last_released_lease_id = ''
+        self._stop_witness = None
         self._lease_service = self.create_service(
             ControlLease,
             str(self.get_parameter('control_lease_service').value),
@@ -139,6 +197,15 @@ class TrajectoryControlBridge(Node):
         self.create_subscription(
             Int8, str(self.get_parameter('servo_status_topic').value),
             self._on_servo_status, 10, callback_group=callback_group)
+        self.create_subscription(
+            JointState, '/joint_states', self._on_stop_feedback, 10,
+            callback_group=callback_group)
+        self.create_subscription(
+            String, '/p1/path_guard/fault', self._on_path_fault, 10,
+            callback_group=callback_group)
+        self.create_service(
+            Trigger, '/fairino/stop_servo', self._operator_stop,
+            callback_group=callback_group)
         self.create_subscription(
             Float64MultiArray,
             str(self.get_parameter('servo_command_topic').value),
@@ -165,6 +232,66 @@ class TrajectoryControlBridge(Node):
         message = String()
         message.data = state
         self._state_publisher.publish(message)
+
+    def _on_stop_feedback(self, message):
+        with self._lock:
+            if self._stop_witness is None:
+                return
+            names = [f'joint{i}' for i in range(1, 7)]
+            lookup = {name: i for i, name in enumerate(message.name)}
+            if (not all(name in lookup for name in names)
+                    or len(message.position) != len(message.name)
+                    or len(message.velocity) != len(message.name)):
+                self._stop_witness.observe(time.monotonic(), 0, 1, [], [])
+                return
+            stamp = message.header.stamp.sec + message.header.stamp.nanosec * 1e-9
+            source_age = self.get_clock().now().nanoseconds * 1e-9 - stamp
+            self._stop_witness.observe(
+                time.monotonic(), stamp, source_age,
+                [message.position[lookup[n]] for n in names],
+                [message.velocity[lookup[n]] for n in names])
+
+    async def _wait_for_stationary(self):
+        future = Future()
+        deadline = time.monotonic() + self._stop_confirmation_timeout_s
+
+        def poll():
+            with self._lock:
+                ready = self._stop_witness.ready(time.monotonic())
+            if not future.done() and (ready or time.monotonic() >= deadline):
+                future.set_result(ready)
+
+        timer = self.create_timer(0.02, poll, callback_group=self._callback_group)
+        try:
+            return await future
+        finally:
+            self.destroy_timer(timer)
+
+    async def _operator_stop(self, _request, response):
+        with self._lock:
+            if self._owner is None and not self._fault_latched:
+                response.success = True
+                response.message = 'already_idle'
+                return response
+            if self._owner != 'SERVO_TRACKING' or self._cleanup_in_progress:
+                response.success = False
+                response.message = 'not_servo_owner_or_stop_in_progress_or_fault'
+                return response
+            lease_id = self._lease_id
+            self._owner = 'SERVO_TRACKING_STOPPING'
+            self._cleanup_in_progress = True
+        response.success = await self._stop_tracking_control(lease_id, 'operator_stop')
+        response.message = 'stop_verified' if response.success else 'stop_unconfirmed'
+        return response
+
+    async def _on_path_fault(self, message):
+        with self._lock:
+            if self._owner != 'SERVO_TRACKING' or self._cleanup_in_progress:
+                return
+            lease_id = self._lease_id
+            self._owner = 'SERVO_TRACKING_STOPPING'
+            self._cleanup_in_progress = True
+        await self._stop_tracking_control(lease_id, 'path_guard:' + message.data)
 
     def _goal_callback(self, goal_request):
         if not goal_request.trajectory.joint_names:
@@ -201,6 +328,36 @@ class TrajectoryControlBridge(Node):
         duration.nanosec = int((seconds - whole_seconds) * 1_000_000_000)
         return duration
 
+    async def _bounded_call(self, client, request, timeout_s):
+        pending = client.call_async(request)
+        completed = Future()
+
+        def done(future):
+            if completed.done():
+                return
+            try:
+                completed.set_result(future.result())
+            except Exception as error:
+                completed.set_exception(error)
+
+        def expired():
+            if not completed.done():
+                with self._lock:
+                    self._service_timeout_latched = True
+                    self._fault_latched = True
+                completed.set_exception(TimeoutError('service_response_timeout'))
+
+        pending.add_done_callback(done)
+        timer = self.create_timer(timeout_s, expired, callback_group=self._callback_group)
+        try:
+            return await completed
+        finally:
+            self.destroy_timer(timer)
+            if not pending.done():
+                pending.cancel()
+        # A ROS service timeout cannot cancel server-side execution. Callers
+        # latch FAULT rather than assuming an unacknowledged switch succeeded.
+
     async def _controller_states(self):
         if not self._list_controllers_client.wait_for_service(
                 timeout_sec=self._service_wait_timeout_s):
@@ -208,8 +365,9 @@ class TrajectoryControlBridge(Node):
                 'controller_manager list service is unavailable')
             return None
         try:
-            response = await self._list_controllers_client.call_async(
-                ListControllers.Request())
+            response = await self._bounded_call(
+                self._list_controllers_client, ListControllers.Request(),
+                self._switch_timeout_s)
         except Exception as error:  # pragma: no cover
             self.get_logger().error(
                 'Controller list call failed: '
@@ -249,7 +407,7 @@ class TrajectoryControlBridge(Node):
             request.activate_asap = True
             request.timeout = self._duration(self._switch_timeout_s)
             try:
-                await self._switch_client.call_async(request)
+                await self._bounded_call(self._switch_client, request, self._switch_timeout_s)
             except Exception:  # pragma: no cover
                 pass
             return False
@@ -276,7 +434,8 @@ class TrajectoryControlBridge(Node):
         request.activate_asap = True
         request.timeout = self._duration(self._switch_timeout_s)
         try:
-            response = await self._switch_client.call_async(request)
+            response = await self._bounded_call(
+                self._switch_client, request, self._switch_timeout_s)
         except Exception as error:  # pragma: no cover
             self.get_logger().error(
                 'Controller switch call failed: '
@@ -306,7 +465,7 @@ class TrajectoryControlBridge(Node):
                 f'MoveIt Servo {operation} service is unavailable')
             return False
         try:
-            response = await client.call_async(Trigger.Request())
+            response = await self._bounded_call(client, Trigger.Request(), self._switch_timeout_s)
         except Exception as error:  # pragma: no cover
             self.get_logger().error(
                 f'MoveIt Servo {operation} call failed: '
@@ -350,7 +509,9 @@ class TrajectoryControlBridge(Node):
                 self._lease_timeout_s = timeout_s
                 self._cleanup_in_progress = True
             self._publish_state('acquiring_servo_tracking_control')
-            activated = await self._switch_controller(
+            path_ready = await self._call_servo_trigger(
+                self._path_ready_client, 'path_guard_ready')
+            activated = path_ready and await self._switch_controller(
                 self._servo_controller, True)
             started = False
             if activated:
@@ -360,8 +521,11 @@ class TrajectoryControlBridge(Node):
                 # Even a failed activation can leave a controller in an
                 # unexpected state.  Verify that both arm controllers are
                 # inactive before claiming monitoring mode is restored.
-                released = await self._switch_controller(
-                    self._servo_controller, False)
+                if activated:
+                    released = await self._stop_tracking_control(lease_id, 'servo_start_failed')
+                else:
+                    released = await self._switch_controller(self._servo_controller, False)
+                released = released and not self._service_timeout_latched
                 with self._lock:
                     self._control_acquired = False
                     self._cleanup_in_progress = False
@@ -430,11 +594,26 @@ class TrajectoryControlBridge(Node):
 
     async def _stop_tracking_control(self, lease_id, reason):
         self._publish_state('releasing_servo_tracking_control')
-        servo_stopped = await self._call_servo_trigger(
-            self._servo_stop_client, 'stop')
+        started = time.monotonic()
+        with self._lock:
+            self._stop_witness = StopWitness(started)
+        # Revoke the hardware command interface FIRST. Its mode switch inhibits
+        # ServoJ, calls ServoMoveEnd and StopMotion, and latches SDK stop errors.
         controller_stopped = await self._switch_controller(
             self._servo_controller, False)
-        released = servo_stopped and controller_stopped
+        servo_stopped = await self._call_servo_trigger(
+            self._servo_stop_client, 'stop')
+        stationary = await self._wait_for_stationary()
+        released = (servo_stopped and controller_stopped and stationary
+                    and not self._service_timeout_latched)
+        report = {
+            'reason': reason, 'controller_inactive': controller_stopped,
+            'servo_generator_stopped': servo_stopped, 'stationary_verified': stationary,
+            'released': released, 'elapsed_s': time.monotonic() - started,
+            'joint_speed_limit_radps': 0.002, 'joint_drift_limit_rad': 0.0002,
+            'stationary_window_s': 0.2,
+        }
+        self._stop_report_publisher.publish(String(data=json.dumps(report)))
         with self._lock:
             self._control_acquired = False if controller_stopped else True
             self._cleanup_in_progress = False

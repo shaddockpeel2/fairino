@@ -51,6 +51,11 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'butterworth_filter_coeff', default_value='1.5'),
         Node(
+            package='fairino3mt_v6_moveit2_config',
+            executable='servo_path_guard', name='p1_path_guard', output='screen',
+            parameters=[moveit.robot_description, moveit.robot_description_semantic],
+        ),
+        Node(
             package='moveit_servo',
             executable='servo_node_main',
             name='servo_node',

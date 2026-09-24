@@ -134,6 +134,9 @@ def result_text(lib: ctypes.CDLL, recognizer: int, stream: int) -> str:
 
 
 def run(args: argparse.Namespace) -> int:
+    if args.hotwords_file:
+        print('RKNN ASR 不支持热词偏置，已忽略 --hotwords-file',
+              file=sys.stderr, flush=True)
     model = Path(args.model_dir)
     keepalive = {
         "encoder": str(model / "encoder.rknn").encode(),
@@ -144,7 +147,6 @@ def run(args: argparse.Namespace) -> int:
         "model_type": b"zipformer",
         "modeling_unit": b"cjkchar",
         "decoding": args.decoding_method.encode(),
-        "hotwords": args.hotwords_file.encode(),
     }
     config = OnlineRecognizerConfig()
     config.feat_config = FeatureConfig(args.sample_rate, 80)
@@ -158,9 +160,6 @@ def run(args: argparse.Namespace) -> int:
     config.model_config.modeling_unit = keepalive["modeling_unit"]
     config.decoding_method = keepalive["decoding"]
     config.max_active_paths = 4
-    if args.hotwords_file:
-        config.hotwords_file = keepalive["hotwords"]
-        config.hotwords_score = args.hotwords_score
     config.enable_endpoint = 1
     config.rule1_min_trailing_silence = args.empty_endpoint_seconds
     config.rule2_min_trailing_silence = args.speech_endpoint_seconds

@@ -2,9 +2,9 @@
 set -euo pipefail
 
 usage() {
-  echo "Usage: $0 <hold|sort> <red|yellow|blue|green> [zone]" >&2
-  echo "       $0 place <red|yellow|blue|green> <zone>" >&2
-  echo "       $0 stack <red|yellow|blue|green> <lower red|yellow|blue|green>" >&2
+  echo "Usage: $0 <hold|sort> <red|yellow|blue|green> [--from-sort-area]" >&2
+  echo "       $0 place <red|yellow|blue|green> <zone> [--from-sort-area]" >&2
+  echo "       $0 stack <red|yellow|blue|green> <lower red|yellow|blue|green> [--from-sort-area]" >&2
   echo "       $0 auto" >&2
   echo "  zone:  calibrated A4 region (A|B|C|D) or one 1-based slot (for example A3)" >&2
   echo "  stack: puts the first colour on top of the second colour" >&2
@@ -16,9 +16,19 @@ if [[ $# -eq 0 ]]; then
   exit 2
 fi
 
+source_location=""
+if [[ "${@: -1}" == --from-sort-area ]]; then
+  source_location="sort_area"
+  set -- "${@:1:$#-1}"
+fi
+if [[ $# -eq 0 ]]; then
+  usage
+  exit 2
+fi
+
 task_mode="$1"
 if [[ "$task_mode" == auto ]]; then
-  if [[ $# -ne 1 ]]; then
+  if [[ $# -ne 1 || -n "$source_location" ]]; then
     echo "auto takes no parameters, for example: $0 auto" >&2
     usage
     exit 2
@@ -92,4 +102,4 @@ source /home/industio/fairino_ws/install/setup.bash
 set -u
 exec ros2 action send_goal --feedback \
   "$action_name" fairino_msgs/action/PickColor \
-  "{color: '$target_color', zone: '$target_zone', support_color: '$target_support_color'}"
+  "{color: '$target_color', zone: '$target_zone', support_color: '$target_support_color', source_location: '$source_location'}"

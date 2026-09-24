@@ -31,8 +31,8 @@ def test_gui_exposes_dialogue_and_robot_action_control_pages():
     assert 'range(1, 5)' in source
     assert "command=lambda: self.command_gripper('open')" in source
     assert "command=lambda: self.command_gripper('close')" in source
-    assert '60 mm · 70°' in source
-    assert '26 mm · 31°' in source
+    assert '60 mm · 1300 µs' in source
+    assert '目标 27 mm · 820 µs' in source
     assert "'tk', 'useinputmethods', True" in source
     # Stage 6 made the speech controls functional; they must not regress to
     # placeholders that silently do nothing.
