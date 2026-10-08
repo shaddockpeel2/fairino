@@ -3,4 +3,4 @@
 /project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: shei2
 /project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: shei2
 /project/sherpa-onnx/csrc/lexicon.cc:ConvertTokensToIds:93 Unknown token: shei2
-{"event": "ready", "socket": "/home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock", "pid": 439368, "candidate": "matcha-icefall-zh-baker", "sample_rate": 22050, "affinity": "big:4-7", "trace": "/home/industio/fairino_ws/evidence/voice/P6/runtime/service-trace.jsonl", "load_s": 4.315716712000722}
+{"event": "ready", "socket": "/home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock", "pid": 238340, "candidate": "matcha-icefall-zh-baker", "sample_rate": 22050, "affinity": "big:4-7", "trace": "/home/industio/fairino_ws/evidence/voice/P6/runtime/service-trace.jsonl", "load_s": 3.812259645999802}

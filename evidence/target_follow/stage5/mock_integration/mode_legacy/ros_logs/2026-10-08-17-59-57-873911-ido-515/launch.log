@@ -1,0 +1,28 @@
+1791453597.8759499 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/mode_legacy/ros_logs/2026-10-08-17-59-57-873911-ido-515
+1791453597.8762467 [INFO] [launch]: Default logging verbosity is set to INFO
+1791453600.1159136 [INFO] [launch.user]: Demo report directory: /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/mode_legacy
+1791453600.1167512 [INFO] [launch.user]: Camera: reuse
+1791453600.1170428 [INFO] [launch.user]: Tag detector: reuse
+1791453600.1173184 [INFO] [launch.user]: Driver starts IDLE. T teach | S start (records offset again) | X stop. Ctrl-C or closing the Demo-owned viewer ends the Demo.
+1791453600.2753897 [INFO] [static_transform_publisher-1]: process started with pid [547]
+1791453600.2756279 [INFO] [follow_preview-2]: process started with pid [549]
+1791453600.2757533 [INFO] [position_follow-3]: process started with pid [551]
+1791453600.3009455 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791453600.3012407 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791453600.3018498 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791453600.3020129 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791453600.3023739 [static_transform_publisher-1] [37;1m2026-10-08 18:00:00.300 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+1791453600.3024583 [static_transform_publisher-1] [37;1m2026-10-08 18:00:00.300 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+1791453600.3025119 [static_transform_publisher-1] [37;1m2026-10-08 18:00:00.300 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+1791453600.3163331 [static_transform_publisher-1] [INFO] [1791453600.315922553] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791453600.3165376 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791453600.3165984 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791453600.3166597 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791453607.0973711 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791453607.1037381 [INFO] [position_follow-3]: sending signal 'SIGINT' to process[position_follow-3]
+1791453607.1047578 [INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+1791453607.1055799 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791453607.1062627 [static_transform_publisher-1] [INFO] [1791453607.105905856] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791453607.2382095 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 547]
+1791453607.3963640 [INFO] [position_follow-3]: process has finished cleanly [pid 551]
+1791453607.3980293 [INFO] [follow_preview-2]: process has finished cleanly [pid 549]

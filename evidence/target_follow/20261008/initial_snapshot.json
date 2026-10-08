@@ -1,0 +1,107 @@
+{
+  "width": 640,
+  "height": 480,
+  "encoding": "rgb8",
+  "frame_id": "camera_color_optical_frame",
+  "stamp_sec": 1791434446,
+  "stamp_nanosec": 485391104,
+  "k": [
+    479.73828125,
+    0.0,
+    322.218017578125,
+    0.0,
+    479.7537841796875,
+    243.452392578125,
+    0.0,
+    0.0,
+    1.0
+  ],
+  "d": [
+    -0.015910401940345764,
+    0.003102334216237068,
+    -0.00044000407797284424,
+    -0.00047369441017508507,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "distortion_model": "rational_polynomial",
+  "dictionary_survey": [
+    {
+      "dictionary": "DICT_4X4_1000",
+      "ids": [],
+      "corners": [],
+      "rejected": 2
+    },
+    {
+      "dictionary": "DICT_5X5_1000",
+      "ids": [],
+      "corners": [],
+      "rejected": 2
+    },
+    {
+      "dictionary": "DICT_6X6_1000",
+      "ids": [],
+      "corners": [],
+      "rejected": 2
+    },
+    {
+      "dictionary": "DICT_7X7_1000",
+      "ids": [],
+      "corners": [],
+      "rejected": 2
+    },
+    {
+      "dictionary": "DICT_ARUCO_ORIGINAL",
+      "ids": [],
+      "corners": [],
+      "rejected": 2
+    },
+    {
+      "dictionary": "DICT_APRILTAG_16h5",
+      "ids": [],
+      "corners": [],
+      "rejected": 2
+    },
+    {
+      "dictionary": "DICT_APRILTAG_25h9",
+      "ids": [],
+      "corners": [],
+      "rejected": 2
+    },
+    {
+      "dictionary": "DICT_APRILTAG_36h10",
+      "ids": [],
+      "corners": [],
+      "rejected": 2
+    },
+    {
+      "dictionary": "DICT_APRILTAG_36h11",
+      "ids": [
+        1
+      ],
+      "corners": [
+        [
+          [
+            311.0,
+            251.0
+          ],
+          [
+            312.0,
+            225.0
+          ],
+          [
+            342.9972839355469,
+            222.15443420410156
+          ],
+          [
+            337.0,
+            252.0
+          ]
+        ]
+      ],
+      "rejected": 1
+    }
+  ]
+}

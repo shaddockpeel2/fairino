@@ -1,0 +1,93 @@
+[37;1m2026-10-08 15:48:15.497 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[37;1m2026-10-08 15:48:15.498 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-08 15:48:15.498 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+requester: making request: std_srvs.srv.Trigger_Request()
+
+response:
+std_srvs.srv.Trigger_Response(success=True, message='Stop requested; follow_state records the SDK stop result.')
+
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+
+[37;1m2026-10-08 15:48:17.201 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[37;1m2026-10-08 15:48:17.201 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-08 15:48:17.201 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+waiting for service to become available...
+requester: making request: std_srvs.srv.Trigger_Request()
+
+response:
+std_srvs.srv.Trigger_Response(success=False, message='fresh base-frame target is required')
+
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+Report directory: /home/industio/fairino_ws/evidence/target_follow/stage4/control_smoke
+Driver starts idle. Use follow_control.sh start to record the current offset and start following.
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage4/control_smoke/ros_logs/2026-10-08-15-48-12-734579-ido-21
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [static_transform_publisher-1]: process started with pid [55]
+[INFO] [follow_preview-2]: process started with pid [57]
+[INFO] [position_follow-3]: process started with pid [59]
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] [37;1m2026-10-08 15:48:12.864 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[position_follow-3] [37;1m2026-10-08 15:48:12.864 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[position_follow-3] [37;1m2026-10-08 15:48:12.864 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] [INFO] [1791445692.896429876] [follow_handeye_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+[static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+[static_transform_publisher-1] from 'flange_link' to 'camera_link'
+[position_follow-3] [INFO] [1791445692.899207157] [position_follow]: Position follow ready to receive data; motion starts only through follow_start. mock=true
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] [37;1m2026-10-08 15:48:13.815 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[follow_preview-2] [37;1m2026-10-08 15:48:13.815 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[follow_preview-2] [37;1m2026-10-08 15:48:13.815 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[follow_preview-2] [INFO] [1791445693.921379734] [follow_preview]: Image-time base-frame conversion only; offset and motion belong to the follow driver.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [position_follow-3]: sending signal 'SIGINT' to process[position_follow-3]
+[INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+[INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+[static_transform_publisher-1] [INFO] [1791445697.806570691] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[position_follow-3] {
+[position_follow-3]   "accel_limit_mm_s2": 30.0,
+[position_follow-3]   "backend": "ServoCart mode 0, tool/work-object 0",
+[position_follow-3]   "close_code": 0,
+[position_follow-3]   "follow_radius_m": 0.1,
+[position_follow-3]   "hardware_servo_commands_sent": 0,
+[position_follow-3]   "kp": 1.5,
+[position_follow-3]   "live_follow_validated": false,
+[position_follow-3]   "mock": true,
+[position_follow-3]   "reason": "signal",
+[position_follow-3]   "requested_period_ms": 8.0,
+[position_follow-3]   "result": "stopped",
+[position_follow-3]   "servo_call_ms": null,
+[position_follow-3]   "servo_commands_sent": 0,
+[position_follow-3]   "servo_interval_ms": null,
+[position_follow-3]   "speed_limit_mm_s": 10.0,
+[position_follow-3]   "starts": 0,
+[position_follow-3]   "target_filter_s": 0.1,
+[position_follow-3]   "target_pauses": 0,
+[position_follow-3]   "target_resumes": 0
+[position_follow-3] }
+[INFO] [static_transform_publisher-1]: process has finished cleanly [pid 55]
+[INFO] [position_follow-3]: process has finished cleanly [pid 59]
+[INFO] [follow_preview-2]: process has finished cleanly [pid 57]
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-08 15:48:10.208 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[37;1m2026-10-08 15:48:10.208 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-08 15:48:10.208 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m

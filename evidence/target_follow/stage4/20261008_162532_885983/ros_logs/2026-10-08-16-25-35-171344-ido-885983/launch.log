@@ -1,0 +1,9 @@
+1791447935.1727731 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage4/20261008_162532_885983/ros_logs/2026-10-08-16-25-35-171344-ido-885983
+1791447935.1729934 [INFO] [launch]: Default logging verbosity is set to INFO
+1791447935.2649152 [INFO] [static_transform_publisher-1]: process started with pid [886177]
+1791447935.2652864 [INFO] [follow_preview-2]: process started with pid [886179]
+1791447935.2654617 [INFO] [position_follow-3]: process started with pid [886181]
+1791447935.2722018 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791447935.2760971 [ERROR] [follow_preview-2]: process has died [pid 886179, exit code -2, cmd '/home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow/follow_preview --ros-args -r __node:=follow_preview --params-file /home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config/preview.yaml --params-file /tmp/launch_params_5m1cgjb1'].
+1791447935.2764416 [ERROR] [position_follow-3]: process has died [pid 886181, exit code -2, cmd '/home/industio/fairino_ws/install/fr3c_follow_driver/lib/fr3c_follow_driver/position_follow --ros-args -r __node:=position_follow --params-file /home/industio/fairino_ws/install/fr3c_follow_driver/share/fr3c_follow_driver/config/position_follow.yaml --params-file /tmp/launch_params_rx63xhzd'].
+1791447935.2768357 [ERROR] [static_transform_publisher-1]: process has died [pid 886177, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --x -0.022343004777692268 --y -0.07201485255317483 --z 0.04555195303911627 --roll 2.9242034206206333 --pitch -1.439956488033078 --yaw -1.3816244171579133 --frame-id flange_link --child-frame-id camera_link --ros-args -r __node:=follow_handeye_tf'].

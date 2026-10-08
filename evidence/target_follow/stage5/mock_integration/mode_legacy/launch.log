@@ -1,0 +1,88 @@
+Demo logs: /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/mode_legacy
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/mode_legacy/ros_logs/2026-10-08-17-59-57-873911-ido-515
+[INFO] [launch]: Default logging verbosity is set to INFO
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-08 17:59:58.054 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[37;1m2026-10-08 17:59:58.055 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-08 17:59:58.055 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[INFO] [launch.user]: Demo report directory: /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/mode_legacy
+[INFO] [launch.user]: Camera: reuse
+[INFO] [launch.user]: Tag detector: reuse
+[INFO] [launch.user]: Driver starts IDLE. T teach | S start (records offset again) | X stop. Ctrl-C or closing the Demo-owned viewer ends the Demo.
+[INFO] [static_transform_publisher-1]: process started with pid [547]
+[INFO] [follow_preview-2]: process started with pid [549]
+[INFO] [position_follow-3]: process started with pid [551]
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] [37;1m2026-10-08 18:00:00.306 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[position_follow-3] [37;1m2026-10-08 18:00:00.306 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[position_follow-3] [37;1m2026-10-08 18:00:00.306 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[static_transform_publisher-1] [INFO] [1791453600.315922553] [follow_handeye_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+[static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+[static_transform_publisher-1] from 'flange_link' to 'camera_link'
+[position_follow-3] [INFO] [1791453600.326102998] [position_follow]: Position follow ready to receive data; motion starts only through follow_start. mock=true
+[position_follow-3] [INFO] [1791453600.326309209] [position_follow]: Tracking mode: legacy; model collision check: OFF. Change through launch/config and restart.
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] [37;1m2026-10-08 18:00:01.187 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[follow_preview-2] [37;1m2026-10-08 18:00:01.187 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[follow_preview-2] [37;1m2026-10-08 18:00:01.187 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[follow_preview-2] [INFO] [1791453601.301191015] [follow_preview]: Image-time base-frame conversion only; offset and motion belong to the follow driver.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [position_follow-3]: sending signal 'SIGINT' to process[position_follow-3]
+[INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+[INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+[static_transform_publisher-1] [INFO] [1791453607.105905856] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [static_transform_publisher-1]: process has finished cleanly [pid 547]
+[position_follow-3] {
+[position_follow-3]   "accel_limit_mm_s2": 60.0,
+[position_follow-3]   "backend": "ServoCart mode 0, tool/work-object 0",
+[position_follow-3]   "close_code": 0,
+[position_follow-3]   "collision_check_ms": null,
+[position_follow-3]   "collision_enabled": false,
+[position_follow-3]   "collision_pauses": 0,
+[position_follow-3]   "collision_resumes": 0,
+[position_follow-3]   "follow_radius_m": 1.0,
+[position_follow-3]   "hardware_servo_commands_sent": 0,
+[position_follow-3]   "kp": 2.0,
+[position_follow-3]   "live_follow_validated": false,
+[position_follow-3]   "mock": true,
+[position_follow-3]   "reason": "signal",
+[position_follow-3]   "requested_period_ms": 8.0,
+[position_follow-3]   "result": "stopped",
+[position_follow-3]   "servo_call_ms": {
+[position_follow-3]     "count": 229,
+[position_follow-3]     "max": 0.05104199999550474,
+[position_follow-3]     "p50": 0.006999999982326699,
+[position_follow-3]     "p95": 0.015166000025601534
+[position_follow-3]   },
+[position_follow-3]   "servo_commands_sent": 229,
+[position_follow-3]   "servo_end_code": 0,
+[position_follow-3]   "servo_interval_ms": {
+[position_follow-3]     "count": 228,
+[position_follow-3]     "max": 13.80619500002922,
+[position_follow-3]     "p50": 8.10229800003981,
+[position_follow-3]     "p95": 9.927567999966413
+[position_follow-3]   },
+[position_follow-3]   "speed_limit_mm_s": 20.0,
+[position_follow-3]   "starts": 1,
+[position_follow-3]   "stop_motion_code": 0,
+[position_follow-3]   "target_filter_s": 0.1,
+[position_follow-3]   "target_pauses": 0,
+[position_follow-3]   "target_resumes": 0,
+[position_follow-3]   "tracking_mode": "legacy"
+[position_follow-3] }
+[INFO] [position_follow-3]: process has finished cleanly [pid 551]
+[INFO] [follow_preview-2]: process has finished cleanly [pid 549]

@@ -1,0 +1,108 @@
+{
+  "duration_s": 5.004152692999924,
+  "robot_packets": 588,
+  "robot_feedback_fps": 117.4798337735241,
+  "flange_samples": 588,
+  "base_target_samples": 9,
+  "preview_samples": 0,
+  "preview_fps": 0,
+  "robot_status_counts": {
+    "valid": 588
+  },
+  "preview_status_counts": {
+    "stale_or_missing_target": 147,
+    "offset_not_recorded": 104
+  },
+  "sdk_call_ms": {
+    "p50": 0.008457998774247244,
+    "p95": 0.017106149243772954,
+    "max": 0.6661740007984918
+  },
+  "motion_commands_enabled": false,
+  "orientation_control_enabled": false,
+  "feedback_intervals_ms": {
+    "p50": 8.008480072021484,
+    "p95": 14.201951026916497,
+    "max": 20.358562469482422
+  },
+  "feedback_timestamp_regressions": 0,
+  "latest_robot": {
+    "call_ms": 0.04900099884252995,
+    "controller_tcp_mm_deg": [
+      -63.72572708129883,
+      -324.7245788574219,
+      398.861328125,
+      -176.3251495361328,
+      0.4823493957519531,
+      -179.17367553710938
+    ],
+    "controller_time": [
+      2026,
+      10,
+      8,
+      14,
+      28,
+      52,
+      185
+    ],
+    "emergency_stop": 0,
+    "enabled": 1,
+    "feedback_age_s": 0.001917437999509275,
+    "frame_counter": 165,
+    "main_error_code": 0,
+    "motion_commands_enabled": false,
+    "new_packets": 62627,
+    "program_state": 1,
+    "robot_mode": 1,
+    "robot_state": 1,
+    "sdk_return_code": 0,
+    "stamp_source": "host_first_observation_of_new_sdk_packet",
+    "status": "valid",
+    "sub_error_code": 0,
+    "tool_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "tool_id": 0,
+    "work_object_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "work_object_id": 0,
+    "audit_receive_s": 19609.848743739
+  },
+  "median_target_base_mm": [
+    -54.08525153625597,
+    -492.5127929148996,
+    28.545351146109954
+  ],
+  "target_base_deviation_mm": {
+    "p50": 0.40079921105467764,
+    "p95": 0.6420866572364612,
+    "max": 0.6861567485554678
+  },
+  "target_axis_span_mm": [
+    0.03415339460891009,
+    0.282673383034282,
+    1.0502187627137727
+  ],
+  "robot_flange_axis_span_mm": [
+    0.004722595214834424,
+    0.003692626953155642,
+    0.005767822265578815
+  ],
+  "target_age_ms": null,
+  "interpolation_gap_ms": null,
+  "error_norm_mm": null,
+  "preview_speed_mm_s": null,
+  "nonpreview_nonzero_velocity_samples": 0,
+  "spread_note": "Base target spread includes actual target movement; robot was not commanded by this pipeline."
+}

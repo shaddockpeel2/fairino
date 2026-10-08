@@ -1,0 +1,14 @@
+1791437381.7334812 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage2/ros_logs/2026-10-08-13-29-41-731767-ido-494679
+1791437381.7337525 [INFO] [launch]: Default logging verbosity is set to INFO
+1791437381.8134773 [INFO] [static_transform_publisher-1]: process started with pid [494915]
+1791437381.8139212 [INFO] [follow_preview-2]: process started with pid [494917]
+1791437381.8636363 [static_transform_publisher-1] [INFO] [1791437381.863115004] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791437381.8639154 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791437381.8639791 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791437381.8640294 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791439088.0296981 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791439088.0324869 [INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+1791439088.0335925 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791439088.0342703 [static_transform_publisher-1] [INFO] [1791439088.029459142] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791439088.0441551 [ERROR] [static_transform_publisher-1]: process has died [pid 494915, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --x -0.022343004777692268 --y -0.07201485255317483 --z 0.04555195303911627 --roll 2.9242034206206333 --pitch -1.439956488033078 --yaw -1.3816244171579133 --frame-id flange_link --child-frame-id camera_link --ros-args -r __node:=follow_handeye_tf'].
+1791439088.2986741 [INFO] [follow_preview-2]: process has finished cleanly [pid 494917]

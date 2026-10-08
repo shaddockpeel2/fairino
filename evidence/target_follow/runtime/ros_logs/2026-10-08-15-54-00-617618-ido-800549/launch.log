@@ -1,0 +1,8 @@
+1791446040.6195588 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/runtime/ros_logs/2026-10-08-15-54-00-617618-ido-800549
+1791446040.6201987 [INFO] [launch]: Default logging verbosity is set to INFO
+1791446040.9709511 [INFO] [component_container-1]: process started with pid [800735]
+1791446040.9721038 [INFO] [tag_pose-2]: process started with pid [800737]
+1791446041.3839195 [INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+1791446532.6014781 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791446532.8830910 [INFO] [tag_pose-2]: process has finished cleanly [pid 800737]
+1791446533.7634737 [INFO] [component_container-1]: process has finished cleanly [pid 800735]

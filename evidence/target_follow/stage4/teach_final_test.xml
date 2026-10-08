@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="9.243" timestamp="2026-10-08T15:46:55.390059" hostname="ido"><testcase classname="src.fr3c_follow_driver.test.test_follow_mock" name="test_image_time_bridge_combined_motion_occlusion_and_restart" time="9.061" /></testsuite></testsuites>

@@ -17,4 +17,5 @@ setup(name='fr3c_camera', version='0.1.0', packages=['fr3c_camera'],
                                         'rgbd_roi_quality = fr3c_camera.quality:main',
                                         'rgbd_raw_depth_audit = fr3c_camera.raw_depth_audit:main',
                                         'blue_cube_localizer = fr3c_camera.blue_cube_localizer:main',
-                                        'color_target_2d = fr3c_camera.color_target_2d:main']})
+                                        'color_target_2d = fr3c_camera.color_target_2d:main',
+                                        'edge_vision = fr3c_camera.edge_vision_node:main']})

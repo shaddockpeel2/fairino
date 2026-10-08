@@ -1,0 +1,9 @@
+follow_preview:
+  ros__parameters:
+    target_timeout_s: 0.35
+    feedback_timeout_s: 0.20
+    max_interpolation_gap_s: 0.05
+    kp: 1.5
+    max_speed_m_s: 0.010
+    max_accel_m_s2: 0.030
+    publish_hz: 50.0

@@ -1,0 +1,23 @@
+1791451715.8029861 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/start_detector_and_exit/ros_logs/2026-10-08-17-28-35-801561-ido-1064439
+1791451715.8031843 [INFO] [launch]: Default logging verbosity is set to INFO
+1791451718.0962276 [INFO] [launch.user]: Demo report directory: /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/start_detector_and_exit
+1791451718.0967562 [INFO] [launch.user]: Camera: reuse
+1791451718.0970554 [INFO] [launch.user]: Tag detector: start
+1791451718.0974309 [INFO] [launch.user]: Driver starts IDLE. T teach | S start (records offset again) | X stop. Ctrl-C or closing the Demo-owned viewer ends the Demo.
+1791451718.3805184 [INFO] [tag_pose-1]: process started with pid [1064632]
+1791451718.3808699 [INFO] [static_transform_publisher-2]: process started with pid [1064634]
+1791451718.3809834 [INFO] [follow_preview-3]: process started with pid [1064636]
+1791451718.3810902 [INFO] [position_follow-4]: process started with pid [1064638]
+1791451718.4412668 [static_transform_publisher-2] [INFO] [1791451718.440808734] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791451718.4415014 [static_transform_publisher-2] translation: ('-0.022343', '-0.072015', '0.045552')
+1791451718.4415650 [static_transform_publisher-2] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791451718.4416173 [static_transform_publisher-2] from 'flange_link' to 'camera_link'
+1791451724.3758371 [INFO] [tag_pose-1]: process has finished cleanly [pid 1064632]
+1791451724.3767967 [INFO] [launch.user]: Demo component exited; stopping the Demo and its driver.
+1791451724.3809309 [INFO] [position_follow-4]: sending signal 'SIGINT' to process[position_follow-4]
+1791451724.3823345 [INFO] [follow_preview-3]: sending signal 'SIGINT' to process[follow_preview-3]
+1791451724.3833220 [INFO] [static_transform_publisher-2]: sending signal 'SIGINT' to process[static_transform_publisher-2]
+1791451724.3840594 [static_transform_publisher-2] [INFO] [1791451724.383691254] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791451724.5118845 [INFO] [static_transform_publisher-2]: process has finished cleanly [pid 1064634]
+1791451724.5560799 [INFO] [position_follow-4]: process has finished cleanly [pid 1064638]
+1791451724.6847968 [INFO] [follow_preview-3]: process has finished cleanly [pid 1064636]

@@ -1,0 +1,21 @@
+1791451454.7416239 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/reuse_and_controls/ros_logs/2026-10-08-17-24-14-740000-ido-1051025
+1791451454.7418513 [INFO] [launch]: Default logging verbosity is set to INFO
+1791451457.0377774 [INFO] [launch.user]: Demo report directory: /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/reuse_and_controls
+1791451457.0389442 [INFO] [launch.user]: Camera: reuse
+1791451457.0407605 [INFO] [launch.user]: Tag detector: reuse
+1791451457.0411243 [INFO] [launch.user]: Driver starts IDLE. T teach | S start (records offset again) | X stop. Ctrl-C or closing the Demo-owned viewer ends the Demo.
+1791451457.2880397 [INFO] [static_transform_publisher-1]: process started with pid [1051214]
+1791451457.2884805 [INFO] [follow_preview-2]: process started with pid [1051216]
+1791451457.2886961 [INFO] [position_follow-3]: process started with pid [1051218]
+1791451457.3425477 [static_transform_publisher-1] [INFO] [1791451457.341829500] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791451457.3427727 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791451457.3428373 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791451457.3428884 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791451470.0575562 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791451470.0612886 [INFO] [position_follow-3]: sending signal 'SIGINT' to process[position_follow-3]
+1791451470.0625880 [INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+1791451470.0637827 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791451470.0646679 [static_transform_publisher-1] [INFO] [1791451470.064120163] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791451470.1944702 [INFO] [position_follow-3]: process has finished cleanly [pid 1051218]
+1791451470.1963859 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 1051214]
+1791451470.3437388 [INFO] [follow_preview-2]: process has finished cleanly [pid 1051216]

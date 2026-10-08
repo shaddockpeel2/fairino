@@ -41,6 +41,19 @@ from .speech_client import SpeechClient, SpeechServiceError, StreamingSpeaker
 
 LOG = logging.getLogger('fr3c_dialogue_gui')
 
+
+def _edge_speech_owns_audio(gui) -> bool:
+    resources = getattr(gui, 'speech_resources', None)
+    return bool(resources is not None and resources.reserved)
+
+
+def _edge_speech_blocks_request(gui) -> bool:
+    if not _edge_speech_owns_audio(gui):
+        return False
+    gui._append('system', '端侧语音感知正在使用或释放音频资源，请离开该页并稍候。')
+    return True
+
+
 ACTION_OPTIONS = (
     ('抓取并保持', 'pick_hold'),
     ('抓取并分类', 'pick_sort'),
@@ -121,6 +134,7 @@ class DialogueGui:
         self._wake_followup_heard = False
         self._request_sources: dict[str, str] = {}
         self.action_runtime = action_runtime
+        self.workspace = workspace or Path(__file__).resolve().parents[3]
         self.bridge = action_runtime.bridge
         self.log_path = log_path
         self.ui_events: queue.Queue[tuple] = queue.Queue()
@@ -131,6 +145,8 @@ class DialogueGui:
         self._health_running = False
         self._last_health_started = 0.0
         self._active_action_request = ''
+        self.speech_resources = None
+        self.edge_speech_page = None
         self._status_values: dict[str, tk.StringVar] = {}
         self._stream_request_id = ''
         self._stream_text = ''
@@ -318,7 +334,51 @@ class DialogueGui:
             command=self.reset_tabletop_objects)
         self.reset_tabletop_button.pack(side='right', padx=7)
         self._build_robot_control_page(robot_page)
+        # Optional page owns its own polling and process; original controls
+        # and model/robot dispatch paths keep their existing behavior.
+        self.edge_vision_page = None
+        try:
+            from .edge_vision_page import EdgeVisionPage
+            self.edge_vision_page = EdgeVisionPage(
+                self.pages, workspace=self.workspace,
+                foreground_busy=lambda: bool(
+                    self._dialogue_busy or self._gripper_busy or self._active_action_request
+                    or self._voice_request
+                    or bool(self.edge_speech_page and self.edge_speech_page.audio_active)
+                    or (self._wake_request and (
+                        self._wake_mode == 'followup' or
+                        '已唤醒' in self._status_values['voice'].get()))))
+        except Exception:
+            LOG.exception('optional edge vision page unavailable')
+        try:
+            from .speech_resource_coordinator import SpeechResourceCoordinator
+            from .edge_speech_page import EdgeSpeechPage
+            resources = SpeechResourceCoordinator(
+                foreground_busy=self._edge_speech_foreground_busy,
+                pause_wake=lambda: self._pause_wake(wait=False),
+                wake_active=lambda: bool(self.wake is not None and self.wake.active),
+                resume_wake=lambda: self._schedule_wake('wake'))
+            self.edge_speech_page = EdgeSpeechPage(
+                self.pages, workspace=self.workspace, resources=resources,
+                speech_socket=(self.speech.client.socket_path if self.speech is not None
+                               else speech_socket_path(self.workspace)),
+                speech_lock=self._speech_start_lock)
+            self.speech_resources = resources
+        except Exception:
+            LOG.exception('optional edge speech page unavailable')
         self.input_box.focus_set()
+
+    def _edge_speech_foreground_busy(self) -> bool:
+        if (self._closing or self._dialogue_busy or self._gripper_busy
+                or self._active_action_request or self._voice_request
+                or self._playback_busy or self._wake_pending_followup
+                or (self._wake_is_enabled() and self._wake_resume_mode == 'followup')
+                or (self._wake_request and (
+                    self._wake_mode == 'followup'
+                    or '已唤醒' in self._status_values['voice'].get()))):
+            return True
+        robot, _observed = self.bridge.state_snapshot()
+        return bool(self.bridge.guard.snapshot().active or robot.get('action_active'))
 
     def _build_robot_control_page(self, page) -> None:
         intro = self.ttk.Frame(page, style='Card.TFrame', padding=22)
@@ -540,6 +600,8 @@ class DialogueGui:
             self.action_result_var.set('参数已就绪，可以执行')
 
     def execute_selected_action(self) -> None:
+        if _edge_speech_blocks_request(self):
+            return
         if self._dialogue_busy or self._gripper_busy:
             self.action_result_var.set('当前请求尚未结束，未发送 Action。')
             return
@@ -595,6 +657,8 @@ class DialogueGui:
             self.pose_result_var.set('XYZ 移动 Action 服务未就绪')
 
     def execute_xyz_move(self) -> None:
+        if _edge_speech_blocks_request(self):
+            return
         if self._dialogue_busy or self._gripper_busy:
             self.pose_result_var.set('当前请求尚未结束，未发送 XYZ 目标。')
             return
@@ -750,6 +814,8 @@ class DialogueGui:
         self._set_gripper_buttons('normal' if enabled else 'disabled')
 
     def command_gripper(self, command: str) -> None:
+        if _edge_speech_blocks_request(self):
+            return
         labels = {'open': '打开', 'close': '闭合'}
         if command not in labels:
             raise ValueError(f'unsupported gripper command: {command}')
@@ -783,9 +849,9 @@ class DialogueGui:
         value = getattr(self, 'wake_enabled', None)
         return bool(self.wake is not None and value is not None and value.get())
 
-    def _pause_wake(self) -> None:
+    def _pause_wake(self, wait: bool = True) -> None:
         if self.wake is not None:
-            self.wake.cancel(wait=True)
+            self.wake.cancel(wait=wait)
         self._wake_request = ''
         self._wake_mode = ''
         self._wake_followup_deadline = 0.0
@@ -798,6 +864,8 @@ class DialogueGui:
         self._wake_resume_at = time.monotonic() + max(0.0, delay_s)
 
     def _wake_can_listen(self) -> bool:
+        if _edge_speech_owns_audio(self):
+            return False
         if (not self._wake_is_enabled() or self._closing or self._voice_request
                 or self._dialogue_busy
                 or getattr(self, '_gripper_busy', False)
@@ -813,6 +881,9 @@ class DialogueGui:
 
     def _ensure_wake_listener(self) -> None:
         if self.wake is None:
+            return
+        if _edge_speech_owns_audio(self):
+            self._status_values['voice'].set('唤醒：未唤醒 · 端侧语音感知使用期间暂停')
             return
         if not self._wake_is_enabled():
             self._status_values['voice'].set('唤醒：未唤醒 · 监听已关闭')
@@ -936,6 +1007,13 @@ class DialogueGui:
 
     def send_text(self, text: str | None = None, request_id: str = '',
                   source: str = '') -> None:
+        if _edge_speech_owns_audio(self):
+            candidate = self.input_var.get().strip() if text is None else text.strip()
+            shortcut = direct_shortcut(candidate)
+            # Keep the existing text stop shortcut available during cleanup.
+            if shortcut is None or shortcut.route != 'stop_action':
+                _edge_speech_blocks_request(self)
+                return
         if self._voice_request:
             return
         text = self.input_var.get().strip() if text is None else text.strip()
@@ -1053,6 +1131,8 @@ class DialogueGui:
     def ask_image(self) -> None:
         from tkinter import simpledialog
 
+        if _edge_speech_blocks_request(self):
+            return
         if (self._voice_request or self._dialogue_busy
                 or getattr(self, '_gripper_busy', False)
                 or self.bridge.guard.snapshot().active):
@@ -1123,7 +1203,8 @@ class DialogueGui:
         if not enabled or self.speech is None:
             return False
         with self._speech_start_lock:
-            if self._closing or epoch != self._speech_epoch or self._voice_request:
+            if (self._closing or epoch != self._speech_epoch or self._voice_request
+                    or _edge_speech_owns_audio(self)):
                 return False
             started = self.speech.start(request_id=request_id)
         if started:
@@ -1211,6 +1292,8 @@ class DialogueGui:
                 self.speech.client.stop('recording')  # errors must prevent capture
 
     def toggle_voice(self) -> None:
+        if _edge_speech_blocks_request(self):
+            return
         if self._voice_request:
             self.voice.finish()
             self.voice_button.configure(text='正在定稿…', state='disabled')
@@ -1280,7 +1363,8 @@ class DialogueGui:
         Playback runs on a worker thread so the page stays responsive and the
         stop button can cut the sentence off.
         """
-        if self._voice_request or self.speech is None or not self.tts_enabled.get():
+        if (_edge_speech_owns_audio(self) or self._voice_request
+                or self.speech is None or not self.tts_enabled.get()):
             return
         clean = (text or '').strip()
         if not clean:
@@ -1301,7 +1385,8 @@ class DialogueGui:
         def worker() -> None:
             try:
                 with self._speech_start_lock:
-                    if epoch != self._speech_epoch or self._voice_request or self._closing:
+                    if (epoch != self._speech_epoch or self._voice_request or self._closing
+                            or _edge_speech_owns_audio(self)):
                         return
                     self.speech.client.begin(request_id=rid)
                 for index in range(0, len(clean), 24):
@@ -1338,6 +1423,9 @@ class DialogueGui:
             self._schedule_wake('followup', delay)
 
     def stop_playback(self, message: str = '') -> None:
+        if _edge_speech_owns_audio(self):
+            # The service's stop is global. Only the tab may stop its session.
+            return
         self._speech_epoch += 1
         if message:
             self._append('system', message)
@@ -1665,6 +1753,18 @@ class DialogueGui:
         if self._closing:
             return
         self._closing = True
+        speech_page = getattr(self, 'edge_speech_page', None)
+        if speech_page is not None:
+            try:
+                speech_page.close()
+            except Exception:
+                LOG.exception('failed to close optional edge speech page')
+        edge_page = getattr(self, 'edge_vision_page', None)
+        if edge_page is not None:
+            try:
+                edge_page.close()
+            except Exception:
+                LOG.exception('failed to close optional edge vision page')
         self._speech_epoch += 1
         if self.wake is not None:
             self.wake.close()
@@ -1676,7 +1776,8 @@ class DialogueGui:
             LOG.exception('failed to cancel model request during shutdown')
         try:
             if self.speech is not None:
-                self.speech.stop('gui_close')
+                with self._speech_start_lock:
+                    self.speech.stop('gui_close')
         except Exception:
             LOG.exception('failed to stop speech during shutdown')
         try:

@@ -1,0 +1,80 @@
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage4/collision_launch_smoke/ros_logs/2026-10-08-17-31-44-911190-ido-21
+[INFO] [launch]: Default logging verbosity is set to INFO
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+[INFO] [static_transform_publisher-1]: process started with pid [22]
+[INFO] [follow_preview-2]: process started with pid [24]
+[INFO] [position_follow-3]: process started with pid [26]
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] [INFO] [1791451905.189191669] [follow_handeye_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+[static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+[static_transform_publisher-1] from 'flange_link' to 'camera_link'
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] getifaddrs: Operation not permitted
+[position_follow-3] [37;1m2026-10-08 17:31:45.192 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[position_follow-3] [37;1m2026-10-08 17:31:45.192 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[position_follow-3] [37;1m2026-10-08 17:31:45.192 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[position_follow-3] [INFO] [1791451905.215411347] [moveit_robot_model.robot_model]: Loading robot model 'fairino3mt_v6_robot'...
+[position_follow-3] [INFO] [1791451905.215500307] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[position_follow-3] [INFO] [1791451905.993458381] [position_follow]: Position follow ready to receive data; motion starts only through follow_start. mock=true
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] getifaddrs: Operation not permitted
+[follow_preview-2] [37;1m2026-10-08 17:31:46.185 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[follow_preview-2] [37;1m2026-10-08 17:31:46.185 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[follow_preview-2] [37;1m2026-10-08 17:31:46.185 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[follow_preview-2] [INFO] [1791451906.612888873] [follow_preview]: Image-time base-frame conversion only; offset and motion belong to the follow driver.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...
+[INFO] [position_follow-3]: sending signal 'SIGINT' to process[position_follow-3]
+[INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+[INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+[static_transform_publisher-1] [INFO] [1791451910.468638726] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ERROR] [static_transform_publisher-1]: process has died [pid 22, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --x -0.022343004777692268 --y -0.07201485255317483 --z 0.04555195303911627 --roll 2.9242034206206333 --pitch -1.439956488033078 --yaw -1.3816244171579133 --frame-id flange_link --child-frame-id camera_link --ros-args -r __node:=follow_handeye_tf'].
+[position_follow-3] {
+[position_follow-3]   "accel_limit_mm_s2": 60.0,
+[position_follow-3]   "backend": "ServoCart mode 0, tool/work-object 0",
+[position_follow-3]   "close_code": 0,
+[position_follow-3]   "collision_check_ms": {
+[position_follow-3]     "count": 148,
+[position_follow-3]     "max": 26.627433002431644,
+[position_follow-3]     "p50": 6.685952001134865,
+[position_follow-3]     "p95": 19.449142000667052
+[position_follow-3]   },
+[position_follow-3]   "collision_enabled": true,
+[position_follow-3]   "collision_pauses": 0,
+[position_follow-3]   "collision_resumes": 0,
+[position_follow-3]   "collision_scene": {
+[position_follow-3]     "collision_margin_m": 0.005,
+[position_follow-3]     "finger_aperture_envelope_m": [
+[position_follow-3]       0.0,
+[position_follow-3]       0.06
+[position_follow-3]     ],
+[position_follow-3]     "table_size_m": 2.0,
+[position_follow-3]     "table_z_m": 0.0
+[position_follow-3]   },
+[position_follow-3]   "follow_radius_m": 1.0,
+[position_follow-3]   "hardware_servo_commands_sent": 0,
+[position_follow-3]   "kp": 2.0,
+[position_follow-3]   "live_follow_validated": false,
+[position_follow-3]   "mock": true,
+[position_follow-3]   "reason": "signal",
+[position_follow-3]   "requested_period_ms": 8.0,
+[position_follow-3]   "result": "stopped",
+[position_follow-3]   "servo_call_ms": null,
+[position_follow-3]   "servo_commands_sent": 0,
+[position_follow-3]   "servo_interval_ms": null,
+[position_follow-3]   "speed_limit_mm_s": 20.0,
+[position_follow-3]   "starts": 0,
+[position_follow-3]   "target_filter_s": 0.1,
+[position_follow-3]   "target_pauses": 0,
+[position_follow-3]   "target_resumes": 0
+[position_follow-3] }
+[INFO] [position_follow-3]: process has finished cleanly [pid 26]
+[INFO] [follow_preview-2]: process has finished cleanly [pid 24]

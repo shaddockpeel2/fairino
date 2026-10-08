@@ -1,0 +1,54 @@
+{
+  "accel_limit_mm_s2": 30.0,
+  "action": "inspect",
+  "axis": "x",
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "controller_state": {
+    "emergency_stop": 0,
+    "enabled": 1,
+    "main_error_code": 0,
+    "program_state": 1,
+    "robot_mode": 1,
+    "robot_state": 1,
+    "sub_error_code": 0,
+    "tool_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "tool_id": 0,
+    "work_object_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "work_object_id": 0
+  },
+  "distance_mm": 5.0,
+  "hardware_servo_commands_sent": 0,
+  "initial_flange_m_rad": [
+    -0.06372541046142578,
+    -0.32472402954101565,
+    0.3988583374023438,
+    -3.077465865069557,
+    0.008420921088465705,
+    -3.127166576280943
+  ],
+  "mock": false,
+  "motion_commands_enabled": false,
+  "motion_readiness_problem": "select automatic mode on the pendant before motion",
+  "motion_response_validated": false,
+  "requested_period_ms": 8.0,
+  "result": "inspected",
+  "servo_call_ms": null,
+  "servo_commands_sent": 0,
+  "servo_interval_ms": null,
+  "speed_limit_mm_s": 5.0
+}

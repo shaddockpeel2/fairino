@@ -1,0 +1,24 @@
+1791445296.2912791 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage4/launch_smoke_verified/ros_logs/2026-10-08-15-41-36-289209-ido-21
+1791445296.2916253 [INFO] [launch]: Default logging verbosity is set to INFO
+1791445296.3840048 [INFO] [static_transform_publisher-1]: process started with pid [55]
+1791445296.3843310 [INFO] [follow_preview-2]: process started with pid [57]
+1791445296.3844507 [INFO] [position_follow-3]: process started with pid [59]
+1791445296.4193347 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791445296.4195948 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791445296.4200833 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791445296.4202309 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791445296.4204984 [static_transform_publisher-1] [37;1m2026-10-08 15:41:36.419 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+1791445296.4205644 [static_transform_publisher-1] [37;1m2026-10-08 15:41:36.419 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+1791445296.4205983 [static_transform_publisher-1] [37;1m2026-10-08 15:41:36.419 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+1791445296.4497700 [static_transform_publisher-1] [INFO] [1791445296.449327291] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791445296.4500055 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791445296.4500670 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791445296.4501173 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791445300.5696003 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791445300.5727289 [INFO] [position_follow-3]: sending signal 'SIGINT' to process[position_follow-3]
+1791445300.5735762 [INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+1791445300.5741720 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791445300.5746396 [static_transform_publisher-1] [INFO] [1791445300.574379460] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791445300.6935048 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 55]
+1791445300.7131443 [INFO] [position_follow-3]: process has finished cleanly [pid 59]
+1791445300.8352032 [INFO] [follow_preview-2]: process has finished cleanly [pid 57]

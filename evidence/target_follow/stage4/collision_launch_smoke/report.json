@@ -1,0 +1,39 @@
+{
+  "accel_limit_mm_s2": 60.0,
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "collision_check_ms": {
+    "count": 148,
+    "max": 26.627433002431644,
+    "p50": 6.685952001134865,
+    "p95": 19.449142000667052
+  },
+  "collision_enabled": true,
+  "collision_pauses": 0,
+  "collision_resumes": 0,
+  "collision_scene": {
+    "collision_margin_m": 0.005,
+    "finger_aperture_envelope_m": [
+      0.0,
+      0.06
+    ],
+    "table_size_m": 2.0,
+    "table_z_m": 0.0
+  },
+  "follow_radius_m": 1.0,
+  "hardware_servo_commands_sent": 0,
+  "kp": 2.0,
+  "live_follow_validated": false,
+  "mock": true,
+  "reason": "signal",
+  "requested_period_ms": 8.0,
+  "result": "stopped",
+  "servo_call_ms": null,
+  "servo_commands_sent": 0,
+  "servo_interval_ms": null,
+  "speed_limit_mm_s": 20.0,
+  "starts": 0,
+  "target_filter_s": 0.1,
+  "target_pauses": 0,
+  "target_resumes": 0
+}

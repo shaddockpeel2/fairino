@@ -1,0 +1,30 @@
+1791453569.7584410 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/start_detector_and_exit/ros_logs/2026-10-08-17-59-29-756315-ido-291
+1791453569.7587504 [INFO] [launch]: Default logging verbosity is set to INFO
+1791453572.0473373 [INFO] [launch.user]: Demo report directory: /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/start_detector_and_exit
+1791453572.0482836 [INFO] [launch.user]: Camera: reuse
+1791453572.0487921 [INFO] [launch.user]: Tag detector: start
+1791453572.0490911 [INFO] [launch.user]: Driver starts IDLE. T teach | S start (records offset again) | X stop. Ctrl-C or closing the Demo-owned viewer ends the Demo.
+1791453572.2173238 [INFO] [tag_pose-1]: process started with pid [323]
+1791453572.2178931 [INFO] [static_transform_publisher-2]: process started with pid [325]
+1791453572.2182770 [INFO] [follow_preview-3]: process started with pid [327]
+1791453572.2185662 [INFO] [position_follow-4]: process started with pid [329]
+1791453572.2372272 [static_transform_publisher-2] getifaddrs: Operation not permitted
+1791453572.2374835 [static_transform_publisher-2] getifaddrs: Operation not permitted
+1791453572.2380135 [static_transform_publisher-2] getifaddrs: Operation not permitted
+1791453572.2381725 [static_transform_publisher-2] getifaddrs: Operation not permitted
+1791453572.2384627 [static_transform_publisher-2] [37;1m2026-10-08 17:59:32.237 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+1791453572.2385321 [static_transform_publisher-2] [37;1m2026-10-08 17:59:32.237 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+1791453572.2385757 [static_transform_publisher-2] [37;1m2026-10-08 17:59:32.237 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+1791453572.2559044 [static_transform_publisher-2] [INFO] [1791453572.255015514] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791453572.2562070 [static_transform_publisher-2] translation: ('-0.022343', '-0.072015', '0.045552')
+1791453572.2563086 [static_transform_publisher-2] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791453572.2563834 [static_transform_publisher-2] from 'flange_link' to 'camera_link'
+1791453587.7408495 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791453587.7567596 [ERROR] [tag_pose-1]: process has died [pid 323, exit code 1, cmd '/home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow/tag_pose --ros-args -r __node:=tag_pose --params-file /home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config/tag_pose.yaml'].
+1791453587.7591901 [INFO] [position_follow-4]: sending signal 'SIGINT' to process[position_follow-4]
+1791453587.7633119 [INFO] [follow_preview-3]: sending signal 'SIGINT' to process[follow_preview-3]
+1791453587.7674594 [INFO] [static_transform_publisher-2]: sending signal 'SIGINT' to process[static_transform_publisher-2]
+1791453587.7871816 [static_transform_publisher-2] [INFO] [1791453587.769231520] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791453587.9354699 [INFO] [position_follow-4]: process has finished cleanly [pid 329]
+1791453587.9363701 [INFO] [static_transform_publisher-2]: process has finished cleanly [pid 325]
+1791453588.0426319 [INFO] [follow_preview-3]: process has finished cleanly [pid 327]

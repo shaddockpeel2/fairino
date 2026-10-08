@@ -1,0 +1,233 @@
+{
+  "status": "stage3_live_validation_complete",
+  "requested_period_ms": 8,
+  "speed_limit_mm_s": 5,
+  "axes_and_return_validated": true,
+  "stop_service_validated": true,
+  "net_return_error_mm": [
+    -0.007034301757802286,
+    -0.0038452148437562172,
+    0.016143798828083256
+  ],
+  "net_return_error_norm_mm": 0.018024686377745545,
+  "max_goal_error_mm": 0.0402636169733009,
+  "max_rotation_delta_deg": 0.00424540415977842,
+  "cases": [
+    {
+      "name": "live_x_plus5_v2",
+      "result": "completed",
+      "delta_mm": [
+        5.004936218261722,
+        0.007720947265643652,
+        -6.10351562624345e-05
+      ],
+      "goal_error_mm": 0.009164224064073261,
+      "rotation_delta_deg": 0.0010287580595905,
+      "servo_interval_ms": {
+        "count": 296,
+        "max": 28.05647700006375,
+        "p50": 9.84239999888814,
+        "p95": 13.413147997198394
+      },
+      "servo_call_ms": {
+        "count": 297,
+        "max": 12.781558001734084,
+        "p50": 3.9395849998982158,
+        "p95": 6.496947000414366
+      },
+      "stop_calls_elapsed_ms": 13.436940000246977,
+      "stop_code": 0,
+      "end_code": 0,
+      "stop_response_observed": true
+    },
+    {
+      "name": "live_x_minus5",
+      "result": "completed",
+      "delta_mm": [
+        -5.005352020263677,
+        -0.001556396484414524,
+        0.008972167968801514
+      ],
+      "goal_error_mm": 0.010562494448752364,
+      "rotation_delta_deg": 0.0017863502166066295,
+      "servo_interval_ms": {
+        "count": 296,
+        "max": 22.404038998502074,
+        "p50": 9.844026000791928,
+        "p95": 14.47965999977896
+      },
+      "servo_call_ms": {
+        "count": 297,
+        "max": 18.428286999551347,
+        "p50": 3.8795019972894806,
+        "p95": 8.12783999936073
+      },
+      "stop_calls_elapsed_ms": 13.189771001634654,
+      "stop_code": 0,
+      "end_code": 0,
+      "stop_response_observed": true
+    },
+    {
+      "name": "live_y_plus5",
+      "result": "completed",
+      "delta_mm": [
+        -0.0009841918945374672,
+        5.031158447265593,
+        0.025482177734348355
+      ],
+      "goal_error_mm": 0.0402636169733009,
+      "rotation_delta_deg": 0.00424540415977842,
+      "servo_interval_ms": {
+        "count": 296,
+        "max": 20.480392999161268,
+        "p50": 9.817025002121227,
+        "p95": 13.438689999020426
+      },
+      "servo_call_ms": {
+        "count": 297,
+        "max": 16.738559999794234,
+        "p50": 3.8771680010540877,
+        "p95": 8.143130999087589
+      },
+      "stop_calls_elapsed_ms": 14.330033001897391,
+      "stop_code": 0,
+      "end_code": 0,
+      "stop_response_observed": true
+    },
+    {
+      "name": "live_y_minus5",
+      "result": "completed",
+      "delta_mm": [
+        -0.0010719299316369613,
+        -5.011138916015623,
+        -0.005554199218771316
+      ],
+      "goal_error_mm": 0.012492942517403089,
+      "rotation_delta_deg": 0.0008149233933067939,
+      "servo_interval_ms": {
+        "count": 296,
+        "max": 24.255268999695545,
+        "p50": 9.717566001199884,
+        "p95": 14.893248000589665
+      },
+      "servo_call_ms": {
+        "count": 297,
+        "max": 21.962743001495255,
+        "p50": 3.8453759989351965,
+        "p95": 7.145913001295412
+      },
+      "stop_calls_elapsed_ms": 13.259021001431393,
+      "stop_code": 0,
+      "end_code": 0,
+      "stop_response_observed": true
+    },
+    {
+      "name": "live_z_plus5",
+      "result": "completed",
+      "delta_mm": [
+        0.0011825561523348682,
+        -0.006683349609348799,
+        4.9968566894531
+      ],
+      "goal_error_mm": 0.0074797060268763545,
+      "rotation_delta_deg": 0.0013460728675201163,
+      "servo_interval_ms": {
+        "count": 296,
+        "max": 21.496362998732366,
+        "p50": 9.930192998581333,
+        "p95": 14.2956170020625
+      },
+      "servo_call_ms": {
+        "count": 297,
+        "max": 15.865675999521045,
+        "p50": 3.8643339976260904,
+        "p95": 7.263162999151973
+      },
+      "stop_calls_elapsed_ms": 13.807069000904448,
+      "stop_code": 0,
+      "end_code": 0,
+      "stop_response_observed": true
+    },
+    {
+      "name": "live_z_minus5",
+      "result": "completed",
+      "delta_mm": [
+        -0.001430511474609375,
+        0.011932373046863454,
+        -4.991333007812515
+      ],
+      "goal_error_mm": 0.014817038947998476,
+      "rotation_delta_deg": 0.002188818433219189,
+      "servo_interval_ms": {
+        "count": 296,
+        "max": 27.69676399839227,
+        "p50": 9.675566001533298,
+        "p95": 13.416523001069436
+      },
+      "servo_call_ms": {
+        "count": 297,
+        "max": 15.813758000149392,
+        "p50": 3.8620009981968906,
+        "p95": 7.302246998733608
+      },
+      "stop_calls_elapsed_ms": 3.576456001610495,
+      "stop_code": 0,
+      "end_code": 0,
+      "stop_response_observed": true
+    },
+    {
+      "name": "live_stop_service",
+      "result": "stopped",
+      "delta_mm": [
+        0.5682334899902441,
+        -0.0001831054687873035,
+        0.00018310546873179234
+      ],
+      "goal_error_mm": 4.431766517575047,
+      "rotation_delta_deg": 0.0029592326689119952,
+      "servo_interval_ms": {
+        "count": 60,
+        "max": 24.647856000228785,
+        "p50": 9.951068001100793,
+        "p95": 18.835749997379025
+      },
+      "servo_call_ms": {
+        "count": 61,
+        "max": 22.005034999892814,
+        "p50": 3.948043999116635,
+        "p95": 7.734210998023627
+      },
+      "stop_calls_elapsed_ms": 4.082502997334814,
+      "stop_code": 0,
+      "end_code": 0,
+      "stop_response_observed": true
+    },
+    {
+      "name": "live_stop_return",
+      "result": "completed",
+      "delta_mm": [
+        -0.5752601623535136,
+        -0.0061035156250222045,
+        0.00805664062497602
+      ],
+      "goal_error_mm": 0.012310015663907147,
+      "rotation_delta_deg": 0.0013189552422174797,
+      "servo_interval_ms": {
+        "count": 103,
+        "max": 26.519210001424653,
+        "p50": 9.882066999125527,
+        "p95": 13.613566999993054
+      },
+      "servo_call_ms": {
+        "count": 104,
+        "max": 21.41236099851085,
+        "p50": 3.8065840017225128,
+        "p95": 6.33623699832242
+      },
+      "stop_calls_elapsed_ms": 14.433284999540774,
+      "stop_code": 0,
+      "end_code": 0,
+      "stop_response_observed": true
+    }
+  ]
+}

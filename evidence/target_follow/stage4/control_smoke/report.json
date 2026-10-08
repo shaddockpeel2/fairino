@@ -1,0 +1,21 @@
+{
+  "accel_limit_mm_s2": 30.0,
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "follow_radius_m": 0.1,
+  "hardware_servo_commands_sent": 0,
+  "kp": 1.5,
+  "live_follow_validated": false,
+  "mock": true,
+  "reason": "signal",
+  "requested_period_ms": 8.0,
+  "result": "stopped",
+  "servo_call_ms": null,
+  "servo_commands_sent": 0,
+  "servo_interval_ms": null,
+  "speed_limit_mm_s": 10.0,
+  "starts": 0,
+  "target_filter_s": 0.1,
+  "target_pauses": 0,
+  "target_resumes": 0
+}

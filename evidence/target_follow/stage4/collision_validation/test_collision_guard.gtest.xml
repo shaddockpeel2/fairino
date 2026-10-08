@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="6" failures="0" disabled="0" errors="0" time="8.269" timestamp="2026-10-08T17:34:14" name="AllTests">
+  <testsuite name="CollisionGuard" tests="6" failures="0" disabled="0" errors="0" time="8.269" timestamp="2026-10-08T17:34:14">
+    <testcase name="ModelAndLocalInverseAgree" status="run" result="completed" time="0.753" timestamp="2026-10-08T17:34:14" classname="CollisionGuard" />
+    <testcase name="TableBlocksAttachmentsBeforePenetrationAndAllowsRetreat" status="run" result="completed" time="2.23" timestamp="2026-10-08T17:34:15" classname="CollisionGuard" />
+    <testcase name="InvalidFeedbackFailsClosed" status="run" result="completed" time="0.734" timestamp="2026-10-08T17:34:17" classname="CollisionGuard" />
+    <testcase name="ChecksSelfCollision" status="run" result="completed" time="0.745" timestamp="2026-10-08T17:34:18" classname="CollisionGuard" />
+    <testcase name="CachedResultExpiresAndDirectionChangesWait" status="run" result="completed" time="0.773" timestamp="2026-10-08T17:34:18" classname="CollisionGuard" />
+    <testcase name="RecordPerformanceWithoutHardware" status="run" result="completed" time="3.034" timestamp="2026-10-08T17:34:19" classname="CollisionGuard" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,24 @@
+1791444957.4224699 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage4/launch_smoke/ros_logs/2026-10-08-15-35-57-421003-ido-21
+1791444957.4226868 [INFO] [launch]: Default logging verbosity is set to INFO
+1791444957.5115685 [INFO] [static_transform_publisher-1]: process started with pid [22]
+1791444957.5118785 [INFO] [follow_preview-2]: process started with pid [24]
+1791444957.5119953 [INFO] [position_follow-3]: process started with pid [26]
+1791444957.5427177 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791444957.5434978 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791444957.5455604 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791444957.5460539 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791444957.5477457 [static_transform_publisher-1] [37;1m2026-10-08 15:35:57.541 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+1791444957.5481012 [static_transform_publisher-1] [37;1m2026-10-08 15:35:57.541 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+1791444957.5483174 [static_transform_publisher-1] [37;1m2026-10-08 15:35:57.541 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+1791444957.5626261 [static_transform_publisher-1] [INFO] [1791444957.562238476] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791444957.5628324 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791444957.5628922 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791444957.5629418 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791444961.9650338 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791444961.9691525 [INFO] [position_follow-3]: sending signal 'SIGINT' to process[position_follow-3]
+1791444961.9706056 [INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+1791444961.9714851 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791444961.9721565 [static_transform_publisher-1] [INFO] [1791444961.971751954] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791444962.0981176 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 22]
+1791444962.1136711 [INFO] [position_follow-3]: process has finished cleanly [pid 26]
+1791444962.3554163 [ERROR] [follow_preview-2]: process has died [pid 24, exit code 1, cmd '/home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow/follow_preview --ros-args -r __node:=follow_preview --params-file /home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config/preview.yaml --params-file /tmp/launch_params_5dauk_ww'].

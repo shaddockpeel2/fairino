@@ -1,0 +1,2 @@
+[INFO] [1791445435.703031720] [position_follow]: Position follow ready to receive data; motion starts only through follow_start. mock=true
+[ERROR] [1791445437.102092174] [position_follow]: target is outside the follow range

@@ -1,0 +1,7 @@
+{
+  "check_ms_max": 20.98361800017301,
+  "check_ms_p50": 19.099721001111902,
+  "check_ms_p95": 20.25735999995959,
+  "hardware_commands_sent": 0,
+  "samples": 120
+}

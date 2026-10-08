@@ -1,0 +1,44 @@
+{
+  "built": true,
+  "mode_selection_unit_tests_passed": 5,
+  "geometry_measurement_regressions_passed": 19,
+  "ros_regressions_passed_across_runs": 12,
+  "isolated_retry_passed": 2,
+  "hardware_motion_commands_sent": 0,
+  "native_hardware_tested": false,
+  "default_collision_enabled": false,
+  "collision_algorithm_changed": false,
+  "mode_reports": {
+    "mode_legacy": {
+      "collision_enabled": false,
+      "tracking_mode": "legacy",
+      "servo_commands_sent": 229,
+      "collision_check_ms": null,
+      "collision_pauses": 0,
+      "servo_interval_ms": {
+        "count": 228,
+        "max": 13.80619500002922,
+        "p50": 8.10229800003981,
+        "p95": 9.927567999966413
+      }
+    },
+    "mode_guarded": {
+      "collision_enabled": true,
+      "tracking_mode": "collision_guarded",
+      "servo_commands_sent": 257,
+      "collision_check_ms": {
+        "count": 162,
+        "max": 43.91644500003622,
+        "p50": 15.302549000011822,
+        "p95": 29.67556099997637
+      },
+      "collision_pauses": 1,
+      "servo_interval_ms": {
+        "count": 255,
+        "max": 18.763749000072494,
+        "p50": 8.11152400001447,
+        "p95": 10.405768999930842
+      }
+    }
+  }
+}

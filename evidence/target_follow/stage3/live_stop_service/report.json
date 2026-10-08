@@ -1,0 +1,88 @@
+{
+  "accel_limit_mm_s2": 30.0,
+  "action": "move",
+  "axis": "x",
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "controller_state": {
+    "emergency_stop": 0,
+    "enabled": 1,
+    "main_error_code": 0,
+    "program_state": 1,
+    "robot_mode": 0,
+    "robot_state": 1,
+    "sub_error_code": 0,
+    "tool_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "tool_id": 0,
+    "work_object_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "work_object_id": 0
+  },
+  "distance_mm": 5.0,
+  "elapsed_s": 0.672003179002786,
+  "final_feedback_age_s": 0.014423075997910928,
+  "final_flange_m_rad": [
+    -0.06315945816040039,
+    -0.32472158813476565,
+    0.39887094116210936,
+    -3.0774048786805945,
+    0.008465110317060955,
+    -3.12716737522927
+  ],
+  "final_robot_state": 1,
+  "hardware_servo_commands_sent": 61,
+  "initial_flange_m_rad": [
+    -0.06372769165039063,
+    -0.32472140502929686,
+    0.39887075805664063,
+    -3.077419792382699,
+    0.008417167695804376,
+    -3.1271553910043646
+  ],
+  "measured_delta_mm": [
+    0.5682334899902441,
+    -0.0001831054687873035,
+    0.00018310546873179234
+  ],
+  "measured_goal_error_mm": 4.431766517575047,
+  "measured_rotation_delta_deg": 0.0029592326689119952,
+  "mock": false,
+  "motion_readiness_problem": "",
+  "motion_response_validated": false,
+  "requested_period_ms": 8.0,
+  "result": "stopped",
+  "servo_call_ms": {
+    "count": 61,
+    "max": 22.005034999892814,
+    "p50": 3.948043999116635,
+    "p95": 7.734210998023627
+  },
+  "servo_commands_sent": 61,
+  "servo_end_code": 0,
+  "servo_interval_ms": {
+    "count": 60,
+    "max": 24.647856000228785,
+    "p50": 9.951068001100793,
+    "p95": 18.835749997379025
+  },
+  "servo_start_code": 0,
+  "speed_limit_mm_s": 5.0,
+  "stop_calls_elapsed_ms": 4.082502997334814,
+  "stop_motion_code": 0,
+  "stop_reason": "service",
+  "stop_response_observed": true,
+  "trajectory_duration_s": 1.875
+}

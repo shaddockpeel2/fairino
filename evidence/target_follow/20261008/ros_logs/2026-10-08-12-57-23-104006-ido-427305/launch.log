@@ -1,0 +1,6 @@
+1791435443.1068215 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/20261008/ros_logs/2026-10-08-12-57-23-104006-ido-427305
+1791435443.1072466 [INFO] [launch]: Default logging verbosity is set to INFO
+1791435443.1805434 [INFO] [tag_pose-1]: process started with pid [427490]
+1791435671.4506545 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791435671.4544575 [INFO] [tag_pose-1]: sending signal 'SIGINT' to process[tag_pose-1]
+1791435671.7980149 [INFO] [tag_pose-1]: process has finished cleanly [pid 427490]

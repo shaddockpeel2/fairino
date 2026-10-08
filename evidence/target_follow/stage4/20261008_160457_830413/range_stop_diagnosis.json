@@ -1,0 +1,227 @@
+{
+  "run_directory": "/home/industio/fairino_ws/evidence/target_follow/stage4/20261008_160457_830413",
+  "source": "live samples.jsonl and user observation; controller feedback, not independent accuracy measurement",
+  "initial_offset_m": [
+    0.002474932138142663,
+    0.1872813021105138,
+    0.18431684435667722
+  ],
+  "initial_target_base_m": [
+    -0.048676150375812036,
+    -0.5207872417975073,
+    0.030144379635077045
+  ],
+  "initial_follow_state": {
+    "actual_tcp_m": [
+      -0.04620121823766937,
+      -0.33350593968699355,
+      0.21446122399175427
+    ],
+    "desired_tcp_m": [
+      -0.04620121823766937,
+      -0.33350593968699355,
+      0.21446122399175427
+    ],
+    "error_norm_mm": 0.0,
+    "feedback_age_ms": 8.496344999002758,
+    "following_requested": true,
+    "mock": false,
+    "motion_commands_enabled": true,
+    "offset_m": [
+      0.002474932138142663,
+      0.1872813021105138,
+      0.18431684435667722
+    ],
+    "offset_recorded": true,
+    "orientation_control_enabled": false,
+    "position_error_m": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "reason": "",
+    "servo_commands_sent": 1,
+    "stamp_s": 1791446778.7258296,
+    "starts": 1,
+    "status": "following",
+    "target_age_ms": 114.19153213500977,
+    "target_base_m": [
+      -0.048676150375812036,
+      -0.5207872417975073,
+      0.030144379635077045
+    ],
+    "target_pauses": 0,
+    "target_resumes": 0,
+    "velocity_m_s": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "last_follow_state_before_fault": {
+    "actual_tcp_m": [
+      0.012087712178513897,
+      -0.31626934309366883,
+      0.2149071714277616
+    ],
+    "desired_tcp_m": [
+      0.04824931814889968,
+      -0.3039610679200158,
+      0.21230080232793994
+    ],
+    "error_norm_mm": 38.28770747893257,
+    "feedback_age_ms": 5.16897299894481,
+    "following_requested": true,
+    "mock": false,
+    "motion_commands_enabled": true,
+    "offset_m": [
+      0.002474932138142663,
+      0.1872813021105138,
+      0.18431684435667722
+    ],
+    "offset_recorded": true,
+    "orientation_control_enabled": false,
+    "position_error_m": [
+      0.03616160597038578,
+      0.012308275173653016,
+      -0.002606369099821676
+    ],
+    "reason": "",
+    "servo_commands_sent": 39282,
+    "servo_end_code": 0,
+    "stamp_s": 1791447098.692369,
+    "starts": 1,
+    "status": "following",
+    "stop_motion_code": 0,
+    "target_age_ms": 109.1470718383789,
+    "target_base_m": [
+      0.046875115731141004,
+      -0.4917127341776265,
+      0.02635818550858543
+    ],
+    "target_pauses": 2,
+    "target_resumes": 2,
+    "velocity_m_s": [
+      0.009444703888391161,
+      0.0032146806335755476,
+      -0.0006807326088290361
+    ]
+  },
+  "first_fault_state": {
+    "actual_tcp_m": [
+      0.01255480658611784,
+      -0.31614351852519634,
+      0.2148843346194366
+    ],
+    "feedback_age_ms": 1.090554000256816,
+    "following_requested": false,
+    "mock": false,
+    "motion_commands_enabled": false,
+    "offset_recorded": false,
+    "orientation_control_enabled": false,
+    "reason": "target is outside the follow range",
+    "servo_commands_sent": 39283,
+    "servo_end_code": 0,
+    "stamp_s": 1791447098.7435904,
+    "starts": 1,
+    "status": "fault",
+    "stop_motion_code": 0,
+    "target_age_ms": 92.36550331115723,
+    "target_base_m": [
+      0.046855007468255536,
+      -0.49010153795392214,
+      0.029972608674149248
+    ],
+    "target_pauses": 2,
+    "target_resumes": 2,
+    "velocity_m_s": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "target_displacement_at_fault_mm": [
+    95.53115784406756,
+    30.68570384358521,
+    -0.1717709609277973
+  ],
+  "target_displacement_norm_at_fault_mm": 100.33864681501036,
+  "configured_radius_mm": 100,
+  "servo_elapsed_before_fault_s": 319.9737777709961,
+  "actual_tcp_span_mm": [
+    58.708082746052966,
+    17.940928193802495,
+    3.481342127485132
+  ],
+  "servo_return_code_counts": {
+    "0": 39283
+  },
+  "stop_events": [
+    {
+      "kind": "stop",
+      "servo_end_code": 0,
+      "stop_motion_code": 0
+    },
+    {
+      "kind": "stop",
+      "servo_end_code": 0,
+      "stop_motion_code": 0
+    },
+    {
+      "kind": "stop",
+      "servo_end_code": 0,
+      "stop_motion_code": 0
+    }
+  ],
+  "last_servo": {
+    "actual_m_rad": [
+      0.009625134468078613,
+      -0.30744610595703126,
+      0.39931994628906253,
+      -3.0773084722491335,
+      0.008442574356633462,
+      -3.1271189056974307
+    ],
+    "actual_tcp_m": [
+      0.012157188764289667,
+      -0.31624832432230204,
+      0.2149060244870396
+    ],
+    "call_ms": 3.328244998556329,
+    "desired_tcp_m": [
+      0.04824931814889968,
+      -0.3039610679200158,
+      0.21230080232793994
+    ],
+    "kind": "servo",
+    "sdk_return_code": 0,
+    "stamp_s": 1791447098.6992452,
+    "target_age_ms": 116.2872314453125,
+    "target_m_rad": [
+      0.010327500449017165,
+      -0.3072216308366793,
+      0.39926005880601323,
+      -3.077395557616779,
+      0.008404105722895377,
+      -3.127135949928407
+    ],
+    "velocity_m_s": [
+      0.009444430008714217,
+      0.0032152753264815957,
+      -0.0006817231002518756
+    ]
+  },
+  "user_report": "方块移动时机械臂跟踪良好，随后界面转为 fault",
+  "internal_error_norm_mm": {
+    "count": 5674,
+    "p50": 0.5230120290531336,
+    "p95": 3.0105854462099155,
+    "max": 38.77312638500671
+  },
+  "servo_call_ms": {
+    "count": 39283,
+    "p50": 3.6814579980273265,
+    "p95": 4.4669250019069295,
+    "max": 20.460646999708842
+  }
+}

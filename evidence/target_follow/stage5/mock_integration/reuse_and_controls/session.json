@@ -1,0 +1,31 @@
+{
+  "stage": 5,
+  "started_at": "2026-10-08T17:59:13.760116+08:00",
+  "mock": true,
+  "ros_domain_id": "191",
+  "motion_starts_automatically": false,
+  "sources_before_start": {
+    "publishers": {
+      "camera": 1,
+      "detector": 1,
+      "flange": 0,
+      "feedback": 0,
+      "preview": 0,
+      "base_target": 0,
+      "follow": 0,
+      "servo": 0
+    },
+    "nodes": [
+      "demo_vision_contract",
+      "follow_demo_probe_30"
+    ]
+  },
+  "owned_sources": {
+    "start_camera": false,
+    "start_detector": false,
+    "start_viewer": false
+  },
+  "driver_params_file": "/tmp/pytest-of-industio/pytest-1/test_reuse_vision_controls_rec0/demo_driver.yaml",
+  "output_dir": "/home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/reuse_and_controls",
+  "collision_enabled_selection": "auto"
+}

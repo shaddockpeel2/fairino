@@ -1,0 +1,64 @@
+{
+  "stage": 4,
+  "software_implemented": true,
+  "live_follow_validated": false,
+  "new_cpp_tests_passed": 5,
+  "existing_cpp_tests_passed": 6,
+  "new_ros_mock_tests_passed": 5,
+  "existing_python_ros_tests_passed": 28,
+  "full_launch_idle_and_shutdown_verified": true,
+  "mock_hardware_servo_commands_sent": 0,
+  "mock_scenarios": {
+    "axis_x": {
+      "result": "stopped",
+      "reason": "signal",
+      "starts": 1,
+      "target_pauses": 0,
+      "target_resumes": 0,
+      "stop_motion_code": 0,
+      "servo_end_code": 0
+    },
+    "axis_y": {
+      "result": "stopped",
+      "reason": "signal",
+      "starts": 1,
+      "target_pauses": 0,
+      "target_resumes": 0,
+      "stop_motion_code": 0,
+      "servo_end_code": 0
+    },
+    "axis_z": {
+      "result": "stopped",
+      "reason": "signal",
+      "starts": 1,
+      "target_pauses": 0,
+      "target_resumes": 0,
+      "stop_motion_code": 0,
+      "servo_end_code": 0
+    },
+    "bridge_recovery_restart": {
+      "result": "stopped",
+      "reason": "signal",
+      "starts": 2,
+      "target_pauses": 1,
+      "target_resumes": 1,
+      "stop_motion_code": 0,
+      "servo_end_code": 0
+    },
+    "invalid_input_range": {
+      "result": "fault",
+      "reason": "target is outside the follow range",
+      "starts": 1,
+      "target_pauses": 1,
+      "target_resumes": 0,
+      "stop_motion_code": 0,
+      "servo_end_code": 0
+    }
+  },
+  "final_teach_bridge_test_passed": true,
+  "control_scripts_smoke_passed": true,
+  "live_first_run_movement_confirmed_by_user": true,
+  "live_first_run_range_stop_confirmed": true,
+  "live_first_run_diagnosis": "evidence/target_follow/stage4/20261008_160457_830413/range_stop_diagnosis.json",
+  "live_full_demo_complete": false
+}

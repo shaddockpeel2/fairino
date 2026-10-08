@@ -1,0 +1,22 @@
+{
+  "duration_s": 5.068514436999976,
+  "robot_packets": 0,
+  "robot_feedback_fps": 0,
+  "flange_samples": 0,
+  "base_target_samples": 0,
+  "preview_samples": 0,
+  "preview_fps": 0,
+  "robot_status_counts": {},
+  "preview_status_counts": {},
+  "sdk_call_ms": null,
+  "motion_commands_enabled": false,
+  "orientation_control_enabled": false,
+  "feedback_intervals_ms": null,
+  "feedback_timestamp_regressions": 0,
+  "target_age_ms": null,
+  "interpolation_gap_ms": null,
+  "error_norm_mm": null,
+  "preview_speed_mm_s": null,
+  "nonpreview_nonzero_velocity_samples": 0,
+  "spread_note": "Base target spread includes actual target movement; robot was not commanded by this pipeline."
+}

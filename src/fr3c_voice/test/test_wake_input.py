@@ -59,7 +59,7 @@ def test_stage9_assets_and_timing_configuration_are_valid():
     wake = WakeInput(WORKSPACE, lambda _event: None)
     wake.validate()
     assert wake.enabled_by_default is True
-    assert wake.phrases == ('法奥同学',)
+    assert wake.phrases == ('玉米',)
     command, _env = wake._asr_command()
     assert '--hotwords-file' not in command
     assert wake.config['pre_roll_s'] == 3.0

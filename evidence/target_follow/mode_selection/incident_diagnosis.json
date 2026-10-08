@@ -1,0 +1,12 @@
+{
+  "source_report": "evidence/target_follow/stage4/20261008_173752_1091664/report.json",
+  "collision_pauses": 2191,
+  "collision_resumes": 2201,
+  "final_error": "ServoCart failed: -4",
+  "sdk_error_definition": "ERR_XMLRPC_CMD_FAILED (-4), robot_error.h",
+  "feedback_age_ms_at_first_fault": 12.104596000426682,
+  "controller_led_cause_confirmed": false,
+  "feedback_disconnect_confirmed": false,
+  "earlier_legacy_run_with_same_error": "evidence/target_follow/stage4/20261008_163902_922818/report.json",
+  "change_scope": "optional model/table overlay for target tracking; existing controller/feedback checks retained"
+}

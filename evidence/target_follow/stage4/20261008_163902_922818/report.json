@@ -1,0 +1,33 @@
+{
+  "accel_limit_mm_s2": 60.0,
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "follow_radius_m": 1.0,
+  "hardware_servo_commands_sent": 15588,
+  "kp": 2.0,
+  "live_follow_validated": false,
+  "mock": false,
+  "reason": "ServoCart failed: -4",
+  "requested_period_ms": 8.0,
+  "result": "fault",
+  "servo_call_ms": {
+    "count": 15588,
+    "max": 16.55751599901123,
+    "p50": 3.690207002364332,
+    "p95": 4.478006998397177
+  },
+  "servo_commands_sent": 15588,
+  "servo_end_code": 0,
+  "servo_interval_ms": {
+    "count": 15585,
+    "max": 27.478510997752892,
+    "p50": 8.09850600126083,
+    "p95": 9.413937001227168
+  },
+  "speed_limit_mm_s": 20.0,
+  "starts": 1,
+  "stop_motion_code": 0,
+  "target_filter_s": 0.1,
+  "target_pauses": 2,
+  "target_resumes": 2
+}

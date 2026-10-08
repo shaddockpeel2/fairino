@@ -1,0 +1,16 @@
+{
+  "test_input": "synthetic colors and OpenCV Lena sample; ROS domain 230",
+  "camera_or_robot_started": false,
+  "colors": {
+    "red": 1,
+    "yellow": 1,
+    "blue": 1,
+    "green": 1
+  },
+  "face_initial_id": 1,
+  "face_movement_id_stable": true,
+  "foreground_pause_and_resume": true,
+  "camera_stale_clears_results": true,
+  "ros_results_topic_received": true,
+  "trigger_services_passed": true
+}

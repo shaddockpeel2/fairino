@@ -1,0 +1,84 @@
+{
+  "cases": [
+    {
+      "case": "axis_x",
+      "result": "completed",
+      "mock": true,
+      "hardware_commands": 0,
+      "stop_code": 0,
+      "end_code": 0,
+      "delta_mm": [
+        5.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case": "axis_y",
+      "result": "completed",
+      "mock": true,
+      "hardware_commands": 0,
+      "stop_code": 0,
+      "end_code": 0,
+      "delta_mm": [
+        0.0,
+        -5.000000000000004,
+        0.0
+      ]
+    },
+    {
+      "case": "axis_z",
+      "result": "completed",
+      "mock": true,
+      "hardware_commands": 0,
+      "stop_code": 0,
+      "end_code": 0,
+      "delta_mm": [
+        0.0,
+        0.0,
+        5.000000000000004
+      ]
+    },
+    {
+      "case": "scheduled_stop",
+      "result": "stopped",
+      "mock": true,
+      "hardware_commands": 0,
+      "stop_code": 0,
+      "end_code": 0,
+      "delta_mm": [
+        0.08575573295104018,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case": "stop_service",
+      "result": "stopped",
+      "mock": true,
+      "hardware_commands": 0,
+      "stop_code": 0,
+      "end_code": 0,
+      "delta_mm": [
+        3.858802099430085e-06,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case": "stop_signal",
+      "result": "stopped",
+      "mock": true,
+      "hardware_commands": 0,
+      "stop_code": 0,
+      "end_code": 0,
+      "delta_mm": [
+        3.858802099430085e-06,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "all_mock": true,
+  "passed_cases": 6
+}

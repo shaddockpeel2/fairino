@@ -1,0 +1,48 @@
+{
+  "cpp_tests_passed": 18,
+  "stage4_ros_tests_passed": 6,
+  "hardware_motion_commands_sent": 0,
+  "live_collision_validated": false,
+  "benchmark": {
+    "check_ms_max": 20.98361800017301,
+    "check_ms_p50": 19.099721001111902,
+    "check_ms_p95": 20.25735999995959,
+    "hardware_commands_sent": 0,
+    "samples": 120
+  },
+  "mock_reports": {
+    "collision_default": {
+      "collision_check_ms": {
+        "count": 41,
+        "max": 55.18792899965774,
+        "p50": 27.48027599955094,
+        "p95": 31.541447999188676
+      },
+      "servo_interval_ms": {
+        "count": 195,
+        "max": 29.94938800111413,
+        "p50": 8.214885998313548,
+        "p95": 13.687491002201568
+      },
+      "collision_pauses": 1,
+      "collision_resumes": 1
+    },
+    "collision_table_pause": {
+      "collision_check_ms": {
+        "count": 18,
+        "max": 35.23936599958688,
+        "p50": 27.968907001195475,
+        "p95": 35.00448799968581
+      },
+      "servo_interval_ms": {
+        "count": 8,
+        "max": 11.161046000779606,
+        "p50": 8.078677001321921,
+        "p95": 9.357650000310969
+      },
+      "collision_pauses": 1,
+      "collision_resumes": 1
+    }
+  },
+  "guide": "docs/目标跟踪轻量防碰撞使用说明-20261008.md"
+}

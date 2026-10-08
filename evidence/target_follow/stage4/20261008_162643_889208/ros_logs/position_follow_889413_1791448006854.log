@@ -1,0 +1,2 @@
+[INFO] [1791448010.304923866] [position_follow]: Position follow ready to receive data; motion starts only through follow_start. mock=false
+[ERROR] [1791448488.010698473] [position_follow]: stop the other controller program before motion

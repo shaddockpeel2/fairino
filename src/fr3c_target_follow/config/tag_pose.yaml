@@ -1,0 +1,20 @@
+tag_pose:
+  ros__parameters:
+    dictionary: DICT_APRILTAG_36h11
+    target_id: 1
+    marker_size_m: 0.020  # User measured detection-corner edge; NOT the 30 mm cube edge.
+    cube_edge_m: 0.030
+    image_topic: /camera/color/image_raw
+    camera_info_topic: /camera/color/camera_info
+    max_image_age_s: 0.25
+    min_edge_px: 12.0
+    max_reprojection_error_px: 2.0
+    ambiguity_margin_px: 0.15
+    continuity_margin_px: 0.20
+    # Compared on 50 captured frames: 13/step=4 detects 50/50 versus default 43/50.
+    adaptive_thresh_constant: 13.0
+    adaptive_thresh_step: 4
+    # Only retry if ID 1 is missing; covers the changed small-tag imaging phase.
+    fallback_thresh_constants: [21.0, 25.0]
+    publish_tag_tf: true
+    publish_annotated_image: true

@@ -1,0 +1,87 @@
+{
+  "accel_limit_mm_s2": 30.0,
+  "action": "move",
+  "axis": "x",
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "controller_state": {
+    "emergency_stop": 0,
+    "enabled": 1,
+    "main_error_code": 0,
+    "program_state": 1,
+    "robot_mode": 0,
+    "robot_state": 1,
+    "sub_error_code": 0,
+    "tool_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "tool_id": 0,
+    "work_object_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "work_object_id": 0
+  },
+  "distance_mm": -0.5682334899902441,
+  "elapsed_s": 1.10110862700094,
+  "final_feedback_age_s": 0.010061027998744976,
+  "final_flange_m_rad": [
+    -0.06373410034179687,
+    -0.324727294921875,
+    0.39887994384765624,
+    -3.0774019492033955,
+    0.0083939508607935,
+    -3.1271378141411703
+  ],
+  "final_robot_state": 1,
+  "hardware_servo_commands_sent": 104,
+  "initial_flange_m_rad": [
+    -0.06315884017944336,
+    -0.32472119140625,
+    0.39887188720703126,
+    -3.0774141997444096,
+    0.008410507192335924,
+    -3.1271482004694215
+  ],
+  "measured_delta_mm": [
+    -0.5752601623535136,
+    -0.0061035156250222045,
+    0.00805664062497602
+  ],
+  "measured_goal_error_mm": 0.012310015663907147,
+  "measured_rotation_delta_deg": 0.0013189552422174797,
+  "mock": false,
+  "motion_readiness_problem": "",
+  "motion_response_validated": true,
+  "requested_period_ms": 8.0,
+  "result": "completed",
+  "servo_call_ms": {
+    "count": 104,
+    "max": 21.41236099851085,
+    "p50": 3.8065840017225128,
+    "p95": 6.33623699832242
+  },
+  "servo_commands_sent": 104,
+  "servo_end_code": 0,
+  "servo_interval_ms": {
+    "count": 103,
+    "max": 26.519210001424653,
+    "p50": 9.882066999125527,
+    "p95": 13.613566999993054
+  },
+  "servo_start_code": 0,
+  "speed_limit_mm_s": 5.0,
+  "stop_calls_elapsed_ms": 14.433284999540774,
+  "stop_motion_code": 0,
+  "stop_response_observed": true,
+  "trajectory_duration_s": 0.33069107356586247
+}

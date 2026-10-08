@@ -1,0 +1,142 @@
+{
+  "recovered_from_complete_raw_jsonl": true,
+  "duration_s": 29.99767984799837,
+  "robot_packets": 3539,
+  "preview_samples": 1178,
+  "preview_status_counts": {
+    "preview": 1178,
+    "stale_or_missing_target": 322
+  },
+  "motion_commands_enabled": false,
+  "target_base_median_mm": [
+    -54.24203251767853,
+    -492.2092047841818,
+    28.900967335417306
+  ],
+  "target_base_deviation_p95_mm": 2.332345164416519,
+  "target_base_axis_span_mm": [
+    2.483013611927258,
+    1.7460590389347108,
+    6.204943834571264
+  ],
+  "tcp_axis_span_mm": [
+    8.732837198604633,
+    1.5147227208699987,
+    0.22366213144875413
+  ],
+  "tcp_start_end_delta_mm": [
+    -8.671782823767959,
+    1.45323942769654,
+    0.09948762339509476
+  ],
+  "target_start_end_delta_mm": [
+    0.14164470762922932,
+    -0.16293157772145905,
+    0.3100799470965865
+  ],
+  "interpolation_gap_p95_ms": 16.08133316040039,
+  "target_age_p95_ms": 259.3803882598877,
+  "latest_preview": {
+    "kind": "preview",
+    "motion_commands_enabled": false,
+    "orientation_control_enabled": false,
+    "offset_recorded": true,
+    "reference_kind": "one_step_from_actual_tcp",
+    "stamp_s": 1791437984.418759,
+    "actual_tcp_m": [
+      -0.06120260973971502,
+      -0.33349920580596887,
+      0.21444813443340693
+    ],
+    "target_base_m": [
+      -0.054101385626896974,
+      -0.49232430624946066,
+      0.02923226266547424
+    ],
+    "target_age_ms": 171.36812210083008,
+    "interpolation_gap_ms": 8.766651153564453,
+    "offset_m": [
+      0.0016544275067360559,
+      0.15684029185115173,
+      0.19940546284837266
+    ],
+    "status": "preview",
+    "desired_tcp_m": [
+      -0.05244695812016092,
+      -0.33548401439830894,
+      0.2286377255138469
+    ],
+    "position_error_m": [
+      0.008755651619554106,
+      -0.0019848085923400705,
+      0.014189591080439962
+    ],
+    "error_norm_mm": 16.791229718556313,
+    "preview_reference_m": [
+      -0.0611595708804852,
+      -0.33350895879494585,
+      0.21451787410665174
+    ],
+    "velocity_m_s": [
+      0.0021699078456515024,
+      -0.0004917204516681812,
+      0.003516093754228198
+    ],
+    "audit_receive_s": 16992.22391168
+  },
+  "latest_robot": {
+    "kind": "robot",
+    "call_ms": 0.006417001713998616,
+    "controller_tcp_mm_deg": [
+      -63.72871017456055,
+      -324.72296142578125,
+      398.8646545410156,
+      -176.32469177246094,
+      0.4821789264678955,
+      -179.1741180419922
+    ],
+    "controller_time": [
+      2026,
+      10,
+      8,
+      13,
+      45,
+      14,
+      564
+    ],
+    "emergency_stop": 0,
+    "enabled": 1,
+    "feedback_age_s": 0.000955801999225514,
+    "frame_counter": 220,
+    "main_error_code": 0,
+    "motion_commands_enabled": false,
+    "new_packets": 94446,
+    "program_state": 1,
+    "robot_mode": 1,
+    "robot_state": 1,
+    "sdk_return_code": 0,
+    "stamp_source": "host_first_observation_of_new_sdk_packet",
+    "status": "valid",
+    "sub_error_code": 0,
+    "tool_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "tool_id": 0,
+    "work_object_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "work_object_id": 0,
+    "audit_receive_s": 16992.226460873
+  },
+  "note": "Recovered metrics use streamed robot/preview data. Unique target positions are deduplicated by reconstructed image timestamp; exact original ROS pose message counts are not reconstructed."
+}

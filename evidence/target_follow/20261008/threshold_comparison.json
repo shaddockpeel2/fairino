@@ -1,0 +1,37 @@
+[
+  {
+    "constant": 9,
+    "detected": 47,
+    "frames": 50,
+    "median_ms": 9.534978000374394,
+    "wrong_ids": []
+  },
+  {
+    "constant": 11,
+    "detected": 47,
+    "frames": 50,
+    "median_ms": 9.167765500933456,
+    "wrong_ids": []
+  },
+  {
+    "constant": 13,
+    "detected": 50,
+    "frames": 50,
+    "median_ms": 8.96884699977818,
+    "wrong_ids": []
+  },
+  {
+    "constant": 15,
+    "detected": 50,
+    "frames": 50,
+    "median_ms": 8.49955000103364,
+    "wrong_ids": []
+  },
+  {
+    "constant": 17,
+    "detected": 50,
+    "frames": 50,
+    "median_ms": 8.323381500304095,
+    "wrong_ids": []
+  }
+]

@@ -1,0 +1,6 @@
+1791434923.1149769 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/20261008/ros_logs/2026-10-08-12-48-43-112826-ido-408820
+1791434923.1152854 [INFO] [launch]: Default logging verbosity is set to INFO
+1791434923.1941311 [INFO] [tag_pose-1]: process started with pid [408995]
+1791435394.9465230 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791435394.9503498 [INFO] [tag_pose-1]: sending signal 'SIGINT' to process[tag_pose-1]
+1791435395.1467140 [ERROR] [tag_pose-1]: process has died [pid 408995, exit code -2, cmd '/home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow/tag_pose --ros-args -r __node:=tag_pose --params-file /home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config/tag_pose.yaml'].

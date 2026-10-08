@@ -1,0 +1,33 @@
+{
+  "accel_limit_mm_s2": 30.0,
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "follow_radius_m": 1.0,
+  "hardware_servo_commands_sent": 57747,
+  "kp": 1.5,
+  "live_follow_validated": false,
+  "mock": false,
+  "reason": "stop the other controller program before motion",
+  "requested_period_ms": 8.0,
+  "result": "fault",
+  "servo_call_ms": {
+    "count": 57747,
+    "max": 23.72617800210719,
+    "p50": 3.6963329985155724,
+    "p95": 4.515923999861116
+  },
+  "servo_commands_sent": 57747,
+  "servo_end_code": 0,
+  "servo_interval_ms": {
+    "count": 57740,
+    "max": 35.30167999997502,
+    "p50": 8.095589000731707,
+    "p95": 9.441062000405509
+  },
+  "speed_limit_mm_s": 10.0,
+  "starts": 1,
+  "stop_motion_code": 0,
+  "target_filter_s": 0.1,
+  "target_pauses": 7,
+  "target_resumes": 6
+}

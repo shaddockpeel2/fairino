@@ -1,0 +1,2 @@
+[INFO] [1791448748.626958848] [position_follow]: Position follow ready to receive data; motion starts only through follow_start. mock=false
+[ERROR] [1791448881.659095270] [position_follow]: ServoCart failed: -4

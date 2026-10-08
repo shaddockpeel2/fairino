@@ -1,0 +1,25 @@
+1791451904.9131007 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage4/collision_launch_smoke/ros_logs/2026-10-08-17-31-44-911190-ido-21
+1791451904.9134223 [INFO] [launch]: Default logging verbosity is set to INFO
+1791451905.1535962 [INFO] [static_transform_publisher-1]: process started with pid [22]
+1791451905.1539788 [INFO] [follow_preview-2]: process started with pid [24]
+1791451905.1541216 [INFO] [position_follow-3]: process started with pid [26]
+1791451905.1778691 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791451905.1780784 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791451905.1784494 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791451905.1785491 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791451905.1787446 [static_transform_publisher-1] [37;1m2026-10-08 17:31:45.177 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+1791451905.1787937 [static_transform_publisher-1] [37;1m2026-10-08 17:31:45.177 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+1791451905.1788256 [static_transform_publisher-1] [37;1m2026-10-08 17:31:45.177 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+1791451905.1902115 [static_transform_publisher-1] [INFO] [1791451905.189191669] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791451905.1904619 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791451905.1905544 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791451905.1906176 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791451910.4688668 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791451910.4692430 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT) again, ignoring...
+1791451910.4730444 [INFO] [position_follow-3]: sending signal 'SIGINT' to process[position_follow-3]
+1791451910.4741201 [INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+1791451910.4748673 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791451910.4753678 [static_transform_publisher-1] [INFO] [1791451910.468638726] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791451910.4829071 [ERROR] [static_transform_publisher-1]: process has died [pid 22, exit code -2, cmd '/opt/ros/humble/lib/tf2_ros/static_transform_publisher --x -0.022343004777692268 --y -0.07201485255317483 --z 0.04555195303911627 --roll 2.9242034206206333 --pitch -1.439956488033078 --yaw -1.3816244171579133 --frame-id flange_link --child-frame-id camera_link --ros-args -r __node:=follow_handeye_tf'].
+1791451910.7800333 [INFO] [position_follow-3]: process has finished cleanly [pid 26]
+1791451910.7821167 [INFO] [follow_preview-2]: process has finished cleanly [pid 24]

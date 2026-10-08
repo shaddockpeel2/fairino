@@ -1,0 +1,71 @@
+{
+  "stage": 5,
+  "verified_at": "2026-10-08T17:30:48.006981+08:00",
+  "software_implemented": true,
+  "built_packages": [
+    "fr3c_follow_feedback",
+    "fr3c_follow_driver",
+    "fr3c_target_follow"
+  ],
+  "control_parameters_changed_by_stage5": false,
+  "one_minute_demo_required": false,
+  "live_stage4_effect_accepted_by_user": true,
+  "new_demo_live_motion_tested": false,
+  "mock_hardware_servo_commands_sent": 0,
+  "tests": {
+    "python": {
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ros_mock": {
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "scenarios": {
+    "reuse_and_controls": {
+      "result": "stopped",
+      "servo_commands_sent": 303,
+      "hardware_servo_commands_sent": 0,
+      "starts": 2,
+      "target_pauses": 1,
+      "target_resumes": 1,
+      "stop_motion_code": 0,
+      "servo_end_code": 0,
+      "close_code": 0,
+      "collision_enabled": false
+    },
+    "start_detector_and_exit": {
+      "result": "stopped",
+      "servo_commands_sent": 70,
+      "hardware_servo_commands_sent": 0,
+      "starts": 1,
+      "target_pauses": 1,
+      "target_resumes": 0,
+      "stop_motion_code": 0,
+      "servo_end_code": 0,
+      "close_code": 0,
+      "collision_enabled": false
+    },
+    "default_config_idle": {
+      "result": "stopped",
+      "servo_commands_sent": 0,
+      "hardware_servo_commands_sent": 0,
+      "starts": 0,
+      "target_pauses": 0,
+      "target_resumes": 0,
+      "stop_motion_code": null,
+      "servo_end_code": null,
+      "close_code": 0,
+      "collision_enabled": true
+    },
+    "existing_owner": {
+      "blocked_before_sdk_connect": true,
+      "report_created": false
+    }
+  }
+}

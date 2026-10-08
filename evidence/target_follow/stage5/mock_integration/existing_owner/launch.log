@@ -1,0 +1,11 @@
+Demo logs: /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/existing_owner
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage5/mock_integration/existing_owner/ros_logs/2026-10-08-17-59-49-745185-ido-410
+[INFO] [launch]: Default logging verbosity is set to INFO
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-08 17:59:49.925 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[37;1m2026-10-08 17:59:49.925 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-08 17:59:49.925 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[ERROR] [launch]: Caught exception in launch (see debug for traceback): Close the existing feedback/preview/follow/servo launch first; the Demo supplies its own SDK owner and base conversion. Found: /target_follow/flange_pose

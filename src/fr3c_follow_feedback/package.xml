@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>fr3c_follow_feedback</name>
+  <version>0.1.0</version>
+  <description>Read-only FAIRINO feedback for independent target following.</description>
+  <maintainer email="developer@example.com">FR3-C project</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>rclcpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>std_msgs</depend>
+  <depend>tf2_ros</depend>
+  <depend>eigen</depend>
+  <build_depend>nlohmann_json</build_depend>
+  <exec_depend>fairino_hardware</exec_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

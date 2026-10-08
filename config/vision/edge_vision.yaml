@@ -1,0 +1,27 @@
+schema_version: 1
+image_topic: /camera/color/image_raw
+max_fps: 8.0
+camera_max_age_s: 1.0
+jpeg_quality: 85
+# Read the existing thresholds without changing the original configuration.
+color_config: src/fr3c_camera/config/color_target_2d.yaml
+objects:
+  model_path: src/fr3c_camera/models/best.rknn
+  confidence_threshold: 0.25
+  iou_threshold: 0.45
+  core_mode: core0
+  max_detections: 30
+faces:
+  model_path: assets/vision/face_detection_yunet_2023mar.onnx
+  confidence_threshold: 0.75
+tracking:
+  lost_after_s: 0.8
+  smoothing: 0.65
+  trail_length: 40
+priority:
+  status_max_age_s: 2.5
+  model_socket: evidence/voice/P3/runtime/fr3c-qwen-service.sock
+  status_topics:
+    grasp: /fr3c_first_grasp/state
+    perception: /perception/blue_cube_localizer/status
+    servo: /fairino/control_state

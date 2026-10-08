@@ -1,0 +1,9 @@
+[INFO] [1791429050.358575568] [fr3c_edge_vision]: Edge vision stopped by default; RGB source=/camera/color/image_raw
+[INFO] [1791429248.806191356] [fr3c_edge_vision]: Edge vision stopped by default; RGB source=/camera/color/image_raw
+W rknn-toolkit-lite2 version: 2.3.2
+W Query dynamic range failed. Ret code: RKNN_ERR_MODEL_INVALID. (If it is a static shape RKNN model, please ignore the above warning message.)
+I RKNN: [11:15:16.979] RKNN Runtime Information, librknnrt version: 2.3.2 (429f97ae6b@2025-04-09T09:09:27)
+I RKNN: [11:15:16.979] RKNN Driver Information, version: 0.9.8
+I RKNN: [11:15:16.982] RKNN Model Information, version: 6, toolkit version: 2.3.0(compiler version: 2.3.0 (c949ad889d@2024-11-07T11:39:30)), target: RKNPU v2, target platform: rk3588, framework name: ONNX, framework layout: NCHW, model inference type: static_shape
+W RKNN: [11:15:17.011] query RKNN_QUERY_INPUT_DYNAMIC_RANGE error, rknn model is static shape type, please export rknn with dynamic_shapes
+[INFO] [1791430207.312828047] [fr3c_edge_vision]: Edge vision stopped by default; RGB source=/camera/color/image_raw

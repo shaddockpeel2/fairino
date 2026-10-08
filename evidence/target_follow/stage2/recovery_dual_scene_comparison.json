@@ -1,0 +1,148 @@
+[
+  {
+    "dataset": "evidence/target_follow/20261008/small_tag_frames.npz",
+    "method": 1,
+    "constant": 13,
+    "detected": 50,
+    "frames": 50,
+    "p95_ms": 15.200521452607047
+  },
+  {
+    "dataset": "evidence/target_follow/20261008/small_tag_frames.npz",
+    "method": 1,
+    "constant": 21,
+    "detected": 50,
+    "frames": 50,
+    "p95_ms": 10.750296149672067
+  },
+  {
+    "dataset": "evidence/target_follow/20261008/small_tag_frames.npz",
+    "method": 1,
+    "constant": 25,
+    "detected": 50,
+    "frames": 50,
+    "p95_ms": 9.986908050814236
+  },
+  {
+    "dataset": "evidence/target_follow/20261008/small_tag_frames.npz",
+    "method": 1,
+    "constant": 7,
+    "detected": 43,
+    "frames": 50,
+    "p95_ms": 13.383214701389079
+  },
+  {
+    "dataset": "evidence/target_follow/20261008/small_tag_frames.npz",
+    "method": 3,
+    "constant": 13,
+    "detected": 44,
+    "frames": 50,
+    "p95_ms": 42.31796090025455
+  },
+  {
+    "dataset": "evidence/target_follow/20261008/small_tag_frames.npz",
+    "fallback_order": [
+      "1:13",
+      "1:21",
+      "1:7"
+    ],
+    "detected": 50,
+    "frames": 50,
+    "p95_ms": 15.200521452607047
+  },
+  {
+    "dataset": "evidence/target_follow/20261008/small_tag_frames.npz",
+    "fallback_order": [
+      "1:13",
+      "1:21",
+      "3:13"
+    ],
+    "detected": 50,
+    "frames": 50,
+    "p95_ms": 15.200521452607047
+  },
+  {
+    "dataset": "evidence/target_follow/20261008/small_tag_frames.npz",
+    "fallback_order": [
+      "1:13",
+      "1:21",
+      "1:25"
+    ],
+    "detected": 50,
+    "frames": 50,
+    "p95_ms": 15.200521452607047
+  },
+  {
+    "dataset": "evidence/target_follow/stage2/recovery_small_tag_frames.npz",
+    "method": 1,
+    "constant": 13,
+    "detected": 6,
+    "frames": 50,
+    "p95_ms": 14.424461699672964
+  },
+  {
+    "dataset": "evidence/target_follow/stage2/recovery_small_tag_frames.npz",
+    "method": 1,
+    "constant": 21,
+    "detected": 48,
+    "frames": 50,
+    "p95_ms": 11.390394850604935
+  },
+  {
+    "dataset": "evidence/target_follow/stage2/recovery_small_tag_frames.npz",
+    "method": 1,
+    "constant": 25,
+    "detected": 50,
+    "frames": 50,
+    "p95_ms": 9.018841250872354
+  },
+  {
+    "dataset": "evidence/target_follow/stage2/recovery_small_tag_frames.npz",
+    "method": 1,
+    "constant": 7,
+    "detected": 9,
+    "frames": 50,
+    "p95_ms": 11.031450900009077
+  },
+  {
+    "dataset": "evidence/target_follow/stage2/recovery_small_tag_frames.npz",
+    "method": 3,
+    "constant": 13,
+    "detected": 43,
+    "frames": 50,
+    "p95_ms": 40.46059274714935
+  },
+  {
+    "dataset": "evidence/target_follow/stage2/recovery_small_tag_frames.npz",
+    "fallback_order": [
+      "1:13",
+      "1:21",
+      "1:7"
+    ],
+    "detected": 48,
+    "frames": 50,
+    "p95_ms": 27.932700048586412
+  },
+  {
+    "dataset": "evidence/target_follow/stage2/recovery_small_tag_frames.npz",
+    "fallback_order": [
+      "1:13",
+      "1:21",
+      "3:13"
+    ],
+    "detected": 49,
+    "frames": 50,
+    "p95_ms": 27.932700048586412
+  },
+  {
+    "dataset": "evidence/target_follow/stage2/recovery_small_tag_frames.npz",
+    "fallback_order": [
+      "1:13",
+      "1:21",
+      "1:25"
+    ],
+    "detected": 50,
+    "frames": 50,
+    "p95_ms": 26.964530348777767
+  }
+]

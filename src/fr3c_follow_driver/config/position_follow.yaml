@@ -1,0 +1,20 @@
+position_follow:
+  ros__parameters:
+    period_ms: 8.0
+    kp: 2.0
+    max_speed_m_s: 0.020
+    max_accel_m_s2: 0.060
+    target_filter_s: 0.10
+    target_timeout_s: 0.35
+    feedback_timeout_s: 0.20
+    follow_radius_m: 1.00
+    # false: previous following loop, no model/IK/checker thread.
+    # true: optional robot/gripper/camera and table collision checking.
+    # Startup setting; stop and restart the driver after changing it.
+    collision_enabled: false
+    table_z_m: 0.0
+    table_size_m: 2.0
+    collision_margin_m: 0.005
+    collision_slow_distance_m: 0.020
+    collision_check_period_ms: 20.0
+    collision_result_timeout_s: 0.15

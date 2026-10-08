@@ -1,0 +1,14 @@
+1791452275.7404785 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage4/20261008_173752_1091664/ros_logs/2026-10-08-17-37-55-738936-ido-1091664
+1791452275.7407057 [INFO] [launch]: Default logging verbosity is set to INFO
+1791452275.9844551 [INFO] [static_transform_publisher-1]: process started with pid [1091869]
+1791452275.9847698 [INFO] [follow_preview-2]: process started with pid [1091871]
+1791452275.9848964 [INFO] [position_follow-3]: process started with pid [1091873]
+1791452276.0109582 [static_transform_publisher-1] [INFO] [1791452276.010054710] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791452276.0112135 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791452276.0112796 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791452276.0113430 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791452835.9818189 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791452835.9849567 [static_transform_publisher-1] [INFO] [1791452835.981403951] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791452836.1134725 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 1091869]
+1791452836.2580373 [INFO] [follow_preview-2]: process has finished cleanly [pid 1091871]
+1791452836.7245247 [ERROR] [position_follow-3]: process has died [pid 1091873, exit code 1, cmd '/home/industio/fairino_ws/install/fr3c_follow_driver/lib/fr3c_follow_driver/position_follow --ros-args -r __node:=position_follow --params-file /home/industio/fairino_ws/install/fr3c_follow_driver/share/fr3c_follow_driver/config/position_follow.yaml --params-file /tmp/launch_params_wy9ae2bn'].

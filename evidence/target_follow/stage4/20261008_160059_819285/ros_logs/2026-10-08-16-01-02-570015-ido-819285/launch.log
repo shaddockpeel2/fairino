@@ -1,0 +1,14 @@
+1791446462.5722961 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage4/20261008_160059_819285/ros_logs/2026-10-08-16-01-02-570015-ido-819285
+1791446462.5729072 [INFO] [launch]: Default logging verbosity is set to INFO
+1791446462.6599884 [INFO] [static_transform_publisher-1]: process started with pid [819501]
+1791446462.6603169 [INFO] [follow_preview-2]: process started with pid [819503]
+1791446462.6604693 [INFO] [position_follow-3]: process started with pid [819505]
+1791446462.7251458 [static_transform_publisher-1] [INFO] [1791446462.723942402] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791446462.7255268 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791446462.7256293 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791446462.7257783 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791446526.4663391 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791446526.4690483 [static_transform_publisher-1] [INFO] [1791446526.465851108] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791446526.5882497 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 819501]
+1791446526.7182865 [INFO] [follow_preview-2]: process has finished cleanly [pid 819503]
+1791446527.1186383 [INFO] [position_follow-3]: process has finished cleanly [pid 819505]

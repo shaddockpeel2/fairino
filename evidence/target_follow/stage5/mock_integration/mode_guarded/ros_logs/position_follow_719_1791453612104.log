@@ -1,0 +1,4 @@
+[INFO] [1791453612.120900761] [moveit_robot_model.robot_model]: Loading robot model 'fairino3mt_v6_robot'...
+[INFO] [1791453612.120993220] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[INFO] [1791453612.918781934] [position_follow]: Position follow ready to receive data; motion starts only through follow_start. mock=true
+[INFO] [1791453612.918893350] [position_follow]: Tracking mode: collision_guarded; model collision check: ON. Change through launch/config and restart.

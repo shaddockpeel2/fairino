@@ -1,0 +1,3 @@
+[INFO] [1791451905.215411347] [moveit_robot_model.robot_model]: Loading robot model 'fairino3mt_v6_robot'...
+[INFO] [1791451905.215500307] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[INFO] [1791451905.993458381] [position_follow]: Position follow ready to receive data; motion starts only through follow_start. mock=true

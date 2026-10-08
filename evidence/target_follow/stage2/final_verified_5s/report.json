@@ -1,0 +1,170 @@
+{
+  "duration_s": 5.003903909997462,
+  "robot_packets": 593,
+  "robot_feedback_fps": 118.81661346426824,
+  "flange_samples": 594,
+  "base_target_samples": 70,
+  "preview_samples": 250,
+  "preview_fps": 50.012799390102124,
+  "robot_status_counts": {
+    "valid": 593
+  },
+  "preview_status_counts": {
+    "preview": 250
+  },
+  "sdk_call_ms": {
+    "p50": 0.006999998731771484,
+    "p95": 0.02100040001096204,
+    "max": 5.021097000280861
+  },
+  "motion_commands_enabled": false,
+  "orientation_control_enabled": false,
+  "feedback_intervals_ms": {
+    "p50": 8.005619049072266,
+    "p95": 13.26313018798828,
+    "max": 16.405105590820312
+  },
+  "feedback_timestamp_regressions": 0,
+  "latest_robot": {
+    "call_ms": 0.0034999975468963385,
+    "controller_tcp_mm_deg": [
+      -63.725379943847656,
+      -324.7242736816406,
+      398.8621826171875,
+      -176.32516479492188,
+      0.482565313577652,
+      -179.1736602783203
+    ],
+    "controller_time": [
+      2026,
+      10,
+      8,
+      15,
+      1,
+      13,
+      683
+    ],
+    "emergency_stop": 0,
+    "enabled": 1,
+    "feedback_age_s": 0.00024383599884458818,
+    "frame_counter": 80,
+    "main_error_code": 0,
+    "motion_commands_enabled": false,
+    "new_packets": 293706,
+    "program_state": 1,
+    "robot_mode": 1,
+    "robot_state": 1,
+    "sdk_return_code": 0,
+    "stamp_source": "host_first_observation_of_new_sdk_packet",
+    "status": "valid",
+    "sub_error_code": 0,
+    "tool_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "tool_id": 0,
+    "work_object_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "work_object_id": 0,
+    "audit_receive_s": 21551.34755429
+  },
+  "median_target_base_mm": [
+    -54.0935339253083,
+    -492.4223616796417,
+    28.949042874062748
+  ],
+  "target_base_deviation_mm": {
+    "p50": 0.37208504328409375,
+    "p95": 1.3059939005693293,
+    "max": 1.4636705784390638
+  },
+  "target_axis_span_mm": [
+    0.10886047619879102,
+    0.7142292286640983,
+    2.7751067648831285
+  ],
+  "robot_flange_axis_span_mm": [
+    0.00445175170898926,
+    0.00402832031248801,
+    0.007598876953118783
+  ],
+  "target_age_ms": {
+    "p50": 84.23316478729248,
+    "p95": 135.0491404533386,
+    "max": 193.23253631591797
+  },
+  "interpolation_gap_ms": {
+    "p50": 8.011817932128906,
+    "p95": 15.984773635864258,
+    "max": 16.405105590820312
+  },
+  "error_norm_mm": {
+    "p50": 1.2133886165834014,
+    "p95": 2.082896747428813,
+    "max": 2.5967052265010464
+  },
+  "preview_speed_mm_s": {
+    "p50": 1.7143347015324777,
+    "p95": 2.7102192989569565,
+    "max": 3.5169610813051735
+  },
+  "nonpreview_nonzero_velocity_samples": 0,
+  "latest_preview": {
+    "motion_commands_enabled": false,
+    "orientation_control_enabled": false,
+    "offset_recorded": true,
+    "reference_kind": "one_step_from_actual_tcp",
+    "stamp_s": 1791442543.5403926,
+    "velocity_m_s": [
+      -1.4062458398139271e-05,
+      0.0004215701088591922,
+      0.0017189694185643562
+    ],
+    "actual_tcp_m": [
+      -0.06120020472358118,
+      -0.3334998844004152,
+      0.21444606264805083
+    ],
+    "target_base_m": [
+      -0.05408347437515838,
+      -0.4923596383744388,
+      0.02916668418248808
+    ],
+    "target_age_ms": 36.429643630981445,
+    "interpolation_gap_ms": 7.958650588989258,
+    "offset_m": [
+      -0.007126588120241285,
+      0.15920878781440245,
+      0.18665676722971564
+    ],
+    "status": "preview",
+    "desired_tcp_m": [
+      -0.06121006249539967,
+      -0.33315085056003635,
+      0.21582345141220372
+    ],
+    "position_error_m": [
+      -9.857771818486127e-06,
+      0.0003490338403788762,
+      0.001377388764152887
+    ],
+    "error_norm_mm": 1.4209579884744903,
+    "preview_reference_m": [
+      -0.06120045639338041,
+      -0.3334923397406087,
+      0.214476826308017
+    ],
+    "audit_receive_s": 21551.346213192
+  },
+  "spread_note": "Base target spread includes actual target movement; robot was not commanded by this pipeline."
+}

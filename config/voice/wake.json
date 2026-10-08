@@ -1,6 +1,6 @@
 {
   "enabled": true,
-  "phrases": ["法奥同学"],
+  "phrases": ["玉米"],
   "kws_python": "/home/industio/DofbotPro_JetsonNano_0106/dofbot/.venv/bin/python",
   "kws_model_directory": "/home/industio/DofbotPro_JetsonNano_0106/dofbot/models/kws/sherpa-onnx-kws-zipformer-wenetspeech-3.3M-2024-01-01",
   "kws_keywords_file": "config/voice/kws_keywords.txt",

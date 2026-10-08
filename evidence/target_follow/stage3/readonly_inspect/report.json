@@ -1,0 +1,17 @@
+{
+  "accel_limit_mm_s2": 30.0,
+  "action": "inspect",
+  "axis": "x",
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "distance_mm": 5.0,
+  "error": "SDK connection failed: -2",
+  "hardware_servo_commands_sent": 0,
+  "mock": false,
+  "motion_response_validated": false,
+  "requested_period_ms": 8.0,
+  "result": "fault",
+  "servo_call_ms": null,
+  "servo_commands_sent": 0,
+  "servo_interval_ms": null,
+  "speed_limit_mm_s": 5.0
+}

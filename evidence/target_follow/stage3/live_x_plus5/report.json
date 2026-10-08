@@ -1,0 +1,69 @@
+{
+  "accel_limit_mm_s2": 30.0,
+  "action": "move",
+  "axis": "x",
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "controller_state": {
+    "emergency_stop": 0,
+    "enabled": 1,
+    "main_error_code": 0,
+    "program_state": 1,
+    "robot_mode": 0,
+    "robot_state": 1,
+    "sub_error_code": 0,
+    "tool_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "tool_id": 0,
+    "work_object_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "work_object_id": 0
+  },
+  "distance_mm": 5.0,
+  "error": "stop the other controller program before motion",
+  "hardware_servo_commands_sent": 2,
+  "initial_flange_m_rad": [
+    -0.06372710800170898,
+    -0.32472308349609375,
+    0.3988633728027344,
+    -3.0774504187352347,
+    0.008418738544728601,
+    -3.127170571022578
+  ],
+  "mock": false,
+  "motion_readiness_problem": "",
+  "motion_response_validated": false,
+  "requested_period_ms": 8.0,
+  "result": "fault",
+  "servo_call_ms": {
+    "count": 2,
+    "max": 9.205392998410389,
+    "p50": 4.120420002436731,
+    "p95": 4.120420002436731
+  },
+  "servo_commands_sent": 2,
+  "servo_end_code": 0,
+  "servo_interval_ms": {
+    "count": 1,
+    "max": 11.476918996777385,
+    "p50": 11.476918996777385,
+    "p95": 11.476918996777385
+  },
+  "servo_start_code": 0,
+  "speed_limit_mm_s": 5.0,
+  "stop_calls_elapsed_ms": 14.715621997311246,
+  "stop_motion_code": 0,
+  "trajectory_duration_s": 1.875
+}

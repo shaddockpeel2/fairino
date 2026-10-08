@@ -1,0 +1,10 @@
+1791440071.0072243 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage2/recovery_ros_logs/2026-10-08-14-14-31-005644-ido-589623
+1791440071.0074549 [INFO] [launch]: Default logging verbosity is set to INFO
+1791440071.0822637 [INFO] [static_transform_publisher-1]: process started with pid [589835]
+1791440071.0826256 [INFO] [robot_feedback-2]: process started with pid [589837]
+1791440071.0827568 [INFO] [follow_preview-3]: process started with pid [589839]
+1791440071.1130688 [static_transform_publisher-1] [INFO] [1791440071.112460112] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791440071.1133940 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791440071.1135137 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791440071.1135876 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791442885.8846042 [INFO] [robot_feedback-2]: process has finished cleanly [pid 589837]

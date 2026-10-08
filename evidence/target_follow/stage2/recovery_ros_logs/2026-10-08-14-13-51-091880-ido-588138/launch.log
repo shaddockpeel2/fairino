@@ -1,0 +1,6 @@
+1791440031.0938969 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage2/recovery_ros_logs/2026-10-08-14-13-51-091880-ido-588138
+1791440031.0941999 [INFO] [launch]: Default logging verbosity is set to INFO
+1791440031.4103868 [INFO] [component_container-1]: process started with pid [588347]
+1791440031.4109111 [INFO] [tag_pose-2]: process started with pid [588349]
+1791440031.8127222 [INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+1791442404.0372946 [INFO] [tag_pose-2]: process has finished cleanly [pid 588349]
