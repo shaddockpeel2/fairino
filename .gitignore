@@ -6,3 +6,8 @@ assets/voice/
 /.venv-tts/
 /.roslog/
 /evidence/voice/P9/runtime/asr-recordings/
+/.local-backups/
+/evidence/target_follow/stage9/20261010_143334_235694/samples.jsonl
+/evidence/target_follow/stage9/20261010_144212_241705/samples.jsonl
+/evidence/target_follow/stage9/20261010_145540_250942/samples.jsonl
+/evidence/target_follow/stage9/20261010_150518_257644/samples.jsonl
