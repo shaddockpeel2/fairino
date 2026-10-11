@@ -1,0 +1,49 @@
+[INFO] [1791608008.439459729] [camera.camera_container]: Load Library: /home/industio/fairino_ws/install/orbbec_camera/lib/liborbbec_camera.so
+[INFO] [1791608008.792901191] [camera.camera_container]: Found class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[INFO] [1791608008.793041192] [camera.camera_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[INFO] [1791608008.937966991] [camera.camera]: Connecting to device with serial number: CH82C5201C9
+[INFO] [1791608008.938179326] [camera.camera]: Before lock: Select device serial number: CH82C5201C9
+[INFO] [1791608008.938236202] [camera.camera]: After lock: Select device serial number: CH82C5201C9
+[INFO] [1791608009.157480358] [camera.camera]: Device serial number CH82C5201C9 matched
+[INFO] [1791608009.157636401] [camera.camera]: Select device cost 219 ms
+[INFO] [1791608009.157692985] [camera.camera]: Try to connect device via USB2.0
+[INFO] [1791608009.157934196] [camera.camera]: OBCameraNode: use_intra_process: OFF
+[INFO] [1791608009.172290770] [camera.camera]: current time domain: system
+[INFO] [1791608009.187041682] [camera.camera]: Create align filter
+[INFO] [1791608009.187172933] [camera.camera]: Setting LDP to OFF
+[INFO] [1791608009.188712075] [camera.camera]: Setting color auto exposure priority to false
+[INFO] [1791608009.189352291] [camera.camera]: color auto exposure priority is set to 0
+[INFO] [1791608009.189455250] [camera.camera]: Setting color auto exposure to ON
+[INFO] [1791608009.190084382] [camera.camera]: Setting IR auto exposure to ON
+[INFO] [1791608009.190935766] [camera.camera]: default_soft_filter_max_diff: 6
+[INFO] [1791608009.191046601] [camera.camera]: default_soft_filter_speckle_size: 50
+[INFO] [1791608009.191258937] [camera.camera]: Setting ThresholdFilter......
+[INFO] [1791608009.191312020] [camera.camera]: set ThresholdFilter to false
+[INFO] [1791608009.191397480] [camera.camera]: Skip setting filter: ThresholdFilter
+[INFO] [1791608009.193104040] [camera.camera]:  stream color is enabled - width: 640, height: 480, fps: 15, Format: OB_FORMAT_MJPG
+[INFO] [1791608009.194269553] [camera.camera]:  stream depth is enabled - width: 640, height: 400, fps: 15, Format: OB_FORMAT_Y11
+[INFO] [1791608009.318435165] [camera.camera]: set align mode to ALIGN_D2C_HW_MODE
+[INFO] [1791608009.318491458] [camera.camera]: enable depth scale ON
+[INFO] [1791608009.318507208] [camera.camera]: Enable color stream
+[INFO] [1791608009.318527625] [camera.camera]: Stream color width: 640 height: 480 fps: 15 format: MJPG
+[INFO] [1791608009.318543958] [camera.camera]: Enable depth stream
+[INFO] [1791608009.318558250] [camera.camera]: Stream depth width: 640 height: 400 fps: 15 format: Y11
+[INFO] [1791608009.885058132] [camera.camera]: Disable frame sync
+[INFO] [1791608009.885203384] [camera.camera]: Setting LDP to OFF
+[INFO] [1791608009.903582377] [camera.camera]: Device DaBai DCW2 connected
+[INFO] [1791608009.903651795] [camera.camera]: Serial number: CH82C5201C9
+[INFO] [1791608009.903665503] [camera.camera]: Firmware version: RD1017
+[INFO] [1791608009.903679212] [camera.camera]: Hardware version: 
+[INFO] [1791608009.903688837] [camera.camera]: Wrapper version: 1.5.15
+[INFO] [1791608009.903710129] [camera.camera]: SDK version: 1.10.35
+[INFO] [1791608009.903720045] [camera.camera]: device unique id: 6-1.3.1-7
+[INFO] [1791608009.903732587] [camera.camera]: Current node pid: 159118
+[INFO] [1791608009.903742212] [camera.camera]: usb connect type: USB2.0
+[INFO] [1791608009.903750671] [camera.camera]: Start device cost 1065 ms
+[INFO] [1791608009.903758838] [camera.camera]: Initialize device cost 746 ms
+[INFO] [1791608010.278981871] [camera.camera]: Publishing static transform from color to depth
+[INFO] [1791608010.279115748] [camera.camera]: Translation 12.2578, -0.0259598, 1.57039
+[INFO] [1791608010.279161540] [camera.camera]: Rotation 0.00144328, 0.00102459, 0.000254427, 0.999998
+[INFO] [1791608010.279206165] [camera.camera]: Publishing static transform from depth to depth
+[INFO] [1791608010.279249624] [camera.camera]: Translation 0, 0, 0
+[INFO] [1791608010.279354625] [camera.camera]: Rotation 0, 0, 0, 1

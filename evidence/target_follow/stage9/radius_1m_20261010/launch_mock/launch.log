@@ -1,0 +1,72 @@
+Stage 9 pose-follow logs: /home/industio/fairino_ws/evidence/target_follow/stage9/radius_1m_20261010/launch_mock
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage9/radius_1m_20261010/launch_mock/ros_logs/2026-10-10-14-29-05-692649-ido-232342
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: Stage 9 POSE FOLLOW starts IDLE | T teach | S start | X stop. Report: /home/industio/fairino_ws/evidence/target_follow/stage9/radius_1m_20261010/launch_mock
+[INFO] [launch.user]: Reusing external detector; its ambiguity threshold is unchanged.
+[INFO] [static_transform_publisher-1]: process started with pid [232412]
+[INFO] [follow_preview-2]: process started with pid [232414]
+[INFO] [orientation_check-3]: process started with pid [232416]
+[INFO] [pose_follow-4]: process started with pid [232418]
+[static_transform_publisher-1] [INFO] [1791613748.148468246] [follow_handeye_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+[static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+[static_transform_publisher-1] from 'flange_link' to 'camera_link'
+[pose_follow-4] [INFO] [1791613748.149925137] [pose_follow]: Stage 9 POSE FOLLOW starts idle. T records; S/start records again and starts; X/stop stops. mock=true
+[orientation_check-3] [INFO] [1791613748.965545989] [orientation_check]: Stage 6: exact image stamps, base-frame rotation, read-only; no motion client.
+[follow_preview-2] [INFO] [1791613749.097988885] [follow_preview]: Image-time base-frame conversion only; offset and motion belong to the follow driver.
+[WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+[INFO] [pose_follow-4]: sending signal 'SIGINT' to process[pose_follow-4]
+[INFO] [orientation_check-3]: sending signal 'SIGINT' to process[orientation_check-3]
+[INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+[INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+[static_transform_publisher-1] [INFO] [1791613754.466240191] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [static_transform_publisher-1]: process has finished cleanly [pid 232412]
+[pose_follow-4] {
+[pose_follow-4]   "angular_speed_limit_deg_s": 3.0,
+[pose_follow-4]   "backend": "ServoCart mode 0, tool/work-object 0",
+[pose_follow-4]   "close_code": 0,
+[pose_follow-4]   "collision_check_ms": null,
+[pose_follow-4]   "collision_enabled": false,
+[pose_follow-4]   "collision_pauses": 0,
+[pose_follow-4]   "collision_resumes": 0,
+[pose_follow-4]   "control_angle_deadband_deg": 2.0,
+[pose_follow-4]   "control_position_deadband_m": 0.004,
+[pose_follow-4]   "follow_angle_deg": 90.0,
+[pose_follow-4]   "follow_mode": "pose",
+[pose_follow-4]   "follow_radius_m": 1.0,
+[pose_follow-4]   "goal_angle_threshold_deg": 4.0,
+[pose_follow-4]   "goal_confirmation_s": 0.2,
+[pose_follow-4]   "goal_position_threshold_m": 0.008,
+[pose_follow-4]   "hardware_servo_commands_sent": 0,
+[pose_follow-4]   "live_pose_follow_validated": false,
+[pose_follow-4]   "mock": true,
+[pose_follow-4]   "reason": "signal",
+[pose_follow-4]   "requested_period_ms": 8.0,
+[pose_follow-4]   "result": "stopped",
+[pose_follow-4]   "rotation_mapping_gain": 0.5,
+[pose_follow-4]   "sdk_angle_encoding": "absolute RPY wrapped to [-180,180] deg",
+[pose_follow-4]   "servo_call_ms": {
+[pose_follow-4]     "count": 633,
+[pose_follow-4]     "max": 0.039083999581635,
+[pose_follow-4]     "p50": 0.005541998689295724,
+[pose_follow-4]     "p95": 0.011083000572398305
+[pose_follow-4]   },
+[pose_follow-4]   "servo_commands_sent": 633,
+[pose_follow-4]   "servo_end_code": 0,
+[pose_follow-4]   "servo_interval_ms": {
+[pose_follow-4]     "count": 632,
+[pose_follow-4]     "max": 17.02972699786187,
+[pose_follow-4]     "p50": 8.125046002533054,
+[pose_follow-4]     "p95": 10.527821999858133
+[pose_follow-4]   },
+[pose_follow-4]   "speed_limit_mm_s": 20.0,
+[pose_follow-4]   "stage": 9,
+[pose_follow-4]   "starts": 1,
+[pose_follow-4]   "stop_motion_code": 0,
+[pose_follow-4]   "target_pauses": 0,
+[pose_follow-4]   "target_resumes": 0,
+[pose_follow-4]   "teaches": 1
+[pose_follow-4] }
+[INFO] [pose_follow-4]: process has finished cleanly [pid 232418]
+[INFO] [orientation_check-3]: process has finished cleanly [pid 232416]
+[INFO] [follow_preview-2]: process has finished cleanly [pid 232414]

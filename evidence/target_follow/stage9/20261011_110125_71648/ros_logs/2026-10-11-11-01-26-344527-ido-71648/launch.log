@@ -1,0 +1,24 @@
+1791687686.3474619 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage9/20261011_110125_71648/ros_logs/2026-10-11-11-01-26-344527-ido-71648
+1791687686.3478093 [INFO] [launch]: Default logging verbosity is set to INFO
+1791687689.4522276 [INFO] [launch.user]: Stage 9 POSE FOLLOW starts IDLE | T teach | S start | X stop. Report: /home/industio/fairino_ws/evidence/target_follow/stage9/20261011_110125_71648
+1791687689.5213993 [INFO] [component_container-1]: process started with pid [71815]
+1791687689.5218248 [INFO] [tag_pose-2]: process started with pid [71817]
+1791687689.5219870 [INFO] [static_transform_publisher-3]: process started with pid [71819]
+1791687689.5220833 [INFO] [follow_preview-4]: process started with pid [71821]
+1791687689.5221791 [INFO] [orientation_check-5]: process started with pid [71823]
+1791687689.5222685 [INFO] [pose_follow-6]: process started with pid [71825]
+1791687689.5223696 [INFO] [pose_view-7]: process started with pid [71827]
+1791687689.6209247 [static_transform_publisher-3] [INFO] [1791687689.619906330] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791687689.6214776 [static_transform_publisher-3] translation: ('-0.022343', '-0.072015', '0.045552')
+1791687689.6218359 [static_transform_publisher-3] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791687689.6221147 [static_transform_publisher-3] from 'flange_link' to 'camera_link'
+1791687690.2183025 [INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+1791687764.4732335 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791687765.2939944 [INFO] [static_transform_publisher-3]: process has finished cleanly [pid 71819]
+1791687765.2947156 [INFO] [orientation_check-5]: process has finished cleanly [pid 71823]
+1791687765.2952306 [INFO] [tag_pose-2]: process has finished cleanly [pid 71817]
+1791687765.2956784 [INFO] [follow_preview-4]: process has finished cleanly [pid 71821]
+1791687765.2960763 [INFO] [pose_view-7]: process has finished cleanly [pid 71827]
+1791687765.2964714 [INFO] [pose_follow-6]: process has finished cleanly [pid 71825]
+1791687765.2976203 [static_transform_publisher-3] [INFO] [1791687764.472773726] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791687765.6557570 [INFO] [component_container-1]: process has finished cleanly [pid 71815]

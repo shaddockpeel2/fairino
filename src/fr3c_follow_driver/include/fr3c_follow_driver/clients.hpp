@@ -11,12 +11,20 @@ class NativeClient final : public Client {
   int read(ROBOT_STATE_PKG * p) override { return robot_.GetRobotRealTimeState(p); }
   int start() override { return robot_.ServoMoveStart(); }
   int send(const Pose & pose, double period_s) override {
-    DescPose target=to_sdk(pose); float gains[6]{1,1,1,1,1,1};
+    DescPose target=to_sdk_absolute(pose); float gains[6]{1,1,1,1,1,1};
     return robot_.ServoCart(0, &target, gains, 0, 0, static_cast<float>(period_s), 0, 0);
   }
   int stop() override { return robot_.StopMotion(); }
   int end() override { return robot_.ServoMoveEnd(); }
   int close() override { return robot_.CloseRPC(); }
+  int inverse(const Pose & pose, const std::array<double,6> & reference,
+              std::array<double,6> & output) override {
+    DescPose target=to_sdk_absolute(pose); JointPos seed{}, solved{};
+    for (int i=0;i<6;++i) seed.jPos[i]=reference[i]*180/kPi;
+    const int code=robot_.GetInverseKinRef(0,&target,&seed,&solved);
+    if (!code) for (int i=0;i<6;++i) output[i]=solved.jPos[i]*kPi/180;
+    return code;
+  }
  private:
   FRRobot robot_;
 };
@@ -46,9 +54,11 @@ class MockClient final : public Client {
   int stop() override { packet_.program_state=1; packet_.robot_state=1; return 0; }
   int end() override { active_=false; return 0; }
   int close() override { return 0; }
+  int inverse(const Pose &, const std::array<double,6> & reference,
+              std::array<double,6> & output) override { output=reference; return 0; }
  private:
   void set_pose(const Pose & pose) {
-    const auto p=to_sdk(pose);
+    const auto p=to_sdk_absolute(pose);
     double raw[6]{p.tran.x,p.tran.y,p.tran.z,p.rpy.rx,p.rpy.ry,p.rpy.rz};
     std::copy(raw, raw+6, packet_.flange_cur_pos);
   }

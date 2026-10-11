@@ -1,0 +1,22 @@
+1791605599.5947793 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage9/launch_mock/ros_logs/2026-10-10-12-13-19-592612-ido-129405
+1791605599.5950933 [INFO] [launch]: Default logging verbosity is set to INFO
+1791605601.9499531 [INFO] [launch.user]: Stage 9 POSE FOLLOW starts IDLE | T teach | S start | X stop. Report: /home/industio/fairino_ws/evidence/target_follow/stage9/launch_mock
+1791605601.9673808 [INFO] [launch.user]: Reusing external detector; its ambiguity threshold is unchanged.
+1791605601.9715991 [INFO] [static_transform_publisher-1]: process started with pid [129495]
+1791605601.9724581 [INFO] [follow_preview-2]: process started with pid [129497]
+1791605601.9725854 [INFO] [orientation_check-3]: process started with pid [129499]
+1791605601.9727371 [INFO] [pose_follow-4]: process started with pid [129501]
+1791605602.0164452 [static_transform_publisher-1] [INFO] [1791605602.015860405] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791605602.0167186 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791605602.0167825 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791605602.0168335 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791605611.1868589 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791605611.1913996 [INFO] [pose_follow-4]: sending signal 'SIGINT' to process[pose_follow-4]
+1791605611.1942956 [INFO] [orientation_check-3]: sending signal 'SIGINT' to process[orientation_check-3]
+1791605611.1961606 [INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+1791605611.1971781 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791605611.1998384 [static_transform_publisher-1] [INFO] [1791605611.198382512] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791605611.3447297 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 129495]
+1791605611.3628881 [INFO] [pose_follow-4]: process has finished cleanly [pid 129501]
+1791605611.5185649 [INFO] [orientation_check-3]: process has finished cleanly [pid 129499]
+1791605611.5207946 [INFO] [follow_preview-2]: process has finished cleanly [pid 129497]

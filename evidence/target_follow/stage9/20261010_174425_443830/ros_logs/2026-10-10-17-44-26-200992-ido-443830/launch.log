@@ -1,0 +1,24 @@
+1791625466.2025864 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage9/20261010_174425_443830/ros_logs/2026-10-10-17-44-26-200992-ido-443830
+1791625466.2028229 [INFO] [launch]: Default logging verbosity is set to INFO
+1791625469.1660645 [INFO] [launch.user]: Stage 9 POSE FOLLOW starts IDLE | T teach | S start | X stop. Report: /home/industio/fairino_ws/evidence/target_follow/stage9/20261010_174425_443830
+1791625469.2367404 [INFO] [component_container-1]: process started with pid [443973]
+1791625469.2391536 [INFO] [tag_pose-2]: process started with pid [443975]
+1791625469.2399337 [INFO] [static_transform_publisher-3]: process started with pid [443977]
+1791625469.2401583 [INFO] [follow_preview-4]: process started with pid [443979]
+1791625469.2402751 [INFO] [orientation_check-5]: process started with pid [443981]
+1791625469.2406292 [INFO] [pose_follow-6]: process started with pid [443983]
+1791625469.2409031 [INFO] [pose_view-7]: process started with pid [443985]
+1791625469.3344705 [static_transform_publisher-3] [INFO] [1791625469.333990789] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791625469.3346872 [static_transform_publisher-3] translation: ('-0.022343', '-0.072015', '0.045552')
+1791625469.3347797 [static_transform_publisher-3] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791625469.3348420 [static_transform_publisher-3] from 'flange_link' to 'camera_link'
+1791625469.6532812 [INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+1791625741.0716789 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791625741.8401301 [INFO] [static_transform_publisher-3]: process has finished cleanly [pid 443977]
+1791625741.8423116 [INFO] [pose_view-7]: process has finished cleanly [pid 443985]
+1791625741.8428755 [INFO] [tag_pose-2]: process has finished cleanly [pid 443975]
+1791625741.8433480 [INFO] [orientation_check-5]: process has finished cleanly [pid 443981]
+1791625741.8438487 [INFO] [follow_preview-4]: process has finished cleanly [pid 443979]
+1791625741.8447404 [ERROR] [pose_follow-6]: process has died [pid 443983, exit code 1, cmd '/home/industio/fairino_ws/install/fr3c_follow_driver/lib/fr3c_follow_driver/pose_follow --ros-args -r __node:=pose_follow --params-file /home/industio/fairino_ws/install/fr3c_follow_driver/share/fr3c_follow_driver/config/pose_follow.yaml --params-file /tmp/launch_params_14l3ag8s'].
+1791625741.8465455 [static_transform_publisher-3] [INFO] [1791625741.071174400] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791625742.2566230 [INFO] [component_container-1]: process has finished cleanly [pid 443973]

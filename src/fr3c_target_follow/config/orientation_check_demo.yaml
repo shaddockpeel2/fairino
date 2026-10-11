@@ -1,0 +1,12 @@
+# Stage 6 approximate Demo quality; no robot motion or attitude filtering.
+# Shorter confirmation reduces interruptions, not measurement error.
+orientation_check:
+  ros__parameters:
+    target_id: 1
+    source_frame_id: camera_color_optical_frame
+    target_timeout_s: 0.35
+    feedback_timeout_s: 0.20
+    confirmation_frames: 2
+    max_angular_speed_deg_s: 60.0
+    jitter_allowance_deg: 6.0
+    publish_hz: 20.0

@@ -1,0 +1,552 @@
+{
+  "static": {
+    "scenario": "static",
+    "duration_s": 30.001657976999923,
+    "paired": 388,
+    "trusted": 44,
+    "paired_status_counts": {
+      "acquiring_orientation": 199,
+      "valid": 44,
+      "orientation_ambiguous": 145
+    },
+    "trusted_fraction": 0.1134020618556701,
+    "valid_quality_measurement_fraction": 0.6410891089108911,
+    "rpy_axis_span_deg": [
+      6.619315285862761,
+      3.4450625931169685,
+      0.9390429504046587
+    ],
+    "rpy_axis_std_deg": [
+      1.1363234123281638,
+      0.5477076640341768,
+      0.14096620014616623
+    ],
+    "rotation_deviation_from_mean_deg": {
+      "count": 388,
+      "min": 0.14004842249252553,
+      "median": 0.9944493795918903,
+      "p95": 2.351576604938414,
+      "max": 3.6912475116570898
+    },
+    "measured_camera_normal_tilt_deg": {
+      "count": 388,
+      "min": 6.247180408471202,
+      "median": 8.779726345811998,
+      "p95": 10.20789506374101,
+      "max": 11.61686319058052
+    },
+    "image_age_ms": {
+      "count": 404,
+      "min": 29.680252075195312,
+      "median": 53.05838584899902,
+      "p95": 82.97622203826901,
+      "max": 105.22270202636719
+    },
+    "selected_candidate_counts": {
+      "0": 404
+    },
+    "valid_orientation_runs": {
+      "frame_counts": {
+        "count": 16,
+        "min": 1.0,
+        "median": 2.0,
+        "p95": 8.75,
+        "max": 11.0
+      },
+      "span_s": {
+        "count": 16,
+        "min": 0.0,
+        "median": 0.04059632150028847,
+        "p95": 0.6058894744999179,
+        "max": 0.685196497999641
+      },
+      "span_note": "first-to-last sample in each run; single frame has zero span"
+    },
+    "good_measurement_runs": {
+      "frame_counts": {
+        "count": 87,
+        "min": 1.0,
+        "median": 2.0,
+        "p95": 6.700000000000003,
+        "max": 15.0
+      },
+      "span_s": {
+        "count": 87,
+        "min": 0.0,
+        "median": 0.07694552300017676,
+        "p95": 0.39297465929948894,
+        "max": 0.9190266699997665
+      },
+      "span_note": "first-to-last sample in each run; single frame has zero span"
+    },
+    "monitor_status_time_s": {
+      "waiting_for_paired_pose": 0.13964545500039094,
+      "no_fresh_image": 1.5023180369998954,
+      "acquiring_orientation": 12.930588727997929,
+      "valid": 2.9019092819989964,
+      "orientation_ambiguous": 11.916127309003059
+    },
+    "monitor_valid_time_fraction": 0.09873600357788251,
+    "confirmation_sensitivity": {
+      "1": {
+        "status_counts": {
+          "valid": 243,
+          "orientation_ambiguous": 145
+        },
+        "available_fraction": 0.6262886597938144
+      },
+      "3": {
+        "status_counts": {
+          "acquiring_orientation": 141,
+          "valid": 102,
+          "orientation_ambiguous": 145
+        },
+        "available_fraction": 0.26288659793814434
+      },
+      "5": {
+        "status_counts": {
+          "acquiring_orientation": 199,
+          "valid": 44,
+          "orientation_ambiguous": 145
+        },
+        "available_fraction": 0.1134020618556701
+      }
+    },
+    "sensitivity_note": "Offline replay reproduces baseline paired status counts; only confirmation length changed. Higher availability is not improved accuracy.",
+    "quality_status_counts": {
+      "no_fresh_image": 1,
+      "valid": 404,
+      "target_not_found": 1
+    },
+    "bins_5s": [
+      {
+        "start_s": 0,
+        "paired": 47,
+        "valid": 9,
+        "ambiguous": 13,
+        "acquiring": 25,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 5,
+        "paired": 74,
+        "valid": 18,
+        "ambiguous": 24,
+        "acquiring": 32,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 10,
+        "paired": 67,
+        "valid": 5,
+        "ambiguous": 29,
+        "acquiring": 33,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 15,
+        "paired": 73,
+        "valid": 6,
+        "ambiguous": 26,
+        "acquiring": 41,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 20,
+        "paired": 67,
+        "valid": 1,
+        "ambiguous": 35,
+        "acquiring": 31,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 25,
+        "paired": 60,
+        "valid": 5,
+        "ambiguous": 18,
+        "acquiring": 37,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 1
+      },
+      {
+        "start_s": 30,
+        "paired": 0,
+        "valid": 0,
+        "ambiguous": 0,
+        "acquiring": 0,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      }
+    ],
+    "all_owned_processes_clean_exit": true,
+    "hardware_motion_commands_sent": 0,
+    "ground_truth_orientation_available": false,
+    "hypothetical_unfiltered_relative_pose": {
+      "offset_length_mm": 221.6960144449925,
+      "initial_stamp": {
+        "sec": 1791512190,
+        "nanosec": 192172032
+      },
+      "tcp_file": "/home/industio/fairino_ws/src/fairino3mt_v6_moveit2_config/config/ydi_j22_tcp.yaml",
+      "goal_axis_span_mm": [
+        9.578760687497883,
+        16.23525402210624,
+        22.631324227652406
+      ],
+      "goal_deviation_from_coordinate_median_mm": {
+        "count": 388,
+        "min": 0.07434515424085482,
+        "median": 3.8921743610841535,
+        "p95": 10.095250123359351,
+        "max": 15.744099259030923
+      },
+      "orientation_only_goal_deviation_from_coordinate_median_mm": {
+        "count": 388,
+        "min": 0.10409007039280778,
+        "median": 3.59180166440076,
+        "p95": 9.183540063383928,
+        "max": 14.128341800883005
+      },
+      "note": "All recorded poses, including rejected frames, projected without filter/limits. Robot was stationary; first recorded flange approximates fixed TCP. No actual control output or stage 7 implementation."
+    }
+  },
+  "target_rotation": {
+    "scenario": "target_rotation",
+    "duration_s": 90.0036914000002,
+    "paired": 1167,
+    "trusted": 422,
+    "paired_status_counts": {
+      "acquiring_orientation": 285,
+      "orientation_ambiguous": 380,
+      "valid": 422,
+      "orientation_jump": 70,
+      "orientation_measurement_rejected": 10
+    },
+    "trusted_fraction": 0.3616109682947729,
+    "valid_quality_measurement_fraction": 0.6700507614213198,
+    "rpy_axis_span_deg": [
+      59.54749148133587,
+      87.11165904729253,
+      168.97198748776842
+    ],
+    "rpy_axis_std_deg": [
+      7.15855908385187,
+      15.318628815324258,
+      35.697648566780686
+    ],
+    "rotation_deviation_from_mean_deg": {
+      "count": 1167,
+      "min": 1.0649675774287652,
+      "median": 19.3746909453221,
+      "p95": 113.0298491100686,
+      "max": 113.933724185925
+    },
+    "measured_camera_normal_tilt_deg": {
+      "count": 1167,
+      "min": 0.6546627681416721,
+      "median": 10.313237694243005,
+      "p95": 29.095245985060494,
+      "max": 46.818728192177296
+    },
+    "image_age_ms": {
+      "count": 1182,
+      "min": 20.97177505493164,
+      "median": 53.291916847229004,
+      "p95": 67.94540882110596,
+      "max": 96.28844261169434
+    },
+    "selected_candidate_counts": {
+      "0": 1084,
+      "1": 98
+    },
+    "valid_orientation_runs": {
+      "frame_counts": {
+        "count": 37,
+        "min": 1.0,
+        "median": 5.0,
+        "p95": 40.59999999999999,
+        "max": 89.0
+      },
+      "span_s": {
+        "count": 37,
+        "min": 0.0,
+        "median": 0.26563957999951526,
+        "p95": 2.992633788199964,
+        "max": 6.120399362000171
+      },
+      "span_note": "first-to-last sample in each run; single frame has zero span"
+    },
+    "good_measurement_runs": {
+      "frame_counts": {
+        "count": 105,
+        "min": 1.0,
+        "median": 3.0,
+        "p95": 24.19999999999999,
+        "max": 93.0
+      },
+      "span_s": {
+        "count": 105,
+        "min": 0.0,
+        "median": 0.13970805799999653,
+        "p95": 1.6697726807993603,
+        "max": 6.548619054000483
+      },
+      "span_note": "first-to-last sample in each run; single frame has zero span"
+    },
+    "monitor_status_time_s": {
+      "waiting_for_paired_pose": 0.35044394899978215,
+      "no_fresh_image": 1.8539626640003917,
+      "acquiring_orientation": 20.31034815399471,
+      "orientation_ambiguous": 27.848431521010205,
+      "target_not_found": 4.804710193999199,
+      "valid": 29.086153596997065,
+      "orientation_jump": 4.9375813810002,
+      "orientation_measurement_rejected": 0.7513587639987236
+    },
+    "monitor_valid_time_fraction": 0.3233843296132237,
+    "confirmation_sensitivity": {
+      "1": {
+        "status_counts": {
+          "valid": 707,
+          "orientation_ambiguous": 380,
+          "orientation_jump": 70,
+          "orientation_measurement_rejected": 10
+        },
+        "available_fraction": 0.6058269065981148
+      },
+      "3": {
+        "status_counts": {
+          "acquiring_orientation": 185,
+          "valid": 522,
+          "orientation_ambiguous": 380,
+          "orientation_jump": 70,
+          "orientation_measurement_rejected": 10
+        },
+        "available_fraction": 0.4473007712082262
+      },
+      "5": {
+        "status_counts": {
+          "acquiring_orientation": 285,
+          "orientation_ambiguous": 380,
+          "valid": 422,
+          "orientation_jump": 70,
+          "orientation_measurement_rejected": 10
+        },
+        "available_fraction": 0.3616109682947729
+      }
+    },
+    "sensitivity_note": "Offline replay reproduces baseline paired status counts; only confirmation length changed. Higher availability is not improved accuracy.",
+    "quality_status_counts": {
+      "no_fresh_image": 2,
+      "valid": 1182,
+      "target_not_found": 73
+    },
+    "bins_5s": [
+      {
+        "start_s": 0,
+        "paired": 38,
+        "valid": 0,
+        "ambiguous": 17,
+        "acquiring": 21,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 1
+      },
+      {
+        "start_s": 5,
+        "paired": 72,
+        "valid": 7,
+        "ambiguous": 34,
+        "acquiring": 31,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 10,
+        "paired": 67,
+        "valid": 14,
+        "ambiguous": 20,
+        "acquiring": 23,
+        "jump": 9,
+        "rejected": 1,
+        "missing": 0
+      },
+      {
+        "start_s": 15,
+        "paired": 72,
+        "valid": 22,
+        "ambiguous": 21,
+        "acquiring": 18,
+        "jump": 8,
+        "rejected": 3,
+        "missing": 0
+      },
+      {
+        "start_s": 20,
+        "paired": 71,
+        "valid": 44,
+        "ambiguous": 9,
+        "acquiring": 13,
+        "jump": 2,
+        "rejected": 3,
+        "missing": 0
+      },
+      {
+        "start_s": 25,
+        "paired": 71,
+        "valid": 34,
+        "ambiguous": 11,
+        "acquiring": 17,
+        "jump": 9,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 30,
+        "paired": 69,
+        "valid": 17,
+        "ambiguous": 31,
+        "acquiring": 17,
+        "jump": 3,
+        "rejected": 1,
+        "missing": 0
+      },
+      {
+        "start_s": 35,
+        "paired": 67,
+        "valid": 26,
+        "ambiguous": 13,
+        "acquiring": 13,
+        "jump": 15,
+        "rejected": 0,
+        "missing": 1
+      },
+      {
+        "start_s": 40,
+        "paired": 70,
+        "valid": 58,
+        "ambiguous": 3,
+        "acquiring": 9,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 45,
+        "paired": 73,
+        "valid": 46,
+        "ambiguous": 5,
+        "acquiring": 18,
+        "jump": 4,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 50,
+        "paired": 70,
+        "valid": 28,
+        "ambiguous": 12,
+        "acquiring": 28,
+        "jump": 2,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 55,
+        "paired": 72,
+        "valid": 17,
+        "ambiguous": 13,
+        "acquiring": 30,
+        "jump": 12,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 60,
+        "paired": 72,
+        "valid": 13,
+        "ambiguous": 27,
+        "acquiring": 24,
+        "jump": 6,
+        "rejected": 2,
+        "missing": 0
+      },
+      {
+        "start_s": 65,
+        "paired": 69,
+        "valid": 64,
+        "ambiguous": 1,
+        "acquiring": 4,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 70,
+        "paired": 25,
+        "valid": 25,
+        "ambiguous": 0,
+        "acquiring": 0,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 49
+      },
+      {
+        "start_s": 75,
+        "paired": 49,
+        "valid": 0,
+        "ambiguous": 49,
+        "acquiring": 0,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 22
+      },
+      {
+        "start_s": 80,
+        "paired": 67,
+        "valid": 0,
+        "ambiguous": 67,
+        "acquiring": 0,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 85,
+        "paired": 73,
+        "valid": 7,
+        "ambiguous": 47,
+        "acquiring": 19,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      },
+      {
+        "start_s": 90,
+        "paired": 0,
+        "valid": 0,
+        "ambiguous": 0,
+        "acquiring": 0,
+        "jump": 0,
+        "rejected": 0,
+        "missing": 0
+      }
+    ],
+    "all_owned_processes_clean_exit": true,
+    "hardware_motion_commands_sent": 0,
+    "ground_truth_orientation_available": false
+  }
+}

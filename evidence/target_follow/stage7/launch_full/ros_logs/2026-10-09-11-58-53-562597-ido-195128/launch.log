@@ -1,0 +1,20 @@
+1791518333.5645683 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage7/launch_full/ros_logs/2026-10-09-11-58-53-562597-ido-195128
+1791518333.5648453 [INFO] [launch]: Default logging verbosity is set to INFO
+1791518335.9572296 [INFO] [launch.user]: Stage 7 POSE PREVIEW | MOTION OFF. Report: /home/industio/fairino_ws/evidence/target_follow/stage7/launch_full
+1791518335.9746025 [INFO] [launch.user]: Reusing external detector: its ambiguity threshold is unchanged.
+1791518335.9882703 [INFO] [static_transform_publisher-1]: process started with pid [195241]
+1791518335.9888771 [INFO] [orientation_check-2]: process started with pid [195243]
+1791518335.9890585 [INFO] [pose_preview-3]: process started with pid [195245]
+1791518335.9891820 [INFO] [pose_preview_audit-4]: process started with pid [195247]
+1791518336.0303588 [static_transform_publisher-1] [INFO] [1791518336.029524790] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791518336.0308096 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791518336.0309155 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791518336.0309732 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791518340.7519770 [INFO] [pose_preview_audit-4]: process has finished cleanly [pid 195247]
+1791518340.7638061 [INFO] [pose_preview-3]: sending signal 'SIGINT' to process[pose_preview-3]
+1791518340.7681434 [INFO] [orientation_check-2]: sending signal 'SIGINT' to process[orientation_check-2]
+1791518340.7866940 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791518340.7961402 [static_transform_publisher-1] [INFO] [1791518340.790981864] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791518340.9232707 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 195241]
+1791518341.1031380 [INFO] [orientation_check-2]: process has finished cleanly [pid 195243]
+1791518341.1137018 [INFO] [pose_preview-3]: process has finished cleanly [pid 195245]

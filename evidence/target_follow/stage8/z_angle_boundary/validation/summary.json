@@ -1,0 +1,14 @@
+{
+  "hardware_servo_commands_sent_by_diagnostics_and_tests": 0,
+  "cpp": {
+    "tests": 24,
+    "failures": 0,
+    "errors": 0
+  },
+  "ros": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0
+  },
+  "post_fix_live_z_motion_validated": false
+}

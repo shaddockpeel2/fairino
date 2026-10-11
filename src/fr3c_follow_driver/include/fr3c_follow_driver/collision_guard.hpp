@@ -11,6 +11,7 @@ using Joints = std::array<double,6>;  // radians, joint1..joint6
 struct CollisionOptions {
   double table_z=0, table_size=2, margin=.005, slow_distance=.020;
   double period=.020, timeout=.15, speed=.020, accel=.060;
+  double angular_speed=3*kPi/180, angular_accel=10*kPi/180;
 };
 struct CollisionInput {
   Joints joints{};
@@ -19,18 +20,25 @@ struct CollisionInput {
   Eigen::Vector3d velocity=Eigen::Vector3d::Zero();
   Eigen::Vector3d lead=Eigen::Vector3d::Zero();
   double stamp=0;
+  bool pose_motion=false;
+  Eigen::Isometry3d flange_tcp=Eigen::Isometry3d::Identity();
+  Eigen::Matrix3d rotation_lead=Eigen::Matrix3d::Identity();
+  Eigen::Vector3d requested_angular=Eigen::Vector3d::Zero(), angular_velocity=Eigen::Vector3d::Zero();
 };
 struct CollisionOutput {
   bool ready=false, colliding=false;
   double scale=0, distance=0, predicted_distance=0, stamp=0, check_ms=0;
   Eigen::Vector3d requested=Eigen::Vector3d::Zero();
   std::string reason="waiting_for_collision_check", pair;
+  bool pose_motion=false;
+  Eigen::Vector3d requested_angular=Eigen::Vector3d::Zero();
 };
 // Scene and heavy FCL work belong exclusively to the worker. No SDK calls here.
 class CollisionModel {
  public:
   CollisionModel(const std::string & urdf, const std::string & srdf, CollisionOptions options);
   CollisionOutput check(const CollisionInput & input);
+  CollisionOutput check_pose(const CollisionInput & input);
   Pose flange(const Joints & joints) const;
   bool inverse(const Pose & target, Joints & joints) const;
   const moveit::core::RobotModelPtr & model() const { return model_; }
@@ -49,6 +57,8 @@ class CollisionGuard {
   ~CollisionGuard();
   void submit(CollisionInput input);
   CollisionOutput result(double now, const Eigen::Vector3d & requested) const;
+  CollisionOutput result_pose(double now,const Eigen::Vector3d & requested,
+                              const Eigen::Vector3d & requested_angular) const;
  private:
   void work();
   std::shared_ptr<CollisionModel> model_;

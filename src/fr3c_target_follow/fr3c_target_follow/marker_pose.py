@@ -62,6 +62,22 @@ def stamp_is_fresh(stamp_s, now_s, max_age_s):
     return stamp_s > 0 and -0.05 <= now_s - stamp_s <= max_age_s
 
 
+def candidate_orientation_quality(solver, separation_deg, margin_px, selected_index,
+                                  ambiguity_margin_px=.15, tolerance_deg=5.):
+    """Explicit approximate policy; candidate selection and raw poses stay intact."""
+    if not math.isfinite(tolerance_deg) or not 0 <= tolerance_deg <= 45:
+        raise ValueError('invalid_orientation_candidate_tolerance')
+    ambiguous = (solver != 'IPPE_SQUARE' or
+                 (margin_px is not None and margin_px < ambiguity_margin_px and
+                  separation_deg > tolerance_deg))
+    valid = not ambiguous and (selected_index == 0 or
+                              (separation_deg is not None and separation_deg <= tolerance_deg))
+    approximate = bool(valid and separation_deg is not None and separation_deg > 5 and
+                       (selected_index != 0 or margin_px < ambiguity_margin_px))
+    return dict(orientation_ambiguous=bool(ambiguous), orientation_measurement_valid=bool(valid),
+                orientation_approximate=approximate, orientation_candidate_tolerance_deg=float(tolerance_deg))
+
+
 @dataclass
 class TagPose:
     rvec: np.ndarray
@@ -74,6 +90,9 @@ class TagPose:
     candidate_margin_px: float | None
     orientation_ambiguous: bool
     solver: str
+    candidate_errors_px: list[float]
+    candidate_rotation_distance_deg: float | None
+    selected_candidate_index: int
 
 
 class MarkerDetector:
@@ -130,7 +149,10 @@ class MarkerDetector:
 
 def solve_marker_pose(corners, size_m, k, d, *, min_edge_px=12.0,
                       max_error_px=2.0, previous_rotation=None,
-                      continuity_margin_px=0.20, ambiguity_margin_px=0.15):
+                      continuity_margin_px=0.20, ambiguity_margin_px=0.15,
+                      orientation_candidate_tolerance_deg=5.):
+    if not math.isfinite(orientation_candidate_tolerance_deg) or not 0 <= orientation_candidate_tolerance_deg <= 45:
+        raise ValueError('invalid_orientation_candidate_tolerance')
     object_points = square_points(size_m)
     image_points = np.ascontiguousarray(corners, dtype=np.float64).reshape(4, 2)
     if not np.isfinite(image_points).all() or not cv2.isContourConvex(image_points.astype(np.float32)):
@@ -173,9 +195,12 @@ def solve_marker_pose(corners, size_m, k, d, *, min_edge_px=12.0,
     chosen = (min(eligible, key=lambda c: rotation_distance_deg(previous_rotation, c[3]))
               if previous_rotation is not None else candidates[0])
     margin = candidates[1][0] - candidates[0][0] if len(candidates) > 1 else None
-    ambiguous = (solver == 'ITERATIVE_FALLBACK' or
-                 (margin is not None and margin < ambiguity_margin_px and
-                  rotation_distance_deg(candidates[0][3], candidates[1][3]) > 5.0))
+    separation = rotation_distance_deg(candidates[0][3], candidates[1][3]) if len(candidates) > 1 else None
+    selected_index = next(i for i, c in enumerate(candidates) if c is chosen)
+    ambiguous = candidate_orientation_quality(solver, separation, margin, selected_index,
+        ambiguity_margin_px, orientation_candidate_tolerance_deg)['orientation_ambiguous']
     error, rvec, position, rotation = chosen
     return TagPose(rvec, position, rotation, quaternion_xyzw(rvec), error,
-                   float(edges.min()), len(candidates), margin, ambiguous, solver)
+                   float(edges.min()), len(candidates), margin, ambiguous, solver,
+                   [c[0] for c in candidates], separation,
+                   selected_index)

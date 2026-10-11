@@ -451,7 +451,8 @@ def sort_area_source_color(user_text: str) -> str | None:
 
 def source_location_for_intent(user_text: str, intent: DialogueIntent) -> str:
     source_color = sort_area_source_color(user_text)
-    return 'sort_area' if intent.is_action and source_color == intent.color else ''
+    return 'sort_area' if (intent.is_action and source_color is not None
+                           and source_color == intent.color) else ''
 
 
 def mentioned_color_sequence(user_text: str) -> list[str]:

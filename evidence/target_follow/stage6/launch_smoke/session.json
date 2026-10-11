@@ -1,0 +1,36 @@
+{
+  "stage": 6,
+  "started_at": "2026-10-10T09:49:23.463276+08:00",
+  "sources_before_start": {
+    "publishers": {
+      "camera": 0,
+      "detector": 0,
+      "flange": 1,
+      "feedback": 1,
+      "preview": 0,
+      "base_target": 1,
+      "follow": 0,
+      "servo": 0,
+      "quality": 1,
+      "orientation": 0,
+      "pose_preview": 0
+    },
+    "nodes": [
+      "orientation_launch_synthetic_source",
+      "follow_demo_probe_215"
+    ]
+  },
+  "owned_sources": {
+    "start_camera": false,
+    "start_detector": false,
+    "start_feedback": false,
+    "start_base": false
+  },
+  "motion_commands_enabled": false,
+  "ros_domain_id": "193",
+  "scenario": "static",
+  "quality_profile": "conservative",
+  "orientation_params_file": "/home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config/orientation_check.yaml",
+  "tag_params_file": "/home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config/tag_pose.yaml",
+  "detector_params_applied": false
+}

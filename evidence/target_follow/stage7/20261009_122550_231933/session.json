@@ -1,0 +1,39 @@
+{
+  "stage": 7,
+  "started_at": "2026-10-09T12:25:53.468729+08:00",
+  "sources_before_start": {
+    "publishers": {
+      "camera": 0,
+      "detector": 0,
+      "flange": 0,
+      "feedback": 0,
+      "preview": 0,
+      "base_target": 0,
+      "follow": 0,
+      "servo": 0,
+      "quality": 0,
+      "orientation": 0,
+      "pose_preview": 0
+    },
+    "nodes": [
+      "follow_demo_probe_231933"
+    ]
+  },
+  "owned_sources": {
+    "start_camera": true,
+    "start_detector": true,
+    "start_feedback": true,
+    "start_base": true
+  },
+  "motion_commands_enabled": false,
+  "ros_domain_id": "187",
+  "quality_profile": "demo",
+  "orientation_params_file": "/home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config/orientation_check_demo.yaml",
+  "tag_params_file": "/home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config/tag_pose_demo.yaml",
+  "preview_params_file": "/home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config/pose_preview.yaml",
+  "preview_overrides": {
+    "tcp_file": "/home/industio/fairino_ws/install/fairino3mt_v6_moveit2_config/share/fairino3mt_v6_moveit2_config/config/ydi_j22_tcp.yaml",
+    "auto_teach": true
+  },
+  "detector_params_applied": true
+}

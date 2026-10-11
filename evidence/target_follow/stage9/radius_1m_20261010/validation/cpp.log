@@ -1,0 +1,25 @@
+Internal ctest changing into directory: /home/industio/fairino_ws/build/fr3c_follow_driver
+Test project /home/industio/fairino_ws/build/fr3c_follow_driver
+    Start 1: test_servo_core
+1/8 Test #1: test_servo_core ..................   Passed    0.13 sec
+    Start 2: test_position_follow
+2/8 Test #2: test_position_follow .............   Passed    0.31 sec
+    Start 3: test_rotation_probe
+3/8 Test #3: test_rotation_probe ..............   Passed    0.48 sec
+    Start 4: test_native_sdk_boundary
+4/8 Test #4: test_native_sdk_boundary .........   Passed    0.19 sec
+    Start 5: test_pose_follow
+5/8 Test #5: test_pose_follow .................   Passed    0.94 sec
+    Start 6: test_pose_feedback
+6/8 Test #6: test_pose_feedback ...............   Passed    1.97 sec
+    Start 7: test_collision_guard
+7/8 Test #7: test_collision_guard .............   Passed    8.51 sec
+    Start 8: test_pose_collision
+8/8 Test #8: test_pose_collision ..............   Passed    3.46 sec
+
+100% tests passed, 0 tests failed out of 8
+
+Label Time Summary:
+gtest    =  15.99 sec*proc (8 tests)
+
+Total Test time (real) =  16.01 sec

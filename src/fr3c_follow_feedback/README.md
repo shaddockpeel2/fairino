@@ -17,3 +17,5 @@ ROS_DOMAIN_ID=187 ROS_LOCALHOST_ONLY=1 ros2 run fr3c_follow_feedback robot_feedb
 优先使用 `scripts/target_follow/start_preview.sh`，它会复用已有的反馈话题。与另一个 SDK 控制客户端共同运行前需由执行端明确 SDK 连接所有权；目前独立预览没有启动控制客户端。
 
 三项 C++ 测试覆盖单位/旋转约定、非有限位姿拒绝、缓存包新鲜度与序号回绕。测试本身不连接机器人。
+
+2026-10-09 修复连接期间退出：节点先完成构造，再执行 SDK RPC；连接返回失败或收到中断时也执行 CloseRPC，避免构造失败后原厂后台线程继续使用已释放对象。新增 `test/test_feedback_startup_ros.py` 用替代 SDK 验证这两条路径，不连接硬件；需在隔离 ROS 域设置 `FR3C_RUN_ROS_TESTS=1` 后用 pytest 单独运行。真实只读连接期间 0.5/1.8 秒中断的复核均正常退出，证据在 `evidence/target_follow/stage6/window_fix_feedback/`。

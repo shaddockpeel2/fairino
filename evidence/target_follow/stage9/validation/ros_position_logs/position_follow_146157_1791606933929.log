@@ -1,0 +1,2 @@
+[INFO] [1791606933.949939250] [position_follow]: Position follow ready to receive data; motion starts only through follow_start. mock=true
+[INFO] [1791606933.950081585] [position_follow]: Tracking mode: legacy; model collision check: OFF. Change through launch/config and restart.

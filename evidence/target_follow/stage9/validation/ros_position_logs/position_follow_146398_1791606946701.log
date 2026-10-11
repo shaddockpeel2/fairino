@@ -1,0 +1,3 @@
+[INFO] [1791606946.730222164] [position_follow]: Position follow ready to receive data; motion starts only through follow_start. mock=true
+[INFO] [1791606946.730365666] [position_follow]: Tracking mode: legacy; model collision check: OFF. Change through launch/config and restart.
+[ERROR] [1791606947.883109621] [position_follow]: target is outside the follow range

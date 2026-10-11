@@ -1,0 +1,24 @@
+1791615340.5812597 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage9/20261010_145540_250942/ros_logs/2026-10-10-14-55-40-578301-ido-250942
+1791615340.5815711 [INFO] [launch]: Default logging verbosity is set to INFO
+1791615343.4804089 [INFO] [launch.user]: Stage 9 POSE FOLLOW starts IDLE | T teach | S start | X stop. Report: /home/industio/fairino_ws/evidence/target_follow/stage9/20261010_145540_250942
+1791615343.5492628 [INFO] [component_container-1]: process started with pid [251039]
+1791615343.5496726 [INFO] [tag_pose-2]: process started with pid [251041]
+1791615343.5498109 [INFO] [static_transform_publisher-3]: process started with pid [251043]
+1791615343.5499103 [INFO] [follow_preview-4]: process started with pid [251045]
+1791615343.5500004 [INFO] [orientation_check-5]: process started with pid [251047]
+1791615343.5500872 [INFO] [pose_follow-6]: process started with pid [251049]
+1791615343.5501707 [INFO] [pose_view-7]: process started with pid [251051]
+1791615343.6222413 [static_transform_publisher-3] [INFO] [1791615343.621686216] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791615343.6224980 [static_transform_publisher-3] translation: ('-0.022343', '-0.072015', '0.045552')
+1791615343.6225643 [static_transform_publisher-3] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791615343.6226168 [static_transform_publisher-3] from 'flange_link' to 'camera_link'
+1791615343.9114623 [INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+1791615910.3059785 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791615911.2961442 [INFO] [static_transform_publisher-3]: process has finished cleanly [pid 251043]
+1791615911.2968867 [INFO] [orientation_check-5]: process has finished cleanly [pid 251047]
+1791615911.2973940 [INFO] [pose_view-7]: process has finished cleanly [pid 251051]
+1791615911.2978759 [INFO] [tag_pose-2]: process has finished cleanly [pid 251041]
+1791615911.2983506 [INFO] [follow_preview-4]: process has finished cleanly [pid 251045]
+1791615911.2988219 [INFO] [pose_follow-6]: process has finished cleanly [pid 251049]
+1791615911.3004904 [static_transform_publisher-3] [INFO] [1791615910.305499611] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791615911.5208771 [INFO] [component_container-1]: process has finished cleanly [pid 251039]

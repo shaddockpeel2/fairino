@@ -1,0 +1,47 @@
+frame: base_link
+target_top_xyz_m: [-0.0445105133653, -0.540219491563, 0.0333258686829]
+target_object_orientation_xyzw: [0, 0, 0.000904506259795, 0.999999590934]
+object_long_axis_yaw_rad: 0.00180901276626
+applied_grasp_yaw_rad: -1.56898731403
+selected_grasp_tilt_rad: 0
+selected_grasp_orientation_xyzw: [0.706466909423, 0.707746074443, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+equivalent_grasp_selection: first_complete_route_in_configured_order
+approach_clearance_m: 0.01
+grasp_depth_m: 0.01
+candidate_planning_time_s: 0.25
+candidate_planning_attempts: 1
+candidate_ik_timeout_s: 0.05
+grasp_tilt_candidates_rad: [0, 0.174532925199, -0.174532925199, 0.349065850399, -0.349065850399, 0.523598775598, -0.523598775598]
+grasp_contact_offset_xyz_m: [0, 0, 0]
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.027
+release_command_repetitions: 2
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: blue
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+stack_enabled: true
+stack_upper_color: blue
+stack_lower_color: green
+maximum_stack_cubes: 4
+stack_support_tier: 0
+stack_support_top_xyz_m: [-0.142331405062, -0.515244588857, 0.0314709205092]
+stack_support_yaw_rad: 0.395504051835
+stack_placement_yaw_offset_rad: 0.393695039068
+stack_approach_clearance_m: 0.03
+stack_height_tolerance_m: 0.012
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.342040637258, -0.374449797348, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 360000
+perception_status_json: '{"detected_targets":[{"center_base_m":[0.04170101952496987,-0.48492688439245085,0.03301489824410658],"color":"red","grasp_axis_yaw_base_rad":0.19780943776857285,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"stack_tier":0,"top_z_base_m":0.03301489824410658},{"center_base_m":[-0.14233140506181385,-0.5152445888574332,0.031470920509186096],"color":"green","grasp_axis_yaw_base_rad":0.39550405183461645,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"stack_tier":0,"top_z_base_m":0.031470920509186096},{"center_base_m":[-0.04451051336526507,-0.5402194915634561,0.03332586868292281],"color":"blue","grasp_axis_yaw_base_rad":0.0018090127662589994,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"stack_tier":0,"top_z_base_m":0.03332586868292281},{"center_base_m":[-0.08095710606172483,-0.44792161747144,0.03163925666329809],"color":"yellow","grasp_axis_yaw_base_rad":0.43465658586660494,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"stack_tier":0,"top_z_base_m":0.03163925666329809}],"detection_mode":"colors","filter_generation":0,"requested_color_physical_count":1,"snapshot_source":"pick_stack_auto_initial_inventory","target_filter_color":"blue"}'

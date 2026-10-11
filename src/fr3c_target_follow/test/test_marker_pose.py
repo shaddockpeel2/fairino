@@ -5,12 +5,31 @@ import numpy as np
 import pytest
 
 from fr3c_target_follow.marker_pose import (
-    MarkerDetector, camera_parameters, quaternion_xyzw, rotation_distance_deg,
+    MarkerDetector, camera_parameters, candidate_orientation_quality, quaternion_xyzw, rotation_distance_deg,
     solve_marker_pose, square_points, stamp_is_fresh,
 )
 
 
 K = np.array([[480., 0, 320], [0, 480., 240], [0, 0, 1]])
+
+
+def test_demo_candidate_policy_accepts_close_ambiguous_branches_and_keeps_wide_ambiguity():
+    rvec = np.array([np.pi-.04, .07, 0.])
+    corners = cv2.projectPoints(square_points(.02), rvec, np.array([.005, -.01, .3]), K, np.zeros(5))[0].reshape(4, 2)
+    corners += .05*np.array([[1., -1.], [-1., 1.], [1., 1.], [-1., -1.]])
+    original = solve_marker_pose(corners, .02, K, np.zeros(5), ambiguity_margin_px=.1)
+    demo = solve_marker_pose(corners, .02, K, np.zeros(5), ambiguity_margin_px=.1,
+                             orientation_candidate_tolerance_deg=35.)
+    assert original.orientation_ambiguous and not demo.orientation_ambiguous
+    assert demo.position_m == pytest.approx(original.position_m)
+    assert demo.quaternion == pytest.approx(original.quaternion)
+    assert demo.selected_candidate_index == original.selected_candidate_index
+    strict = candidate_orientation_quality('IPPE_SQUARE', 18., .05, 1, .1)
+    assert strict['orientation_ambiguous'] and not strict['orientation_measurement_valid']
+    approximate = candidate_orientation_quality('IPPE_SQUARE', 18., .05, 1, .1, 35.)
+    assert approximate['orientation_measurement_valid'] and approximate['orientation_approximate']
+    assert not candidate_orientation_quality('IPPE_SQUARE', 36., .05, 1, .1, 35.)['orientation_measurement_valid']
+    assert not candidate_orientation_quality('ITERATIVE_FALLBACK', None, None, 0, .1, 35.)['orientation_measurement_valid']
 
 
 def projected_tag(size=0.020, distortion=None):
@@ -28,6 +47,12 @@ def test_recover_metric_position_and_orientation_with_realistic_distortion():
     assert rotation_distance_deg(pose.rotation, cv2.Rodrigues(rvec)[0]) < 1e-4
     assert pose.reprojection_error_px < 1e-5
     assert np.linalg.norm(pose.quaternion) == pytest.approx(1)
+    assert len(pose.candidate_errors_px) == pose.candidate_count
+    assert pose.candidate_errors_px == sorted(pose.candidate_errors_px)
+    assert pose.selected_candidate_index == 0
+    if pose.candidate_count > 1:
+        assert 0 <= pose.candidate_rotation_distance_deg <= 180
+        assert pose.candidate_margin_px == pytest.approx(pose.candidate_errors_px[1]-pose.candidate_errors_px[0])
 
 
 def test_cube_edge_must_not_be_used_as_label_edge():

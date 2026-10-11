@@ -1,0 +1,5 @@
+[INFO] [1791517474.802574061] [follow_handeye_tf]: Spinning until stopped - publishing transform
+translation: ('-0.022343', '-0.072015', '0.045552')
+rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+from 'flange_link' to 'camera_link'
+[INFO] [1791517479.606890703] [rclcpp]: signal_handler(SIGINT/SIGTERM)

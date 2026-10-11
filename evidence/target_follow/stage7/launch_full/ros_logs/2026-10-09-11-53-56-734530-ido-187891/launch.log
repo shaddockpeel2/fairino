@@ -1,0 +1,20 @@
+1791518036.7364447 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage7/launch_full/ros_logs/2026-10-09-11-53-56-734530-ido-187891
+1791518036.7367451 [INFO] [launch]: Default logging verbosity is set to INFO
+1791518039.1099436 [INFO] [launch.user]: Stage 7 POSE PREVIEW | MOTION OFF. Report: /home/industio/fairino_ws/evidence/target_follow/stage7/launch_full
+1791518039.1269722 [INFO] [launch.user]: Reusing external detector: its ambiguity threshold is unchanged.
+1791518039.1402123 [INFO] [static_transform_publisher-1]: process started with pid [187999]
+1791518039.1407151 [INFO] [orientation_check-2]: process started with pid [188001]
+1791518039.1408865 [INFO] [pose_preview-3]: process started with pid [188003]
+1791518039.1409826 [INFO] [pose_preview_audit-4]: process started with pid [188005]
+1791518039.1849582 [static_transform_publisher-1] [INFO] [1791518039.184114301] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791518039.1853466 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791518039.1854150 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791518039.1854658 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791518043.8720527 [INFO] [pose_preview_audit-4]: process has finished cleanly [pid 188005]
+1791518043.8812292 [INFO] [pose_preview-3]: sending signal 'SIGINT' to process[pose_preview-3]
+1791518043.8841541 [INFO] [orientation_check-2]: sending signal 'SIGINT' to process[orientation_check-2]
+1791518043.8872678 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791518043.8896782 [static_transform_publisher-1] [INFO] [1791518043.888351341] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791518044.0304825 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 187999]
+1791518044.1984444 [INFO] [pose_preview-3]: process has finished cleanly [pid 188003]
+1791518044.2020278 [INFO] [orientation_check-2]: process has finished cleanly [pid 188001]

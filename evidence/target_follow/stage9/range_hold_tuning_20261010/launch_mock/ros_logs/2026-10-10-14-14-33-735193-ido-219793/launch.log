@@ -1,0 +1,22 @@
+1791612873.7366638 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage9/range_hold_tuning_20261010/launch_mock/ros_logs/2026-10-10-14-14-33-735193-ido-219793
+1791612873.7368612 [INFO] [launch]: Default logging verbosity is set to INFO
+1791612876.1324601 [INFO] [launch.user]: Stage 9 POSE FOLLOW starts IDLE | T teach | S start | X stop. Report: /home/industio/fairino_ws/evidence/target_follow/stage9/range_hold_tuning_20261010/launch_mock
+1791612876.1572857 [INFO] [launch.user]: Reusing external detector; its ambiguity threshold is unchanged.
+1791612876.1633332 [INFO] [static_transform_publisher-1]: process started with pid [219870]
+1791612876.1639552 [INFO] [follow_preview-2]: process started with pid [219872]
+1791612876.1641026 [INFO] [orientation_check-3]: process started with pid [219874]
+1791612876.1642044 [INFO] [pose_follow-4]: process started with pid [219876]
+1791612876.2158768 [static_transform_publisher-1] [INFO] [1791612876.215028890] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791612876.2163010 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791612876.2163792 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791612876.2164321 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791612882.7334142 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791612882.7377727 [INFO] [pose_follow-4]: sending signal 'SIGINT' to process[pose_follow-4]
+1791612882.7388422 [INFO] [orientation_check-3]: sending signal 'SIGINT' to process[orientation_check-3]
+1791612882.7396841 [INFO] [follow_preview-2]: sending signal 'SIGINT' to process[follow_preview-2]
+1791612882.7404559 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791612882.7410581 [static_transform_publisher-1] [INFO] [1791612882.740684048] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791612882.8762147 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 219870]
+1791612882.9038525 [INFO] [pose_follow-4]: process has finished cleanly [pid 219876]
+1791612883.0385938 [INFO] [follow_preview-2]: process has finished cleanly [pid 219872]
+1791612883.0672481 [INFO] [orientation_check-3]: process has finished cleanly [pid 219874]

@@ -1,0 +1,16 @@
+1791510018.9473858 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage6/launch_smoke/ros_logs/2026-10-09-09-40-18-945427-ido-38952
+1791510018.9476666 [INFO] [launch]: Default logging verbosity is set to INFO
+1791510021.3264487 [INFO] [launch.user]: Stage 6 READ ONLY. Report: /home/industio/fairino_ws/evidence/target_follow/stage6/launch_smoke
+1791510021.3667703 [INFO] [static_transform_publisher-1]: process started with pid [39031]
+1791510021.3672938 [INFO] [orientation_check-2]: process started with pid [39036]
+1791510021.3674207 [INFO] [orientation_audit-3]: process started with pid [39038]
+1791510021.4326932 [static_transform_publisher-1] [INFO] [1791510021.431902820] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791510021.4334402 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791510021.4335434 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791510021.4335978 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791510024.2627869 [INFO] [orientation_audit-3]: process has finished cleanly [pid 39038]
+1791510024.2659626 [INFO] [orientation_check-2]: sending signal 'SIGINT' to process[orientation_check-2]
+1791510024.2666581 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791510024.2676501 [static_transform_publisher-1] [INFO] [1791510024.267048003] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791510024.4091396 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 39031]
+1791510024.6163867 [INFO] [orientation_check-2]: process has finished cleanly [pid 39036]

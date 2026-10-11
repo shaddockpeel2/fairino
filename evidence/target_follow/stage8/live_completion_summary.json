@@ -1,0 +1,124 @@
+{
+  "stage": 8,
+  "validated_scope": "three base axes, small combined round trip, scheduled mid-motion stop; current Demo scope",
+  "scheduled_stop_is_not_a_manual_service_test": true,
+  "stage8_demo_completed": true,
+  "new_sessions": [
+    {
+      "session": "20261010_112830_94430",
+      "axis": "xyz",
+      "result": "completed",
+      "stop_reason": null,
+      "elapsed_s": 4.452615573000003,
+      "source_sha256": {
+        "report.json": "daa9b7aa5e9b1e5cabb0b5e993606091d2cd4aef126dadbc3979d9cc7b7f8341",
+        "samples.jsonl": "d517ffd4b36241383cc6269413d6fc4fdafe2b3d1b9e0702debe0d8ec4597962"
+      },
+      "servo_commands": 438,
+      "servo_return_codes": {
+        "0": 438
+      },
+      "peak_base_rotation_vector_deg": [
+        1.1550198873813158,
+        1.1552572212374845,
+        1.1575847864090536
+      ],
+      "final_base_rotation_vector_deg": [
+        -0.005160003857281044,
+        -0.0010843706056390952,
+        -0.0011304881442380148
+      ],
+      "final_joint_delta_deg": [
+        -0.00021362304687408596,
+        0.003913879394542674,
+        0.00043487548828393297,
+        0.0010910034179649906,
+        0.00043487548828393297,
+        0.0010881423950196462
+      ],
+      "final_angle_to_start_deg": 0.005392541346343331,
+      "max_tcp_drift_mm": 0.18477778654190832,
+      "stop_motion_code": 0,
+      "servo_end_code": 0,
+      "stop_response_observed": true
+    },
+    {
+      "session": "20261010_112945_95452",
+      "axis": "z",
+      "result": "stopped",
+      "stop_reason": "scheduled",
+      "elapsed_s": 1.0060319310014165,
+      "source_sha256": {
+        "report.json": "ca64a17c058f8ca2de56d8a0a28ddeb52f4dcc343d3a8af0206a56d8a4ae512d",
+        "samples.jsonl": "df6fe633ac96b2d78142a6e65f77ea3b2dbdebe542bacda2a6f33849dd82be18"
+      },
+      "servo_commands": 99,
+      "servo_return_codes": {
+        "0": 99
+      },
+      "peak_base_rotation_vector_deg": [
+        0.006286187514359866,
+        -0.003313770750497399,
+        1.0937798597471806
+      ],
+      "final_base_rotation_vector_deg": [
+        -0.00042157680859367845,
+        -0.0008005635619749227,
+        1.2823611613434565
+      ],
+      "final_joint_delta_deg": [
+        0.07157897949219566,
+        0.06047821044924078,
+        -0.0918045043945392,
+        0.06004333496094413,
+        -0.08593749999999943,
+        -1.208278179168701
+      ],
+      "final_angle_to_start_deg": 1.2823614805321326,
+      "max_tcp_drift_mm": 0.1303309221776366,
+      "stop_motion_code": 0,
+      "servo_end_code": 0,
+      "stop_response_observed": true
+    },
+    {
+      "session": "20261010_113012_95807",
+      "axis": "z",
+      "result": "stopped",
+      "stop_reason": "scheduled",
+      "elapsed_s": 1.0006217099999049,
+      "source_sha256": {
+        "report.json": "052f8f28194c93364a3599309caeed301b80c2fb4faff61121e9e6a11556c287",
+        "samples.jsonl": "7459c715eb0ef8198fe910ba1f783397365605ebd514de5dfaf0b15991968c78"
+      },
+      "servo_commands": 97,
+      "servo_return_codes": {
+        "0": 97
+      },
+      "peak_base_rotation_vector_deg": [
+        0.005500898817281454,
+        -0.00029533130374085714,
+        1.0339727802413907
+      ],
+      "final_base_rotation_vector_deg": [
+        -0.0007523115226632019,
+        0.0006892091292312198,
+        1.2337708810063954
+      ],
+      "final_joint_delta_deg": [
+        0.06918334960936615,
+        0.05960845947266019,
+        -0.09006500244140346,
+        0.05960845947267291,
+        -0.08354187011718264,
+        -1.1619400978088372
+      ],
+      "final_angle_to_start_deg": 1.2337713028768267,
+      "max_tcp_drift_mm": 0.145755927236592,
+      "stop_motion_code": 0,
+      "servo_end_code": 0,
+      "stop_response_observed": true
+    }
+  ],
+  "hardware_tests_executed_by_assistant": false,
+  "note": "Controller feedback and calibrated TCP geometry, not independent optical/physical metrology. Small scheduled Z rotations may be visually subtle; both runs show joint and flange rotation followed by stop. Manual signal/service stop was covered in software and prior translation testing, not newly claimed as a stage8 hardware test."
+}

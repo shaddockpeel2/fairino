@@ -1,0 +1,8 @@
+........                                                                 [100%]
+=============================== warnings summary ===============================
+src/fr3c_follow_driver/test/test_pose_follow_mock.py::test_enabled_collision_guard_predicts_rotating_tool_in_actual_driver
+  Warning: private variables, such as '_ConstructUnits__ConstructUnitsValue', will be normal attributes in 3.11
+
+-- Docs: https://docs.pytest.org/en/stable/warnings.html
+- generated xml file: /home/industio/fairino_ws/evidence/target_follow/stage9/validation/ros_driver.xml -
+8 passed, 1 warning in 33.25s

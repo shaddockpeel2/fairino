@@ -1,0 +1,42 @@
+# Active YDI-J22 TCP v3, accepted for the first RGB cube grasp on 2026-09-11.
+ydi_j22_tcp:
+  version: 3
+  defined: true
+  calibrated: true
+  status: pivot_solution_accepted_for_first_rgb_grasp
+  parent_frame: flange_link
+  child_frame: grasp_frame
+  xyz_m: [-0.000847397, 0.003027928, 0.184614459]
+  rpy_rad: [0.0, 0.0, 0.0]
+  controller_pose_mm_deg: [-0.847397, 3.027928, 184.614459, 0.0, 0.0, 0.0]
+  geometry:
+    tcp_definition: flexible_finger_common_closing_tip
+    previous_nominal_pose_mm_deg: [0.0, 0.0, 163.0, 0.0, 0.0, 0.0]
+    previous_nominal_basis: vendor_160_mm_plus_assumed_spacer_3_mm
+    spacer_presence: unverified_user_observation_suggests_absent
+    user_measured_flange_to_tip_z_mm: 178.0
+    vendor_dimension_note: vendor_confirmed_160_mm_dimension_is_not_reliable_for_this_gripper
+  calibration:
+    method: fixed_point_pivot_3d
+    x_y_source: fixed_point_pivot_session
+    z_source: fixed_point_pivot_session
+    previous_z_decision_source: user_direct_flange_face_to_tip_measurement
+    session: evidence/P10/tcp_pivot_20260910
+    sample_count: 12
+    inlier_sample_count: 11
+    excluded_samples: [11]
+    inlier_residual_rms_mm: 1.181242
+    inlier_residual_max_mm: 1.912685
+    orientation_pair_span_deg: 163.169562
+    condition_number: 5.609256
+    leave_one_out_tcp_delta_max_mm: 0.747564
+    candidate_pose_mm_deg: [-0.847397, 3.027928, 184.614459, 0.0, 0.0, 0.0]
+    candidate_length_mm: 184.641
+    candidate_use: promoted_after_table_contact_rviz_alignment_confirmation
+    previous_active_pose_mm_deg: [-0.847397, 3.027928, 178.0, 0.0, 0.0, 0.0]
+    active_tcp_length_mm: 184.641
+    accepted_for: first_rgb_cube_grasp_moveit_rviz
+  source: pivot_solution_promoted_after_table_contact_observation
+  controller_tool_id: null
+  fixed_point_validation: table_contact_rviz_alignment_confirmed_by_user
+  payload_weight_and_cog: pending

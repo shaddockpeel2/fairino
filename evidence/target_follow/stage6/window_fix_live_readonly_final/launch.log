@@ -1,0 +1,704 @@
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage6/window_fix_live_readonly_final/ros_logs/2026-10-09-10-14-06-199653-ido-65035
+[INFO] [launch]: Default logging verbosity is set to INFO
+{
+  "pass": true,
+  "expected_model": "DaBai DCW2",
+  "expected_serial_number": "CH82C5201C9",
+  "expected_connection": "USB2.0",
+  "expected_speed_mbps": "480",
+  "matching_devices": [
+    {
+      "sysfs_name": "5-1.3.1",
+      "product_id": "06a0",
+      "product": "ORBBEC Depth Sensor",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "5",
+      "devnum": "7",
+      "authorized": "1",
+      "power_control": "on",
+      "external_usb_hubs": [
+        "5-1.3",
+        "5-1"
+      ],
+      "device_node": "/dev/bus/usb/005/007",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    },
+    {
+      "sysfs_name": "5-1.3.3",
+      "product_id": "0561",
+      "product": "Orbbec DaBai DCW2 RGB Camera",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "5",
+      "devnum": "9",
+      "authorized": "1",
+      "power_control": "on",
+      "external_usb_hubs": [
+        "5-1.3",
+        "5-1"
+      ],
+      "device_node": "/dev/bus/usb/005/009",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    }
+  ],
+  "all_orbbec_devices": [
+    {
+      "sysfs_name": "5-1.3.1",
+      "product_id": "06a0",
+      "product": "ORBBEC Depth Sensor",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "5",
+      "devnum": "7",
+      "authorized": "1",
+      "power_control": "on",
+      "external_usb_hubs": [
+        "5-1.3",
+        "5-1"
+      ],
+      "device_node": "/dev/bus/usb/005/007",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    },
+    {
+      "sysfs_name": "5-1.3.3",
+      "product_id": "0561",
+      "product": "Orbbec DaBai DCW2 RGB Camera",
+      "serial_number": "CH82C5201C9",
+      "speed_mbps": "480",
+      "busnum": "5",
+      "devnum": "9",
+      "authorized": "1",
+      "power_control": "on",
+      "external_usb_hubs": [
+        "5-1.3",
+        "5-1"
+      ],
+      "device_node": "/dev/bus/usb/005/009",
+      "device_node_exists": true,
+      "device_node_mode": "crw-rw-rw-",
+      "device_node_readable": true,
+      "device_node_writable": true
+    }
+  ],
+  "control_transfer_probes": [
+    {
+      "product_id": "0561",
+      "status": "OK",
+      "result_code": 11,
+      "elapsed_ms": 0.8,
+      "serial_number": "CH82C5201C9"
+    },
+    {
+      "product_id": "06a0",
+      "status": "OK",
+      "result_code": 11,
+      "elapsed_ms": 0.3,
+      "serial_number": "CH82C5201C9"
+    }
+  ],
+  "warnings": [
+    "camera is behind cascaded external USB hubs; DaBai DCW2 requires a stable USB 2.0 host supply rated at least 5 V / 1.5 A"
+  ],
+  "failures": []
+}
+[INFO] [launch.user]: Stage 6 READ ONLY. Report: /home/industio/fairino_ws/evidence/target_follow/stage6/window_fix_live_readonly_final
+[INFO] [component_container-1]: process started with pid [65124]
+[INFO] [tag_pose-2]: process started with pid [65126]
+[INFO] [static_transform_publisher-3]: process started with pid [65128]
+[INFO] [robot_feedback-4]: process started with pid [65130]
+[INFO] [follow_preview-5]: process started with pid [65132]
+[INFO] [orientation_check-6]: process started with pid [65134]
+[INFO] [orientation_audit-7]: process started with pid [65136]
+[INFO] [pose_view-8]: process started with pid [65138]
+[static_transform_publisher-3] [INFO] [1791512049.192259282] [follow_handeye_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-3] translation: ('-0.022343', '-0.072015', '0.045552')
+[static_transform_publisher-3] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+[static_transform_publisher-3] from 'flange_link' to 'camera_link'
+[component_container-1] [INFO] [1791512049.327681291] [camera.camera_container]: Load Library: /home/industio/fairino_ws/install/orbbec_camera/lib/liborbbec_camera.so
+[component_container-1] [INFO] [1791512049.687349663] [camera.camera_container]: Found class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-1] [INFO] [1791512049.687521747] [camera.camera_container]: Instantiate class: rclcpp_components::NodeFactoryTemplate<orbbec_camera::OBCameraNodeDriver>
+[component_container-1] [10/09 10:14:09.714111][info][65124][Context.cpp:68] Context created with config: /home/industio/fairino_ws/install/orbbec_camera/share/orbbec_camera/config/OrbbecSDKConfig_v1.0.xml
+[component_container-1] [10/09 10:14:09.714182][info][65124][Context.cpp:73] Work directory=/home/industio/fairino_ws/evidence/target_follow/stage6/window_fix_live_readonly_final, SDK version=v1.10.35-20260128-fa838f5
+[component_container-1] [10/09 10:14:09.714233][info][65124][LinuxPal.cpp:32] createObPal: create LinuxPal!
+[component_container-1] [10/09 10:14:09.722958][warning][65124][OpenNIDeviceInfo.cpp:190] New openni device matched.
+[component_container-1] [10/09 10:14:09.723238][info][65124][LinuxPal.cpp:166] Create PollingDeviceWatcher!
+[component_container-1] [10/09 10:14:09.723429][info][65124][DeviceManager.cpp:15] Current found device(s): (1)
+[component_container-1] [10/09 10:14:09.723447][info][65124][DeviceManager.cpp:24] 	- Name: DaBai DCW2, PID: 0x06a0, SN/ID: CH82C5201C9, Connection: USB2.0
+[INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+[component_container-1] [INFO] [1791512049.832601507] [camera.camera]: Connecting to device with serial number: CH82C5201C9
+[component_container-1] [INFO] [1791512049.832876259] [camera.camera]: Before lock: Select device serial number: CH82C5201C9
+[component_container-1] [INFO] [1791512049.832935760] [camera.camera]: After lock: Select device serial number: CH82C5201C9
+[component_container-1] [10/09 10:14:09.835573][warning][65193][OpenNIHostProtocol.cpp:739] Get usb core type failed!
+[component_container-1] [INFO] [1791512049.998253569] [camera.camera]: Device serial number CH82C5201C9 matched
+[component_container-1] [INFO] [1791512049.998423613] [camera.camera]: Select device cost 165 ms
+[component_container-1] [INFO] [1791512049.998480780] [camera.camera]: Try to connect device via USB2.0
+[component_container-1] [INFO] [1791512049.998733074] [camera.camera]: OBCameraNode: use_intra_process: OFF
+[component_container-1] [INFO] [1791512050.041937449] [camera.camera]: current time domain: system
+[component_container-1] [INFO] [1791512050.061006489] [camera.camera]: Create align filter
+[component_container-1] [10/09 10:14:10.061296][warning][65193][NeonAlign.cpp:343] NeonAlign create.
+[component_container-1] [INFO] [1791512050.061357075] [camera.camera]: Setting LDP to OFF
+[component_container-1] [INFO] [1791512050.063110882] [camera.camera]: Setting color auto exposure priority to false
+[component_container-1] [INFO] [1791512050.064426894] [camera.camera]: color auto exposure priority is set to 0
+[component_container-1] [INFO] [1791512050.064647396] [camera.camera]: Setting color auto exposure to ON
+[component_container-1] [INFO] [1791512050.065572862] [camera.camera]: Setting IR auto exposure to ON
+[component_container-1] [INFO] [1791512050.066712122] [camera.camera]: default_soft_filter_max_diff: 6
+[component_container-1] [INFO] [1791512050.066872540] [camera.camera]: default_soft_filter_speckle_size: 50
+[component_container-1] [INFO] [1791512050.067132709] [camera.camera]: Setting ThresholdFilter......
+[component_container-1] [INFO] [1791512050.067184918] [camera.camera]: set ThresholdFilter to false
+[component_container-1] [INFO] [1791512050.067285544] [camera.camera]: Skip setting filter: ThresholdFilter
+[component_container-1] [INFO] [1791512050.068978975] [camera.camera]:  stream color is enabled - width: 640, height: 480, fps: 15, Format: OB_FORMAT_MJPG
+[component_container-1] [INFO] [1791512050.070203694] [camera.camera]:  stream depth is enabled - width: 640, height: 400, fps: 15, Format: OB_FORMAT_Y11
+[orientation_check-6] [INFO] [1791512050.182946381] [orientation_check]: Stage 6: exact image stamps, base-frame rotation, read-only; no motion client.
+[component_container-1] [10/09 10:14:10.193461][warning][65193][ObException.cpp:5] Current device does not support frame sync!
+[component_container-1] [10/09 10:14:10.193522][warning][65193][Pipeline.cpp:45] Execute failure! A libobsensor_exception has occurred!
+[component_container-1] 	 - where:45#Pipeline
+[component_container-1] 	 - msg:Current device does not support frame sync!
+[component_container-1] 	 - type:N11libobsensor31unsupported_operation_exceptionE
+[component_container-1] [INFO] [1791512050.193561390] [camera.camera]: set align mode to ALIGN_D2C_HW_MODE
+[component_container-1] [INFO] [1791512050.193618265] [camera.camera]: enable depth scale ON
+[component_container-1] [INFO] [1791512050.193634599] [camera.camera]: Enable color stream
+[component_container-1] [INFO] [1791512050.193653266] [camera.camera]: Stream color width: 640 height: 480 fps: 15 format: MJPG
+[component_container-1] [INFO] [1791512050.193668141] [camera.camera]: Enable depth stream
+[component_container-1] [INFO] [1791512050.193680974] [camera.camera]: Stream depth width: 640 height: 400 fps: 15 format: Y11
+[follow_preview-5] [INFO] [1791512050.668910725] [follow_preview]: Image-time base-frame conversion only; offset and motion belong to the follow driver.
+[tag_pose-2] [INFO] [1791512050.687010840] [tag_pose]: Measuring DICT_APRILTAG_36h11 id=1, edge=20.0 mm; OpenCV=4.5.4. Position + orientation are data only; no robot motion.
+[component_container-1] [INFO] [1791512050.706386133] [camera.camera]: Disable frame sync
+[component_container-1] [INFO] [1791512050.706576885] [camera.camera]: Setting LDP to OFF
+[component_container-1] [INFO] [1791512050.727164647] [camera.camera]: Device DaBai DCW2 connected
+[component_container-1] [INFO] [1791512050.727253898] [camera.camera]: Serial number: CH82C5201C9
+[component_container-1] [INFO] [1791512050.727274023] [camera.camera]: Firmware version: RD1017
+[component_container-1] [INFO] [1791512050.727288898] [camera.camera]: Hardware version: 
+[component_container-1] [INFO] [1791512050.727298523] [camera.camera]: Wrapper version: 1.5.15
+[component_container-1] [INFO] [1791512050.727337899] [camera.camera]: SDK version: 1.10.35
+[component_container-1] [INFO] [1791512050.727349565] [camera.camera]: device unique id: 5-1.3.1-7
+[component_container-1] [INFO] [1791512050.727365024] [camera.camera]: Current node pid: 65124
+[component_container-1] [INFO] [1791512050.727374649] [camera.camera]: usb connect type: USB2.0
+[component_container-1] [INFO] [1791512050.727383982] [camera.camera]: Start device cost 995 ms
+[component_container-1] [INFO] [1791512050.727394483] [camera.camera]: Initialize device cost 728 ms
+[component_container-1] [INFO] [1791512051.146914833] [camera.camera]: Publishing static transform from color to depth
+[component_container-1] [INFO] [1791512051.146999709] [camera.camera]: Translation 12.2578, -0.0259598, 1.57039
+[component_container-1] [INFO] [1791512051.147018376] [camera.camera]: Rotation 0.00144328, 0.00102459, 0.000254427, 0.999998
+[component_container-1] [INFO] [1791512051.147037042] [camera.camera]: Publishing static transform from depth to depth
+[component_container-1] [INFO] [1791512051.147053959] [camera.camera]: Translation 0, 0, 0
+[component_container-1] [INFO] [1791512051.147113460] [camera.camera]: Rotation 0, 0, 0, 1
+[orientation_audit-7] Orientation: no_fresh_image
+[robot_feedback-4] [INFO] [1791512052.228118847] [follow_robot_feedback]: Read-only feedback connected to 192.168.58.2; no motion API
+[orientation_audit-7] Orientation: acquiring_orientation
+[orientation_audit-7] Orientation: acquiring_orientation
+[orientation_audit-7] Orientation: orientation_ambiguous
+[orientation_audit-7] Orientation: acquiring_orientation
+[orientation_audit-7] Orientation: acquiring_orientation
+[orientation_audit-7] Orientation: acquiring_orientation
+[orientation_audit-7] Orientation: orientation_ambiguous
+[orientation_audit-7] Orientation: acquiring_orientation
+[orientation_audit-7] {
+[orientation_audit-7]   "stage": 6,
+[orientation_audit-7]   "scenario": "unspecified",
+[orientation_audit-7]   "paired_observations": 113,
+[orientation_audit-7]   "trusted_orientation_observations": 10,
+[orientation_audit-7]   "orientation_available_fraction": 0.08849557522123894,
+[orientation_audit-7]   "paired_status_counts": {
+[orientation_audit-7]     "acquiring_orientation": 60,
+[orientation_audit-7]     "valid": 10,
+[orientation_audit-7]     "orientation_ambiguous": 43
+[orientation_audit-7]   },
+[orientation_audit-7]   "observation_status_counts": {
+[orientation_audit-7]     "no_fresh_image": 1,
+[orientation_audit-7]     "acquiring_orientation": 60,
+[orientation_audit-7]     "valid": 10,
+[orientation_audit-7]     "orientation_ambiguous": 86
+[orientation_audit-7]   },
+[orientation_audit-7]   "state_status_counts": {
+[orientation_audit-7]     "waiting_for_paired_pose": 3,
+[orientation_audit-7]     "no_fresh_image": 29,
+[orientation_audit-7]     "acquiring_orientation": 94,
+[orientation_audit-7]     "valid": 15,
+[orientation_audit-7]     "orientation_ambiguous": 59
+[orientation_audit-7]   },
+[orientation_audit-7]   "motion_commands_enabled": false,
+[orientation_audit-7]   "orientation_control_enabled": false,
+[orientation_audit-7]   "hardware_servo_commands_sent": 0,
+[orientation_audit-7]   "command_scope": "this_read_only_pipeline",
+[orientation_audit-7]   "spread_note": "Contains real movement unless both target and robot were stationary. Spread is not absolute pose accuracy; a stable trajectory does not prove the correct PnP branch.",
+[orientation_audit-7]   "orientation_delta_deg": {
+[orientation_audit-7]     "p50": 1.2334261686939987,
+[orientation_audit-7]     "p95": 3.4290410140022973,
+[orientation_audit-7]     "max": 4.921557739697111
+[orientation_audit-7]   },
+[orientation_audit-7]   "angular_speed_deg_s": {
+[orientation_audit-7]     "p50": 16.47303998569511,
+[orientation_audit-7]     "p95": 49.215845746013436,
+[orientation_audit-7]     "max": 72.38538695241476
+[orientation_audit-7]   },
+[orientation_audit-7]   "candidate_margin_px": {
+[orientation_audit-7]     "p50": 0.17307015964935046,
+[orientation_audit-7]     "p95": 0.23197603097968691,
+[orientation_audit-7]     "max": 0.2667256760134813
+[orientation_audit-7]   },
+[orientation_audit-7]   "candidate_rotation_distance_deg": {
+[orientation_audit-7]     "p50": 25.921871984667245,
+[orientation_audit-7]     "p95": 30.08924604967893,
+[orientation_audit-7]     "max": 32.90406210114241
+[orientation_audit-7]   },
+[orientation_audit-7]   "min_edge_px": {
+[orientation_audit-7]     "p50": 29.922308991301033,
+[orientation_audit-7]     "p95": 30.020525752259942,
+[orientation_audit-7]     "max": 30.048486498170597
+[orientation_audit-7]   },
+[orientation_audit-7]   "reprojection_error_px": {
+[orientation_audit-7]     "p50": 0.07299687610217978,
+[orientation_audit-7]     "p95": 0.12334202144937693,
+[orientation_audit-7]     "max": 0.18302969304981195
+[orientation_audit-7]   },
+[orientation_audit-7]   "all_base": {
+[orientation_audit-7]     "rotation_deviation_from_first_deg": {
+[orientation_audit-7]       "p50": 2.983658042189753,
+[orientation_audit-7]       "p95": 4.642817408022396,
+[orientation_audit-7]       "max": 5.731456662801023
+[orientation_audit-7]     },
+[orientation_audit-7]     "relative_rotation_vector_axis_span_deg": [
+[orientation_audit-7]       6.251193287553149,
+[orientation_audit-7]       3.274460174743003,
+[orientation_audit-7]       0.7881454640996517
+[orientation_audit-7]     ],
+[orientation_audit-7]     "start_end_rotation_vector_deg": [
+[orientation_audit-7]       -1.69084963677781,
+[orientation_audit-7]       0.22431317215654453,
+[orientation_audit-7]       -0.0572162296207827
+[orientation_audit-7]     ],
+[orientation_audit-7]     "position_deviation_from_median_mm": {
+[orientation_audit-7]       "p50": 0.5794370145965265,
+[orientation_audit-7]       "p95": 1.969124993152221,
+[orientation_audit-7]       "max": 3.9393743769645124
+[orientation_audit-7]     },
+[orientation_audit-7]     "position_axis_span_mm": [
+[orientation_audit-7]       0.28272131803638856,
+[orientation_audit-7]       1.3470726470354855,
+[orientation_audit-7]       5.759602628512273
+[orientation_audit-7]     ]
+[orientation_audit-7]   },
+[orientation_audit-7]   "trusted_base": {
+[orientation_audit-7]     "rotation_deviation_from_first_deg": {
+[orientation_audit-7]       "p50": 1.2779383721022666,
+[orientation_audit-7]       "p95": 3.4355082000247235,
+[orientation_audit-7]       "max": 3.824650530746554
+[orientation_audit-7]     },
+[orientation_audit-7]     "relative_rotation_vector_axis_span_deg": [
+[orientation_audit-7]       3.154446905655011,
+[orientation_audit-7]       2.621381945456161,
+[orientation_audit-7]       0.32861541586246423
+[orientation_audit-7]     ],
+[orientation_audit-7]     "start_end_rotation_vector_deg": [
+[orientation_audit-7]       -0.8956326052864566,
+[orientation_audit-7]       -0.22749149676099412,
+[orientation_audit-7]       -0.06691380442348674
+[orientation_audit-7]     ],
+[orientation_audit-7]     "position_deviation_from_median_mm": {
+[orientation_audit-7]       "p50": 0.4116983949297983,
+[orientation_audit-7]       "p95": 1.5628025995928065,
+[orientation_audit-7]       "max": 1.7411120883813938
+[orientation_audit-7]     },
+[orientation_audit-7]     "position_axis_span_mm": [
+[orientation_audit-7]       0.19215295767961715,
+[orientation_audit-7]       0.7055989577185451,
+[orientation_audit-7]       2.9974798698789717
+[orientation_audit-7]     ]
+[orientation_audit-7]   },
+[orientation_audit-7]   "robot_flange": {
+[orientation_audit-7]     "rotation_deviation_from_first_deg": {
+[orientation_audit-7]       "p50": 0.000490088383600057,
+[orientation_audit-7]       "p95": 0.0007150913678403845,
+[orientation_audit-7]       "max": 0.0008950406846009891
+[orientation_audit-7]     },
+[orientation_audit-7]     "relative_rotation_vector_axis_span_deg": [
+[orientation_audit-7]       0.0013302157656697108,
+[orientation_audit-7]       0.0007226001442278337,
+[orientation_audit-7]       0.0010718613216109286
+[orientation_audit-7]     ],
+[orientation_audit-7]     "start_end_rotation_vector_deg": [
+[orientation_audit-7]       0.0,
+[orientation_audit-7]       0.0,
+[orientation_audit-7]       0.0
+[orientation_audit-7]     ],
+[orientation_audit-7]     "position_deviation_from_median_mm": {
+[orientation_audit-7]       "p50": 0.0012771490226217558,
+[orientation_audit-7]       "p95": 0.0027032626433412072,
+[orientation_audit-7]       "max": 0.005158092811177149
+[orientation_audit-7]     },
+[orientation_audit-7]     "position_axis_span_mm": [
+[orientation_audit-7]       0.004821777343753941,
+[orientation_audit-7]       0.0032043457031116773,
+[orientation_audit-7]       0.0076904296875124345
+[orientation_audit-7]     ]
+[orientation_audit-7]   },
+[orientation_audit-7]   "latest_paired_observation": {
+[orientation_audit-7]     "schema_version": 1,
+[orientation_audit-7]     "frame_id": "base_link",
+[orientation_audit-7]     "source_frame_id": "camera_color_optical_frame",
+[orientation_audit-7]     "stamp": {
+[orientation_audit-7]       "sec": 1791512060,
+[orientation_audit-7]       "nanosec": 635911936
+[orientation_audit-7]     },
+[orientation_audit-7]     "stamp_s": 1791512060.635912,
+[orientation_audit-7]     "target_id": 1,
+[orientation_audit-7]     "position_m": [
+[orientation_audit-7]       -0.01786584129586998,
+[orientation_audit-7]       -0.4987618390147339,
+[orientation_audit-7]       0.03360369353678311
+[orientation_audit-7]     ],
+[orientation_audit-7]     "quaternion_xyzw": [
+[orientation_audit-7]       -7.616701712949754e-06,
+[orientation_audit-7]       -0.007869486896197578,
+[orientation_audit-7]       0.16990319273727292,
+[orientation_audit-7]       0.9854293359828789
+[orientation_audit-7]     ],
+[orientation_audit-7]     "rpy_deg": [
+[orientation_audit-7]       -0.15409355923948057,
+[orientation_audit-7]       -0.8885246054893134,
+[orientation_audit-7]       19.56618768113814
+[orientation_audit-7]     ],
+[orientation_audit-7]     "valid_position": true,
+[orientation_audit-7]     "orientation_measurement_valid": true,
+[orientation_audit-7]     "quality": {
+[orientation_audit-7]       "status": "valid",
+[orientation_audit-7]       "dictionary": "DICT_APRILTAG_36h11",
+[orientation_audit-7]       "target_id": 1,
+[orientation_audit-7]       "marker_size_m": 0.02,
+[orientation_audit-7]       "cube_edge_m": 0.03,
+[orientation_audit-7]       "processed_frames": 128,
+[orientation_audit-7]       "valid_frames": 128,
+[orientation_audit-7]       "motion_commands_enabled": false,
+[orientation_audit-7]       "received_frames": 128,
+[orientation_audit-7]       "overwritten_frames": 0,
+[orientation_audit-7]       "pose_origin": "top_label_center",
+[orientation_audit-7]       "valid_position": true,
+[orientation_audit-7]       "detector_threshold": 13.0,
+[orientation_audit-7]       "detector_passes": 1,
+[orientation_audit-7]       "detected_ids": [
+[orientation_audit-7]         1
+[orientation_audit-7]       ],
+[orientation_audit-7]       "corners_px": [
+[orientation_audit-7]         [
+[orientation_audit-7]           306.138671875,
+[orientation_audit-7]           212.1577911376953
+[orientation_audit-7]         ],
+[orientation_audit-7]         [
+[orientation_audit-7]           276.18572998046875,
+[orientation_audit-7]           219.21502685546875
+[orientation_audit-7]         ],
+[orientation_audit-7]         [
+[orientation_audit-7]           268.9523010253906,
+[orientation_audit-7]           190.2605438232422
+[orientation_audit-7]         ],
+[orientation_audit-7]         [
+[orientation_audit-7]           298.6122131347656,
+[orientation_audit-7]           183.19949340820312
+[orientation_audit-7]         ]
+[orientation_audit-7]       ],
+[orientation_audit-7]       "position_m": [
+[orientation_audit-7]         -0.02266727967022683,
+[orientation_audit-7]         -0.02763202328847161,
+[orientation_audit-7]         0.31323551226794216
+[orientation_audit-7]       ],
+[orientation_audit-7]       "quaternion_xyzw": [
+[orientation_audit-7]         0.12396130342547382,
+[orientation_audit-7]         0.9885894914020662,
+[orientation_audit-7]         -0.07572205779457909,
+[orientation_audit-7]         0.0398821100973368
+[orientation_audit-7]       ],
+[orientation_audit-7]       "rpy_deg": [
+[orientation_audit-7]         -171.92324626342636,
+[orientation_audit-7]         5.6025549907721865,
+[orientation_audit-7]         166.10158419356944
+[orientation_audit-7]       ],
+[orientation_audit-7]       "distance_m": 0.3152678550446002,
+[orientation_audit-7]       "reprojection_error_px": 0.06399800348405403,
+[orientation_audit-7]       "min_edge_px": 29.84433919710166,
+[orientation_audit-7]       "candidate_count": 2,
+[orientation_audit-7]       "candidate_margin_px": 0.17250943795320922,
+[orientation_audit-7]       "candidate_errors_px": [
+[orientation_audit-7]         0.06399800348405403,
+[orientation_audit-7]         0.23650744143726327
+[orientation_audit-7]       ],
+[orientation_audit-7]       "candidate_rotation_distance_deg": 28.451041383794042,
+[orientation_audit-7]       "selected_candidate_index": 0,
+[orientation_audit-7]       "orientation_ambiguous": false,
+[orientation_audit-7]       "orientation_measurement_valid": true,
+[orientation_audit-7]       "solver": "IPPE_SQUARE",
+[orientation_audit-7]       "image_age_ms": 28.877973556518555,
+[orientation_audit-7]       "processing_ms": 16.679686999850674,
+[orientation_audit-7]       "callback_ms": 17.433942999559804,
+[orientation_audit-7]       "frame_id": "camera_color_optical_frame",
+[orientation_audit-7]       "stamp_s": 1791512060.635912,
+[orientation_audit-7]       "stamp": {
+[orientation_audit-7]         "sec": 1791512060,
+[orientation_audit-7]         "nanosec": 635911936
+[orientation_audit-7]       }
+[orientation_audit-7]     },
+[orientation_audit-7]     "motion_commands_enabled": false,
+[orientation_audit-7]     "orientation_control_enabled": false,
+[orientation_audit-7]     "valid_orientation": true,
+[orientation_audit-7]     "status": "valid",
+[orientation_audit-7]     "orientation_delta_deg": 1.691471750136068,
+[orientation_audit-7]     "angular_speed_deg_s": 24.889951909956704,
+[orientation_audit-7]     "continuity_frame": "base_link",
+[orientation_audit-7]     "confirmation_count": 5,
+[orientation_audit-7]     "confirmation_frames": 5,
+[orientation_audit-7]     "accepted_anchor_delta_deg": 1.691471750136068,
+[orientation_audit-7]     "allowed_delta_deg": 7.07748096,
+[orientation_audit-7]     "published_stamp_s": 1791512060.690835,
+[orientation_audit-7]     "pairing": {
+[orientation_audit-7]       "paired": 113,
+[orientation_audit-7]       "evicted": 0,
+[orientation_audit-7]       "expired": 15,
+[orientation_audit-7]       "late": 0,
+[orientation_audit-7]       "pending_poses": 0,
+[orientation_audit-7]       "pending_qualities": 0
+[orientation_audit-7]     },
+[orientation_audit-7]     "kind": "observation",
+[orientation_audit-7]     "audit_receive_s": 4754.039646766
+[orientation_audit-7]   },
+[orientation_audit-7]   "latest_state": {
+[orientation_audit-7]     "schema_version": 1,
+[orientation_audit-7]     "frame_id": "base_link",
+[orientation_audit-7]     "source_frame_id": "camera_color_optical_frame",
+[orientation_audit-7]     "stamp": {
+[orientation_audit-7]       "sec": 1791512060,
+[orientation_audit-7]       "nanosec": 635911936
+[orientation_audit-7]     },
+[orientation_audit-7]     "stamp_s": 1791512060.635912,
+[orientation_audit-7]     "target_id": 1,
+[orientation_audit-7]     "position_m": [
+[orientation_audit-7]       -0.01786584129586998,
+[orientation_audit-7]       -0.4987618390147339,
+[orientation_audit-7]       0.03360369353678311
+[orientation_audit-7]     ],
+[orientation_audit-7]     "quaternion_xyzw": [
+[orientation_audit-7]       -7.616701712949754e-06,
+[orientation_audit-7]       -0.007869486896197578,
+[orientation_audit-7]       0.16990319273727292,
+[orientation_audit-7]       0.9854293359828789
+[orientation_audit-7]     ],
+[orientation_audit-7]     "rpy_deg": [
+[orientation_audit-7]       -0.15409355923948057,
+[orientation_audit-7]       -0.8885246054893134,
+[orientation_audit-7]       19.56618768113814
+[orientation_audit-7]     ],
+[orientation_audit-7]     "valid_position": true,
+[orientation_audit-7]     "orientation_measurement_valid": true,
+[orientation_audit-7]     "quality": {
+[orientation_audit-7]       "status": "valid",
+[orientation_audit-7]       "dictionary": "DICT_APRILTAG_36h11",
+[orientation_audit-7]       "target_id": 1,
+[orientation_audit-7]       "marker_size_m": 0.02,
+[orientation_audit-7]       "cube_edge_m": 0.03,
+[orientation_audit-7]       "processed_frames": 128,
+[orientation_audit-7]       "valid_frames": 128,
+[orientation_audit-7]       "motion_commands_enabled": false,
+[orientation_audit-7]       "received_frames": 128,
+[orientation_audit-7]       "overwritten_frames": 0,
+[orientation_audit-7]       "pose_origin": "top_label_center",
+[orientation_audit-7]       "valid_position": true,
+[orientation_audit-7]       "detector_threshold": 13.0,
+[orientation_audit-7]       "detector_passes": 1,
+[orientation_audit-7]       "detected_ids": [
+[orientation_audit-7]         1
+[orientation_audit-7]       ],
+[orientation_audit-7]       "corners_px": [
+[orientation_audit-7]         [
+[orientation_audit-7]           306.138671875,
+[orientation_audit-7]           212.1577911376953
+[orientation_audit-7]         ],
+[orientation_audit-7]         [
+[orientation_audit-7]           276.18572998046875,
+[orientation_audit-7]           219.21502685546875
+[orientation_audit-7]         ],
+[orientation_audit-7]         [
+[orientation_audit-7]           268.9523010253906,
+[orientation_audit-7]           190.2605438232422
+[orientation_audit-7]         ],
+[orientation_audit-7]         [
+[orientation_audit-7]           298.6122131347656,
+[orientation_audit-7]           183.19949340820312
+[orientation_audit-7]         ]
+[orientation_audit-7]       ],
+[orientation_audit-7]       "position_m": [
+[orientation_audit-7]         -0.02266727967022683,
+[orientation_audit-7]         -0.02763202328847161,
+[orientation_audit-7]         0.31323551226794216
+[orientation_audit-7]       ],
+[orientation_audit-7]       "quaternion_xyzw": [
+[orientation_audit-7]         0.12396130342547382,
+[orientation_audit-7]         0.9885894914020662,
+[orientation_audit-7]         -0.07572205779457909,
+[orientation_audit-7]         0.0398821100973368
+[orientation_audit-7]       ],
+[orientation_audit-7]       "rpy_deg": [
+[orientation_audit-7]         -171.92324626342636,
+[orientation_audit-7]         5.6025549907721865,
+[orientation_audit-7]         166.10158419356944
+[orientation_audit-7]       ],
+[orientation_audit-7]       "distance_m": 0.3152678550446002,
+[orientation_audit-7]       "reprojection_error_px": 0.06399800348405403,
+[orientation_audit-7]       "min_edge_px": 29.84433919710166,
+[orientation_audit-7]       "candidate_count": 2,
+[orientation_audit-7]       "candidate_margin_px": 0.17250943795320922,
+[orientation_audit-7]       "candidate_errors_px": [
+[orientation_audit-7]         0.06399800348405403,
+[orientation_audit-7]         0.23650744143726327
+[orientation_audit-7]       ],
+[orientation_audit-7]       "candidate_rotation_distance_deg": 28.451041383794042,
+[orientation_audit-7]       "selected_candidate_index": 0,
+[orientation_audit-7]       "orientation_ambiguous": false,
+[orientation_audit-7]       "orientation_measurement_valid": true,
+[orientation_audit-7]       "solver": "IPPE_SQUARE",
+[orientation_audit-7]       "image_age_ms": 28.877973556518555,
+[orientation_audit-7]       "processing_ms": 16.679686999850674,
+[orientation_audit-7]       "callback_ms": 17.433942999559804,
+[orientation_audit-7]       "frame_id": "camera_color_optical_frame",
+[orientation_audit-7]       "stamp_s": 1791512060.635912,
+[orientation_audit-7]       "stamp": {
+[orientation_audit-7]         "sec": 1791512060,
+[orientation_audit-7]         "nanosec": 635911936
+[orientation_audit-7]       }
+[orientation_audit-7]     },
+[orientation_audit-7]     "motion_commands_enabled": false,
+[orientation_audit-7]     "orientation_control_enabled": false,
+[orientation_audit-7]     "valid_orientation": true,
+[orientation_audit-7]     "status": "valid",
+[orientation_audit-7]     "orientation_delta_deg": 1.691471750136068,
+[orientation_audit-7]     "angular_speed_deg_s": 24.889951909956704,
+[orientation_audit-7]     "continuity_frame": "base_link",
+[orientation_audit-7]     "confirmation_count": 5,
+[orientation_audit-7]     "confirmation_frames": 5,
+[orientation_audit-7]     "accepted_anchor_delta_deg": 1.691471750136068,
+[orientation_audit-7]     "allowed_delta_deg": 7.07748096,
+[orientation_audit-7]     "feedback_age_ms": 1.182427,
+[orientation_audit-7]     "target_age_ms": 73.608135,
+[orientation_audit-7]     "published_stamp_s": 1791512060.709569,
+[orientation_audit-7]     "pairing": {
+[orientation_audit-7]       "paired": 113,
+[orientation_audit-7]       "evicted": 0,
+[orientation_audit-7]       "expired": 15,
+[orientation_audit-7]       "late": 0,
+[orientation_audit-7]       "pending_poses": 0,
+[orientation_audit-7]       "pending_qualities": 0
+[orientation_audit-7]     },
+[orientation_audit-7]     "kind": "state",
+[orientation_audit-7]     "audit_receive_s": 4754.057595506
+[orientation_audit-7]   },
+[orientation_audit-7]   "pairing": {
+[orientation_audit-7]     "paired": 113,
+[orientation_audit-7]     "evicted": 0,
+[orientation_audit-7]     "expired": 15,
+[orientation_audit-7]     "late": 0,
+[orientation_audit-7]     "pending_poses": 0,
+[orientation_audit-7]     "pending_qualities": 0
+[orientation_audit-7]   },
+[orientation_audit-7]   "duration_s": 10.000443580999672,
+[orientation_audit-7]   "replay_source": null
+[orientation_audit-7] }
+[INFO] [orientation_audit-7]: process has finished cleanly [pid 65136]
+[INFO] [pose_view-8]: sending signal 'SIGINT' to process[pose_view-8]
+[INFO] [orientation_check-6]: sending signal 'SIGINT' to process[orientation_check-6]
+[INFO] [follow_preview-5]: sending signal 'SIGINT' to process[follow_preview-5]
+[INFO] [robot_feedback-4]: sending signal 'SIGINT' to process[robot_feedback-4]
+[INFO] [static_transform_publisher-3]: sending signal 'SIGINT' to process[static_transform_publisher-3]
+[INFO] [tag_pose-2]: sending signal 'SIGINT' to process[tag_pose-2]
+[INFO] [component_container-1]: sending signal 'SIGINT' to process[component_container-1]
+[robot_feedback-4] [INFO] [1791512061.780957561] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[static_transform_publisher-3] [INFO] [1791512061.788494002] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[component_container-1] Received SIGINT (Ctrl+C), shutting down ROS2...
+[component_container-1] [WARN] [1791512061.821255454] [camera.camera]: Do destroy ~OBCameraNode
+[component_container-1] [WARN] [1791512061.821319912] [camera.camera]: Stop tf thread
+[component_container-1] [WARN] [1791512061.821332746] [camera.camera]: Stop color frame thread
+[component_container-1] [INFO] [1791512061.821386996] [camera.camera]: Color frame thread exit!
+[component_container-1] [WARN] [1791512061.821486456] [camera.camera]: stop streams
+[INFO] [static_transform_publisher-3]: process has finished cleanly [pid 65128]
+[component_container-1] [10/09 10:14:21.924978][warning][65258][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer20: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[component_container-1] [10/09 10:14:22.028660][warning][65258][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer45: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[component_container-1] [10/09 10:14:22.028965][warning][65258][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Invalid argument, number:22 
+[component_container-1] [10/09 10:14:22.028985][warning][65258][OpenNIUSBLinux.cpp:230] Endpoint 0x81, Buffer11: Failed to cancel asynch I/O transfer.
+[INFO] [pose_view-8]: process has finished cleanly [pid 65138]
+[INFO] [orientation_check-6]: process has finished cleanly [pid 65134]
+[INFO] [tag_pose-2]: process has finished cleanly [pid 65126]
+[INFO] [follow_preview-5]: process has finished cleanly [pid 65132]
+[component_container-1] [10/09 10:14:22.132546][warning][65258][OpenNIUSBLinux.cpp:245] Endpoint  0x81, Buffer12: Failed waiting on asynch transfer event:OB_EVENT_TIMEOUT
+[component_container-1] [10/09 10:14:22.132652][warning][65258][OpenNIUSBLinux.cpp:204] exist(0) read thread(13)
+[component_container-1] [10/09 10:14:22.132834][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.132954][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.132976][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.132995][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133013][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133062][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133081][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133107][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133126][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133145][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133163][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133181][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133199][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133217][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133235][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133254][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133272][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133290][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133308][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133326][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133345][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133363][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133381][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133399][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133418][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133436][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133454][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133472][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133490][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133509][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133539][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133559][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133580][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133599][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133617][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133636][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133655][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133673][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133691][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133710][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133728][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133746][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133765][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133782][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133801][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133819][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133837][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133855][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133874][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133893][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133909][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133927][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133944][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133961][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.133979][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.134008][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.134026][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.134046][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.134064][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.134082][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.134099][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.134117][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.134135][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[component_container-1] [10/09 10:14:22.134152][warning][65124][MessengerLibusb.cpp:82] usb_request_cancel returned error, endpoint:129, error:Inappropriate ioctl for device, number:25 
+[INFO] [robot_feedback-4]: process has finished cleanly [pid 65130]
+[component_container-1] [WARN] [1791512062.754348658] [camera.camera]: Destroy ~OBCameraNode DONE
+[INFO] [component_container-1]: process has finished cleanly [pid 65124]

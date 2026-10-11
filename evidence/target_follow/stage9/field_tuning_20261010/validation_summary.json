@@ -1,0 +1,142 @@
+{
+  "stage": 9,
+  "recorded_at": "2026-10-10T13:05:15.943101+08:00",
+  "result": "field_tuning_software_mock_validation_passed",
+  "hardware_servo_commands_sent_by_this_validation": 0,
+  "live_updated_pose_follow_validated": false,
+  "tests": {
+    "cpp": {
+      "tests": 37,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 37
+    },
+    "python": {
+      "tests": 61,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "disabled": 0,
+      "passed": 60
+    },
+    "ros_driver": {
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 10
+    },
+    "ros_launch": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 1
+    }
+  },
+  "passed_total": 108,
+  "skipped_total": 1,
+  "follow_radius_m": 0.2,
+  "candidate_tolerance_deg": 35.0,
+  "motion_angle_range_deg": 20.0,
+  "mock_reports": [
+    {
+      "path": "launch_mock/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "9fa287fdcabfb40500c291f8ecb9ddb7507de9eb2d2e300eae1262436dc90d78"
+    },
+    {
+      "path": "mock_integration/approximate_bridge/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "5cc3fc39b275dc5e457ef45e2ce0075a3f1be8f0e2d4490c090aaf5a08ef5c52"
+    },
+    {
+      "path": "mock_integration/axis_0/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "61b928e8f00f1ac8a81552493c64e637c0bcb424739c1e3ba0bcd7be90b689c4"
+    },
+    {
+      "path": "mock_integration/axis_1/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "677aa9cb192df99574c482aa003cef7e439ec87c528f814d9e6be56693df9001"
+    },
+    {
+      "path": "mock_integration/axis_2/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "fa4679fdadcaacb2dbf16d4c20fe6ddafb0598d0430281acfc772de84733cdd7"
+    },
+    {
+      "path": "mock_integration/collision_on/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "a69520079c548709052a42fc78aeb294f035ae2ccff53f7d4b849b7c09ec3c9e"
+    },
+    {
+      "path": "mock_integration/image_time_bridge/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "bb808458df40cc6ff4f0acfacc794875af2a828ab256c3fbfa3529d613c04fa3"
+    },
+    {
+      "path": "mock_integration/invalid_observation/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "79cfc187a6a451ea5aa75fd7e893729d3d8667956c29b7204c488ef3a5707aaf"
+    },
+    {
+      "path": "mock_integration/quality_recovery/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "3caa6b1ea6ba7b8d9fb84c149708cd2f313aebab9a9e62fd81d935964ff2ab78"
+    },
+    {
+      "path": "mock_integration/relocation/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "cacffa3b30b98b1bcec8d909b8c9a1161f474f9780d36ce4623372e72d22bb0e"
+    },
+    {
+      "path": "mock_integration/start_soft_quality/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "00c5decf33d09e63e76a12e3e62ea338e6687128da94b7f5fbc0d19271248a50"
+    }
+  ],
+  "source_sha256": {
+    "src/fr3c_target_follow/config/tag_pose_demo_follow.yaml": "ff19c64a70d8c41a1fd0548f6807549b362c92fab926cc3f8ef9c0e0deaff47c",
+    "src/fr3c_target_follow/launch/pose_follow.launch.py": "7a706b04009ec8c07a45b326f2bf20f452c3c0ff388cbb5117ba8e987dfdcc05",
+    "src/fr3c_target_follow/fr3c_target_follow/marker_pose.py": "66cd71d99336bd49f31da1ebaf03cd86ac65b5a4f6f013aef49740d909e20125",
+    "src/fr3c_target_follow/fr3c_target_follow/pose_node.py": "30a0e26b81d416c5c51e72b29c5ab37cf132c4bde5f9f1df1f5e60f7191e323b",
+    "src/fr3c_target_follow/fr3c_target_follow/orientation_quality.py": "34ce6441200ffa7de8e87044f362df65b55b4ccc36ca0c0c35c7cc5593ba1011",
+    "src/fr3c_target_follow/fr3c_target_follow/viewer.py": "022ef03074b11c2849bc3238fddfe88936b741957c173f30e42f460cdd44b8f9",
+    "src/fr3c_follow_driver/include/fr3c_follow_driver/pose_follow.hpp": "a77850f491e41a9858d5d2e71ec5157bdb67b1e6b32ab7bfbbba9e48bb607fec",
+    "src/fr3c_follow_driver/include/fr3c_follow_driver/pose_observation.hpp": "07780eafc09890375cd0ea5ab46a67840b4821020889894ef5195302b2d53bfd",
+    "src/fr3c_follow_driver/src/pose_follow.cpp": "43598a8051f42047a761879e59ba3fa5c2040774d81893dae6c8955c745ee3bd",
+    "src/fr3c_follow_driver/config/pose_follow.yaml": "d69cb26d8a04c3cd5debf9e7391f77fe3f074080f0b1eda791f9f6b1e1aaa0f4",
+    "src/fr3c_follow_driver/test/test_pose_follow.cpp": "c39c471dc9b745a472d1478cd2ebe5551b52ce72c3423f86c3726b8204aef8fb",
+    "src/fr3c_follow_driver/test/test_pose_follow_mock.py": "056b0e9126859fd04ae481ea8081d4e8c1b132ea322760c68b0f3275f0ab0639",
+    "src/fr3c_target_follow/test/test_marker_pose.py": "c95728aaeed87f2b940e279b78daf0fb1ef42eff3511cde38c9f102359b2f89b",
+    "src/fr3c_target_follow/test/test_orientation_quality.py": "ca1dd88c051c6481e5353bac956d38c73bde9c1dca6dc627940a308eebc86895",
+    "src/fr3c_target_follow/test/test_pose_follow_launch_ros.py": "9ef68a801168bcbdcea1ad65cf63b26deca9050e04b0c27fd11a5df0a4ecfc74"
+  }
+}

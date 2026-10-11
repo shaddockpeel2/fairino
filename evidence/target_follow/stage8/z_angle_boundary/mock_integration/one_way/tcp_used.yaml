@@ -1,0 +1,6 @@
+ydi_j22_tcp:
+  calibrated: true
+  parent_frame: flange_link
+  child_frame: grasp_frame
+  xyz_m: [.002, -.003, .185]
+  rpy_rad: [.1, -.2, .3]

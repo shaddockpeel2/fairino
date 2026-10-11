@@ -1,0 +1,22 @@
+# Stage 9 approximate pose Demo. Raw PnP selection and position are unchanged.
+# Candidate rotations within 35 degrees may be used despite a small error gap.
+# Base-frame continuity, image freshness, filtering and motion limits still apply.
+tag_pose:
+  ros__parameters:
+    dictionary: DICT_APRILTAG_36h11
+    target_id: 1
+    marker_size_m: 0.020
+    cube_edge_m: 0.030
+    image_topic: /camera/color/image_raw
+    camera_info_topic: /camera/color/camera_info
+    max_image_age_s: 0.25
+    min_edge_px: 12.0
+    max_reprojection_error_px: 2.0
+    ambiguity_margin_px: 0.10
+    continuity_margin_px: 0.20
+    orientation_candidate_tolerance_deg: 35.0
+    adaptive_thresh_constant: 13.0
+    adaptive_thresh_step: 4
+    fallback_thresh_constants: [21.0, 25.0]
+    publish_tag_tf: true
+    publish_annotated_image: true

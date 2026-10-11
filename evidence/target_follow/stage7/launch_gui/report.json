@@ -1,0 +1,213 @@
+{
+  "stage": 7,
+  "duration_s": 4.002628442000059,
+  "preview_states": 178,
+  "trusted_observations": 53,
+  "status_counts": {
+    "stale_robot_feedback": 2,
+    "acquiring_orientation": 4,
+    "preview": 172
+  },
+  "teach_count": 1,
+  "motion_commands_enabled": false,
+  "orientation_control_enabled": false,
+  "hardware_servo_commands_sent": 0,
+  "command_scope": "this_read_only_preview",
+  "reference_kind": "one_step_from_actual_tcp",
+  "note": "Preview only. Desired/error spans include target/robot motion and are not accuracy.",
+  "desired_position_axis_span_mm": [
+    51.38390708200219,
+    0.0,
+    31.472995148267792
+  ],
+  "max_rotation_error_deg": 12.664032431125671,
+  "max_preview_speed_mm_s": 20.000000000000004,
+  "max_preview_angular_speed_deg_s": 3.0000000000000004,
+  "rotation_mapping_gain": 1.0,
+  "latest_state": {
+    "schema_version": 1,
+    "stage": 7,
+    "stamp": {
+      "sec": 1791518627,
+      "nanosec": 609327446
+    },
+    "motion_commands_enabled": false,
+    "orientation_control_enabled": false,
+    "reference_kind": "one_step_from_actual_tcp",
+    "offset_recorded": true,
+    "teach_count": 1,
+    "quality_reason": null,
+    "rotation_mapping_gain": 1.0,
+    "deadband_enter_deg": 3.0,
+    "rotation_tau_s": 0.4,
+    "velocity_m_s": [
+      0.015184120237636146,
+      0.0,
+      -0.0109756000784317
+    ],
+    "angular_velocity_deg_s": [
+      1.8552324919826952e-31,
+      2.7973546200046266,
+      -2.853713382281189e-32
+    ],
+    "target_age_ms": 70.967653,
+    "feedback_age_ms": 12.057331,
+    "trusted_image_stamp": {
+      "sec": 1791518627,
+      "nanosec": 538359793
+    },
+    "raw_target_m": [
+      0.1,
+      -0.4,
+      0.02
+    ],
+    "raw_target_rpy_deg": [
+      0.0,
+      -5.870130744611113,
+      0.0
+    ],
+    "raw_target_quaternion_xyzw": [
+      0.0,
+      -0.05120415300255095,
+      0.0,
+      0.9986882069571521
+    ],
+    "raw_image_stamp": {
+      "sec": 1791518627,
+      "nanosec": 538359793
+    },
+    "filtered_target_m": [
+      0.1,
+      -0.4,
+      0.02
+    ],
+    "filtered_target_rpy_deg": [
+      0.0,
+      2.423750935062899,
+      0.0
+    ],
+    "filtered_target_quaternion_xyzw": [
+      0.0,
+      0.021149639983816294,
+      0.0,
+      0.9997763213482078
+    ],
+    "actual_tcp_m": [
+      0.199152603,
+      -0.303027928,
+      0.16538554099999997
+    ],
+    "actual_tcp_rpy_deg": [
+      180.0,
+      -0.0,
+      0.0
+    ],
+    "actual_tcp_quaternion_xyzw": [
+      1.0,
+      0.0,
+      0.0,
+      6.123233995736766e-17
+    ],
+    "mapped_target_m": [
+      0.1,
+      -0.4,
+      0.02
+    ],
+    "mapped_target_rpy_deg": [
+      0.0,
+      4.423750935062915,
+      0.0
+    ],
+    "mapped_target_quaternion_xyzw": [
+      0.0,
+      0.038594921497746515,
+      0.0,
+      0.9992549384589414
+    ],
+    "desired_tcp_m": [
+      0.20359262755414329,
+      -0.303027928,
+      0.1622559725634282
+    ],
+    "desired_tcp_rpy_deg": [
+      180.0,
+      1.7686909155258614,
+      0.0
+    ],
+    "desired_tcp_quaternion_xyzw": [
+      0.9998808867658725,
+      0.0,
+      -0.01543412713088809,
+      6.123233995736766e-17
+    ],
+    "reference_tcp_m": [
+      0.19946030218154515,
+      -0.303027928,
+      0.16516312553514287
+    ],
+    "reference_tcp_rpy_deg": [
+      180.0,
+      0.05668709899526533,
+      -5.76432218928243e-34
+    ],
+    "reference_tcp_quaternion_xyzw": [
+      0.999999877641765,
+      0.0,
+      -0.0004946882402529253,
+      -1.6081226496766366e-16
+    ],
+    "reference_flange_m": [
+      0.2004903519481503,
+      -0.3,
+      0.3497766557841921
+    ],
+    "reference_flange_rpy_deg": [
+      180.0,
+      0.05668709899526533,
+      -5.76432218928243e-34
+    ],
+    "reference_flange_quaternion_xyzw": [
+      0.999999877641765,
+      0.0,
+      -0.0004946882402529253,
+      -1.6081226496766366e-16
+    ],
+    "status": "preview",
+    "position_error_m": [
+      0.004440024554143274,
+      0.0,
+      -0.003129568436571778
+    ],
+    "error_norm_mm": 5.432128187053533,
+    "rotation_error_deg": 1.768690915525861,
+    "offset_matrix": [
+      [
+        0.9989265156707727,
+        -5.672926028511984e-18,
+        0.046322956402300615,
+        0.09231147615720953
+      ],
+      [
+        0.0,
+        -1.0,
+        -1.2246467991473532e-16,
+        0.09697207200000002
+      ],
+      [
+        0.046322956402300615,
+        1.2233321599996301e-16,
+        -0.9989265156707727,
+        0.14982251360598386
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "rotation_active": true,
+    "kind": "preview",
+    "audit_receive_s": 11320.967196855
+  }
+}

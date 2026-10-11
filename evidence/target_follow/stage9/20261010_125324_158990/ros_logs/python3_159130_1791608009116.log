@@ -1,0 +1,8 @@
+[INFO] [1791608025.171641795] [target_pose_viewer]: Start rejected: fresh trusted full pose is required: orientation_ambiguous
+[INFO] [1791608045.592587926] [target_pose_viewer]: Stop OK: Stop requested; follow_state records the SDK stop result.
+[INFO] [1791608046.651003323] [target_pose_viewer]: Stop OK: Stop requested; follow_state records the SDK stop result.
+[INFO] [1791608047.245029254] [target_pose_viewer]: Stop OK: Stop requested; follow_state records the SDK stop result.
+[INFO] [1791608048.956462561] [target_pose_viewer]: Start rejected: fresh trusted full pose is required: orientation_measurement_rejected
+[INFO] [1791608051.382011032] [target_pose_viewer]: Start rejected: fresh trusted full pose is required: acquiring_orientation
+[INFO] [1791608052.048233711] [target_pose_viewer]: Start rejected: fresh trusted full pose is required: orientation_ambiguous
+[INFO] [1791608053.949810102] [target_pose_viewer]: Start rejected: fresh trusted full pose is required: orientation_ambiguous

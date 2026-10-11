@@ -1,0 +1,80 @@
+{
+  "run": "20261010_134555_196814",
+  "source_sha256": "66704d6a110548dbbacabac791a96da772e7bcb01478dd7e8c6f82f77a842aba",
+  "hardware_commands_sent_by_this_analysis": 0,
+  "live_report": {
+    "angular_speed_limit_deg_s": 3.0,
+    "backend": "ServoCart mode 0, tool/work-object 0",
+    "close_code": 0,
+    "collision_check_ms": null,
+    "collision_enabled": false,
+    "collision_pauses": 0,
+    "collision_resumes": 0,
+    "follow_angle_deg": 20.0,
+    "follow_mode": "pose",
+    "follow_radius_m": 0.2,
+    "hardware_servo_commands_sent": 619,
+    "live_pose_follow_validated": false,
+    "mock": false,
+    "reason": "signal",
+    "requested_period_ms": 8.0,
+    "result": "stopped",
+    "rotation_mapping_gain": 0.5,
+    "sdk_angle_encoding": "absolute RPY wrapped to [-180,180] deg",
+    "servo_call_ms": {
+      "count": 619,
+      "max": 10.24461499764584,
+      "p50": 3.6549159995047376,
+      "p95": 4.257797998434398
+    },
+    "servo_commands_sent": 619,
+    "servo_end_code": 0,
+    "servo_interval_ms": {
+      "count": 617,
+      "max": 19.692971000040416,
+      "p50": 8.28167600047891,
+      "p95": 11.22404300258495
+    },
+    "speed_limit_mm_s": 20.0,
+    "stage": 9,
+    "starts": 1,
+    "stop_motion_code": 0,
+    "target_pauses": 2,
+    "target_resumes": 1,
+    "teaches": 1
+  },
+  "live_servo_return_codes": {
+    "0": 619
+  },
+  "recovery_event": {
+    "raw_angle_gap_deg": 20.24177953697272,
+    "raw_position_gap_mm": 1.7377496808699857,
+    "mapped_angle_gap_deg": 10.124585053422951,
+    "prior_raw_angle_threshold_deg": 20.0,
+    "updated_raw_angle_threshold_deg": 40.0
+  },
+  "prior_policy_replay": {
+    "jitter_allowance_deg": 6.0,
+    "statuses": {
+      "acquiring_orientation": 7,
+      "valid": 304,
+      "orientation_jump": 14
+    },
+    "paired": 325,
+    "accepted_fraction": 0.9353846153846154
+  },
+  "updated_policy_replay": {
+    "jitter_allowance_deg": 25.0,
+    "statuses": {
+      "acquiring_orientation": 1,
+      "valid": 324
+    },
+    "paired": 325,
+    "accepted_fraction": 0.9969230769230769
+  },
+  "limitations": [
+    "Uses recorded poses and selected candidates, not regenerated camera images.",
+    "Gate replay does not simulate the changed live robot viewpoint.",
+    "Updated live tilt following has not yet been validated."
+  ]
+}

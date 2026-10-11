@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="13.529" timestamp="2026-10-10T13:52:45.405132" hostname="ido"><testcase classname="test.test_pose_follow_launch_ros" name="test_launch_reuses_synthetic_detector_loads_stable_profile_and_cleans_owned_nodes" time="13.370" /></testsuite></testsuites>

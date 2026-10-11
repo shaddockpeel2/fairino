@@ -1,0 +1,23 @@
+1791518055.0549071 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage7/launch_gui/ros_logs/2026-10-09-11-54-15-052853-ido-188486
+1791518055.0552096 [INFO] [launch]: Default logging verbosity is set to INFO
+1791518057.4463828 [INFO] [launch.user]: Stage 7 POSE PREVIEW | MOTION OFF. Report: /home/industio/fairino_ws/evidence/target_follow/stage7/launch_gui
+1791518057.4664459 [INFO] [launch.user]: Reusing external detector: its ambiguity threshold is unchanged.
+1791518057.4740722 [INFO] [static_transform_publisher-1]: process started with pid [188622]
+1791518057.4751678 [INFO] [orientation_check-2]: process started with pid [188624]
+1791518057.4754353 [INFO] [pose_preview-3]: process started with pid [188626]
+1791518057.4755471 [INFO] [pose_preview_audit-4]: process started with pid [188628]
+1791518057.4756441 [INFO] [pose_view-5]: process started with pid [188630]
+1791518057.5212102 [static_transform_publisher-1] [INFO] [1791518057.519357189] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791518057.5220599 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791518057.5224619 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791518057.5227141 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791518062.5363605 [INFO] [pose_preview_audit-4]: process has finished cleanly [pid 188628]
+1791518062.5484915 [INFO] [pose_view-5]: sending signal 'SIGINT' to process[pose_view-5]
+1791518062.5526493 [INFO] [pose_preview-3]: sending signal 'SIGINT' to process[pose_preview-3]
+1791518062.5557559 [INFO] [orientation_check-2]: sending signal 'SIGINT' to process[orientation_check-2]
+1791518062.5588956 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791518062.5610325 [static_transform_publisher-1] [INFO] [1791518062.559593276] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791518062.6792798 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 188622]
+1791518062.8123784 [INFO] [pose_view-5]: process has finished cleanly [pid 188630]
+1791518062.8225598 [INFO] [pose_preview-3]: process has finished cleanly [pid 188626]
+1791518062.8355997 [INFO] [orientation_check-2]: process has finished cleanly [pid 188624]

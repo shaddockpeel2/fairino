@@ -1,0 +1,15 @@
+1791688116.5688388 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage9/20261011_110836_77788/ros_logs/2026-10-11-11-08-36-567113-ido-77788
+1791688116.5690908 [INFO] [launch]: Default logging verbosity is set to INFO
+1791688119.4846330 [INFO] [launch.user]: Stage 9 POSE FOLLOW starts IDLE | T teach | S start | X stop. Report: /home/industio/fairino_ws/evidence/target_follow/stage9/20261011_110836_77788
+1791688119.5445116 [INFO] [component_container-1]: process started with pid [77933]
+1791688119.5449476 [INFO] [tag_pose-2]: process started with pid [77935]
+1791688119.5456328 [INFO] [static_transform_publisher-3]: process started with pid [77937]
+1791688119.5458148 [INFO] [follow_preview-4]: process started with pid [77939]
+1791688119.5459192 [INFO] [orientation_check-5]: process started with pid [77941]
+1791688119.5460167 [INFO] [pose_follow-6]: process started with pid [77943]
+1791688119.5461054 [INFO] [pose_view-7]: process started with pid [77945]
+1791688119.6237817 [static_transform_publisher-3] [INFO] [1791688119.623153277] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791688119.6240771 [static_transform_publisher-3] translation: ('-0.022343', '-0.072015', '0.045552')
+1791688119.6241491 [static_transform_publisher-3] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791688119.6242027 [static_transform_publisher-3] from 'flange_link' to 'camera_link'
+1791688119.9468756 [INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'

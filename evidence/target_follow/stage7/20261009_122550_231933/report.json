@@ -1,0 +1,219 @@
+{
+  "stage": 7,
+  "duration_s": 90.00532522399953,
+  "preview_states": 4480,
+  "trusted_observations": 1168,
+  "status_counts": {
+    "stale_robot_feedback": 105,
+    "orientation_ambiguous": 6,
+    "acquiring_orientation": 3,
+    "preview": 4182,
+    "holding_quality": 114,
+    "stale_trusted_pose": 47,
+    "orientation_jump": 5,
+    "orientation_measurement_rejected": 9,
+    "target_not_found": 9
+  },
+  "teach_count": 1,
+  "motion_commands_enabled": false,
+  "orientation_control_enabled": false,
+  "hardware_servo_commands_sent": 0,
+  "command_scope": "this_read_only_preview",
+  "reference_kind": "one_step_from_actual_tcp",
+  "note": "Preview only. Desired/error spans include target/robot motion and are not accuracy.",
+  "desired_position_axis_span_mm": [
+    90.21834745035162,
+    50.62803057423682,
+    41.135221329436035
+  ],
+  "max_rotation_error_deg": 22.272961116423076,
+  "max_preview_speed_mm_s": 20.000000000000007,
+  "max_preview_angular_speed_deg_s": 3.0000000000000013,
+  "rotation_mapping_gain": 1.0,
+  "latest_state": {
+    "schema_version": 1,
+    "stage": 7,
+    "stamp": {
+      "sec": 1791520044,
+      "nanosec": 161958297
+    },
+    "motion_commands_enabled": false,
+    "orientation_control_enabled": false,
+    "reference_kind": "one_step_from_actual_tcp",
+    "offset_recorded": true,
+    "teach_count": 1,
+    "quality_reason": null,
+    "rotation_mapping_gain": 1.0,
+    "deadband_enter_deg": 3.0,
+    "rotation_tau_s": 0.4,
+    "velocity_m_s": [
+      -0.018188374238152893,
+      -0.005731681705666935,
+      0.006027509220052594
+    ],
+    "angular_velocity_deg_s": [
+      0.9667063708084089,
+      0.29604960431324534,
+      2.824505872612838
+    ],
+    "target_age_ms": 64.845209,
+    "feedback_age_ms": 8.016457,
+    "trusted_image_stamp": {
+      "sec": 1791520044,
+      "nanosec": 97113088
+    },
+    "raw_target_m": [
+      -0.06982733830423266,
+      -0.5233640669412035,
+      0.03241278838353445
+    ],
+    "raw_target_rpy_deg": [
+      2.0795313305684706,
+      -2.375460871209354,
+      -92.4895844162408
+    ],
+    "raw_target_quaternion_xyzw": [
+      -0.0024226997901495603,
+      -0.0274372098920782,
+      -0.7217668755301446,
+      0.6915879607298826
+    ],
+    "raw_image_stamp": {
+      "sec": 1791520044,
+      "nanosec": 97113088
+    },
+    "filtered_target_m": [
+      -0.06996089932067298,
+      -0.5233828240256395,
+      0.032457720173947276
+    ],
+    "filtered_target_rpy_deg": [
+      1.385616683158898,
+      -2.3064106935305237,
+      -90.37438333329095
+    ],
+    "filtered_target_quaternion_xyzw": [
+      -0.005756244438780658,
+      -0.022759659167077964,
+      -0.7090461472350318,
+      0.7047711860282863
+    ],
+    "actual_tcp_m": [
+      -0.06995939643695723,
+      -0.4042034818777954,
+      0.12836823809173706
+    ],
+    "actual_tcp_rpy_deg": [
+      179.7460174560547,
+      -1.293589949607849,
+      179.69464111328125
+    ],
+    "actual_tcp_quaternion_xyzw": [
+      -0.0026895993153461246,
+      -0.9999302102842532,
+      -0.0022463458325292533,
+      0.011282488502667302
+    ],
+    "mapped_target_m": [
+      -0.06996089932067298,
+      -0.5233828240256395,
+      0.032457720173947276
+    ],
+    "mapped_target_rpy_deg": [
+      0.7612535144248821,
+      -2.0322358535833085,
+      -88.9667742345076
+    ],
+    "mapped_target_quaternion_xyzw": [
+      -0.007686926039541055,
+      -0.017306008290723776,
+      -0.7004927307464277,
+      0.7134082613879074
+    ],
+    "desired_tcp_m": [
+      -0.0921339266742677,
+      -0.41119131639388673,
+      0.1357167335485414
+    ],
+    "desired_tcp_rpy_deg": [
+      176.5435183635519,
+      -2.014976923997018,
+      -171.03321819521207
+    ],
+    "desired_tcp_quaternion_xyzw": [
+      0.0775938009821948,
+      -0.9963739454681786,
+      -0.028688139126282267,
+      0.019878468622656072
+    ],
+    "reference_tcp_m": [
+      -0.07033646651667673,
+      -0.40432230754354126,
+      0.12849319666980213
+    ],
+    "reference_tcp_rpy_deg": [
+      179.72600095644435,
+      -1.2998238839603693,
+      179.75364998651932
+    ],
+    "reference_tcp_quaternion_xyzw": [
+      -0.002176785062094634,
+      -0.9999304402265397,
+      -0.002415315999618457,
+      0.011337661300907671
+    ],
+    "reference_flange_m": [
+      -0.0670130248891575,
+      -0.40824738390537424,
+      0.313062786290665
+    ],
+    "reference_flange_rpy_deg": [
+      179.72600095644435,
+      -1.2998238839603693,
+      179.75364998651932
+    ],
+    "reference_flange_quaternion_xyzw": [
+      -0.002176785062094634,
+      -0.9999304402265397,
+      -0.002415315999618457,
+      0.011337661300907671
+    ],
+    "status": "preview",
+    "position_error_m": [
+      -0.022174530237310475,
+      -0.006987834516091307,
+      0.007348495456804355
+    ],
+    "error_norm_mm": 24.383191094447582,
+    "rotation_error_deg": 9.747352497410956,
+    "offset_matrix": [
+      [
+        0.13909938547068693,
+        -0.9861610001520021,
+        -0.09020999246691083,
+        -0.10884054269506882
+      ],
+      [
+        -0.9893271597961296,
+        -0.13439606095389312,
+        -0.056298043392298325,
+        -0.018720509205003157
+      ],
+      [
+        0.043395067132116556,
+        0.09707821887158989,
+        -0.9943302708704583,
+        0.10744431195159573
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "rotation_active": false,
+    "kind": "preview",
+    "audit_receive_s": 12737.514004232
+  }
+}

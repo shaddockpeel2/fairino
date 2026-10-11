@@ -1,0 +1,62 @@
+{
+  "stage": 6,
+  "scenario": "target_rotation",
+  "paired_observations": 0,
+  "trusted_orientation_observations": 0,
+  "orientation_available_fraction": 0.0,
+  "paired_status_counts": {},
+  "observation_status_counts": {},
+  "state_status_counts": {
+    "no_fresh_image": 3
+  },
+  "motion_commands_enabled": false,
+  "orientation_control_enabled": false,
+  "hardware_servo_commands_sent": 0,
+  "command_scope": "this_read_only_pipeline",
+  "spread_note": "Contains real movement unless both target and robot were stationary. Spread is not absolute pose accuracy; a stable trajectory does not prove the correct PnP branch.",
+  "orientation_delta_deg": null,
+  "angular_speed_deg_s": null,
+  "candidate_margin_px": null,
+  "candidate_rotation_distance_deg": null,
+  "min_edge_px": null,
+  "reprojection_error_px": null,
+  "all_base": null,
+  "trusted_base": null,
+  "robot_flange": null,
+  "latest_state": {
+    "schema_version": 1,
+    "status": "no_fresh_image",
+    "frame_id": "base_link",
+    "stamp": null,
+    "valid_position": false,
+    "valid_orientation": false,
+    "orientation_measurement_valid": false,
+    "position_m": null,
+    "quaternion_xyzw": null,
+    "motion_commands_enabled": false,
+    "orientation_control_enabled": false,
+    "confirmation_count": 0,
+    "feedback_age_ms": null,
+    "published_stamp_s": 1791511323.920504,
+    "pairing": {
+      "paired": 0,
+      "evicted": 0,
+      "expired": 0,
+      "late": 0,
+      "pending_poses": 0,
+      "pending_qualities": 0
+    },
+    "kind": "state",
+    "audit_receive_s": 4017.269916269
+  },
+  "pairing": {
+    "paired": 0,
+    "evicted": 0,
+    "expired": 0,
+    "late": 0,
+    "pending_poses": 0,
+    "pending_qualities": 0
+  },
+  "duration_s": 0.11965073600003961,
+  "replay_source": null
+}

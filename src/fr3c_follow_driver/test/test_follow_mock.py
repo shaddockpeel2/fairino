@@ -31,7 +31,8 @@ class Rig:
         self.history = PoseHistory()
         self.bridge, self.enabled, self.states = bridge, True, []
         self.target = np.array([0., -.3, .03])
-        self.output = ROOT/'evidence/target_follow/stage4/mock_integration'/name
+        self.output = Path(os.environ.get('FR3C_POSITION_TEST_OUTPUT_ROOT',
+                                         str(ROOT/'evidence/target_follow/stage4/mock_integration')))/name
         cmd = [str(BIN), '--ros-args', '-p', 'mock:=true', '-p', 'output_dir:='+str(self.output),
                '-p', 'tcp_xyz_m:='+str(TCP), '-p', 'tcp_rpy_rad:=[0.0, 0.0, 0.0]',
                '-p', 'collision_enabled:=false']  # Original ideal actuator contracts; geometry tested separately.

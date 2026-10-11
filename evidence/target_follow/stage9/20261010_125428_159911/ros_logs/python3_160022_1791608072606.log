@@ -1,0 +1,2 @@
+[INFO] [1791608083.564581470] [target_pose_viewer]: Start rejected: fresh trusted full pose is required: orientation_ambiguous
+[INFO] [1791608096.560822668] [target_pose_viewer]: Stop OK: Stop requested; follow_state records the SDK stop result.

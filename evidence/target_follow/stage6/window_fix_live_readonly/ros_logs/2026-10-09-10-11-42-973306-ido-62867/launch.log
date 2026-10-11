@@ -1,0 +1,32 @@
+1791511902.9751699 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage6/window_fix_live_readonly/ros_logs/2026-10-09-10-11-42-973306-ido-62867
+1791511902.9757500 [INFO] [launch]: Default logging verbosity is set to INFO
+1791511905.8184812 [INFO] [launch.user]: Stage 6 READ ONLY. Report: /home/industio/fairino_ws/evidence/target_follow/stage6/window_fix_live_readonly
+1791511905.9074676 [INFO] [component_container-1]: process started with pid [62999]
+1791511905.9082856 [INFO] [tag_pose-2]: process started with pid [63001]
+1791511905.9087000 [INFO] [static_transform_publisher-3]: process started with pid [63003]
+1791511905.9089835 [INFO] [robot_feedback-4]: process started with pid [63005]
+1791511905.9091620 [INFO] [follow_preview-5]: process started with pid [63007]
+1791511905.9092853 [INFO] [orientation_check-6]: process started with pid [63009]
+1791511905.9093931 [INFO] [orientation_audit-7]: process started with pid [63011]
+1791511905.9095008 [INFO] [pose_view-8]: process started with pid [63014]
+1791511905.9871926 [static_transform_publisher-3] [INFO] [1791511905.986232438] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791511905.9877057 [static_transform_publisher-3] translation: ('-0.022343', '-0.072015', '0.045552')
+1791511905.9880095 [static_transform_publisher-3] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791511905.9882612 [static_transform_publisher-3] from 'flange_link' to 'camera_link'
+1791511906.5137832 [INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+1791511917.2930305 [INFO] [orientation_audit-7]: process has finished cleanly [pid 63011]
+1791511917.5300732 [INFO] [pose_view-8]: sending signal 'SIGINT' to process[pose_view-8]
+1791511917.5320816 [INFO] [orientation_check-6]: sending signal 'SIGINT' to process[orientation_check-6]
+1791511917.5354443 [INFO] [follow_preview-5]: sending signal 'SIGINT' to process[follow_preview-5]
+1791511917.5370026 [INFO] [robot_feedback-4]: sending signal 'SIGINT' to process[robot_feedback-4]
+1791511917.5390787 [INFO] [static_transform_publisher-3]: sending signal 'SIGINT' to process[static_transform_publisher-3]
+1791511917.5495672 [INFO] [tag_pose-2]: sending signal 'SIGINT' to process[tag_pose-2]
+1791511917.5512812 [INFO] [component_container-1]: sending signal 'SIGINT' to process[component_container-1]
+1791511917.5523188 [static_transform_publisher-3] [INFO] [1791511917.539470013] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791511917.6718395 [INFO] [static_transform_publisher-3]: process has finished cleanly [pid 63003]
+1791511917.7823865 [INFO] [pose_view-8]: process has finished cleanly [pid 63014]
+1791511917.8135571 [INFO] [follow_preview-5]: process has finished cleanly [pid 63007]
+1791511917.8185728 [INFO] [tag_pose-2]: process has finished cleanly [pid 63001]
+1791511917.8805447 [ERROR] [orientation_check-6]: process has died [pid 63009, exit code 1, cmd '/home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow/orientation_check --ros-args --params-file /home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config/orientation_check.yaml'].
+1791511918.2048969 [INFO] [robot_feedback-4]: process has finished cleanly [pid 63005]
+1791511918.7326207 [INFO] [component_container-1]: process has finished cleanly [pid 62999]

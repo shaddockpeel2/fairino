@@ -1,0 +1,32 @@
+Starting >>> fr3c_target_follow
+running develop
+[Processing: fr3c_target_follow]
+[Processing: fr3c_target_follow]
+running egg_info
+writing fr3c_target_follow.egg-info/PKG-INFO
+writing dependency_links to fr3c_target_follow.egg-info/dependency_links.txt
+writing entry points to fr3c_target_follow.egg-info/entry_points.txt
+writing requirements to fr3c_target_follow.egg-info/requires.txt
+writing top-level names to fr3c_target_follow.egg-info/top_level.txt
+reading manifest file 'fr3c_target_follow.egg-info/SOURCES.txt'
+writing manifest file 'fr3c_target_follow.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/industio/fairino_ws/install/fr3c_target_follow/lib/python3.10/site-packages/fr3c-target-follow.egg-link (link to .)
+Installing follow_control script to /home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow
+Installing follow_preview script to /home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow
+Installing orientation_audit script to /home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow
+Installing orientation_check script to /home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow
+Installing pose_audit script to /home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow
+Installing pose_preview script to /home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow
+Installing pose_preview_audit script to /home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow
+Installing pose_view script to /home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow
+Installing preview_audit script to /home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow
+Installing tag_pose script to /home/industio/fairino_ws/install/fr3c_target_follow/lib/fr3c_target_follow
+
+Installed /home/industio/fairino_ws/build/fr3c_target_follow
+running symlink_data
+symbolically linking /home/industio/fairino_ws/build/fr3c_target_follow/config/pose_preview.yaml -> /home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/config
+symbolically linking /home/industio/fairino_ws/build/fr3c_target_follow/launch/pose_preview.launch.py -> /home/industio/fairino_ws/install/fr3c_target_follow/share/fr3c_target_follow/launch
+Finished <<< fr3c_target_follow [1min 1s]
+
+Summary: 1 package finished [1min 2s]

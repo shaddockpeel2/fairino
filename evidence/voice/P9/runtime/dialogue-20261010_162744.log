@@ -1,0 +1,12 @@
+2026-10-10 16:27:44,924 INFO fr3c_dialogue_gui speech service ready at /home/industio/fairino_ws/evidence/voice/P6/runtime/fr3c-tts-pipeline.sock
+2026-10-10 16:28:45,004 INFO fr3c_dialogue_gui local_route request_id=7f6548f06ffc4011b69120cb874c663f route=chat
+2026-10-10 16:28:49,489 INFO fr3c_dialogue_gui speech playback first_write=1.891s playback_end=4.438s
+2026-10-10 16:30:04,635 INFO fr3c_dialogue_gui local_action_route request_id=5853503d66bb472893bd5dd43349944a task=pick_auto_stack color=None zone=None support_color=None
+2026-10-10 16:30:04,637 ERROR fr3c_dialogue_gui action_dispatch_failed request_id=5853503d66bb472893bd5dd43349944a
+Traceback (most recent call last):
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/dialogue_gui.py", line 1104, in _handle_intent
+    self.bridge.send(
+  File "/home/industio/fairino_ws/src/fr3c_voice/fr3c_voice/action_bridge.py", line 194, in send
+    raise ValueError(
+ValueError: pick_auto_stack does not accept a color, zone, or support color
+2026-10-10 16:30:11,656 INFO fr3c_dialogue_gui speech playback first_write=0.441s playback_end=6.967s

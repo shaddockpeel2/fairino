@@ -83,9 +83,14 @@ def test_fresh_pose_loss_stale_input_and_recovery_over_ros():
         assert .09 < poses[-1].pose.position.z < .11
         q = poses[-1].pose.orientation
         assert np.linalg.norm([q.x, q.y, q.z, q.w]) == pytest.approx(1)
+        assert quality[-1]['stamp'] == dict(sec=stamp.sec, nanosec=stamp.nanosec)
+        assert quality[-1]['valid_position'] is True
+        assert len(quality[-1]['candidate_errors_px']) == quality[-1]['candidate_count']
+        assert isinstance(quality[-1]['orientation_measurement_valid'], bool)
         count = len(poses)
         publish(np.full_like(canvas, 255))
         assert len(poses) == count and quality[-1]['status'] == 'target_not_found'
+        assert quality[-1]['valid_position'] is False and quality[-1]['orientation_measurement_valid'] is False
         publish(canvas, age_s=1)
         assert len(poses) == count and quality[-1]['status'] == 'stale_or_out_of_order_image'
         spin_for(.6)

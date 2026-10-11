@@ -1,0 +1,2 @@
+[INFO] [1791614550.804281750] [target_pose_viewer]: Start OK: Pose following started from the current TCP with a newly recorded relation.
+[INFO] [1791615321.818269724] [target_pose_viewer]: Start rejected: driver is stopping or faulted; inspect follow_state

@@ -1,0 +1,51 @@
+1. 构建第四步代码。
+   在一个终端执行，等待构建成功：
+   cd /home/industio/fairino_ws
+   source /home/industio/fairino_ws/scripts/camera/activate.bash
+   colcon build --packages-select fr3c_follow_driver fr3c_target_follow --symlink-install
+2. 终端 1：启动相机和标签检测。
+   如果这部分已经正常运行，直接继续下一步；否则执行：
+   export FR3C_FOLLOW_DOMAIN_ID=187
+   /home/industio/fairino_ws/scripts/target_follow/start_pose.sh
+   保持这个终端运行。如果提示相机和检测已运行，表示正在复用已有链路。
+3. 终端 2：启动第四步真实执行端。
+   export FR3C_FOLLOW_DOMAIN_ID=187
+   /home/industio/fairino_ws/scripts/target_follow/start_follow.sh
+   这次实机验证不要追加 mock:=true。
+   正常启动会显示类似：
+   Position follow ready to receive data ...
+   mock=false
+   此时机械臂还不会跟随。如果提示已有反馈或预览程序运行，回到第 1 步关闭对应程序，再重新执行。
+4. 终端 3：打开查看器。
+   export FR3C_FOLLOW_DOMAIN_ID=187
+   /home/industio/fairino_ws/scripts/target_follow/view_pose.sh
+   应能看到标签框、坐标轴、位置数字，以及实际 TCP。执行端待机时底部显示类似：
+   FOLLOW OFF | idle
+5. 准备起始位置，开始跟随。
+   用示教器将末端放到合适的观察位置，让相机完整看到方块顶面的标签。沿用第三步已核对的工具 0、工件坐标 0 配置，准备好小幅移动空间，然后切到自动模式，保持机器人已使能、其他运动程序停止。
+   方块先保持不动。点击查看器窗口，再按 S。
+   S 会自动记录当前偏移和末端姿态，无需先按 T。开始成功后，底部应显示：
+   FOLLOW ON | following
+   如果按键不方便，也可以在第 4 个终端执行开始命令：
+   export FR3C_FOLLOW_DOMAIN_ID=187
+   /home/industio/fairino_ws/scripts/target_follow/follow_control.sh start
+   返回 success=True 表示开始请求成功；随后仍要观察窗口是否保持 following。
+6. 验证位置跟随。
+   保持标签完整可见，依次操作：
+   - 先沿一个方向缓慢移动方块约 5–10 mm，观察末端是否跟着移动。
+   - 停住方块，观察末端是否逐渐收敛、停稳。
+   - 再分别试另外两个方向，最后做小幅组合移动。
+   当前默认最大跟随速度为 10 mm/s，移动方块时慢一些。第一版只跟 XYZ，机械臂末端姿态保持不变。
+7. 验证遮挡和恢复。
+   方块保持原位，遮挡标签约 1 秒。应停止推进，窗口显示：
+   FOLLOW OFF | paused_target
+   重新露出标签后，应自动恢复到 following，继续保持原来的偏移。
+8. 验证主动停止，然后退出。
+   在查看器按 X。应显示：
+   FOLLOW OFF | stopped
+   再移动一下方块，确认机械臂保持停止。也可以用命令停止：
+   export FR3C_FOLLOW_DOMAIN_ID=187
+   /home/industio/fairino_ws/scripts/target_follow/follow_control.sh stop
+   验证结束后，在终端 2 按 Ctrl-C 关闭执行端；查看器按 Q/Esc 关闭；需要关闭相机检测时，再在终端 1 按 Ctrl-C。
+   Q/Esc 只关闭查看器，所以退出前先按 X。 下次按 S 开始时，会重新记录当时的偏移。
+如果开始返回 success=False，或者窗口出现 fault，把终端 2 的报错文字和窗口底部状态发给我，就能继续定位。

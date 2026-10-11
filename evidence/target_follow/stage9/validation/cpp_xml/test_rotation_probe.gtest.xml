@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="4" failures="0" disabled="0" errors="0" time="0.319" timestamp="2026-10-10T12:13:10" name="AllTests">
+  <testsuite name="TcpRotation" tests="3" failures="0" disabled="0" errors="0" time="0.306" timestamp="2026-10-10T12:13:10">
+    <testcase name="AllBaseAxesCompensateFullToolAndReturnFromDifferentStarts" status="run" result="completed" time="0.304" timestamp="2026-10-10T12:13:10" classname="fr3c_follow_driver.TcpRotation" />
+    <testcase name="NumericalAngularVelocityAndAccelerationRespectLimitsIncludingTurnaround" status="run" result="completed" time="0.001" timestamp="2026-10-10T12:13:11" classname="fr3c_follow_driver.TcpRotation" />
+    <testcase name="OneWayHoldsEndpointAndRejectsInvalidInput" status="run" result="completed" time="0.001" timestamp="2026-10-10T12:13:11" classname="fr3c_follow_driver.TcpRotation" />
+  </testsuite>
+  <testsuite name="PoseGeometry" tests="1" failures="0" disabled="0" errors="0" time="0.013" timestamp="2026-10-10T12:13:11">
+    <testcase name="ContinuousSdkEulerAcross180AndBothPitchSingularities" status="run" result="completed" time="0.013" timestamp="2026-10-10T12:13:11" classname="fr3c_follow_driver.PoseGeometry" />
+  </testsuite>
+</testsuites>

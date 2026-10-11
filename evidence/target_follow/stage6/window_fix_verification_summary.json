@@ -1,0 +1,64 @@
+{
+  "failed_user_session": "20261009_100158_54440",
+  "failed_duration_s": 0.11965073600003961,
+  "failed_paired_observations": 0,
+  "first_exit": "pose_view, clean exit before capture",
+  "viewer_root_cause": "OpenCV 4.5.4 GTK3 WND_PROP_VISIBLE=-1 interpreted as window removed",
+  "feedback_root_cause": "RPC during node construction starts detached threads; shutdown/initialization failure skipped CloseRPC",
+  "software_tests": {
+    "target_python_passed": 55,
+    "target_python_opt_in_skipped": 13,
+    "window_and_launch_ros_gui_passed": 11,
+    "feedback_mock_rpc_ros_passed": 2,
+    "feedback_cpp_passed": 3
+  },
+  "native_startup_interrupt_before": {
+    "exit_code": -11,
+    "signal_after_s": 0.5,
+    "hardware_servo_commands_sent": 0,
+    "read_only": true
+  },
+  "native_startup_interrupt_after": [
+    {
+      "exit_code": 0,
+      "signal_after_s": 0.5,
+      "hardware_servo_commands_sent": 0,
+      "read_only": true
+    },
+    {
+      "exit_code": 0,
+      "signal_after_s": 1.8,
+      "hardware_servo_commands_sent": 0,
+      "read_only": true
+    }
+  ],
+  "real_gui_all_owned_processes_finished_cleanly": true,
+  "real_gui_scenario": "unspecified",
+  "user_static_target_rotation_and_robot_rotation_validation_complete": false,
+  "hardware_motion_commands_sent": 0,
+  "real_gui_teardown_problem": "Initial regression capture saved; orientation_check raised rclpy subscription conversion error after SIGINT. Fixed by handling RuntimeError only when context has shut down.",
+  "real_gui_initial_capture": {
+    "duration_s": 10.001107334000153,
+    "paired_observations": 97,
+    "trusted_orientation_observations": 34,
+    "paired_status_counts": {
+      "acquiring_orientation": 46,
+      "orientation_ambiguous": 17,
+      "valid": 34
+    },
+    "hardware_servo_commands_sent": 0
+  },
+  "real_gui_initial_all_owned_processes_finished_cleanly": false,
+  "real_gui_read_only": {
+    "duration_s": 10.000443580999672,
+    "paired_observations": 113,
+    "trusted_orientation_observations": 10,
+    "paired_status_counts": {
+      "acquiring_orientation": 60,
+      "valid": 10,
+      "orientation_ambiguous": 43
+    },
+    "hardware_servo_commands_sent": 0
+  },
+  "real_gui_final_session": "window_fix_live_readonly_final"
+}

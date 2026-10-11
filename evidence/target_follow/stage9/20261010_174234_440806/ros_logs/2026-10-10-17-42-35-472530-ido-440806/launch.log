@@ -1,0 +1,24 @@
+1791625355.4745281 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage9/20261010_174234_440806/ros_logs/2026-10-10-17-42-35-472530-ido-440806
+1791625355.4748166 [INFO] [launch]: Default logging verbosity is set to INFO
+1791625358.7209513 [INFO] [launch.user]: Stage 9 POSE FOLLOW starts IDLE | T teach | S start | X stop. Report: /home/industio/fairino_ws/evidence/target_follow/stage9/20261010_174234_440806
+1791625358.8157876 [INFO] [component_container-1]: process started with pid [440991]
+1791625358.8164635 [INFO] [tag_pose-2]: process started with pid [440993]
+1791625358.8166950 [INFO] [static_transform_publisher-3]: process started with pid [440995]
+1791625358.8168449 [INFO] [follow_preview-4]: process started with pid [440997]
+1791625358.8169808 [INFO] [orientation_check-5]: process started with pid [441001]
+1791625358.8171101 [INFO] [pose_follow-6]: process started with pid [441003]
+1791625358.8172312 [INFO] [pose_view-7]: process started with pid [441011]
+1791625358.8657637 [static_transform_publisher-3] [INFO] [1791625358.864848612] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791625358.8662367 [static_transform_publisher-3] translation: ('-0.022343', '-0.072015', '0.045552')
+1791625358.8665221 [static_transform_publisher-3] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791625358.8667598 [static_transform_publisher-3] from 'flange_link' to 'camera_link'
+1791625359.3544886 [INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+1791625404.8083286 [WARNING] [launch]: user interrupted with ctrl-c (SIGINT)
+1791625405.4049873 [INFO] [static_transform_publisher-3]: process has finished cleanly [pid 440995]
+1791625405.4059110 [INFO] [orientation_check-5]: process has finished cleanly [pid 441001]
+1791625405.4066093 [INFO] [tag_pose-2]: process has finished cleanly [pid 440993]
+1791625405.4072425 [INFO] [follow_preview-4]: process has finished cleanly [pid 440997]
+1791625405.4078867 [INFO] [pose_view-7]: process has finished cleanly [pid 441011]
+1791625405.4093919 [static_transform_publisher-3] [INFO] [1791625404.808146667] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791625405.4678268 [INFO] [pose_follow-6]: process has finished cleanly [pid 441003]
+1791625406.0314586 [INFO] [component_container-1]: process has finished cleanly [pid 440991]

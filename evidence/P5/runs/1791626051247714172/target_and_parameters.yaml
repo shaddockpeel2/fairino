@@ -1,0 +1,47 @@
+frame: base_link
+target_top_xyz_m: [-0.122327764684, -0.461754888203, 0.0309324294023]
+target_object_orientation_xyzw: [0, 0, 0.13162281099, 0.991299871697]
+object_long_axis_yaw_rad: 0.26401171224
+applied_grasp_yaw_rad: -1.30678461456
+selected_grasp_tilt_rad: 0
+selected_grasp_orientation_xyzw: [0.607883479257, 0.794026243676, 0, 0]
+nominal_grasp_orientation_xyzw: [0, 1, 0, 0]
+use_target_yaw: true
+use_target_size: true
+target_yaw_offset_rad: -1.57079632679
+selected_yaw_symmetry_rad: 1.57079632679
+equivalent_grasp_selection: first_complete_route_in_configured_order
+approach_clearance_m: 0.01
+grasp_depth_m: 0.01
+candidate_planning_time_s: 0.25
+candidate_planning_attempts: 1
+candidate_ik_timeout_s: 0.05
+grasp_tilt_candidates_rad: [0, 0.174532925199, -0.174532925199, 0.349065850399, -0.349065850399, 0.523598775598, -0.523598775598]
+grasp_contact_offset_xyz_m: [0, 0, 0]
+lift_distance_m: 0.05
+pre_open_position_m: 0.06
+close_position_m: 0.027
+release_command_repetitions: 2
+object_size_m: [0.03, 0.03, 0.03]
+sort_enabled: true
+sort_color: yellow
+sort_grid_file: /home/industio/fairino_ws/evidence/a4_paper_grid.json
+stack_enabled: true
+stack_upper_color: yellow
+stack_lower_color: green
+maximum_stack_cubes: 4
+stack_support_tier: 0
+stack_support_top_xyz_m: [-0.0514396100713, -0.541439541093, 0.0321974025446]
+stack_support_yaw_rad: 0.0373766565563
+stack_placement_yaw_offset_rad: -0.226635055683
+stack_approach_clearance_m: 0.03
+stack_height_tolerance_m: 0.012
+release_bottom_gap_m: 0.005
+place_region_center_m: [0.2374912583, -0.374433469667, 0]
+ground_plane_z_m: 0
+ground_plane_xy_size_m: [2, 2]
+ground_plane_thickness_m: 0.02
+execute: true
+p6_gate_file: /home/industio/fairino_ws/evidence/P6/p6_execution_gate.txt
+p6_gate_max_age_s: 360000
+perception_status_json: '{"actionable_cube_count":1,"active_inferences":0,"candidate_area_px":2531.0,"center_base_m":[-0.12232776468449334,-0.46175488820280747,0.030922227425901786],"color":"yellow","depth_valid_fraction":1.0,"detected_targets":[{"center_base_m":[-0.05143961007133771,-0.5414395410928103,0.03219740254456871],"color":"green","grasp_axis_yaw_base_rad":0.0373766565563487,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.02196273894504977,0.022367795303182284],"stack_tier":0,"top_z_base_m":0.03219740254456871},{"center_base_m":[-0.12232776468449334,-0.46175488820280747,0.030922227425901786],"color":"yellow","grasp_axis_yaw_base_rad":0.26147408021669416,"grasp_axis_yaw_period_rad":1.5707963267948966,"nominal_object_size_m":[0.03,0.03,0.03],"object_class":"cube_30mm","observed_short_long_m":[0.025444468383173095,0.025592152406779194],"stack_tier":0,"top_z_base_m":0.030922227425901786}],"detection_mode":"colors","error_count":0,"filter_generation":5,"frames_inferred":1958,"frames_skipped_paused":0,"frozen":false,"grasp_axis_yaw_base_rad":0.2640117122396402,"grasp_axis_yaw_period_rad":1.5707963267948966,"grasp_axis_yaw_std_rad":0.0035942082392621147,"has_stable_pose":true,"inference_enabled":true,"last_inference_end_ns":32458570844305,"last_inference_start_ns":32458396955362,"last_success_ns":32458570844305,"nominal_object_size_m":[0.03,0.03,0.03],"npu_inference":false,"object_class":"cube_30mm","observed_short_long_m":[0.025444468383173095,0.025592152406779194],"orientation_source":"top_surface_square_min_area_edge","pause_generation":0,"physical_color_counts":{"blue":0,"green":1,"red":0,"yellow":1},"physical_cube_count":2,"position_std_m":[2.08332123501468e-05,0.00012448384056188571,1.3472592220123446e-05],"raw_center_base_m":[-0.12232776468449334,-0.46175488820280747,0.034922227425901786],"reason":"stable_target_updated","rejected_color_regions":{},"rejected_target_details":[],"requested_color_physical_count":1,"required_samples":3,"rgb_color_regions":2,"sample_stamp":1791626050.870341,"samples":3,"skipped_cube_count":0,"sort_color_order":["red","yellow","blue","green"],"stable":true,"stacked_cube_count":0,"target_filter_color":"yellow","top_axis_ratio":1.0280524523016241,"top_pose_z_compensation_m":-0.004,"top_z_spread_m":0.001275972721130253,"tracking":true,"valid":true}'

@@ -1,0 +1,321 @@
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage6/launch_smoke/ros_logs/2026-10-10-09-49-20-796597-ido-215
+[INFO] [launch]: Default logging verbosity is set to INFO
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-10 09:49:21.007 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[37;1m2026-10-10 09:49:21.007 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-10 09:49:21.007 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[INFO] [launch.user]: Stage 6 READ ONLY. Report: /home/industio/fairino_ws/evidence/target_follow/stage6/launch_smoke
+[INFO] [launch.user]: Orientation quality profile: conservative
+[INFO] [static_transform_publisher-1]: process started with pid [247]
+[INFO] [orientation_check-2]: process started with pid [249]
+[INFO] [orientation_audit-3]: process started with pid [251]
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] [INFO] [1791596963.654411949] [follow_handeye_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+[static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+[static_transform_publisher-1] from 'flange_link' to 'camera_link'
+[orientation_check-2] getifaddrs: Operation not permitted
+[orientation_check-2] getifaddrs: Operation not permitted
+[orientation_check-2] getifaddrs: Operation not permitted
+[orientation_check-2] getifaddrs: Operation not permitted
+[orientation_check-2] [37;1m2026-10-10 09:49:24.500 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[orientation_check-2] [37;1m2026-10-10 09:49:24.501 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[orientation_check-2] [37;1m2026-10-10 09:49:24.501 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[orientation_audit-3] getifaddrs: Operation not permitted
+[orientation_audit-3] getifaddrs: Operation not permitted
+[orientation_audit-3] getifaddrs: Operation not permitted
+[orientation_audit-3] getifaddrs: Operation not permitted
+[orientation_audit-3] [37;1m2026-10-10 09:49:24.548 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[orientation_audit-3] [37;1m2026-10-10 09:49:24.548 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[orientation_audit-3] [37;1m2026-10-10 09:49:24.548 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[orientation_check-2] [INFO] [1791596964.592518776] [orientation_check]: Stage 6: exact image stamps, base-frame rotation, read-only; no motion client.
+[orientation_audit-3] Orientation: valid
+[orientation_audit-3] {
+[orientation_audit-3]   "stage": 6,
+[orientation_audit-3]   "scenario": "static",
+[orientation_audit-3]   "paired_observations": 30,
+[orientation_audit-3]   "trusted_orientation_observations": 27,
+[orientation_audit-3]   "orientation_available_fraction": 0.9,
+[orientation_audit-3]   "paired_status_counts": {
+[orientation_audit-3]     "acquiring_orientation": 3,
+[orientation_audit-3]     "valid": 27
+[orientation_audit-3]   },
+[orientation_audit-3]   "observation_status_counts": {
+[orientation_audit-3]     "acquiring_orientation": 3,
+[orientation_audit-3]     "valid": 27
+[orientation_audit-3]   },
+[orientation_audit-3]   "state_status_counts": {
+[orientation_audit-3]     "acquiring_orientation": 4,
+[orientation_audit-3]     "valid": 27
+[orientation_audit-3]   },
+[orientation_audit-3]   "motion_commands_enabled": false,
+[orientation_audit-3]   "orientation_control_enabled": false,
+[orientation_audit-3]   "hardware_servo_commands_sent": 0,
+[orientation_audit-3]   "command_scope": "this_read_only_pipeline",
+[orientation_audit-3]   "spread_note": "Contains real movement unless both target and robot were stationary. Spread is not absolute pose accuracy; a stable trajectory does not prove the correct PnP branch.",
+[orientation_audit-3]   "orientation_delta_deg": {
+[orientation_audit-3]     "p50": 0.0,
+[orientation_audit-3]     "p95": 0.0,
+[orientation_audit-3]     "max": 0.0
+[orientation_audit-3]   },
+[orientation_audit-3]   "angular_speed_deg_s": {
+[orientation_audit-3]     "p50": 0.0,
+[orientation_audit-3]     "p95": 0.0,
+[orientation_audit-3]     "max": 0.0
+[orientation_audit-3]   },
+[orientation_audit-3]   "candidate_margin_px": null,
+[orientation_audit-3]   "candidate_rotation_distance_deg": {
+[orientation_audit-3]     "p50": 30.0,
+[orientation_audit-3]     "p95": 30.0,
+[orientation_audit-3]     "max": 30.0
+[orientation_audit-3]   },
+[orientation_audit-3]   "min_edge_px": null,
+[orientation_audit-3]   "reprojection_error_px": null,
+[orientation_audit-3]   "all_base": {
+[orientation_audit-3]     "rotation_deviation_from_first_deg": {
+[orientation_audit-3]       "p50": 0.0,
+[orientation_audit-3]       "p95": 0.0,
+[orientation_audit-3]       "max": 0.0
+[orientation_audit-3]     },
+[orientation_audit-3]     "relative_rotation_vector_axis_span_deg": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ],
+[orientation_audit-3]     "start_end_rotation_vector_deg": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ],
+[orientation_audit-3]     "position_deviation_from_median_mm": {
+[orientation_audit-3]       "p50": 0.0,
+[orientation_audit-3]       "p95": 0.0,
+[orientation_audit-3]       "max": 0.0
+[orientation_audit-3]     },
+[orientation_audit-3]     "position_axis_span_mm": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ]
+[orientation_audit-3]   },
+[orientation_audit-3]   "trusted_base": {
+[orientation_audit-3]     "rotation_deviation_from_first_deg": {
+[orientation_audit-3]       "p50": 0.0,
+[orientation_audit-3]       "p95": 0.0,
+[orientation_audit-3]       "max": 0.0
+[orientation_audit-3]     },
+[orientation_audit-3]     "relative_rotation_vector_axis_span_deg": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ],
+[orientation_audit-3]     "start_end_rotation_vector_deg": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ],
+[orientation_audit-3]     "position_deviation_from_median_mm": {
+[orientation_audit-3]       "p50": 0.0,
+[orientation_audit-3]       "p95": 0.0,
+[orientation_audit-3]       "max": 0.0
+[orientation_audit-3]     },
+[orientation_audit-3]     "position_axis_span_mm": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ]
+[orientation_audit-3]   },
+[orientation_audit-3]   "robot_flange": {
+[orientation_audit-3]     "rotation_deviation_from_first_deg": {
+[orientation_audit-3]       "p50": 0.0,
+[orientation_audit-3]       "p95": 0.0,
+[orientation_audit-3]       "max": 0.0
+[orientation_audit-3]     },
+[orientation_audit-3]     "relative_rotation_vector_axis_span_deg": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ],
+[orientation_audit-3]     "start_end_rotation_vector_deg": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ],
+[orientation_audit-3]     "position_deviation_from_median_mm": {
+[orientation_audit-3]       "p50": 0.0,
+[orientation_audit-3]       "p95": 0.0,
+[orientation_audit-3]       "max": 0.0
+[orientation_audit-3]     },
+[orientation_audit-3]     "position_axis_span_mm": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ]
+[orientation_audit-3]   },
+[orientation_audit-3]   "latest_paired_observation": {
+[orientation_audit-3]     "schema_version": 1,
+[orientation_audit-3]     "frame_id": "base_link",
+[orientation_audit-3]     "source_frame_id": "camera_color_optical_frame",
+[orientation_audit-3]     "stamp": {
+[orientation_audit-3]       "sec": 1791596966,
+[orientation_audit-3]       "nanosec": 33532609
+[orientation_audit-3]     },
+[orientation_audit-3]     "stamp_s": 1791596966.0335326,
+[orientation_audit-3]     "target_id": 1,
+[orientation_audit-3]     "position_m": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.03
+[orientation_audit-3]     ],
+[orientation_audit-3]     "quaternion_xyzw": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       1.0
+[orientation_audit-3]     ],
+[orientation_audit-3]     "rpy_deg": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       -0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ],
+[orientation_audit-3]     "valid_position": true,
+[orientation_audit-3]     "orientation_measurement_valid": true,
+[orientation_audit-3]     "quality": {
+[orientation_audit-3]       "status": "valid",
+[orientation_audit-3]       "target_id": 1,
+[orientation_audit-3]       "frame_id": "camera_color_optical_frame",
+[orientation_audit-3]       "stamp": {
+[orientation_audit-3]         "sec": 1791596966,
+[orientation_audit-3]         "nanosec": 33532609
+[orientation_audit-3]       },
+[orientation_audit-3]       "valid_position": true,
+[orientation_audit-3]       "orientation_measurement_valid": true,
+[orientation_audit-3]       "orientation_ambiguous": false,
+[orientation_audit-3]       "solver": "IPPE_SQUARE",
+[orientation_audit-3]       "candidate_count": 2,
+[orientation_audit-3]       "selected_candidate_index": 0,
+[orientation_audit-3]       "candidate_errors_px": [
+[orientation_audit-3]         0.01,
+[orientation_audit-3]         0.6
+[orientation_audit-3]       ],
+[orientation_audit-3]       "candidate_rotation_distance_deg": 30.0
+[orientation_audit-3]     },
+[orientation_audit-3]     "motion_commands_enabled": false,
+[orientation_audit-3]     "orientation_control_enabled": false,
+[orientation_audit-3]     "valid_orientation": true,
+[orientation_audit-3]     "status": "valid",
+[orientation_audit-3]     "orientation_delta_deg": 0.0,
+[orientation_audit-3]     "angular_speed_deg_s": 0.0,
+[orientation_audit-3]     "continuity_frame": "base_link",
+[orientation_audit-3]     "confirmation_count": 5,
+[orientation_audit-3]     "confirmation_frames": 5,
+[orientation_audit-3]     "accepted_anchor_delta_deg": 0.0,
+[orientation_audit-3]     "allowed_delta_deg": 5.97858552,
+[orientation_audit-3]     "published_stamp_s": 1791596966.099824,
+[orientation_audit-3]     "pairing": {
+[orientation_audit-3]       "paired": 31,
+[orientation_audit-3]       "evicted": 0,
+[orientation_audit-3]       "expired": 0,
+[orientation_audit-3]       "late": 0,
+[orientation_audit-3]       "pending_poses": 0,
+[orientation_audit-3]       "pending_qualities": 0
+[orientation_audit-3]     },
+[orientation_audit-3]     "kind": "observation",
+[orientation_audit-3]     "audit_receive_s": 3373.469666903
+[orientation_audit-3]   },
+[orientation_audit-3]   "latest_state": {
+[orientation_audit-3]     "schema_version": 1,
+[orientation_audit-3]     "frame_id": "base_link",
+[orientation_audit-3]     "source_frame_id": "camera_color_optical_frame",
+[orientation_audit-3]     "stamp": {
+[orientation_audit-3]       "sec": 1791596966,
+[orientation_audit-3]       "nanosec": 33532609
+[orientation_audit-3]     },
+[orientation_audit-3]     "stamp_s": 1791596966.0335326,
+[orientation_audit-3]     "target_id": 1,
+[orientation_audit-3]     "position_m": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.03
+[orientation_audit-3]     ],
+[orientation_audit-3]     "quaternion_xyzw": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       1.0
+[orientation_audit-3]     ],
+[orientation_audit-3]     "rpy_deg": [
+[orientation_audit-3]       0.0,
+[orientation_audit-3]       -0.0,
+[orientation_audit-3]       0.0
+[orientation_audit-3]     ],
+[orientation_audit-3]     "valid_position": true,
+[orientation_audit-3]     "orientation_measurement_valid": true,
+[orientation_audit-3]     "quality": {
+[orientation_audit-3]       "status": "valid",
+[orientation_audit-3]       "target_id": 1,
+[orientation_audit-3]       "frame_id": "camera_color_optical_frame",
+[orientation_audit-3]       "stamp": {
+[orientation_audit-3]         "sec": 1791596966,
+[orientation_audit-3]         "nanosec": 33532609
+[orientation_audit-3]       },
+[orientation_audit-3]       "valid_position": true,
+[orientation_audit-3]       "orientation_measurement_valid": true,
+[orientation_audit-3]       "orientation_ambiguous": false,
+[orientation_audit-3]       "solver": "IPPE_SQUARE",
+[orientation_audit-3]       "candidate_count": 2,
+[orientation_audit-3]       "selected_candidate_index": 0,
+[orientation_audit-3]       "candidate_errors_px": [
+[orientation_audit-3]         0.01,
+[orientation_audit-3]         0.6
+[orientation_audit-3]       ],
+[orientation_audit-3]       "candidate_rotation_distance_deg": 30.0
+[orientation_audit-3]     },
+[orientation_audit-3]     "motion_commands_enabled": false,
+[orientation_audit-3]     "orientation_control_enabled": false,
+[orientation_audit-3]     "valid_orientation": true,
+[orientation_audit-3]     "status": "valid",
+[orientation_audit-3]     "orientation_delta_deg": 0.0,
+[orientation_audit-3]     "angular_speed_deg_s": 0.0,
+[orientation_audit-3]     "continuity_frame": "base_link",
+[orientation_audit-3]     "confirmation_count": 5,
+[orientation_audit-3]     "confirmation_frames": 5,
+[orientation_audit-3]     "accepted_anchor_delta_deg": 0.0,
+[orientation_audit-3]     "allowed_delta_deg": 5.97858552,
+[orientation_audit-3]     "feedback_age_ms": 30.077991,
+[orientation_audit-3]     "target_age_ms": 89.205316,
+[orientation_audit-3]     "published_stamp_s": 1791596966.1229281,
+[orientation_audit-3]     "pairing": {
+[orientation_audit-3]       "paired": 31,
+[orientation_audit-3]       "evicted": 0,
+[orientation_audit-3]       "expired": 0,
+[orientation_audit-3]       "late": 0,
+[orientation_audit-3]       "pending_poses": 0,
+[orientation_audit-3]       "pending_qualities": 0
+[orientation_audit-3]     },
+[orientation_audit-3]     "kind": "state",
+[orientation_audit-3]     "audit_receive_s": 3373.492820788
+[orientation_audit-3]   },
+[orientation_audit-3]   "pairing": {
+[orientation_audit-3]     "paired": 31,
+[orientation_audit-3]     "evicted": 0,
+[orientation_audit-3]     "expired": 0,
+[orientation_audit-3]     "late": 0,
+[orientation_audit-3]     "pending_poses": 0,
+[orientation_audit-3]     "pending_qualities": 0
+[orientation_audit-3]   },
+[orientation_audit-3]   "duration_s": 1.506662760999916,
+[orientation_audit-3]   "replay_source": null
+[orientation_audit-3] }
+[INFO] [orientation_audit-3]: process has finished cleanly [pid 251]
+[INFO] [orientation_check-2]: sending signal 'SIGINT' to process[orientation_check-2]
+[INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+[static_transform_publisher-1] [INFO] [1791596966.506665789] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [static_transform_publisher-1]: process has finished cleanly [pid 247]
+[INFO] [orientation_check-2]: process has finished cleanly [pid 249]

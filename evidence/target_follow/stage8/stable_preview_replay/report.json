@@ -1,0 +1,155 @@
+{
+  "hardware_servo_commands_sent": 0,
+  "absolute_pose_accuracy_verified": false,
+  "cases": {
+    "static": {
+      "input_path": "/home/industio/fairino_ws/evidence/target_follow/stage6/manual_20261009_101620/static/samples.jsonl",
+      "sha256": "f62aae14a6a98a2b9299180e2d77b56209ae41d7968d48c12925c6be82a8339b",
+      "previous": {
+        "parameters": {
+          "target_id": 1,
+          "auto_teach": false,
+          "target_timeout_s": 0.35,
+          "feedback_timeout_s": 0.2,
+          "position_tau_s": 0.15,
+          "rotation_tau_s": 0.4,
+          "deadband_enter_deg": 3.0,
+          "deadband_exit_deg": 2.0,
+          "rotation_mapping_gain": 1.0,
+          "kp_position": 2.0,
+          "kp_rotation": 1.0,
+          "max_speed_m_s": 0.02,
+          "max_accel_m_s2": 0.06,
+          "max_angular_speed_deg_s": 3.0,
+          "max_angular_accel_deg_s2": 10.0,
+          "publish_hz": 50.0
+        },
+        "jitter_allowance_deg": 3.0,
+        "quality_counts": {
+          "acquiring_orientation": 42,
+          "valid": 303,
+          "orientation_ambiguous": 43
+        },
+        "accepted": 303,
+        "position_from_recorded_tcp_mm": {
+          "p95": 6.575243737996057,
+          "max": 7.187573621319815
+        },
+        "rotation_from_recorded_tcp_deg": {
+          "p95": 1.2176617204699813,
+          "max": 1.2176617204699813
+        }
+      },
+      "stable": {
+        "parameters": {
+          "target_id": 1,
+          "auto_teach": false,
+          "target_timeout_s": 0.35,
+          "feedback_timeout_s": 0.2,
+          "position_tau_s": 0.25,
+          "rotation_tau_s": 0.8,
+          "deadband_enter_deg": 6.0,
+          "deadband_exit_deg": 4.0,
+          "rotation_mapping_gain": 0.5,
+          "kp_position": 2.0,
+          "kp_rotation": 1.0,
+          "max_speed_m_s": 0.02,
+          "max_accel_m_s2": 0.06,
+          "max_angular_speed_deg_s": 3.0,
+          "max_angular_accel_deg_s2": 10.0,
+          "publish_hz": 50.0
+        },
+        "jitter_allowance_deg": 6.0,
+        "quality_counts": {
+          "acquiring_orientation": 42,
+          "valid": 303,
+          "orientation_ambiguous": 43
+        },
+        "accepted": 303,
+        "position_from_recorded_tcp_mm": {
+          "p95": 2.757520365479237,
+          "max": 3.341612633758619
+        },
+        "rotation_from_recorded_tcp_deg": {
+          "p95": 0.0,
+          "max": 0.0
+        }
+      }
+    },
+    "static_more_pixels": {
+      "input_path": "/home/industio/fairino_ws/evidence/target_follow/stage6/manual_20261009_101620/static_more_pixels/samples.jsonl",
+      "sha256": "17e2076056475b407ab3668151666e0308faeb1e3bd4591444a7603158ca3a46",
+      "previous": {
+        "parameters": {
+          "target_id": 1,
+          "auto_teach": false,
+          "target_timeout_s": 0.35,
+          "feedback_timeout_s": 0.2,
+          "position_tau_s": 0.15,
+          "rotation_tau_s": 0.4,
+          "deadband_enter_deg": 3.0,
+          "deadband_exit_deg": 2.0,
+          "rotation_mapping_gain": 1.0,
+          "kp_position": 2.0,
+          "kp_rotation": 1.0,
+          "max_speed_m_s": 0.02,
+          "max_accel_m_s2": 0.06,
+          "max_angular_speed_deg_s": 3.0,
+          "max_angular_accel_deg_s2": 10.0,
+          "publish_hz": 50.0
+        },
+        "jitter_allowance_deg": 3.0,
+        "quality_counts": {
+          "acquiring_orientation": 11,
+          "orientation_ambiguous": 10,
+          "valid": 226
+        },
+        "accepted": 226,
+        "position_from_recorded_tcp_mm": {
+          "p95": 0.7443365479339359,
+          "max": 0.8817335563218766
+        },
+        "rotation_from_recorded_tcp_deg": {
+          "p95": 0.0,
+          "max": 0.0
+        }
+      },
+      "stable": {
+        "parameters": {
+          "target_id": 1,
+          "auto_teach": false,
+          "target_timeout_s": 0.35,
+          "feedback_timeout_s": 0.2,
+          "position_tau_s": 0.25,
+          "rotation_tau_s": 0.8,
+          "deadband_enter_deg": 6.0,
+          "deadband_exit_deg": 4.0,
+          "rotation_mapping_gain": 0.5,
+          "kp_position": 2.0,
+          "kp_rotation": 1.0,
+          "max_speed_m_s": 0.02,
+          "max_accel_m_s2": 0.06,
+          "max_angular_speed_deg_s": 3.0,
+          "max_angular_accel_deg_s2": 10.0,
+          "publish_hz": 50.0
+        },
+        "jitter_allowance_deg": 6.0,
+        "quality_counts": {
+          "acquiring_orientation": 11,
+          "orientation_ambiguous": 10,
+          "valid": 226
+        },
+        "accepted": 226,
+        "position_from_recorded_tcp_mm": {
+          "p95": 0.6753725962571203,
+          "max": 0.7922610567857515
+        },
+        "rotation_from_recorded_tcp_deg": {
+          "p95": 0.0,
+          "max": 0.0
+        }
+      }
+    }
+  },
+  "note": "Offline relative targets on user-confirmed stationary recordings. Uses a fixed initial flange as TCP feedback; target displacement includes record bias, not absolute accuracy. No ROS holding/timing, camera-motion compensation test or robot response is simulated."
+}

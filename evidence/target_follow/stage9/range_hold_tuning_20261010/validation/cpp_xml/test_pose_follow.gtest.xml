@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="13" failures="0" disabled="0" errors="0" time="0.779" timestamp="2026-10-10T14:17:54" name="AllTests">
+  <testsuite name="PoseFollow" tests="9" failures="0" disabled="0" errors="0" time="0.778" timestamp="2026-10-10T14:17:54">
+    <testcase name="RecordsWithoutJumpAndPreservesFullRelationForEachAxisAndRotatedTool" status="run" result="completed" time="0.008" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseFollow" />
+    <testcase name="HalfMappingReducesBothOrbitAndAttitudeAndIgnoresSeveralDegreeJitter" status="run" result="completed" time="0.024" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseFollow" />
+    <testcase name="ClosedLoopBoundsConvergeAndSettlesWithFeedbackAndCommonTwistScaling" status="run" result="completed" time="0.162" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseFollow" />
+    <testcase name="RawRangeIsCheckedBeforeFilteringAndFrozenFeedbackCannotAccumulateReferences" status="run" result="completed" time="0.029" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseFollow" />
+    <testcase name="PauseReanchorsZeroVelocitiesKeepsFiltersAndReteachAdoptsNewActualPose" status="run" result="completed" time="0" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseFollow" />
+    <testcase name="DemoAllowsLargeMappedTiltWithoutRemovingReferenceLeadCheck" status="run" result="completed" time="0.209" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseFollow" />
+    <testcase name="StaticVisualAndFeedbackNoiseFreezeWholeGoalAfterArrivalAndRealMotionReleases" status="run" result="completed" time="0.336" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseFollow" />
+    <testcase name="SlowMovementAccumulatesAndSingleSpikesOrAlternatingNoiseDoNotRelease" status="run" result="completed" time="0.008" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseFollow" />
+    <testcase name="ResumeKeepsStaticAnchorAndDoesNotAbsorbRealTargetMovementIntoHold" status="run" result="completed" time="0.001" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseFollow" />
+  </testsuite>
+  <testsuite name="PoseGeometry" tests="1" failures="0" disabled="0" errors="0" time="0" timestamp="2026-10-10T14:17:54">
+    <testcase name="ShortestRotationAcross180AndDeterministicPiLog" status="run" result="completed" time="0" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseGeometry" />
+  </testsuite>
+  <testsuite name="PoseObservation" tests="3" failures="0" disabled="0" errors="0" time="0.001" timestamp="2026-10-10T14:17:54">
+    <testcase name="ExactStampQuaternionSignAndSoftQualityAreDistinctFromTrustedPose" status="run" result="completed" time="0" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseObservation" />
+    <testcase name="ApproximateCandidatePolicyIsExplicitBoundedAndCannotPromoteInvalidData" status="run" result="completed" time="0.001" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseObservation" />
+    <testcase name="RejectsNanosecondMismatchMissingQualityAlternativePoseAndBadGeometry" status="run" result="completed" time="0" timestamp="2026-10-10T14:17:54" classname="fr3c_follow_driver.PoseObservation" />
+  </testsuite>
+</testsuites>

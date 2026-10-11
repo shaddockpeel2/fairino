@@ -1,0 +1,242 @@
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage7/launch_gui/ros_logs/2026-10-09-12-03-40-729838-ido-202245
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [launch.user]: Stage 7 POSE PREVIEW | MOTION OFF. Report: /home/industio/fairino_ws/evidence/target_follow/stage7/launch_gui
+[INFO] [launch.user]: Reusing external detector: its ambiguity threshold is unchanged.
+[INFO] [static_transform_publisher-1]: process started with pid [202358]
+[INFO] [orientation_check-2]: process started with pid [202360]
+[INFO] [pose_preview-3]: process started with pid [202362]
+[INFO] [pose_preview_audit-4]: process started with pid [202364]
+[INFO] [pose_view-5]: process started with pid [202366]
+[static_transform_publisher-1] [INFO] [1791518623.183014769] [follow_handeye_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+[static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+[static_transform_publisher-1] from 'flange_link' to 'camera_link'
+[orientation_check-2] [INFO] [1791518624.052129833] [orientation_check]: Stage 6: exact image stamps, base-frame rotation, read-only; no motion client.
+[pose_preview-3] [INFO] [1791518624.068919502] [pose_preview]: Stage 7 READ ONLY. T records pose; no start/stop motion services or SDK client.
+[pose_preview-3] [INFO] [1791518624.174595485] [pose_preview]: Recorded target-to-TCP pose for preview only.
+[pose_preview_audit-4] Pose preview: preview | recorded=True | rotation error=2.8 deg | MOTION OFF
+[pose_preview_audit-4] Pose preview: preview | recorded=True | rotation error=12.7 deg | MOTION OFF
+[pose_preview_audit-4] Pose preview: preview | recorded=True | rotation error=4.9 deg | MOTION OFF
+[pose_preview_audit-4] {
+[pose_preview_audit-4]   "stage": 7,
+[pose_preview_audit-4]   "duration_s": 4.002628442000059,
+[pose_preview_audit-4]   "preview_states": 178,
+[pose_preview_audit-4]   "trusted_observations": 53,
+[pose_preview_audit-4]   "status_counts": {
+[pose_preview_audit-4]     "stale_robot_feedback": 2,
+[pose_preview_audit-4]     "acquiring_orientation": 4,
+[pose_preview_audit-4]     "preview": 172
+[pose_preview_audit-4]   },
+[pose_preview_audit-4]   "teach_count": 1,
+[pose_preview_audit-4]   "motion_commands_enabled": false,
+[pose_preview_audit-4]   "orientation_control_enabled": false,
+[pose_preview_audit-4]   "hardware_servo_commands_sent": 0,
+[pose_preview_audit-4]   "command_scope": "this_read_only_preview",
+[pose_preview_audit-4]   "reference_kind": "one_step_from_actual_tcp",
+[pose_preview_audit-4]   "note": "Preview only. Desired/error spans include target/robot motion and are not accuracy.",
+[pose_preview_audit-4]   "desired_position_axis_span_mm": [
+[pose_preview_audit-4]     51.38390708200219,
+[pose_preview_audit-4]     0.0,
+[pose_preview_audit-4]     31.472995148267792
+[pose_preview_audit-4]   ],
+[pose_preview_audit-4]   "max_rotation_error_deg": 12.664032431125671,
+[pose_preview_audit-4]   "max_preview_speed_mm_s": 20.000000000000004,
+[pose_preview_audit-4]   "max_preview_angular_speed_deg_s": 3.0000000000000004,
+[pose_preview_audit-4]   "rotation_mapping_gain": 1.0,
+[pose_preview_audit-4]   "latest_state": {
+[pose_preview_audit-4]     "schema_version": 1,
+[pose_preview_audit-4]     "stage": 7,
+[pose_preview_audit-4]     "stamp": {
+[pose_preview_audit-4]       "sec": 1791518627,
+[pose_preview_audit-4]       "nanosec": 609327446
+[pose_preview_audit-4]     },
+[pose_preview_audit-4]     "motion_commands_enabled": false,
+[pose_preview_audit-4]     "orientation_control_enabled": false,
+[pose_preview_audit-4]     "reference_kind": "one_step_from_actual_tcp",
+[pose_preview_audit-4]     "offset_recorded": true,
+[pose_preview_audit-4]     "teach_count": 1,
+[pose_preview_audit-4]     "quality_reason": null,
+[pose_preview_audit-4]     "rotation_mapping_gain": 1.0,
+[pose_preview_audit-4]     "deadband_enter_deg": 3.0,
+[pose_preview_audit-4]     "rotation_tau_s": 0.4,
+[pose_preview_audit-4]     "velocity_m_s": [
+[pose_preview_audit-4]       0.015184120237636146,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.0109756000784317
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "angular_velocity_deg_s": [
+[pose_preview_audit-4]       1.8552324919826952e-31,
+[pose_preview_audit-4]       2.7973546200046266,
+[pose_preview_audit-4]       -2.853713382281189e-32
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "target_age_ms": 70.967653,
+[pose_preview_audit-4]     "feedback_age_ms": 12.057331,
+[pose_preview_audit-4]     "trusted_image_stamp": {
+[pose_preview_audit-4]       "sec": 1791518627,
+[pose_preview_audit-4]       "nanosec": 538359793
+[pose_preview_audit-4]     },
+[pose_preview_audit-4]     "raw_target_m": [
+[pose_preview_audit-4]       0.1,
+[pose_preview_audit-4]       -0.4,
+[pose_preview_audit-4]       0.02
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "raw_target_rpy_deg": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -5.870130744611113,
+[pose_preview_audit-4]       0.0
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "raw_target_quaternion_xyzw": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.05120415300255095,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.9986882069571521
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "raw_image_stamp": {
+[pose_preview_audit-4]       "sec": 1791518627,
+[pose_preview_audit-4]       "nanosec": 538359793
+[pose_preview_audit-4]     },
+[pose_preview_audit-4]     "filtered_target_m": [
+[pose_preview_audit-4]       0.1,
+[pose_preview_audit-4]       -0.4,
+[pose_preview_audit-4]       0.02
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "filtered_target_rpy_deg": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       2.423750935062899,
+[pose_preview_audit-4]       0.0
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "filtered_target_quaternion_xyzw": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.021149639983816294,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.9997763213482078
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "actual_tcp_m": [
+[pose_preview_audit-4]       0.199152603,
+[pose_preview_audit-4]       -0.303027928,
+[pose_preview_audit-4]       0.16538554099999997
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "actual_tcp_rpy_deg": [
+[pose_preview_audit-4]       180.0,
+[pose_preview_audit-4]       -0.0,
+[pose_preview_audit-4]       0.0
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "actual_tcp_quaternion_xyzw": [
+[pose_preview_audit-4]       1.0,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       6.123233995736766e-17
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "mapped_target_m": [
+[pose_preview_audit-4]       0.1,
+[pose_preview_audit-4]       -0.4,
+[pose_preview_audit-4]       0.02
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "mapped_target_rpy_deg": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       4.423750935062915,
+[pose_preview_audit-4]       0.0
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "mapped_target_quaternion_xyzw": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.038594921497746515,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.9992549384589414
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "desired_tcp_m": [
+[pose_preview_audit-4]       0.20359262755414329,
+[pose_preview_audit-4]       -0.303027928,
+[pose_preview_audit-4]       0.1622559725634282
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "desired_tcp_rpy_deg": [
+[pose_preview_audit-4]       180.0,
+[pose_preview_audit-4]       1.7686909155258614,
+[pose_preview_audit-4]       0.0
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "desired_tcp_quaternion_xyzw": [
+[pose_preview_audit-4]       0.9998808867658725,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.01543412713088809,
+[pose_preview_audit-4]       6.123233995736766e-17
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_tcp_m": [
+[pose_preview_audit-4]       0.19946030218154515,
+[pose_preview_audit-4]       -0.303027928,
+[pose_preview_audit-4]       0.16516312553514287
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_tcp_rpy_deg": [
+[pose_preview_audit-4]       180.0,
+[pose_preview_audit-4]       0.05668709899526533,
+[pose_preview_audit-4]       -5.76432218928243e-34
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_tcp_quaternion_xyzw": [
+[pose_preview_audit-4]       0.999999877641765,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.0004946882402529253,
+[pose_preview_audit-4]       -1.6081226496766366e-16
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_flange_m": [
+[pose_preview_audit-4]       0.2004903519481503,
+[pose_preview_audit-4]       -0.3,
+[pose_preview_audit-4]       0.3497766557841921
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_flange_rpy_deg": [
+[pose_preview_audit-4]       180.0,
+[pose_preview_audit-4]       0.05668709899526533,
+[pose_preview_audit-4]       -5.76432218928243e-34
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_flange_quaternion_xyzw": [
+[pose_preview_audit-4]       0.999999877641765,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.0004946882402529253,
+[pose_preview_audit-4]       -1.6081226496766366e-16
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "status": "preview",
+[pose_preview_audit-4]     "position_error_m": [
+[pose_preview_audit-4]       0.004440024554143274,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.003129568436571778
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "error_norm_mm": 5.432128187053533,
+[pose_preview_audit-4]     "rotation_error_deg": 1.768690915525861,
+[pose_preview_audit-4]     "offset_matrix": [
+[pose_preview_audit-4]       [
+[pose_preview_audit-4]         0.9989265156707727,
+[pose_preview_audit-4]         -5.672926028511984e-18,
+[pose_preview_audit-4]         0.046322956402300615,
+[pose_preview_audit-4]         0.09231147615720953
+[pose_preview_audit-4]       ],
+[pose_preview_audit-4]       [
+[pose_preview_audit-4]         0.0,
+[pose_preview_audit-4]         -1.0,
+[pose_preview_audit-4]         -1.2246467991473532e-16,
+[pose_preview_audit-4]         0.09697207200000002
+[pose_preview_audit-4]       ],
+[pose_preview_audit-4]       [
+[pose_preview_audit-4]         0.046322956402300615,
+[pose_preview_audit-4]         1.2233321599996301e-16,
+[pose_preview_audit-4]         -0.9989265156707727,
+[pose_preview_audit-4]         0.14982251360598386
+[pose_preview_audit-4]       ],
+[pose_preview_audit-4]       [
+[pose_preview_audit-4]         0.0,
+[pose_preview_audit-4]         0.0,
+[pose_preview_audit-4]         0.0,
+[pose_preview_audit-4]         1.0
+[pose_preview_audit-4]       ]
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "rotation_active": true,
+[pose_preview_audit-4]     "kind": "preview",
+[pose_preview_audit-4]     "audit_receive_s": 11320.967196855
+[pose_preview_audit-4]   }
+[pose_preview_audit-4] }
+[INFO] [pose_preview_audit-4]: process has finished cleanly [pid 202364]
+[INFO] [pose_view-5]: sending signal 'SIGINT' to process[pose_view-5]
+[INFO] [pose_preview-3]: sending signal 'SIGINT' to process[pose_preview-3]
+[INFO] [orientation_check-2]: sending signal 'SIGINT' to process[orientation_check-2]
+[INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+[static_transform_publisher-1] [INFO] [1791518627.867142673] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [static_transform_publisher-1]: process has finished cleanly [pid 202358]
+[INFO] [pose_view-5]: process has finished cleanly [pid 202366]
+[INFO] [pose_preview-3]: process has finished cleanly [pid 202362]
+[INFO] [orientation_check-2]: process has finished cleanly [pid 202360]

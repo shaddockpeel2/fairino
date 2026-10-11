@@ -1,0 +1,31 @@
+{
+  "live_servo_return_codes": {
+    "0": 619
+  },
+  "recovery_event": {
+    "raw_angle_gap_deg": 20.24177953697272,
+    "raw_position_gap_mm": 1.7377496808699857,
+    "mapped_angle_gap_deg": 10.124585053422951,
+    "prior_raw_angle_threshold_deg": 20.0,
+    "updated_raw_angle_threshold_deg": 40.0
+  },
+  "prior_policy_replay": {
+    "jitter_allowance_deg": 6.0,
+    "statuses": {
+      "acquiring_orientation": 7,
+      "valid": 304,
+      "orientation_jump": 14
+    },
+    "paired": 325,
+    "accepted_fraction": 0.9353846153846154
+  },
+  "updated_policy_replay": {
+    "jitter_allowance_deg": 25.0,
+    "statuses": {
+      "acquiring_orientation": 1,
+      "valid": 324
+    },
+    "paired": 325,
+    "accepted_fraction": 0.9969230769230769
+  }
+}

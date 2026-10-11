@@ -1,0 +1,3 @@
+[INFO] [1791611651.201135129] [moveit_robot_model.robot_model]: Loading robot model 'fairino3mt_v6_robot'...
+[INFO] [1791611651.201256463] [moveit_robot_model.robot_model]: No root/virtual joint specified in SRDF. Assuming fixed joint
+[INFO] [1791611651.968604763] [pose_follow]: Stage 9 POSE FOLLOW starts idle. T records; S/start records again and starts; X/stop stops. mock=true

@@ -1,0 +1,31 @@
+{
+  "stage": 6,
+  "started_at": "2026-10-09T10:14:23.504770+08:00",
+  "sources_before_start": {
+    "publishers": {
+      "camera": 0,
+      "detector": 0,
+      "flange": 1,
+      "feedback": 1,
+      "preview": 0,
+      "base_target": 1,
+      "follow": 0,
+      "servo": 0,
+      "quality": 1,
+      "orientation": 0
+    },
+    "nodes": [
+      "follow_demo_probe_65500",
+      "orientation_launch_synthetic_source"
+    ]
+  },
+  "owned_sources": {
+    "start_camera": false,
+    "start_detector": false,
+    "start_feedback": false,
+    "start_base": false
+  },
+  "motion_commands_enabled": false,
+  "ros_domain_id": "211",
+  "scenario": "static"
+}

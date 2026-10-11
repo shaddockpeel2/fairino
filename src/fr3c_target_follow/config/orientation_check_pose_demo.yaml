@@ -1,0 +1,12 @@
+# Stage 9 only: tolerate noisy tilt observations before SO(3) filtering.
+# The angular rate term still applies; large isolated jumps are rejected.
+orientation_check:
+  ros__parameters:
+    target_id: 1
+    source_frame_id: camera_color_optical_frame
+    target_timeout_s: 0.35
+    feedback_timeout_s: 0.20
+    confirmation_frames: 2
+    max_angular_speed_deg_s: 60.0
+    jitter_allowance_deg: 25.0
+    publish_hz: 20.0

@@ -1,0 +1,83 @@
+{
+  "run": "20261010_142209_226469",
+  "source_sha256": "c784960a6f37d95ecc4a4260087d1ceeabf9d8bce7808dc250618a332ad2e34e",
+  "hardware_commands_sent_by_analysis": 0,
+  "live_report": {
+    "angular_speed_limit_deg_s": 3.0,
+    "backend": "ServoCart mode 0, tool/work-object 0",
+    "close_code": 0,
+    "collision_check_ms": null,
+    "collision_enabled": false,
+    "collision_pauses": 0,
+    "collision_resumes": 0,
+    "control_angle_deadband_deg": 2.0,
+    "control_position_deadband_m": 0.004,
+    "follow_angle_deg": 90.0,
+    "follow_mode": "pose",
+    "follow_radius_m": 0.5,
+    "goal_angle_threshold_deg": 4.0,
+    "goal_confirmation_s": 0.2,
+    "goal_position_threshold_m": 0.008,
+    "hardware_servo_commands_sent": 3398,
+    "live_pose_follow_validated": false,
+    "mock": false,
+    "reason": "ServoCart failed: 112",
+    "requested_period_ms": 8.0,
+    "result": "fault",
+    "rotation_mapping_gain": 0.5,
+    "sdk_angle_encoding": "absolute RPY wrapped to [-180,180] deg",
+    "servo_call_ms": {
+      "count": 3398,
+      "max": 11.165120999066858,
+      "p50": 3.658705998532241,
+      "p95": 4.335671997978352
+    },
+    "servo_commands_sent": 3398,
+    "servo_end_code": 0,
+    "servo_interval_ms": {
+      "count": 3397,
+      "max": 16.947476000495953,
+      "p50": 8.192129997041775,
+      "p95": 11.210622000362491
+    },
+    "speed_limit_mm_s": 20.0,
+    "stage": 9,
+    "starts": 1,
+    "stop_motion_code": 0,
+    "target_pauses": 0,
+    "target_resumes": 0,
+    "teaches": 1
+  },
+  "sdk_error_definition": {
+    "path": "src/fairino_hardware/libfairino/include/robot_error.h",
+    "code": 112,
+    "name": "ERR_TARGET_POSE_CANNOT_REACHED",
+    "meaning": "目标位姿无法到达"
+  },
+  "servo_return_codes": {
+    "0": 3397,
+    "112": 1
+  },
+  "maximum_sent_tcp_speed_mm_s": 20.0,
+  "maximum_sent_tcp_angular_speed_deg_s": 3.0000000000000004,
+  "maximum_reference_displacement_mm": 85.35388162632714,
+  "maximum_feedback_joint3_speed_deg_s": 89.46637925872693,
+  "peak_joint3_event": {
+    "stamp_s": 1791613369.3067803,
+    "interval_s": 0.00796365737915039,
+    "joint3_before_deg": -4.75697135925293,
+    "joint3_after_deg": -4.044491767883301
+  },
+  "final_joint3_deg": -0.00021755104535259306,
+  "change": {
+    "follow_radius_m": 1.0,
+    "speed_limit_mm_s": 20.0,
+    "angular_speed_limit_deg_s": 3.0,
+    "new_joint_speed_limit_added": false
+  },
+  "limitations": [
+    "Joint speed is estimated from first-observed SDK packet timestamps, not a dedicated velocity sensor.",
+    "Controller reachability is independent of the software distance limit.",
+    "No new hardware motion or SDK connection was made."
+  ]
+}

@@ -1,0 +1,25 @@
+1791596968.5515919 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage6/launch_smoke_demo/ros_logs/2026-10-10-09-49-28-549595-ido-291
+1791596968.5519054 [INFO] [launch]: Default logging verbosity is set to INFO
+1791596970.9247260 [INFO] [launch.user]: Stage 6 READ ONLY. Report: /home/industio/fairino_ws/evidence/target_follow/stage6/launch_smoke_demo
+1791596970.9249709 [INFO] [launch.user]: Orientation quality profile: demo
+1791596970.9411793 [INFO] [launch.user]: Reusing external detector: its ambiguity threshold is unchanged; Demo confirmation applies to this monitor. To apply Demo detector quality, stop the external detector and restart this check.
+1791596970.9442875 [INFO] [static_transform_publisher-1]: process started with pid [323]
+1791596970.9445763 [INFO] [orientation_check-2]: process started with pid [325]
+1791596970.9446909 [INFO] [orientation_audit-3]: process started with pid [327]
+1791596970.9561121 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791596970.9563010 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791596970.9566309 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791596970.9567211 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791596970.9569168 [static_transform_publisher-1] [37;1m2026-10-10 09:49:30.956 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+1791596970.9569690 [static_transform_publisher-1] [37;1m2026-10-10 09:49:30.956 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+1791596970.9570043 [static_transform_publisher-1] [37;1m2026-10-10 09:49:30.956 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+1791596970.9685583 [static_transform_publisher-1] [INFO] [1791596970.968203788] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791596970.9687459 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791596970.9688032 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791596970.9688528 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791596973.6397996 [INFO] [orientation_audit-3]: process has finished cleanly [pid 327]
+1791596973.6460433 [INFO] [orientation_check-2]: sending signal 'SIGINT' to process[orientation_check-2]
+1791596973.6482370 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791596973.6499951 [static_transform_publisher-1] [INFO] [1791596973.648910242] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791596973.7695019 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 323]
+1791596973.9041522 [INFO] [orientation_check-2]: process has finished cleanly [pid 325]

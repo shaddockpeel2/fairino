@@ -1,0 +1,17 @@
+{
+  "publishers": {
+    "camera": 0,
+    "detector": 0,
+    "flange": 0,
+    "feedback": 0,
+    "preview": 0,
+    "base_target": 0,
+    "follow": 0,
+    "servo": 0,
+    "quality": 0,
+    "orientation": 0
+  },
+  "nodes": [
+    "follow_demo_probe_43076"
+  ]
+}

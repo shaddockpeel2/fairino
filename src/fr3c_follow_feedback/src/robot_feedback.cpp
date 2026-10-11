@@ -25,15 +25,21 @@ class RobotFeedback final : public rclcpp::Node {
     pose_pub_ = create_publisher<geometry_msgs::msg::PoseStamped>("/target_follow/flange_pose", 20);
     status_pub_ = create_publisher<std_msgs::msg::String>("/target_follow/robot_feedback", 20);
     tf_ = std::make_unique<tf2_ros::TransformBroadcaster>(*this);
+    poll_hz_ = hz;
+  }
+  void connect() {
+    // RPC starts detached SDK threads. The node must already be fully built so
+    // its destructor closes RPC even if shutdown makes timer creation throw.
+    rpc_started_ = true;
     const int code = robot_.RPC(ip_.c_str());
     if (code != 0) throw std::runtime_error("read-only SDK RPC failed: " + std::to_string(code));
-    connected_ = true;
-    timer_ = create_wall_timer(std::chrono::duration<double>(1.0 / hz), [this] { poll(); });
+    if (!rclcpp::ok()) return;
+    timer_ = create_wall_timer(std::chrono::duration<double>(1.0 / poll_hz_), [this] { poll(); });
     RCLCPP_INFO(get_logger(), "Read-only feedback connected to %s; no motion API", ip_.c_str());
   }
   ~RobotFeedback() override {
     if (timer_) timer_->cancel();
-    if (connected_) robot_.CloseRPC();
+    if (rpc_started_) robot_.CloseRPC();
   }
  private:
   double steady_seconds() const {
@@ -110,8 +116,8 @@ class RobotFeedback final : public rclcpp::Node {
   }
   FRRobot robot_;
   std::string ip_;
-  bool connected_ = false;
-  double stale_s_ = 0.2, last_status_ = 0.0;
+  bool rpc_started_ = false;
+  double poll_hz_ = 125.0, stale_s_ = 0.2, last_status_ = 0.0;
   unsigned count_ = 0;
   PacketFreshness freshness_;
   rclcpp::TimerBase::SharedPtr timer_;
@@ -123,8 +129,16 @@ class RobotFeedback final : public rclcpp::Node {
 int main(int argc, char ** argv) {
   rclcpp::init(argc, argv);
   int result = 0;
-  try { rclcpp::spin(std::make_shared<RobotFeedback>()); }
-  catch (const std::exception & error) { RCLCPP_ERROR(rclcpp::get_logger("follow_feedback"), "%s", error.what()); result = 1; }
+  try {
+    auto node = std::make_shared<RobotFeedback>();
+    node->connect();
+    if (rclcpp::ok()) rclcpp::spin(node);
+  } catch (const std::exception & error) {
+    if (rclcpp::ok()) {
+      RCLCPP_ERROR(rclcpp::get_logger("follow_feedback"), "%s", error.what());
+      result = 1;
+    }
+  }
   rclcpp::shutdown();
   return result;
 }

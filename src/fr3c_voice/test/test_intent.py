@@ -330,6 +330,7 @@ def test_auto_stack_phrases_take_the_safe_local_route(text):
     assert route.zone is None
     assert route.support_color is None
     assert route.reply == AUTO_STACK_REPLY
+    assert source_location_for_intent(text, route) == ''
 
 
 @pytest.mark.parametrize('text', ['自动码垛', '自动堆叠', '自动堆放', '自动码放'])
@@ -374,6 +375,7 @@ def test_model_auto_stack_route_is_accepted_for_colourless_text():
     assert intent.color is None
     assert intent.zone is None
     assert intent.support_color is None
+    assert source_location_for_intent('自动堆叠', intent) == ''
 
 
 def test_model_auto_stack_route_is_rejected_when_text_names_a_colour():

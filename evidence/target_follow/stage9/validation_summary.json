@@ -1,0 +1,186 @@
+{
+  "stage": 9,
+  "recorded_at": "2026-10-10T12:38:05.754029+08:00",
+  "result": "software_mock_validation_passed",
+  "live_pose_follow_validated": false,
+  "hardware_servo_commands_sent": 0,
+  "tests": {
+    "cpp": {
+      "tests": 36,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 36
+    },
+    "python": {
+      "tests": 41,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "disabled": 0,
+      "passed": 40
+    },
+    "ros_driver": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 8
+    },
+    "ros_launch": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 1
+    },
+    "ros_position": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 6
+    }
+  },
+  "passed_total": 91,
+  "skipped_total": 1,
+  "notes": [
+    "All driver execution checks used MockClient; no robot or camera connection.",
+    "One OpenCV GUI test requires a display and was skipped.",
+    "Position regression invalid_input_range intentionally ends in fault.",
+    "Reported 40 mm cross-view coordinate difference remains a live sanity check.",
+    "Live visual following and live rotation collision prediction have not been validated."
+  ],
+  "mock_reports": [
+    {
+      "path": "launch_mock/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "3ac4c5449f5847dba222767dd2f48126d746c2b04e9a0fe004c934d1b34902d2"
+    },
+    {
+      "path": "mock_integration/axis_0/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "45d98eba1115dcc68fb9e73f8c8497e1b85c4b7bb651b3c5382b5656ce7a0da5"
+    },
+    {
+      "path": "mock_integration/axis_1/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "b715aeb3bebb52765d06a71aadd9bb65207d2ac4b697e0a75b4c02da8dd42a6b"
+    },
+    {
+      "path": "mock_integration/axis_2/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "4a9187e8b5205e9b7fa0e083f438901a3551a12999fcd65cafa0959e764fd63f"
+    },
+    {
+      "path": "mock_integration/collision_on/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "68710ab251f0a05ff316faa941457d200a0f44e77852caace12caa0dafd2f633"
+    },
+    {
+      "path": "mock_integration/image_time_bridge/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "2347fcefb42629a7128d2b014f6cc98dcd400a54991ba5b6afa43edfe3ddb088"
+    },
+    {
+      "path": "mock_integration/invalid_observation/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "259928670187b5b3308cfe40d9d963bbfdd73cfbf43a15fdf5ff69c33be50b2d"
+    },
+    {
+      "path": "mock_integration/quality_recovery/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "07a6b1a1dfb3122f4f6b874434de5dd2f19855d2a176e4f17142b415ee5560a8"
+    },
+    {
+      "path": "mock_integration/relocation/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "e302715ac4944d3b4b6e200299dfeeabcb220299408e0a15d81fceadef24190b"
+    },
+    {
+      "path": "regression_position/axis_x/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "6e88eb62ff00f395b238c7fb66575146cab2c393d299b15fbdce6970a9342d17"
+    },
+    {
+      "path": "regression_position/axis_y/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "5c466ab709a79bb88bf6fa3c09cd1598c7f56f1f008d403e2d52c371f8bf6c99"
+    },
+    {
+      "path": "regression_position/axis_z/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "c09ece9386c8df808dbe1cff71c10b930c1b3958738b6c97cc5677c2ca0256f8"
+    },
+    {
+      "path": "regression_position/bridge_recovery_restart/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "90fcb87657eca3c07f0888490363741214fc31673e5dabf68bc17c36266dbfce"
+    },
+    {
+      "path": "regression_position/collision_default/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "fbb921102b45a3cedb713fb1e6951f25912137c002ce9a294f7d7366da7af234"
+    },
+    {
+      "path": "regression_position/collision_table_pause/report.json",
+      "mock": true,
+      "result": "stopped",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "392f5a54ce04638f30a704dd39de2d46faff7d8798f01540172140c618bc666e"
+    },
+    {
+      "path": "regression_position/invalid_input_range/report.json",
+      "mock": true,
+      "result": "fault",
+      "hardware_servo_commands_sent": 0,
+      "sha256": "2edf006bec781f1e621c8cf41087e2f991a2feff7bb26b34181761fa7dd66ede"
+    }
+  ],
+  "source_sha256": {
+    "src/fr3c_follow_driver/src/pose_follow.cpp": "90b66fb549b23a946a18848e653efd7643b631d4a811fb7732c808738a615402",
+    "src/fr3c_follow_driver/include/fr3c_follow_driver/pose_follow.hpp": "d60d02db8b25505e5be35a9076ff707c6cdd1bad5ee1ac1b71467c3838df473d",
+    "src/fr3c_follow_driver/include/fr3c_follow_driver/pose_geometry.hpp": "dacd4f959ced857a72c8a423d3b4c0334450e1fe5124fe48907317555fc627b0",
+    "src/fr3c_follow_driver/include/fr3c_follow_driver/pose_observation.hpp": "f63eab5440f2af603aadcfa9aef32ff1f2551a11bae8e365e331f2cc39208199",
+    "src/fr3c_follow_driver/include/fr3c_follow_driver/collision_guard.hpp": "4f0165641dae355abf05a7b760c9955e3b02edf3ed36129bd5fe7fafaf32dfec",
+    "src/fr3c_follow_driver/src/collision_guard.cpp": "ba20ac4b0876fc8310250cd4499e99b8fd2aaa66d55558afc3a8efd5a2258b97",
+    "src/fr3c_follow_driver/config/pose_follow.yaml": "28ef8d7b3d449c503daba5bf2ccd328055ad2f86b1f77a303ec30a2e0304f93c",
+    "src/fr3c_target_follow/launch/pose_follow.launch.py": "3db513fec2e60e45bd287cfcf6663cec2562f39fab1d035e215c8a9bc48336d5",
+    "src/fr3c_target_follow/fr3c_target_follow/demo_graph.py": "409b442d18ae5a7ca92a779ace8c56b3341c0934f509f3c3613873868d2d8d65",
+    "src/fr3c_target_follow/fr3c_target_follow/preview_node.py": "462c40be2e53eefb95d73160177e4a21a6845d2cb607327b37a4fe87189313c2",
+    "src/fr3c_target_follow/fr3c_target_follow/viewer.py": "a64f8c1c30299db6db7df004248838c39c62d7e4bd42de500298c57b6a5c6039",
+    "scripts/target_follow/start_pose_follow.sh": "a6a8dc979d4abf12faafb629de5a26b810724b7f2000d0f57528c49221d75d12"
+  }
+}

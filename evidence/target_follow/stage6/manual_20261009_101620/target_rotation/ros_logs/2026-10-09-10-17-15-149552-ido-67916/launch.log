@@ -1,0 +1,29 @@
+1791512235.1514432 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage6/manual_20261009_101620/target_rotation/ros_logs/2026-10-09-10-17-15-149552-ido-67916
+1791512235.1517270 [INFO] [launch]: Default logging verbosity is set to INFO
+1791512237.9889190 [INFO] [launch.user]: Stage 6 READ ONLY. Report: /home/industio/fairino_ws/evidence/target_follow/stage6/manual_20261009_101620/target_rotation
+1791512238.0567954 [INFO] [component_container-1]: process started with pid [68009]
+1791512238.0581949 [INFO] [tag_pose-2]: process started with pid [68011]
+1791512238.0585630 [INFO] [static_transform_publisher-3]: process started with pid [68013]
+1791512238.0586867 [INFO] [robot_feedback-4]: process started with pid [68015]
+1791512238.0587850 [INFO] [follow_preview-5]: process started with pid [68017]
+1791512238.0588832 [INFO] [orientation_check-6]: process started with pid [68019]
+1791512238.0589745 [INFO] [orientation_audit-7]: process started with pid [68021]
+1791512238.1095006 [static_transform_publisher-3] [INFO] [1791512238.109068012] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791512238.1097143 [static_transform_publisher-3] translation: ('-0.022343', '-0.072015', '0.045552')
+1791512238.1097815 [static_transform_publisher-3] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791512238.1098325 [static_transform_publisher-3] from 'flange_link' to 'camera_link'
+1791512238.6864035 [INFO] [launch_ros.actions.load_composable_nodes]: Loaded node '/camera/camera' in container '/camera/camera_container'
+1791512330.3131025 [INFO] [orientation_audit-7]: process has finished cleanly [pid 68021]
+1791512330.8154111 [INFO] [orientation_check-6]: sending signal 'SIGINT' to process[orientation_check-6]
+1791512330.8227036 [INFO] [follow_preview-5]: sending signal 'SIGINT' to process[follow_preview-5]
+1791512330.8309174 [INFO] [robot_feedback-4]: sending signal 'SIGINT' to process[robot_feedback-4]
+1791512330.8355486 [INFO] [static_transform_publisher-3]: sending signal 'SIGINT' to process[static_transform_publisher-3]
+1791512330.8429890 [INFO] [tag_pose-2]: sending signal 'SIGINT' to process[tag_pose-2]
+1791512330.8494306 [INFO] [component_container-1]: sending signal 'SIGINT' to process[component_container-1]
+1791512330.8513198 [static_transform_publisher-3] [INFO] [1791512330.837441989] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791512330.9765534 [INFO] [static_transform_publisher-3]: process has finished cleanly [pid 68013]
+1791512331.1063042 [INFO] [orientation_check-6]: process has finished cleanly [pid 68019]
+1791512331.1185794 [INFO] [tag_pose-2]: process has finished cleanly [pid 68011]
+1791512331.1264627 [INFO] [follow_preview-5]: process has finished cleanly [pid 68017]
+1791512331.5173047 [INFO] [robot_feedback-4]: process has finished cleanly [pid 68015]
+1791512332.0794415 [INFO] [component_container-1]: process has finished cleanly [pid 68009]

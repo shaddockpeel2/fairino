@@ -1,0 +1,18 @@
+pose_preview:
+  ros__parameters:
+    target_id: 1
+    auto_teach: false
+    target_timeout_s: 0.35
+    feedback_timeout_s: 0.20
+    position_tau_s: 0.15
+    rotation_tau_s: 0.4
+    deadband_enter_deg: 3.0
+    deadband_exit_deg: 2.0
+    rotation_mapping_gain: 1.0
+    kp_position: 2.0
+    kp_rotation: 1.0
+    max_speed_m_s: 0.020
+    max_accel_m_s2: 0.060
+    max_angular_speed_deg_s: 3.0
+    max_angular_accel_deg_s2: 10.0
+    publish_hz: 50.0

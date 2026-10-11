@@ -1,0 +1,271 @@
+[INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage7/launch_half/ros_logs/2026-10-10-09-49-11-481207-ido-127
+[INFO] [launch]: Default logging verbosity is set to INFO
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+getifaddrs: Operation not permitted
+[37;1m2026-10-10 09:49:11.672 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[37;1m2026-10-10 09:49:11.672 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[37;1m2026-10-10 09:49:11.672 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[INFO] [launch.user]: Stage 7 POSE PREVIEW | MOTION OFF. Report: /home/industio/fairino_ws/evidence/target_follow/stage7/launch_half
+[INFO] [launch.user]: Reusing external detector: its ambiguity threshold is unchanged.
+[INFO] [static_transform_publisher-1]: process started with pid [159]
+[INFO] [orientation_check-2]: process started with pid [161]
+[INFO] [pose_preview-3]: process started with pid [163]
+[INFO] [pose_preview_audit-4]: process started with pid [165]
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] getifaddrs: Operation not permitted
+[static_transform_publisher-1] [INFO] [1791596953.956528175] [follow_handeye_tf]: Spinning until stopped - publishing transform
+[static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+[static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+[static_transform_publisher-1] from 'flange_link' to 'camera_link'
+[pose_preview_audit-4] getifaddrs: Operation not permitted
+[pose_preview_audit-4] getifaddrs: Operation not permitted
+[pose_preview_audit-4] getifaddrs: Operation not permitted
+[pose_preview_audit-4] getifaddrs: Operation not permitted
+[pose_preview_audit-4] [37;1m2026-10-10 09:49:14.396 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[pose_preview_audit-4] [37;1m2026-10-10 09:49:14.396 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[pose_preview_audit-4] [37;1m2026-10-10 09:49:14.396 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[orientation_check-2] getifaddrs: Operation not permitted
+[orientation_check-2] getifaddrs: Operation not permitted
+[orientation_check-2] getifaddrs: Operation not permitted
+[orientation_check-2] getifaddrs: Operation not permitted
+[orientation_check-2] [37;1m2026-10-10 09:49:14.775 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[orientation_check-2] [37;1m2026-10-10 09:49:14.775 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[orientation_check-2] [37;1m2026-10-10 09:49:14.775 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[pose_preview-3] getifaddrs: Operation not permitted
+[pose_preview-3] getifaddrs: Operation not permitted
+[pose_preview-3] getifaddrs: Operation not permitted
+[pose_preview-3] getifaddrs: Operation not permitted
+[pose_preview-3] [37;1m2026-10-10 09:49:14.809 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+[pose_preview-3] [37;1m2026-10-10 09:49:14.809 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+[pose_preview-3] [37;1m2026-10-10 09:49:14.809 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+[orientation_check-2] [INFO] [1791596954.876893325] [orientation_check]: Stage 6: exact image stamps, base-frame rotation, read-only; no motion client.
+[pose_preview-3] [INFO] [1791596954.916166611] [pose_preview]: Stage 7 READ ONLY. T records pose; no start/stop motion services or SDK client.
+[pose_preview-3] [INFO] [1791596954.966667419] [pose_preview]: Recorded target-to-TCP pose for preview only.
+[pose_preview_audit-4] Pose preview: preview | recorded=True | TCP angle gap=0.0 deg | MOTION OFF
+[pose_preview_audit-4] Pose preview: preview | recorded=True | TCP angle gap=3.7 deg | MOTION OFF
+[pose_preview_audit-4] Pose preview: preview | recorded=True | TCP angle gap=1.1 deg | MOTION OFF
+[pose_preview_audit-4] {
+[pose_preview_audit-4]   "stage": 7,
+[pose_preview_audit-4]   "duration_s": 4.004016598999897,
+[pose_preview_audit-4]   "preview_states": 178,
+[pose_preview_audit-4]   "trusted_observations": 54,
+[pose_preview_audit-4]   "status_counts": {
+[pose_preview_audit-4]     "stale_robot_feedback": 1,
+[pose_preview_audit-4]     "acquiring_orientation": 2,
+[pose_preview_audit-4]     "preview": 175
+[pose_preview_audit-4]   },
+[pose_preview_audit-4]   "teach_count": 1,
+[pose_preview_audit-4]   "motion_commands_enabled": false,
+[pose_preview_audit-4]   "orientation_control_enabled": false,
+[pose_preview_audit-4]   "hardware_servo_commands_sent": 0,
+[pose_preview_audit-4]   "command_scope": "this_read_only_preview",
+[pose_preview_audit-4]   "reference_kind": "one_step_from_actual_tcp",
+[pose_preview_audit-4]   "note": "Preview only. Desired/error spans include target/robot motion and are not accuracy.",
+[pose_preview_audit-4]   "desired_position_axis_span_mm": [
+[pose_preview_audit-4]     11.161396884513398,
+[pose_preview_audit-4]     0.0,
+[pose_preview_audit-4]     7.167804488859647
+[pose_preview_audit-4]   ],
+[pose_preview_audit-4]   "max_rotation_error_deg": 3.7454013339383967,
+[pose_preview_audit-4]   "max_preview_speed_mm_s": 20.000000000000004,
+[pose_preview_audit-4]   "max_preview_angular_speed_deg_s": 3.0000000000000004,
+[pose_preview_audit-4]   "rotation_mapping_gain": 0.5,
+[pose_preview_audit-4]   "latest_state": {
+[pose_preview_audit-4]     "schema_version": 1,
+[pose_preview_audit-4]     "stage": 7,
+[pose_preview_audit-4]     "stamp": {
+[pose_preview_audit-4]       "sec": 1791596958,
+[pose_preview_audit-4]       "nanosec": 457023565
+[pose_preview_audit-4]     },
+[pose_preview_audit-4]     "motion_commands_enabled": false,
+[pose_preview_audit-4]     "orientation_control_enabled": false,
+[pose_preview_audit-4]     "reference_kind": "one_step_from_actual_tcp",
+[pose_preview_audit-4]     "offset_recorded": true,
+[pose_preview_audit-4]     "teach_count": 1,
+[pose_preview_audit-4]     "quality_reason": null,
+[pose_preview_audit-4]     "rotation_mapping_gain": 0.5,
+[pose_preview_audit-4]     "deadband_enter_deg": 6.0,
+[pose_preview_audit-4]     "rotation_tau_s": 0.8,
+[pose_preview_audit-4]     "velocity_m_s": [
+[pose_preview_audit-4]       0.0029051967119674837,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.0020027480458750246
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "angular_velocity_deg_s": [
+[pose_preview_audit-4]       2.6049404406642647e-31,
+[pose_preview_audit-4]       0.5744358757014116,
+[pose_preview_audit-4]       -1.1905885072201354e-32
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "target_age_ms": 122.724423,
+[pose_preview_audit-4]     "feedback_age_ms": 64.202895,
+[pose_preview_audit-4]     "trusted_image_stamp": {
+[pose_preview_audit-4]       "sec": 1791596958,
+[pose_preview_audit-4]       "nanosec": 334299142
+[pose_preview_audit-4]     },
+[pose_preview_audit-4]     "raw_target_m": [
+[pose_preview_audit-4]       0.1,
+[pose_preview_audit-4]       -0.4,
+[pose_preview_audit-4]       0.02
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "raw_target_rpy_deg": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -5.881496938431266,
+[pose_preview_audit-4]       0.0
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "raw_target_quaternion_xyzw": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.05130321138817975,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.998683123168335
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "raw_image_stamp": {
+[pose_preview_audit-4]       "sec": 1791596958,
+[pose_preview_audit-4]       "nanosec": 334299142
+[pose_preview_audit-4]     },
+[pose_preview_audit-4]     "filtered_target_m": [
+[pose_preview_audit-4]       0.1,
+[pose_preview_audit-4]       -0.4,
+[pose_preview_audit-4]       0.02
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "filtered_target_rpy_deg": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       4.057513089596662,
+[pose_preview_audit-4]       0.0
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "filtered_target_quaternion_xyzw": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.03540108293236063,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.9993731852152209
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "actual_tcp_m": [
+[pose_preview_audit-4]       0.199152603,
+[pose_preview_audit-4]       -0.303027928,
+[pose_preview_audit-4]       0.16538554099999997
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "actual_tcp_rpy_deg": [
+[pose_preview_audit-4]       180.0,
+[pose_preview_audit-4]       -0.0,
+[pose_preview_audit-4]       0.0
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "actual_tcp_quaternion_xyzw": [
+[pose_preview_audit-4]       1.0,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       6.123233995736766e-17
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "mapped_target_m": [
+[pose_preview_audit-4]       0.1,
+[pose_preview_audit-4]       -0.4,
+[pose_preview_audit-4]       0.02
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "mapped_target_rpy_deg": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       3.2575207971193,
+[pose_preview_audit-4]       0.0
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "mapped_target_quaternion_xyzw": [
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.02842340312579949,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       0.9995959734586511
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "desired_tcp_m": [
+[pose_preview_audit-4]       0.20060520135598375,
+[pose_preview_audit-4]       -0.303027928,
+[pose_preview_audit-4]       0.16438416697706246
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "desired_tcp_rpy_deg": [
+[pose_preview_audit-4]       180.0,
+[pose_preview_audit-4]       0.5744358757007028,
+[pose_preview_audit-4]       0.0
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "desired_tcp_quaternion_xyzw": [
+[pose_preview_audit-4]       0.999987435449692,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.005012877691315359,
+[pose_preview_audit-4]       -1.6081226496766366e-16
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_tcp_m": [
+[pose_preview_audit-4]       0.1992106918649848,
+[pose_preview_audit-4]       -0.303027928,
+[pose_preview_audit-4]       0.16534549642733604
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_tcp_rpy_deg": [
+[pose_preview_audit-4]       180.0,
+[pose_preview_audit-4]       0.011485737915294189,
+[pose_preview_audit-4]       -2.3753388760064615e-34
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_tcp_quaternion_xyzw": [
+[pose_preview_audit-4]       0.999999994976776,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.0001002319715353436,
+[pose_preview_audit-4]       6.123233995736766e-17
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_flange_m": [
+[pose_preview_audit-4]       0.20009509739021494,
+[pose_preview_audit-4]       -0.3,
+[pose_preview_audit-4]       0.3499597818453536
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_flange_rpy_deg": [
+[pose_preview_audit-4]       180.0,
+[pose_preview_audit-4]       0.011485737915294189,
+[pose_preview_audit-4]       -2.3753388760064615e-34
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "reference_flange_quaternion_xyzw": [
+[pose_preview_audit-4]       0.999999994976776,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.0001002319715353436,
+[pose_preview_audit-4]       6.123233995736766e-17
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "status": "preview",
+[pose_preview_audit-4]     "position_error_m": [
+[pose_preview_audit-4]       0.0014525983559837419,
+[pose_preview_audit-4]       0.0,
+[pose_preview_audit-4]       -0.0010013740229375123
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "error_norm_mm": 1.7643106069002497,
+[pose_preview_audit-4]     "rotation_error_deg": 0.5744358757014116,
+[pose_preview_audit-4]     "offset_matrix": [
+[pose_preview_audit-4]       [
+[pose_preview_audit-4]         0.9989037383776607,
+[pose_preview_audit-4]         -5.73276180326212e-18,
+[pose_preview_audit-4]         0.046811552581964795,
+[pose_preview_audit-4]         0.09223818290939717
+[pose_preview_audit-4]       ],
+[pose_preview_audit-4]       [
+[pose_preview_audit-4]         0.0,
+[pose_preview_audit-4]         -1.0,
+[pose_preview_audit-4]         -1.2246467991473532e-16,
+[pose_preview_audit-4]         0.09697207200000002
+[pose_preview_audit-4]       ],
+[pose_preview_audit-4]       [
+[pose_preview_audit-4]         0.04681155258196479,
+[pose_preview_audit-4]         1.2233042658605273e-16,
+[pose_preview_audit-4]         -0.9989037383776608,
+[pose_preview_audit-4]         0.14986764769993183
+[pose_preview_audit-4]       ],
+[pose_preview_audit-4]       [
+[pose_preview_audit-4]         0.0,
+[pose_preview_audit-4]         0.0,
+[pose_preview_audit-4]         0.0,
+[pose_preview_audit-4]         1.0
+[pose_preview_audit-4]       ]
+[pose_preview_audit-4]     ],
+[pose_preview_audit-4]     "rotation_active": false,
+[pose_preview_audit-4]     "kind": "preview",
+[pose_preview_audit-4]     "audit_receive_s": 3365.83193589
+[pose_preview_audit-4]   }
+[pose_preview_audit-4] }
+[INFO] [pose_preview_audit-4]: process has finished cleanly [pid 165]
+[INFO] [pose_preview-3]: sending signal 'SIGINT' to process[pose_preview-3]
+[INFO] [orientation_check-2]: sending signal 'SIGINT' to process[orientation_check-2]
+[INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+[static_transform_publisher-1] [INFO] [1791596958.831546962] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[INFO] [static_transform_publisher-1]: process has finished cleanly [pid 159]
+[INFO] [pose_preview-3]: process has finished cleanly [pid 163]
+[INFO] [orientation_check-2]: process has finished cleanly [pid 161]

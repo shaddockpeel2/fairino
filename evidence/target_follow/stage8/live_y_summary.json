@@ -1,0 +1,24 @@
+{
+  "stage": 8,
+  "session": "20261010_105717_70715",
+  "validated_scope": "base-Y +2.5 deg round trip confirmed by controller feedback and SDK results",
+  "user_visual_confirmation_recorded": false,
+  "peak_actual_base_rotation_vector_deg": [
+    -0.000357270779495662,
+    2.501679328841248,
+    0.0005905992369385823
+  ],
+  "source_sha256": {
+    "report.json": "76aea3f5e0e9e0e8929a33533b27121486698bedc84358069adcbdd1c0c48261",
+    "samples.jsonl": "4507e015372440b7ae25e5f921d48de66ded8377c7331e5375072b93a5039580"
+  },
+  "servo_return_codes": {
+    "0": 516
+  },
+  "max_tcp_drift_mm": 0.15040082908801097,
+  "final_tcp_angle_to_start_deg": 0.005979056520340922,
+  "stop_motion_code": 0,
+  "servo_end_code": 0,
+  "stop_response_observed": true,
+  "note": "Feedback-based result; no independent physical metrology or explicit visual confirmation of Y direction. Raw report is preserved."
+}

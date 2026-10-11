@@ -1,0 +1,81 @@
+{
+  "recorded_at": "2026-10-10T14:29:42.172850+08:00",
+  "result": "radius_1m_build_and_mock_entry_passed",
+  "tests": {
+    "cpp": {
+      "tests": 41,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 41
+    },
+    "ros_launch": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 1
+    }
+  },
+  "total_passed": 42,
+  "hardware_commands_sent_by_this_validation": 0,
+  "configured_radius_m": 1.0,
+  "speed_limit_mm_s": 20.0,
+  "angular_speed_limit_deg_s": 3.0,
+  "live_updated_radius_validated": false,
+  "source_sha256": {
+    "src/fr3c_follow_driver/include/fr3c_follow_driver/pose_follow.hpp": "4de6574db33d66b0d5a739f0fc6f71e8fd1dcd905e81bb27ca075550a933dae0",
+    "src/fr3c_follow_driver/src/pose_follow.cpp": "e5c6e1be20154f6eca8c96bd58cc718f66d42fb4d034d9db0b84238bb1342f2b",
+    "src/fr3c_follow_driver/config/pose_follow.yaml": "ecb1cbb76b3673fd6486da131aadff5e981f2ad07df8f19130fdffba48a2c9ee",
+    "src/fr3c_target_follow/test/test_pose_follow_launch_ros.py": "33e121868b9c2a62134361df14ffd21108fd7a92b57824827383e0d6dc254cb7"
+  },
+  "binary_sha256": "755c5e3d478051cadacc6cc499fd2d6070d0b89c132724551b9466d67e89e61e",
+  "mock_report": {
+    "angular_speed_limit_deg_s": 3.0,
+    "backend": "ServoCart mode 0, tool/work-object 0",
+    "close_code": 0,
+    "collision_check_ms": null,
+    "collision_enabled": false,
+    "collision_pauses": 0,
+    "collision_resumes": 0,
+    "control_angle_deadband_deg": 2.0,
+    "control_position_deadband_m": 0.004,
+    "follow_angle_deg": 90.0,
+    "follow_mode": "pose",
+    "follow_radius_m": 1.0,
+    "goal_angle_threshold_deg": 4.0,
+    "goal_confirmation_s": 0.2,
+    "goal_position_threshold_m": 0.008,
+    "hardware_servo_commands_sent": 0,
+    "live_pose_follow_validated": false,
+    "mock": true,
+    "reason": "signal",
+    "requested_period_ms": 8.0,
+    "result": "stopped",
+    "rotation_mapping_gain": 0.5,
+    "sdk_angle_encoding": "absolute RPY wrapped to [-180,180] deg",
+    "servo_call_ms": {
+      "count": 633,
+      "max": 0.039083999581635,
+      "p50": 0.005541998689295724,
+      "p95": 0.011083000572398305
+    },
+    "servo_commands_sent": 633,
+    "servo_end_code": 0,
+    "servo_interval_ms": {
+      "count": 632,
+      "max": 17.02972699786187,
+      "p50": 8.125046002533054,
+      "p95": 10.527821999858133
+    },
+    "speed_limit_mm_s": 20.0,
+    "stage": 9,
+    "starts": 1,
+    "stop_motion_code": 0,
+    "target_pauses": 0,
+    "target_resumes": 0,
+    "teaches": 1
+  }
+}

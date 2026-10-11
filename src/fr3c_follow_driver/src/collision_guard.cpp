@@ -133,6 +133,7 @@ void CollisionModel::measure(moveit::core::RobotState & state, double & distance
   pair=closest.link_names[0].empty() ? "outside_distance_band" : closest.link_names[0]+" / "+closest.link_names[1];
 }
 CollisionOutput CollisionModel::check(const CollisionInput & input) {
+  if (input.pose_motion) return check_pose(input);
   const double began=monotonic();
   CollisionOutput out; out.stamp=input.stamp; out.requested=input.requested;
   try {
@@ -208,6 +209,84 @@ CollisionOutput CollisionModel::check(const CollisionInput & input) {
   } catch (const std::exception & e) { out.ready=true; out.scale=0; out.reason=e.what(); }
   out.check_ms=(monotonic()-began)*1000; return out;
 }
+CollisionOutput CollisionModel::check_pose(const CollisionInput & input) {
+  const double began=monotonic();
+  CollisionOutput out; out.stamp=input.stamp; out.requested=input.requested;
+  out.pose_motion=true; out.requested_angular=input.requested_angular;
+  try {
+    if (!input.requested.allFinite() || !input.velocity.allFinite() || !input.lead.allFinite() ||
+        !input.requested_angular.allFinite() || !input.angular_velocity.allFinite() ||
+        !std::isfinite(options_.angular_speed+options_.angular_accel) ||
+        options_.angular_speed<=0 || options_.angular_accel<=0)
+      throw std::runtime_error("invalid pose collision prediction input");
+    continuous_pose(input.flange_tcp,Pose{});
+    Eigen::Isometry3d lead_rotation=Eigen::Isometry3d::Identity(); lead_rotation.linear()=input.rotation_lead;
+    continuous_pose(lead_rotation,Pose{});
+    auto state=scene_->getCurrentState(); set_joints(state,input.joints);
+    if (!state.satisfiesBounds(arm_)) throw std::runtime_error("joint feedback outside model limits");
+    const Eigen::Isometry3d actual=state.getGlobalLinkTransform("flange_link");
+    const auto observed=pose_transform(input.flange);
+    if ((actual.translation()-observed.translation()).norm()>.02 ||
+        rotation_distance(actual.linear(),observed.linear())>.05)
+      throw std::runtime_error("robot model and SDK flange feedback disagree");
+    measure(state,out.distance,out.pair,out.colliding);
+    out.ready=true; out.predicted_distance=out.distance;
+    if (out.colliding) { out.reason="model_collision: "+out.pair; }
+    else {
+      const auto tcp0=actual*input.flange_tcp;
+      const double latency=options_.timeout+options_.period;
+      const double lp=latency+options_.speed/(2*options_.accel);
+      const double la=latency+options_.angular_speed/(2*options_.angular_accel);
+      auto commanded=tcp0,braking=tcp0;
+      commanded.translation()+=input.lead+input.requested*lp;
+      commanded.linear()=rotation_exp(input.requested_angular*la)*input.rotation_lead*tcp0.linear();
+      braking.translation()+=input.lead+input.velocity*(latency+input.velocity.norm()/(2*options_.accel));
+      braking.linear()=rotation_exp(input.angular_velocity*(latency+input.angular_velocity.norm()/(2*options_.angular_accel)))*input.rotation_lead*tcp0.linear();
+      std::vector<Eigen::Isometry3d> paths{commanded};
+      if (!commanded.matrix().isApprox(braking.matrix(),1e-10)) paths.push_back(braking);
+      bool valid=true; double commanded_min=out.distance; std::string pair=out.pair;
+      for (std::size_t path=0;path<paths.size() && valid;++path) {
+        const Eigen::Vector3d delta=paths[path].translation()-tcp0.translation();
+        const auto angular=rotation_log(paths[path].linear()*tcp0.linear().transpose());
+        const int samples=std::max({1,static_cast<int>(std::ceil(delta.norm()/.002)),
+          static_cast<int>(std::ceil(angular.norm()/(.5*kPi/180)))});
+        if (samples>48) { valid=false; break; }
+        auto predicted=state;
+        for (int i=1;i<=samples;++i) {
+          const double fraction=static_cast<double>(i)/samples;
+          auto next=tcp0; next.translation()+=fraction*delta;
+          next.linear()=rotation_exp(fraction*angular)*tcp0.linear();
+          const auto previous=predicted;
+          if (!inverse(next*input.flange_tcp.inverse(),predicted)) { valid=false; break; }
+          const double joint_travel=previous.distance(predicted,arm_);
+          if (joint_travel>.25) { valid=false; break; }
+          const int steps=std::max(1,static_cast<int>(std::ceil(joint_travel/.025)));
+          for (int j=1;j<=steps;++j) {
+            auto sample=previous;
+            previous.interpolate(predicted,static_cast<double>(j)/steps,sample); sample.update();
+            double distance; std::string candidate; bool collision;
+            measure(sample,distance,candidate,collision);
+            if (distance<out.predicted_distance) { out.predicted_distance=distance; pair=candidate; }
+            if (path==0) commanded_min=std::min(commanded_min,distance);
+          }
+        }
+      }
+      const bool moving=input.requested.norm()>1e-6 || input.requested_angular.norm()>1e-6;
+      const bool stopped=input.velocity.norm()<1e-6 && input.angular_velocity.norm()<1e-6;
+      if (!valid) out.reason="pose_collision_prediction_unavailable";
+      else if (out.predicted_distance<=options_.margin) {
+        if (stopped && moving && commanded_min>=out.distance-1e-6 && out.predicted_distance>=out.distance-1e-6) {
+          out.scale=1; out.reason="moving_away_from_collision_margin";
+        } else out.reason="collision_margin: "+pair;
+      } else {
+        out.scale=std::clamp((out.predicted_distance-options_.margin)/(options_.slow_distance-options_.margin),0.,1.);
+        if (out.predicted_distance>=out.distance-1e-6 && moving) out.scale=1;
+        out.reason=out.scale<1 ? "collision_slowdown: "+pair : "clear";
+      }
+    }
+  } catch (const std::exception & e) { out.ready=true; out.scale=0; out.reason=e.what(); }
+  out.check_ms=(monotonic()-began)*1000; return out;
+}
 CollisionGuard::CollisionGuard(std::shared_ptr<CollisionModel> model, CollisionOptions options)
     : model_(std::move(model)), options_(options) { worker_=std::thread(&CollisionGuard::work,this); }
 CollisionGuard::~CollisionGuard() {
@@ -227,6 +306,17 @@ CollisionOutput CollisionGuard::result(double now, const Eigen::Vector3d & reque
              out.requested.normalized().dot(requested.normalized())<.98 ||
              requested.norm()>out.requested.norm()+1e-6)) {
     out.scale=0; out.reason="waiting_for_new_motion_collision_check";
+  }
+  return out;
+}
+CollisionOutput CollisionGuard::result_pose(double now,const Eigen::Vector3d & requested,
+                                            const Eigen::Vector3d & angular) const {
+  auto out=result(now,requested);
+  if (!out.pose_motion) { out.scale=0; out.reason="waiting_for_pose_collision_check"; }
+  else if (angular.norm()>1e-6 && (out.requested_angular.norm()<1e-6 ||
+      angular.normalized().dot(out.requested_angular.normalized())<.98 ||
+      angular.norm()>out.requested_angular.norm()+1e-6)) {
+    out.scale=0; out.reason="waiting_for_new_rotation_collision_check";
   }
   return out;
 }

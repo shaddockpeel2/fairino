@@ -1,20 +1,7 @@
 #pragma once
-#include <Eigen/Geometry>
-#include "fr3c_follow_driver/servo_core.hpp"
+#include "fr3c_follow_driver/pose_geometry.hpp"
 
 namespace fr3c_follow_driver {
-inline Eigen::Matrix3d rotation(const Pose & pose) {
-  return (Eigen::AngleAxisd(pose[5], Eigen::Vector3d::UnitZ()) *
-          Eigen::AngleAxisd(pose[4], Eigen::Vector3d::UnitY()) *
-          Eigen::AngleAxisd(pose[3], Eigen::Vector3d::UnitX())).toRotationMatrix();
-}
-inline Eigen::Vector3d position(const Pose & pose) { return {pose[0], pose[1], pose[2]}; }
-inline Eigen::Vector3d limited(Eigen::Vector3d v, double bound) {
-  const double norm = v.norm();
-  if (norm > bound) v *= bound / norm;
-  return v;
-}
-
 // Keep a continuous reference, but calculate PBVS error from measured TCP.
 // Vision supplies positions only; all reference integration runs at the send rate.
 class PositionFollow {

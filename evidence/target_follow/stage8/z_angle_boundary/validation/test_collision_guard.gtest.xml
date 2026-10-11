@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="6" failures="0" disabled="0" errors="0" time="8.251" timestamp="2026-10-10T11:06:59" name="AllTests">
+  <testsuite name="CollisionGuard" tests="6" failures="0" disabled="0" errors="0" time="8.251" timestamp="2026-10-10T11:06:59">
+    <testcase name="ModelAndLocalInverseAgree" status="run" result="completed" time="0.761" timestamp="2026-10-10T11:06:59" classname="fr3c_follow_driver.CollisionGuard" />
+    <testcase name="TableBlocksAttachmentsBeforePenetrationAndAllowsRetreat" status="run" result="completed" time="2.286" timestamp="2026-10-10T11:07:00" classname="fr3c_follow_driver.CollisionGuard" />
+    <testcase name="InvalidFeedbackFailsClosed" status="run" result="completed" time="0.727" timestamp="2026-10-10T11:07:02" classname="fr3c_follow_driver.CollisionGuard" />
+    <testcase name="ChecksSelfCollision" status="run" result="completed" time="0.772" timestamp="2026-10-10T11:07:03" classname="fr3c_follow_driver.CollisionGuard" />
+    <testcase name="CachedResultExpiresAndDirectionChangesWait" status="run" result="completed" time="0.756" timestamp="2026-10-10T11:07:04" classname="fr3c_follow_driver.CollisionGuard" />
+    <testcase name="RecordPerformanceWithoutHardware" status="run" result="completed" time="2.949" timestamp="2026-10-10T11:07:05" classname="fr3c_follow_driver.CollisionGuard" />
+  </testsuite>
+</testsuites>

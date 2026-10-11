@@ -1,0 +1,37 @@
+{
+  "stage": 6,
+  "build": {
+    "package": "fr3c_target_follow",
+    "passed": true
+  },
+  "python": {
+    "tests": 58,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 11,
+    "passed": 47
+  },
+  "ros": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 5
+  },
+  "live_readonly": {
+    "paired_observations": 99,
+    "trusted_orientation_observations": 79,
+    "paired_status_counts": {
+      "acquiring_orientation": 16,
+      "valid": 79,
+      "orientation_ambiguous": 4
+    },
+    "hardware_servo_commands_sent": 0,
+    "motion_commands_enabled": false
+  },
+  "live_sources_cleaned_up": true,
+  "replay_matches_live": true,
+  "real_target_three_axis_rotation_verified": false,
+  "real_robot_rotation_verified": false,
+  "visible_rotation_range_verified": false
+}

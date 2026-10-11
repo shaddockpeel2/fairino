@@ -1,0 +1,42 @@
+{
+  "stage": 8,
+  "hardware_servo_commands_sent": 0,
+  "live_rotation_validated": false,
+  "results": {
+    "python": {
+      "tests": 58,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    "ros_motion": {
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ros_preview": {
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    "cpp": {
+      "tests": 22,
+      "failures": 0,
+      "errors": 0
+    }
+  },
+  "motion_mock_cases": [
+    "scheduled_stop",
+    "one_way",
+    "axis_z",
+    "axis_y",
+    "axis_xyz",
+    "inspect",
+    "duplicate_owner",
+    "axis_x",
+    "stop_service",
+    "stop_signal"
+  ]
+}

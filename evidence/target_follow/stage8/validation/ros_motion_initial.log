@@ -1,0 +1,27 @@
+....F..........                                                          [100%]
+=================================== FAILURES ===================================
+______________ test_one_way_with_rotated_tool_and_scheduled_stop _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-industio/pytest-1/test_one_way_with_rotated_tool0')
+
+    def test_one_way_with_rotated_tool_and_scheduled_stop(tmp_path):
+        tcp = tmp_path/'tcp.yaml'
+        tcp.write_text('ydi_j22_tcp:\n  calibrated: true\n  parent_frame: flange_link\n  child_frame: grasp_frame\n  xyz_m: [.002, -.003, .185]\n  rpy_rad: [.1, -.2, .3]\n')
+        for name, extra in [('one_way', []), ('scheduled_stop', ['--stop-after-s', '.3'])]:
+            cmd, output, env = command(name, '--move', '--axis', 'y', '--angle-deg', '-2.5',
+                                      '--one-way', '--tcp-file', str(tcp), *extra)
+            completed = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=20)
+>           assert completed.returncode == 0, completed.stderr+completed.stdout
+E           AssertionError: Traceback (most recent call last):
+E               File "<stdin>", line 10, in <module>
+E               File "<stdin>", line 10, in <genexpr>
+E             TypeError: must be real number, not str
+E             
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['/home/industio/fairino_ws/scripts/target_follow/rotation_demo.sh', '--mock', '--output-dir', '...e "<stdin>", line 10, in <module>\n  File "<stdin>", line 10, in <genexpr>\nTypeError: must be real number, not str\n').returncode
+
+src/fr3c_follow_driver/test/test_rotation_mock.py:66: AssertionError
+- generated xml file: /home/industio/fairino_ws/evidence/target_follow/stage8/validation/ros_motion.xml -
+=========================== short test summary info ============================
+FAILED src/fr3c_follow_driver/test/test_rotation_mock.py::test_one_way_with_rotated_tool_and_scheduled_stop
+1 failed, 14 passed in 56.30s

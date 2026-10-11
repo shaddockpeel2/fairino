@@ -1,0 +1,2 @@
+[INFO] [1791614538.598995378] [pose_follow]: Stage 9 POSE FOLLOW starts idle. T records; S/start records again and starts; X/stop stops. mock=false
+[ERROR] [1791615225.281811041] [pose_follow]: ServoCart failed: -4

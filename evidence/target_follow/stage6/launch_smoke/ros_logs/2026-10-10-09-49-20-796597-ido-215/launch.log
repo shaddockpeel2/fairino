@@ -1,0 +1,24 @@
+1791596960.7986639 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage6/launch_smoke/ros_logs/2026-10-10-09-49-20-796597-ido-215
+1791596960.7989786 [INFO] [launch]: Default logging verbosity is set to INFO
+1791596963.5721025 [INFO] [launch.user]: Stage 6 READ ONLY. Report: /home/industio/fairino_ws/evidence/target_follow/stage6/launch_smoke
+1791596963.5724363 [INFO] [launch.user]: Orientation quality profile: conservative
+1791596963.5963140 [INFO] [static_transform_publisher-1]: process started with pid [247]
+1791596963.5973315 [INFO] [orientation_check-2]: process started with pid [249]
+1791596963.5979304 [INFO] [orientation_audit-3]: process started with pid [251]
+1791596963.6317465 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791596963.6321154 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791596963.6327569 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791596963.6329200 [static_transform_publisher-1] getifaddrs: Operation not permitted
+1791596963.6332428 [static_transform_publisher-1] [37;1m2026-10-10 09:49:23.631 [31;1m[[37;1mTRANSPORT[31;1m Error] [37mAll whitelist interfaces were filtered out[34;1m -> Function [36mUDPv4Transport[m
+1791596963.6333141 [static_transform_publisher-1] [37;1m2026-10-10 09:49:23.631 [31;1m[[37;1mTRANSPORT_UDP[31;1m Error] [37mError creating socket: Operation not permitted[34;1m -> Function [36minit[m
+1791596963.6333530 [static_transform_publisher-1] [37;1m2026-10-10 09:49:23.631 [31;1m[[37;1mRTPS_PARTICIPANT[31;1m Error] [37mUser transport failed to register.[34;1m -> Function [36mRTPSParticipantImpl[m
+1791596963.6551158 [static_transform_publisher-1] [INFO] [1791596963.654411949] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791596963.6554568 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791596963.6555219 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791596963.6555743 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791596966.5010140 [INFO] [orientation_audit-3]: process has finished cleanly [pid 251]
+1791596966.5054703 [INFO] [orientation_check-2]: sending signal 'SIGINT' to process[orientation_check-2]
+1791596966.5063562 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791596966.5076756 [static_transform_publisher-1] [INFO] [1791596966.506665789] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791596966.6359725 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 247]
+1791596966.8288054 [INFO] [orientation_check-2]: process has finished cleanly [pid 249]

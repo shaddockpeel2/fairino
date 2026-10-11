@@ -1,0 +1,6 @@
+{
+  "exit_code": -11,
+  "signal_after_s": 0.5,
+  "hardware_servo_commands_sent": 0,
+  "read_only": true
+}

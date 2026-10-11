@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="0" skipped="0" tests="1" time="7.814" timestamp="2026-10-09T10:51:46.939854" hostname="ido"><testcase classname="test.test_orientation_launch_ros" name="test_read_only_entry_records_and_closes_owned_nodes_preserving_external_sources[False]" time="7.754" /></testsuite></testsuites>

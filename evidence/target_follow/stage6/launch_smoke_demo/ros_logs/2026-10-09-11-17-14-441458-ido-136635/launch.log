@@ -1,0 +1,18 @@
+1791515834.4433508 [INFO] [launch]: All log files can be found below /home/industio/fairino_ws/evidence/target_follow/stage6/launch_smoke_demo/ros_logs/2026-10-09-11-17-14-441458-ido-136635
+1791515834.4436188 [INFO] [launch]: Default logging verbosity is set to INFO
+1791515836.8170948 [INFO] [launch.user]: Stage 6 READ ONLY. Report: /home/industio/fairino_ws/evidence/target_follow/stage6/launch_smoke_demo
+1791515836.8174438 [INFO] [launch.user]: Orientation quality profile: demo
+1791515836.8320801 [INFO] [launch.user]: Reusing external detector: its ambiguity threshold is unchanged; Demo confirmation applies to this monitor. To apply Demo detector quality, stop the external detector and restart this check.
+1791515836.8415484 [INFO] [static_transform_publisher-1]: process started with pid [136749]
+1791515836.8421092 [INFO] [orientation_check-2]: process started with pid [136751]
+1791515836.8422790 [INFO] [orientation_audit-3]: process started with pid [136753]
+1791515836.8741522 [static_transform_publisher-1] [INFO] [1791515836.873255043] [follow_handeye_tf]: Spinning until stopped - publishing transform
+1791515836.8745575 [static_transform_publisher-1] translation: ('-0.022343', '-0.072015', '0.045552')
+1791515836.8746526 [static_transform_publisher-1] rotation: ('0.530454', '-0.531335', '0.453229', '0.480505')
+1791515836.8747249 [static_transform_publisher-1] from 'flange_link' to 'camera_link'
+1791515839.7170639 [INFO] [orientation_audit-3]: process has finished cleanly [pid 136753]
+1791515839.7258663 [INFO] [orientation_check-2]: sending signal 'SIGINT' to process[orientation_check-2]
+1791515839.7291460 [INFO] [static_transform_publisher-1]: sending signal 'SIGINT' to process[static_transform_publisher-1]
+1791515839.7310257 [static_transform_publisher-1] [INFO] [1791515839.729924921] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+1791515839.8644345 [INFO] [static_transform_publisher-1]: process has finished cleanly [pid 136749]
+1791515840.0709012 [INFO] [orientation_check-2]: process has finished cleanly [pid 136751]

@@ -1,0 +1,41 @@
+{
+  "angular_speed_limit_deg_s": 3.0,
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "collision_check_ms": null,
+  "collision_enabled": false,
+  "collision_pauses": 0,
+  "collision_resumes": 0,
+  "follow_angle_deg": 20.0,
+  "follow_mode": "pose",
+  "follow_radius_m": 0.2,
+  "hardware_servo_commands_sent": 0,
+  "live_pose_follow_validated": false,
+  "mock": true,
+  "reason": "signal",
+  "requested_period_ms": 8.0,
+  "result": "stopped",
+  "rotation_mapping_gain": 1.0,
+  "sdk_angle_encoding": "absolute RPY wrapped to [-180,180] deg",
+  "servo_call_ms": {
+    "count": 685,
+    "max": 0.1922109986480791,
+    "p50": 0.005540998245123774,
+    "p95": 0.014001001545693725
+  },
+  "servo_commands_sent": 685,
+  "servo_end_code": 0,
+  "servo_interval_ms": {
+    "count": 683,
+    "max": 20.809599998756312,
+    "p50": 8.118213001580443,
+    "p95": 11.254954999458278
+  },
+  "speed_limit_mm_s": 20.0,
+  "stage": 9,
+  "starts": 2,
+  "stop_motion_code": 0,
+  "target_pauses": 0,
+  "target_resumes": 0,
+  "teaches": 3
+}

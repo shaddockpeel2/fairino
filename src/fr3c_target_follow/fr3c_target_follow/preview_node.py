@@ -55,8 +55,8 @@ class FollowPreview(Node):
         self.robot_error = None
         self.pose_pub = self.create_publisher(PoseStamped, '/target_follow/tag_pose_base', 10)
         self.tcp_pub = self.create_publisher(PoseStamped, '/target_follow/tcp_pose_base', 10)
-        self.goal_pub = self.create_publisher(PoseStamped, '/target_follow/desired_tcp_pose', 10)
-        self.ref_pub = self.create_publisher(PoseStamped, '/target_follow/preview_reference', 10)
+        self.goal_pub = None if self.options['transform_only'] else self.create_publisher(PoseStamped, '/target_follow/desired_tcp_pose', 10)
+        self.ref_pub = None if self.options['transform_only'] else self.create_publisher(PoseStamped, '/target_follow/preview_reference', 10)
         self.velocity_pub = self.create_publisher(TwistStamped, '/target_follow/preview_velocity', 10)
         self.state_pub = self.create_publisher(String, '/target_follow/preview_state', 10)
         self.create_subscription(PoseStamped, '/target_follow/flange_pose', self.flange, 50)

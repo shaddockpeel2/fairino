@@ -18,6 +18,10 @@ setup(
         'pose_view = fr3c_target_follow.viewer:main',
         'follow_preview = fr3c_target_follow.preview_node:main',
         'preview_audit = fr3c_target_follow.preview_audit:main',
+        'orientation_check = fr3c_target_follow.orientation_node:main',
+        'orientation_audit = fr3c_target_follow.orientation_audit:main',
+        'pose_preview = fr3c_target_follow.pose_preview_node:main',
+        'pose_preview_audit = fr3c_target_follow.pose_preview_audit:main',
         'follow_control = fr3c_target_follow.control:main',
     ]},
 )

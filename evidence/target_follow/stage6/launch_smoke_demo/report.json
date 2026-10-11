@@ -1,0 +1,277 @@
+{
+  "stage": 6,
+  "scenario": "static",
+  "paired_observations": 31,
+  "trusted_orientation_observations": 30,
+  "orientation_available_fraction": 0.967741935483871,
+  "paired_status_counts": {
+    "acquiring_orientation": 1,
+    "valid": 30
+  },
+  "observation_status_counts": {
+    "acquiring_orientation": 1,
+    "valid": 30
+  },
+  "state_status_counts": {
+    "acquiring_orientation": 1,
+    "valid": 29
+  },
+  "motion_commands_enabled": false,
+  "orientation_control_enabled": false,
+  "hardware_servo_commands_sent": 0,
+  "command_scope": "this_read_only_pipeline",
+  "spread_note": "Contains real movement unless both target and robot were stationary. Spread is not absolute pose accuracy; a stable trajectory does not prove the correct PnP branch.",
+  "orientation_delta_deg": {
+    "p50": 0.0,
+    "p95": 0.0,
+    "max": 0.0
+  },
+  "angular_speed_deg_s": {
+    "p50": 0.0,
+    "p95": 0.0,
+    "max": 0.0
+  },
+  "candidate_margin_px": null,
+  "candidate_rotation_distance_deg": {
+    "p50": 30.0,
+    "p95": 30.0,
+    "max": 30.0
+  },
+  "min_edge_px": null,
+  "reprojection_error_px": null,
+  "all_base": {
+    "rotation_deviation_from_first_deg": {
+      "p50": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+    },
+    "relative_rotation_vector_axis_span_deg": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "start_end_rotation_vector_deg": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "position_deviation_from_median_mm": {
+      "p50": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+    },
+    "position_axis_span_mm": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "trusted_base": {
+    "rotation_deviation_from_first_deg": {
+      "p50": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+    },
+    "relative_rotation_vector_axis_span_deg": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "start_end_rotation_vector_deg": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "position_deviation_from_median_mm": {
+      "p50": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+    },
+    "position_axis_span_mm": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "robot_flange": {
+    "rotation_deviation_from_first_deg": {
+      "p50": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+    },
+    "relative_rotation_vector_axis_span_deg": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "start_end_rotation_vector_deg": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "position_deviation_from_median_mm": {
+      "p50": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+    },
+    "position_axis_span_mm": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "latest_paired_observation": {
+    "schema_version": 1,
+    "frame_id": "base_link",
+    "source_frame_id": "camera_color_optical_frame",
+    "stamp": {
+      "sec": 1791596973,
+      "nanosec": 316348967
+    },
+    "stamp_s": 1791596973.316349,
+    "target_id": 1,
+    "position_m": [
+      0.0,
+      0.0,
+      0.03
+    ],
+    "quaternion_xyzw": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "rpy_deg": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "valid_position": true,
+    "orientation_measurement_valid": true,
+    "quality": {
+      "status": "valid",
+      "target_id": 1,
+      "frame_id": "camera_color_optical_frame",
+      "stamp": {
+        "sec": 1791596973,
+        "nanosec": 316348967
+      },
+      "valid_position": true,
+      "orientation_measurement_valid": true,
+      "orientation_ambiguous": false,
+      "solver": "IPPE_SQUARE",
+      "candidate_count": 2,
+      "selected_candidate_index": 0,
+      "candidate_errors_px": [
+        0.01,
+        0.6
+      ],
+      "candidate_rotation_distance_deg": 30.0
+    },
+    "motion_commands_enabled": false,
+    "orientation_control_enabled": false,
+    "valid_orientation": true,
+    "status": "valid",
+    "orientation_delta_deg": 0.0,
+    "angular_speed_deg_s": 0.0,
+    "continuity_frame": "base_link",
+    "confirmation_count": 2,
+    "confirmation_frames": 2,
+    "accepted_anchor_delta_deg": 0.0,
+    "allowed_delta_deg": 9.00789336,
+    "published_stamp_s": 1791596973.3818786,
+    "pairing": {
+      "paired": 31,
+      "evicted": 0,
+      "expired": 0,
+      "late": 0,
+      "pending_poses": 0,
+      "pending_qualities": 0
+    },
+    "kind": "observation",
+    "audit_receive_s": 3380.750914205
+  },
+  "latest_state": {
+    "schema_version": 1,
+    "frame_id": "base_link",
+    "source_frame_id": "camera_color_optical_frame",
+    "stamp": {
+      "sec": 1791596973,
+      "nanosec": 266217411
+    },
+    "stamp_s": 1791596973.2662175,
+    "target_id": 1,
+    "position_m": [
+      0.0,
+      0.0,
+      0.03
+    ],
+    "quaternion_xyzw": [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ],
+    "rpy_deg": [
+      0.0,
+      -0.0,
+      0.0
+    ],
+    "valid_position": true,
+    "orientation_measurement_valid": true,
+    "quality": {
+      "status": "valid",
+      "target_id": 1,
+      "frame_id": "camera_color_optical_frame",
+      "stamp": {
+        "sec": 1791596973,
+        "nanosec": 266217411
+      },
+      "valid_position": true,
+      "orientation_measurement_valid": true,
+      "orientation_ambiguous": false,
+      "solver": "IPPE_SQUARE",
+      "candidate_count": 2,
+      "selected_candidate_index": 0,
+      "candidate_errors_px": [
+        0.01,
+        0.6
+      ],
+      "candidate_rotation_distance_deg": 30.0
+    },
+    "motion_commands_enabled": false,
+    "orientation_control_enabled": false,
+    "valid_orientation": true,
+    "status": "valid",
+    "orientation_delta_deg": 0.0,
+    "angular_speed_deg_s": 0.0,
+    "continuity_frame": "base_link",
+    "confirmation_count": 2,
+    "confirmation_frames": 2,
+    "accepted_anchor_delta_deg": 0.0,
+    "allowed_delta_deg": 8.8374942,
+    "feedback_age_ms": 19.943188,
+    "target_age_ms": 79.65531,
+    "published_stamp_s": 1791596973.3460362,
+    "pairing": {
+      "paired": 30,
+      "evicted": 0,
+      "expired": 0,
+      "late": 0,
+      "pending_poses": 0,
+      "pending_qualities": 0
+    },
+    "kind": "state",
+    "audit_receive_s": 3380.715206285
+  },
+  "pairing": {
+    "paired": 30,
+    "evicted": 0,
+    "expired": 0,
+    "late": 0,
+    "pending_poses": 0,
+    "pending_qualities": 0
+  },
+  "duration_s": 1.5017060589998437,
+  "replay_source": null
+}

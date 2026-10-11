@@ -1,0 +1,83 @@
+{
+  "active_after_record_fraction": 0.9839670178653229,
+  "low_motion_window": {
+    "start_s": 3,
+    "end_s": 30,
+    "selected_from_measured_trajectory": true,
+    "raw": {
+      "position_deviation_from_median_mm": {
+        "count": 1350,
+        "median": 0.21459029202330113,
+        "p95": 0.6855475858636532,
+        "max": 1.3017917749915768
+      },
+      "position_axis_span_mm": [
+        0.0919006520338217,
+        0.35797898225764513,
+        2.109949766203184
+      ],
+      "rotation_deviation_from_mean_deg": {
+        "count": 1350,
+        "median": 1.2368682605967738,
+        "p95": 2.9130632089553825,
+        "max": 4.502382451040334
+      }
+    },
+    "filtered": {
+      "position_deviation_from_median_mm": {
+        "count": 1350,
+        "median": 0.10227458731514133,
+        "p95": 0.3392431746022955,
+        "max": 0.5552637104809452
+      },
+      "position_axis_span_mm": [
+        0.05987467378271161,
+        0.18070558142446735,
+        1.0563051057314587
+      ],
+      "rotation_deviation_from_mean_deg": {
+        "count": 1350,
+        "median": 0.3395926166174755,
+        "p95": 0.718082786696328,
+        "max": 1.1719138322030733
+      }
+    },
+    "desired": {
+      "position_deviation_from_median_mm": {
+        "count": 1350,
+        "median": 0.10227458731512051,
+        "p95": 0.33924317460229997,
+        "max": 0.5552637104809315
+      },
+      "position_axis_span_mm": [
+        0.05987467378271161,
+        0.18070558142446735,
+        1.0563051057314587
+      ],
+      "rotation_deviation_from_mean_deg": {
+        "count": 1350,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      }
+    }
+  },
+  "max_full_goal_displacement_from_record_mm": 58.73929478649421,
+  "hypothetical_half_mapping": {
+    "max_displacement_from_record_mm": 37.975276733853754,
+    "max_tcp_angle_gap_deg": 11.136410221553794,
+    "note": "Offline remapping of accepted rotations; not a new live run or robot execution."
+  },
+  "end": {
+    "time_s": 89.58297463599956,
+    "raw_angle_from_record_deg": 6.356774390113341,
+    "filtered_angle_from_record_deg": 8.312184188098659,
+    "tcp_angle_gap_deg": 9.747352497410956,
+    "last_3s_tcp_angle_gap_range_deg": [
+      3.2574524983786732,
+      14.608740504258504
+    ]
+  },
+  "owned_processes_clean_exit": 8,
+  "process_error": false
+}

@@ -1,0 +1,3 @@
+[INFO] [1791607930.447655574] [target_pose_viewer]: Start OK: Pose following started from the current TCP with a newly recorded relation.
+[INFO] [1791607982.107362199] [target_pose_viewer]: Stop OK: Stop requested; follow_state records the SDK stop result.
+[INFO] [1791607988.782311509] [target_pose_viewer]: Start rejected: fresh trusted full pose is required: orientation_ambiguous

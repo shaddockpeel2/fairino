@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="6" failures="0" disabled="0" errors="0" time="0.131" timestamp="2026-10-10T11:06:58" name="AllTests">
+  <testsuite name="PositionFollow" tests="6" failures="0" disabled="0" errors="0" time="0.131" timestamp="2026-10-10T11:06:58">
+    <testcase name="CollisionReductionImmediatelyConstrainsExistingVelocity" status="run" result="completed" time="0.008" timestamp="2026-10-10T11:06:58" classname="fr3c_follow_driver.PositionFollow" />
+    <testcase name="TcpConversionAndFixedRotationForEveryAxis" status="run" result="completed" time="0.075" timestamp="2026-10-10T11:06:58" classname="fr3c_follow_driver.PositionFollow" />
+    <testcase name="MeasuredFeedbackWithLagConvergesAfterTargetStops" status="run" result="completed" time="0.042" timestamp="2026-10-10T11:06:59" classname="fr3c_follow_driver.PositionFollow" />
+    <testcase name="PausedReferenceReanchorsWithoutJumpAndRestartReteaches" status="run" result="completed" time="0.001" timestamp="2026-10-10T11:06:59" classname="fr3c_follow_driver.PositionFollow" />
+    <testcase name="RangeCheckedBeforeFilteringAndNoRunawayWithFrozenFeedback" status="run" result="completed" time="0.005" timestamp="2026-10-10T11:06:59" classname="fr3c_follow_driver.PositionFollow" />
+    <testcase name="NonfiniteGeometryAndObservationsNeverProduceCommands" status="run" result="completed" time="0" timestamp="2026-10-10T11:06:59" classname="fr3c_follow_driver.PositionFollow" />
+  </testsuite>
+</testsuites>

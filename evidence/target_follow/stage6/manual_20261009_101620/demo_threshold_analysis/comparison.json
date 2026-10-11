@@ -1,0 +1,183 @@
+{
+  "cases": {
+    "static": [
+      {
+        "ambiguity_margin_px": 0.15,
+        "confirmation_frames": 5,
+        "status_counts": {
+          "acquiring_orientation": 199,
+          "valid": 44,
+          "orientation_ambiguous": 145
+        },
+        "available_fraction": 0.1134020618556701,
+        "longest_valid_run_frames": 11,
+        "longest_valid_run_span_s": 0.685196497999641,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      },
+      {
+        "ambiguity_margin_px": 0.15,
+        "confirmation_frames": 2,
+        "status_counts": {
+          "acquiring_orientation": 87,
+          "valid": 156,
+          "orientation_ambiguous": 145
+        },
+        "available_fraction": 0.4020618556701031,
+        "longest_valid_run_frames": 14,
+        "longest_valid_run_span_s": 0.8882415620000756,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      },
+      {
+        "ambiguity_margin_px": 0.1,
+        "confirmation_frames": 2,
+        "status_counts": {
+          "acquiring_orientation": 42,
+          "valid": 303,
+          "orientation_ambiguous": 43
+        },
+        "available_fraction": 0.7809278350515464,
+        "longest_valid_run_frames": 36,
+        "longest_valid_run_span_s": 2.5099028429995087,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      },
+      {
+        "ambiguity_margin_px": 0.05,
+        "confirmation_frames": 2,
+        "status_counts": {
+          "acquiring_orientation": 6,
+          "valid": 378,
+          "orientation_ambiguous": 4
+        },
+        "available_fraction": 0.9742268041237113,
+        "longest_valid_run_frames": 105,
+        "longest_valid_run_span_s": 7.219848596999327,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      }
+    ],
+    "static_more_pixels": [
+      {
+        "ambiguity_margin_px": 0.15,
+        "confirmation_frames": 5,
+        "status_counts": {
+          "acquiring_orientation": 118,
+          "orientation_ambiguous": 66,
+          "valid": 63
+        },
+        "available_fraction": 0.2550607287449393,
+        "longest_valid_run_frames": 11,
+        "longest_valid_run_span_s": 0.7744949139996606,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      },
+      {
+        "ambiguity_margin_px": 0.15,
+        "confirmation_frames": 2,
+        "status_counts": {
+          "acquiring_orientation": 49,
+          "orientation_ambiguous": 66,
+          "valid": 132
+        },
+        "available_fraction": 0.5344129554655871,
+        "longest_valid_run_frames": 14,
+        "longest_valid_run_span_s": 0.954365986999619,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      },
+      {
+        "ambiguity_margin_px": 0.1,
+        "confirmation_frames": 2,
+        "status_counts": {
+          "acquiring_orientation": 11,
+          "orientation_ambiguous": 10,
+          "valid": 226
+        },
+        "available_fraction": 0.9149797570850202,
+        "longest_valid_run_frames": 46,
+        "longest_valid_run_span_s": 3.4222708070001318,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      },
+      {
+        "ambiguity_margin_px": 0.05,
+        "confirmation_frames": 2,
+        "status_counts": {
+          "acquiring_orientation": 1,
+          "valid": 246
+        },
+        "available_fraction": 0.9959514170040485,
+        "longest_valid_run_frames": 246,
+        "longest_valid_run_span_s": 17.6642987969999,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      }
+    ],
+    "target_rotation": [
+      {
+        "ambiguity_margin_px": 0.15,
+        "confirmation_frames": 5,
+        "status_counts": {
+          "acquiring_orientation": 285,
+          "orientation_ambiguous": 380,
+          "valid": 422,
+          "orientation_jump": 70,
+          "orientation_measurement_rejected": 10
+        },
+        "available_fraction": 0.3616109682947729,
+        "longest_valid_run_frames": 89,
+        "longest_valid_run_span_s": 6.120399362000171,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      },
+      {
+        "ambiguity_margin_px": 0.15,
+        "confirmation_frames": 2,
+        "status_counts": {
+          "acquiring_orientation": 111,
+          "valid": 596,
+          "orientation_ambiguous": 380,
+          "orientation_jump": 70,
+          "orientation_measurement_rejected": 10
+        },
+        "available_fraction": 0.5107112253641817,
+        "longest_valid_run_frames": 92,
+        "longest_valid_run_span_s": 6.37907480100057,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      },
+      {
+        "ambiguity_margin_px": 0.1,
+        "confirmation_frames": 2,
+        "status_counts": {
+          "acquiring_orientation": 90,
+          "valid": 726,
+          "orientation_ambiguous": 253,
+          "orientation_jump": 78,
+          "orientation_measurement_rejected": 20
+        },
+        "available_fraction": 0.622107969151671,
+        "longest_valid_run_frames": 146,
+        "longest_valid_run_span_s": 10.395097497999814,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      },
+      {
+        "ambiguity_margin_px": 0.05,
+        "confirmation_frames": 2,
+        "status_counts": {
+          "acquiring_orientation": 89,
+          "valid": 798,
+          "orientation_ambiguous": 155,
+          "orientation_measurement_rejected": 31,
+          "orientation_jump": 94
+        },
+        "available_fraction": 0.6838046272493573,
+        "longest_valid_run_frames": 141,
+        "longest_valid_run_span_s": 10.077429617999769,
+        "note": "Run spans are first-to-last sample; higher availability does not establish correctness. Candidates and measurements are unchanged; no ROS pairing/latency or robot execution simulation."
+      }
+    ]
+  },
+  "absolute_pose_accuracy_verified": false,
+  "hardware_commands_sent": 0,
+  "unchanged_parameters": {
+    "max_angular_speed_deg_s": 60.0,
+    "jitter_allowance_deg": 3.0,
+    "timeout_s": 0.35,
+    "max_reprojection_error_px": 2.0,
+    "continuity_margin_px": 0.2
+  },
+  "limitations": "Uses selected candidates recorded under the original configuration. Changing ambiguity classification does not change PnP selection, but real scheduling/quality arrival may differ."
+}

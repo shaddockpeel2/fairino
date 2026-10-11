@@ -1,0 +1,141 @@
+{
+  "stage": 9,
+  "recorded_at": "2026-10-10T13:56:28.641733+08:00",
+  "result": "tilt_tuning_software_mock_validation_passed",
+  "hardware_servo_commands_sent_by_this_validation": 0,
+  "live_updated_tilt_follow_validated": false,
+  "tests": {
+    "cpp": {
+      "tests": 37,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 37
+    },
+    "python": {
+      "tests": 47,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 47
+    },
+    "ros_driver": {
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 11
+    },
+    "ros_launch": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "disabled": 0,
+      "passed": 1
+    }
+  },
+  "passed_total": 96,
+  "skipped_total": 0,
+  "jitter_allowance_deg": 25.0,
+  "raw_recovery_angle_gap_deg": 40.0,
+  "motion_angle_range_deg": 20.0,
+  "mock_reports": [
+    {
+      "path": "launch_mock/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "f95dcee8d934a9ff8ac7e122962404bfcd0052fd458cfcb774d20d9c520b25a0"
+    },
+    {
+      "path": "mock_integration/approximate_bridge/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "5029da9c312e6b6a90b87e5cc33ce67c0ffa666caa3fa4446e2fdf390fbed025"
+    },
+    {
+      "path": "mock_integration/axis_0/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "86ea0f3b3f01103bc7f767192b476059a366b201dd2e48729b3f5becbf8eb5a4"
+    },
+    {
+      "path": "mock_integration/axis_1/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "8eea9df66c4dfc84c5a0ae69337281eed0a4cc0f5b6b7e62717cd0b0070ade64"
+    },
+    {
+      "path": "mock_integration/axis_2/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "520d813b59b7e5eec189ef802a500c34113691d7e2b577edfe8cb034d4179b16"
+    },
+    {
+      "path": "mock_integration/collision_on/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "705899cbb0e3381971c1e7c978a907c81d698bcb26f323ce9891e508771b5877"
+    },
+    {
+      "path": "mock_integration/image_time_bridge/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "b28d1ac8440d2c70b53633a855f026eaf18f6cc6813749389dbc17414ffbf6a2"
+    },
+    {
+      "path": "mock_integration/invalid_observation/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "ca2747e7e44634a01bf15684ab8bca5864e90674a51dd1d7350632cd66c75a70"
+    },
+    {
+      "path": "mock_integration/quality_recovery/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "f26553ef5f268e21e09d0f379850e1b45caf624e72dece391b6d553228b7e067"
+    },
+    {
+      "path": "mock_integration/relocation/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "d385bb3b79ef7a72b4e83cf824c2e1cde0883cd8ae605294ccbf01d29f87edec"
+    },
+    {
+      "path": "mock_integration/start_soft_quality/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "ad90a384d392e73e6b0b1b15bb2fc5e514b9d262ed3b045ea7f6ba3959effde9"
+    },
+    {
+      "path": "mock_integration/tilt_recovery/report.json",
+      "result": "stopped",
+      "mock": true,
+      "hardware_servo_commands_sent": 0,
+      "sha256": "2de4cb05f0e54425b98bc8d7b1b16e1739fb906ed7bd6068dfe536771f610fb3"
+    }
+  ],
+  "source_sha256": {
+    "src/fr3c_target_follow/config/orientation_check_pose_demo.yaml": "07d69a1ad09866fe62a93eda48524edaeffefe72ff06ddc3650d67f959eb8e91",
+    "src/fr3c_target_follow/launch/pose_follow.launch.py": "43e9cbc9d43e09bfade60f66ac41b07be93822b095e25f0d8a78e2c3de6c0648",
+    "src/fr3c_follow_driver/config/pose_follow.yaml": "e4fbc5cb4502dd0efca2c7799542054270d67a0a8a6fb39040d853a9b8ab8272",
+    "src/fr3c_follow_driver/src/pose_follow.cpp": "f56ef58e8175feda86089bc5a87319ca3b478c1c66eb1ddb3ea3810ea1a1f9ce",
+    "src/fr3c_follow_driver/test/test_pose_follow_mock.py": "d3a3e0c2c4cf71f8e1218c97025aacf49e998c1a869b4fd0f1762d1d666af50d",
+    "src/fr3c_target_follow/test/test_orientation_quality.py": "073787f69621d23a8cd05bfcb2c1a386a0c9fcb8584140225708d1134b55dfa8",
+    "src/fr3c_target_follow/test/test_pose_follow_launch_ros.py": "c9896a53a743c3243d8d564996c2022f39f36b65b50027fc0c8b89fcada0755b"
+  }
+}

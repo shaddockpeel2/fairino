@@ -1,0 +1,44 @@
+{
+  "stage": 8,
+  "session": "20261010_105216_66879",
+  "source_sha256": {
+    "report.json": "e00e87ebd27e53f8099193d92cc4c15284c8d3e8310ceb2fc05c2e244f507b42",
+    "samples.jsonl": "26a1a624c2b55875b0b08a16d1dc5282c57e07a113ea46432503545f461ec967"
+  },
+  "user_confirmed_motion": true,
+  "validated_scope": "first base-X +2.5 deg TCP rotation round trip and normal end stop",
+  "peak_actual_base_rotation_vector_deg": [
+    2.5051269833499465,
+    7.050412911454738e-05,
+    0.000914991970575358
+  ],
+  "max_actual_flange_translation_from_start_mm": 8.066060850577752,
+  "servo_return_codes": {
+    "0": 516
+  },
+  "phase_counts": {
+    "rotating_out": 195,
+    "holding_out": 62,
+    "rotating_back": 196,
+    "holding_back": 63
+  },
+  "max_tcp_drift_mm": 0.2041745287597308,
+  "final_tcp_drift_mm": 0.013535089905792256,
+  "final_tcp_angle_to_start_deg": 0.0025369407670161955,
+  "stop_motion_code": 0,
+  "servo_end_code": 0,
+  "stop_response_observed": true,
+  "servo_interval_ms": {
+    "count": 515,
+    "max": 27.062106999437674,
+    "p50": 9.91151699963666,
+    "p95": 12.002163000033761
+  },
+  "remaining_live_checks": [
+    "base-Y round trip",
+    "base-Z round trip",
+    "small combined rotation",
+    "mid-motion stop"
+  ],
+  "note": "TCP figures are calculated from controller flange feedback and the loaded calibration, not independent physical metrology. Raw report is preserved, including its non-certifying live_rotation_validated default."
+}

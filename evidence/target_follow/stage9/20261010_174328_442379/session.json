@@ -1,0 +1,125 @@
+{
+  "stage": 9,
+  "follow_mode": "pose",
+  "started_at": "2026-10-10T17:43:31.872760+08:00",
+  "mock": false,
+  "ros_domain_id": "187",
+  "motion_starts_automatically": false,
+  "sources_before_start": {
+    "publishers": {
+      "camera": 0,
+      "detector": 0,
+      "flange": 0,
+      "feedback": 0,
+      "preview": 0,
+      "base_target": 0,
+      "follow": 0,
+      "servo": 0,
+      "quality": 0,
+      "orientation": 0,
+      "pose_preview": 0,
+      "pose_observation": 0
+    },
+    "nodes": [
+      "follow_demo_probe_442379"
+    ]
+  },
+  "owned_sources": {
+    "start_camera": true,
+    "start_detector": true,
+    "start_viewer": true
+  },
+  "driver_params_file": "/home/industio/fairino_ws/install/fr3c_follow_driver/share/fr3c_follow_driver/config/pose_follow.yaml",
+  "driver_parameters": {
+    "target_id": 1,
+    "period_ms": 8.0,
+    "target_timeout_s": 0.35,
+    "feedback_timeout_s": 0.2,
+    "position_tau_s": 0.25,
+    "rotation_tau_s": 0.8,
+    "deadband_enter_deg": 6.0,
+    "deadband_exit_deg": 4.0,
+    "rotation_mapping_gain": 0.5,
+    "kp_position": 2.0,
+    "kp_rotation": 1.0,
+    "max_speed_m_s": 0.15,
+    "max_accel_m_s2": 0.1,
+    "max_angular_speed_deg_s": 10.0,
+    "max_angular_accel_deg_s2": 25.0,
+    "control_position_deadband_m": 0.004,
+    "control_angle_deadband_deg": 2.0,
+    "goal_position_threshold_m": 0.008,
+    "goal_angle_threshold_deg": 4.0,
+    "goal_confirmation_s": 0.2,
+    "follow_radius_m": 1.0,
+    "follow_angle_deg": 90.0,
+    "reference_position_lead_m": 0.015,
+    "reference_angle_lead_deg": 5.0,
+    "recovery_position_gap_m": 0.15,
+    "recovery_angle_gap_deg": 120.0,
+    "collision_enabled": false,
+    "table_z_m": 0.0,
+    "table_size_m": 2.0,
+    "collision_margin_m": 0.005,
+    "collision_slow_distance_m": 0.02,
+    "collision_check_period_ms": 20.0,
+    "collision_result_timeout_s": 0.15,
+    "mock": false,
+    "robot_ip": "192.168.58.2",
+    "output_dir": "/home/industio/fairino_ws/evidence/target_follow/stage9/20261010_174328_442379",
+    "tcp_xyz_m": [
+      -0.000847397,
+      0.003027928,
+      0.184614459
+    ],
+    "tcp_rpy_rad": [
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "tag_parameters": {
+    "tag_pose": {
+      "ros__parameters": {
+        "dictionary": "DICT_APRILTAG_36h11",
+        "target_id": 1,
+        "marker_size_m": 0.02,
+        "cube_edge_m": 0.03,
+        "image_topic": "/camera/color/image_raw",
+        "camera_info_topic": "/camera/color/camera_info",
+        "max_image_age_s": 0.25,
+        "min_edge_px": 12.0,
+        "max_reprojection_error_px": 2.0,
+        "ambiguity_margin_px": 0.1,
+        "continuity_margin_px": 0.2,
+        "orientation_candidate_tolerance_deg": 35.0,
+        "adaptive_thresh_constant": 13.0,
+        "adaptive_thresh_step": 4,
+        "fallback_thresh_constants": [
+          21.0,
+          25.0
+        ],
+        "publish_tag_tf": true,
+        "publish_annotated_image": true
+      }
+    }
+  },
+  "orientation_parameters": {
+    "orientation_check": {
+      "ros__parameters": {
+        "target_id": 1,
+        "source_frame_id": "camera_color_optical_frame",
+        "target_timeout_s": 0.35,
+        "feedback_timeout_s": 0.2,
+        "confirmation_frames": 2,
+        "max_angular_speed_deg_s": 60.0,
+        "jitter_allowance_deg": 25.0,
+        "publish_hz": 20.0
+      }
+    }
+  },
+  "tcp_file": "/home/industio/fairino_ws/install/fairino3mt_v6_moveit2_config/share/fairino3mt_v6_moveit2_config/config/ydi_j22_tcp.yaml",
+  "handeye_file": "/home/industio/fairino_ws/install/fairino3mt_v6_moveit2_config/share/fairino3mt_v6_moveit2_config/config/dabai_dcw2_handeye.yaml",
+  "collision_enabled": false,
+  "detector_params_applied": true
+}

@@ -1,0 +1,50 @@
+{
+  "static": {
+    "accepted": 303,
+    "raw_tcp_position_from_recorded_mm": {
+      "median": 12.946612098985756,
+      "p95": 20.52112819348668,
+      "max": 24.683582853687028
+    },
+    "preview_tcp_position_from_recorded_mm": {
+      "median": 5.957058712653094,
+      "p95": 6.575243737996057,
+      "max": 7.187573621319815
+    },
+    "raw_tcp_rotation_from_recorded_deg": {
+      "median": 3.066141349191651,
+      "p95": 4.838095232259773,
+      "max": 5.764595842328667
+    },
+    "preview_tcp_rotation_from_recorded_deg": {
+      "median": 1.2176617204699813,
+      "p95": 1.2176617204699813,
+      "max": 1.2176617204699813
+    },
+    "offset_length_mm": 221.67970356756982
+  },
+  "static_more_pixels": {
+    "accepted": 226,
+    "raw_tcp_position_from_recorded_mm": {
+      "median": 5.495902653654145,
+      "p95": 10.744938426606495,
+      "max": 13.14230996462089
+    },
+    "preview_tcp_position_from_recorded_mm": {
+      "median": 0.48241001298428327,
+      "p95": 0.7443365479339359,
+      "max": 0.8817335563218766
+    },
+    "raw_tcp_rotation_from_recorded_deg": {
+      "median": 2.2073599778176427,
+      "p95": 3.809801287402644,
+      "max": 4.681056516143361
+    },
+    "preview_tcp_rotation_from_recorded_deg": {
+      "median": 0.0,
+      "p95": 0.0,
+      "max": 0.0
+    },
+    "offset_length_mm": 154.05260696947832
+  }
+}

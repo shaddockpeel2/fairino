@@ -1,0 +1,130 @@
+{
+  "kind": "offline_quality_policy_replay",
+  "hardware_commands_sent_by_analysis": 0,
+  "candidate_tolerance_deg": 35.0,
+  "follow_radius_m": 0.2,
+  "runs": [
+    {
+      "run": "20261010_125147_157700",
+      "source_sha256": "e493ef6d31b14a072ca03c176d6eda45fabe1abbea564d34784bb6545e34e879",
+      "hardware_servo_commands_sent": 2967,
+      "sdk_stop_codes": {
+        "stop_motion_code": 0,
+        "servo_end_code": 0,
+        "close_code": 0
+      },
+      "prior_policy_replay": {
+        "paired": 1181,
+        "statuses": {
+          "acquiring_orientation": 61,
+          "valid": 809,
+          "orientation_ambiguous": 258,
+          "orientation_measurement_rejected": 53
+        },
+        "accepted": 809,
+        "accepted_fraction": 0.6850127011007621,
+        "longest_gap_between_accepted_s": 8.552166912,
+        "first_accepted_ns": 1791607914507398912
+      },
+      "updated_policy_replay": {
+        "paired": 1181,
+        "statuses": {
+          "acquiring_orientation": 9,
+          "valid": 1158,
+          "orientation_jump": 12,
+          "orientation_ambiguous": 1,
+          "orientation_measurement_rejected": 1
+        },
+        "accepted": 1158,
+        "accepted_fraction": 0.9805249788314987,
+        "longest_gap_between_accepted_s": 0.472088832,
+        "first_accepted_ns": 1791607914507398912
+      },
+      "first_range_pause": {
+        "stamp_s": 1791607961.507978,
+        "raw_mapped_tcp_displacement_mm": 100.85616213889583,
+        "raw_mapped_tcp_rotation_deg": 4.293915730899131,
+        "prior_radius_mm": 100.0,
+        "updated_radius_mm": 200.0,
+        "would_pass_updated_range": true
+      }
+    },
+    {
+      "run": "20261010_125324_158990",
+      "source_sha256": "690453b5523074d8e6af6fd0367cb0cf171021cc2440215027c29d9ffa48eb20",
+      "hardware_servo_commands_sent": 0,
+      "sdk_stop_codes": {
+        "stop_motion_code": null,
+        "servo_end_code": null,
+        "close_code": 0
+      },
+      "prior_policy_replay": {
+        "paired": 678,
+        "statuses": {
+          "orientation_ambiguous": 514,
+          "acquiring_orientation": 48,
+          "orientation_measurement_rejected": 23,
+          "valid": 89,
+          "orientation_jump": 4
+        },
+        "accepted": 89,
+        "accepted_fraction": 0.13126843657817108,
+        "longest_gap_between_accepted_s": 7.876057088,
+        "first_accepted_ns": 1791608029321657088
+      },
+      "updated_policy_replay": {
+        "paired": 678,
+        "statuses": {
+          "acquiring_orientation": 13,
+          "valid": 639,
+          "orientation_ambiguous": 2,
+          "orientation_jump": 24
+        },
+        "accepted": 639,
+        "accepted_fraction": 0.9424778761061947,
+        "longest_gap_between_accepted_s": 0.875947008,
+        "first_accepted_ns": 1791608011549563904
+      }
+    },
+    {
+      "run": "20261010_125428_159911",
+      "source_sha256": "ca8910c5ae6349a950725a04029bdbfecf99b4c18ce34f70dbe6a2983eedb869",
+      "hardware_servo_commands_sent": 0,
+      "sdk_stop_codes": {
+        "stop_motion_code": null,
+        "servo_end_code": null,
+        "close_code": 0
+      },
+      "prior_policy_replay": {
+        "paired": 358,
+        "statuses": {
+          "orientation_measurement_rejected": 31,
+          "orientation_ambiguous": 278,
+          "acquiring_orientation": 15,
+          "valid": 34
+        },
+        "accepted": 34,
+        "accepted_fraction": 0.09497206703910614,
+        "longest_gap_between_accepted_s": 0.676015872,
+        "first_accepted_ns": 1791608088055578112
+      },
+      "updated_policy_replay": {
+        "paired": 358,
+        "statuses": {
+          "acquiring_orientation": 3,
+          "valid": 345,
+          "orientation_jump": 10
+        },
+        "accepted": 345,
+        "accepted_fraction": 0.9636871508379888,
+        "longest_gap_between_accepted_s": 0.73999104,
+        "first_accepted_ns": 1791608075467293952
+      }
+    }
+  ],
+  "limitations": [
+    "Uses recorded selected poses, not regenerated images or candidate selection.",
+    "New closed-loop motion changes the viewpoint; replay does not validate live behavior.",
+    "Range comparison covers the first recorded limit event only."
+  ]
+}

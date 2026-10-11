@@ -1,0 +1,20 @@
+# Same measurement/selection as tag_pose.yaml, with looser ambiguity screening.
+# This accepts approximate poses for Demo evaluation; it does not resolve IPPE ambiguity.
+tag_pose:
+  ros__parameters:
+    dictionary: DICT_APRILTAG_36h11
+    target_id: 1
+    marker_size_m: 0.020
+    cube_edge_m: 0.030
+    image_topic: /camera/color/image_raw
+    camera_info_topic: /camera/color/camera_info
+    max_image_age_s: 0.25
+    min_edge_px: 12.0
+    max_reprojection_error_px: 2.0
+    ambiguity_margin_px: 0.10
+    continuity_margin_px: 0.20
+    adaptive_thresh_constant: 13.0
+    adaptive_thresh_step: 4
+    fallback_thresh_constants: [21.0, 25.0]
+    publish_tag_tf: true
+    publish_annotated_image: true

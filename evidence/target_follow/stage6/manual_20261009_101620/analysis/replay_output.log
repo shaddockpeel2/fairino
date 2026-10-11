@@ -1,0 +1,124 @@
+{
+  "static": {
+    "trusted_fraction": 0.1134020618556701,
+    "rpy_axis_span_deg": [
+      6.619315285862761,
+      3.4450625931169685,
+      0.9390429504046587
+    ],
+    "rotation_deviation_from_mean_deg": {
+      "count": 388,
+      "min": 0.14004842249252553,
+      "median": 0.9944493795918903,
+      "p95": 2.351576604938414,
+      "max": 3.6912475116570898
+    },
+    "valid_orientation_runs": {
+      "frame_counts": {
+        "count": 16,
+        "min": 1.0,
+        "median": 2.0,
+        "p95": 8.75,
+        "max": 11.0
+      },
+      "span_s": {
+        "count": 16,
+        "min": 0.0,
+        "median": 0.04059632150028847,
+        "p95": 0.6058894744999179,
+        "max": 0.685196497999641
+      },
+      "span_note": "first-to-last sample in each run; single frame has zero span"
+    },
+    "confirmation_sensitivity": {
+      "1": {
+        "status_counts": {
+          "valid": 243,
+          "orientation_ambiguous": 145
+        },
+        "available_fraction": 0.6262886597938144
+      },
+      "3": {
+        "status_counts": {
+          "acquiring_orientation": 141,
+          "valid": 102,
+          "orientation_ambiguous": 145
+        },
+        "available_fraction": 0.26288659793814434
+      },
+      "5": {
+        "status_counts": {
+          "acquiring_orientation": 199,
+          "valid": 44,
+          "orientation_ambiguous": 145
+        },
+        "available_fraction": 0.1134020618556701
+      }
+    },
+    "all_owned_processes_clean_exit": true
+  },
+  "target_rotation": {
+    "trusted_fraction": 0.3616109682947729,
+    "rpy_axis_span_deg": [
+      59.54749148133587,
+      87.11165904729253,
+      168.97198748776842
+    ],
+    "rotation_deviation_from_mean_deg": {
+      "count": 1167,
+      "min": 1.0649675774287652,
+      "median": 19.3746909453221,
+      "p95": 113.0298491100686,
+      "max": 113.933724185925
+    },
+    "valid_orientation_runs": {
+      "frame_counts": {
+        "count": 37,
+        "min": 1.0,
+        "median": 5.0,
+        "p95": 40.59999999999999,
+        "max": 89.0
+      },
+      "span_s": {
+        "count": 37,
+        "min": 0.0,
+        "median": 0.26563957999951526,
+        "p95": 2.992633788199964,
+        "max": 6.120399362000171
+      },
+      "span_note": "first-to-last sample in each run; single frame has zero span"
+    },
+    "confirmation_sensitivity": {
+      "1": {
+        "status_counts": {
+          "valid": 707,
+          "orientation_ambiguous": 380,
+          "orientation_jump": 70,
+          "orientation_measurement_rejected": 10
+        },
+        "available_fraction": 0.6058269065981148
+      },
+      "3": {
+        "status_counts": {
+          "acquiring_orientation": 185,
+          "valid": 522,
+          "orientation_ambiguous": 380,
+          "orientation_jump": 70,
+          "orientation_measurement_rejected": 10
+        },
+        "available_fraction": 0.4473007712082262
+      },
+      "5": {
+        "status_counts": {
+          "acquiring_orientation": 285,
+          "orientation_ambiguous": 380,
+          "valid": 422,
+          "orientation_jump": 70,
+          "orientation_measurement_rejected": 10
+        },
+        "available_fraction": 0.3616109682947729
+      }
+    },
+    "all_owned_processes_clean_exit": true
+  }
+}

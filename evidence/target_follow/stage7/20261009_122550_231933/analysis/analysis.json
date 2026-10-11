@@ -1,0 +1,294 @@
+{
+  "duration_s": 90.00532522399953,
+  "paired": 1210,
+  "trusted": 1168,
+  "paired_status_counts": {
+    "acquiring_orientation": 23,
+    "valid": 1168,
+    "orientation_ambiguous": 15,
+    "orientation_jump": 1,
+    "orientation_measurement_rejected": 3
+  },
+  "trusted_pair_fraction": 0.9652892561983472,
+  "recorded_states": 4366,
+  "active_recorded_states": 4296,
+  "active_after_record_fraction": 0.9839670178653229,
+  "after_record_status_counts": {
+    "preview": 4182,
+    "holding_quality": 114,
+    "stale_trusted_pose": 47,
+    "orientation_jump": 5,
+    "orientation_measurement_rejected": 9,
+    "target_not_found": 9
+  },
+  "startup_until_record_s": 2.2904738779998297,
+  "stale_feedback_only_before_record": true,
+  "low_motion_window": {
+    "start_s": 3,
+    "end_s": 30,
+    "selected_from_measured_trajectory": true,
+    "raw": {
+      "position_deviation_from_median_mm": {
+        "count": 1350,
+        "median": 0.21459029202330113,
+        "p95": 0.6855475858636532,
+        "max": 1.3017917749915768
+      },
+      "position_axis_span_mm": [
+        0.0919006520338217,
+        0.35797898225764513,
+        2.109949766203184
+      ],
+      "rotation_deviation_from_mean_deg": {
+        "count": 1350,
+        "median": 1.2368682605967738,
+        "p95": 2.9130632089553825,
+        "max": 4.502382451040334
+      }
+    },
+    "filtered": {
+      "position_deviation_from_median_mm": {
+        "count": 1350,
+        "median": 0.10227458731514133,
+        "p95": 0.3392431746022955,
+        "max": 0.5552637104809452
+      },
+      "position_axis_span_mm": [
+        0.05987467378271161,
+        0.18070558142446735,
+        1.0563051057314587
+      ],
+      "rotation_deviation_from_mean_deg": {
+        "count": 1350,
+        "median": 0.3395926166174755,
+        "p95": 0.718082786696328,
+        "max": 1.1719138322030733
+      }
+    },
+    "desired": {
+      "position_deviation_from_median_mm": {
+        "count": 1350,
+        "median": 0.10227458731512051,
+        "p95": 0.33924317460229997,
+        "max": 0.5552637104809315
+      },
+      "position_axis_span_mm": [
+        0.05987467378271161,
+        0.18070558142446735,
+        1.0563051057314587
+      ],
+      "rotation_deviation_from_mean_deg": {
+        "count": 1350,
+        "median": 0.0,
+        "p95": 0.0,
+        "max": 0.0
+      }
+    }
+  },
+  "actual_tcp": {
+    "position_deviation_from_median_mm": {
+      "count": 4375,
+      "median": 0.0018062913872664535,
+      "p95": 0.0045102489035687265,
+      "max": 0.01135216793038887
+    },
+    "position_axis_span_mm": [
+      0.009825608982508283,
+      0.009159178999629258,
+      0.015343563831621276
+    ],
+    "rotation_deviation_from_mean_deg": {
+      "count": 4375,
+      "median": 0.0002969880805388632,
+      "p95": 0.0006776258997742265,
+      "max": 0.0015705082098860354
+    }
+  },
+  "offset_length_mm": 154.0811518966662,
+  "max_tcp_angle_gap_deg": 22.272961116423076,
+  "max_full_goal_displacement_from_record_mm": 58.73929478649421,
+  "hypothetical_half_mapping": {
+    "max_displacement_from_record_mm": 37.975276733853754,
+    "max_tcp_angle_gap_deg": 11.136410221553794,
+    "note": "Offline remapping of accepted rotations; not a new live run or robot execution."
+  },
+  "max_relative_transform_position_disagreement_mm": 1.1102230246251565e-13,
+  "initial_goal_position_error_mm": 1.1775693440128312e-13,
+  "user_says_roughly_returned_to_initial_pose": true,
+  "end": {
+    "time_s": 89.58297463599956,
+    "raw_angle_from_record_deg": 6.356774390113341,
+    "filtered_angle_from_record_deg": 8.312184188098659,
+    "tcp_angle_gap_deg": 9.747352497410956,
+    "last_3s_tcp_angle_gap_range_deg": [
+      3.2574524983786732,
+      14.608740504258504
+    ]
+  },
+  "feedback_status_counts": {
+    "valid": 10138
+  },
+  "controller_coordinate_contexts": [
+    [
+      0,
+      0
+    ]
+  ],
+  "all_recorded_tool_workobject_transforms_zero": true,
+  "owned_processes_clean_exit": 8,
+  "process_error": false,
+  "bins_5s": [
+    {
+      "start_s": 0,
+      "status_counts": {
+        "stale_robot_feedback": 105,
+        "orientation_ambiguous": 6,
+        "acquiring_orientation": 3,
+        "preview": 136
+      },
+      "max_tcp_angle_gap_deg": 0.0014181223955539027
+    },
+    {
+      "start_s": 5,
+      "status_counts": {
+        "preview": 235,
+        "holding_quality": 15
+      },
+      "max_tcp_angle_gap_deg": 0.0011966995297863303
+    },
+    {
+      "start_s": 10,
+      "status_counts": {
+        "preview": 235,
+        "holding_quality": 15
+      },
+      "max_tcp_angle_gap_deg": 0.0017657071099829943
+    },
+    {
+      "start_s": 15,
+      "status_counts": {
+        "preview": 250
+      },
+      "max_tcp_angle_gap_deg": 0.001089946978605882
+    },
+    {
+      "start_s": 20,
+      "status_counts": {
+        "preview": 228,
+        "holding_quality": 22
+      },
+      "max_tcp_angle_gap_deg": 0.001412638095754684
+    },
+    {
+      "start_s": 25,
+      "status_counts": {
+        "preview": 250
+      },
+      "max_tcp_angle_gap_deg": 0.0011820735858918616
+    },
+    {
+      "start_s": 30,
+      "status_counts": {
+        "preview": 250
+      },
+      "max_tcp_angle_gap_deg": 18.95045381496413
+    },
+    {
+      "start_s": 35,
+      "status_counts": {
+        "preview": 250
+      },
+      "max_tcp_angle_gap_deg": 22.272818648016315
+    },
+    {
+      "start_s": 40,
+      "status_counts": {
+        "preview": 248,
+        "stale_trusted_pose": 2
+      },
+      "max_tcp_angle_gap_deg": 22.272961116423076
+    },
+    {
+      "start_s": 45,
+      "status_counts": {
+        "preview": 250
+      },
+      "max_tcp_angle_gap_deg": 19.08090973270764
+    },
+    {
+      "start_s": 50,
+      "status_counts": {
+        "preview": 243,
+        "orientation_jump": 5,
+        "holding_quality": 2
+      },
+      "max_tcp_angle_gap_deg": 16.608901803139894
+    },
+    {
+      "start_s": 55,
+      "status_counts": {
+        "preview": 179,
+        "holding_quality": 53,
+        "stale_trusted_pose": 9,
+        "orientation_measurement_rejected": 9
+      },
+      "max_tcp_angle_gap_deg": 11.657938372756776
+    },
+    {
+      "start_s": 60,
+      "status_counts": {
+        "preview": 250
+      },
+      "max_tcp_angle_gap_deg": 13.00765809405596
+    },
+    {
+      "start_s": 65,
+      "status_counts": {
+        "preview": 208,
+        "target_not_found": 5,
+        "holding_quality": 1,
+        "stale_trusted_pose": 36
+      },
+      "max_tcp_angle_gap_deg": 15.636507871770053
+    },
+    {
+      "start_s": 70,
+      "status_counts": {
+        "preview": 250
+      },
+      "max_tcp_angle_gap_deg": 15.939584035259804
+    },
+    {
+      "start_s": 75,
+      "status_counts": {
+        "preview": 246,
+        "target_not_found": 2,
+        "holding_quality": 2
+      },
+      "max_tcp_angle_gap_deg": 13.370229685337337
+    },
+    {
+      "start_s": 80,
+      "status_counts": {
+        "preview": 244,
+        "target_not_found": 2,
+        "holding_quality": 4
+      },
+      "max_tcp_angle_gap_deg": 8.914319762039261
+    },
+    {
+      "start_s": 85,
+      "status_counts": {
+        "preview": 230
+      },
+      "max_tcp_angle_gap_deg": 14.608740504258504
+    }
+  ],
+  "hardware_commands_sent": 0,
+  "source_sha256": {
+    "samples.jsonl": "adccabfef494dd2bcc456006b1ffc7f3401075cad8e39e419b5c7083c5ff5ac2",
+    "report.json": "925c7a2d30c19bbfabf612a265aa6472392078557252981be456f43e8fb38d28",
+    "session.json": "4d8326842416a4763a7545fa300363640e51d9790614bc603ea1af1978780a26"
+  },
+  "note": "TCP angle gap is desired versus actual robot orientation, not camera accuracy. Robot remained stationary; low-motion interval is inferred, not externally labelled. Approximate return and unsettled endpoint do not establish return accuracy or physical axis correctness."
+}

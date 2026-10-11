@@ -1,0 +1,2 @@
+[INFO] [1791512052.228118847] [follow_robot_feedback]: Read-only feedback connected to 192.168.58.2; no motion API
+[INFO] [1791512061.780957561] [rclcpp]: signal_handler(SIGINT/SIGTERM)

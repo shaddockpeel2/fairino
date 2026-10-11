@@ -1,0 +1,27 @@
+[1.358s] WARNING:colcon.colcon_core.package_selection:Some selected packages are already built in one or more underlay workspaces:
+	'fr3c_follow_driver' is in: /home/industio/fairino_ws/install/fr3c_follow_driver
+If a package in a merged underlay workspace is overridden and it installs headers, then all packages in the overlay must sort their include directories by workspace order. Failure to do so may result in build failures or undefined behavior at run time.
+If the overridden package is used by another package in any underlay, then the overriding package in the overlay must be API and ABI compatible or undefined behavior at run time may occur.
+
+If you understand the risks and want to override a package anyways, add the following to the command line:
+	--allow-overriding fr3c_follow_driver
+
+This may be promoted to an error in a future release of colcon-override-check.
+Starting >>> fr3c_follow_driver
+--- stderr: fr3c_follow_driver
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+/home/industio/fairino_ws/src/fr3c_follow_driver/src/pose_follow.cpp: In static member function ‘static Json PoseFollowDriver::stats(std::vector<double, std::allocator<double> >)’:
+/home/industio/fairino_ws/src/fr3c_follow_driver/src/pose_follow.cpp:222:5: warning: this ‘if’ clause does not guard... [-Wmisleading-indentation]
+  222 |     if (values.empty()) return nullptr; std::sort(values.begin(),values.end());
+      |     ^~
+/home/industio/fairino_ws/src/fr3c_follow_driver/src/pose_follow.cpp:222:41: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘if’
+  222 |     if (values.empty()) return nullptr; std::sort(values.begin(),values.end());
+      |                                         ^~~
+---
+[Processing: fr3c_follow_driver]
+[Processing: fr3c_follow_driver]
+[Processing: fr3c_follow_driver]
+Finished <<< fr3c_follow_driver [1min 49s]
+
+Summary: 1 package finished [1min 50s]
+  1 package had stderr output: fr3c_follow_driver

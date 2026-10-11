@@ -1,0 +1,80 @@
+{
+  "accel_limit_deg_s2": 10.0,
+  "action": "inspect",
+  "angle_deg": 2.5,
+  "axis": "x",
+  "axis_frame": "base_link",
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "controller_state": {
+    "emergency_stop": 0,
+    "enabled": 1,
+    "main_error_code": 0,
+    "program_state": 4,
+    "robot_mode": 2,
+    "robot_state": 4,
+    "sub_error_code": 0,
+    "tool_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "tool_id": 0,
+    "work_object_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "work_object_id": 0
+  },
+  "flange_tcp_m_rad": [
+    -0.000847397,
+    0.003027928,
+    0.184614459,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "hardware_servo_commands_sent": 0,
+  "initial_flange_m_rad": [
+    -0.06873477935791016,
+    -0.39427670288085936,
+    0.35273590087890627,
+    3.083143458197497,
+    -0.028299889909023674,
+    3.1354990746995828
+  ],
+  "initial_tcp": {
+    "position_m": [
+      -0.07301345192486608,
+      -0.3804431928271787,
+      0.1686633286086981
+    ],
+    "quaternion_xyzw": [
+      0.003458630720530905,
+      0.999467027066374,
+      0.029260469018019493,
+      -0.014054345715426148
+    ]
+  },
+  "live_rotation_validated": false,
+  "mock": false,
+  "mock_ik_is_physical": false,
+  "model_collision_enabled": false,
+  "motion_commands_enabled": false,
+  "motion_readiness_problem": "select automatic mode on the pendant before motion",
+  "requested_period_ms": 8.0,
+  "result": "inspected",
+  "round_trip": true,
+  "servo_call_ms": null,
+  "servo_commands_sent": 0,
+  "servo_interval_ms": null,
+  "speed_limit_deg_s": 3.0,
+  "stage": 8
+}

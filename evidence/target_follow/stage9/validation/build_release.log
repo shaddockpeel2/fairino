@@ -1,0 +1,10 @@
+Starting >>> fr3c_follow_driver
+[Processing: fr3c_follow_driver]
+[Processing: fr3c_follow_driver]
+Finished <<< fr3c_follow_driver [1min 17s]
+Starting >>> fr3c_target_follow
+[Processing: fr3c_target_follow]
+[Processing: fr3c_target_follow]
+Finished <<< fr3c_target_follow [1min 0s]
+
+Summary: 2 packages finished [2min 18s]

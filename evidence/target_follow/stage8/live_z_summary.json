@@ -1,0 +1,53 @@
+{
+  "stage": 8,
+  "user_confirmed_z_motion_normal": true,
+  "validated_scope": "post-fix base-Z +2.5 deg TCP rotation round trip and normal end stop",
+  "sessions": [
+    {
+      "session": "20261010_112300_90105",
+      "source_sha256": {
+        "report.json": "b4fe123c4d1bad6db906ab964010ecc6e2de393cce41148a755501400baaeefd",
+        "samples.jsonl": "8f607cdb1b5af22bfdf967379eb82db5f2203311f29e3f0d1eaca3ca349e4bc6"
+      },
+      "servo_return_codes": {
+        "0": 516
+      },
+      "peak_actual_base_rotation_vector_deg": [
+        -0.0013754905286230265,
+        0.0010125655589531314,
+        2.503351017607254
+      ],
+      "max_tcp_drift_mm": 0.13627401314090193,
+      "final_tcp_angle_to_start_deg": 0.001801282838884732,
+      "stop_motion_code": 0,
+      "servo_end_code": 0,
+      "stop_response_observed": true,
+      "sdk_angles_bounded": true
+    },
+    {
+      "session": "20261010_112330_90532",
+      "source_sha256": {
+        "report.json": "7091685300ff9fb8fb54acd85490c13ba0891834eb80ca1aaf9c5635db7c7de0",
+        "samples.jsonl": "0c42d2f8524c4e1dc84c354b67c5a65944ae24d61e2c7666d146852ad40c86f2"
+      },
+      "servo_return_codes": {
+        "0": 516
+      },
+      "peak_actual_base_rotation_vector_deg": [
+        -0.0020239444819440495,
+        0.0005817427690365454,
+        2.502668353782644
+      ],
+      "max_tcp_drift_mm": 0.1295252141964464,
+      "final_tcp_angle_to_start_deg": 0.001455141132488266,
+      "stop_motion_code": 0,
+      "servo_end_code": 0,
+      "stop_response_observed": true,
+      "sdk_angles_bounded": true
+    }
+  ],
+  "remaining_live_checks": [
+    "small combined rotation",
+    "mid-motion stop"
+  ]
+}

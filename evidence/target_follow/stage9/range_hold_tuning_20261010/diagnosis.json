@@ -1,0 +1,145 @@
+{
+  "run": "20261010_140121_208977",
+  "source_sha256": "edfb094c21257b8b60c898ce2f8b3a679d2cddbcb328a36ddb3b4e082cc40ff2",
+  "hardware_commands_sent_by_analysis": 0,
+  "servo_return_codes": {
+    "0": 14049
+  },
+  "live_report": {
+    "angular_speed_limit_deg_s": 3.0,
+    "backend": "ServoCart mode 0, tool/work-object 0",
+    "close_code": 0,
+    "collision_check_ms": null,
+    "collision_enabled": false,
+    "collision_pauses": 0,
+    "collision_resumes": 0,
+    "follow_angle_deg": 20.0,
+    "follow_mode": "pose",
+    "follow_radius_m": 0.2,
+    "hardware_servo_commands_sent": 14049,
+    "live_pose_follow_validated": false,
+    "mock": false,
+    "reason": "signal",
+    "requested_period_ms": 8.0,
+    "result": "stopped",
+    "rotation_mapping_gain": 0.5,
+    "sdk_angle_encoding": "absolute RPY wrapped to [-180,180] deg",
+    "servo_call_ms": {
+      "count": 14049,
+      "max": 18.793744999129558,
+      "p50": 3.6907899993821047,
+      "p95": 4.364254997199168
+    },
+    "servo_commands_sent": 14049,
+    "servo_end_code": 0,
+    "servo_interval_ms": {
+      "count": 14045,
+      "max": 31.085877999430522,
+      "p50": 8.256589000666281,
+      "p95": 11.255830999289174
+    },
+    "speed_limit_mm_s": 20.0,
+    "stage": 9,
+    "starts": 1,
+    "stop_motion_code": 0,
+    "target_pauses": 4,
+    "target_resumes": 3,
+    "teaches": 1
+  },
+  "transitions": [
+    {
+      "stamp_s": 1791612088.2291436,
+      "status": "idle",
+      "reason": "",
+      "servo_commands_sent": 0
+    },
+    {
+      "stamp_s": 1791612096.6927521,
+      "status": "following",
+      "reason": "",
+      "servo_commands_sent": 5
+    },
+    {
+      "stamp_s": 1791612104.5728235,
+      "status": "paused_target",
+      "reason": "target_not_found",
+      "servo_commands_sent": 939
+    },
+    {
+      "stamp_s": 1791612104.63242,
+      "status": "paused_target",
+      "reason": "acquiring_orientation",
+      "servo_commands_sent": 939
+    },
+    {
+      "stamp_s": 1791612104.684404,
+      "status": "following",
+      "reason": "",
+      "servo_commands_sent": 942
+    },
+    {
+      "stamp_s": 1791612184.5034766,
+      "status": "paused_target",
+      "reason": "stale_trusted_pose",
+      "servo_commands_sent": 10388
+    },
+    {
+      "stamp_s": 1791612184.733785,
+      "status": "following",
+      "reason": "",
+      "servo_commands_sent": 10389
+    },
+    {
+      "stamp_s": 1791612204.7279985,
+      "status": "paused_target",
+      "reason": "stale_trusted_pose",
+      "servo_commands_sent": 12746
+    },
+    {
+      "stamp_s": 1791612204.8530874,
+      "status": "following",
+      "reason": "",
+      "servo_commands_sent": 12747
+    },
+    {
+      "stamp_s": 1791612215.9030435,
+      "status": "paused_reteach",
+      "reason": "target is outside the pose follow range; S/start records a new relation",
+      "servo_commands_sent": 14049
+    },
+    {
+      "stamp_s": 1791612230.4933107,
+      "status": "stopped",
+      "reason": "signal",
+      "servo_commands_sent": 14049
+    }
+  ],
+  "range_event": {
+    "raw_target_change_deg": 40.710175536983506,
+    "mapped_tcp_change_deg": 20.355087768491735,
+    "raw_goal_distance_mm": 31.66233406690997,
+    "old_radius_mm": 200,
+    "old_angle_deg": 20,
+    "new_radius_mm": 500,
+    "new_angle_deg": 90,
+    "accepted_by_new_range": true
+  },
+  "small_change_interval": {
+    "seconds_after_start": [
+      60,
+      70
+    ],
+    "samples": 1183,
+    "desired_position_span_per_axis_mm": [
+      1.562072125288888,
+      1.66236955226029,
+      2.859829103137951
+    ],
+    "nonzero_correction_fraction": 0.22062552831783602
+  },
+  "limitations": [
+    "Recorded poses, no camera-image re-estimation or changed viewpoint simulation.",
+    "Small-change interval has no independent stationary-target ground truth.",
+    "New stationary hold and enlarged range require live confirmation."
+  ]
+}

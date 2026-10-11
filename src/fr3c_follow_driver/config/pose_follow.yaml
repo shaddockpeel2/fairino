@@ -1,0 +1,36 @@
+pose_follow:
+  ros__parameters:
+    target_id: 1
+    period_ms: 8.0
+    target_timeout_s: 0.35
+    feedback_timeout_s: 0.20
+    position_tau_s: 0.25
+    rotation_tau_s: 0.8
+    deadband_enter_deg: 6.0
+    deadband_exit_deg: 4.0
+    rotation_mapping_gain: 0.5
+    kp_position: 2.0
+    kp_rotation: 1.0
+    max_speed_m_s: 0.150
+    max_accel_m_s2: 0.100
+    max_angular_speed_deg_s: 10.0
+    max_angular_accel_deg_s2: 25.0
+    # Accept visible Demo accuracy; hold the whole TCP goal during small jitter.
+    control_position_deadband_m: 0.004
+    control_angle_deadband_deg: 2.0
+    goal_position_threshold_m: 0.008
+    goal_angle_threshold_deg: 4.0
+    goal_confirmation_s: 0.20
+    follow_radius_m: 1.00
+    follow_angle_deg: 90.0
+    reference_position_lead_m: 0.015
+    reference_angle_lead_deg: 5.0
+    recovery_position_gap_m: 0.15
+    recovery_angle_gap_deg: 120.0
+    collision_enabled: false
+    table_z_m: 0.0
+    table_size_m: 2.0
+    collision_margin_m: 0.005
+    collision_slow_distance_m: 0.020
+    collision_check_period_ms: 20.0
+    collision_result_timeout_s: 0.15

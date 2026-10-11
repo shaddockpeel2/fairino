@@ -1,0 +1,34 @@
+Starting >>> fr3c_follow_driver
+--- stderr: fr3c_follow_driver
+warning: Using load_yaml() directly is deprecated. Use xacro.load_yaml() instead.
+/home/industio/fairino_ws/src/fr3c_follow_driver/test/test_pose_follow.cpp: In member function ‘virtual void PoseFollow_RecordsWithoutJumpAndPreservesFullRelationForEachAxisAndRotatedTool_Test::TestBody()’:
+/home/industio/fairino_ws/src/fr3c_follow_driver/test/test_pose_follow.cpp:15:30: warning: loop variable ‘axis’ creates a copy from type ‘const Vector3d’ {aka ‘const Eigen::Matrix<double, 3, 1>’} [-Wrange-loop-construct]
+   15 |   for (const Eigen::Vector3d axis:std::array<Eigen::Vector3d,4>{Eigen::Vector3d(1,0,0),Eigen::Vector3d(0,1,0),Eigen::Vector3d(0,0,1),Eigen::Vector3d(1,1,1).normalized()}) {
+      |                              ^~~~
+/home/industio/fairino_ws/src/fr3c_follow_driver/test/test_pose_follow.cpp:15:30: note: use reference type to prevent copying
+   15 |   for (const Eigen::Vector3d axis:std::array<Eigen::Vector3d,4>{Eigen::Vector3d(1,0,0),Eigen::Vector3d(0,1,0),Eigen::Vector3d(0,0,1),Eigen::Vector3d(1,1,1).normalized()}) {
+      |                              ^~~~
+      |                              &
+/home/industio/fairino_ws/src/fr3c_follow_driver/test/test_pose_follow.cpp: In member function ‘virtual void PoseGeometry_ShortestRotationAcross180AndDeterministicPiLog_Test::TestBody()’:
+/home/industio/fairino_ws/src/fr3c_follow_driver/test/test_pose_follow.cpp:79:30: warning: loop variable ‘axis’ creates a copy from type ‘const Vector3d’ {aka ‘const Eigen::Matrix<double, 3, 1>’} [-Wrange-loop-construct]
+   79 |   for (const Eigen::Vector3d axis:{Eigen::Vector3d(-1,0,0),Eigen::Vector3d(0,-1,0),Eigen::Vector3d(0,0,-1)}) {
+      |                              ^~~~
+/home/industio/fairino_ws/src/fr3c_follow_driver/test/test_pose_follow.cpp:79:30: note: use reference type to prevent copying
+   79 |   for (const Eigen::Vector3d axis:{Eigen::Vector3d(-1,0,0),Eigen::Vector3d(0,-1,0),Eigen::Vector3d(0,0,-1)}) {
+      |                              ^~~~
+      |                              &
+/home/industio/fairino_ws/src/fr3c_follow_driver/test/test_pose_collision.cpp: In member function ‘virtual void PoseCollision_TableSweepAndAngularBrakingAreCheckedEvenWithZeroTranslation_Test::TestBody()’:
+/home/industio/fairino_ws/src/fr3c_follow_driver/test/test_pose_collision.cpp:30:3: warning: this ‘for’ clause does not guard... [-Wmisleading-indentation]
+   30 |   for (unsigned i=0;i<6;++i) state.setVariablePosition("joint"+std::to_string(i+1),in.joints[i]); state.update();
+      |   ^~~
+/home/industio/fairino_ws/src/fr3c_follow_driver/test/test_pose_collision.cpp:30:99: note: ...this statement, but the latter is misleadingly indented as if it were guarded by the ‘for’
+   30 |   for (unsigned i=0;i<6;++i) state.setVariablePosition("joint"+std::to_string(i+1),in.joints[i]); state.update();
+      |                                                                                                   ^~~~~
+---
+[Processing: fr3c_follow_driver]
+Finished <<< fr3c_follow_driver [46.9s]
+Starting >>> fr3c_target_follow
+Finished <<< fr3c_target_follow [2.45s]
+
+Summary: 2 packages finished [50.5s]
+  1 package had stderr output: fr3c_follow_driver

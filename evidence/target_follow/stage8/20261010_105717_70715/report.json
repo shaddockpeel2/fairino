@@ -1,0 +1,143 @@
+{
+  "accel_limit_deg_s2": 10.0,
+  "action": "rotation",
+  "angle_deg": 2.5,
+  "axis": "y",
+  "axis_frame": "base_link",
+  "backend": "ServoCart mode 0, tool/work-object 0",
+  "close_code": 0,
+  "controller_state": {
+    "emergency_stop": 0,
+    "enabled": 1,
+    "main_error_code": 0,
+    "program_state": 1,
+    "robot_mode": 0,
+    "robot_state": 1,
+    "sub_error_code": 0,
+    "tool_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "tool_id": 0,
+    "work_object_coord_mm_deg": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "work_object_id": 0
+  },
+  "elapsed_s": 5.217023383000196,
+  "final_feedback_age_s": 0.010456644999976561,
+  "final_flange_m_rad": [
+    -0.06621306610107422,
+    -0.41561541748046876,
+    0.34646630859375,
+    3.0722774946338647,
+    -0.02932493645140597,
+    3.1372607557606704
+  ],
+  "final_joints_rad": [
+    -1.4784841060358616,
+    -1.8505845688092042,
+    -1.1049673741948145,
+    -1.8286798025271935,
+    1.548359993559306,
+    0.09846713557810129
+  ],
+  "final_robot_state": 1,
+  "final_tcp": {
+    "position_m": [
+      -0.07069140064217426,
+      -0.3997888764488102,
+      0.16255913086481324
+    ],
+    "quaternion_xyzw": [
+      0.0026724583950490104,
+      0.9992886142877628,
+      0.03467857373350878,
+      -0.014578060391536554
+    ]
+  },
+  "final_tcp_angle_to_goal_deg": 0.005979056520340922,
+  "final_tcp_angle_to_start_deg": 0.005979056520340922,
+  "final_tcp_drift_mm": 0.0410490021936508,
+  "flange_tcp_m_rad": [
+    -0.000847397,
+    0.003027928,
+    0.184614459,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "hardware_servo_commands_sent": 516,
+  "ik_preflight_passed": true,
+  "initial_flange_m_rad": [
+    -0.06621080017089843,
+    -0.4156018981933594,
+    0.3464389953613281,
+    3.072177359776878,
+    -0.029348243272133367,
+    3.137245575742457
+  ],
+  "initial_joints_rad": [
+    -1.4784765160267546,
+    -1.8505579371983034,
+    -1.1050774959058893,
+    -1.8286911209618264,
+    1.5483561319757253,
+    0.098497512259285
+  ],
+  "initial_tcp": {
+    "position_m": [
+      -0.07069305416421295,
+      -0.39975685005394035,
+      0.1625335067262404
+    ],
+    "quaternion_xyzw": [
+      0.0026811768396109155,
+      0.9992866847449359,
+      0.03472873552664447,
+      -0.014589308103886365
+    ]
+  },
+  "leg_duration_s": 1.5625000000000002,
+  "live_rotation_validated": false,
+  "max_joint_feedback_step_deg": 0.04307556152342403,
+  "max_observed_rotation_deg": 2.501679424067362,
+  "max_observed_tcp_drift_mm": 0.15040082908801097,
+  "mock": false,
+  "mock_ik_is_physical": false,
+  "model_collision_enabled": false,
+  "motion_readiness_problem": "",
+  "requested_period_ms": 8.0,
+  "result": "completed",
+  "round_trip": true,
+  "servo_call_ms": {
+    "count": 516,
+    "max": 7.9786209998928825,
+    "p50": 3.7625370005116565,
+    "p95": 4.613213000084215
+  },
+  "servo_commands_sent": 516,
+  "servo_end_code": 0,
+  "servo_interval_ms": {
+    "count": 515,
+    "max": 21.381878999818582,
+    "p50": 9.78097200004413,
+    "p95": 11.917033999452542
+  },
+  "servo_start_code": 0,
+  "speed_limit_deg_s": 3.0,
+  "stage": 8,
+  "stop_calls_elapsed_ms": 13.458340999932261,
+  "stop_motion_code": 0,
+  "stop_response_observed": true,
+  "trajectory_duration_s": 4.125
+}

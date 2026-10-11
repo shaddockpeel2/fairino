@@ -16,7 +16,7 @@ from std_msgs.msg import String
 from tf2_ros import TransformBroadcaster
 
 from fr3c_camera.rgbd import image_array, stamp_seconds
-from .marker_pose import (MarkerDetector, camera_parameters, rpy_degrees,
+from .marker_pose import (MarkerDetector, camera_parameters, candidate_orientation_quality, rpy_degrees,
                           solve_marker_pose, square_points, stamp_is_fresh)
 
 
@@ -29,12 +29,15 @@ class TagPoseNode(Node):
                         camera_info_topic='/camera/color/camera_info',
                         max_image_age_s=0.25, min_edge_px=12.0,
                         max_reprojection_error_px=2.0, ambiguity_margin_px=0.15,
-                        continuity_margin_px=0.20, publish_tag_tf=True,
+                        continuity_margin_px=0.20, orientation_candidate_tolerance_deg=5.0, publish_tag_tf=True,
                         adaptive_thresh_constant=13.0, adaptive_thresh_step=4,
                         fallback_thresh_constants=[21.0,25.0],
                         publish_annotated_image=True)
         self.options = {key: self.declare_parameter(key, value).value for key, value in defaults.items()}
         square_points(self.options['marker_size_m'])
+        tolerance = self.options['orientation_candidate_tolerance_deg']
+        if not math.isfinite(tolerance) or not 0 <= tolerance <= 45:
+            raise ValueError('invalid_orientation_candidate_tolerance')
         for key in ('max_image_age_s', 'min_edge_px', 'max_reprojection_error_px'):
             if not math.isfinite(self.options[key]) or self.options[key] <= 0:
                 raise ValueError(key + ' must be positive')
@@ -83,9 +86,11 @@ class TagPoseNode(Node):
                     cube_edge_m=self.options['cube_edge_m'], processed_frames=self.total,
                     valid_frames=self.valid, motion_commands_enabled=False,
                     received_frames=self.received_frames, overwritten_frames=self.overwritten_frames,
-                    pose_origin='top_label_center', **values)
+                    pose_origin='top_label_center', valid_position=status == 'valid', **values)
+        data.setdefault('orientation_measurement_valid', False)
         if message is not None:
-            data.update(frame_id=message.header.frame_id, stamp_s=stamp_seconds(message))
+            data.update(frame_id=message.header.frame_id, stamp_s=stamp_seconds(message),
+                        stamp={'sec': message.header.stamp.sec, 'nanosec': message.header.stamp.nanosec})
         self.quality_pub.publish(String(data=json.dumps(data, allow_nan=False)))
 
     def process_latest(self):
@@ -131,7 +136,8 @@ class TagPoseNode(Node):
                 min_edge_px=self.options['min_edge_px'], max_error_px=self.options['max_reprojection_error_px'],
                 previous_rotation=self.previous_rotation,
                 continuity_margin_px=self.options['continuity_margin_px'],
-                ambiguity_margin_px=self.options['ambiguity_margin_px'])
+                ambiguity_margin_px=self.options['ambiguity_margin_px'],
+                orientation_candidate_tolerance_deg=self.options['orientation_candidate_tolerance_deg'])
             finished_age = self.get_clock().now().nanoseconds / 1e9 - stamp
             if finished_age > self.options['max_image_age_s']:
                 raise ValueError('image_expired_during_processing')
@@ -156,7 +162,12 @@ class TagPoseNode(Node):
                           rpy_deg=rpy_degrees(pose.rotation), distance_m=float(np.linalg.norm(pose.position_m)),
                           reprojection_error_px=pose.reprojection_error_px, min_edge_px=pose.min_edge_px,
                           candidate_count=pose.candidate_count, candidate_margin_px=pose.candidate_margin_px,
-                          orientation_ambiguous=pose.orientation_ambiguous,
+                          candidate_errors_px=pose.candidate_errors_px,
+                          candidate_rotation_distance_deg=pose.candidate_rotation_distance_deg,
+                          selected_candidate_index=pose.selected_candidate_index,
+                          **candidate_orientation_quality(pose.solver, pose.candidate_rotation_distance_deg,
+                              pose.candidate_margin_px, pose.selected_candidate_index,
+                              self.options['ambiguity_margin_px'], self.options['orientation_candidate_tolerance_deg']),
                           solver=pose.solver,
                           image_age_ms=finished_age * 1000)
             if self.options['publish_annotated_image']:

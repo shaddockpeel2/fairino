@@ -26,6 +26,15 @@ inline DescPose to_sdk(const Pose & p) {
   return out;
 }
 
+// Absolute-pose RPCs reject unwrapped Euler values beyond +/-180 deg even
+// when their rotation is reachable. Keep neighboring RPY in the planner,
+// and encode the same physical rotation within the controller's range here.
+inline DescPose to_sdk_absolute(const Pose & p) {
+  Pose bounded=p;
+  for (int i=3;i<6;++i) bounded[i]=std::remainder(p[i],2*kPi);
+  return to_sdk(bounded);
+}
+
 class Translation {
  public:
   Translation(int axis, double distance_m, double speed_m_s, double accel_m_s2)
@@ -86,6 +95,8 @@ class Client {
   virtual int stop() = 0;
   virtual int end() = 0;
   virtual int close() = 0;
+  // Preflight only; joint inputs/outputs are radians. Mock does not model IK.
+  virtual int inverse(const Pose &, const std::array<double,6> &, std::array<double,6> &) { return -1; }
 };
 
 struct StopResult { int stop_code = 0, end_code = 0; };
